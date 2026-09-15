@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node server.js",
     "mcp": "node mcp/server.js",
-    "test": "node mcp/tools/verify_diagnosis.test.js"
+    "test": "node mcp/tools/verify_diagnosis.test.js && node mcp/tools/tools.test.js"
   },
   "keywords": ["alexa-plus", "mcp", "repair", "voice", "bedrock"]
 }

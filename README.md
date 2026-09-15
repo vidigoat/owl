@@ -108,17 +108,23 @@ Full detail: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
 `TODO` — this table is the most important thing in the repository for an automated reviewer. Every row
 must name the file it lives in and be callable, not merely described.
 
-| tool | input | returns | file |
+Four of these are implemented and callable over JSON-RPC today; the rest are stubs waiting on AWS
+credentials. The table says which, because a tool table that overstates itself is the fastest way to
+lose a reviewer's trust.
+
+| tool | input | returns | status |
 |---|---|---|---|
-| `identify_appliance` | image | brand, model, confidence | `mcp/tools/identify_appliance.js` |
-| `read_error` | image | fault code, confidence | `mcp/tools/read_error.js` |
-| `diagnose` | model, code | ranked causes | `mcp/tools/diagnose.js` |
-| `verify_diagnosis` | model, cause | upheld / abstain | `mcp/tools/verify_diagnosis.js` |
-| `guide` | model, cause | hands-free steps | `mcp/tools/guide.js` |
-| `find_part` | model, cause | exact part, fit confidence | `mcp/tools/find_part.js` |
-| `order_part` | part | Wallet checkout | `mcp/tools/order_part.js` |
-| `confirm_fix` | image | fault cleared? | `mcp/tools/confirm_fix.js` |
-| `home.remember` / `home.due` | record | household memory | `mcp/tools/home.js` |
+| `diagnose` | model, code | ranked causes, cheapest first | **live** |
+| `verify_diagnosis` | model, code, causeId, ruledOut | upheld / abstain, with a citation | **live** |
+| `guide` | model, code, causeId | hands-free steps with pacing | **live** |
+| `find_part` | model, causeId | exact part + what a service call costs | **live** |
+| `identify_appliance` | image | brand, model, confidence | stub — needs Bedrock |
+| `read_error` | image | fault code, confidence | stub — needs Bedrock |
+| `confirm_fix` | image | fault cleared? | stub — needs Bedrock |
+| `order_part` | part | Wallet checkout | stub — needs Wallet sandbox |
+| `home.remember` / `home.due` | record | household memory | stub — needs AgentCore |
+
+Each lives in its own file under `mcp/tools/`, registered in `mcp/server.js`.
 
 Transport: Streamable HTTP, MCP spec `2025-11-25`. Server entry point: `mcp/server.js`.
 
@@ -146,9 +152,21 @@ Transport: Streamable HTTP, MCP spec `2025-11-25`. Server entry point: `mcp/serv
 git clone <repo>
 cd second-set-of-hands
 cp .env.example .env    # AWS profile + Bedrock model
-node server.js          # http://localhost:8792 — the device experience
-node mcp/server.js      # the MCP server Alexa+ would call
+npm start               # http://localhost:8792 — the device experience
+npm run mcp             # http://localhost:8793/mcp — the server Alexa+ calls
+npm test                # the trust gate
 ```
+
+Call the gate directly, without the device:
+
+```bash
+curl -s -X POST http://localhost:8793/mcp -H 'content-type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"verify_diagnosis",
+       "arguments":{"model":"SHE3AR75UC","code":"E24","causeId":"pump"}}}'
+```
+
+It refuses, because the free check has not been ruled out yet. Add `"ruledOut":["filter","hose"]` and
+it upholds the part.
 
 ---
 

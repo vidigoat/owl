@@ -14,6 +14,8 @@
 const http = require('http');
 const { diagnose } = require('./tools/diagnose');
 const { verify_diagnosis } = require('./tools/verify_diagnosis');
+const { guide } = require('./tools/guide');
+const { find_part } = require('./tools/find_part');
 
 const PORT = process.env.MCP_PORT || 8793;
 const PROTOCOL_VERSION = '2025-11-25';
@@ -54,6 +56,35 @@ const TOOLS = [
       required: ['model', 'code'],
     },
     handler: verify_diagnosis,
+  },
+  {
+    name: 'guide',
+    description:
+      'Return the repair steps for an upheld cause, written to be heard rather than read, with the pacing each step usually takes. Refuses to improvise a procedure it has not got.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        model: { type: 'string' },
+        code: { type: 'string' },
+        causeId: { type: 'string' },
+      },
+      required: ['model', 'code', 'causeId'],
+    },
+    handler: guide,
+  },
+  {
+    name: 'find_part',
+    description:
+      'Find the part that fits this exact model, with what the alternative service call costs. Returns nothing rather than a part that only probably fits.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        model: { type: 'string' },
+        causeId: { type: 'string' },
+      },
+      required: ['model', 'causeId'],
+    },
+    handler: find_part,
   },
 ];
 
