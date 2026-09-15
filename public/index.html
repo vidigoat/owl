@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Second Set of Hands — Alexa+ repair copilot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<header class="top">
+  <h1>Second&nbsp;Set of&nbsp;Hands</h1>
+  <p class="tagline">
+    Point your Echo Show at the blinking panel. It reads the fault, proves the diagnosis,
+    talks you through the repair, and orders the exact part.
+  </p>
+</header>
+
+<!-- ─────────────────── the device + the tool trace ─────────────────── -->
+<section class="stage">
+  <div class="device" aria-label="Echo Show running the repair copilot">
+    <div class="device__bezel">
+      <div class="screen" id="screen"></div>
+      <div class="device__cam" title="camera"></div>
+    </div>
+    <p class="device__caption" id="caption">Bosch dishwasher, flashing a code, water in the bottom.</p>
+    <div class="device__controls">
+      <button class="btn" id="advance">Start the repair</button>
+      <button class="btn btn--ghost" id="abstain-btn">Show it refuse a job</button>
+      <button class="btn btn--ghost" id="reset">Reset</button>
+    </div>
+  </div>
+
+  <aside class="trace" aria-label="What runs underneath">
+    <h2>Underneath</h2>
+    <p class="trace__note">Every line is a real MCP tool call. Alexa+ is the surface; this is the product.</p>
+    <ol class="trace__list" id="trace"></ol>
+    <div class="trace__foot">
+      <div><span>MCP</span><b>Streamable HTTP · 2025-11-25</b></div>
+      <div><span>vision + memory</span><b>Bedrock · AgentCore</b></div>
+      <div><span>checkout</span><b>Amazon Wallet</b></div>
+    </div>
+  </aside>
+</section>
+
+<main>
+
+<!-- ─────────────────── the wedge ─────────────────── -->
+<section class="wedge">
+  <h2>Why this is different from a photo app</h2>
+  <div class="wedge__grid">
+    <article>
+      <h3>It won't guess with your money</h3>
+      <p>
+        A diagnosis has to be upheld against that model's service data before you are asked to spend
+        anything. When three causes sit too close together, it says so and books a technician instead.
+      </p>
+    </article>
+    <article>
+      <h3>Your hands are already busy</h3>
+      <p>
+        You cannot hold a phone inside a dishwasher. Every step is spoken, paced to what you are doing,
+        and the screen shows one instruction at a time from across the room.
+      </p>
+    </article>
+    <article>
+      <h3>It finishes the job</h3>
+      <p>
+        The exact part for your model number, ordered in one word through Amazon Wallet — then it checks
+        the panel afterwards to confirm the fault actually cleared.
+      </p>
+    </article>
+  </div>
+</section>
+
+<!-- ─────────────────── numbers ─────────────────── -->
+<section class="numbers">
+  <h2>The problem, in what it costs people</h2>
+  <div class="numbers__grid">
+    <div><b>$179</b><span>average appliance repair call, before parts</span></div>
+    <div><b>$60–100</b><span>diagnostic fee just for the visit</span></div>
+    <div><b>7+ days</b><span>typical wait — worse in rural areas</span></div>
+    <div><b>39%</b><span>of Americans have thrown out a large appliance they couldn't get fixed</span></div>
+    <div><b>~1 in 3</b><span>service calls are things the owner could have fixed</span></div>
+  </div>
+  <p class="numbers__src">Industry-reported figures, 2026.</p>
+</section>
+
+<!-- ─────────────────── how it works ─────────────────── -->
+<section class="how">
+  <h2>How it works</h2>
+  <pre class="diagram">
+   you                      Alexa+ (device)            this MCP server
+    │                            │                            │
+    │  "why is it beeping?"      │                            │
+    ├───────────────────────────►│   identify_appliance ─────►│  Bedrock vision
+    │                            │   read_error         ─────►│  → Bosch SHE3AR75UC, E24
+    │                            │                            │
+    │                            │   diagnose           ─────►│  2 ranked causes
+    │                            │   verify_diagnosis   ─────►│  ┌─────────────────┐
+    │                            │                            │  │  TRUST GATE     │
+    │                            │                            │  │  upheld?        │
+    │                            │                            │  └───┬─────────┬───┘
+    │                            │                            │   yes│      no │
+    │  spoken, one step at a time│   guide              ─────►│◄─────┘         │
+    │◄───────────────────────────┤                            │                │
+    │  "still beeping"           │   find_part          ─────►│  exact part    │  "get a technician —
+    │                            │   order_part         ─────►│  Wallet        │   I won't guess"
+    │  "yes, order it"           │                            │                ▼
+    │◄───────────────────────────┤   confirm_fix        ─────►│  re-read panel: fault cleared
+    │                            │   home.remember      ─────►│  repair receipt → AgentCore
+  </pre>
+</section>
+
+<!-- ─────────────────── memory ─────────────────── -->
+<section class="memory">
+  <h2>What the house remembers</h2>
+  <ul class="memory__list" id="memory"></ul>
+  <p class="memory__note">
+    The repair receipt is what makes the next conversation short — and what lets it speak first when
+    a filter is due, instead of waiting for something to break.
+  </p>
+</section>
+
+<!-- ─────────────────── build plan ─────────────────── -->
+<section class="plan">
+  <h2>Build plan</h2>
+  <div class="plan__grid">
+    <article>
+      <h3>Running for real</h3>
+      <ul class="tick">
+        <li>MCP tool surface and the verify-or-abstain gate</li>
+        <li>Step pacing, part selection, memory model</li>
+        <li>This device experience</li>
+      </ul>
+    </article>
+    <article>
+      <h3>Waiting on keys</h3>
+      <ul class="dot">
+        <li>Bedrock vision on real photos of your panels</li>
+        <li>AgentCore Memory for the household record</li>
+        <li>Wallet checkout in the sandbox</li>
+      </ul>
+    </article>
+    <article>
+      <h3>Submission</h3>
+      <ul class="dot">
+        <li>Amazon Developer Hackathon — Alexa+ track</li>
+        <li>Due 24 Oct, 00:30 IST</li>
+        <li>$25,000 track + $5,000 mini challenge</li>
+      </ul>
+    </article>
+  </div>
+  <p class="honest">
+    The Alexa+ layer here is the simulated web experience the rules explicitly allow — judges confirmed
+    on the forum that nobody can call Alexa+ directly. The MCP server behind it is real, and that is what
+    the repository has to prove.
+  </p>
+</section>
+
+</main>
+
+<footer>
+  <span>Second Set of Hands</span>
+  <span>localhost:8792</span>
+</footer>
+
+<script src="/app.js"></script>
+</body>
+</html>
