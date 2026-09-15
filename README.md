@@ -183,9 +183,12 @@ it upholds the part.
 
 ## For reviewers
 
-`TODO` — a table mapping each judging criterion to the file or screen that answers it: technological
-implementation, design, potential impact, quality of the idea. Add a line pointing to the product
-feedback and friction log, which are part of the submission.
+[`docs/JUDGING.md`](docs/JUDGING.md) maps each criterion — tech implementation, design, potential
+impact, quality of the idea — to the file or screen that answers it, covers the mini challenge, and
+marks what is still stubbed.
+
+The short version, if you have two minutes: `npm start`, open localhost:8792, press **Start the
+repair** and walk it through. Then press **Show it refuse a job** — that screen is the product.
 
 - Friction log: [`docs/FRICTION-LOG.md`](docs/FRICTION-LOG.md)
 - Product feedback: [`docs/PRODUCT-FEEDBACK.md`](docs/PRODUCT-FEEDBACK.md)
