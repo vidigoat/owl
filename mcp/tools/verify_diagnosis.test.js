@@ -56,10 +56,20 @@ it('refuses every cause behind mains wiring, however confident', () => {
   assert.equal(r.escalate, 'technician');
 });
 
-it('refuses when the top two causes are too close to separate', () => {
-  const r = verify_diagnosis({ model: 'SHE3AR75UC', code: 'E09' });
+it('refuses when two causes are too close to separate', () => {
+  // pump 0.21 vs hose 0.07 once the filter is cleared: a 14% gap, inside the threshold.
+  const r = verify_diagnosis({ model: 'SHE3AR75UC', code: 'E24', causeId: 'pump', ruledOut: ['filter'] });
   assert.equal(r.abstain, true);
   assert.match(r.reason, /within|separate/i);
+  assert.equal(r.escalate, 'technician');
+});
+
+it('puts mains voltage ahead of every other consideration', () => {
+  // E09's causes are close AND behind mains. The mains rule must be the one that answers.
+  const r = verify_diagnosis({ model: 'SHE3AR75UC', code: 'E09' });
+  assert.equal(r.abstain, true);
+  assert.equal(r.escalate, 'technician');
+  assert.match(r.reason, /mains/i);
 });
 
 it('refuses a model it has no service data for', () => {

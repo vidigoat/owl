@@ -1,0 +1,15 @@
+{
+  "name": "second-set-of-hands",
+  "version": "0.1.0",
+  "private": true,
+  "description": "An Alexa+ add-on that sees what's broken and fixes it with you — hands-free, down to the part on your doorstep.",
+  "license": "MIT",
+  "type": "commonjs",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node server.js",
+    "mcp": "node mcp/server.js",
+    "test": "node mcp/tools/verify_diagnosis.test.js"
+  },
+  "keywords": ["alexa-plus", "mcp", "repair", "voice", "bedrock"]
+}
