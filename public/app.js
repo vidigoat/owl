@@ -81,6 +81,8 @@ const screens = {
   3: () => {
     pushTrace(D.trace.verify, true);
     const c = D.causes;
+    // The verdict on screen is whatever the real gate returned — see refreshVerdict().
+    queueMicrotask(refreshVerdict);
     return {
       caption: 'Two causes, ranked. The cheap one is checked first.',
       label: 'Talk me through it',
@@ -167,6 +169,27 @@ const screens = {
     };
   },
 };
+
+/* Ask the real verify_diagnosis tool, through the server, and show what it actually said.
+   Nothing about the verdict is hard-coded in the interface. */
+async function refreshVerdict() {
+  const gate = document.querySelector('.gate');
+  if (!gate) return;
+  try {
+    const r = await (
+      await fetch(`/api/verify?model=${encodeURIComponent(D.appliance.model)}&code=${encodeURIComponent(D.fault.code)}`)
+    ).json();
+    if (r.abstain) {
+      gate.classList.add('gate--refuse');
+      gate.innerHTML = `<b>NOT UPHELD — NO PART SOLD</b><p>${r.reason}</p>`;
+    } else {
+      gate.classList.remove('gate--refuse');
+      gate.innerHTML = `<b>DIAGNOSIS UPHELD · ${Math.round(r.confidence * 100)}%</b><p>${r.citation}</p>`;
+    }
+  } catch {
+    /* leave the static verdict in place if the server is unreachable */
+  }
+}
 
 function render() {
   const s = screens[Math.min(stage, 6)]();
