@@ -60,6 +60,8 @@ a part number for a model you have not checked.
 
 ## Definition of done for any change
 
+- `npm test` passes — 20 checks across the gate and the tools that can cost someone money.
 - The device experience still completes the full loop without a dead end.
 - `verify_diagnosis` still refuses the ambiguous case (`E09`) — there is a button for it in the UI.
+- Every fact on the device screen still comes from a tool, not from the front-end (`docs/decisions/002`).
 - The friction log has an entry if the change was harder than it should have been.
