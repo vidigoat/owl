@@ -1,10 +1,65 @@
 # Friction log
 
-Part of the submission, and worth up to a 10% scoring bonus. Write the entry while the annoyance is
-fresh — not at the end.
+Part of the submission. Written as things happen, not reconstructed at the end — the detail that makes
+a log useful is gone within a day.
 
-Format, one row per rough edge:
+Only entries from work actually done are recorded here. Bedrock, Wallet and AgentCore entries will
+appear when those are wired; there is nothing to say about them yet.
 
-| date | task attempted | what I expected | what happened | severity | workaround | suggestion |
-|---|---|---|---|---|---|---|
-| `TODO` | | | | | | |
+---
+
+### 2026-09-15 · Alexa+ add-ons cannot be tested against Alexa+
+
+**Task:** work out how to demo an add-on end to end.
+**Expected:** a sandbox or simulator that runs an MCP add-on against Alexa+ itself.
+**Actual:** Alexa+ for Builders is limited to selected partners, and hackathon entrants cannot call
+Alexa+ at all. The rules permit a simulated experience instead, and an organiser confirmed on the
+forum that judges have no way to distinguish a real add-on from a convincing simulation in a video.
+**Severity:** medium — it does not block the build, but it decides the architecture on day one.
+**Workaround:** build a real MCP server and drive it from a simulated device surface, so the tools are
+genuinely invoked even though the assistant is not.
+**Suggestion:** a read-only Alexa+ sandbox — even one device, even rate-limited — would let an add-on
+be validated against the real orchestrator before certification. Without it, the first time an add-on
+meets Alexa+ is after submission.
+
+---
+
+### 2026-09-15 · Docs describe MCP Apps for output, but not image input
+
+**Task:** establish whether a tool can receive a photo from the Echo Show camera as an argument.
+**Expected:** a clear statement either way in the MCP toolkit docs.
+**Actual:** the docs cover rendering UI *to* the device thoroughly via MCP Apps, and Alexa+ visual
+recognition ships on Echo Show, but whether an add-on tool can take an image argument is not stated.
+**Severity:** medium — it is the difference between "point the camera at the panel" being a real
+capability or a simulated one.
+**Workaround:** the vision step runs server-side in our own surface.
+**Suggestion:** one line in the MCP toolkit overview saying whether tool inputs can carry an image,
+and if so in what encoding.
+
+---
+
+### 2026-09-15 · A confidence ranking is not a safety rule (our own bug)
+
+**Task:** ask the trust gate whether the $38 drain pump could be authorised.
+**Expected:** a refusal, because the free filter check had not been tried yet.
+**Actual:** a refusal — but for a nonsense reason: *"Failed drain pump and Failed drain pump are within
+0% of each other."* The gate compared the requested cause against the highest-ranked cause, which was
+the same row when the caller named a specific cause.
+**Severity:** high. The refusal was right by accident, and the reason shown to a user was incoherent.
+**Fix:** compare against the best *remaining* cause, and add `ruledOut` so clearing the free check is
+what earns the paid part its verdict. Tests now cover both directions and assert the gate never
+compares a cause to itself.
+**Lesson worth keeping:** we found this by running the tool and reading the sentence it produced, not
+from a test. Bugs in refusal paths hide well, because a refusal looks like success.
+
+---
+
+### 2026-09-15 · A test that encoded the wrong precedence
+
+**Task:** assert the gate refuses when causes are too close to separate.
+**Expected:** the E09 case to fail on the separation rule.
+**Actual:** it refused on the mains-voltage rule instead, and the test failed.
+**Severity:** low, but instructive — the test was wrong, not the code. Mains voltage *should* outrank
+a confidence comparison.
+**Fix:** test separation on a case with no mains in it, and add a test asserting mains takes
+precedence.
