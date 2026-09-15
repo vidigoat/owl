@@ -14,6 +14,35 @@ const say = (text) => `<div class="saying"><i>says</i><span>${text}</span></div>
 
 async function boot() {
   D = await (await fetch('/api/session')).json();
+
+  // The steps and the price come from the real tools, not from anything typed into this file.
+  // If the tools are unreachable the screens still render, on the session's own data.
+  try {
+    const g = await (
+      await fetch(`/api/guide?model=${D.appliance.model}&code=${D.fault.code}&causeId=filter`)
+    ).json();
+    if (g.known) {
+      D.steps = g.steps.map((s) => ({ ...s, hands: s.hands === 'both' ? 'both hands' : s.hands }));
+      D.guideSeconds = g.totalSeconds;
+    }
+
+    const p = await (await fetch(`/api/part?model=${D.appliance.model}&causeId=pump`)).json();
+    if (p.found) {
+      D.part = {
+        ...D.part,
+        name: p.part.name,
+        price: p.part.price,
+        eta: p.part.eta,
+        fitsModel: p.part.fitsModel,
+        fitConfidence: p.part.fitConfidence,
+        alternative: p.alternative,
+        saving: p.saving,
+      };
+    }
+  } catch {
+    /* fall back to the session data */
+  }
+
   renderMemory();
   render();
 }

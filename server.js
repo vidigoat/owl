@@ -6,6 +6,8 @@ const data = require('./engine');
 // The device experience calls the same modules the MCP server exposes — no second copy of the truth.
 const { diagnose } = require('./mcp/tools/diagnose');
 const { verify_diagnosis } = require('./mcp/tools/verify_diagnosis');
+const { guide } = require('./mcp/tools/guide');
+const { find_part } = require('./mcp/tools/find_part');
 
 const PORT = 8792;
 const PUBLIC = path.join(__dirname, 'public');
@@ -40,6 +42,19 @@ http
       const causeId = url.searchParams.get('causeId') || undefined;
       const ruledOut = (url.searchParams.get('ruledOut') || '').split(',').filter(Boolean);
       return send(res, 200, JSON.stringify(verify_diagnosis({ model, code, causeId, ruledOut })), 'application/json');
+    }
+
+    if (url.pathname === '/api/guide') {
+      const model = url.searchParams.get('model');
+      const code = url.searchParams.get('code');
+      const causeId = url.searchParams.get('causeId');
+      return send(res, 200, JSON.stringify(guide({ model, code, causeId })), 'application/json');
+    }
+
+    if (url.pathname === '/api/part') {
+      const model = url.searchParams.get('model');
+      const causeId = url.searchParams.get('causeId');
+      return send(res, 200, JSON.stringify(find_part({ model, causeId })), 'application/json');
     }
 
     const rel = url.pathname === '/' ? 'index.html' : url.pathname.slice(1);
