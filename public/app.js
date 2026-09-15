@@ -231,7 +231,31 @@ function renderMemory() {
     .join('');
 }
 
+/* Hands-free: the pacing is the point. Steps advance on their own, the way they would if you
+   were listening with both hands inside the machine. */
+let handsFreeTimer = null;
+
+function handsFree() {
+  if (handsFreeTimer) {
+    clearInterval(handsFreeTimer);
+    handsFreeTimer = null;
+    $('#handsfree').textContent = 'Hands-free';
+    return;
+  }
+  $('#handsfree').textContent = 'Stop';
+  handsFreeTimer = setInterval(() => {
+    if (stage >= 6) {
+      clearInterval(handsFreeTimer);
+      handsFreeTimer = null;
+      $('#handsfree').textContent = 'Hands-free';
+      return;
+    }
+    advance();
+  }, 2600);
+}
+
 advanceBtn.addEventListener('click', advance);
+$('#handsfree').addEventListener('click', handsFree);
 $('#abstain-btn').addEventListener('click', showAbstain);
 $('#reset').addEventListener('click', reset);
 boot();
