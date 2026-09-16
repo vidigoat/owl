@@ -43,7 +43,11 @@ function beginCheckout({ model, code, causeId, ruledOut = [] }) {
     return {
       ok: false,
       refused: true,
-      reason: 'That cause costs nothing to fix. There is no part to buy.',
+      // Say which of the two it is. Reporting an unknown cost as a free repair is the same lie as
+      // reporting an unobserved run as a quiet one.
+      reason: verdict.costKnown
+        ? 'That cause costs nothing to fix. There is no part to buy.'
+        : `I have no parts data for this machine, so I cannot tell you what this costs or sell you anything for it. ${verdict.cause?.label ? `The fix is: ${verdict.cause.label}.` : ''}`.trim(),
     };
   }
 

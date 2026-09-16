@@ -89,7 +89,12 @@ function verify_diagnosis({ model, code, causeId, ruledOut = [] }) {
     confidence: target.likelihood,
     cause: target,
     citation: target.evidence,
-    maySpend: target.cost > 0,
+    // A cost of 0 means the fix is free. A cost of null or undefined means we do not know what it
+    // costs — which happens on a machine learned from its manual, where there is no parts data at
+    // all. Those are opposite facts, and collapsing them told an owner that replacing a drain pump
+    // "costs nothing to fix".
+    costKnown: typeof target.cost === 'number',
+    maySpend: typeof target.cost === 'number' && target.cost > 0,
   };
 }
 

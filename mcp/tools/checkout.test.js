@@ -93,4 +93,23 @@ it('can be cancelled before it is placed, and not after', () => {
   assert.equal(cancelCheckout({ sessionId: other.sessionId }).ok, false);
 });
 
+
+it('an unknown cost is never reported as a free repair', () => {
+  // Found by reading `npm run demo` output: for an LG washer learned from its manual, the device
+  // said replacing a failed drain pump "costs nothing to fix. There is no part to buy." A service
+  // manual lists remedies, never prices — so the cost was UNKNOWN and was being written as 0.
+  // Zero means free. They are opposite facts, and this one had money attached to it.
+  const { parse } = require('../../manual/faultgraph');
+  const parsed = parse({
+    text: 'Fault codes\nOE   The machine cannot drain\n     Replace the drain pump if it does not turn\n',
+    source: 'LG service manual',
+  });
+  const entry = parsed.codes?.OE ?? parsed.OE ?? Object.values(parsed.codes || parsed)[0];
+  const causes = entry?.causes || [];
+  assert.ok(causes.length, 'the manual should have produced a cause to test');
+  causes.forEach((c) =>
+    assert.notEqual(c.cost, 0, `"${c.label}" was given a cost of 0, which claims the repair is free`)
+  );
+});
+
 console.log(`\n${passed} passed`);

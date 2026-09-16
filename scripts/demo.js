@@ -108,4 +108,4 @@ if (!cart.ok) {
 }
 
 line();
-console.log(`\n  ${dim('Everything above came from a tool call. Run `npm test` for the 98 checks behind it.')}\n`);
+console.log(`\n  ${dim('Everything above came from a tool call. `npm test` runs every check behind it.')}\n`);

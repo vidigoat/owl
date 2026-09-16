@@ -130,7 +130,11 @@ function parse({ model, text, sourceName = 'manual' }) {
       label: remedyToCause(remedy),
       // The manual's ordering is the prior: the first remedy listed is the most common.
       likelihood: Number((1 / (k + 1.6)).toFixed(3)),
-      cost: 0,
+      // Null, not 0. A service manual lists remedies, never prices — so what this costs is
+      // UNKNOWN, and 0 would mean "free". Written as 0 it told an owner that replacing a drain
+      // pump costs nothing to fix, which is both wrong and exactly the kind of confident wrong
+      // answer the gate exists to prevent.
+      cost: null,
       mains: isMains(remedy),
       ownerFixable: !isMains(remedy),
       evidence: `${sourceName}: "${remedy}"`,
