@@ -150,7 +150,10 @@ const TOOLS = [
 const result = (id, value) => ({ jsonrpc: '2.0', id, result: value });
 const failure = (id, code, message) => ({ jsonrpc: '2.0', id, error: { code, message } });
 
-function handle(msg) {
+/* Async, because tools are allowed to do real work — `see` calls Bedrock. Every tool before it
+ * happened to be synchronous, which hid the fact that a Promise was being serialised straight into
+ * the response. */
+async function handle(msg) {
   const { id, method, params } = msg;
 
   if (method === 'initialize') {
@@ -172,7 +175,7 @@ function handle(msg) {
     if (!tool) return failure(id, -32602, `No tool named "${params?.name}".`);
 
     try {
-      const value = tool.handler(params.arguments || {});
+      const value = await tool.handler(params.arguments || {});
       return result(id, {
         content: [{ type: 'text', text: JSON.stringify(value, null, 2) }],
         structuredContent: value,
@@ -204,7 +207,7 @@ const server = http.createServer((req, res) => {
 
   let body = '';
   req.on('data', (c) => (body += c));
-  req.on('end', () => {
+  req.on('end', async () => {
     let payload;
     try {
       payload = JSON.parse(body);
@@ -213,9 +216,14 @@ const server = http.createServer((req, res) => {
       return res.end(JSON.stringify(failure(null, -32700, 'Malformed JSON.')));
     }
 
-    const response = Array.isArray(payload) ? payload.map(handle) : handle(payload);
-    res.writeHead(200, { 'content-type': 'application/json' });
-    res.end(JSON.stringify(response));
+    try {
+      const response = Array.isArray(payload) ? await Promise.all(payload.map(handle)) : await handle(payload);
+      res.writeHead(200, { 'content-type': 'application/json' });
+      res.end(JSON.stringify(response));
+    } catch (e) {
+      res.writeHead(500, { 'content-type': 'application/json' });
+      res.end(JSON.stringify(failure(payload?.id ?? null, -32603, e.message)));
+    }
   });
 });
 
