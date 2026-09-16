@@ -14,6 +14,38 @@ const MODELS = {
     codes: {
       E24: {
         meaning: 'Water cannot leave the machine during the pump-out phase.',
+        // The checks a technician would actually run, and what each outcome rules out.
+        // `effort` is what it costs the person, not the machine — that is what stops the copilot
+        // asking someone to haul a dishwasher out of a cabinet to save itself one question.
+        tests: [
+          {
+            id: 'pump-hum',
+            question: 'Start a drain cycle and listen. Can you hear the pump humming?',
+            effort: 'free',
+            outcomes: [
+              { value: 'hums', say: 'it hums', consistentWith: ['filter', 'hose'] },
+              { value: 'silent', say: "it's silent", consistentWith: ['pump'] },
+            ],
+          },
+          {
+            id: 'filter-check',
+            question: 'Twist the filter out and look at it. Is it clogged?',
+            effort: 'easy',
+            outcomes: [
+              { value: 'clogged', say: "it's clogged", consistentWith: ['filter'] },
+              { value: 'clean', say: "it's clean", consistentWith: ['pump', 'hose'] },
+            ],
+          },
+          {
+            id: 'hose-check',
+            question: 'Pull the machine out and check the drain hose behind it. Is it kinked?',
+            effort: 'heavy',
+            outcomes: [
+              { value: 'kinked', say: "it's kinked", consistentWith: ['hose'] },
+              { value: 'straight', say: "it's fine", consistentWith: ['filter', 'pump'] },
+            ],
+          },
+        ],
         causes: [
           {
             id: 'filter',
