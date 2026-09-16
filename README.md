@@ -317,13 +317,17 @@ Fault codes used throughout are genuine Bosch, Whirlpool, LG and Samsung codes.
 ```
   ── RENDERED PANELS ──  drawn, not photographed
   bosch-dishwasher-panel-e24.png             code E24
+  bosch-dishwasher-panel-glare-e15.png       code null — expected E15
   bosch-dishwasher-plate-she3ar75uc.png        model SHE3AR75UC
   ge-oven-panel-clean.png                    correctly saw no fault code
+  lg-washer-panel-angled-ue.png              code UE
   lg-washer-panel-oe.png                     code OE
   samsung-fridge-panel-clean.png             correctly saw no fault code
+  samsung-washer-panel-thumb-4c.png          code 4C
+  whirlpool-washer-panel-dim-f05.png         code null — expected F05
   whirlpool-washer-panel-f21.png             code F21
 
-  fault code read correctly   5/5  100%
+  fault code read correctly   7/9  78%
   model number read correctly 1/1  100%
 
   ── PHOTOGRAPHS ──  the only number that counts.
@@ -331,14 +335,26 @@ Fault codes used throughout are genuine Bosch, Whirlpool, LG and Samsung codes.
   is UNPROVEN, whatever the panels above say.
 ```
 
+**78%, and the two it missed are the interesting part.** A specular highlight across the digits and
+an unlit utility room both defeated it — and in both cases it returned `null` rather than a guess.
+That is the failure mode this product needs: a reader that invents `E15` under glare sends someone
+to buy a heater element for a machine whose real fault is something else. It read a panel
+photographed from a crouching angle, and one with a thumb across the corner, correctly.
+
+The line that matters is still the one that isn't there: **zero invented fault codes.** Two of the
+ten panels are healthy machines covered in numbers — a fridge showing 38°F and an oven clock reading
+12:47 — and it declined to call either a fault.
+
 The line that matters is the one that isn't there: **zero invented fault codes.** Two of the six
 panels are healthy machines covered in numbers — a fridge showing 38°F and an oven clock reading
 12:47 — and it declined to call either one a fault. A repair tool that hallucinates a code on a
 working machine sends someone to buy a part they do not need.
 
-Those panels are *drawings* (`npm run panels`), and they are scored under a heading saying so. They
-prove the reader reads a display. They do not prove it reads a kitchen — no glare, no angle, no
-hand in the frame, no dark utility room. `eval/photos/` is empty and that claim stays unproven.
+Those panels are *drawings* (`npm run panels`), and they are scored under a heading saying so. Four
+of them deliberately approximate what a kitchen does to a photograph — glare, angle, bad light, a
+thumb in the way — because an evaluation everything passes is measuring nothing. They still prove
+only that the reader reads a display. `eval/photos/` is empty and the claim that it reads a real
+kitchen stays unproven.
 
 Both bugs that made this work at all were found by pointing it at real AWS for the first time: the
 CLI was writing two JSON documents into one stream so every read failed, and the prompt was

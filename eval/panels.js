@@ -58,6 +58,29 @@ const PANELS = [
     note: 'a clock. Also no fault. 12:47 is not a fault code.',
     html: seg({ bg: '#101215', ink: '#7fd4c1', text: '12:47', sub: 'GE', width: 900, height: 560 }),
   },
+  // ── the hard ones ──────────────────────────────────────────────────────
+  // An evaluation everything passes is measuring nothing. A kitchen adds glare, angle, bad light
+  // and a hand in the way, and these four approximate the parts of that a drawing can approximate.
+  {
+    file: 'bosch-dishwasher-panel-glare-e15.png',
+    note: 'HARD: a specular highlight straight across the digits, like a ceiling light on gloss plastic',
+    html: hard({ code: 'E15', brand: 'BOSCH', ink: '#ff3b2f', effect: 'glare' }),
+  },
+  {
+    file: 'lg-washer-panel-angled-ue.png',
+    note: 'HARD: photographed from the side, as anyone crouching at a machine actually would',
+    html: hard({ code: 'UE', brand: 'LG', ink: '#eef2f8', effect: 'angle' }),
+  },
+  {
+    file: 'whirlpool-washer-panel-dim-f05.png',
+    note: 'HARD: a dark utility room, no flash',
+    html: hard({ code: 'F05', brand: 'WHIRLPOOL', ink: '#ffb020', effect: 'dim' }),
+  },
+  {
+    file: 'samsung-washer-panel-thumb-4c.png',
+    note: 'HARD: a thumb across the corner of the display, holding the phone one-handed',
+    html: hard({ code: '4C', brand: 'SAMSUNG', ink: '#7fd4c1', effect: 'thumb' }),
+  },
   {
     file: 'bosch-dishwasher-plate-she3ar75uc.png',
     note: 'a rating plate — small print, model number among a dozen other numbers',
@@ -131,6 +154,41 @@ function fridge() {
         ICE MAKER ON<br>FILTER OK<br>DOOR CLOSED<br>SAMSUNG
       </div>
     </div>`, 1200, 540);
+}
+
+/**
+ * The same display, made harder in one specific way.
+ *
+ * Each effect isolates one thing a kitchen does to a photograph, so a failure says which one broke
+ * it rather than "a real photo is hard". None of this makes a render into a photograph — that is
+ * what eval/photos is for — but a reader that folds under a highlight will fold in a kitchen too.
+ */
+function hard({ code, brand, ink, effect }) {
+  const fx = {
+    glare: `filter: contrast(1.05);`,
+    angle: `transform: perspective(900px) rotateY(24deg) rotateX(6deg); transform-origin: 30% 50%;`,
+    dim: `filter: brightness(0.34) contrast(0.92);`,
+    thumb: '',
+  }[effect];
+
+  const overlay = {
+    glare: `<div style="position:absolute;inset:0;background:linear-gradient(104deg,
+      rgba(255,255,255,0) 30%, rgba(255,255,255,.82) 44%, rgba(255,255,255,.92) 50%,
+      rgba(255,255,255,.55) 56%, rgba(255,255,255,0) 70%);pointer-events:none"></div>`,
+    thumb: `<div style="position:absolute;right:-6%;bottom:-14%;width:42%;height:58%;
+      background:radial-gradient(ellipse at 40% 30%, #c69a80 0%, #a8745c 60%, #8a5c47 100%);
+      border-radius:52% 48% 40% 60%;box-shadow:0 -10px 26px rgba(0,0,0,.45)"></div>`,
+    angle: '', dim: '',
+  }[effect];
+
+  return shell(`<div class="housing" style="background:#121316;display:grid;place-items:center;${fx}">
+      <div style="text-align:center">
+        <div style="font-family:'IBM Plex Mono',monospace;font-weight:600;color:${ink};
+          font-size:132px;letter-spacing:.08em;text-shadow:0 0 28px ${ink}55">${code}</div>
+        <div style="margin-top:18px;color:#8b93a1;letter-spacing:.32em;font-size:15px">${brand}</div>
+      </div>
+      ${overlay}
+    </div>`, 1000, 600);
 }
 
 /** A rating plate: the model number hidden among a dozen equally plausible numbers. */
