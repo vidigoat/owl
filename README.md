@@ -180,6 +180,8 @@ git clone <repo>
 cd second-set-of-hands
 
 npm run demo            # ← start here: the whole loop in a terminal, 20 seconds
+npm run preflight # check AWS: CLI, credentials, Bedrock access, a real vision call
+npm run capture   # regenerate this README's screenshots from a real run (needs Chrome)
 npm test                # every suite, reported together
 npm start               # http://localhost:8792 — the device experience
 npm run mcp             # http://localhost:8793/mcp — the server Alexa+ calls

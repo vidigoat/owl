@@ -14,7 +14,8 @@
     "eval": "node eval/run.js",
     "demo": "node scripts/demo.js",
     "test": "node scripts/test.js",
-    "capture": "node scripts/capture.js"
+    "capture": "node scripts/capture.js",
+    "preflight": "node scripts/preflight.js"
   },
   "keywords": [
     "alexa-plus",
