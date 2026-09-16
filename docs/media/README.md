@@ -12,7 +12,11 @@ rule below stays true without anybody having to remember it.
 step at a time and stitches the frames, so frame N is the device after exactly N presses. Nothing
 can be trimmed out of the middle, and no frame can show a state the software could not reach.
 
-The only thing still wanting a human is `terminal.png`, which is a screenshot of `npm run demo`.
+Nothing here wants a human any more. `terminal.png` used to: run the demo, screenshot the terminal.
+That is a worse process than it looks — it depends on somebody's font, somebody's theme and
+somebody's window width, and it goes stale silently the moment the output changes. The output is
+deterministic, so `npm run terminal-shot` runs the demo, converts its ANSI colours to HTML and
+screenshots that. Same bytes the command printed.
 
 `teach.png` was dropped rather than faked. It was meant to show the manual on screen mid-ingest, but
 that state lasts under a second and headless capture runs on virtual time, which skips straight past
@@ -28,7 +32,7 @@ any two frames hash the same.
 | `learned.png` | the space built from an LG manual nothing here has seen, with its citation | `npm run capture` | **captured** |
 | `checkout.png` | the itemised total beside the $179 alternative | `npm run capture` | **captured** |
 | `guide.png` | the hands-free repair steps, one at a time | `npm run capture` | **captured** |
-| `terminal.png` | `npm run demo` output, whole loop in one screen | `npm run demo`, then screenshot | TODO |
+| `terminal.png` | `npm run demo` output, whole loop in one screen | `npm run terminal-shot` | **captured** |
 | `flow.gif` | the full loop end to end, no cuts | `npm run gif` | **captured** |
 
 ## Which of these matter most

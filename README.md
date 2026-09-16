@@ -321,8 +321,11 @@ npm run mcp             # http://localhost:8793/mcp — the server Alexa+ calls
 
 npm run preflight       # does AWS actually work? CLI, credentials, Bedrock, one real read
 npm run capture         # regenerate this README's screenshots from a real run (needs Chrome)
+npm run terminal-shot   # and the one of the demo's own output
 npm run eval            # the vision evaluation (needs photographs in eval/photos/)
 ```
+
+![The whole loop in one screen: a real Bedrock read, a machine learned from its manual, and a refusal to sell](docs/media/terminal.png)
 
 `npm run demo` runs the complete procedure against an LG washing machine that nothing in this
 repository has ever heard of: it reads the manual, builds the hypothesis space, picks each check by

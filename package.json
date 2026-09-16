@@ -18,7 +18,8 @@
     "preflight": "node scripts/preflight.js",
     "gif": "node scripts/gif.js",
     "panels": "node eval/panels.js",
-    "questions": "node eval/questions.js"
+    "questions": "node eval/questions.js",
+    "terminal-shot": "node scripts/terminal-shot.js"
   },
   "keywords": [
     "alexa-plus",
