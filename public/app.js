@@ -41,7 +41,33 @@ let pending = null;           // the question on screen, awaiting an answer
 let checkout = null;          // an open checkout session, if one was opened
 let handsFreeTimer = null;
 
-const say = (text) => `<div class="saying"><i>says</i><span>${text}</span></div>`;
+/**
+ * Saying something.
+ *
+ * This is a voice product wearing a screen. The line has always been rendered; now it can also be
+ * spoken, which is the only way to demonstrate the thing the whole design turns on — that it talks
+ * you through a repair while your hands are inside the machine and your eyes are not on the screen.
+ *
+ * Off by default, and a toggle rather than a setting, because software that starts talking the
+ * moment you open it is software people close.
+ */
+let voiceOn = false;
+
+function speak(text) {
+  if (!voiceOn || !window.speechSynthesis) return;
+  // Cancel first: two overlapping sentences is worse than a missed one, and the pacing loop can
+  // reach the next step before the last has finished.
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(String(text).replace(/<[^>]*>/g, ''));
+  u.rate = 1.02;   // just above default; instructions read slowly sound patronising
+  u.pitch = 1;
+  window.speechSynthesis.speak(u);
+}
+
+const say = (text) => {
+  speak(text);
+  return `<div class="saying"><i>says</i><span>${text}</span></div>`;
+};
 
 /** Anything a vision model read off a stranger's photograph is untrusted text, not markup. */
 const esc = (s) => String(s ?? '').replace(/[<>&"]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c]));
@@ -670,6 +696,8 @@ async function teach() {
 }
 
 function reset() {
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  stopCamera(); // a camera left running after a reset is a light nobody asked to leave on
   APPLIANCE = { ...DEFAULT_APPLIANCE };
   stage = 'idle';
   dx = null;
@@ -714,6 +742,12 @@ $('#handsfree').addEventListener('click', handsFree);
 $('#teach-btn').addEventListener('click', teach);
 $('#abstain-btn').addEventListener('click', showRefusal);
 $('#reset').addEventListener('click', reset);
+$('#speak').addEventListener('click', () => {
+  voiceOn = !voiceOn;
+  $('#speak').textContent = `Speak: ${voiceOn ? 'on' : 'off'}`;
+  if (!voiceOn && window.speechSynthesis) window.speechSynthesis.cancel();
+  else speak('Right. I can talk you through this.');
+});
 
 /**
  * Capture hook — `?at=<frame>`.

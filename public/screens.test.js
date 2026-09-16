@@ -92,7 +92,12 @@ function load() {
     clearInterval,
     queueMicrotask,
     document: { querySelector: () => element(), createElement: () => element() },
-    window: { matchMedia: () => ({ matches: true }) }, // reduced motion: skip animation waits
+    window: {
+      matchMedia: () => ({ matches: true }), // reduced motion: skip animation waits
+      // A spy, not a stub. Anything that speaks without being asked shows up here.
+      speechSynthesis: { spoken: [], speak(u) { this.spoken.push(u); }, cancel() {} },
+    },
+    SpeechSynthesisUtterance: function (text) { this.text = text; },
     location: { search: '' }, // the capture hook stays off unless a test asks for it
     URLSearchParams,
     fetch: async (url) => ({ json: async () => respond(String(url)) }),
@@ -138,6 +143,18 @@ function load() {
     await s.advance();
     s.reset();
     await s.advance();
+  });
+
+  await it('never speaks unless somebody asked it to', async () => {
+    // A device that starts talking the moment you open it is a device people close. Voice is off
+    // until the toggle is pressed, and this walks the whole flow to prove nothing slips out.
+    const s = load();
+    await new Promise((r) => setTimeout(r, 10));
+    for (let i = 0; i < 8; i++) await s.advance();
+    await s.showRefusal();
+    await s.teach();
+    assert.equal(s.window.speechSynthesis.spoken.length, 0,
+      'something spoke without the Speak toggle being on');
   });
 
   console.log(`\n${passed} passed`);
