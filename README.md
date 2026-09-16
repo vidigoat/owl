@@ -118,23 +118,6 @@ curl -s -X POST http://localhost:8793/mcp -H 'content-type: application/json' \
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}' | jq '.result.tools | length'
 ```
 
-| tool | what it is for | file |
-|---|---|---|
-| `see` | Read the model number and fault code off a photograph. Returns nulls rather than guesses, and always states whether the read was real or simulated. | `mcp/tools/see.js` |
-| `hypotheses` | Build the space of possible causes for a code on a model, with priors and the uncertainty left, in bits. | `mcp/tools/hypotheses.js` |
-| `next_test` | Choose the one check worth asking a person to do next — most uncertainty removed per unit of effort. Returns nothing when one cause is left or when nothing would tell us anything. | `mcp/tools/next_test.js` |
-| `observe` | Fold a check's result back in: keep the consistent causes, name the ruled-out ones, detect contradiction. | `mcp/tools/hypotheses.js` |
-| `diagnose` | Rank causes cheapest-and-likeliest first. Offers candidates; decides nothing. | `mcp/tools/diagnose.js` |
-| **`verify_diagnosis`** | **The gate.** Decides whether a cause may be stated as fact and have money attached. Abstains on mains voltage, on a cheaper cause not yet ruled out, on too little separation, and on no evidence. | `mcp/tools/verify_diagnosis.js` |
-| `guide` | Repair steps for an upheld cause, written to be heard, with the pacing each takes. Refuses to improvise a procedure it does not have. | `mcp/tools/guide.js` |
-| `find_part` | The part that fits this exact model, with what the service call would have cost. Returns nothing rather than a part that only probably fits. | `mcp/tools/find_part.js` |
-| `begin_checkout` | Open a checkout. Refuses outright if the diagnosis was not upheld. Itemised total, the alternative, a session id. | `mcp/tools/order_part.js` |
-| `confirm_checkout` | Place an order that was already read out. Completes exactly once. | `mcp/tools/order_part.js` |
-| `confirm_fix` | Look at the panel again and say whether the fault cleared. Will not confirm what it could not genuinely see. | `mcp/tools/confirm_fix.js` |
-| `remember_repair` | Write down what was wrong, what was done, whether it worked. | `mcp/tools/home.js` |
-| `whats_due` | Consumables due across the household, so it can speak first instead of waiting for a breakdown. | `mcp/tools/home.js` |
-| `repair_history` | Everything this machine has been through before. | `mcp/tools/home.js` |
-
 Two of them are the product. `next_test` is why this asks three questions instead of twenty, and
 `verify_diagnosis` is the only function in the repository that can authorise spending — everything
 else offers, and it alone decides.
@@ -158,18 +141,45 @@ what is missing.
 | `remember_repair` | model, code, cause, outcome | the repair receipt | **live**, file-backed until AgentCore |
 | `repair_history` | model | everything this machine has been through | **live** |
 | `whats_due` | — | consumables past their window | **live** |
-| `order_part` | part | Wallet checkout | stub — needs Wallet sandbox |
+| `begin_checkout` | part, upheld diagnosis | itemised total + what the service call would have cost | **live** — refuses outright if the diagnosis was not upheld |
+| `confirm_checkout` | session id | the order, placed exactly once | **live** — Wallet itself is still a sandbox stub |
 
 Each lives in its own file under `mcp/tools/`, registered in `mcp/server.js`.
+
+Two of them are the product. `next_test` is why this asks three questions instead of twenty, and
+`verify_diagnosis` is the only function in the repository that can authorise spending — everything
+else offers, and it alone decides.
 
 Transport: Streamable HTTP, MCP spec `2025-11-25`. Server entry point: `mcp/server.js`.
 
 ### Being taught a machine it has never seen
 
-`TODO` — the section that matters most. The copilot is not programmed for one dishwasher. Hand it the
-service manual for an appliance nothing in this repository has heard of and it reads the fault table
-out of it, builds the hypothesis space, and runs the same loop — with every cause citing the line of
-the manual it came from.
+Nothing here is programmed for one dishwasher. Hand it the service manual for a machine this
+repository has never heard of, and it reads the fault table out of the prose, builds the hypothesis
+space, and runs the identical loop.
+
+![An LG washer nothing in this project knows, learned from its manual at runtime](docs/media/learned.png)
+
+That is an LG washer — `LG-WM3900HWA`, fault `OE`. No file in this project mentions it. The trace
+beside it is the whole trick: `manual.parse` recovers two fault codes, `learn` installs them, and
+`hypotheses` returns three causes and 1.50 bits from a graph that did not exist a second earlier.
+Every cause cites the line it came from: *"Check the drain filter for debris."*
+
+The parser carries three code patterns, because manufacturers do not agree with each other:
+
+```js
+/^\s*([A-Z]{1,2}[:\-\s]?\d{1,3}[A-Z]?)\s*[-–—:.\t]?\s+(.{6,200})$/  // E24, E:15, F21
+/^\s*(\d{1,2}[A-Z]{1,2})\s*[-–—:.\t]?\s+(.{6,200})$/                 // 4C, 5E
+/^\s*([A-Z]{2,3})\s*(?:[-–—:]\s*|\s{2,})(.{6,200})$/                  // OE, UE, dE
+```
+
+The third one exists because of a failure: LG's scheme is letter pairs with no digits at all, and
+the original pattern required a digit, so an LG manual parsed to nothing. `manual/generality.test.js`
+now holds all four schemes — Bosch, Whirlpool, LG, Samsung — against the same parser.
+
+And when a manual has no fault table in it, it recovers nothing and says **NOTHING RECOVERED**,
+rather than assembling a plausible-looking hypothesis space out of prose. That refusal is tested
+too.
 
 ```bash
 curl -s -X POST localhost:8792/api/learn -H 'content-type: application/json' \
