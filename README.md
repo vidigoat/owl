@@ -362,6 +362,20 @@ returning a display's fault code as the model number. Neither was findable offli
 
 ---
 
+## Decisions
+
+The arguments worth not having twice — what was decided, what it cost, and what would have to be
+true to change it. Written for whoever picks this up next, including an agent.
+
+| | | |
+|---|---|---|
+| [001](docs/decisions/001-refuse-rather-than-guess.md) | Only report what actually reproduced | load-bearing; do not soften |
+| [002](docs/decisions/002-pacing-belongs-to-the-tool.md) | The demo must refuse something real | |
+| [003](docs/decisions/003-replacement-is-not-a-test.md) | Replacing a part is not a diagnostic step | |
+| [004](docs/decisions/004-unknown-is-not-absent.md) | "I could not establish X" is not "X is absent" | the one that cost four bugs in an afternoon |
+
+---
+
 ## What it cannot do
 
 **A fault with no code.** The whole entry point is a code on a panel. A machine that is simply dead,
