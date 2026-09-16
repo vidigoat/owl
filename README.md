@@ -482,6 +482,7 @@ true to change it. Written for whoever picks this up next, including an agent.
 | [002](docs/decisions/002-pacing-belongs-to-the-tool.md) | The demo must refuse something real | |
 | [003](docs/decisions/003-replacement-is-not-a-test.md) | Replacing a part is not a diagnostic step | |
 | [004](docs/decisions/004-unknown-is-not-absent.md) | "I could not establish X" is not "X is absent" | the one that cost four bugs in an afternoon |
+| [005](docs/decisions/005-read-the-question-out-of-the-manual.md) | Read the question out of the manual, not just the remedy | found by measuring, not by looking |
 
 ---
 
