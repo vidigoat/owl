@@ -100,8 +100,20 @@ function renderCamera() {
 
 async function renderSpace() {
   stage = 'space';
-  trace('identify_appliance', 'frame.jpg', `${APPLIANCE.brand} ${APPLIANCE.model} · 0.97`, 'Bedrock vision');
-  trace('read_error', 'frame.jpg', 'E24 · 0.99', 'Bedrock vision');
+
+  // The real vision path. Without credentials this comes back labelled as simulated, and that
+  // label goes on the screen — the demo is not allowed to pretend it saw something it did not.
+  const read = await post('/api/see', {
+    imagePath: `eval/photos/${APPLIANCE.model.toLowerCase()}-panel.jpg`,
+    expect: { model: APPLIANCE.model, code: APPLIANCE.code },
+  });
+  const simulated = read.simulated !== false;
+  trace(
+    'see',
+    'frame.jpg',
+    simulated ? 'SIMULATED — no credentials' : `${read.model} · ${read.code} · ${read.confidence ?? '—'}`,
+    simulated ? 'fallback' : read.via
+  );
 
   const started = await post('/api/diagnosis/start', { model: APPLIANCE.model, code: APPLIANCE.code });
   dx = { space: started.space, tests: started.tests, performed: [], ruledOut: [], bits: started.bits, meaning: started.meaning };
@@ -113,8 +125,9 @@ async function renderSpace() {
     <div class="s-space">
       <div class="readout">
         <span class="readout__k">fault</span>
-        <span class="fault-chip">E24</span>
+        <span class="fault-chip">${APPLIANCE.code}</span>
         <span class="readout__meaning">${dx.meaning}</span>
+        ${simulated ? '<span class="sim-badge" title="Bedrock was unreachable — this read was not performed">simulated read</span>' : ''}
       </div>
       ${spaceMarkup(dx.space)}
       ${bitsLine(dx.bits)}

@@ -12,6 +12,7 @@ const { buildSpace, prune } = require('./mcp/tools/hypotheses');
 const { nextTest } = require('./mcp/tools/next_test');
 const { MODELS, LEARNED, learn } = require('./data/service-data');
 const { parse: parseManual } = require('./manual/faultgraph');
+const { see } = require('./mcp/tools/see');
 
 /** Read a JSON body. The diagnosis loop passes objects around, so GET params won't do. */
 const readJson = (req) =>
@@ -60,6 +61,15 @@ http
       const causeId = url.searchParams.get('causeId') || undefined;
       const ruledOut = (url.searchParams.get('ruledOut') || '').split(',').filter(Boolean);
       return send(res, 200, JSON.stringify(verify_diagnosis({ model, code, causeId, ruledOut })), 'application/json');
+    }
+
+    // Read a photograph. Without credentials this comes back labelled as simulated, and the device
+    // shows that label — a demo that cannot tell a real read from a canned one is a magic trick.
+    if (req.method === 'POST' && url.pathname === '/api/see') {
+      return readJson(req)
+        .then((body) => see(body))
+        .then((r) => send(res, 200, JSON.stringify(r), 'application/json'))
+        .catch((e) => send(res, 500, JSON.stringify({ error: e.message }), 'application/json'));
     }
 
     // Teach it a machine it has never seen, from that machine's own service manual.

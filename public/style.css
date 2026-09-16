@@ -193,6 +193,14 @@ footer { max-width: 1140px; margin: 0 auto; padding: 22px 24px; display: flex; j
 .s-space, .s-question, .s-conclusion, .s-refuse { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
 .readout__meaning { font-size: 15px; color: var(--graphite); }
 
+/* Shown whenever the camera read did not actually happen. It is deliberately plain rather than
+   alarming — the point is honesty, not a warning. */
+.sim-badge {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .02em;
+  color: var(--amber); border: 1px dashed var(--amber); border-radius: 999px;
+  padding: 2px 8px; white-space: nowrap;
+}
+
 .space { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 .cause {
   position: relative; display: flex; align-items: baseline; gap: 12px;
