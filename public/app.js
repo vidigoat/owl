@@ -231,6 +231,63 @@ async function readPhoto(file) {
   return readDataUrl(dataUrl, file.name);
 }
 
+/**
+ * Learn a machine from a photograph of its manual page.
+ *
+ * The same destination as the pasted-text route and a different way of getting the characters
+ * there. It shows the transcription, because a fault table taken on trust is exactly the thing this
+ * project argues against — you should be able to hold the page up next to it.
+ */
+async function learnFromPhoto(file) {
+  advanceBtn.disabled = true;
+  const dataUrl = await new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(r.result);
+    r.onerror = () => reject(new Error('could not read that file'));
+    r.readAsDataURL(file);
+  });
+
+  const model = (prompt('Which machine is this manual for? (model number)') || '').trim();
+  if (!model) { advanceBtn.disabled = false; return; }
+
+  screen.innerHTML = `
+    <div class="s-cam">
+      <img class="s-cam__shot" src="${dataUrl}" alt="the manual page being read" />
+      <span class="s-cam__hint">transcribing the fault table…</span>
+    </div>
+    ${say('Let me read that page.')}`;
+
+  const r = await post('/api/learn-from-photo', { imageBase64: dataUrl, model });
+  trace('read_manual', file.name, r.learned ? `${r.codeCount} code(s) recovered` : r.reason,
+    r.simulated ? 'fallback' : 'Bedrock vision');
+
+  if (!r.learned) {
+    screen.innerHTML = `
+      <div class="s-refuse">
+        <span class="refuse__seal">NOTHING RECOVERED</span>
+        <p class="refuse__line">I couldn't get a fault table off that page.</p>
+        <p class="refuse__why">${esc(r.reason || '')}</p>
+        ${r.transcribed ? `<pre class="teach__manual">${esc(r.transcribed)}</pre>` : ''}
+      </div>
+      ${say("There's no fault table I can use on that page. I'd be guessing.")}`;
+    advanceBtn.disabled = false;
+    return;
+  }
+
+  APPLIANCE = { ...APPLIANCE, model, code: r.codes[0] };
+  captionEl.textContent = `Learned ${model} from a photograph — ${r.coverage}. Nothing in this project knew this machine.`;
+  screen.innerHTML = `
+    <div class="s-teach">
+      <p class="teach__head">${esc(model)}</p>
+      <p class="teach__sub">${esc(r.coverage)} — ${r.codes.map(esc).join(', ')}</p>
+      <pre class="teach__manual">${esc(r.transcribed || '')}</pre>
+      <p class="teach__cite">Transcribed off your photograph. Hold the page up next to it.</p>
+    </div>
+    ${say(`Right — I can read ${r.codes.length} fault codes off that. Let's start with ${r.codes[0]}.`)}`;
+  advanceBtn.disabled = false;
+  advanceBtn.textContent = 'What could cause it?';
+}
+
 /** One reader for both routes, so a dropped file and a camera frame can never behave differently. */
 async function readDataUrl(dataUrl, label) {
   advanceBtn.disabled = true;
@@ -730,8 +787,26 @@ async function teach() {
       <p class="teach__head">${m.brand} ${m.model}</p>
       <p class="teach__sub">Nothing in this project knows anything about this machine.</p>
       <pre class="teach__manual">${m.text.trim()}</pre>
+      <label class="s-cam__drop" id="manual-drop">
+        <input type="file" id="manual-photo" accept="image/*" hidden />
+        <b>Or photograph a real manual page</b>
+        <span>Nobody has the text of a fault table — they have a booklet in a drawer. Drop a photo
+        of the page and Bedrock transcribes it, character for character.</span>
+      </label>
     </div>
     ${say("I haven't seen this one. Let me read its manual.")}`;
+
+  const mDrop = screen.querySelector('#manual-drop');
+  const mInput = screen.querySelector('#manual-photo');
+  mInput.addEventListener('change', () => mInput.files[0] && learnFromPhoto(mInput.files[0]));
+  ['dragenter', 'dragover'].forEach((e) =>
+    mDrop.addEventListener(e, (ev) => { ev.preventDefault(); mDrop.classList.add('is-over'); }));
+  ['dragleave', 'drop'].forEach((e) =>
+    mDrop.addEventListener(e, (ev) => { ev.preventDefault(); mDrop.classList.remove('is-over'); }));
+  mDrop.addEventListener('drop', (ev) => {
+    const f = ev.dataTransfer?.files?.[0];
+    if (f) learnFromPhoto(f);
+  });
 
   await new Promise((r) => setTimeout(r, 900));
 

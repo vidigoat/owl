@@ -13,6 +13,7 @@ const { nextTest } = require('./mcp/tools/next_test');
 const { MODELS, LEARNED, learn } = require('./data/service-data');
 const { parse: parseManual } = require('./manual/faultgraph');
 const { see } = require('./mcp/tools/see');
+const { read_manual } = require('./mcp/tools/read_manual');
 const { confirm_fix } = require('./mcp/tools/confirm_fix');
 const { beginCheckout, confirmCheckout } = require('./mcp/tools/order_part');
 const { remember: rememberAppliance, receipt: writeReceipt, due: dueNow } = require('./mcp/tools/home');
@@ -117,6 +118,15 @@ http
     }
 
     // Teach it a machine it has never seen, from that machine's own service manual.
+    // Learn a machine from a PHOTOGRAPH of its manual page. Same destination as /api/learn, a
+    // different way of getting the characters there.
+    if (req.method === 'POST' && url.pathname === '/api/learn-from-photo') {
+      return readJson(req)
+        .then((body) => read_manual(body))
+        .then((r) => send(res, 200, JSON.stringify(r), 'application/json'))
+        .catch((e) => send(res, 500, JSON.stringify({ error: e.message }), 'application/json'));
+    }
+
     if (req.method === 'POST' && url.pathname === '/api/learn') {
       return readJson(req)
         .then((body) => {
