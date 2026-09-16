@@ -50,16 +50,23 @@ Shot list for the ≤3 minute submission video. Numbered so a second take can pi
 | 1 | at the machine, pressing **point the camera at the machine** | "I'm not going to type anything." | the gesture the product is built on |
 | 2 | live feed, press **Read it**; trace shows `see(camera) → E24 · 0.95 · Bedrock vision` | "That's Nova Lite. It just read my dishwasher." | **the shot.** real camera, real model, real code |
 | 3 | three causes with bars and bits | "Three things cause E24. It doesn't know which." | reasoning, not pattern-matching |
-| 4 | it asks about the pump and **stops** | "And it waits. It has no hands." | the pause is the product |
-| 5 | answer; a cause strikes through; `0.43 bits left` | "That's gone. Because of something I did." | elimination made visible |
+| 3.5 | press **Speak: on** before starting | — | do this off camera or in one beat; everything after is heard, not read |
+| 4 | it asks about the pump ALOUD and **stops** | "And it waits. It has no hands." | the pause is the product |
+| 5 | **say "it hums" out loud.** Trace shows `heard("it hums") → it hums · speech`. A cause strikes through; `0.43 bits left` | "I didn't touch anything. My hands are in the machine." | **the best shot in the video.** Voice in, voice out, hands never leave the appliance |
 | 6 | **Show it refuse a job** → NOT UPHELD — NO PART SOLD | "I'm not going to guess with your money." | the frame that wins it |
 | 7 | trace: `verify_diagnosis(E09) → ABSTAIN · trust gate` | "It books a technician instead of selling me a pump." | every competitor sells the part |
 | 8 | **Teach it a new machine** → LG manual → three cited causes | "No file in this project mentions this machine." | kills "you hardcoded it" |
 | 9 | terminal: `npm run eval` → 5/5, 0 hallucinated | "Two of those panels were healthy machines covered in numbers. It called neither a fault." | measured, not claimed |
 | 10 | black: "14 MCP tools. One of them can spend your money. It says no." | — | out |
 
-**Setup:** `AWS_PROFILE=bedrock npm start`. Stand at a machine with a fault showing; unplugging a
+**Setup:** `AWS_PROFILE=bedrock npm start`, in Chrome (speech recognition is Chrome-only). Press
+**Speak: on** and allow the microphone and camera when asked — do that before you start recording,
+so the permission prompts are not in the take. Stand at a machine with a fault showing; unplugging a
 dishwasher mid-cycle usually throws a drain code within a minute.
+
+**Record the audio.** Half of this demo is now sound: it reads every line aloud and takes spoken
+answers. A silent screen capture throws away the part that makes it an Alexa product rather than a
+web page.
 
 **The line the whole video exists to earn:** every other repair app is built around its best case.
 This one is built around the case where it does not know.

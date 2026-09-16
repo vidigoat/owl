@@ -297,6 +297,7 @@ it upholds the part.
 | This interface, and every screenshot above | **Real** — `npm run capture` drives it by pressing the same buttons a person would |
 | Bedrock vision (`see`, `read_error`, `identify_appliance`, `confirm_fix`) | **Real and running** against `us.amazon.nova-lite-v1:0`. Point the device's camera at a machine, or drop a photograph on it, and the code it reads is what the session diagnoses. Without credentials every read is still labelled `SIMULATED — no credentials` on screen and in the trace |
 | The camera | **Real.** `getUserMedia`, a live preview, one button that sends the frame to Bedrock. Refused or absent, it says NO CAMERA with the reason — it never silently falls back to the fixture |
+| Speaking, and hearing | **Real.** It reads every line aloud and takes spoken answers — "it hums" eliminates a cause without anyone touching the screen, which is the only input that fits a person with their hands inside a machine. Both are off until one toggle turns them on, and a test walks the entire flow and fails if a single utterance escapes or the microphone opens unasked |
 | The Alexa+ device surface | **Simulated by a web experience**, which the rules explicitly permit — no entrant can call Alexa+ directly. Nothing in the device code decides anything; every cause, question and elimination came back from a tool call, so Alexa+ could drive it unchanged |
 
 Fault codes used throughout are genuine Bosch, Whirlpool, LG and Samsung codes.
