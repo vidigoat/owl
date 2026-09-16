@@ -138,3 +138,43 @@ much a defect as one that oversells, and it fails in front of precisely the read
 for.
 **Fix:** corrected, and added a rule to `AGENTS.md`: never cite a check count in prose. Say "every
 suite" and let `npm test` print the number.
+
+---
+
+### 2026-09-16 · Pointing it at real AWS for the first time
+
+**Task:** get the vision path working, after a Bedrock-only IAM user made it possible at all.
+**Severity:** the whole feature. Five defects in about twenty minutes, and *not one of them was
+findable offline* — every unit test had been passing against a path that had never once succeeded.
+
+**1. The call had never worked.** `bedrock-runtime invoke-model` was writing the model's response
+body to `/dev/stdout` while the CLI wrote its own metadata there too, so stdout held two JSON
+documents concatenated and every read died on `JSON.parse`. Every image came back labelled
+SIMULATED — the system being honest about a path that was simply broken. *Fix:* request and
+response through temp files. A file has exactly one writer.
+
+**2. The prompt confused its own two fields.** It read `F21` off a washer display perfectly and
+returned it as the model number. Expensive in both directions: a model number in the code field
+walks a fault tree that does not exist, a fault code in the model field silently looks up the wrong
+machine. *Fix:* the prompt says where each field physically lives — lit display versus printed
+rating plate, 2–4 characters versus 8–14 — rather than only what each one is.
+
+**3. The string "null" became a fault code.** Asked about a healthy machine the model sometimes
+writes `"null"` rather than JSON null; uppercasing produced `code: "NULL"`, which then failed lookup
+and was reported as a *misread display*. An absence has to survive as an absence.
+
+**4. A rating plate returned its FD number as a fault.** On a photograph with no display in it at
+all, `9902` came back as a fault code. Label text is not a fault, however short it looks.
+
+**5. A repair was confirmed on a read at 0.1 confidence.** The worst of the five, because it is the
+one claim that stops a person looking further. A blank display read that badly is evidence we could
+not see, not evidence a fault cleared. *Fix:* a floor under confirmation only — a poor read still
+showing the original code is perfectly good evidence the repair failed.
+
+**The general lesson.** Four of these five are the same mistake wearing different clothes: treating
+"I could not establish X" as "X is absent". The project already had a rule about that and still
+shipped it four more times, which suggests a rule is not enough and the shape needs to be a test.
+
+**Suggestion for AWS:** `invoke-model` taking an output path *and* printing metadata to stdout is a
+trap that costs everyone the same hour. Either write metadata to stderr, or refuse `/dev/stdout` as
+an output path with a message saying why.
