@@ -19,6 +19,7 @@
 const { execFile } = require('node:child_process');
 const fs = require('node:fs');
 const path = require('node:path');
+const os = require('node:os');
 
 const MODEL_ID = process.env.BEDROCK_VISION_MODEL || 'us.amazon.nova-lite-v1:0';
 const REGION = process.env.AWS_REGION || 'us-east-1';
@@ -26,14 +27,34 @@ const PROFILE = process.env.AWS_PROFILE || null;
 
 /* Deliberately rigid. The model is told to refuse rather than guess, and to answer in a shape we
  * can validate — anything else is treated as a failed read. */
+/**
+ * The two fields are easy to confuse and the confusion is expensive.
+ *
+ * The first real Bedrock run read `F21` off a washer's display and returned it as the MODEL. The
+ * vision was perfect; the classification was not. A model number in the code field sends the whole
+ * diagnosis down a fault tree that does not exist, and a fault code in the model field silently
+ * looks up the wrong machine. So the prompt now says where each one physically lives, rather than
+ * only what each one is.
+ */
 const PROMPT = `You are reading a photograph of a home appliance.
 
 Return ONLY minified JSON, no prose, in exactly this shape:
 {"model":"<model number or null>","code":"<fault code or null>","confidence":<0..1>}
 
-Rules:
-- "model" is the manufacturer's model number from the rating plate, copied character for character.
-- "code" is the fault or error code shown on the display, e.g. E24, OE, 4C. Null if no code is shown.
+The two fields come from two different places. Do not put one in the other.
+
+- "code" is what the LIT DISPLAY is showing right now — a short fault code, usually 2-4 characters,
+  often in a different colour from everything around it: E24, OE, 4C, F21, dE, UE. If a display is
+  showing a fault code, it goes in "code", even if the machine's brand is the only other text you
+  can see. Null if the display shows no fault (a clock, a temperature, a cycle name, or nothing).
+- "model" is the manufacturer's model number PRINTED ON A STICKER OR RATING PLATE — a long
+  alphanumeric string, typically 8-14 characters, next to words like MODEL, SERIAL, FD, or voltage
+  and wattage ratings. It is never on the lit display. Null if you cannot see a rating plate.
+
+More rules:
+- A short code on a display is never a model number. A long string on a printed label is never a
+  fault code.
+- Numbers that are obviously a temperature, a clock, a cycle time, or a setting are NOT fault codes.
 - If you cannot read something with confidence, use null. Do not guess. Do not infer a plausible
   model number from the brand or the appearance of the machine.
 - confidence is your confidence in the fields you did fill in.`;
@@ -68,8 +89,29 @@ function parseReading(text) {
   }
 }
 
+/**
+ * Call Bedrock through the AWS CLI.
+ *
+ * The response body goes to a temp file rather than /dev/stdout. It used to go to stdout, and the
+ * first time this ever reached AWS it failed on every image: the CLI writes the model's response
+ * body to the output path AND its own metadata to stdout, so stdout held two JSON documents
+ * concatenated and `JSON.parse` died on the second one. A file has exactly one writer.
+ *
+ * The request body also goes to a file. An image is megabytes of base64 and argv is not.
+ */
 function invokeBedrock(base64, format) {
   return new Promise((resolve, reject) => {
+    const stamp = `${process.pid}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+    const bodyFile = path.join(os.tmpdir(), `ssoh-req-${stamp}.json`);
+    const outFile = path.join(os.tmpdir(), `ssoh-res-${stamp}.json`);
+    const clean = () => { fs.rmSync(bodyFile, { force: true }); fs.rmSync(outFile, { force: true }); };
+
+    try {
+      fs.writeFileSync(bodyFile, JSON.stringify(bodyFor(base64, format)));
+    } catch (e) {
+      return reject(e);
+    }
+
     const args = [
       'bedrock-runtime',
       'invoke-model',
@@ -77,14 +119,25 @@ function invokeBedrock(base64, format) {
       '--region', REGION,
       '--content-type', 'application/json',
       '--cli-binary-format', 'raw-in-base64-out',
-      '--body', JSON.stringify(bodyFor(base64, format)),
-      '/dev/stdout',
+      '--body', `fileb://${bodyFile}`,
+      outFile,
     ];
     if (PROFILE) args.push('--profile', PROFILE);
 
-    execFile('aws', args, { maxBuffer: 8 * 1024 * 1024 }, (err, stdout, stderr) => {
-      if (err) return reject(new Error((stderr || err.message).trim().split('\n').pop()));
-      resolve(stdout);
+    execFile('aws', args, { maxBuffer: 8 * 1024 * 1024 }, (err, _stdout, stderr) => {
+      if (err) {
+        clean();
+        return reject(new Error((stderr || err.message).trim().split('\n').pop()));
+      }
+      let out;
+      try {
+        out = fs.readFileSync(outFile, 'utf8');
+      } catch (e) {
+        clean();
+        return reject(e);
+      }
+      clean();
+      resolve(out);
     });
   });
 }

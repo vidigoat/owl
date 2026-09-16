@@ -16,7 +16,8 @@
     "test": "node scripts/test.js",
     "capture": "node scripts/capture.js",
     "preflight": "node scripts/preflight.js",
-    "gif": "node scripts/gif.js"
+    "gif": "node scripts/gif.js",
+    "panels": "node eval/panels.js"
   },
   "keywords": [
     "alexa-plus",

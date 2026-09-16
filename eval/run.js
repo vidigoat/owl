@@ -22,6 +22,7 @@ const path = require('node:path');
 const { see } = require('../mcp/tools/see');
 
 const DIR = path.join(__dirname, 'photos');
+const RENDERED = path.join(__dirname, 'rendered');
 const IMAGE = /\.(jpe?g|png|webp)$/i;
 
 /** Pull the expected answer out of the filename. */
@@ -41,23 +42,20 @@ function expectationFor(file) {
 
 const pct = (n, d) => (d === 0 ? '—' : `${Math.round((n / d) * 100)}%`);
 
-async function main() {
-  if (!fs.existsSync(DIR)) {
-    console.log('No eval/photos directory. Nothing measured.');
-    process.exit(0);
-  }
+/**
+ * Score one directory of images.
+ *
+ * Photographs and rendered panels are scored by the same code and reported as two separate
+ * numbers, never one. A render is missing everything a kitchen adds — glare, angle, a hand in the
+ * frame — so averaging the two would let drawings flatter the number that actually matters.
+ */
+async function score(dir, noun) {
+  const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => IMAGE.test(f)) : [];
+  if (files.length === 0) return null;
 
-  const files = fs.readdirSync(DIR).filter((f) => IMAGE.test(f));
+  console.log(`\n  ${files.length} ${noun}${files.length === 1 ? '' : 's'}\n`);
 
-  if (files.length === 0) {
-    console.log('\n  No photographs in eval/photos — nothing has been measured.\n');
-    console.log('  This is the one thing that cannot be built without you. See eval/photos/README.md.');
-    console.log('  Until there are photographs here, any claim about reading fault codes is unproven.\n');
-    process.exit(0);
-  }
-
-  console.log(`\n  ${files.length} photograph${files.length === 1 ? '' : 's'}\n`);
-
+  const DIR = dir;
   const tally = { codeTried: 0, codeRight: 0, modelTried: 0, modelRight: 0, simulated: 0, hallucinated: 0 };
 
   for (const file of files) {
@@ -98,15 +96,30 @@ async function main() {
     console.log(`  ${file.padEnd(42)} ${verdict}`);
   }
 
-  console.log('\n  ── results ──');
-  console.log(`  fault code read correctly   ${tally.codeRight}/${tally.codeTried}  ${pct(tally.codeRight, tally.codeTried)}`);
+  console.log(`\n  fault code read correctly   ${tally.codeRight}/${tally.codeTried}  ${pct(tally.codeRight, tally.codeTried)}`);
   console.log(`  model number read correctly ${tally.modelRight}/${tally.modelTried}  ${pct(tally.modelRight, tally.modelTried)}`);
   if (tally.hallucinated > 0) {
     console.log(`\n  ${tally.hallucinated} invented a fault code on a healthy machine. That number must be zero.`);
   }
   if (tally.simulated > 0) {
     console.log(`\n  ${tally.simulated} could not be read at all (no Bedrock credentials) and are excluded.`);
-    console.log('  These numbers describe only the photographs that were genuinely processed.');
+    console.log('  These numbers describe only the images that were genuinely processed.');
+  }
+  return tally;
+}
+
+async function main() {
+  console.log('\n  ── RENDERED PANELS ──  drawn, not photographed. They measure whether the reader');
+  console.log('     reads a display at all. They do not measure whether it reads YOUR kitchen.');
+  const rendered = await score(RENDERED, 'rendered panel');
+  if (!rendered) console.log('\n  None. Run `npm run panels` to draw them.');
+
+  console.log('\n\n  ── PHOTOGRAPHS ──  the only number that counts.');
+  const photos = await score(DIR, 'photograph');
+  if (!photos) {
+    console.log('\n  No photographs in eval/photos — the claim that this reads real machines is');
+    console.log('  UNPROVEN, whatever the panels above say. See eval/photos/README.md.');
+    console.log('  This is the one thing that cannot be built without you.');
   }
   console.log();
 }
