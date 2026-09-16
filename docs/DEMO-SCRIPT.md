@@ -56,7 +56,7 @@ Shot list for the ≤3 minute submission video. Numbered so a second take can pi
 | 6 | **Show it refuse a job** → NOT UPHELD — NO PART SOLD | "I'm not going to guess with your money." | the frame that wins it |
 | 7 | trace: `verify_diagnosis(E09) → ABSTAIN · trust gate` | "It books a technician instead of selling me a pump." | every competitor sells the part |
 | 8 | **Teach it a new machine** → LG manual → three cited causes | "No file in this project mentions this machine." | kills "you hardcoded it" |
-| 9 | terminal: `npm run eval` → 5/5, 0 hallucinated | "Two of those panels were healthy machines covered in numbers. It called neither a fault." | measured, not claimed |
+| 9 | terminal: `npm run eval` → 7/9, **0 hallucinated** | "It misses two — glare, and a dark room. Both times it says null instead of guessing. And two of those panels are healthy machines covered in numbers; it called neither one a fault." | measured, not claimed — and quoting the misses is what makes the rest believable |
 | 10 | black: "14 MCP tools. One of them can spend your money. It says no." | — | out |
 
 **Setup:** `AWS_PROFILE=bedrock npm start`, in Chrome (speech recognition is Chrome-only). Press

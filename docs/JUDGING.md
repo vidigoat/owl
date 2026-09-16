@@ -10,7 +10,7 @@ at something runnable — no claim here needs to be taken on trust.
 |---|---|
 | The MCP server — JSON-RPC over Streamable HTTP, spec 2025-11-25 | `mcp/server.js` |
 | Sixteen tools genuinely registered and invoked, not described | `mcp/tools/` — answer `tools/list` over Streamable HTTP; the README table names the file each lives in |
-| **Vision that actually runs** — real Bedrock Nova Lite, scored | `npm run eval` → 5/5 codes, 1/1 model, **0 invented**. `mcp/tools/see.js` |
+| **Vision that actually runs** — real Bedrock Nova Lite, scored against deliberately hard panels | `npm run eval` → 7/9 codes, 1/1 model, **0 invented**; the two misses return null rather than guess. `mcp/tools/see.js` |
 | **A camera, and a voice** — point it at a machine, answer out loud | `public/app.js` — `getUserMedia`, `speechSynthesis`, `SpeechRecognition` |
 | **The diagnosis engine** — entropy over a hypothesis space, cost-weighted information gain | `mcp/tools/next_test.js` |
 | **Learning a machine at runtime** from its own service manual | `manual/faultgraph.js`, `POST /api/learn` |
