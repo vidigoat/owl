@@ -131,8 +131,30 @@ async function bedrock() {
 
 async function memory() {
   console.log(`\n${C.bold}AgentCore memory${C.off}`);
+
+  // Probe the permission rather than only the env var. AmazonBedrockFullAccess does NOT cover
+  // bedrock-agentcore — they are separate services with separate action prefixes, which is exactly
+  // the kind of thing that is discovered at the wrong moment.
+  try {
+    await aws(['bedrock-agentcore-control', 'list-memories', '--region', REGION, '--output', 'json']);
+    ok('the profile can reach AgentCore');
+  } catch (e) {
+    const why = short(e);
+    if (/AccessDenied|not authorized/i.test(why)) {
+      skip('AgentCore is not permitted for this identity',
+        'AmazonBedrockFullAccess does not include bedrock-agentcore:* — they are separate services.\n' +
+        '      Add an inline policy allowing bedrock-agentcore:* if you want real household memory.\n' +
+        '      Until then memory is file-backed behind the same interface, and the UI says "local".');
+    } else if (/Invalid choice|argument command/i.test(why)) {
+      skip('AgentCore', `this AWS CLI does not know the bedrock-agentcore-control command (${why.slice(0, 60)})`);
+    } else {
+      skip('AgentCore', why);
+    }
+    return;
+  }
+
   if (!process.env.AGENTCORE_MEMORY_ID) {
-    return skip('AGENTCORE_MEMORY_ID', 'not set — memory falls back to the local store, which the UI labels as local');
+    return skip('AGENTCORE_MEMORY_ID', 'reachable, but no memory id set — still using the local store');
   }
   ok('configured', process.env.AGENTCORE_MEMORY_ID);
 }
