@@ -20,6 +20,7 @@ const { see } = require('./tools/see');
 const { read_error } = require('./tools/read_error');
 const { identify_appliance } = require('./tools/identify_appliance');
 const { read_manual } = require('./tools/read_manual');
+const { RESOURCES, spaceCard, stepCard, refusalCard, checkoutCard } = require('./cards');
 const { confirm_fix } = require('./tools/confirm_fix');
 const { beginCheckout, confirmCheckout } = require('./tools/order_part');
 const { receipt, due, history } = require('./tools/home');
@@ -283,8 +284,27 @@ async function handle(msg) {
   if (method === 'initialize') {
     return result(id, {
       protocolVersion: PROTOCOL_VERSION,
-      capabilities: { tools: { listChanged: false } },
+      capabilities: { tools: { listChanged: false }, resources: { listChanged: false, subscribe: false } },
       serverInfo: { name: 'second-set-of-hands', version: '0.1.0' },
+    });
+  }
+
+  // Cards. A host that can draw gets a card; a host that cannot still gets every word spoken,
+  // because nothing appears only on a screen — see mcp/cards.js for why that rule is not negotiable.
+  if (method === 'resources/list') {
+    return result(id, {
+      resources: RESOURCES.map(({ uri, name, description, mimeType }) => ({ uri, name, description, mimeType })),
+    });
+  }
+
+  if (method === 'resources/read') {
+    const uri = params?.uri;
+    const found = RESOURCES.find((r) => r.uri === uri);
+    if (!found) {
+      return failure(id, -32602, `No such resource: ${uri}`);
+    }
+    return result(id, {
+      contents: [{ uri: found.uri, mimeType: found.mimeType, text: found.read() }],
     });
   }
 

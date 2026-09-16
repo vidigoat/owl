@@ -166,6 +166,20 @@ curl -s -X POST http://localhost:8793/mcp -H 'content-type: application/json' \
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}' | jq '.result.tools | length'
 ```
 
+It also serves **resources** — the cards an Echo Show draws while Alexa talks:
+
+```bash
+curl -s -X POST http://localhost:8793/mcp -H 'content-type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"resources/list"}'
+```
+
+One rule governs all of them, and it is easy to break while making a screen nicer: **nothing appears
+only on a card.** The person is kneeling in front of a machine with their hands inside it and their
+eyes nowhere near a display, so anything they must know has to survive being *heard*. A card is for
+what eyes are better at — a probability bar, a struck-through cause, an itemised total — and a card
+that is load-bearing has quietly turned a voice product into a screen product.
+`mcp/cards.test.js` checks that no card shows a number nobody passed into it.
+
 Two of them are the product. `next_test` is why this asks three questions instead of twenty, and
 `verify_diagnosis` is the only function in the repository that can authorise spending — everything
 else offers, and it alone decides.
@@ -196,6 +210,20 @@ what is missing.
 | `confirm_checkout` | session id | the order, placed exactly once | **live** — Wallet itself is still a sandbox stub |
 
 Each lives in its own file under `mcp/tools/`, registered in `mcp/server.js`.
+
+It also serves **resources** — the cards an Echo Show draws while Alexa talks:
+
+```bash
+curl -s -X POST http://localhost:8793/mcp -H 'content-type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"resources/list"}'
+```
+
+One rule governs all of them, and it is easy to break while making a screen nicer: **nothing appears
+only on a card.** The person is kneeling in front of a machine with their hands inside it and their
+eyes nowhere near a display, so anything they must know has to survive being *heard*. A card is for
+what eyes are better at — a probability bar, a struck-through cause, an itemised total — and a card
+that is load-bearing has quietly turned a voice product into a screen product.
+`mcp/cards.test.js` checks that no card shows a number nobody passed into it.
 
 Two of them are the product. `next_test` is why this asks three questions instead of twenty, and
 `verify_diagnosis` is the only function in the repository that can authorise spending — everything
