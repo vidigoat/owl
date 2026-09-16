@@ -11,6 +11,7 @@
  */
 
 const { execFileSync, spawn } = require('node:child_process');
+const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
 
@@ -34,7 +35,6 @@ const SHOTS = [
   { file: 'hero.png', at: 'hero', size: '1280,1000' },
   { file: 'collapse.png', at: 'collapse', size: '1280,1000' },
   { file: 'refusal.png', at: 'refusal', size: '1280,900' },
-  { file: 'teach.png', at: 'teach', size: '1280,1000' },
   { file: 'learned.png', at: 'learned', size: '1280,1000' },
   { file: 'guide.png', at: 'guide', size: '1280,900' },
   { file: 'checkout.png', at: 'checkout', size: '1280,1000' },
@@ -75,6 +75,23 @@ const SHOTS = [
 
     const kb = Math.round(fs.statSync(dest).size / 1024);
     console.log(`  ${shot.file.padEnd(16)} ${shot.size.padEnd(11)} ${kb} kB${kb < 12 ? '   ← suspiciously small, look at it' : ''}`);
+  }
+
+  // Two frames that are byte-identical are two captions describing one moment, which is the quiet
+  // kind of dishonesty this project is against. It happened once: the manual-ingest pause is
+  // transient, and headless virtual time skips straight past it.
+  const seen = new Map();
+  const dupes = [];
+  for (const shot of SHOTS) {
+    const hash = crypto.createHash('sha1').update(fs.readFileSync(path.join(OUT, shot.file))).digest('hex');
+    if (seen.has(hash)) dupes.push(`${seen.get(hash)} and ${shot.file}`);
+    else seen.set(hash, shot.file);
+  }
+  if (dupes.length) {
+    console.error(`\n  identical frames: ${dupes.join('; ')}`);
+    console.error('  Two captions for one moment. Fix the frame or drop it — do not ship both.');
+    server.kill();
+    process.exit(1);
   }
 
   server.kill();

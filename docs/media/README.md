@@ -14,13 +14,18 @@ can be trimmed out of the middle, and no frame can show a state the software cou
 
 The only thing still wanting a human is `terminal.png`, which is a screenshot of `npm run demo`.
 
+`teach.png` was dropped rather than faked. It was meant to show the manual on screen mid-ingest, but
+that state lasts under a second and headless capture runs on virtual time, which skips straight past
+it — so the frame came out byte-identical to `learned.png`. Two captions for one moment is the quiet
+kind of dishonesty this project exists to argue against, so `npm run capture` now fails outright if
+any two frames hash the same.
+
 | file | the exact moment | how to get there | status |
 |---|---|---|---|
 | `hero.png` | the question filling the screen, hypothesis space beneath it | `npm run capture` | **captured** |
 | `collapse.png` | a cause greyed out and struck through, right after an answer | `npm run capture` | **captured** |
 | `refusal.png` | the amber NOT UPHELD card | `npm run capture` | **captured** |
-| `teach.png` | the LG manual on screen, mid-ingest | `npm run capture` | **captured** |
-| `learned.png` | the space built from that manual, with the citation line | `npm run capture` | **captured** |
+| `learned.png` | the space built from an LG manual nothing here has seen, with its citation | `npm run capture` | **captured** |
 | `checkout.png` | the itemised total beside the $179 alternative | `npm run capture` | **captured** |
 | `guide.png` | the hands-free repair steps, one at a time | `npm run capture` | **captured** |
 | `terminal.png` | `npm run demo` output, whole loop in one screen | `npm run demo`, then screenshot | TODO |
