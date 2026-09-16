@@ -16,6 +16,7 @@ const { diagnose } = require('./tools/diagnose');
 const { verify_diagnosis } = require('./tools/verify_diagnosis');
 const { guide } = require('./tools/guide');
 const { find_part } = require('./tools/find_part');
+const { see } = require('./tools/see');
 const { buildSpace, prune } = require('./tools/hypotheses');
 const { nextTest } = require('./tools/next_test');
 
@@ -87,6 +88,20 @@ const TOOLS = [
       required: ['model', 'causeId'],
     },
     handler: find_part,
+  },
+  {
+    name: 'see',
+    description:
+      'Read the model number and fault code off a photograph of an appliance. Returns nulls rather than guesses, and always states whether the read was real or simulated.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        imagePath: { type: 'string', description: 'Path to the photograph' },
+        expect: { type: 'object', description: 'Only used to shape a simulated read when Bedrock is unreachable' },
+      },
+      required: ['imagePath'],
+    },
+    handler: see,
   },
   {
     name: 'hypotheses',
