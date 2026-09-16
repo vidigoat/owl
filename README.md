@@ -11,6 +11,12 @@ repair while your hands are inside the machine, and orders the exact part throug
 > if any two frames come out identical. What is not yet real is named plainly in
 > [What is real and what is simulated](#what-is-real-and-what-is-simulated).
 
+![Show it the machine: drop a photograph, or point the camera](docs/media/camera.png)
+
+You do not type a fault code into this. You show it the machine — a photograph, or the camera
+pointed at the panel — and whatever Bedrock reads is what it diagnoses, including when that is
+nothing at all.
+
 ![The device mid-repair: one question, the causes still in play beneath it](docs/media/hero.png)
 
 ---

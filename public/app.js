@@ -847,6 +847,7 @@ const onScreen = (sel) => Boolean(screen.querySelector(sel));
 // a step, which is how the first attempt at this captured the question AFTER the elimination rather
 // than the elimination itself.
 const FRAMES = {
+  camera: { until: () => onScreen('.s-cam') },   // the opening move: show it the machine
   hero: { until: () => onScreen('.s-question') && !onScreen('.question--answered') },
   collapse: { until: () => onScreen('.question--answered') }, // a cause struck through
   guide: { until: () => stage === 'guide' },

@@ -32,6 +32,7 @@ const BASE = `http://localhost:${PORT}`;
 
 /** Each frame names a moment the device can actually reach. See FRAMES in public/app.js. */
 const SHOTS = [
+  { file: 'camera.png', at: 'camera', size: '1280,1000' },
   { file: 'hero.png', at: 'hero', size: '1280,1000' },
   { file: 'collapse.png', at: 'collapse', size: '1280,1000' },
   { file: 'refusal.png', at: 'refusal', size: '1280,900' },
