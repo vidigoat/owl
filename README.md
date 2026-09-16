@@ -182,7 +182,7 @@ git clone <repo>
 cd second-set-of-hands
 
 npm run demo            # ← start here: the whole loop in a terminal, 20 seconds
-npm test                # 100 checks across 9 suites
+npm test                # every suite, reported together
 npm start               # http://localhost:8792 — the device experience
 npm run mcp             # http://localhost:8793/mcp — the server Alexa+ calls
 npm run eval            # the vision evaluation (needs photographs)

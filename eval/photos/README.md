@@ -34,8 +34,8 @@ Model and code in the filename where you know them. That becomes the expected an
 
 ## What happens then
 
-`expected.json` gets written alongside — the model number and fault code each photo really shows —
-and the eval reports exact-match accuracy on both. Two numbers, honestly measured, in the README:
+Run `npm run eval`. The filename *is* the expected answer — no separate manifest to keep in step —
+and it reports exact-match accuracy. Two numbers, honestly measured, in the README:
 
 - how often it read the **fault code** correctly
 - how often it read the **model number** correctly

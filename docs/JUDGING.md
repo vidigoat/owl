@@ -44,9 +44,9 @@ AWS credentials. The README table marks which is which.
 ### The two runs worth doing yourself
 
 ```bash
-npm test          # 89 checks
+npm run demo      # the whole loop on a machine nobody coded for, in a terminal
+npm test          # every suite, reported together
 npm run eval      # the vision evaluation — honest about having no photographs yet
-node manual/generality.test.js
 ```
 
 That last one is the claim that matters: four manufacturers' manuals — Bosch, LG, Samsung, Whirlpool,
