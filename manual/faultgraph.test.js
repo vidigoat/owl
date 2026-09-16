@@ -134,7 +134,7 @@ OE   The machine cannot drain
   const tests = LEARNED['ORDER-TEST'].codes.OE.tests;
   const first = nextTest({ space, tests });
 
-  assert.notMatch(first.test.question, /^Replace/i, 'opened by asking someone to buy a part');
+  assert.doesNotMatch(first.test.question, /^Replace/i, 'opened by asking someone to buy a part');
   assert.notEqual(first.test.effort, 'heavy');
 });
 
