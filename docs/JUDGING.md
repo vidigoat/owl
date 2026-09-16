@@ -41,6 +41,18 @@ It refuses — the free check has not been ruled out. Add `"ruledOut":["filter",
 **Not there yet:** the three vision tools, Wallet checkout, and AgentCore memory are stubs waiting on
 AWS credentials. The README table marks which is which.
 
+### The two runs worth doing yourself
+
+```bash
+npm test          # 89 checks
+npm run eval      # the vision evaluation — honest about having no photographs yet
+node manual/generality.test.js
+```
+
+That last one is the claim that matters: four manufacturers' manuals — Bosch, LG, Samsung, Whirlpool,
+each writing fault codes differently — parsed from scratch, narrowed to a single cause, and talked
+through with a procedure citing the manual it came from. None of them are coded for.
+
 ## Design
 *Is the interaction model well considered for the device?*
 

@@ -95,25 +95,41 @@
 <section class="how">
   <h2>How it works</h2>
   <pre class="diagram">
-   you                      Alexa+ (device)            this MCP server
-    │                            │                            │
-    │  "why is it beeping?"      │                            │
-    ├───────────────────────────►│   identify_appliance ─────►│  Bedrock vision
-    │                            │   read_error         ─────►│  → Bosch SHE3AR75UC, E24
-    │                            │                            │
-    │                            │   diagnose           ─────►│  2 ranked causes
-    │                            │   verify_diagnosis   ─────►│  ┌─────────────────┐
-    │                            │                            │  │  TRUST GATE     │
-    │                            │                            │  │  upheld?        │
-    │                            │                            │  └───┬─────────┬───┘
-    │                            │                            │   yes│      no │
-    │  spoken, one step at a time│   guide              ─────►│◄─────┘         │
-    │◄───────────────────────────┤                            │                │
-    │  "still beeping"           │   find_part          ─────►│  exact part    │  "get a technician —
-    │                            │   order_part         ─────►│  Wallet        │   I won't guess"
-    │  "yes, order it"           │                            │                ▼
-    │◄───────────────────────────┤   confirm_fix        ─────►│  re-read panel: fault cleared
-    │                            │   home.remember      ─────►│  repair receipt → AgentCore
+                    ┌──────────────────────────────────────┐
+   you  ───────────►│  see        the panel, the plate     │  Bedrock vision
+   "it's beeping"   └──────────────────┬───────────────────┘
+                                       │  never met this machine?
+                                       ▼
+                    ┌──────────────────────────────────────┐
+                    │  learn      read its service manual  │  → fault graph, cited
+                    └──────────────────┬───────────────────┘
+                                       ▼
+                    ┌──────────────────────────────────────┐
+                    │  hypotheses  everything it could be  │  4 causes · 2.00 bits
+                    └──────────────────┬───────────────────┘
+                                       ▼
+        ┌──────────────────────────────────────────────────────────┐
+        │                                                          │
+        │   next_test   which single check rules out the most      │
+        │               for the least effort?                      │
+        │                          │                               │
+        │                          ▼                               │
+        │   ask you  ─────────►  it has no hands, so it waits      │
+        │                          │                               │
+        │                          ▼                               │
+        │   observe     your answer eliminates causes              │
+        │                          │                               │
+        └──────────────────────────┼───────────────────────────────┘
+                   more than one   │   exactly one left
+                   left? loop ◄────┴────► verify_diagnosis
+                                              │
+                            ┌─────────────────┴─────────────────┐
+                        upheld                              refused
+                            │                                   │
+                            ▼                                   ▼
+              guide → find_part → order_part        "three causes too close,
+              confirm_fix → remember_repair          one is mains wiring —
+              (it checks its own work)                call a technician"
   </pre>
 </section>
 
