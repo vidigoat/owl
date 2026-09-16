@@ -127,8 +127,7 @@ lose a reviewer's trust.
 | `verify_diagnosis` | model, code, causeId, ruledOut | upheld / abstain, with a citation | **live** |
 | `guide` | model, code, causeId | hands-free steps with pacing | **live** |
 | `find_part` | model, causeId | exact part + what a service call costs | **live** |
-| `identify_appliance` | image | brand, model, confidence | stub — needs Bedrock |
-| `read_error` | image | fault code, confidence | stub — needs Bedrock |
+| `see` | image | model number + fault code, or nulls | **live**, falls back to a *labelled* simulated read without credentials |
 | `confirm_fix` | image | fault cleared? | stub — needs Bedrock |
 | `order_part` | part | Wallet checkout | stub — needs Wallet sandbox |
 | `home.remember` / `home.due` | record | household memory | stub — needs AgentCore |

@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node server.js",
     "mcp": "node mcp/server.js",
-    "test": "node mcp/tools/verify_diagnosis.test.js && node mcp/tools/tools.test.js && node mcp/tools/diagnosis.test.js && node manual/faultgraph.test.js && node mcp/tools/see.test.js && node mcp/server.test.js"
+    "eval": "node eval/run.js",
+    "test": "node mcp/tools/verify_diagnosis.test.js && node mcp/tools/tools.test.js && node mcp/tools/diagnosis.test.js && node manual/faultgraph.test.js && node mcp/tools/see.test.js && node mcp/tools/memory.test.js && node mcp/server.test.js"
   },
   "keywords": ["alexa-plus", "mcp", "repair", "voice", "bedrock"]
 }

@@ -17,6 +17,8 @@ const { verify_diagnosis } = require('./tools/verify_diagnosis');
 const { guide } = require('./tools/guide');
 const { find_part } = require('./tools/find_part');
 const { see } = require('./tools/see');
+const { confirm_fix } = require('./tools/confirm_fix');
+const { receipt, due, history } = require('./tools/home');
 const { buildSpace, prune } = require('./tools/hypotheses');
 const { nextTest } = require('./tools/next_test');
 
@@ -102,6 +104,51 @@ const TOOLS = [
       required: ['imagePath'],
     },
     handler: see,
+  },
+  {
+    name: 'confirm_fix',
+    description:
+      'Look at the panel again after a repair and say whether the fault actually cleared. Will not confirm anything it could not genuinely see.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        imagePath: { type: 'string' },
+        code: { type: 'string', description: 'The fault code that was being repaired' },
+      },
+      required: ['imagePath'],
+    },
+    handler: confirm_fix,
+  },
+  {
+    name: 'remember_repair',
+    description:
+      'Write down what was wrong, what was done about it, and whether it worked — so the next conversation about this machine is short.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        model: { type: 'string' },
+        code: { type: 'string' },
+        cause: { type: 'string' },
+        action: { type: 'string' },
+        part: { type: 'string' },
+        cost: { type: 'number' },
+        confirmed: { type: 'boolean' },
+      },
+      required: ['model', 'code'],
+    },
+    handler: receipt,
+  },
+  {
+    name: 'whats_due',
+    description: 'Consumables now due across the household, so it can speak first instead of waiting for a breakdown.',
+    inputSchema: { type: 'object', properties: {} },
+    handler: due,
+  },
+  {
+    name: 'repair_history',
+    description: 'Everything this machine has been through before.',
+    inputSchema: { type: 'object', properties: { model: { type: 'string' } }, required: ['model'] },
+    handler: history,
   },
   {
     name: 'hypotheses',
