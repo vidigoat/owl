@@ -185,7 +185,7 @@ what is missing.
 | `guide` | model, code, causeId | hands-free steps with pacing | **live** |
 | `find_part` | model, causeId | exact part + what a service call costs | **live** |
 | `see` | image or bytes | model number + fault code, or nulls | **live against Bedrock Nova Lite**; falls back to a *labelled* simulated read without credentials |
-| `read_error` | image/bytes, model | the code AND what it means on that model | **live** — abstains rather than interpret a code against the wrong machine |
+| `read_error` | image/bytes, model, or `noCodeShown` | the code AND what it means on that model | **live** — abstains rather than interpret a code against the wrong machine. `noCodeShown` lets an agent report that the *person* looked and saw nothing, which is an established absence rather than a failed read |
 | `identify_appliance` | image/bytes | the machine, and whether we have service data for it | **live** — never infers a model from the brand |
 | `confirm_fix` | image, code | did the fault actually clear? | **live** — refuses to confirm a repair it could not see |
 | `remember_repair` | model, code, cause, outcome | the repair receipt | **live**, file-backed until AgentCore |
