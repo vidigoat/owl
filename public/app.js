@@ -106,6 +106,7 @@ function renderCamera() {
         <span>Drop one here, or click to choose. It goes to Bedrock and whatever it reads is what
         this diagnoses — including if that is nothing.</span>
       </label>
+      <button class="s-cam__live" id="live">Or point the camera at the machine</button>
     </div>
     ${say('Got it. Hold still for a second.')}`;
 
@@ -121,6 +122,68 @@ function renderCamera() {
   drop.addEventListener('drop', (ev) => {
     const file = ev.dataTransfer?.files?.[0];
     if (file) readPhoto(file);
+  });
+  screen.querySelector('#live').addEventListener('click', openCamera);
+}
+
+/**
+ * The camera, actually.
+ *
+ * An Echo Show has one pointed at the room; a laptop has one pointed at whatever you hold in front
+ * of it. Either way this is the real gesture the product is built around — you do not type a fault
+ * code into a repair app, you show it the machine.
+ */
+let stream = null;
+
+function stopCamera() {
+  if (stream) stream.getTracks().forEach((t) => t.stop());
+  stream = null;
+}
+
+async function openCamera() {
+  advanceBtn.disabled = true;
+  captionEl.textContent = 'Hold the panel in front of the lens and press Read it.';
+  screen.innerHTML = `
+    <div class="s-cam">
+      <video class="s-cam__video" id="feed" autoplay playsinline muted></video>
+      <div class="s-cam__live-row">
+        <button class="s-cam__shoot" id="shoot">Read it</button>
+        <button class="s-cam__cancel" id="stop">Cancel</button>
+      </div>
+    </div>
+    ${say('Show me the panel.')}`;
+
+  screen.querySelector('#stop').addEventListener('click', () => { stopCamera(); renderCamera(); advanceBtn.disabled = false; });
+
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: 'environment', width: { ideal: 1920 }, height: { ideal: 1080 } },
+      audio: false,
+    });
+  } catch (e) {
+    // No camera, or permission refused. Say which, and leave the other routes open.
+    screen.innerHTML = `
+      <div class="s-refuse">
+        <span class="refuse__seal">NO CAMERA</span>
+        <p class="refuse__line">I can't get to a camera.</p>
+        <p class="refuse__why">${esc(e.message || String(e))}</p>
+      </div>
+      ${say("I can't reach the camera, so use a photograph instead.")}`;
+    advanceBtn.disabled = false;
+    return;
+  }
+
+  const feed = screen.querySelector('#feed');
+  feed.srcObject = stream;
+
+  screen.querySelector('#shoot').addEventListener('click', () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = feed.videoWidth || 1280;
+    canvas.height = feed.videoHeight || 720;
+    canvas.getContext('2d').drawImage(feed, 0, 0, canvas.width, canvas.height);
+    stopCamera();
+    // JPEG at 0.92: a fault code is high-contrast, and a smaller upload reads sooner.
+    readDataUrl(canvas.toDataURL('image/jpeg', 0.92), 'camera');
   });
 }
 
@@ -139,6 +202,12 @@ async function readPhoto(file) {
     r.onerror = () => reject(new Error('could not read that file'));
     r.readAsDataURL(file);
   });
+  return readDataUrl(dataUrl, file.name);
+}
+
+/** One reader for both routes, so a dropped file and a camera frame can never behave differently. */
+async function readDataUrl(dataUrl, label) {
+  advanceBtn.disabled = true;
 
   screen.innerHTML = `
     <div class="s-cam">
@@ -148,7 +217,7 @@ async function readPhoto(file) {
     ${say('Let me look at that.')}`;
 
   const read = await post('/api/see', { imageBase64: dataUrl });
-  trace('see', file.name, read.simulated ? 'SIMULATED — no credentials' : `${read.code ?? 'no code'} · ${read.confidence ?? '—'}`,
+  trace('see', label, read.simulated ? 'SIMULATED — no credentials' : `${read.code ?? 'no code'} · ${read.confidence ?? '—'}`,
     read.simulated ? 'fallback' : 'Bedrock vision');
 
   if (read.simulated) {
