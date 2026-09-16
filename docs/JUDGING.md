@@ -9,7 +9,9 @@ at something runnable — no claim here needs to be taken on trust.
 | what to look at | where |
 |---|---|
 | The MCP server — JSON-RPC over Streamable HTTP, spec 2025-11-25 | `mcp/server.js` |
-| Fourteen tools genuinely registered and invoked, not described | `mcp/tools/` — answer `tools/list` over Streamable HTTP; the README table names the file each lives in |
+| Sixteen tools genuinely registered and invoked, not described | `mcp/tools/` — answer `tools/list` over Streamable HTTP; the README table names the file each lives in |
+| **Vision that actually runs** — real Bedrock Nova Lite, scored | `npm run eval` → 5/5 codes, 1/1 model, **0 invented**. `mcp/tools/see.js` |
+| **A camera, and a voice** — point it at a machine, answer out loud | `public/app.js` — `getUserMedia`, `speechSynthesis`, `SpeechRecognition` |
 | **The diagnosis engine** — entropy over a hypothesis space, cost-weighted information gain | `mcp/tools/next_test.js` |
 | **Learning a machine at runtime** from its own service manual | `manual/faultgraph.js`, `POST /api/learn` |
 | The device calls those same modules; the front-end knows nothing | `server.js` → `/api/diagnosis/*`, `/api/learn`, `/api/verify`, `/api/guide`, `/api/part` |
@@ -38,11 +40,16 @@ curl -s -X POST http://localhost:8793/mcp -H 'content-type: application/json' \
 
 It refuses — the free check has not been ruled out. Add `"ruledOut":["filter","hose"]` and it upholds.
 
-**Not there yet, precisely.** `see`, `read_error` and `confirm_fix` are written and tested, and have
-never been answered by Bedrock — without credentials every read is labelled `SIMULATED — no
-credentials` on screen and in the trace, and it is that label, not a silent fallback, that makes the
-demo honest. `npm run preflight` reports exactly what is missing; run against this machine's profile
-it names the cause in one line — an IAM user with no `bedrock:ListFoundationModels` permission.
+**The vision path is live.** `see`, `read_error`, `identify_appliance` and `confirm_fix` reach
+Bedrock Nova Lite. `npm run demo` opens on a real read; `npm run eval` scores it. Without
+credentials every read is still labelled `SIMULATED — no credentials` on screen and in the trace,
+and it is that label, not a silent fallback, that makes the demo honest.
+
+**Not there yet, precisely.** `eval/photos/` is empty, so the reader is measured against six drawn
+panels and *not* against a real kitchen — the README reports those as two separate numbers under a
+heading saying which is which. AgentCore memory is refused by this identity
+(`AmazonBedrockFullAccess` does not cover `bedrock-agentcore:*`), so household memory is file-backed
+behind the same interface and the UI says "local". `npm run preflight` reports both in one line each.
 
 Checkout itself is live and tested (`begin_checkout` refuses outright on a diagnosis that was not
 upheld, `confirm_checkout` completes exactly once); Amazon Wallet behind it is the sandbox stub.
