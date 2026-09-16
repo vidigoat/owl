@@ -93,12 +93,29 @@ const MODELS = {
   'WF45T6000AW': { brand: 'Samsung', kind: 'Washer', codes: { '4C': { meaning: 'The machine is not getting water.', causes: [] } } },
 };
 
+/**
+ * Models learned at runtime from a service manual, keyed the same way as the hand-written ones.
+ * Verified data always wins: `learn` will not overwrite a model that is already in MODELS.
+ */
+const LEARNED = {};
+
+function learn({ model, brand = 'Unknown', kind = 'Appliance', codes, source }) {
+  if (MODELS[model]) return { learned: false, reason: `${model} already has verified service data.` };
+  if (!codes || Object.keys(codes).length === 0) return { learned: false, reason: 'Nothing usable was recovered from that manual.' };
+  LEARNED[model] = { brand, kind, codes, source, generated: true };
+  return { learned: true, model, codes: Object.keys(codes).length };
+}
+
+function known(model) {
+  return Boolean(MODELS[model] || LEARNED[model]);
+}
+
 function lookup(model, code) {
-  const m = MODELS[model];
+  const m = MODELS[model] || LEARNED[model];
   if (!m) return { known: false, reason: `No service data for model ${model}.` };
   const c = m.codes[code];
   if (!c) return { known: false, reason: `No record of ${code} for ${model}.` };
   return { known: true, brand: m.brand, kind: m.kind, meaning: c.meaning, causes: c.causes };
 }
 
-module.exports = { MODELS, lookup };
+module.exports = { MODELS, LEARNED, lookup, learn, known };

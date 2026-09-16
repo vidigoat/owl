@@ -10,7 +10,8 @@ const { guide } = require('./mcp/tools/guide');
 const { find_part } = require('./mcp/tools/find_part');
 const { buildSpace, prune } = require('./mcp/tools/hypotheses');
 const { nextTest } = require('./mcp/tools/next_test');
-const { MODELS } = require('./data/service-data');
+const { MODELS, LEARNED, learn } = require('./data/service-data');
+const { parse: parseManual } = require('./manual/faultgraph');
 
 /** Read a JSON body. The diagnosis loop passes objects around, so GET params won't do. */
 const readJson = (req) =>
@@ -59,6 +60,23 @@ http
       const causeId = url.searchParams.get('causeId') || undefined;
       const ruledOut = (url.searchParams.get('ruledOut') || '').split(',').filter(Boolean);
       return send(res, 200, JSON.stringify(verify_diagnosis({ model, code, causeId, ruledOut })), 'application/json');
+    }
+
+    // Teach it a machine it has never seen, from that machine's own service manual.
+    if (req.method === 'POST' && url.pathname === '/api/learn') {
+      return readJson(req)
+        .then((body) => {
+          const graph = parseManual({ model: body.model, text: body.text, sourceName: body.source || 'service manual' });
+          const result = learn({
+            model: body.model,
+            brand: body.brand,
+            kind: body.kind,
+            codes: graph.codes,
+            source: body.source,
+          });
+          return send(res, 200, JSON.stringify({ ...result, coverage: graph.coverage, found: graph.found }), 'application/json');
+        })
+        .catch((e) => send(res, 400, JSON.stringify({ error: e.message }), 'application/json'));
     }
 
     // ── the diagnosis loop: the device holds the state, the server holds the reasoning ──
