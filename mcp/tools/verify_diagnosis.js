@@ -60,7 +60,10 @@ function verify_diagnosis({ model, code, causeId, ruledOut = [] }) {
   if (target.mains) {
     return {
       abstain: true,
-      confidence: target.likelihood,
+      // The source likelihood, NOT a posterior. The gate re-derives everything from service data on
+    // purpose: a caller that could raise this number by asserting eliminations could talk the gate
+    // into authorising a spend. Callers must not present it to a person as "confidence".
+    confidence: target.likelihood,
       reason: 'This cause sits behind mains wiring. It is not an owner repair regardless of confidence.',
       escalate: 'technician',
     };
@@ -74,7 +77,10 @@ function verify_diagnosis({ model, code, causeId, ruledOut = [] }) {
     const behind = target.likelihood < contender.likelihood;
     return {
       abstain: true,
-      confidence: target.likelihood,
+      // The source likelihood, NOT a posterior. The gate re-derives everything from service data on
+    // purpose: a caller that could raise this number by asserting eliminations could talk the gate
+    // into authorising a spend. Callers must not present it to a person as "confidence".
+    confidence: target.likelihood,
       reason: behind
         ? `"${contender.label}" is still ${gap}% more likely and hasn't been ruled out. Try that first.`
         : `"${target.label}" and "${contender.label}" are within ${gap}% of each other. Not enough to separate them without opening the machine.`,
@@ -86,6 +92,9 @@ function verify_diagnosis({ model, code, causeId, ruledOut = [] }) {
   return {
     abstain: false,
     upheld: true,
+    // The source likelihood, NOT a posterior. The gate re-derives everything from service data on
+    // purpose: a caller that could raise this number by asserting eliminations could talk the gate
+    // into authorising a spend. Callers must not present it to a person as "confidence".
     confidence: target.likelihood,
     cause: target,
     citation: target.evidence,

@@ -86,7 +86,11 @@ const verdict = verify_diagnosis({ model: MANUAL.model, code: MANUAL.code, cause
 console.log(
   verdict.abstain
     ? `     ${amber('REFUSED')} — ${verdict.reason}`
-    : `     ${green('UPHELD')} · confidence ${verdict.confidence} · may spend: ${verdict.maySpend}`
+    // Deliberately not called "confidence". The gate re-derives this from service data rather than
+    // trusting the caller's arithmetic, so it is the source prior for this cause — not a posterior
+    // that has absorbed the eliminations. Printing 0.278 as "confidence" reads as "28% sure",
+    // which is both wrong and an understatement of what the run actually established.
+    : `     ${green('UPHELD')} · prior from service data ${verdict.confidence} · may spend: ${verdict.maySpend}`
 );
 if (verdict.citation) console.log(dim(`     cites: ${verdict.citation}`));
 
