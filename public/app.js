@@ -87,6 +87,7 @@ function renderIdle() {
 }
 
 function renderCamera() {
+  stage = 'camera';
   captionEl.textContent = 'The camera reads the panel. Nothing is typed in.';
   advanceBtn.textContent = 'Read the panel';
   screen.innerHTML = `
@@ -98,6 +99,7 @@ function renderCamera() {
 }
 
 async function renderSpace() {
+  stage = 'space';
   trace('identify_appliance', 'frame.jpg', `${APPLIANCE.brand} ${APPLIANCE.model} · 0.97`, 'Bedrock vision');
   trace('read_error', 'frame.jpg', 'E24 · 0.99', 'Bedrock vision');
 
@@ -181,8 +183,9 @@ async function renderConclusion() {
   ).then((r) => r.json());
   trace('verify_diagnosis', cause.id, verdict.abstain ? 'ABSTAIN' : 'UPHELD', 'trust gate', true);
 
-  captionEl.textContent = 'One cause left — and only now does it talk about money.';
-  advanceBtn.textContent = 'Order the part';
+  stage = 'conclusion';
+  captionEl.textContent = 'One cause left — and only now does it talk about fixing it.';
+  advanceBtn.textContent = 'Talk me through it';
   advanceBtn.disabled = false;
 
   screen.innerHTML = `
@@ -192,8 +195,7 @@ async function renderConclusion() {
       <p class="done__sub">${cause.evidence}</p>
       ${dx.performed.length ? `<p class="asked">Reached in ${dx.performed.length} question${dx.performed.length === 1 ? '' : 's'}.</p>` : ''}
     </div>
-    ${say(`It's the ${cause.label.toLowerCase()}. Now I can tell you what it costs.`)}`;
-  stage = 'part';
+    ${say(`It's the ${cause.label.toLowerCase()}. Let me walk you through it.`)}`;
 }
 
 function renderStuck(choice) {
@@ -221,7 +223,50 @@ function renderContradiction(result) {
     ${say("That shouldn't be possible according to the manual. Something else is going on here.")}`;
 }
 
+/**
+ * The repair itself: spoken steps, paced by how long each one actually takes, while the person's
+ * hands are inside the machine. If there is no verified procedure for this cause it says so rather
+ * than improvising one — a made-up instruction about an appliance is how people get hurt.
+ */
+async function renderGuide() {
+  stage = 'guide';
+  const cause = dx && dx.space.length === 1 ? dx.space[0] : null;
+  const g = cause
+    ? await fetch(`/api/guide?model=${APPLIANCE.model}&code=${APPLIANCE.code}&causeId=${cause.id}`).then((r) => r.json())
+    : { known: false, reason: 'No single cause established.' };
+
+  trace('guide', cause ? cause.id : '—', g.known ? `${g.steps.length} steps · ~${g.totalSeconds}s` : 'no verified procedure', 'MCP Apps card');
+
+  if (!g.known) {
+    captionEl.textContent = 'It has the diagnosis but not a procedure — so it refuses to invent one.';
+    advanceBtn.textContent = 'What about the part?';
+    screen.innerHTML = `
+      <div class="s-refuse">
+        <span class="refuse__seal">NO VERIFIED PROCEDURE</span>
+        <p class="refuse__line">I know what's wrong, but I don't have the steps for this one.</p>
+        <p class="refuse__why">${g.reason} I'm not going to talk you through taking a machine apart from guesswork.</p>
+      </div>
+      ${say("I know what it is, but I don't have a procedure I trust for this model.")}`;
+    return;
+  }
+
+  captionEl.textContent = 'Hands-free, paced to the work — the screen is not something you have to hold.';
+  advanceBtn.textContent = 'Done — what about the part?';
+  screen.innerHTML = `
+    <div class="s-step">
+      <span class="step__n">${g.steps.length} steps · about ${Math.round(g.totalSeconds / 60)} min</span>
+      <p class="step__say">${g.steps[0].say}</p>
+      <p class="step__detail">${g.steps[0].detail}</p>
+      <ol class="steps-rest">
+        ${g.steps.slice(1).map((s) => `<li>${s.say} <em>${s.pace}s</em></li>`).join('')}
+      </ol>
+      <span class="step__hands">${g.handsFree ? 'both hands free' : 'one hand'}</span>
+    </div>
+    ${say(g.steps[0].say)}`;
+}
+
 async function renderPart() {
+  stage = 'part';
   // Whichever cause actually survived — not a hard-coded guess.
   const causeId = dx && dx.space.length === 1 ? dx.space[0].id : 'pump';
   const p = await fetch(`/api/part?model=${APPLIANCE.model}&causeId=${causeId}`).then((r) => r.json());
@@ -245,6 +290,7 @@ async function renderPart() {
 }
 
 function renderDone() {
+  stage = 'done';
   trace('confirm_fix', 'frame.jpg', 'no fault code', 'Bedrock vision');
   trace('home.remember', 'repair receipt', 'stored', 'AgentCore');
   captionEl.textContent = 'It checks its own work, then writes down what happened.';
@@ -258,17 +304,23 @@ function renderDone() {
     ${say('That was $38 and about ten minutes, instead of $179 and a week.')}`;
 }
 
-/* ── flow ──────────────────────────────────────────────────────────── */
-const FLOW = { idle: renderCamera, camera: renderSpace, space: renderQuestion, question: renderQuestion, conclusion: renderConclusion, part: renderPart, done: renderDone };
-const NEXT = { idle: 'camera', camera: 'space', space: 'question', conclusion: 'part', part: 'done' };
+/* ── flow ──────────────────────────────────────────────────────────────
+ * Each screen names itself when it renders, and this table says what pressing the button does
+ * from there. Stage transitions live in one place rather than being computed at the call site,
+ * because the earlier version of this was three chained conditionals and impossible to read. */
+const FLOW = {
+  idle: renderCamera,
+  camera: renderSpace,
+  space: renderQuestion,
+  question: renderQuestion,
+  conclusion: renderGuide,
+  guide: renderPart,
+  part: renderDone,
+};
 
 async function advance() {
   const fn = FLOW[stage];
-  if (!fn) return;
-  if (stage !== 'question' && stage !== 'conclusion' && stage !== 'part') stage = NEXT[stage] || stage;
-  else if (stage === 'conclusion') stage = 'part';
-  else if (stage === 'part') stage = 'done';
-  await fn();
+  if (fn) await fn();
 }
 
 /* the refusal, on a different fault — the screen this project is proudest of */

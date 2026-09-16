@@ -119,6 +119,11 @@ h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -0.015em; }
 .step__dot.is-on { background: var(--graphite); }
 .step__hands { position: absolute; right: 26px; bottom: 22px; font-family: var(--mono); font-size: 11px; color: var(--graphite); }
 
+/* the steps still to come — present but quiet, so the current one stays the hero */
+.steps-rest { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 5px; }
+.steps-rest li { font-size: 14px; color: var(--graphite); }
+.steps-rest em { font-family: var(--mono); font-size: 11px; font-style: normal; color: var(--proof); }
+
 .s-part { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
 .part__name { font-size: 26px; font-weight: 600; }
 .part__fit { font-family: var(--mono); font-size: 13px; color: var(--proof); }

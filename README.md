@@ -114,6 +114,9 @@ lose a reviewer's trust.
 
 | tool | input | returns | status |
 |---|---|---|---|
+| `hypotheses` | model, code | the space of possible causes + how uncertain it is, in bits | **live** |
+| `next_test` | space, tests, performed | the one check worth asking for — most ruled out for least effort | **live** |
+| `observe` | space, outcome | what survived, and what that answer eliminated | **live** |
 | `diagnose` | model, code | ranked causes, cheapest first | **live** |
 | `verify_diagnosis` | model, code, causeId, ruledOut | upheld / abstain, with a citation | **live** |
 | `guide` | model, code, causeId | hands-free steps with pacing | **live** |
@@ -127,6 +130,23 @@ lose a reviewer's trust.
 Each lives in its own file under `mcp/tools/`, registered in `mcp/server.js`.
 
 Transport: Streamable HTTP, MCP spec `2025-11-25`. Server entry point: `mcp/server.js`.
+
+### Being taught a machine it has never seen
+
+`TODO` — the section that matters most. The copilot is not programmed for one dishwasher. Hand it the
+service manual for an appliance nothing in this repository has heard of and it reads the fault table
+out of it, builds the hypothesis space, and runs the same loop — with every cause citing the line of
+the manual it came from.
+
+```bash
+curl -s -X POST localhost:8792/api/learn -H 'content-type: application/json' \
+  -d '{"model":"LG-WM3900","brand":"LG","source":"LG service manual",
+       "text":"Fault codes\nOE   The machine cannot drain\n     Check the drain filter for debris\n     Replace the drain pump if it does not turn\n"}'
+```
+
+Fault codes are not one shape — Bosch writes `E24`, Samsung writes `4C`, and LG's entire scheme is
+letter pairs with no digits at all. The parser handles all three, and reports honestly how much of a
+manual it actually recovered rather than implying it read the whole thing.
 
 ---
 
