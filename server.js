@@ -14,6 +14,7 @@ const { MODELS, LEARNED, learn } = require('./data/service-data');
 const { parse: parseManual } = require('./manual/faultgraph');
 const { see } = require('./mcp/tools/see');
 const { confirm_fix } = require('./mcp/tools/confirm_fix');
+const { beginCheckout, confirmCheckout } = require('./mcp/tools/order_part');
 const { remember: rememberAppliance, receipt: writeReceipt, due: dueNow } = require('./mcp/tools/home');
 
 /** Read a JSON body. The diagnosis loop passes objects around, so GET params won't do. */
@@ -72,6 +73,19 @@ http
         .then((body) => see(body))
         .then((r) => send(res, 200, JSON.stringify(r), 'application/json'))
         .catch((e) => send(res, 500, JSON.stringify({ error: e.message }), 'application/json'));
+    }
+
+    // Checkout. The refusal lives here too: a cart cannot be opened for a cause the gate refused.
+    if (req.method === 'POST' && url.pathname === '/api/checkout/begin') {
+      return readJson(req)
+        .then((body) => send(res, 200, JSON.stringify(beginCheckout(body)), 'application/json'))
+        .catch((e) => send(res, 400, JSON.stringify({ error: e.message }), 'application/json'));
+    }
+
+    if (req.method === 'POST' && url.pathname === '/api/checkout/confirm') {
+      return readJson(req)
+        .then((body) => send(res, 200, JSON.stringify(confirmCheckout(body)), 'application/json'))
+        .catch((e) => send(res, 400, JSON.stringify({ error: e.message }), 'application/json'));
     }
 
     // Did the repair actually work, and write down what happened.

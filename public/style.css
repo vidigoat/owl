@@ -127,6 +127,13 @@ h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -0.015em; }
 .s-part { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
 .part__name { font-size: 26px; font-weight: 600; }
 .part__fit { font-family: var(--mono); font-size: 13px; color: var(--proof); }
+/* Said out loud before "yes" means anything, so it is shown the same way. */
+.totals { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 4px; max-width: 280px; }
+.totals li { display: flex; justify-content: space-between; font-size: 14px; color: var(--graphite); }
+.totals b { font-family: var(--mono); font-weight: 500; color: var(--ink); }
+.totals__total { border-top: 1px solid var(--rule); padding-top: 5px; margin-top: 2px; font-weight: 600; color: var(--ink); }
+.totals__total b { font-size: 17px; }
+
 .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px; }
 .compare div { border: 1px solid var(--rule); border-radius: 6px; padding: 12px 14px; }
 .compare b { display: block; font-size: 24px; }

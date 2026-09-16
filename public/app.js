@@ -36,6 +36,7 @@ let D = null;                 // session data (part, memory, static copy)
 let stage = 'idle';
 let dx = null;                // the live diagnosis: { space, tests, performed, bits, meaning }
 let pending = null;           // the question on screen, awaiting an answer
+let checkout = null;          // an open checkout session, if one was opened
 let handsFreeTimer = null;
 
 const say = (text) => `<div class="saying"><i>says</i><span>${text}</span></div>`;
@@ -280,26 +281,53 @@ async function renderGuide() {
 
 async function renderPart() {
   stage = 'part';
-  // Whichever cause actually survived — not a hard-coded guess.
-  const causeId = dx && dx.space.length === 1 ? dx.space[0].id : 'pump';
-  const p = await fetch(`/api/part?model=${APPLIANCE.model}&causeId=${causeId}`).then((r) => r.json());
-  trace('find_part', `${APPLIANCE.model} pump`, p.found ? `$${p.part.price} · fits ${p.part.fitConfidence}` : 'nothing verified', 'parts catalog');
+  const causeId = dx && dx.space.length === 1 ? dx.space[0].id : null;
 
-  captionEl.textContent = 'The exact part for this model, and what not doing it costs.';
-  advanceBtn.textContent = 'Done';
+  // Opening a checkout runs the gate again. If the diagnosis was not upheld there is no cart at
+  // all — the refusal lives in the money path too, not just in the conversation.
+  const cart = await post('/api/checkout/begin', {
+    model: APPLIANCE.model,
+    code: APPLIANCE.code,
+    causeId,
+    ruledOut: dx ? dx.ruledOut : [],
+  });
+  trace('begin_checkout', causeId || '—', cart.ok ? `$${cart.totals.total}` : 'refused', 'Amazon Wallet');
 
-  screen.innerHTML = p.found
-    ? `<div class="s-part">
-        <div><div class="part__name">${p.part.name}</div><span class="part__fit">fits ${p.part.fitsModel} · ${p.part.fitConfidence}</span></div>
-        <div class="compare">
-          <div class="is-ours"><b>$${p.part.price}</b><span>this part · ${p.part.eta}</span></div>
-          <div><b>$${p.alternative.price}</b><span>${p.alternative.label} · ${p.alternative.eta}</span></div>
-        </div>
-        <p class="ask">Order it with your Amazon wallet?</p>
+  if (!cart.ok) {
+    captionEl.textContent = 'No cart at all — the gate refuses in the money path too.';
+    advanceBtn.textContent = 'Done';
+    screen.innerHTML = `
+      <div class="s-refuse">
+        <span class="refuse__seal">NOTHING TO SELL YOU</span>
+        <p class="refuse__line">${cart.refused ? "I'm not going to order anything." : 'No part available.'}</p>
+        <p class="refuse__why">${cart.reason}</p>
+        ${cart.alternative ? `<p class="asked">A service call would be about $${cart.alternative.price}.</p>` : ''}
       </div>
-      ${say(`Thirty-eight dollars, here tomorrow. A service call is about ${p.alternative.price}.`)}`
-    : `<div class="s-refuse"><span class="refuse__seal">NO VERIFIED PART</span><p class="refuse__line">${p.reason}</p></div>`;
-  stage = 'done';
+      ${say(cart.reason)}`;
+    checkout = null;
+    return;
+  }
+
+  checkout = cart.sessionId;
+  const item = cart.lineItems[0];
+  captionEl.textContent = 'Itemised and said out loud before "yes" means anything.';
+  advanceBtn.textContent = 'Yes, order it';
+
+  screen.innerHTML = `
+    <div class="s-part">
+      <div><div class="part__name">${item.title}</div><span class="part__fit">fits ${item.fitsModel} · arrives ${cart.eta.toLowerCase()}</span></div>
+      <ul class="totals">
+        <li><span>part</span><b>$${cart.totals.subtotal}</b></li>
+        <li><span>tax</span><b>$${cart.totals.tax}</b></li>
+        <li class="totals__total"><span>total</span><b>$${cart.totals.total}</b></li>
+      </ul>
+      <div class="compare">
+        <div class="is-ours"><b>$${cart.totals.total}</b><span>this part</span></div>
+        <div><b>$${cart.insteadOf.price}</b><span>${cart.insteadOf.label} · ${cart.insteadOf.eta}</span></div>
+      </div>
+      <p class="ask">Order it with your Amazon wallet? You save $${cart.saving}.</p>
+    </div>
+    ${say(cart.say)}`;
 }
 
 async function renderDone() {
@@ -307,6 +335,15 @@ async function renderDone() {
   advanceBtn.disabled = true;
 
   const cause = dx && dx.space.length === 1 ? dx.space[0] : null;
+
+  // Place the order that was read out, if one was.
+  let order = null;
+  if (checkout) {
+    const placed = await post('/api/checkout/confirm', { sessionId: checkout });
+    trace('confirm_checkout', checkout, placed.ok ? placed.order.orderId : placed.reason, 'Amazon Wallet');
+    order = placed.ok ? placed.order : null;
+    checkout = null;
+  }
 
   // Actually look at the panel again. If we could not, say so — a repair confirmed from a
   // photograph nobody took is the same lie as a diagnosis nobody established.
@@ -458,6 +495,7 @@ function reset() {
   stage = 'idle';
   dx = null;
   pending = null;
+  checkout = null; // never let a second run confirm a cart from the first
   traceEl.innerHTML = '';
   if (handsFreeTimer) { clearInterval(handsFreeTimer); handsFreeTimer = null; $('#handsfree').textContent = 'Hands-free'; }
   renderIdle();
