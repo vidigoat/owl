@@ -130,7 +130,11 @@ lose a reviewer's trust.
 | `see` | image | model number + fault code, or nulls | **live**, falls back to a *labelled* simulated read without credentials |
 | `confirm_fix` | image | fault cleared? | stub — needs Bedrock |
 | `order_part` | part | Wallet checkout | stub — needs Wallet sandbox |
-| `home.remember` / `home.due` | record | household memory | stub — needs AgentCore |
+| `confirm_fix` | image, code | did the fault actually clear? | **live** — refuses to confirm a repair it could not see |
+| `remember_repair` | model, code, cause, outcome | the repair receipt | **live**, file-backed until AgentCore |
+| `repair_history` | model | everything this machine has been through | **live** |
+| `whats_due` | — | consumables past their window | **live** |
+| `order_part` | part | Wallet checkout | stub — needs Wallet sandbox |
 
 Each lives in its own file under `mcp/tools/`, registered in `mcp/server.js`.
 
