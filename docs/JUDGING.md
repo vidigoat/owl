@@ -12,6 +12,10 @@ at something runnable — no claim here needs to be taken on trust.
 | Sixteen tools genuinely registered and invoked, not described | `mcp/tools/` — answer `tools/list` over Streamable HTTP; the README table names the file each lives in |
 | **Vision that actually runs** — real Bedrock Nova Lite, scored against deliberately hard panels | `npm run eval` → 7/9 codes, 1/1 model, **0 invented**; the two misses return null rather than guess. `mcp/tools/see.js` |
 | **A camera, and a voice** — point it at a machine, answer out loud | `public/app.js` — `getUserMedia`, `speechSynthesis`, `SpeechRecognition` |
+| **Learns a machine from a photograph of its manual** | `mcp/tools/read_manual.js` — verified on a Hotpoint FDW60 whose codes appear nowhere in this repo |
+| **Rich cards as MCP resources** | `mcp/cards.js` — `resources/list` and `resources/read`; nothing appears only on a card |
+| **Survives a hostile manual** | `manual/adversarial.test.js` — a page trying to sell a £340 board cannot open a cart |
+| **Measured, not asserted** | `npm run questions` (every answer path) · `npm run eval` (real Bedrock) |
 | **The diagnosis engine** — entropy over a hypothesis space, cost-weighted information gain | `mcp/tools/next_test.js` |
 | **Learning a machine at runtime** from its own service manual | `manual/faultgraph.js`, `POST /api/learn` |
 | The device calls those same modules; the front-end knows nothing | `server.js` → `/api/diagnosis/*`, `/api/learn`, `/api/verify`, `/api/guide`, `/api/part` |
