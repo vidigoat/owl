@@ -11,8 +11,10 @@ const traceEl = $('#trace');
 const captionEl = $('#caption');
 const advanceBtn = $('#advance');
 
-/* Mutable: the whole point is that it can be pointed at a machine it has never seen. */
-let APPLIANCE = { model: 'SHE3AR75UC', brand: 'Bosch', kind: 'Dishwasher', code: 'E24' };
+/* The machine the demo opens on, defined once. Everything else reads APPLIANCE, which is mutable
+   because the whole point is that it can be pointed at a machine it has never seen. */
+const DEFAULT_APPLIANCE = { model: 'SHE3AR75UC', brand: 'Bosch', kind: 'Dishwasher', code: 'E24' };
+let APPLIANCE = { ...DEFAULT_APPLIANCE };
 
 /* A real LG fault table. Letter-only codes, which is how LG writes them. */
 const UNSEEN_MANUAL = {
@@ -505,7 +507,7 @@ async function teach() {
 }
 
 function reset() {
-  APPLIANCE = { model: 'SHE3AR75UC', brand: 'Bosch', kind: 'Dishwasher', code: 'E24' };
+  APPLIANCE = { ...DEFAULT_APPLIANCE };
   stage = 'idle';
   dx = null;
   pending = null;
