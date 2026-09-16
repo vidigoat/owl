@@ -151,7 +151,7 @@ Full detail: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
 
 ## MCP tool surface
 
-All fourteen are live over Streamable HTTP (spec `2025-11-25`) and answer `tools/list` and
+All sixteen are live over Streamable HTTP (spec `2025-11-25`) and answer `tools/list` and
 `tools/call` today. Check it rather than taking it from me:
 
 ```bash
@@ -178,7 +178,9 @@ what is missing.
 | `verify_diagnosis` | model, code, causeId, ruledOut | upheld / abstain, with a citation | **live** |
 | `guide` | model, code, causeId | hands-free steps with pacing | **live** |
 | `find_part` | model, causeId | exact part + what a service call costs | **live** |
-| `see` | image | model number + fault code, or nulls | **live**, falls back to a *labelled* simulated read without credentials |
+| `see` | image or bytes | model number + fault code, or nulls | **live against Bedrock Nova Lite**; falls back to a *labelled* simulated read without credentials |
+| `read_error` | image/bytes, model | the code AND what it means on that model | **live** — abstains rather than interpret a code against the wrong machine |
+| `identify_appliance` | image/bytes | the machine, and whether we have service data for it | **live** — never infers a model from the brand |
 | `confirm_fix` | image, code | did the fault actually clear? | **live** — refuses to confirm a repair it could not see |
 | `remember_repair` | model, code, cause, outcome | the repair receipt | **live**, file-backed until AgentCore |
 | `repair_history` | model | everything this machine has been through | **live** |
@@ -293,10 +295,47 @@ it upholds the part.
 | Learning a machine from its manual at runtime | **Real**, tested against Bosch, Whirlpool, LG and Samsung code schemes |
 | Step pacing and the household memory model | **Real**, tested |
 | This interface, and every screenshot above | **Real** — `npm run capture` drives it by pressing the same buttons a person would |
-| Bedrock vision (`see`, `read_error`, `confirm_fix`) | **Written**, and it has never been answered by AWS. Without credentials every read is labelled `SIMULATED — no credentials` on screen and in the trace. `npm run preflight` says exactly what is missing |
+| Bedrock vision (`see`, `read_error`, `identify_appliance`, `confirm_fix`) | **Real and running** against `us.amazon.nova-lite-v1:0`. Point the device's camera at a machine, or drop a photograph on it, and the code it reads is what the session diagnoses. Without credentials every read is still labelled `SIMULATED — no credentials` on screen and in the trace |
+| The camera | **Real.** `getUserMedia`, a live preview, one button that sends the frame to Bedrock. Refused or absent, it says NO CAMERA with the reason — it never silently falls back to the fixture |
 | The Alexa+ device surface | **Simulated by a web experience**, which the rules explicitly permit — no entrant can call Alexa+ directly. Nothing in the device code decides anything; every cause, question and elimination came back from a tool call, so Alexa+ could drive it unchanged |
 
 Fault codes used throughout are genuine Bosch, Whirlpool, LG and Samsung codes.
+
+---
+
+## How well does it actually read?
+
+`npm run eval` scores the reader against real Bedrock. Two numbers, never averaged:
+
+```
+  ── RENDERED PANELS ──  drawn, not photographed
+  bosch-dishwasher-panel-e24.png             code E24
+  bosch-dishwasher-plate-she3ar75uc.png        model SHE3AR75UC
+  ge-oven-panel-clean.png                    correctly saw no fault code
+  lg-washer-panel-oe.png                     code OE
+  samsung-fridge-panel-clean.png             correctly saw no fault code
+  whirlpool-washer-panel-f21.png             code F21
+
+  fault code read correctly   5/5  100%
+  model number read correctly 1/1  100%
+
+  ── PHOTOGRAPHS ──  the only number that counts.
+  No photographs in eval/photos — the claim that this reads real machines
+  is UNPROVEN, whatever the panels above say.
+```
+
+The line that matters is the one that isn't there: **zero invented fault codes.** Two of the six
+panels are healthy machines covered in numbers — a fridge showing 38°F and an oven clock reading
+12:47 — and it declined to call either one a fault. A repair tool that hallucinates a code on a
+working machine sends someone to buy a part they do not need.
+
+Those panels are *drawings* (`npm run panels`), and they are scored under a heading saying so. They
+prove the reader reads a display. They do not prove it reads a kitchen — no glare, no angle, no
+hand in the frame, no dark utility room. `eval/photos/` is empty and that claim stays unproven.
+
+Both bugs that made this work at all were found by pointing it at real AWS for the first time: the
+CLI was writing two JSON documents into one stream so every read failed, and the prompt was
+returning a display's fault code as the model number. Neither was findable offline.
 
 ---
 
