@@ -54,6 +54,34 @@ from a test. Bugs in refusal paths hide well, because a refusal looks like succe
 
 ---
 
+### 2026-09-16 · Reaching Bedrock without adding a dependency
+
+**Task:** call a vision model from a project that deliberately has no npm dependencies.
+**Expected:** either an SDK or a documented plain-HTTPS path.
+**Actual:** the SDK is the documented route; signing requests by hand is SigV4, which is a lot of
+code to own. Shelling out to the AWS CLI works and inherits whatever profile the operator has
+configured, which turned out to be the better answer anyway for a hackathon judge running this
+locally.
+**Severity:** low, once you land on it.
+**Workaround:** `aws bedrock-runtime invoke-model` with `--cli-binary-format raw-in-base64-out`.
+**Suggestion:** that flag is the hour-costing detail. A copy-pasteable CLI example for image input
+in the Bedrock vision docs — not just SDK snippets — would save it. Judges and hackathon entrants
+reach for curl and the CLI first.
+
+---
+
+### 2026-09-16 · The latency requirement cannot be measured
+
+**Task:** check our add-on against the sub-500ms round trip the functional requirements ask for.
+**Expected:** some way to measure against the real orchestrator.
+**Actual:** entrants cannot call Alexa+, so the number can only be honoured by guesswork. We can
+measure our own server, which is not the thing being specified.
+**Severity:** medium — it is a stated requirement with no way to verify compliance.
+**Suggestion:** publish the measurement point, or provide an echo endpoint that reports the
+round-trip as the orchestrator sees it.
+
+---
+
 ### 2026-09-15 · A test that encoded the wrong precedence
 
 **Task:** assert the gate refuses when causes are too close to separate.

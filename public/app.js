@@ -411,7 +411,21 @@ const FLOW = {
 
 async function advance() {
   const fn = FLOW[stage];
-  if (fn) await fn();
+  if (!fn) return;
+  try {
+    await fn();
+  } catch (e) {
+    // A dead screen mid-demo is the worst possible failure. Say what broke, stay usable.
+    captionEl.textContent = 'Something failed. The screen says so rather than going blank.';
+    advanceBtn.disabled = true;
+    screen.innerHTML = `
+      <div class="s-refuse">
+        <span class="refuse__seal">SOMETHING BROKE</span>
+        <p class="refuse__line">That step didn't complete.</p>
+        <p class="refuse__why">${e.message}. Press reset to start again — nothing was ordered.</p>
+      </div>`;
+    trace('error', stage, e.message, 'device');
+  }
 }
 
 /* the refusal, on a different fault — the screen this project is proudest of */
