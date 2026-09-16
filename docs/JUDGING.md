@@ -9,11 +9,11 @@ at something runnable — no claim here needs to be taken on trust.
 | what to look at | where |
 |---|---|
 | The MCP server — JSON-RPC over Streamable HTTP, spec 2025-11-25 | `mcp/server.js` |
-| Seven tools genuinely registered and invoked, not described | `mcp/tools/` — `hypotheses`, `next_test`, `observe`, `diagnose`, `verify_diagnosis`, `guide`, `find_part` |
+| Fourteen tools genuinely registered and invoked, not described | `mcp/tools/` — answer `tools/list` over Streamable HTTP; the README table names the file each lives in |
 | **The diagnosis engine** — entropy over a hypothesis space, cost-weighted information gain | `mcp/tools/next_test.js` |
 | **Learning a machine at runtime** from its own service manual | `manual/faultgraph.js`, `POST /api/learn` |
 | The device calls those same modules; the front-end knows nothing | `server.js` → `/api/diagnosis/*`, `/api/learn`, `/api/verify`, `/api/guide`, `/api/part` |
-| 50 checks, weighted towards the things that can cost someone money | `npm test` |
+| Every suite reported together, weighted towards the things that can cost someone money | `npm test` |
 
 The one worth running yourself:
 
@@ -38,8 +38,15 @@ curl -s -X POST http://localhost:8793/mcp -H 'content-type: application/json' \
 
 It refuses — the free check has not been ruled out. Add `"ruledOut":["filter","hose"]` and it upholds.
 
-**Not there yet:** the three vision tools, Wallet checkout, and AgentCore memory are stubs waiting on
-AWS credentials. The README table marks which is which.
+**Not there yet, precisely.** `see`, `read_error` and `confirm_fix` are written and tested, and have
+never been answered by Bedrock — without credentials every read is labelled `SIMULATED — no
+credentials` on screen and in the trace, and it is that label, not a silent fallback, that makes the
+demo honest. `npm run preflight` reports exactly what is missing; run against this machine's profile
+it names the cause in one line — an IAM user with no `bedrock:ListFoundationModels` permission.
+
+Checkout itself is live and tested (`begin_checkout` refuses outright on a diagnosis that was not
+upheld, `confirm_checkout` completes exactly once); Amazon Wallet behind it is the sandbox stub.
+Household memory is live and file-backed behind the same interface AgentCore will sit behind.
 
 ### The two runs worth doing yourself
 
@@ -82,6 +89,7 @@ the product, and it is the thing under test.
 ## Mini challenge and bonus
 
 - **AWS Builder:** Bedrock vision for the fault code and model plate, AgentCore Memory for the
-  household record. Both stubbed today — see the README table.
+  household record. Both written behind their real interfaces and neither has reached AWS yet;
+  `npm run preflight` says why, and every simulated read says so where it appears.
 - **Friction log:** `docs/FRICTION-LOG.md`, written while building rather than at the end.
 - **Product feedback:** `docs/PRODUCT-FEEDBACK.md`.
