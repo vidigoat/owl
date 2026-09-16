@@ -184,6 +184,57 @@ main h2 { font-size: 30px; }
 
 footer { max-width: 1140px; margin: 0 auto; padding: 22px 24px; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 12px; color: #8d959e; }
 
+/* ── the hypothesis space ────────────────────────────────── */
+.s-space, .s-question, .s-conclusion, .s-refuse { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+.readout__meaning { font-size: 15px; color: var(--graphite); }
+
+.space { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.cause {
+  position: relative; display: flex; align-items: baseline; gap: 12px;
+  padding: 9px 12px; border: 1px solid var(--rule); border-radius: 6px;
+  background: #fff; overflow: hidden;
+  transition: opacity 420ms ease, filter 420ms ease;
+}
+/* the bar is the prior, drawn behind the label */
+.cause__bar { position: absolute; inset: 0 auto 0 0; width: var(--p); background: #e6efee; z-index: 0; }
+.cause__label, .cause__pct { position: relative; z-index: 1; }
+.cause__label { flex: 1; font-size: 17px; font-weight: 600; }
+.cause__pct { font-family: var(--mono); font-size: 12px; color: var(--graphite); }
+
+/* the moment the product is understood */
+.cause.is-out { opacity: .38; filter: grayscale(1); }
+.cause.is-out .cause__label { text-decoration: line-through; text-decoration-thickness: 1px; }
+.cause.is-out .cause__bar { background: transparent; }
+
+.bits { font-family: var(--mono); font-size: 12px; color: var(--graphite); margin: 2px 0 0; }
+
+/* ── the question is the hero ────────────────────────────── */
+.question { font-size: 30px; font-weight: 600; line-height: 1.22; margin: 0; max-width: 20ch; }
+.question--answered { font-size: 19px; color: var(--graphite); font-weight: 500; max-width: 34ch; }
+.question__why { font-size: 14px; color: var(--graphite); margin: 0; }
+.question__bits { font-family: var(--mono); color: var(--proof); }
+.answered__you { font-size: 16px; margin: 0; }
+.answered__you b { color: var(--proof); }
+
+.answers { display: flex; gap: 10px; flex-wrap: wrap; margin: 2px 0 6px; }
+.answer {
+  font-family: var(--display); font-size: 16px; font-weight: 600;
+  background: var(--ink); color: var(--paper); border: 0; border-radius: 6px;
+  padding: 11px 20px; cursor: pointer;
+}
+.answer:hover { background: var(--proof); }
+.answer:focus-visible { outline: 2px solid var(--proof); outline-offset: 3px; }
+
+.asked { font-family: var(--mono); font-size: 12px; color: var(--graphite); margin: 0; }
+
+/* ── refusal: calm and certain, never an error ───────────── */
+.refuse__seal {
+  align-self: flex-start; font-family: var(--mono); font-size: 12px;
+  color: var(--amber); border: 1px solid var(--amber); border-radius: 999px; padding: 4px 12px;
+}
+.refuse__line { font-size: 26px; font-weight: 600; margin: 0; max-width: 22ch; }
+.refuse__why { color: var(--graphite); margin: 0; max-width: 42ch; font-size: 15px; }
+
 @media (prefers-reduced-motion: no-preference) {
   .s-listen__ring { animation: pulse 2.4s ease-in-out infinite; }
   @keyframes pulse { 0%,100% { transform: scale(1); opacity: .9; } 50% { transform: scale(1.09); opacity: .55; } }

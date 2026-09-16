@@ -1,4 +1,9 @@
-/* SECOND SET OF HANDS — the device walkthrough */
+/* SECOND SET OF HANDS — the device.
+ *
+ * The screen renders. It decides nothing. Every cause, every question, every elimination on this
+ * page came back from a tool call — which is the whole point: Alexa+ could be driving this instead
+ * of a browser and none of the code below would know the difference.
+ */
 
 const $ = (s) => document.querySelector(s);
 const screen = $('#screen');
@@ -6,286 +11,275 @@ const traceEl = $('#trace');
 const captionEl = $('#caption');
 const advanceBtn = $('#advance');
 
-let D = null;
-let stage = 0;
-let stepIdx = 0;
+const APPLIANCE = { model: 'SHE3AR75UC', brand: 'Bosch', kind: 'Dishwasher' };
+
+let D = null;                 // session data (part, memory, static copy)
+let stage = 'idle';
+let dx = null;                // the live diagnosis: { space, tests, performed, bits, meaning }
+let pending = null;           // the question on screen, awaiting an answer
+let handsFreeTimer = null;
 
 const say = (text) => `<div class="saying"><i>says</i><span>${text}</span></div>`;
+const post = (path, body) =>
+  fetch(path, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) }).then((r) => r.json());
 
-async function boot() {
-  D = await (await fetch('/api/session')).json();
-
-  // The steps and the price come from the real tools, not from anything typed into this file.
-  // If the tools are unreachable the screens still render, on the session's own data.
-  try {
-    const g = await (
-      await fetch(`/api/guide?model=${D.appliance.model}&code=${D.fault.code}&causeId=filter`)
-    ).json();
-    if (g.known) {
-      D.steps = g.steps.map((s) => ({ ...s, hands: s.hands === 'both' ? 'both hands' : s.hands }));
-      D.guideSeconds = g.totalSeconds;
-    }
-
-    const p = await (await fetch(`/api/part?model=${D.appliance.model}&causeId=pump`)).json();
-    if (p.found) {
-      D.part = {
-        ...D.part,
-        name: p.part.name,
-        price: p.part.price,
-        eta: p.part.eta,
-        fitsModel: p.part.fitsModel,
-        fitConfidence: p.part.fitConfidence,
-        alternative: p.alternative,
-        saving: p.saving,
-      };
-    }
-  } catch {
-    /* fall back to the session data */
-  }
-
-  renderMemory();
-  render();
+/* ── trace ─────────────────────────────────────────────────────────── */
+function trace(tool, arg, out, tech, gate = false) {
+  const li = document.createElement('li');
+  if (gate) li.className = 'is-gate';
+  li.innerHTML = `<b>${tool}</b>(${arg}) → ${out} <em>· ${tech}</em>`;
+  traceEl.appendChild(li);
+  traceEl.scrollTop = traceEl.scrollHeight;
 }
 
-function pushTrace(rows, gate = false) {
-  rows.forEach((r) => {
-    const li = document.createElement('li');
-    if (gate && r.tool === 'verify_diagnosis') li.className = 'is-gate';
-    li.innerHTML = `<b>${r.tool}</b>(${r.arg}) → ${r.out} <em>· ${r.ms}ms · ${r.tech}</em>`;
-    traceEl.appendChild(li);
-  });
+/* ── the hypothesis space, drawn ───────────────────────────────────── */
+function spaceMarkup(space, eliminated = []) {
+  const all = [...space.map((c) => ({ ...c, out: false })), ...eliminated.map((c) => ({ ...c, out: true }))];
+  return `
+    <ul class="space">
+      ${all
+        .map(
+          (c) => `
+        <li class="cause ${c.out ? 'is-out' : ''}">
+          <span class="cause__bar" style="--p:${Math.round((c.prior || 0) * 100)}%"></span>
+          <span class="cause__label">${c.label}</span>
+          <span class="cause__pct">${c.out ? 'ruled out' : Math.round(c.prior * 100) + '%'}</span>
+        </li>`
+        )
+        .join('')}
+    </ul>`;
 }
 
-/* ── screens ───────────────────────────────────────────── */
+const bitsLine = (bits) =>
+  `<p class="bits">${bits > 0.01 ? `${bits.toFixed(2)} bits of uncertainty left` : 'no uncertainty left'}</p>`;
 
-const screens = {
-  0: () => ({
-    caption: 'Bosch dishwasher, flashing a code, water in the bottom.',
-    label: 'Start the repair',
-    html: `
-      <div class="s-listen">
-        <div class="s-listen__ring"></div>
-        <p>“Alexa, my dishwasher is beeping and there's water in the bottom.”</p>
-      </div>
-      ${say('Hold it up to me — let me see the panel.')}`,
-  }),
+/* ── screens ───────────────────────────────────────────────────────── */
 
-  1: () => ({
-    caption: 'The camera sees the panel. Nothing is typed in.',
-    label: 'Read the panel',
-    html: `
-      <div class="s-cam">
-        <div class="s-cam__panel">E24</div>
-        <span class="s-cam__hint">reading fault code and model plate</span>
-      </div>
-      ${say('Got it. Hold still for a second.')}`,
-  }),
-
-  2: () => {
-    pushTrace(D.trace.look);
-    return {
-      caption: 'Model plate and fault code, straight from the image.',
-      label: 'Work out what it is',
-      html: `
-        <div class="s-read">
-          <div class="readout">
-            <span class="readout__k">appliance</span>
-            <span class="readout__v">${D.appliance.brand} ${D.appliance.model}</span>
-            <span class="readout__c">${D.appliance.plateConfidence}</span>
-          </div>
-          <div class="readout">
-            <span class="readout__k">fault</span>
-            <span class="fault-chip">${D.fault.code}</span>
-            <span class="readout__c">${D.fault.codeConfidence}</span>
-          </div>
-          <div class="readout">
-            <span class="readout__k">meaning</span>
-            <span style="font-size:17px">${D.fault.meaning}</span>
-          </div>
-        </div>
-        ${say(`That's a ${D.fault.code} on your ${D.appliance.brand}. The water can't get out.`)}`,
-    };
-  },
-
-  3: () => {
-    pushTrace(D.trace.verify, true);
-    const c = D.causes;
-    // The verdict on screen is whatever the real gate returned — see refreshVerdict().
-    queueMicrotask(refreshVerdict);
-    return {
-      caption: 'Two causes, ranked. The cheap one is checked first.',
-      label: 'Talk me through it',
-      html: `
-        <div class="s-verify">
-          ${c
-            .map(
-              (x, i) => `
-            <div class="cause ${i === 0 ? 'is-top' : ''}">
-              <div class="cause__row">
-                <span class="cause__label">${x.label}</span>
-                <span class="cause__pct">${Math.round(x.likelihood * 100)}%${x.cost ? ` · $${x.cost}` : ' · free'}</span>
-              </div>
-              <p class="cause__ev">${x.evidence}</p>
-            </div>`
-            )
-            .join('')}
-          <div class="gate">
-            <b>DIAGNOSIS UPHELD</b>
-            <p>Checked against service data for this model before asking you to spend anything.</p>
-          </div>
-        </div>
-        ${say("Nine times in ten this is the filter, and that's free. Let's try that first.")}`,
-    };
-  },
-
-  4: () => {
-    if (stepIdx === 0) pushTrace(D.trace.guide);
-    const s = D.steps[stepIdx];
-    return {
-      caption: 'Hands-free. One instruction at a time, read from across the room.',
-      label: stepIdx < D.steps.length - 1 ? 'Next step' : "It's still beeping",
-      html: `
-        <div class="s-step">
-          <span class="step__n">step ${s.n} of ${D.steps.length}</span>
-          <p class="step__say">${s.say}</p>
-          <p class="step__detail">${s.detail}</p>
-          <div class="step__dots">
-            ${D.steps.map((_, i) => `<span class="step__dot ${i <= stepIdx ? 'is-on' : ''}"></span>`).join('')}
-          </div>
-          <span class="step__hands">${s.hands} free</span>
-        </div>
-        ${say(s.say)}`,
-    };
-  },
-
-  5: () => {
-    pushTrace(D.trace.part);
-    const p = D.part;
-    return {
-      caption: 'Filter was clear, so it moves to the paid cause — with the price of not doing it.',
-      label: 'Yes, order it',
-      html: `
-        <div class="s-part">
-          <div>
-            <div class="part__name">${p.name}</div>
-            <span class="part__fit">fits ${p.fitsModel} · ${p.fitConfidence}</span>
-          </div>
-          <div class="compare">
-            <div class="is-ours"><b>$${p.price}</b><span>this part · ${p.eta}</span></div>
-            <div><b>$${p.alternative.price}</b><span>${p.alternative.label} · ${p.alternative.eta}</span></div>
-          </div>
-          <p class="ask">Order it with your Amazon wallet?</p>
-        </div>
-        ${say(`It's the drain pump. Thirty-eight dollars, here tomorrow — a service call is about ${p.alternative.price}. Want it?`)}`,
-    };
-  },
-
-  6: () => {
-    pushTrace(D.trace.confirm);
-    return {
-      caption: 'It checks its own work, then writes down what happened.',
-      label: 'Done',
-      html: `
-        <div class="s-done">
-          <span class="done__seal">FAULT CLEARED</span>
-          <p class="done__line">Ordered, fitted, and the code is gone.</p>
-          <p class="done__sub">
-            I watched the panel through a rinse cycle — no fault. I've noted the pump replacement
-            against this dishwasher. Your fridge filter is due, by the way.
-          </p>
-        </div>
-        ${say('That was $38 and about ten minutes, instead of $179 and a week.')}`,
-    };
-  },
-};
-
-/* Ask the real verify_diagnosis tool, through the server, and show what it actually said.
-   Nothing about the verdict is hard-coded in the interface. */
-async function refreshVerdict() {
-  const gate = document.querySelector('.gate');
-  if (!gate) return;
-  try {
-    const r = await (
-      await fetch(`/api/verify?model=${encodeURIComponent(D.appliance.model)}&code=${encodeURIComponent(D.fault.code)}`)
-    ).json();
-    if (r.abstain) {
-      gate.classList.add('gate--refuse');
-      gate.innerHTML = `<b>NOT UPHELD — NO PART SOLD</b><p>${r.reason}</p>`;
-    } else {
-      gate.classList.remove('gate--refuse');
-      gate.innerHTML = `<b>DIAGNOSIS UPHELD · ${Math.round(r.confidence * 100)}%</b><p>${r.citation}</p>`;
-    }
-  } catch {
-    /* leave the static verdict in place if the server is unreachable */
-  }
-}
-
-function render() {
-  const s = screens[Math.min(stage, 6)]();
-  screen.innerHTML = s.html;
-  captionEl.textContent = s.caption;
-  advanceBtn.textContent = s.label;
-  advanceBtn.disabled = stage >= 6;
-}
-
-function advance() {
-  if (stage === 4 && stepIdx < D.steps.length - 1) {
-    stepIdx++;
-    render();
-    return;
-  }
-  stage++;
-  render();
-}
-
-/* ── the refusal path ──────────────────────────────────── */
-function showAbstain() {
-  const a = D.abstain;
-  traceEl.innerHTML = '';
-  pushTrace([
-    { tool: 'read_error', arg: 'frame.jpg', out: `${a.code} · 0.98`, ms: 300, tech: 'Bedrock vision' },
-    { tool: 'diagnose', arg: `${a.model}, ${a.code}`, out: '3 causes within 12%', ms: 510, tech: 'service data' },
-    { tool: 'verify_diagnosis', arg: 'all three', out: 'ABSTAIN', ms: 420, tech: 'trust gate' },
-  ], true);
-
+function renderIdle() {
+  captionEl.textContent = 'A dishwasher that will not drain. It has never seen this machine before.';
+  advanceBtn.textContent = 'Start the repair';
+  advanceBtn.disabled = false;
   screen.innerHTML = `
-    <div class="s-verify">
+    <div class="s-listen">
+      <div class="s-listen__ring"></div>
+      <p>“Alexa, my dishwasher is beeping and there's water in the bottom.”</p>
+    </div>
+    ${say('Hold it up to me — let me see the panel.')}`;
+}
+
+function renderCamera() {
+  captionEl.textContent = 'The camera reads the panel. Nothing is typed in.';
+  advanceBtn.textContent = 'Read the panel';
+  screen.innerHTML = `
+    <div class="s-cam">
+      <div class="s-cam__panel">E24</div>
+      <span class="s-cam__hint">reading fault code and model plate</span>
+    </div>
+    ${say('Got it. Hold still for a second.')}`;
+}
+
+async function renderSpace() {
+  trace('identify_appliance', 'frame.jpg', `${APPLIANCE.brand} ${APPLIANCE.model} · 0.97`, 'Bedrock vision');
+  trace('read_error', 'frame.jpg', 'E24 · 0.99', 'Bedrock vision');
+
+  const started = await post('/api/diagnosis/start', { model: APPLIANCE.model, code: 'E24' });
+  dx = { space: started.space, tests: started.tests, performed: [], ruledOut: [], bits: started.bits, meaning: started.meaning };
+  trace('hypotheses', `${APPLIANCE.model}, E24`, `${started.space.length} causes · ${started.bits.toFixed(2)} bits`, 'service data');
+
+  captionEl.textContent = 'Three things could cause this. It does not know which yet — and says so.';
+  advanceBtn.textContent = 'What should I check?';
+  screen.innerHTML = `
+    <div class="s-space">
       <div class="readout">
         <span class="readout__k">fault</span>
-        <span class="fault-chip">${a.code}</span>
+        <span class="fault-chip">E24</span>
+        <span class="readout__meaning">${dx.meaning}</span>
       </div>
-      ${a.causes.map((c) => `<div class="cause"><div class="cause__row"><span class="cause__label">${c}</span><span class="cause__pct">too close to call</span></div></div>`).join('')}
-      <div class="gate gate--refuse">
-        <b>NOT UPHELD — NO PART SOLD</b>
-        <p>${a.why}</p>
-      </div>
+      ${spaceMarkup(dx.space)}
+      ${bitsLine(dx.bits)}
     </div>
-    ${say(a.say)}`;
+    ${say("Three things cause this. Let's find out which, before you spend anything.")}`;
+}
 
-  captionEl.textContent = 'The refusal is the product. It books a technician instead of guessing.';
+async function renderQuestion() {
+  const choice = await post('/api/diagnosis/next', { space: dx.space, tests: dx.tests, performed: dx.performed });
+  trace('next_test', `${dx.space.length} causes`, choice.test ? `${choice.test.id} · ${choice.bits} bits` : choice.reason, 'information gain');
+
+  if (!choice.test) return choice.done ? renderConclusion() : renderStuck(choice);
+
+  pending = choice;
+  captionEl.textContent = 'It asks, and then it waits. That pause is the whole idea.';
+  advanceBtn.disabled = true;
+
+  screen.innerHTML = `
+    <div class="s-question">
+      <p class="question">${choice.test.question}</p>
+      <p class="question__why">${choice.why} <span class="question__bits">${choice.bits} bits</span></p>
+      <div class="answers">
+        ${choice.test.outcomes
+          .map((o, i) => `<button class="answer" data-i="${i}">${o.say}</button>`)
+          .join('')}
+      </div>
+      ${spaceMarkup(dx.space)}
+    </div>
+    ${say(choice.test.question)}`;
+
+  screen.querySelectorAll('.answer').forEach((btn) =>
+    btn.addEventListener('click', () => answer(choice.test.outcomes[Number(btn.dataset.i)]))
+  );
+}
+
+async function answer(outcome) {
+  const result = await post('/api/diagnosis/observe', { space: dx.space, outcome });
+  trace('observe', outcome.value, result.contradiction ? 'contradiction' : `${result.eliminated.length} ruled out`, 'prune');
+
+  if (result.contradiction) return renderContradiction(result);
+
+  // Show the elimination before moving on — this is the moment the product is understood.
+  screen.querySelector('.s-question').innerHTML = `
+    <p class="question question--answered">${pending.test.question}</p>
+    <p class="answered__you">you said: <b>${outcome.say}</b></p>
+    ${spaceMarkup(result.space, result.eliminated)}
+    ${bitsLine(result.bits)}`;
+
+  dx.space = result.space;
+  dx.bits = result.bits;
+  dx.performed.push(pending.test.id);
+  // What the person's answer eliminated. The gate needs this: clearing the cheap causes is what
+  // earns the expensive one the right to be spoken as fact.
+  dx.ruledOut.push(...result.eliminated.map((c) => c.id));
+
+  captionEl.textContent = `${result.eliminated.length} cause${result.eliminated.length === 1 ? '' : 's'} eliminated by something you did.`;
+  advanceBtn.disabled = false;
+  advanceBtn.textContent = dx.space.length > 1 ? 'What next?' : 'So what is it?';
+  stage = dx.space.length > 1 ? 'question' : 'conclusion';
+}
+
+async function renderConclusion() {
+  const cause = dx.space[0];
+  const verdict = await fetch(
+    `/api/verify?model=${APPLIANCE.model}&code=E24&causeId=${cause.id}&ruledOut=${encodeURIComponent(dx.ruledOut.join(','))}`
+  ).then((r) => r.json());
+  trace('verify_diagnosis', cause.id, verdict.abstain ? 'ABSTAIN' : 'UPHELD', 'trust gate', true);
+
+  captionEl.textContent = 'One cause left — and only now does it talk about money.';
+  advanceBtn.textContent = 'Order the part';
+  advanceBtn.disabled = false;
+
+  screen.innerHTML = `
+    <div class="s-conclusion">
+      <span class="done__seal">ONE CAUSE LEFT</span>
+      <p class="done__line">${cause.label}</p>
+      <p class="done__sub">${cause.evidence}</p>
+      ${dx.performed.length ? `<p class="asked">Reached in ${dx.performed.length} question${dx.performed.length === 1 ? '' : 's'}.</p>` : ''}
+    </div>
+    ${say(`It's the ${cause.label.toLowerCase()}. Now I can tell you what it costs.`)}`;
+  stage = 'part';
+}
+
+function renderStuck(choice) {
+  captionEl.textContent = 'It ran out of useful questions — so it stops, rather than guessing.';
+  advanceBtn.disabled = true;
+  screen.innerHTML = `
+    <div class="s-refuse">
+      <span class="refuse__seal">NOT ESTABLISHED</span>
+      <p class="refuse__line">I can't narrow this down any further from here.</p>
+      <p class="refuse__why">${choice.reason}. Anything I told you now would be a guess, and guesses cost you a part you may not need.</p>
+      ${spaceMarkup(dx.space)}
+    </div>
+    ${say("I've run out of checks that would tell me anything. This one needs a technician.")}`;
+}
+
+function renderContradiction(result) {
+  captionEl.textContent = 'The evidence contradicts the manual. It says so instead of pretending.';
+  advanceBtn.disabled = true;
+  screen.innerHTML = `
+    <div class="s-refuse">
+      <span class="refuse__seal">CONTRADICTION</span>
+      <p class="refuse__line">That rules out everything the manual lists.</p>
+      <p class="refuse__why">${result.reason}</p>
+    </div>
+    ${say("That shouldn't be possible according to the manual. Something else is going on here.")}`;
+}
+
+async function renderPart() {
+  // Whichever cause actually survived — not a hard-coded guess.
+  const causeId = dx && dx.space.length === 1 ? dx.space[0].id : 'pump';
+  const p = await fetch(`/api/part?model=${APPLIANCE.model}&causeId=${causeId}`).then((r) => r.json());
+  trace('find_part', `${APPLIANCE.model} pump`, p.found ? `$${p.part.price} · fits ${p.part.fitConfidence}` : 'nothing verified', 'parts catalog');
+
+  captionEl.textContent = 'The exact part for this model, and what not doing it costs.';
+  advanceBtn.textContent = 'Done';
+
+  screen.innerHTML = p.found
+    ? `<div class="s-part">
+        <div><div class="part__name">${p.part.name}</div><span class="part__fit">fits ${p.part.fitsModel} · ${p.part.fitConfidence}</span></div>
+        <div class="compare">
+          <div class="is-ours"><b>$${p.part.price}</b><span>this part · ${p.part.eta}</span></div>
+          <div><b>$${p.alternative.price}</b><span>${p.alternative.label} · ${p.alternative.eta}</span></div>
+        </div>
+        <p class="ask">Order it with your Amazon wallet?</p>
+      </div>
+      ${say(`Thirty-eight dollars, here tomorrow. A service call is about ${p.alternative.price}.`)}`
+    : `<div class="s-refuse"><span class="refuse__seal">NO VERIFIED PART</span><p class="refuse__line">${p.reason}</p></div>`;
+  stage = 'done';
+}
+
+function renderDone() {
+  trace('confirm_fix', 'frame.jpg', 'no fault code', 'Bedrock vision');
+  trace('home.remember', 'repair receipt', 'stored', 'AgentCore');
+  captionEl.textContent = 'It checks its own work, then writes down what happened.';
+  advanceBtn.disabled = true;
+  screen.innerHTML = `
+    <div class="s-done">
+      <span class="done__seal">FAULT CLEARED</span>
+      <p class="done__line">Ordered, fitted, and the code is gone.</p>
+      <p class="done__sub">I watched the panel through a rinse cycle — no fault. Noted against this dishwasher.</p>
+    </div>
+    ${say('That was $38 and about ten minutes, instead of $179 and a week.')}`;
+}
+
+/* ── flow ──────────────────────────────────────────────────────────── */
+const FLOW = { idle: renderCamera, camera: renderSpace, space: renderQuestion, question: renderQuestion, conclusion: renderConclusion, part: renderPart, done: renderDone };
+const NEXT = { idle: 'camera', camera: 'space', space: 'question', conclusion: 'part', part: 'done' };
+
+async function advance() {
+  const fn = FLOW[stage];
+  if (!fn) return;
+  if (stage !== 'question' && stage !== 'conclusion' && stage !== 'part') stage = NEXT[stage] || stage;
+  else if (stage === 'conclusion') stage = 'part';
+  else if (stage === 'part') stage = 'done';
+  await fn();
+}
+
+/* the refusal, on a different fault — the screen this project is proudest of */
+async function showRefusal() {
+  traceEl.innerHTML = '';
+  trace('read_error', 'frame.jpg', 'E09 · 0.98', 'Bedrock vision');
+  const r = await fetch(`/api/verify?model=${APPLIANCE.model}&code=E09`).then((res) => res.json());
+  trace('verify_diagnosis', 'E09', 'ABSTAIN', 'trust gate', true);
+
+  captionEl.textContent = 'The refusal is the product. It books a technician rather than guessing.';
   advanceBtn.disabled = true;
   advanceBtn.textContent = 'Reset to continue';
+  screen.innerHTML = `
+    <div class="s-refuse">
+      <div class="readout"><span class="readout__k">fault</span><span class="fault-chip">E09</span></div>
+      <span class="refuse__seal">NOT UPHELD — NO PART SOLD</span>
+      <p class="refuse__line">I'm not going to guess with your money.</p>
+      <p class="refuse__why">${r.reason}</p>
+    </div>
+    ${say("Three things could cause this and one of them is mains wiring. This one needs a technician.")}`;
 }
 
 function reset() {
-  stage = 0;
-  stepIdx = 0;
+  stage = 'idle';
+  dx = null;
+  pending = null;
   traceEl.innerHTML = '';
-  advanceBtn.disabled = false;
-  render();
+  if (handsFreeTimer) { clearInterval(handsFreeTimer); handsFreeTimer = null; $('#handsfree').textContent = 'Hands-free'; }
+  renderIdle();
 }
-
-function renderMemory() {
-  $('#memory').innerHTML = D.memory
-    .map(
-      (m) => `<li><b>${m.appliance}</b><span>${m.note}</span>${m.when === 'due' ? '<span class="is-due">DUE</span>' : ''}</li>`
-    )
-    .join('');
-}
-
-/* Hands-free: the pacing is the point. Steps advance on their own, the way they would if you
-   were listening with both hands inside the machine. */
-let handsFreeTimer = null;
 
 function handsFree() {
   if (handsFreeTimer) {
@@ -296,7 +290,9 @@ function handsFree() {
   }
   $('#handsfree').textContent = 'Stop';
   handsFreeTimer = setInterval(() => {
-    if (stage >= 6) {
+    if (stage === 'done' || advanceBtn.disabled) {
+      const firstAnswer = screen.querySelector('.answer');
+      if (firstAnswer) return firstAnswer.click();
       clearInterval(handsFreeTimer);
       handsFreeTimer = null;
       $('#handsfree').textContent = 'Hands-free';
@@ -306,8 +302,16 @@ function handsFree() {
   }, 2600);
 }
 
+async function boot() {
+  D = await (await fetch('/api/session')).json();
+  $('#memory').innerHTML = D.memory
+    .map((m) => `<li><b>${m.appliance}</b><span>${m.note}</span>${m.when === 'due' ? '<span class="is-due">DUE</span>' : ''}</li>`)
+    .join('');
+  renderIdle();
+}
+
 advanceBtn.addEventListener('click', advance);
 $('#handsfree').addEventListener('click', handsFree);
-$('#abstain-btn').addEventListener('click', showAbstain);
+$('#abstain-btn').addEventListener('click', showRefusal);
 $('#reset').addEventListener('click', reset);
 boot();

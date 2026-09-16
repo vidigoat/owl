@@ -8,6 +8,23 @@ const { diagnose } = require('./mcp/tools/diagnose');
 const { verify_diagnosis } = require('./mcp/tools/verify_diagnosis');
 const { guide } = require('./mcp/tools/guide');
 const { find_part } = require('./mcp/tools/find_part');
+const { buildSpace, prune } = require('./mcp/tools/hypotheses');
+const { nextTest } = require('./mcp/tools/next_test');
+const { MODELS } = require('./data/service-data');
+
+/** Read a JSON body. The diagnosis loop passes objects around, so GET params won't do. */
+const readJson = (req) =>
+  new Promise((resolve, reject) => {
+    let body = '';
+    req.on('data', (c) => (body += c));
+    req.on('end', () => {
+      try {
+        resolve(body ? JSON.parse(body) : {});
+      } catch (e) {
+        reject(e);
+      }
+    });
+  });
 
 const PORT = 8792;
 const PUBLIC = path.join(__dirname, 'public');
@@ -42,6 +59,31 @@ http
       const causeId = url.searchParams.get('causeId') || undefined;
       const ruledOut = (url.searchParams.get('ruledOut') || '').split(',').filter(Boolean);
       return send(res, 200, JSON.stringify(verify_diagnosis({ model, code, causeId, ruledOut })), 'application/json');
+    }
+
+    // ── the diagnosis loop: the device holds the state, the server holds the reasoning ──
+    if (req.method === 'POST' && url.pathname.startsWith('/api/diagnosis/')) {
+      return readJson(req)
+        .then((body) => {
+          const step = url.pathname.split('/').pop();
+
+          if (step === 'start') {
+            const built = buildSpace({ model: body.model, code: body.code });
+            const fault = MODELS[body.model]?.codes?.[body.code];
+            return send(res, 200, JSON.stringify({ ...built, tests: fault?.tests || [] }), 'application/json');
+          }
+
+          if (step === 'next') {
+            return send(res, 200, JSON.stringify(nextTest(body)), 'application/json');
+          }
+
+          if (step === 'observe') {
+            return send(res, 200, JSON.stringify(prune(body)), 'application/json');
+          }
+
+          return send(res, 404, JSON.stringify({ error: `no diagnosis step "${step}"` }), 'application/json');
+        })
+        .catch((e) => send(res, 400, JSON.stringify({ error: e.message }), 'application/json'));
     }
 
     if (url.pathname === '/api/guide') {

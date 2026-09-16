@@ -16,6 +16,8 @@ const { diagnose } = require('./tools/diagnose');
 const { verify_diagnosis } = require('./tools/verify_diagnosis');
 const { guide } = require('./tools/guide');
 const { find_part } = require('./tools/find_part');
+const { buildSpace, prune } = require('./tools/hypotheses');
+const { nextTest } = require('./tools/next_test');
 
 const PORT = process.env.MCP_PORT || 8793;
 const PROTOCOL_VERSION = '2025-11-25';
@@ -85,6 +87,46 @@ const TOOLS = [
       required: ['model', 'causeId'],
     },
     handler: find_part,
+  },
+  {
+    name: 'hypotheses',
+    description:
+      'Build the space of possible causes for a fault code on a model, with how likely each is and how much uncertainty remains, in bits.',
+    inputSchema: {
+      type: 'object',
+      properties: { model: { type: 'string' }, code: { type: 'string' } },
+      required: ['model', 'code'],
+    },
+    handler: buildSpace,
+  },
+  {
+    name: 'next_test',
+    description:
+      'Choose the single check worth asking a person to perform next: the one that removes the most uncertainty for the least effort. Returns nothing when one cause is left, or when no remaining check would tell us anything.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        space: { type: 'array', items: { type: 'object' } },
+        tests: { type: 'array', items: { type: 'object' } },
+        performed: { type: 'array', items: { type: 'string' } },
+      },
+      required: ['space', 'tests'],
+    },
+    handler: nextTest,
+  },
+  {
+    name: 'observe',
+    description:
+      'Fold the result of a check back in: keep the causes consistent with what was seen, and name the ones it ruled out.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        space: { type: 'array', items: { type: 'object' } },
+        outcome: { type: 'object' },
+      },
+      required: ['space', 'outcome'],
+    },
+    handler: prune,
   },
 ];
 
