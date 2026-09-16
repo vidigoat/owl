@@ -8,7 +8,11 @@ each moment by pressing the same buttons a person would, and writes the files be
 back door into a state the software cannot reach on its own, which is how the "real captures only"
 rule below stays true without anybody having to remember it.
 
-Only `flow.gif` still needs a human: it is a screen recording, so record one uninterrupted run.
+`flow.gif` is generated too, by `npm run gif` — but not as a screen recording. It shoots the run one
+step at a time and stitches the frames, so frame N is the device after exactly N presses. Nothing
+can be trimmed out of the middle, and no frame can show a state the software could not reach.
+
+The only thing still wanting a human is `terminal.png`, which is a screenshot of `npm run demo`.
 
 | file | the exact moment | how to get there | status |
 |---|---|---|---|
@@ -19,8 +23,8 @@ Only `flow.gif` still needs a human: it is a screen recording, so record one uni
 | `learned.png` | the space built from that manual, with the citation line | `npm run capture` | **captured** |
 | `checkout.png` | the itemised total beside the $179 alternative | `npm run capture` | **captured** |
 | `guide.png` | the hands-free repair steps, one at a time | `npm run capture` | **captured** |
-| `terminal.png` | `npm run demo` output, whole loop in one screen | `npm run demo` | TODO |
-| `flow.gif` | the full loop end to end, under 12s, no cuts | one uninterrupted run | TODO |
+| `terminal.png` | `npm run demo` output, whole loop in one screen | `npm run demo`, then screenshot | TODO |
+| `flow.gif` | the full loop end to end, no cuts | `npm run gif` | **captured** |
 
 ## Which of these matter most
 

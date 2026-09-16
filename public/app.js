@@ -598,7 +598,23 @@ async function captureFrame(name) {
   document.body.dataset.ready = name; // what the capture script waits for
 }
 
+/** `?steps=N` — take exactly N steps and stop. Used to shoot the frames of docs/media/flow.gif. */
+async function captureSteps(n) {
+  const wait = () => new Promise((r) => setTimeout(r, 420));
+  for (let i = 0; i < n; i++) {
+    const answerBtn = screen.querySelector('.answer');
+    if (answerBtn) answerBtn.click();
+    else if (!advanceBtn.disabled) advance();
+    else break; // nothing left to press; the run is over
+    await wait();
+  }
+  document.body.dataset.ready = `steps-${n}`;
+}
+
 boot().then(() => {
-  const at = new URLSearchParams(location.search).get('at');
+  const q = new URLSearchParams(location.search);
+  const at = q.get('at');
   if (at) return captureFrame(at);
+  const steps = q.get('steps');
+  if (steps !== null) return captureSteps(Number(steps) || 0);
 });
