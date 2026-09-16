@@ -180,12 +180,13 @@ git clone <repo>
 cd second-set-of-hands
 
 npm run demo            # ← start here: the whole loop in a terminal, 20 seconds
-npm run preflight # check AWS: CLI, credentials, Bedrock access, a real vision call
-npm run capture   # regenerate this README's screenshots from a real run (needs Chrome)
 npm test                # every suite, reported together
 npm start               # http://localhost:8792 — the device experience
 npm run mcp             # http://localhost:8793/mcp — the server Alexa+ calls
-npm run eval            # the vision evaluation (needs photographs)
+
+npm run preflight       # does AWS actually work? CLI, credentials, Bedrock, one real read
+npm run capture         # regenerate this README's screenshots from a real run (needs Chrome)
+npm run eval            # the vision evaluation (needs photographs in eval/photos/)
 ```
 
 `npm run demo` runs the complete procedure against an LG washing machine that nothing in this
