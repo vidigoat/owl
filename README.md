@@ -333,6 +333,42 @@ Fault codes used throughout are genuine Bosch, Whirlpool, LG and Samsung codes.
 
 ---
 
+## How many questions does it ask?
+
+The central algorithmic claim is that picking each check by uncertainty removed per unit of owner
+effort gets to one cause faster than working down a list. `npm run questions` exhausts that claim —
+every fault code on every machine, and **every possible sequence of answers**, not a sample:
+
+```
+  machine                code   causes  paths  mean   worst  naive worst
+  ──────────────────────────────────────────────────────────────────────
+  Bosch SHE3AR75UC       E24    3       3      1.7    2      3
+  LG LG-WM3900HWA        OE     3       3      1.7    2      3   learned from its manual
+  LG LG-WM3900HWA        UE     1       1      0.0    0      1   learned from its manual
+  Hotpoint HOTPOINT-FDW  H20    3       3      1.7    2      3   learned from its manual
+  Hotpoint HOTPOINT-FDW  F05    3       3      1.7    2      3   learned from its manual
+  Hotpoint HOTPOINT-FDW  F13    2       2      1.0    1      2   learned from its manual
+
+  1.3 questions on average, worst case 2 — against 2.5 causes to ask about one at a time.
+  15 answer paths walked, every one of them.
+```
+
+**Two honest readings of that table.**
+
+The one worth having: a machine learned from its manual thirty seconds ago diagnoses exactly as
+efficiently as the one the fixtures were written around — 1.7 questions either way. The generality
+is not a demo path with worse ergonomics behind it.
+
+The one that keeps it honest: with three causes per code, 1.3 against 2.5 is a real improvement and
+a modest one. Information gain earns its keep as the space grows, and these fault tables are small.
+The claim "three questions instead of twenty" is not supported by this data and is not made.
+
+The number that actually matters is **worst case 2**. The mean describes a typical repair; the worst
+case describes the person who gives up, and there is no path through any of these machines that asks
+more than twice.
+
+---
+
 ## How well does it actually read?
 
 `npm run eval` scores the reader against real Bedrock. Two numbers, never averaged:
