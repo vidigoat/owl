@@ -11,7 +11,26 @@ const traceEl = $('#trace');
 const captionEl = $('#caption');
 const advanceBtn = $('#advance');
 
-const APPLIANCE = { model: 'SHE3AR75UC', brand: 'Bosch', kind: 'Dishwasher' };
+/* Mutable: the whole point is that it can be pointed at a machine it has never seen. */
+let APPLIANCE = { model: 'SHE3AR75UC', brand: 'Bosch', kind: 'Dishwasher', code: 'E24' };
+
+/* A real LG fault table. Letter-only codes, which is how LG writes them. */
+const UNSEEN_MANUAL = {
+  model: 'LG-WM3900HWA',
+  brand: 'LG',
+  kind: 'Washer',
+  code: 'OE',
+  source: 'LG service manual',
+  text: `Fault codes
+OE   The machine cannot drain
+     Check the drain filter for debris
+     Clean the drain pump of obstructions
+     Replace the drain pump if it does not turn
+
+UE   The load is unbalanced
+     Check the load is evenly distributed
+`,
+};
 
 let D = null;                 // session data (part, memory, static copy)
 let stage = 'idle';
@@ -82,9 +101,9 @@ async function renderSpace() {
   trace('identify_appliance', 'frame.jpg', `${APPLIANCE.brand} ${APPLIANCE.model} · 0.97`, 'Bedrock vision');
   trace('read_error', 'frame.jpg', 'E24 · 0.99', 'Bedrock vision');
 
-  const started = await post('/api/diagnosis/start', { model: APPLIANCE.model, code: 'E24' });
+  const started = await post('/api/diagnosis/start', { model: APPLIANCE.model, code: APPLIANCE.code });
   dx = { space: started.space, tests: started.tests, performed: [], ruledOut: [], bits: started.bits, meaning: started.meaning };
-  trace('hypotheses', `${APPLIANCE.model}, E24`, `${started.space.length} causes · ${started.bits.toFixed(2)} bits`, 'service data');
+  trace('hypotheses', `${APPLIANCE.model}, ${APPLIANCE.code}`, `${started.space.length} causes · ${started.bits.toFixed(2)} bits`, 'service data');
 
   captionEl.textContent = 'Three things could cause this. It does not know which yet — and says so.';
   advanceBtn.textContent = 'What should I check?';
@@ -158,7 +177,7 @@ async function answer(outcome) {
 async function renderConclusion() {
   const cause = dx.space[0];
   const verdict = await fetch(
-    `/api/verify?model=${APPLIANCE.model}&code=E24&causeId=${cause.id}&ruledOut=${encodeURIComponent(dx.ruledOut.join(','))}`
+    `/api/verify?model=${APPLIANCE.model}&code=${APPLIANCE.code}&causeId=${cause.id}&ruledOut=${encodeURIComponent(dx.ruledOut.join(','))}`
   ).then((r) => r.json());
   trace('verify_diagnosis', cause.id, verdict.abstain ? 'ABSTAIN' : 'UPHELD', 'trust gate', true);
 
@@ -272,7 +291,64 @@ async function showRefusal() {
     ${say("Three things could cause this and one of them is mains wiring. This one needs a technician.")}`;
 }
 
+/* Point it at a machine nobody wrote code for. It reads that machine's own manual and carries on. */
+async function teach() {
+  traceEl.innerHTML = '';
+  const m = UNSEEN_MANUAL;
+
+  captionEl.textContent = 'A washing machine. No code anywhere in this project mentions it.';
+  advanceBtn.disabled = true;
+  screen.innerHTML = `
+    <div class="s-teach">
+      <p class="teach__head">${m.brand} ${m.model}</p>
+      <p class="teach__sub">Nothing in this project knows anything about this machine.</p>
+      <pre class="teach__manual">${m.text.trim()}</pre>
+    </div>
+    ${say("I haven't seen this one. Let me read its manual.")}`;
+
+  await new Promise((r) => setTimeout(r, 900));
+
+  const learned = await post('/api/learn', m);
+  trace('manual.parse', `${m.source}`, learned.coverage, 'fault graph');
+  trace('learn', m.model, learned.learned ? `${learned.codes} code(s)` : learned.reason, 'runtime');
+
+  if (!learned.learned) {
+    screen.innerHTML = `
+      <div class="s-refuse">
+        <span class="refuse__seal">NOTHING RECOVERED</span>
+        <p class="refuse__line">I couldn't get a fault table out of that manual.</p>
+        <p class="refuse__why">${learned.reason || learned.coverage}</p>
+      </div>
+      ${say("That manual doesn't have anything I can use. I'd be guessing.")}`;
+    return;
+  }
+
+  APPLIANCE = { model: m.model, brand: m.brand, kind: m.kind, code: m.code };
+  const started = await post('/api/diagnosis/start', { model: m.model, code: m.code });
+  dx = { space: started.space, tests: started.tests, performed: [], ruledOut: [], bits: started.bits, meaning: started.meaning };
+  trace('hypotheses', `${m.model}, ${m.code}`, `${started.space.length} causes · ${started.bits.toFixed(2)} bits`, 'learned graph');
+
+  captionEl.textContent = 'It built the hypothesis space from the manual — every cause cites a line of it.';
+  advanceBtn.disabled = false;
+  advanceBtn.textContent = 'What should I check?';
+  stage = 'question';
+
+  screen.innerHTML = `
+    <div class="s-space">
+      <div class="readout">
+        <span class="readout__k">learned</span>
+        <span class="fault-chip">${m.code}</span>
+        <span class="readout__meaning">${dx.meaning}</span>
+      </div>
+      ${spaceMarkup(dx.space)}
+      <p class="teach__cite">${dx.space[0].evidence}</p>
+      ${bitsLine(dx.bits)}
+    </div>
+    ${say(`Right — ${m.code} on this LG. Three things cause it. Same as before: let's narrow it down.`)}`;
+}
+
 function reset() {
+  APPLIANCE = { model: 'SHE3AR75UC', brand: 'Bosch', kind: 'Dishwasher', code: 'E24' };
   stage = 'idle';
   dx = null;
   pending = null;
@@ -312,6 +388,7 @@ async function boot() {
 
 advanceBtn.addEventListener('click', advance);
 $('#handsfree').addEventListener('click', handsFree);
+$('#teach-btn').addEventListener('click', teach);
 $('#abstain-btn').addEventListener('click', showRefusal);
 $('#reset').addEventListener('click', reset);
 boot();

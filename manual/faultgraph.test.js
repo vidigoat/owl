@@ -112,6 +112,41 @@ it('recognises mains work by what it touches', () => {
   assert.equal(isMains('Clean the filter'), false);
 });
 
+it('reads LG-style letter codes, which have no digits at all', () => {
+  const lg = `Fault codes
+OE   The machine cannot drain
+     Check the drain filter for debris
+     Replace the drain pump if it does not turn
+
+UE   The load is unbalanced
+     Check the load is evenly distributed
+`;
+  const g = parse({ model: 'LG-TEST', text: lg });
+  assert.ok(g.codes.OE, 'OE not recovered — LG uses letter-only codes');
+  assert.ok(g.codes.UE, 'UE not recovered');
+  assert.match(g.codes.OE.meaning, /cannot drain/i);
+});
+
+it('reads Samsung-style digit-first codes', () => {
+  const samsung = `Fault codes
+4C   Water is not being supplied
+     Check the water supply taps are open
+     Clean the inlet filter of debris
+`;
+  const g = parse({ model: 'SAMSUNG-TEST', text: samsung });
+  assert.ok(g.codes['4C'], '4C not recovered — Samsung uses digit-first codes');
+});
+
+it('does not mistake ordinary sentences for fault codes', () => {
+  const prose = `Safety
+THE  appliance must be earthed at all times
+AND  never operated with a damaged cable
+NOTE  check the manual before servicing
+`;
+  const g = parse({ model: 'PROSE-TEST', text: prose });
+  assert.equal(g.found, 0, `matched prose as codes: ${Object.keys(g.codes)}`);
+});
+
 it('finds nothing in a manual with no fault table, and says so', () => {
   const g = parse({ model: 'TEST-2', text: 'Congratulations on your new appliance.\nPlease read carefully.' });
   assert.equal(g.found, 0);

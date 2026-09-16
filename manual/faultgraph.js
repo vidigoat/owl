@@ -18,10 +18,34 @@
  * specific place in a specific manual.
  */
 
-/* Fault tables look like:  "E24   Drain pump blocked   Check filter and drain hose"
- * or:                      "E:24 - Water not draining. Clean the filter."
- * Codes are 2-6 chars, letters+digits, and sit at the start of a line. */
-const CODE_LINE = /^\s*([A-Z]{1,2}[:\-\s]?\d{1,3}[A-Z]?|\d[A-Z])\s*[-–—:.\t]?\s+(.{6,200})$/;
+/* Fault codes are not one shape. Bosch writes E24 and E:15; Samsung writes 4C and 5E; LG's entire
+ * scheme is letter pairs — OE, UE, dE, FE — with no digits at all. A parser that only understands
+ * "letter then number" silently fails on two of the four biggest brands, which is worse than
+ * failing loudly.
+ *
+ * Letter-only codes need a wider gap before the description, because two capitals followed by a
+ * single space is also what a sentence looks like. */
+const CODE_PATTERNS = [
+  /^\s*([A-Z]{1,2}[:\-\s]?\d{1,3}[A-Z]?)\s*[-–—:.\t]?\s+(.{6,200})$/, // E24, E:15, F21, E09A
+  /^\s*(\d{1,2}[A-Z]{1,2})\s*[-–—:.\t]?\s+(.{6,200})$/,               // 4C, 5E, 21E
+  /^\s*([A-Z]{2,3})\s*(?:[-–—:]\s*|\s{2,})(.{6,200})$/,               // OE, UE, dE, FE
+];
+
+/* Words that would otherwise read as a letter-only fault code at the start of a line. */
+const NOT_A_CODE = new Set(['THE', 'AND', 'FOR', 'ARE', 'NOT', 'YOU', 'USE', 'SEE', 'ALL', 'ANY', 'CAN', 'ITS', 'OFF', 'ON', 'IF', 'IN', 'TO', 'OF', 'OR', 'AT', 'IS', 'IT', 'BE', 'DO', 'NO', 'WARNING', 'NOTE']);
+
+function matchCodeLine(line) {
+  for (const pattern of CODE_PATTERNS) {
+    const m = line.match(pattern);
+    if (!m) continue;
+    if (NOT_A_CODE.has(m[1].toUpperCase().replace(/[:\-\s]/g, ''))) continue;
+    return m;
+  }
+  return null;
+}
+
+/** Kept for callers that only need to ask "does this line start a fault entry?" */
+const CODE_LINE = { test: (line) => matchCodeLine(line) !== null };
 
 /** Words that mark a line as describing a remedy rather than a symptom. */
 const REMEDY_HINTS = /\b(check|clean|clear|replace|inspect|remove|tighten|straighten|reset|ensure)\b/i;
@@ -79,7 +103,7 @@ function parse({ model, text, sourceName = 'manual' }) {
   let found = 0;
 
   lines.forEach((line, i) => {
-    const m = line.match(CODE_LINE);
+    const m = matchCodeLine(line);
     if (!m) return;
 
     const code = normaliseCode(m[1]);
@@ -153,4 +177,4 @@ function merge(existing = {}, graph) {
   return codes;
 }
 
-module.exports = { parse, extract, merge, effortOf, isMains, remedyToCause, CODE_LINE };
+module.exports = { parse, extract, merge, effortOf, isMains, remedyToCause, matchCodeLine, CODE_LINE };
