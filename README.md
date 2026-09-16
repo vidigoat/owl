@@ -6,8 +6,10 @@ Point an Echo Show at a blinking appliance panel. It reads the fault code and th
 diagnosis against that model's service data before asking you to spend anything, talks you through the
 repair while your hands are inside the machine, and orders the exact part through Amazon Wallet.
 
-> **Status:** scaffold. The structure below is final; sections marked `TODO` stay unwritten until the
-> feature they describe exists. No screenshot is committed until it is a real capture.
+> **Status:** running. Every screenshot below is a real capture of a real run — `npm run capture`
+> and `npm run gif` generate them by pressing the same buttons a person would, and the capture fails
+> if any two frames come out identical. What is not yet real is named plainly in
+> [What is real and what is simulated](#what-is-real-and-what-is-simulated).
 
 ![The device mid-repair: one question, the causes still in play beneath it](docs/media/hero.png)
 
@@ -32,19 +34,19 @@ repair while your hands are inside the machine, and orders the exact part throug
 
 ## The problem
 
-`TODO` — four numbers and one sentence of consequence:
-
 - `$179` average appliance repair call, before parts
 - `$60–100` diagnostic fee just for the visit
 - `7+ days` typical wait, worse rurally
 - `39%` of Americans have thrown out a large appliance they couldn't get fixed
 - roughly **one in three** service calls are things the owner could have done themselves
 
+So a third of the time, someone waits a week and pays $179 for a job they could have done in ten
+minutes — and the reason they don't is not that the repair is hard. It is that nobody can tell them
+*which* repair it is. Diagnosis is the scarce thing, not the labour.
+
 ---
 
 ## What it does
-
-`TODO` — the flow, in the order it happens, one line each:
 
 | stage | what happens |
 |---|---|
@@ -69,7 +71,17 @@ from a photo; this runs a procedure and can stop halfway through to say it doesn
 
 ## See it run
 
-`TODO` — numbered path for a reviewer, with the exact utterances to try.
+Two minutes, in this order:
+
+1. `npm run demo` — the whole loop in a terminal, against an LG washer nothing here has heard of.
+2. `npm start`, open `localhost:8792`, press **Start the repair**, and answer the questions it asks.
+   Watch the right-hand column: every line is a real MCP tool call, and the device decides nothing.
+3. Press **Show it refuse a job**. That screen is the product.
+4. Press **Teach it a new machine**. It reads an LG service manual it has never seen and rebuilds
+   the hypothesis space from it, citing the line each cause came from.
+
+If you are driving it by voice instead, the utterances are: *"something's wrong with my
+dishwasher"* → *"what should I check?"* → *"it hums"* → *"is it the filter?"* → *"order it"*.
 
 ![The whole loop: read the panel, narrow the causes, do the repair, refuse to claim it worked](docs/media/flow.gif)
 
@@ -79,9 +91,30 @@ from a photo; this runs a procedure and can stop halfway through to say it doesn
 
 The difference between this and a photo-diagnosis app: **it will not guess with your money.**
 
-`TODO` — write this section around the refusal, not the success. When three causes sit within a few
-percent of each other and one involves mains voltage, the verifier refuses to uphold any of them and the
-copilot books a technician instead of selling a part.
+Every other appliance-diagnosis tool is built around its best case. This one is built around the
+case where it does not know.
+
+`verify_diagnosis` is the only function here that can authorise spending, and it refuses on four
+grounds, any one of which is enough:
+
+| it refuses when | because |
+|---|---|
+| the cause sits behind mains voltage | not an owner repair at any confidence. Mains outranks everything, including a diagnosis it is certain of |
+| a cheaper cause has not been ruled out | selling a $89 pump before anyone checked the free filter is the thing the trade gets accused of |
+| the top two causes are within 15% | that is not a diagnosis, it is a coin toss with a part number attached |
+| there is no evidence at all | a prior is a reason to ask a question, never a reason to take money |
+
+When it abstains, no cart is opened — not an empty one, not a cancelled one. `begin_checkout`
+refuses outright on a cause that was not upheld, so there is no path from a guess to a charge.
+
+![NOT UPHELD — no part sold: the gate refusing to spend money on a guess](docs/media/refusal.png)
+
+The screen above is the product. A repair copilot that sells you a pump when it isn't sure is worse
+than no copilot, because you now have a $89 part and the original fault.
+
+Below it is the other half: the hypothesis space collapsing because of something the owner did.
+`next_test` picks each question by bits of uncertainty removed per unit of effort — which is why
+this asks three questions where a decision tree asks twenty.
 
 ![NOT UPHELD — no part sold: the gate refusing to spend money on a guess](docs/media/refusal.png)
 
@@ -90,8 +123,6 @@ copilot books a technician instead of selling a part.
 ---
 
 ## Architecture
-
-`TODO` — keep the ASCII in-README and export a matching `docs/media/architecture.png`.
 
 ```
  you ──► Alexa+ (device surface) ──► this MCP server ──► Bedrock vision
@@ -195,8 +226,6 @@ manual it actually recovered rather than implying it read the whole thing.
 
 ## Built with
 
-`TODO` — name the exact services and what each is for.
-
 | piece | what it does here |
 |---|---|
 | MCP (Streamable HTTP, 2025-11-25) | the add-on surface Alexa+ calls |
@@ -208,8 +237,6 @@ manual it actually recovered rather than implying it read the whole thing.
 ---
 
 ## Run it yourself
-
-`TODO` — four commands maximum.
 
 No dependencies, no build step, no credentials needed to see it work.
 
