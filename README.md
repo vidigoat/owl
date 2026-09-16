@@ -367,6 +367,34 @@ The number that actually matters is **worst case 2**. The mean describes a typic
 case describes the person who gives up, and there is no path through any of these machines that asks
 more than twice.
 
+### When does choosing the question actually help?
+
+Asking that properly turned up something the project had not noticed about itself:
+
+```
+  causes   one-cause checks   partitioning checks  one at a time
+  ──────────────────────────────────────────────────────────────
+  4        3                  2                    3
+  8        7                  3                    7
+  16       15                 4                    15
+  32       31                 5                    31
+```
+
+**Information gain cannot beat working down a list when every check tests exactly one cause.** A
+remedy — *"try this, did it fix it?"* — is that kind of check: a yes identifies one cause, a no
+removes one. A fault table is a list of remedies, so a machine learned from its manual gets remedy
+checks and an irreducibly linear curve.
+
+Against **observations** — *"can you hear the pump?"*, consistent with several causes at once — the
+same algorithm is logarithmic. Thirty-two causes in five questions instead of thirty-one.
+
+This is a real limitation, it is visible in the numbers above, and it says exactly what the next
+piece of work is: the machines in `data/service-data.js` have hand-authored observations and the
+learned ones do not. Deriving observations from a manual's prose, rather than only remedies, is
+where the generality path currently stops being as good as the built-in one.
+
+That gap was invisible until the measurement was written. It is here rather than quietly absent.
+
 ---
 
 ## How well does it actually read?

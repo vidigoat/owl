@@ -176,7 +176,71 @@ if (require.main === module) {
     `${C.dim} — against ${naive.toFixed(1)} causes to ask about one at a time.${C.off}`);
   console.log(`  ${C.dim}Mean effort ${effort.toFixed(1)} (free 0 · easy 1 · awkward 4 · heavy 12).` +
     ` ${totalPaths} answer paths walked, every one of them.${C.off}`);
-  console.log(`  ${C.dim}The worst case is the number that matters: it is the person who gives up.${C.off}\n`);
+  console.log(`  ${C.dim}The worst case is the number that matters: it is the person who gives up.${C.off}`);
+
+  /* ── does it matter at scale? ────────────────────────────────────────────
+   * The table above is honest and modest: three causes per code is a small space, and 1.3 against
+   * 2.5 is a real improvement that nobody would write home about.
+   *
+   * The interesting question is what happens as fault tables get larger, and that is a property of
+   * the algorithm rather than of any appliance — so it can be answered without inventing service
+   * data for machines nobody has measured. These spaces are SYNTHETIC and labelled as such: uniform
+   * priors, one clean binary check per cause. Real tables are messier and the real curve is worse.
+   * What survives is the shape.
+   */
+  console.log(`\n  ${C.bold}When does choosing the question actually help?${C.off}`);
+  console.log(`  ${C.dim}Synthetic spaces, uniform priors. Not appliance data — this is a property of the`);
+  console.log(`  algorithm, and the answer turned out to be more interesting than expected.${C.off}\n`);
+  console.log(`  ${'causes'.padEnd(8)} ${'one-cause checks'.padEnd(18)} ${'partitioning checks'.padEnd(20)} one at a time`);
+  console.log(`  ${C.dim}${'─'.repeat(66)}${C.off}`);
+
+  const worstOver = (space, tests) => {
+    const paths = [];
+    walk({ space, tests, performed: [], effort: 0, depth: 0 }, paths);
+    return Math.max(...paths.map((p) => p.questions));
+  };
+
+  for (const n of [3, 4, 6, 8, 12, 16, 24, 32]) {
+    const space = Array.from({ length: n }, (_, i) => ({ id: `c${i}`, label: `cause ${i}`, prior: 1 / n }));
+
+    // A remedy check: "try this, did it fix it?" A yes identifies one cause; a no removes exactly
+    // one. This is what a fault table's remedy list gives you, and it is irreducibly linear.
+    const oneCause = space.map((c, i) => ({
+      id: `t${i}`, question: `is it ${c.label}?`, effort: 'easy',
+      outcomes: [
+        { value: 'yes', say: 'yes', consistentWith: [c.id] },
+        { value: 'no', say: 'no', consistentWith: space.filter((x) => x.id !== c.id).map((x) => x.id) },
+      ],
+    }));
+
+    // An observation: "can you hear the pump?" Each answer is consistent with a GROUP of causes,
+    // so one question can halve the space rather than trimming one off it.
+    const partitioning = Array.from({ length: Math.ceil(Math.log2(n)) + 1 }, (_, bit) => {
+      const on = space.filter((_, i) => (i >> bit) & 1).map((c) => c.id);
+      const off = space.filter((_, i) => !((i >> bit) & 1)).map((c) => c.id);
+      return {
+        id: `p${bit}`, question: `observation ${bit}?`, effort: 'easy',
+        outcomes: [
+          { value: 'a', say: 'yes', consistentWith: on },
+          { value: 'b', say: 'no', consistentWith: off },
+        ],
+      };
+    }).filter((t) => t.outcomes.every((o) => o.consistentWith.length));
+
+    console.log(
+      `  ${String(n).padEnd(8)} ${String(worstOver(space, oneCause)).padEnd(18)} ` +
+      `${C.green}${String(worstOver(space, partitioning)).padEnd(20)}${C.off} ${n - 1}`
+    );
+  }
+
+  console.log(`\n  ${C.dim}The finding worth stating: information gain cannot beat working down a list when every`);
+  console.log(`  check tests exactly one cause. A remedy — "try this, did it fix it?" — is that kind of`);
+  console.log(`  check, and a fault table is a list of remedies. Against OBSERVATIONS, which are`);
+  console.log(`  consistent with several causes at once, it is logarithmic instead of linear.`);
+  console.log(`  ${C.off}`);
+  console.log(`  ${C.dim}Which is why data/service-data.js authors observations for the machines it knows, and`);
+  console.log(`  why a machine learned from a manual gets remedy checks and a flatter curve. That gap is`);
+  console.log(`  real, it is visible in the table above, and closing it is the next piece of work.${C.off}\n`);
 }
 
 module.exports = { measure, walk, EFFORT_COST };
