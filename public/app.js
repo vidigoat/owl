@@ -302,19 +302,60 @@ async function renderPart() {
   stage = 'done';
 }
 
-function renderDone() {
+async function renderDone() {
   stage = 'done';
-  trace('confirm_fix', 'frame.jpg', 'no fault code', 'Bedrock vision');
-  trace('home.remember', 'repair receipt', 'stored', 'AgentCore');
-  captionEl.textContent = 'It checks its own work, then writes down what happened.';
   advanceBtn.disabled = true;
+
+  const cause = dx && dx.space.length === 1 ? dx.space[0] : null;
+
+  // Actually look at the panel again. If we could not, say so — a repair confirmed from a
+  // photograph nobody took is the same lie as a diagnosis nobody established.
+  const check = await post('/api/confirm', {
+    imagePath: `eval/photos/${APPLIANCE.model.toLowerCase()}-panel-after.jpg`,
+    code: APPLIANCE.code,
+  });
+  trace('confirm_fix', 'frame.jpg', check.confirmed ? 'no fault code' : check.unknown ? 'could not verify' : 'still faulty', check.simulated ? 'fallback' : 'Bedrock vision');
+
+  const saved = await post('/api/remember', {
+    model: APPLIANCE.model,
+    brand: APPLIANCE.brand,
+    kind: APPLIANCE.kind,
+    code: APPLIANCE.code,
+    cause: cause ? cause.label : null,
+    action: 'Guided repair',
+    confirmed: check.confirmed,
+  });
+  trace('remember_repair', APPLIANCE.model, saved.repeat ? 'repeat fault' : 'receipt stored', 'household memory');
+
+  const dueLine = saved.due && saved.due.length
+    ? `<p class="done__sub">Also — ${saved.due[0].part} on another machine is ${saved.due[0].daysSince} days old. Want me to reorder it?</p>`
+    : '';
+
+  if (check.confirmed) {
+    captionEl.textContent = 'It checked its own work, then wrote down what happened.';
+    screen.innerHTML = `
+      <div class="s-done">
+        <span class="done__seal">FAULT CLEARED</span>
+        <p class="done__line">Fixed, and the code is gone.</p>
+        <p class="done__sub">I watched the panel through a cycle — no fault. Noted against this ${APPLIANCE.kind.toLowerCase()}.</p>
+        ${saved.note ? `<p class="asked">${saved.note}</p>` : ''}
+        ${dueLine}
+      </div>
+      ${say('That was about ten minutes and a cheap part, instead of a call-out and a week.')}`;
+    return;
+  }
+
+  // The honest ending: it did the repair, but it could not verify the result.
+  captionEl.textContent = 'It will not tell you it worked when it could not actually check.';
   screen.innerHTML = `
-    <div class="s-done">
-      <span class="done__seal">FAULT CLEARED</span>
-      <p class="done__line">Ordered, fitted, and the code is gone.</p>
-      <p class="done__sub">I watched the panel through a rinse cycle — no fault. Noted against this dishwasher.</p>
+    <div class="s-refuse">
+      <span class="refuse__seal">${check.stillFaulty ? 'STILL FAULTY' : 'NOT VERIFIED'}</span>
+      <p class="refuse__line">${check.stillFaulty ? 'That did not fix it.' : "I can't confirm it worked."}</p>
+      <p class="refuse__why">${check.reason}</p>
+      ${saved.note ? `<p class="asked">${saved.note}</p>` : ''}
+      ${dueLine}
     </div>
-    ${say('That was $38 and about ten minutes, instead of $179 and a week.')}`;
+    ${say(check.stillFaulty ? "It's still showing the same code. Let's keep going." : "I couldn't see the panel, so I'm not going to tell you it's fixed.")}`;
 }
 
 /* ── flow ──────────────────────────────────────────────────────────────

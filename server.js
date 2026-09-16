@@ -13,6 +13,8 @@ const { nextTest } = require('./mcp/tools/next_test');
 const { MODELS, LEARNED, learn } = require('./data/service-data');
 const { parse: parseManual } = require('./manual/faultgraph');
 const { see } = require('./mcp/tools/see');
+const { confirm_fix } = require('./mcp/tools/confirm_fix');
+const { remember: rememberAppliance, receipt: writeReceipt, due: dueNow } = require('./mcp/tools/home');
 
 /** Read a JSON body. The diagnosis loop passes objects around, so GET params won't do. */
 const readJson = (req) =>
@@ -69,6 +71,24 @@ http
       return readJson(req)
         .then((body) => see(body))
         .then((r) => send(res, 200, JSON.stringify(r), 'application/json'))
+        .catch((e) => send(res, 500, JSON.stringify({ error: e.message }), 'application/json'));
+    }
+
+    // Did the repair actually work, and write down what happened.
+    if (req.method === 'POST' && url.pathname === '/api/confirm') {
+      return readJson(req)
+        .then((body) => confirm_fix(body))
+        .then((r) => send(res, 200, JSON.stringify(r), 'application/json'))
+        .catch((e) => send(res, 500, JSON.stringify({ error: e.message }), 'application/json'));
+    }
+
+    if (req.method === 'POST' && url.pathname === '/api/remember') {
+      return readJson(req)
+        .then((body) => {
+          rememberAppliance({ model: body.model, brand: body.brand, kind: body.kind });
+          const saved = writeReceipt(body);
+          return send(res, 200, JSON.stringify({ ...saved, due: dueNow().due }), 'application/json');
+        })
         .catch((e) => send(res, 500, JSON.stringify({ error: e.message }), 'application/json'));
     }
 
