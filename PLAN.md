@@ -13,12 +13,19 @@ This is the earlier deadline and the larger prize, so it has priority over the N
 
 | week | what has to be true by the end of it |
 |---|---|
-| 0 · to 21 Sep | AWS account with Bedrock access, `alexa-ai` authenticated, $150 credits requested, hello-world MCP add-on answering |
-| 1 · 22–28 Sep | vision reads a real fault code and model plate from a photo; `diagnose` returns ranked causes |
-| 2 · 29 Sep–5 Oct | the trust gate refuses the ambiguous case; guided steps paced correctly; memory writes a repair receipt |
-| 3 · 6–12 Oct | part lookup by model, Wallet checkout flow, `confirm_fix` re-reads the panel |
-| 4 · 13–19 Oct | device experience polished, README written, product feedback and friction log complete |
-| 5 · 20–21 Oct | video recorded, **submit 21 Oct** with two days of slack before the deadline |
+| ~~0~~ | ~~MCP add-on answering~~ — **done**: 14 tools, JSON-RPC over Streamable HTTP |
+| ~~1~~ | ~~`diagnose` returns ranked causes~~ — **done, and further**: a full elimination loop with cost-weighted information gain |
+| ~~2~~ | ~~gate refuses the ambiguous case; guided steps; repair receipt~~ — **done**, plus it refuses in the money path too |
+| ~~3~~ | ~~part lookup, checkout, `confirm_fix`~~ — **done**: checkout refuses on a refused diagnosis, confirms once |
+| **now** | **the only gate left: can Bedrock read a fault code off a real photograph?** Needs AWS access and Vidit's photos |
+| 4 · 13–19 Oct | device polish against real reads, README, product feedback, friction log |
+| 5 · 20–21 Oct | video recorded, **submit 21 Oct** with two days of slack |
+
+What got built ahead of schedule: learning a machine from its own service manual, which was not in
+the original plan at all. Four manufacturers' manuals — Bosch, LG, Samsung, Whirlpool — parse,
+narrow to a single cause, and produce a cited procedure, none of them coded for.
+
+98 checks. `npm test`.
 
 ## Scoring levers, in order of value
 
