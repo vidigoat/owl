@@ -19,6 +19,7 @@ const { find_part } = require('./tools/find_part');
 const { see } = require('./tools/see');
 const { read_error } = require('./tools/read_error');
 const { identify_appliance } = require('./tools/identify_appliance');
+const { read_manual } = require('./tools/read_manual');
 const { confirm_fix } = require('./tools/confirm_fix');
 const { beginCheckout, confirmCheckout } = require('./tools/order_part');
 const { receipt, due, history } = require('./tools/home');
@@ -137,6 +138,23 @@ const TOOLS = [
       },
     },
     handler: identify_appliance,
+  },
+  {
+    name: 'read_manual',
+    description:
+      'Read an appliance service manual from a photograph of the page and learn that machine at runtime. Transcribes the fault table character for character; it does not interpret, invent a remedy, or fill in a code it could not read. A page with no fault table on it recovers nothing and says so.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        imagePath: { type: 'string', description: 'Photograph of the manual page' },
+        imageBase64: { type: 'string', description: 'The same, as bytes from a camera' },
+        model: { type: 'string', description: 'Which machine this manual belongs to' },
+        brand: { type: 'string' },
+        kind: { type: 'string', description: 'Dishwasher, Washer, Fridge…' },
+      },
+      required: ['model'],
+    },
+    handler: read_manual,
   },
   {
     name: 'begin_checkout',

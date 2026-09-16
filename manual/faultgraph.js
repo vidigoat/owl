@@ -105,8 +105,39 @@ function remedyToCause(remedy) {
  * Deterministic pass over manual text.
  * Returns only what it actually found — an empty graph is a valid, honest answer.
  */
+/**
+ * Manuals write a fault table two ways, and so do people transcribing one.
+ *
+ *   E24  The machine cannot drain        the code and its meaning on one line
+ *   E24
+ *   The machine cannot drain             the code alone, meaning underneath
+ *
+ * The second is common in printed tables, where the code sits in its own narrow column, and it is
+ * what a vision model produces when it transcribes such a table honestly. Rejoining them here means
+ * the rest of the parser only ever sees one shape — and, more to the point, means a perfectly good
+ * transcription is not thrown away over a line break.
+ */
+function joinOrphanCodes(lines) {
+  const out = [];
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const bare = /^\s*([A-Za-z]{0,3}[:\-]?\d{0,3}[A-Za-z]?)\s*$/.exec(line);
+    const next = lines[i + 1];
+
+    // A line holding only a plausible code, with something substantial under it.
+    if (bare && bare[1].length >= 2 && /[A-Za-z0-9]/.test(bare[1]) && next && next.trim().length > 5
+        && !NOT_A_CODE.has(bare[1].trim().toUpperCase())) {
+      out.push(`${bare[1].trim()}   ${next.trim()}`);
+      i++; // the meaning has been consumed
+      continue;
+    }
+    out.push(line);
+  }
+  return out;
+}
+
 function parse({ model, text, sourceName = 'manual' }) {
-  const lines = String(text).split(/\r?\n/);
+  const lines = joinOrphanCodes(String(text).split(/\r?\n/));
   const codes = {};
   let found = 0;
 
@@ -192,4 +223,4 @@ function merge(existing = {}, graph) {
   return codes;
 }
 
-module.exports = { parse, extract, merge, effortOf, isMains, remedyToCause, matchCodeLine, CODE_LINE };
+module.exports = { parse, extract, merge, effortOf, isMains, remedyToCause, matchCodeLine, joinOrphanCodes, CODE_LINE };

@@ -157,7 +157,7 @@ Full detail: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
 
 ## MCP tool surface
 
-All sixteen are live over Streamable HTTP (spec `2025-11-25`) and answer `tools/list` and
+All seventeen are live over Streamable HTTP (spec `2025-11-25`) and answer `tools/list` and
 `tools/call` today. Check it rather than taking it from me:
 
 ```bash
@@ -187,6 +187,7 @@ what is missing.
 | `see` | image or bytes | model number + fault code, or nulls | **live against Bedrock Nova Lite**; falls back to a *labelled* simulated read without credentials |
 | `read_error` | image/bytes, model, or `noCodeShown` | the code AND what it means on that model | **live** — abstains rather than interpret a code against the wrong machine. `noCodeShown` lets an agent report that the *person* looked and saw nothing, which is an established absence rather than a failed read |
 | `identify_appliance` | image/bytes | the machine, and whether we have service data for it | **live** — never infers a model from the brand |
+| `read_manual` | image/bytes, model | learns a machine at runtime from a **photograph of its manual page** | **live** — transcribes, never interprets; a page with no fault table recovers nothing and says so |
 | `confirm_fix` | image, code | did the fault actually clear? | **live** — refuses to confirm a repair it could not see |
 | `remember_repair` | model, code, cause, outcome | the repair receipt | **live**, file-backed until AgentCore |
 | `repair_history` | model | everything this machine has been through | **live** |
@@ -207,6 +208,28 @@ Transport: Streamable HTTP, MCP spec `2025-11-25`. Server entry point: `mcp/serv
 Nothing here is programmed for one dishwasher. Hand it the service manual for a machine this
 repository has never heard of, and it reads the fault table out of the prose, builds the hypothesis
 space, and runs the identical loop.
+
+**And you do not need the text of the manual — you can photograph the page.** Nobody has the text of
+a fault table. They have a booklet in a drawer, at 9pm, with a broken dishwasher:
+
+```
+1. read the page → 3 codes: H20, F05, F13
+2. F05 → The machine is not draining (1.50 bits)
+     49%  Drain filter — debris
+     30%  Drain hose is kinked
+     22%  Drain pump has failed
+     cites: Hotpoint service manual: "Check the drain filter for debris"
+3. asks → Check the drain filter for debris — did that fix it?
+4. gate → upheld
+```
+
+A Hotpoint FDW60. No file in this project mentions it, and those three codes appear nowhere in
+`data/service-data.js`. It read them off a picture and then diagnosed with them.
+
+The rule that makes it safe is the one that governs vision everywhere here: **transcribe, never
+interpret.** The model is asked to copy characters, not to explain what a fault means or supply a
+remedy it thinks is likely — because everything downstream cites the manual, and a model-invented
+remedy would arrive wearing a citation to a line that does not exist.
 
 ![An LG washer nothing in this project knows, learned from its manual at runtime](docs/media/learned.png)
 

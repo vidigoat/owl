@@ -131,4 +131,32 @@ it('every cause across every manufacturer cites a real source line', () => {
   });
 });
 
+it('a code on its own line still parses', () => {
+  // How printed tables are laid out — the code in its own narrow column — and therefore how a
+  // vision model transcribes one honestly. Bedrock read a manual page perfectly and the whole
+  // table was thrown away over a line break.
+  const g = parse({ model: 'X', sourceName: 'manual', text: `Fault codes
+H20
+The machine is not filling with water
+  Check the water supply tap is fully open
+  Clean the inlet filter at the hose connection
+F05
+The machine is not draining
+  Check the drain filter for debris
+` });
+  assert.deepEqual(Object.keys(g.codes).sort(), ['F05', 'H20']);
+  assert.match(g.codes.H20.meaning, /not filling/);
+  assert.ok(g.codes.F05.causes.length >= 1);
+});
+
+it('joining a code to the next line does not invent codes out of prose', () => {
+  const { joinOrphanCodes } = require('./faultgraph');
+  // A short word alone on a line is not a fault code, and the line under it is not its meaning.
+  const joined = joinOrphanCodes(['NOTE', 'Disconnect the machine from the mains first.', '']);
+  assert.equal(joined[0], 'NOTE', 'NOTE was treated as a fault code');
+  // Nor is an empty line, nor a code with nothing underneath it.
+  assert.deepEqual(joinOrphanCodes(['', 'x']), ['', 'x']);
+  assert.deepEqual(joinOrphanCodes(['E24', '']), ['E24', '']);
+});
+
 console.log(`\n${passed} passed`);

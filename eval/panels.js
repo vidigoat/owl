@@ -82,6 +82,11 @@ const PANELS = [
     html: hard({ code: '4C', brand: 'SAMSUNG', ink: '#7fd4c1', effect: 'thumb' }),
   },
   {
+    file: 'manual-page-hotpoint-fdw60.png',
+    note: 'a service manual page — the fault table read_manual learns a machine from',
+    html: manualPage(),
+  },
+  {
     file: 'bosch-dishwasher-plate-she3ar75uc.png',
     note: 'a rating plate — small print, model number among a dozen other numbers',
     html: plate(),
@@ -189,6 +194,46 @@ function hard({ code, brand, ink, effect }) {
       </div>
       ${overlay}
     </div>`, 1000, 600);
+}
+
+/**
+ * A page from a service manual.
+ *
+ * Deliberately an appliance nothing in this project has heard of, with codes that appear nowhere in
+ * data/service-data.js. If `read_manual` produces a working hypothesis space from this, it did it
+ * by reading the page — there is nothing else it could have come from.
+ */
+function manualPage() {
+  return shell(`<div class="housing" style="background:#f4f2ec;color:#15171a;padding:4% 6%;
+      font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:19px;line-height:1.5;overflow:hidden">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;
+        border-bottom:2px solid #15171a;padding-bottom:8px">
+        <b style="font-size:26px;letter-spacing:.02em">HOTPOINT FDW60</b>
+        <span style="font-size:15px;opacity:.6">Service manual &nbsp;·&nbsp; 6 — Fault codes</span>
+      </div>
+      <p style="margin:16px 0 14px;font-size:17px;opacity:.75">
+        If a fault is detected the machine stops and displays a code. Work through the checks in the
+        order listed.</p>
+      <table style="width:100%;border-collapse:collapse;font-size:18px">
+        <tr><td style="width:62px;vertical-align:top;padding:9px 0"><b>H20</b></td>
+            <td style="padding:9px 0">The machine is not filling with water<br>
+              <span style="opacity:.78">&nbsp;&nbsp;Check the water supply tap is fully open<br>
+              &nbsp;&nbsp;Clean the inlet filter at the hose connection<br>
+              &nbsp;&nbsp;Replace the inlet valve if it does not open</span></td></tr>
+        <tr><td style="vertical-align:top;padding:9px 0"><b>F05</b></td>
+            <td style="padding:9px 0">The machine is not draining<br>
+              <span style="opacity:.78">&nbsp;&nbsp;Check the drain filter for debris<br>
+              &nbsp;&nbsp;Straighten the drain hose<br>
+              &nbsp;&nbsp;Replace the drain pump if it does not turn</span></td></tr>
+        <tr><td style="vertical-align:top;padding:9px 0"><b>F13</b></td>
+            <td style="padding:9px 0">The water is not heating<br>
+              <span style="opacity:.78">&nbsp;&nbsp;Check the mains supply to the heater<br>
+              &nbsp;&nbsp;Replace the heating element</span></td></tr>
+      </table>
+      <p style="margin-top:20px;font-size:14px;opacity:.5">
+        Part numbers are listed in section 9. Disconnect the machine from the mains before any
+        service work.</p>
+    </div>`, 1000, 760);
 }
 
 /** A rating plate: the model number hidden among a dozen equally plausible numbers. */
