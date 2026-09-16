@@ -64,7 +64,16 @@ These come from the official rules; breaking one disqualifies the entry.
 - Every tool returns a `confidence` and may return `abstain: true`. Callers must handle `abstain`.
 - Copy is spoken aloud. Write it as a competent person standing next to someone would say it: short
   sentences, no jargon, no apologies, never "I'm sorry, I couldn't find...".
-- Screenshots in `docs/media/` are real captures only. Never commit a mockup as evidence.
+- Screenshots in `docs/media/` are real captures only. Never commit a mockup as evidence — and you
+  do not need to: `npm run capture` and `npm run gif` generate every one of them by driving the real
+  interface with headless Chrome. `npm run capture` exits non-zero if any two frames come out
+  byte-identical, because two captions describing one moment is the quiet kind of dishonesty this
+  project argues against.
+- Anything that can only be checked against real AWS lives in `npm run preflight` — CLI, credentials,
+  Bedrock reachability, whether the model id exists in the region, and one real read. Add to it
+  rather than writing a new one-off script.
+- Never cite a check count in prose. It goes stale within a day and reads as carelessness to exactly
+  the reviewer it was written for. Say "every suite" and let `npm test` print the number.
 
 ## Where the demo must not drift
 
@@ -74,8 +83,13 @@ a part number for a model you have not checked.
 
 ## Definition of done for any change
 
-- `npm test` passes — 20 checks across the gate and the tools that can cost someone money.
+- `npm test` passes — every suite, reported together. The runner never stops at the first failure,
+  because that reports a smaller number of checks than the project has and reads like success.
 - The device experience still completes the full loop without a dead end.
 - `verify_diagnosis` still refuses the ambiguous case (`E09`) — there is a button for it in the UI.
 - Every fact on the device screen still comes from a tool, not from the front-end (`docs/decisions/002`).
 - The friction log has an entry if the change was harder than it should have been.
+- If the change alters anything on screen, `npm run capture` was re-run and the new frames committed.
+- The README claims nothing that is not true today. Its "what is real and what is simulated" table
+  and its "what it cannot do" section are load-bearing; a claim that outruns the code costs more
+  than the feature was worth.
