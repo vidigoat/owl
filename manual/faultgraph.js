@@ -126,7 +126,10 @@ function parse({ model, text, sourceName = 'manual' }) {
       mains: isMains(remedy),
       ownerFixable: !isMains(remedy),
       evidence: `${sourceName}: "${remedy}"`,
-      source: { line: i + 1 },
+      // The manual's own wording, kept verbatim. This is what the guide reads aloud, because a
+      // remedy line IS the repair step — paraphrasing it would be inventing a procedure.
+      remedy,
+      source: { line: i + 1, manual: sourceName },
     }));
 
     if (causes.length === 0) return;

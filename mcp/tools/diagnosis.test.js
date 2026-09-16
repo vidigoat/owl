@@ -110,4 +110,48 @@ it('a test that rules nothing out is never chosen', () => {
   assert.equal(choice.stuck, true);
 });
 
+console.log('\na machine taught at runtime');
+
+const { parse } = require('../../manual/faultgraph');
+const { learn } = require('../../data/service-data');
+const { guide } = require('./guide');
+
+const LEARNED_MANUAL = `Fault codes
+OE   The machine cannot drain
+     Check the drain filter for debris
+     Clean the drain pump of obstructions
+     Replace the drain pump if it does not turn
+`;
+
+it('can be taught a machine and then diagnose it', () => {
+  const g = parse({ model: 'TEST-LEARN', text: LEARNED_MANUAL, sourceName: 'test manual' });
+  const res = learn({ model: 'TEST-LEARN', brand: 'Test', codes: g.codes, source: 'test manual' });
+  assert.equal(res.learned, true);
+
+  const built = buildSpace({ model: 'TEST-LEARN', code: 'OE' });
+  assert.equal(built.known, true);
+  assert.ok(built.space.length >= 3);
+});
+
+it('reads a learned procedure out of the manual, verbatim', () => {
+  const built = buildSpace({ model: 'TEST-LEARN', code: 'OE' });
+  const proc = guide({ model: 'TEST-LEARN', code: 'OE', causeId: built.space[0].id });
+  assert.equal(proc.known, true);
+  assert.equal(proc.generated, true);
+  // the manual's own wording, not a paraphrase
+  assert.ok(proc.steps.some((s) => /drain filter for debris/i.test(s.say)));
+  assert.ok(proc.citation.includes('test manual'));
+});
+
+it('still prefers a hand-written procedure over a generated one', () => {
+  const proc = guide({ model: 'SHE3AR75UC', code: 'E24', causeId: 'filter' });
+  assert.equal(proc.known, true);
+  assert.ok(!proc.generated, 'verified steps must win over generated ones');
+});
+
+it('refuses for a machine it was never taught', () => {
+  const proc = guide({ model: 'NEVER-SEEN', code: 'ZZ', causeId: 'x' });
+  assert.equal(proc.known, false);
+});
+
 console.log(`\n${passed} passed`);

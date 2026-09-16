@@ -24,11 +24,60 @@ const STEPS = {
   ],
 };
 
+const { lookup } = require('../../data/service-data');
+const { effortOf } = require('../../manual/faultgraph');
+
+/** How long a step plausibly takes, from what it asks the person to do. */
+const PACE = { free: 10, easy: 25, awkward: 45, heavy: 90 };
+
+/**
+ * A procedure recovered from a manual we were handed at runtime.
+ *
+ * The manual's remedy line is read out verbatim. That is deliberate: the moment we start
+ * rephrasing instructions about dismantling an appliance, we are inventing a procedure, and the
+ * whole argument of this project is that it does not do that.
+ */
+function fromLearnedManual({ model, code, causeId }) {
+  const found = lookup(model, code);
+  if (!found.known) return null;
+
+  const cause = found.causes.find((c) => c.id === causeId);
+  if (!cause || !cause.remedy) return null;
+
+  // Everything the manual lists for this fault, with the chosen cause's remedy first.
+  const ordered = [cause, ...found.causes.filter((c) => c.id !== causeId && c.remedy)];
+
+  const steps = ordered.map((c, i) => {
+    const effort = effortOf(c.remedy);
+    return {
+      n: i + 1,
+      say: c.remedy,
+      detail: i === 0 ? `This is what the manual lists first for ${code}.` : 'If that did not do it, this is next.',
+      pace: PACE[effort] ?? PACE.easy,
+      hands: 'both',
+      source: c.source,
+    };
+  });
+
+  return {
+    known: true,
+    generated: true,
+    steps,
+    totalSeconds: steps.reduce((n, s) => n + s.pace, 0),
+    handsFree: true,
+    citation: cause.evidence,
+  };
+}
+
 function guide({ model, code, causeId }) {
   const key = `${model}:${code}:${causeId}`;
   const steps = STEPS[key];
 
   if (!steps) {
+    // Nothing hand-written — but we may have been taught this machine from its own manual.
+    const learned = fromLearnedManual({ model, code, causeId });
+    if (learned) return learned;
+
     return {
       known: false,
       reason: `No verified procedure for ${causeId} on ${model} ${code}. Not going to improvise one.`,
