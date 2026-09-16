@@ -42,6 +42,9 @@ let checkout = null;          // an open checkout session, if one was opened
 let handsFreeTimer = null;
 
 const say = (text) => `<div class="saying"><i>says</i><span>${text}</span></div>`;
+
+/** Anything a vision model read off a stranger's photograph is untrusted text, not markup. */
+const esc = (s) => String(s ?? '').replace(/[<>&"]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c]));
 const post = (path, body) =>
   fetch(path, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) }).then((r) => r.json());
 
@@ -95,10 +98,101 @@ function renderCamera() {
   advanceBtn.textContent = 'Read the panel';
   screen.innerHTML = `
     <div class="s-cam">
-      <div class="s-cam__panel">E24</div>
+      <div class="s-cam__panel">${esc(APPLIANCE.code)}</div>
       <span class="s-cam__hint">reading fault code and model plate</span>
+      <label class="s-cam__drop" id="drop">
+        <input type="file" id="photo" accept="image/*" hidden />
+        <b>Use a real photograph</b>
+        <span>Drop one here, or click to choose. It goes to Bedrock and whatever it reads is what
+        this diagnoses — including if that is nothing.</span>
+      </label>
     </div>
     ${say('Got it. Hold still for a second.')}`;
+
+  // Scoped to the screen, not the document: these are rendered by this function rather than
+  // declared in index.html, and public/wiring.test.js is right to insist on the difference.
+  const drop = screen.querySelector('#drop');
+  const input = screen.querySelector('#photo');
+  input.addEventListener('change', () => input.files[0] && readPhoto(input.files[0]));
+  ['dragenter', 'dragover'].forEach((e) =>
+    drop.addEventListener(e, (ev) => { ev.preventDefault(); drop.classList.add('is-over'); }));
+  ['dragleave', 'drop'].forEach((e) =>
+    drop.addEventListener(e, (ev) => { ev.preventDefault(); drop.classList.remove('is-over'); }));
+  drop.addEventListener('drop', (ev) => {
+    const file = ev.dataTransfer?.files?.[0];
+    if (file) readPhoto(file);
+  });
+}
+
+/**
+ * A real photograph, read by the real model.
+ *
+ * This is the difference between a demo and a product. Whatever Bedrock reads off this image is
+ * what the rest of the session diagnoses — so if it reads nothing, the session says it read
+ * nothing, and there is no path from here to a confident answer about a machine we could not see.
+ */
+async function readPhoto(file) {
+  advanceBtn.disabled = true;
+  const dataUrl = await new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(r.result);
+    r.onerror = () => reject(new Error('could not read that file'));
+    r.readAsDataURL(file);
+  });
+
+  screen.innerHTML = `
+    <div class="s-cam">
+      <img class="s-cam__shot" src="${dataUrl}" alt="the photograph being read" />
+      <span class="s-cam__hint">sending it to Bedrock…</span>
+    </div>
+    ${say('Let me look at that.')}`;
+
+  const read = await post('/api/see', { imageBase64: dataUrl });
+  trace('see', file.name, read.simulated ? 'SIMULATED — no credentials' : `${read.code ?? 'no code'} · ${read.confidence ?? '—'}`,
+    read.simulated ? 'fallback' : 'Bedrock vision');
+
+  if (read.simulated) {
+    screen.innerHTML = `
+      <div class="s-refuse">
+        <span class="refuse__seal">NOT READ</span>
+        <p class="refuse__line">I couldn't actually look at that.</p>
+        <p class="refuse__why">${esc(read.reason || 'No Bedrock credentials.')}</p>
+      </div>
+      ${say("I couldn't see it, so I'm not going to pretend I did.")}`;
+    advanceBtn.disabled = false;
+    return;
+  }
+
+  if (!read.code) {
+    screen.innerHTML = `
+      <div class="s-cam">
+        <img class="s-cam__shot" src="${dataUrl}" alt="the photograph that was read" />
+        <span class="s-cam__hint">no fault code on that panel</span>
+      </div>
+      <div class="s-refuse" style="margin-top:14px">
+        <span class="refuse__seal">NO FAULT SHOWN</span>
+        <p class="refuse__why">I read the panel and there is no error code on it. Nothing to
+        diagnose — which is the right answer, not a failure.</p>
+      </div>
+      ${say("I looked. There's no fault code showing, so there's nothing for me to work on.")}`;
+    advanceBtn.disabled = false;
+    return;
+  }
+
+  // A real read replaces the demo machine. From here the whole session is about THIS photograph.
+  APPLIANCE = { ...APPLIANCE, code: read.code, model: read.model || APPLIANCE.model };
+  captionEl.textContent = `Read from your photograph by ${read.via || 'Bedrock'} — not from a fixture.`;
+  screen.innerHTML = `
+    <div class="s-cam">
+      <img class="s-cam__shot" src="${dataUrl}" alt="the photograph that was read" />
+      <div class="s-cam__read">
+        <span class="s-cam__code">${esc(read.code)}</span>
+        <span class="s-cam__meta">${esc(read.model || 'model plate not in frame')} · confidence ${read.confidence ?? '—'}</span>
+      </div>
+    </div>
+    ${say(`That's ${read.code}. Let me work out what's causing it.`)}`;
+  advanceBtn.disabled = false;
+  advanceBtn.textContent = 'What could cause it?';
 }
 
 async function renderSpace() {

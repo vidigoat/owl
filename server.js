@@ -18,10 +18,20 @@ const { beginCheckout, confirmCheckout } = require('./mcp/tools/order_part');
 const { remember: rememberAppliance, receipt: writeReceipt, due: dueNow } = require('./mcp/tools/home');
 
 /** Read a JSON body. The diagnosis loop passes objects around, so GET params won't do. */
+/** 28 MB: a phone photo becomes ~33% larger as base64, and see() caps the image itself at 20 MB. */
+const MAX_BODY = 28 * 1024 * 1024;
+
 const readJson = (req) =>
   new Promise((resolve, reject) => {
     let body = '';
-    req.on('data', (c) => (body += c));
+    req.on('data', (c) => {
+      body += c;
+      // Refuse early rather than buffering an unbounded upload into memory.
+      if (body.length > MAX_BODY) {
+        reject(new Error('Body too large'));
+        req.destroy();
+      }
+    });
     req.on('end', () => {
       try {
         resolve(body ? JSON.parse(body) : {});

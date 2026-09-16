@@ -160,22 +160,40 @@ function simulatedRead(reason, expect = {}) {
   };
 }
 
+/** 20 MB of base64 is a generous phone photo and a firm ceiling on what a caller can push in. */
+const MAX_BASE64 = 20 * 1024 * 1024;
+
 /**
  * Read one photograph.
+ *
+ * Two ways in, because there are two callers. The evaluation harness has files on disk and passes
+ * `imagePath`. A person holding a phone in front of their own dishwasher has bytes and no path, so
+ * the device passes `imageBase64` — that path is what makes this a camera rather than a fixture.
+ *
  * Always resolves — a failure to reach Bedrock is a simulated read, clearly labelled, never a crash.
  */
-async function see({ imagePath, expect = {} }) {
-  const format = FORMATS[path.extname(imagePath || '').toLowerCase()] || 'jpeg';
-
-  if (!imagePath || !fs.existsSync(imagePath)) {
-    return simulatedRead(`No image at ${imagePath}`);
-  }
-
+async function see({ imagePath, imageBase64, imageFormat, expect = {} }) {
   let base64;
-  try {
-    base64 = fs.readFileSync(imagePath).toString('base64');
-  } catch (e) {
-    return simulatedRead(e.message);
+  let format;
+
+  if (imageBase64) {
+    // Accept a data: URL or bare base64; a browser hands over the former.
+    const m = /^data:image\/([a-z+]+);base64,(.*)$/is.exec(String(imageBase64));
+    const raw = m ? m[2] : String(imageBase64);
+    format = imageFormat || FORMATS[`.${(m?.[1] || '').toLowerCase()}`] || (m?.[1] === 'png' ? 'png' : 'jpeg');
+    if (raw.length > MAX_BASE64) return simulatedRead('Image too large to send (over 20 MB).');
+    if (!/^[A-Za-z0-9+/=\s]+$/.test(raw)) return simulatedRead('That did not decode as an image.');
+    base64 = raw.replace(/\s+/g, '');
+  } else {
+    format = FORMATS[path.extname(imagePath || '').toLowerCase()] || 'jpeg';
+    if (!imagePath || !fs.existsSync(imagePath)) {
+      return simulatedRead(`No image at ${imagePath}`);
+    }
+    try {
+      base64 = fs.readFileSync(imagePath).toString('base64');
+    } catch (e) {
+      return simulatedRead(e.message);
+    }
   }
 
   try {

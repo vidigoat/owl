@@ -32,7 +32,12 @@ const it = (name, fn) => {
   }
 };
 
+// Ids the page declares, plus ids the script renders into a screen itself. Reaching for anything
+// outside that union is the bug this catches: a rename in index.html that the script still chases.
 const idsInHtml = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map((m) => m[1]));
+const idsRendered = new Set([...app.matchAll(/\bid="([a-zA-Z0-9_-]+)"/g)].map((m) => m[1]));
+const idsAvailable = new Set([...idsInHtml, ...idsRendered]);
+
 const idsWanted = [...app.matchAll(/\$\('#([a-zA-Z0-9_-]+)'\)|querySelector\('#([a-zA-Z0-9_-]+)'\)/g)]
   .map((m) => m[1] || m[2])
   .filter(Boolean);
@@ -40,8 +45,8 @@ const idsWanted = [...app.matchAll(/\$\('#([a-zA-Z0-9_-]+)'\)|querySelector\('#(
 console.log('interface wiring');
 
 it('every element the script reaches for exists in the markup', () => {
-  const missing = [...new Set(idsWanted)].filter((id) => !idsInHtml.has(id));
-  assert.deepEqual(missing, [], `script looks for #${missing.join(', #')} which the page does not have`);
+  const missing = [...new Set(idsWanted)].filter((id) => !idsAvailable.has(id));
+  assert.deepEqual(missing, [], `script looks for #${missing.join(', #')} which nothing creates`);
 });
 
 it('every button on the page is wired to something', () => {
