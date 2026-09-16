@@ -175,14 +175,23 @@ manual it actually recovered rather than implying it read the whole thing.
 
 `TODO` — four commands maximum.
 
+No dependencies, no build step, no credentials needed to see it work.
+
 ```bash
 git clone <repo>
 cd second-set-of-hands
-cp .env.example .env    # AWS profile + Bedrock model
+
+npm run demo            # ← start here: the whole loop in a terminal, 20 seconds
+npm test                # 100 checks across 9 suites
 npm start               # http://localhost:8792 — the device experience
 npm run mcp             # http://localhost:8793/mcp — the server Alexa+ calls
-npm test                # the trust gate
+npm run eval            # the vision evaluation (needs photographs)
 ```
+
+`npm run demo` runs the complete procedure against an LG washing machine that nothing in this
+repository has ever heard of: it reads the manual, builds the hypothesis space, picks each check by
+what it rules out per unit of effort, narrows to one cause, cites the line of the manual it came
+from, and refuses to sell a part it hasn't earned the right to sell.
 
 Call the gate directly, without the device:
 
