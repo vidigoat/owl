@@ -109,12 +109,40 @@ Full detail: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
 
 ## MCP tool surface
 
-`TODO` — this table is the most important thing in the repository for an automated reviewer. Every row
-must name the file it lives in and be callable, not merely described.
+All fourteen are live over Streamable HTTP (spec `2025-11-25`) and answer `tools/list` and
+`tools/call` today. Check it rather than taking it from me:
 
-Four of these are implemented and callable over JSON-RPC today; the rest are stubs waiting on AWS
-credentials. The table says which, because a tool table that overstates itself is the fastest way to
-lose a reviewer's trust.
+```bash
+npm run mcp
+curl -s -X POST http://localhost:8793/mcp -H 'content-type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}' | jq '.result.tools | length'
+```
+
+| tool | what it is for | file |
+|---|---|---|
+| `see` | Read the model number and fault code off a photograph. Returns nulls rather than guesses, and always states whether the read was real or simulated. | `mcp/tools/see.js` |
+| `hypotheses` | Build the space of possible causes for a code on a model, with priors and the uncertainty left, in bits. | `mcp/tools/hypotheses.js` |
+| `next_test` | Choose the one check worth asking a person to do next — most uncertainty removed per unit of effort. Returns nothing when one cause is left or when nothing would tell us anything. | `mcp/tools/next_test.js` |
+| `observe` | Fold a check's result back in: keep the consistent causes, name the ruled-out ones, detect contradiction. | `mcp/tools/hypotheses.js` |
+| `diagnose` | Rank causes cheapest-and-likeliest first. Offers candidates; decides nothing. | `mcp/tools/diagnose.js` |
+| **`verify_diagnosis`** | **The gate.** Decides whether a cause may be stated as fact and have money attached. Abstains on mains voltage, on a cheaper cause not yet ruled out, on too little separation, and on no evidence. | `mcp/tools/verify_diagnosis.js` |
+| `guide` | Repair steps for an upheld cause, written to be heard, with the pacing each takes. Refuses to improvise a procedure it does not have. | `mcp/tools/guide.js` |
+| `find_part` | The part that fits this exact model, with what the service call would have cost. Returns nothing rather than a part that only probably fits. | `mcp/tools/find_part.js` |
+| `begin_checkout` | Open a checkout. Refuses outright if the diagnosis was not upheld. Itemised total, the alternative, a session id. | `mcp/tools/order_part.js` |
+| `confirm_checkout` | Place an order that was already read out. Completes exactly once. | `mcp/tools/order_part.js` |
+| `confirm_fix` | Look at the panel again and say whether the fault cleared. Will not confirm what it could not genuinely see. | `mcp/tools/confirm_fix.js` |
+| `remember_repair` | Write down what was wrong, what was done, whether it worked. | `mcp/tools/home.js` |
+| `whats_due` | Consumables due across the household, so it can speak first instead of waiting for a breakdown. | `mcp/tools/home.js` |
+| `repair_history` | Everything this machine has been through before. | `mcp/tools/home.js` |
+
+Two of them are the product. `next_test` is why this asks three questions instead of twenty, and
+`verify_diagnosis` is the only function in the repository that can authorise spending — everything
+else offers, and it alone decides.
+
+What is *not* real is the vision path reaching AWS: `see` and `confirm_fix` are written and tested,
+but have never been answered by Bedrock. Without credentials every read is labelled
+`SIMULATED — no credentials` on screen and in the trace, and `npm run preflight` reports exactly
+what is missing.
 
 | tool | input | returns | status |
 |---|---|---|---|
@@ -209,12 +237,45 @@ it upholds the part.
 
 ## What is real and what is simulated
 
-`TODO` — say it plainly:
+| | Status |
+|---|---|
+| The MCP server and all 14 tools, over Streamable HTTP | **Real**, tested |
+| The trust gate — the only thing that can authorise spending | **Real**, tested. It refuses on mains voltage, on a cheaper cause not yet ruled out, on too little separation, and on no evidence at all |
+| Test selection by information gain per unit of owner effort | **Real**, tested |
+| Learning a machine from its manual at runtime | **Real**, tested against Bosch, Whirlpool, LG and Samsung code schemes |
+| Step pacing and the household memory model | **Real**, tested |
+| This interface, and every screenshot above | **Real** — `npm run capture` drives it by pressing the same buttons a person would |
+| Bedrock vision (`see`, `read_error`, `confirm_fix`) | **Written**, and it has never been answered by AWS. Without credentials every read is labelled `SIMULATED — no credentials` on screen and in the trace. `npm run preflight` says exactly what is missing |
+| The Alexa+ device surface | **Simulated by a web experience**, which the rules explicitly permit — no entrant can call Alexa+ directly. Nothing in the device code decides anything; every cause, question and elimination came back from a tool call, so Alexa+ could drive it unchanged |
 
-- **Real:** the MCP server and every tool above, the trust gate, the step pacing, the memory model.
-- **Simulated:** the Alexa+ device surface — the web experience the hackathon rules explicitly permit,
-  because no entrant can call Alexa+ directly.
-- Fault codes used in the demo are genuine Bosch/Whirlpool/LG/Samsung codes.
+Fault codes used throughout are genuine Bosch, Whirlpool, LG and Samsung codes.
+
+---
+
+## What it cannot do
+
+**A fault with no code.** The whole entry point is a code on a panel. A machine that is simply dead,
+or wrong in a way it does not report, gives this nothing to start from.
+
+**Priors that are yours.** The probabilities come from service data — what fails on this model
+across a population. Your machine is one draw from that distribution and may be nothing like it.
+What the tool does with a prior is pick a question, not reach a conclusion, which is why that is
+tolerable.
+
+**An owner who answers wrongly.** "Is the filter clogged?" prunes real causes. A confident wrong
+answer prunes the right one, and everything after is built on it. The one defence is that
+contradictory evidence is detected rather than absorbed — when the remaining space empties, it says
+so and stops instead of inventing a cause.
+
+**Confirm that the repair worked, without vision.** It re-reads the panel to check the fault
+cleared. With no credentials it cannot, and it says **NOT VERIFIED** rather than congratulating you
+— which is how the demo GIF above ends.
+
+**Anything behind mains voltage.** Refused by design, at the gate, regardless of how confident the
+diagnosis is. That is not a gap to close later; it is the product.
+
+**A manual with no fault table.** It recovers nothing and says **NOTHING RECOVERED**, rather than
+producing a plausible-looking hypothesis space out of prose.
 
 ---
 
