@@ -107,6 +107,37 @@ it('knows that reaching behind the machine costs more than looking', () => {
   assert.equal(effortOf('Check the filter for food debris'), 'easy');
 });
 
+it('treats "replace the part" as the most expensive thing it can ask for', () => {
+  // As a diagnostic step this means buy a part and fit it to find out. It must never be cheap.
+  assert.equal(effortOf('Replace the drain pump if it does not turn'), 'heavy');
+  assert.equal(effortOf('Renew the door seal'), 'heavy');
+  assert.equal(effortOf('Fit a new inlet valve'), 'heavy');
+});
+
+it('exhausts every cheap check before asking anyone to buy a part', () => {
+  const { nextTest } = require('../mcp/tools/next_test');
+  const { buildSpace } = require('../mcp/tools/hypotheses');
+  const { learn, LEARNED } = require('../data/service-data');
+
+  const g = parse({
+    model: 'ORDER-TEST',
+    text: `Fault codes
+OE   The machine cannot drain
+     Check the drain filter for blockages
+     Replace the drain pump if it does not turn
+`,
+    sourceName: 'test manual',
+  });
+  learn({ model: 'ORDER-TEST', brand: 'Test', codes: g.codes, source: 'test manual' });
+
+  const { space } = buildSpace({ model: 'ORDER-TEST', code: 'OE' });
+  const tests = LEARNED['ORDER-TEST'].codes.OE.tests;
+  const first = nextTest({ space, tests });
+
+  assert.notMatch(first.test.question, /^Replace/i, 'opened by asking someone to buy a part');
+  assert.notEqual(first.test.effort, 'heavy');
+});
+
 it('recognises mains work by what it touches', () => {
   assert.equal(isMains('Check the mains wiring harness'), true);
   assert.equal(isMains('Clean the filter'), false);

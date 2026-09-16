@@ -50,8 +50,16 @@ const CODE_LINE = { test: (line) => matchCodeLine(line) !== null };
 /** Words that mark a line as describing a remedy rather than a symptom. */
 const REMEDY_HINTS = /\b(check|clean|clear|replace|inspect|remove|tighten|straighten|reset|ensure)\b/i;
 
-/** Rough cost of asking a person to do the thing described. Drives information gain. */
+/**
+ * Rough cost of asking a person to do the thing described. Drives information gain.
+ *
+ * "Replace the drain pump" is the important case. A manual lists it as a remedy, but as a
+ * *diagnostic step* it means buy a part, fit it, and see — which is exactly the expensive guessing
+ * this whole project exists to prevent. It is the most costly thing we can ask for, so it must
+ * never be reached for early: every free look and every cheap check has to be exhausted first.
+ */
 function effortOf(text) {
+  if (/\b(replace|renew|fit a new|install a new|swap out)\b/i.test(text)) return 'heavy';
   if (/\b(pull (the )?(machine|appliance) out|behind the|move the|disconnect the (mains|water)|remove the (back|panel|base))\b/i.test(text)) return 'heavy';
   if (/\b(unscrew|open the (base|panel)|take off|dismantle)\b/i.test(text)) return 'awkward';
   if (/\b(listen|look|check the display|is there|do you (hear|see))\b/i.test(text)) return 'free';
