@@ -551,4 +551,54 @@ $('#handsfree').addEventListener('click', handsFree);
 $('#teach-btn').addEventListener('click', teach);
 $('#abstain-btn').addEventListener('click', showRefusal);
 $('#reset').addEventListener('click', reset);
-boot();
+
+/**
+ * Capture hook — `?at=<frame>`.
+ *
+ * Drives the device to one exact moment so the README's images can be taken from a real run by a
+ * headless browser, rather than posed by hand. It presses the same buttons a person would; there is
+ * no back door into a state the software cannot reach on its own. See docs/media/README.md.
+ */
+const onScreen = (sel) => Boolean(screen.querySelector(sel));
+
+// Predicates describe what is on the screen, not what `stage` happens to be. Stage lags a render by
+// a step, which is how the first attempt at this captured the question AFTER the elimination rather
+// than the elimination itself.
+const FRAMES = {
+  hero: { until: () => onScreen('.s-question') && !onScreen('.question--answered') },
+  collapse: { until: () => onScreen('.question--answered') }, // a cause struck through
+  guide: { until: () => stage === 'guide' },
+  checkout: { until: () => stage === 'part' },
+  refusal: { press: () => showRefusal() },
+  teach: { press: () => teach() },
+  learned: { press: () => teach(), then: 1 },
+};
+
+async function captureFrame(name) {
+  const frame = FRAMES[name];
+  if (!frame) return;
+  const wait = () => new Promise((r) => setTimeout(r, 420));
+
+  /** Whatever moves the device forward from here — an answer if one is offered, else Continue. */
+  const step = async () => {
+    const answerBtn = screen.querySelector('.answer');
+    if (answerBtn) answerBtn.click();
+    else if (!advanceBtn.disabled) advance();
+    await wait();
+  };
+
+  if (frame.press) {
+    frame.press();
+    await wait();
+  } else {
+    for (let i = 0; i < 25 && !frame.until(); i++) await step();
+  }
+  for (let i = 0; i < (frame.then || 0); i++) await step();
+
+  document.body.dataset.ready = name; // what the capture script waits for
+}
+
+boot().then(() => {
+  const at = new URLSearchParams(location.search).get('at');
+  if (at) return captureFrame(at);
+});

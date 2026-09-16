@@ -5,13 +5,22 @@
   "description": "An Alexa+ add-on that sees what's broken and fixes it with you — hands-free, down to the part on your doorstep.",
   "license": "MIT",
   "type": "commonjs",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "start": "node server.js",
     "mcp": "node mcp/server.js",
     "eval": "node eval/run.js",
     "demo": "node scripts/demo.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "capture": "node scripts/capture.js"
   },
-  "keywords": ["alexa-plus", "mcp", "repair", "voice", "bedrock"]
+  "keywords": [
+    "alexa-plus",
+    "mcp",
+    "repair",
+    "voice",
+    "bedrock"
+  ]
 }

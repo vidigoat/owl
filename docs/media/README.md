@@ -3,17 +3,22 @@
 Every image the README references lives here. Nothing is committed until it is a real capture of a
 real run — no mockups, no composites, nothing staged that the software cannot actually do.
 
-Now that the screens exist, these are the exact frames to take. Run `npm start`, open
-`localhost:8792`, and capture at 2× with the browser chrome cropped out.
+**These are taken automatically.** `npm run capture` starts the server, drives headless Chrome to
+each moment by pressing the same buttons a person would, and writes the files below. There is no
+back door into a state the software cannot reach on its own, which is how the "real captures only"
+rule below stays true without anybody having to remember it.
+
+Only `flow.gif` still needs a human: it is a screen recording, so record one uninterrupted run.
 
 | file | the exact moment | how to get there | status |
 |---|---|---|---|
-| `hero.png` | the question filling the screen, hypothesis space beneath it | Start the repair → Read the panel → What should I check? | TODO |
-| `collapse.png` | a cause greyed out and struck through, right after an answer | answer the first question | TODO |
-| `refusal.png` | the amber NOT UPHELD card | press **Show it refuse a job** | TODO |
-| `teach.png` | the LG manual on screen, mid-ingest | press **Teach it a new machine** | TODO |
-| `learned.png` | the space built from that manual, with the citation line | one press after `teach.png` | TODO |
-| `checkout.png` | the itemised total beside the $179 alternative | run through to the part | TODO |
+| `hero.png` | the question filling the screen, hypothesis space beneath it | `npm run capture` | **captured** |
+| `collapse.png` | a cause greyed out and struck through, right after an answer | `npm run capture` | **captured** |
+| `refusal.png` | the amber NOT UPHELD card | `npm run capture` | **captured** |
+| `teach.png` | the LG manual on screen, mid-ingest | `npm run capture` | **captured** |
+| `learned.png` | the space built from that manual, with the citation line | `npm run capture` | **captured** |
+| `checkout.png` | the itemised total beside the $179 alternative | `npm run capture` | **captured** |
+| `guide.png` | the hands-free repair steps, one at a time | `npm run capture` | **captured** |
 | `terminal.png` | `npm run demo` output, whole loop in one screen | `npm run demo` | TODO |
 | `flow.gif` | the full loop end to end, under 12s, no cuts | one uninterrupted run | TODO |
 

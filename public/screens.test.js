@@ -93,6 +93,8 @@ function load() {
     queueMicrotask,
     document: { querySelector: () => element(), createElement: () => element() },
     window: { matchMedia: () => ({ matches: true }) }, // reduced motion: skip animation waits
+    location: { search: '' }, // the capture hook stays off unless a test asks for it
+    URLSearchParams,
     fetch: async (url) => ({ json: async () => respond(String(url)) }),
     encodeURIComponent,
   };

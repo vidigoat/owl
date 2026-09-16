@@ -9,8 +9,7 @@ repair while your hands are inside the machine, and orders the exact part throug
 > **Status:** scaffold. The structure below is final; sections marked `TODO` stay unwritten until the
 > feature they describe exists. No screenshot is committed until it is a real capture.
 
-<!-- MEDIA: docs/media/hero.png — the device screen mid-repair, one instruction large, fault code visible. -->
-![TODO hero](docs/media/hero.png)
+![The device mid-repair: one question, the causes still in play beneath it](docs/media/hero.png)
 
 ---
 
@@ -63,7 +62,8 @@ repair while your hands are inside the machine, and orders the exact part throug
 The three bold rows are the difference between this and a repair app. Everything else guesses once
 from a photo; this runs a procedure and can stop halfway through to say it doesn't know.
 
-<!-- MEDIA: docs/media/flow.gif — the whole loop end to end, under 12 seconds. -->
+<!-- MEDIA: docs/media/flow.gif — the whole loop end to end, under 12 seconds. Still TODO: the
+     stills below are captured automatically by `npm run capture`; the GIF needs a screen recording. -->
 
 ---
 
@@ -83,11 +83,9 @@ The difference between this and a photo-diagnosis app: **it will not guess with 
 percent of each other and one involves mains voltage, the verifier refuses to uphold any of them and the
 copilot books a technician instead of selling a part.
 
-<!-- MEDIA: docs/media/refusal.png — the ABSTAIN card. This screenshot is not optional. -->
-![TODO refusal](docs/media/refusal.png)
+![NOT UPHELD — no part sold: the gate refusing to spend money on a guess](docs/media/refusal.png)
 
-<!-- MEDIA: docs/media/proof.png — confirm_fix re-reading the panel with no fault code. -->
-![TODO proof](docs/media/proof.png)
+![The hypothesis space collapsing: a cause struck out by something the owner did](docs/media/collapse.png)
 
 ---
 
