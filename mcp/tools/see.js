@@ -54,6 +54,9 @@ The two fields come from two different places. Do not put one in the other.
 More rules:
 - A short code on a display is never a model number. A long string on a printed label is never a
   fault code.
+- If there is no lit display in the picture at all — a photograph of just a sticker or rating plate,
+  for instance — then "code" is null. Numbers printed on a label are never fault codes, however
+  short they look. FD, E-NR, SERIAL and voltage figures are label text, not faults.
 - Numbers that are obviously a temperature, a clock, a cycle time, or a setting are NOT fault codes.
 - If you cannot read something with confidence, use null. Do not guess. Do not infer a plausible
   model number from the brand or the appearance of the machine.
@@ -73,6 +76,20 @@ function bodyFor(base64, format) {
   };
 }
 
+/**
+ * The model does not always answer in JSON null.
+ *
+ * Asked for a fault code on a healthy machine it sometimes writes the *string* "null", or "none",
+ * or "N/A". Uppercasing that produced `code: "NULL"` — a fault code that does not exist, on a
+ * machine that is fine, which then failed to look up and reported a misread display. The absence
+ * has to survive as an absence.
+ */
+function blank(v) {
+  if (v === null || v === undefined) return true;
+  const s = String(v).trim().toLowerCase();
+  return s === '' || s === 'null' || s === 'none' || s === 'n/a' || s === 'na' || s === 'unknown' || s === '-';
+}
+
 /** Pull the JSON object out of whatever the model wrapped it in. */
 function parseReading(text) {
   const match = String(text).match(/\{[\s\S]*\}/);
@@ -80,8 +97,8 @@ function parseReading(text) {
   try {
     const parsed = JSON.parse(match[0]);
     return {
-      model: parsed.model || null,
-      code: parsed.code ? String(parsed.code).toUpperCase().replace(/\s/g, '') : null,
+      model: blank(parsed.model) ? null : String(parsed.model).trim(),
+      code: blank(parsed.code) ? null : String(parsed.code).toUpperCase().replace(/\s/g, ''),
       confidence: typeof parsed.confidence === 'number' ? parsed.confidence : null,
     };
   } catch {

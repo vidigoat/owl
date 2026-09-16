@@ -61,5 +61,34 @@ const it = async (name, fn) => {
     assert.ok(r.note && /Simulated/.test(r.note), 'must say so in the payload itself');
   });
 
-  console.log(`\n${passed} passed`);
-})();
+  })();
+
+it('the string "null" is an absence, not a fault code', () => {
+  // Found against real Bedrock: asked for a code on a healthy machine, the model sometimes writes
+  // the STRING "null" rather than JSON null. Uppercasing it produced code "NULL" — a fault code
+  // that does not exist, on a machine that is fine, which then reported a misread display.
+  for (const v of ['null', 'NULL', ' none ', 'N/A', 'na', '', 'unknown', '-']) {
+    const r = parseReading(JSON.stringify({ model: null, code: v, confidence: 0.9 }));
+    assert.equal(r.code, null, `"${v}" survived as a code`);
+  }
+  for (const v of ['null', 'None', '']) {
+    const r = parseReading(JSON.stringify({ model: v, code: 'E24', confidence: 0.9 }));
+    assert.equal(r.model, null, `"${v}" survived as a model`);
+  }
+});
+
+it('a real code still survives', () => {
+  const r = parseReading(JSON.stringify({ model: 'SHE3AR75UC', code: 'e 24', confidence: 0.9 }));
+  assert.equal(r.code, 'E24');
+  assert.equal(r.model, 'SHE3AR75UC');
+});
+
+it('the prompt tells the model that label numbers are not fault codes', () => {
+  // Also found against real Bedrock: on a photograph of a rating plate with no display in it at
+  // all, it returned the FD number 9902 as a fault code.
+  assert.match(PROMPT, /no lit display/i);
+  assert.match(PROMPT, /FD/);
+  assert.match(PROMPT, /never fault codes/i);
+});
+
+console.log(`\n${passed} passed`);

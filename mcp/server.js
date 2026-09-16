@@ -17,6 +17,8 @@ const { verify_diagnosis } = require('./tools/verify_diagnosis');
 const { guide } = require('./tools/guide');
 const { find_part } = require('./tools/find_part');
 const { see } = require('./tools/see');
+const { read_error } = require('./tools/read_error');
+const { identify_appliance } = require('./tools/identify_appliance');
 const { confirm_fix } = require('./tools/confirm_fix');
 const { beginCheckout, confirmCheckout } = require('./tools/order_part');
 const { receipt, due, history } = require('./tools/home');
@@ -100,11 +102,40 @@ const TOOLS = [
       type: 'object',
       properties: {
         imagePath: { type: 'string', description: 'Path to the photograph' },
+        imageBase64: { type: 'string', description: 'The image itself, from a camera or an upload' },
         expect: { type: 'object', description: 'Only used to shape a simulated read when Bedrock is unreachable' },
       },
-      required: ['imagePath'],
     },
     handler: see,
+  },
+  {
+    name: 'read_error',
+    description:
+      'Read the fault code off a photograph of an appliance display and say what it means on that specific model. Abstains when no code is shown, when it cannot be read, or when there is no service data for the machine — a code interpreted against the wrong model is worse than no reading at all.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        imagePath: { type: 'string', description: 'Path to the photograph' },
+        imageBase64: { type: 'string', description: 'The image itself, from a camera or an upload' },
+        model: { type: 'string', description: 'The model, if already known' },
+        code: { type: 'string', description: 'Skip the photograph and interpret a code directly' },
+      },
+    },
+    handler: read_error,
+  },
+  {
+    name: 'identify_appliance',
+    description:
+      'Identify the appliance in a photograph and say whether there is service data for it. Returns a model number only if it was actually read off a rating plate, never inferred from the brand, and says what would be needed to help with an unknown machine.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        imagePath: { type: 'string', description: 'Path to the photograph' },
+        imageBase64: { type: 'string', description: 'The image itself, from a camera or an upload' },
+        model: { type: 'string', description: 'Ask about a model directly, without a photograph' },
+      },
+    },
+    handler: identify_appliance,
   },
   {
     name: 'begin_checkout',
