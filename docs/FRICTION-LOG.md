@@ -91,3 +91,50 @@ round-trip as the orchestrator sees it.
 a confidence comparison.
 **Fix:** test separation on a case with no mains in it, and add a test asserting mains takes
 precedence.
+
+---
+
+### 2026-09-16 · An unknown cost, reported as a free repair
+
+**Task:** read the `npm run demo` output end to end, looking for anything that overstates itself.
+**Expected:** the LG run to end by naming a part, or by saying it had no parts data for that machine.
+**Actual:** it concluded the drain pump had failed and then said *"That cause costs nothing to fix.
+There is no part to buy."*
+**Severity:** high. It is in the only file that can take money from someone, and it is a confident
+wrong answer of exactly the kind the gate exists to prevent.
+**Cause:** two bugs stacked. `manual/faultgraph.js` wrote `cost: 0` on every cause learned from a
+manual — but a service manual lists remedies and never prices, so the cost was *unknown* and zero
+means *free*. Then `order_part` saw `maySpend: false` and asserted one specific reason for it
+without checking which of several applied.
+**Fix:** learned causes carry `cost: null`; the verdict carries `costKnown`; the refusal says the
+true thing. Regression test in `mcp/tools/checkout.test.js`.
+**Worth saying:** this is the same shape as reporting an unobserved run as a quiet one. Whenever a
+field can mean *zero* or *we do not know*, those are opposite facts and one of them will eventually
+be spoken aloud to a person.
+
+---
+
+### 2026-09-16 · Two screenshots of the same moment
+
+**Task:** generate the README's images from real runs rather than posing them.
+**Expected:** seven distinct frames.
+**Actual:** `teach.png` and `learned.png` came out byte-identical. The manual-ingest state lasts
+under a second, and headless capture runs on virtual time, which skips straight past it.
+**Severity:** medium. Nothing was broken; the README would simply have carried two captions
+describing one image, which is the quiet kind of dishonesty this project argues against.
+**Fix:** dropped the frame rather than contorting the product to be photographable, and `npm run
+capture` now hashes every frame and exits non-zero if any two match.
+
+---
+
+### 2026-09-16 · Documents that understated the project
+
+**Task:** check the docs a reviewer actually opens.
+**Actual:** `AGENTS.md` claimed 20 checks and `docs/JUDGING.md` claimed 50 (there are 112).
+`JUDGING.md` also said seven tools (fourteen) and called checkout and memory "stubs waiting on AWS
+credentials" — both are live and tested; only Wallet and AgentCore behind them are not.
+**Severity:** medium, and the kind that is easy to dismiss. A judging document that undersells is as
+much a defect as one that oversells, and it fails in front of precisely the reader it was written
+for.
+**Fix:** corrected, and added a rule to `AGENTS.md`: never cite a check count in prose. Say "every
+suite" and let `npm test` print the number.
