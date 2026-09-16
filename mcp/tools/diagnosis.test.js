@@ -186,4 +186,13 @@ it('never offers a learned procedure for a cause it refused', () => {
   assert.equal(verdict.maySpend, undefined, 'a refused verdict must not authorise spending');
 });
 
+it('a repair is never confirmed on a read too poor to trust', () => {
+  // Found against real Bedrock: a blank display read at 0.1 confidence came back as
+  // "confirmed: true". That is the one claim here that stops a person looking further, and a poor
+  // read showing nothing is evidence we could not see — not evidence the fault cleared.
+  const { CONFIRM_FLOOR } = require('./confirm_fix');
+  assert.ok(CONFIRM_FLOOR > 0 && CONFIRM_FLOOR < 1, 'there has to be a floor at all');
+  assert.ok(CONFIRM_FLOOR >= 0.4, 'a floor this low is not a floor');
+});
+
 console.log(`\n${passed} passed`);
