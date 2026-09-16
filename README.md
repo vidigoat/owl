@@ -50,12 +50,18 @@ repair while your hands are inside the machine, and orders the exact part throug
 | stage | what happens |
 |---|---|
 | see | camera reads the fault code and the model plate — nothing is typed |
-| diagnose | ranked causes for *that* model, cheapest first |
-| **verify** | the diagnosis must be upheld against service data, or it refuses |
+| **learn** | if it has never met this machine, it reads that model's own service manual and builds the fault graph |
+| hypothesise | the possible causes, with how likely each is and how much is still unknown, in bits |
+| **ask** | it picks the single check that rules out the most for the least effort — and waits, because it has no hands |
+| **narrow** | your answer eliminates causes in front of you; repeat until one survives |
+| **verify** | the survivor must be upheld against service data, or it refuses |
 | guide | spoken steps, paced to the work, one instruction on screen |
 | buy | the exact part for the model, ordered in one word via Amazon Wallet |
 | confirm | re-reads the panel afterwards to prove the fault actually cleared |
 | remember | writes a repair receipt so the next conversation is short |
+
+The three bold rows are the difference between this and a repair app. Everything else guesses once
+from a photo; this runs a procedure and can stop halfway through to say it doesn't know.
 
 <!-- MEDIA: docs/media/flow.gif — the whole loop end to end, under 12 seconds. -->
 

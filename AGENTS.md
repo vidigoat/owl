@@ -14,6 +14,16 @@ Developer Hackathon, Alexa+ track. Deadline **23 Oct 2026, 12:00 PT**.
 
 **Never assert a cause, a part, or a price that has not been verified for that specific model.**
 
+Two rules follow from it, and both have been broken once already during development:
+
+- **Diagnosis is a search, not a lookup.** `next_test` picks the check that removes the most
+  uncertainty for the least human effort, the answer prunes the space, repeat. If you find yourself
+  adding a fixed checklist, you are rebuilding the thing every competitor already has.
+- **A manual's wording is read out verbatim.** When the procedure came from a service manual we were
+  handed at runtime, the remedy line is spoken as written. The moment you paraphrase an instruction
+  about dismantling an appliance, you are inventing a procedure, and someone could get hurt. If the
+  wording is awkward, that is the manufacturer's problem, not ours to smooth over.
+
 The product is not "AI guesses what's wrong." Every other appliance app does that, and they are
 confidently wrong in a way that costs people money. Our differentiator is the refusal: when the evidence
 does not separate the causes, `verify_diagnosis` returns `ABSTAIN`, the copilot books a technician, and

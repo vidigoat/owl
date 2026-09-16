@@ -9,9 +9,23 @@ at something runnable — no claim here needs to be taken on trust.
 | what to look at | where |
 |---|---|
 | The MCP server — JSON-RPC over Streamable HTTP, spec 2025-11-25 | `mcp/server.js` |
-| Four tools genuinely registered and invoked, not described | `mcp/tools/` — `diagnose`, `verify_diagnosis`, `guide`, `find_part` |
-| The device calls those same modules; the front-end knows nothing | `server.js` → `/api/verify`, `/api/guide`, `/api/part` |
-| 20 checks over the tools that can cost someone money | `npm test` |
+| Seven tools genuinely registered and invoked, not described | `mcp/tools/` — `hypotheses`, `next_test`, `observe`, `diagnose`, `verify_diagnosis`, `guide`, `find_part` |
+| **The diagnosis engine** — entropy over a hypothesis space, cost-weighted information gain | `mcp/tools/next_test.js` |
+| **Learning a machine at runtime** from its own service manual | `manual/faultgraph.js`, `POST /api/learn` |
+| The device calls those same modules; the front-end knows nothing | `server.js` → `/api/diagnosis/*`, `/api/learn`, `/api/verify`, `/api/guide`, `/api/part` |
+| 50 checks, weighted towards the things that can cost someone money | `npm test` |
+
+The one worth running yourself:
+
+```bash
+npm start
+curl -s -X POST localhost:8792/api/diagnosis/start -H 'content-type: application/json' \
+  -d '{"model":"SHE3AR75UC","code":"E24"}'
+```
+
+Three causes come back with priors and the uncertainty in bits. Feed that to `/api/diagnosis/next`
+and it will pick the *free* listening check over the one that needs the machine pulled out — even
+though the filter is the more likely cause. That trade-off is the product.
 
 Call the gate yourself without the device:
 

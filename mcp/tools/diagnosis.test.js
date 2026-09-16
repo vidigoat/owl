@@ -154,4 +154,36 @@ it('refuses for a machine it was never taught', () => {
   assert.equal(proc.known, false);
 });
 
+/* The safety property that matters most: the mains rule is inferred by the parser when a machine is
+ * learned, and the gate has to honour it on data it did not write itself. */
+it('still refuses mains work on a machine it taught itself', () => {
+  const { verify_diagnosis } = require('./verify_diagnosis');
+  const mainsManual = `Fault codes
+HE   The water is not heating
+     Check the mains wiring harness for damage
+     Replace the control board
+`;
+  const g = parse({ model: 'TEST-MAINS', text: mainsManual, sourceName: 'test manual' });
+  learn({ model: 'TEST-MAINS', brand: 'Test', codes: g.codes, source: 'test manual' });
+
+  const causes = g.codes.HE.causes;
+  assert.ok(causes.length >= 2, 'expected two mains causes');
+
+  causes.forEach((c) => {
+    assert.equal(c.mains, true, `"${c.label}" should be flagged as mains work`);
+    const verdict = verify_diagnosis({ model: 'TEST-MAINS', code: 'HE', causeId: c.id });
+    assert.equal(verdict.abstain, true, `gate must refuse "${c.label}"`);
+    assert.equal(verdict.escalate, 'technician');
+  });
+});
+
+it('never offers a learned procedure for a cause it refused', () => {
+  const built = buildSpace({ model: 'TEST-MAINS', code: 'HE' });
+  const { verify_diagnosis } = require('./verify_diagnosis');
+  const verdict = verify_diagnosis({ model: 'TEST-MAINS', code: 'HE', causeId: built.space[0].id });
+  // the gate refuses, so the caller must never reach the guide for this cause
+  assert.equal(verdict.abstain, true);
+  assert.equal(verdict.maySpend, undefined, 'a refused verdict must not authorise spending');
+});
+
 console.log(`\n${passed} passed`);
