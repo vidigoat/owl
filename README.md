@@ -128,8 +128,6 @@ lose a reviewer's trust.
 | `guide` | model, code, causeId | hands-free steps with pacing | **live** |
 | `find_part` | model, causeId | exact part + what a service call costs | **live** |
 | `see` | image | model number + fault code, or nulls | **live**, falls back to a *labelled* simulated read without credentials |
-| `confirm_fix` | image | fault cleared? | stub — needs Bedrock |
-| `order_part` | part | Wallet checkout | stub — needs Wallet sandbox |
 | `confirm_fix` | image, code | did the fault actually clear? | **live** — refuses to confirm a repair it could not see |
 | `remember_repair` | model, code, cause, outcome | the repair receipt | **live**, file-backed until AgentCore |
 | `repair_history` | model | everything this machine has been through | **live** |

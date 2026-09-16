@@ -26,6 +26,13 @@ function verify_diagnosis({ model, code, causeId, ruledOut = [] }) {
 
   // Causes the owner has already tried and cleared are out of the running. This is how the free
   // check being eliminated is what earns the paid one the right to be spoken as fact.
+  //
+  // `ruledOut` takes CAUSE ids. Passing test ids by mistake used to silently match nothing and
+  // produce a refusal saying a cause "hasn't been ruled out" when the caller believed it had —
+  // a confusing answer to a caller error. Unrecognised ids are reported rather than ignored.
+  const knownIds = new Set(found.causes.map((c) => c.id));
+  const unknownRuledOut = ruledOut.filter((id) => !knownIds.has(id));
+
   const causes = found.causes
     .filter((c) => !ruledOut.includes(c.id))
     .sort((a, b) => b.likelihood - a.likelihood);
@@ -72,6 +79,7 @@ function verify_diagnosis({ model, code, causeId, ruledOut = [] }) {
         ? `"${contender.label}" is still ${gap}% more likely and hasn't been ruled out. Try that first.`
         : `"${target.label}" and "${contender.label}" are within ${gap}% of each other. Not enough to separate them without opening the machine.`,
       escalate: behind ? 'try-cheaper-cause-first' : 'technician',
+      ...(unknownRuledOut.length ? { unknownRuledOut, hint: 'ruledOut takes cause ids, not test ids — none of those matched a cause for this code.' } : {}),
     };
   }
 

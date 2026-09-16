@@ -72,6 +72,21 @@ it('puts mains voltage ahead of every other consideration', () => {
   assert.match(r.reason, /mains/i);
 });
 
+it('says so when ruledOut contains ids that are not causes', () => {
+  // The easy caller mistake: passing test ids instead of cause ids. It used to look like a
+  // straightforward refusal, which sent you hunting in the wrong place.
+  const r = verify_diagnosis({ model: 'SHE3AR75UC', code: 'E24', causeId: 'pump', ruledOut: ['pump-hum', 'filter-check'] });
+  assert.equal(r.abstain, true);
+  assert.deepEqual(r.unknownRuledOut, ['pump-hum', 'filter-check']);
+  assert.match(r.hint, /cause ids, not test ids/i);
+});
+
+it('does not complain when ruledOut is correct', () => {
+  const r = verify_diagnosis({ model: 'SHE3AR75UC', code: 'E24', causeId: 'pump', ruledOut: ['filter', 'hose'] });
+  assert.equal(r.abstain, false);
+  assert.equal(r.unknownRuledOut, undefined);
+});
+
 it('refuses a model it has no service data for', () => {
   const r = verify_diagnosis({ model: 'NOT-A-MODEL', code: 'E24' });
   assert.equal(r.abstain, true);
