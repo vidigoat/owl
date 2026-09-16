@@ -18,6 +18,7 @@ const { guide } = require('./tools/guide');
 const { find_part } = require('./tools/find_part');
 const { see } = require('./tools/see');
 const { confirm_fix } = require('./tools/confirm_fix');
+const { beginCheckout, confirmCheckout } = require('./tools/order_part');
 const { receipt, due, history } = require('./tools/home');
 const { buildSpace, prune } = require('./tools/hypotheses');
 const { nextTest } = require('./tools/next_test');
@@ -104,6 +105,32 @@ const TOOLS = [
       required: ['imagePath'],
     },
     handler: see,
+  },
+  {
+    name: 'begin_checkout',
+    description:
+      'Open a checkout for the part this fault needs. Refuses outright if the diagnosis was not upheld. Returns the itemised total, what a service call would have cost, and a session id.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        model: { type: 'string' },
+        code: { type: 'string' },
+        causeId: { type: 'string' },
+        ruledOut: { type: 'array', items: { type: 'string' }, description: 'Cause ids already eliminated' },
+      },
+      required: ['model', 'code', 'causeId'],
+    },
+    handler: beginCheckout,
+  },
+  {
+    name: 'confirm_checkout',
+    description: 'Place the order for a checkout that was already read out. Completes exactly once.',
+    inputSchema: {
+      type: 'object',
+      properties: { sessionId: { type: 'string' }, handler: { type: 'string' } },
+      required: ['sessionId'],
+    },
+    handler: confirmCheckout,
   },
   {
     name: 'confirm_fix',
