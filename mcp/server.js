@@ -8,7 +8,7 @@
  *   node mcp/server.js            -> http://localhost:8793/mcp
  *
  * Implemented: initialize, tools/list, tools/call over JSON-RPC 2.0.
- * TODO: SSE upgrade for streaming responses, OAuth 2.1 + PKCE, MCP Apps UI resources.
+ * Not yet: SSE for streaming responses, and OAuth 2.1 + PKCE. Resources are live — see mcp/cards.js.
  */
 
 const http = require('http');

@@ -6,12 +6,15 @@
  * so everything downstream (hypotheses, next_test, the trust gate) is indifferent to where the
  * knowledge came from.
  *
- * Two paths, one interface:
- *   parse()   deterministic. Fault-code tables in manuals are unusually regular, and a regex that
- *             finds them is honest about what it found: no code, no claim.
- *   extract() model-assisted, for the manuals that are prose rather than tables. Stubbed until
- *             Bedrock credentials land; the shape it must return is fixed here so the rest of the
- *             system can be finished without it.
+ * One path, two ways in.
+ *
+ * `parse()` is deterministic. Fault-code tables in manuals are unusually regular, and a regex that
+ * finds them is honest about what it found: no code, no claim.
+ *
+ * The text reaching it may have been typed, or it may have been read off a photograph of the page
+ * by `mcp/tools/read_manual.js`. The ordering there is the constraint: the model produces
+ * CHARACTERS and this file produces causes, so a model-invented remedy can never arrive wearing a
+ * citation to a line that was not printed.
  *
  * Everything carries a `source` — the page and line it came from — because the trust gate is only
  * allowed to uphold a cause that can cite something, and "the manual said so" has to mean a
@@ -213,14 +216,19 @@ function parse({ model, text, sourceName = 'manual' }) {
   };
 }
 
-/**
- * Model-assisted extraction, for manuals whose fault information is prose.
- * TODO: Bedrock. Must return the identical shape as parse(), with method: 'extracted' and a source
- * for every cause — a cause the model invented without a citation must never reach the gate.
+/*
+ * There used to be an `extract()` here — a stub for model-assisted extraction, returning
+ * `{ TODO: true, coverage: 'not implemented' }` and called by nobody.
+ *
+ * It got built, and it is `mcp/tools/read_manual.js`. Bedrock transcribes the fault table off a
+ * PHOTOGRAPH of the page and hands the text to `parse()` above, which means the model never
+ * produces a cause — it produces characters, and the same parser everything else uses turns those
+ * into causes that each cite a line. That ordering was the constraint the stub's comment described,
+ * and keeping it is why a model-invented remedy cannot reach the gate wearing a citation to a line
+ * that does not exist.
+ *
+ * Deleted rather than left standing, because a stub nobody calls reads as work outstanding.
  */
-async function extract({ model, text, sourceName = 'manual' }) {
-  return { model, source: sourceName, method: 'extracted', codes: {}, found: 0, coverage: 'not implemented', TODO: true };
-}
 
 /** Merge a generated graph into the hand-written service data shape. Hand-written wins on conflict. */
 function merge(existing = {}, graph) {
@@ -318,4 +326,4 @@ function observationsFrom(causes, remedies) {
   return out;
 }
 
-module.exports = { parse, extract, merge, effortOf, isMains, remedyToCause, matchCodeLine, joinOrphanCodes, observationsFrom, conjugate, CONDITION, CODE_LINE };
+module.exports = { parse, merge, effortOf, isMains, remedyToCause, matchCodeLine, joinOrphanCodes, observationsFrom, conjugate, CONDITION, CODE_LINE };
