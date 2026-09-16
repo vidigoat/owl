@@ -16,6 +16,9 @@ const { nextTest } = require('../mcp/tools/next_test');
 const { verify_diagnosis } = require('../mcp/tools/verify_diagnosis');
 const { guide } = require('../mcp/tools/guide');
 const { beginCheckout, confirmCheckout } = require('../mcp/tools/order_part');
+const { read_error } = require('../mcp/tools/read_error');
+const fs = require('node:fs');
+const path = require('node:path');
 
 const b = (s) => `\x1b[1m${s}\x1b[0m`;
 const dim = (s) => `\x1b[2m${s}\x1b[0m`;
@@ -40,6 +43,35 @@ OE   The machine cannot drain
 console.log(`\n  ${b('SECOND SET OF HANDS')}  ${dim('— the whole loop, on a machine nobody coded for')}\n`);
 line();
 
+/* 0 — see it, if there is anything to see with.
+ *
+ * The rest of this runs with no credentials and no network, which is why it is the command judges
+ * are pointed at. This step is the exception: with AWS configured it sends a real panel to Bedrock
+ * and prints what came back. Without it, it says so and moves on — a demo that cannot tell a real
+ * read from a canned one is a magic trick. */
+async function look() {
+  const panel = path.join(__dirname, '..', 'eval', 'rendered', 'bosch-dishwasher-panel-e24.png');
+  if (!fs.existsSync(panel)) {
+    console.log(`  ${b('0. looks at a panel')}   ${dim('skipped — run `npm run panels` to draw one')}`);
+    return;
+  }
+
+  const started = Date.now();
+  const r = await read_error({ imagePath: panel, model: 'SHE3AR75UC' });
+
+  if (r.simulated) {
+    console.log(`  ${b('0. looks at a panel')}   ${amber('SIMULATED')} ${dim('— no Bedrock credentials')}`);
+    console.log(dim(`     ${r.reason}`));
+    console.log(dim('     Everything below still runs. Nothing below needed a camera.'));
+    return;
+  }
+
+  console.log(`  ${b('0. looks at a panel')}   ${green(r.code || 'no code')}   ${dim(`${Date.now() - started} ms · Bedrock`)}`);
+  console.log(dim(`     ${r.meaning || r.reason}`));
+  console.log(dim(`     read off an image, not passed in as a string`));
+}
+
+look().then(() => {
 /* 1 — learn it */
 const graph = parse({ model: MANUAL.model, text: MANUAL.text, sourceName: MANUAL.source });
 learn({ model: MANUAL.model, brand: MANUAL.brand, codes: graph.codes, source: MANUAL.source });
@@ -113,3 +145,4 @@ if (!cart.ok) {
 
 line();
 console.log(`\n  ${dim('Everything above came from a tool call. `npm test` runs every check behind it.')}\n`);
+});
