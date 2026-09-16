@@ -96,6 +96,14 @@ function load() {
       matchMedia: () => ({ matches: true }), // reduced motion: skip animation waits
       // A spy, not a stub. Anything that speaks without being asked shows up here.
       speechSynthesis: { spoken: [], speak(u) { this.spoken.push(u); }, cancel() {} },
+      // A spy on the microphone too. Counting starts, not results.
+      __recognitionStarts: 0,
+      get webkitSpeechRecognition() {
+        const w = this;
+        return function () {
+          return { start() { w.__recognitionStarts++; }, abort() {}, set onresult(_) {}, set onerror(_) {} };
+        };
+      },
     },
     SpeechSynthesisUtterance: function (text) { this.text = text; },
     location: { search: '' }, // the capture hook stays off unless a test asks for it
@@ -155,6 +163,31 @@ function load() {
     await s.teach();
     assert.equal(s.window.speechSynthesis.spoken.length, 0,
       'something spoke without the Speak toggle being on');
+  });
+
+  await it('hearing an answer only ever picks from the answers on offer', async () => {
+    // The narrowness is the safety. It chooses between the options already on screen, so the worst
+    // it can do is pick the wrong one of two — it can never invent an observation nobody made.
+    const s = load();
+    await new Promise((r) => setTimeout(r, 10));
+    const outcomes = [{ say: 'it hums', value: 'hums' }, { say: "it's silent", value: 'silent' }];
+
+    assert.equal(s.matchAnswer('it hums', outcomes)?.outcome.value, 'hums');
+    assert.equal(s.matchAnswer('yeah it hums a bit', outcomes)?.outcome.value, 'hums');
+    assert.equal(s.matchAnswer("it's silent", outcomes)?.outcome.value, 'silent');
+    assert.equal(s.matchAnswer('nothing, silent', outcomes)?.outcome.value, 'silent');
+
+    // Heard, but not an answer to THIS question. Must not be forced into one.
+    for (const noise of ['what time is it', 'hello there', 'call my mother', '']) {
+      assert.equal(s.matchAnswer(noise, outcomes), null, `"${noise}" was taken as an answer`);
+    }
+  });
+
+  await it('never opens the microphone unless voice is on', async () => {
+    const s = load();
+    await new Promise((r) => setTimeout(r, 10));
+    for (let i = 0; i < 8; i++) await s.advance();
+    assert.equal(s.window.__recognitionStarts ?? 0, 0, 'something opened the microphone unasked');
   });
 
   console.log(`\n${passed} passed`);

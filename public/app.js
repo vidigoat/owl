@@ -353,9 +353,88 @@ async function renderQuestion() {
   screen.querySelectorAll('.answer').forEach((btn) =>
     btn.addEventListener('click', () => answer(choice.test.outcomes[Number(btn.dataset.i)]))
   );
+
+  listenForAnswer(choice.test.outcomes);
+}
+
+/* ── hearing ────────────────────────────────────────────────────────────────
+ * The other half of a voice product. It asks a question and then waits — and what it is waiting
+ * for is a person with their hands inside a machine, who cannot reach a button. Speaking the
+ * answer is not a convenience here; it is the only input that fits the situation.
+ */
+
+let recogniser = null;
+
+const Recognition = () =>
+  window.SpeechRecognition || window.webkitSpeechRecognition || null;
+
+function stopListening() {
+  if (recogniser) {
+    try { recogniser.abort(); } catch { /* already gone */ }
+    recogniser = null;
+  }
+}
+
+/**
+ * Match what was heard against the answers actually on offer.
+ *
+ * Deliberately narrow. It only ever chooses between the options already on screen, so the worst it
+ * can do is pick the wrong one of two — never invent an observation nobody made. Anything it is
+ * not reasonably sure of is ignored and the buttons stay.
+ */
+function matchAnswer(heard, outcomes) {
+  const said = heard.toLowerCase().replace(/[^a-z0-9 ]/g, ' ');
+  const words = new Set(said.split(/\s+/).filter((w) => w.length > 2));
+
+  let best = null;
+  let bestScore = 0;
+  outcomes.forEach((o, i) => {
+    const target = String(o.say).toLowerCase().replace(/[^a-z0-9 ]/g, ' ');
+    const hits = target.split(/\s+/).filter((w) => w.length > 2 && words.has(w)).length;
+    // A bare yes/no is the commonest real answer and matches nothing by word overlap.
+    const polarity =
+      (/\b(yes|yeah|yep|it does|correct)\b/.test(said) && /\b(yes|does|is|hums|clogged)\b/.test(target)) ||
+      (/\b(no|nope|nothing|it doesn'?t|still)\b/.test(said) && /\b(no|not|doesn|silent|clean|still)\b/.test(target));
+    const score = hits + (polarity ? 1.5 : 0);
+    if (score > bestScore) { bestScore = score; best = { outcome: o, index: i }; }
+  });
+
+  return bestScore >= 1 ? best : null;
+}
+
+function listenForAnswer(outcomes) {
+  stopListening();
+  if (!voiceOn) return;             // one toggle governs both speaking and hearing
+  const R = Recognition();
+  if (!R) return;
+
+  recogniser = new R();
+  recogniser.lang = 'en-US';
+  recogniser.interimResults = false;
+  recogniser.maxAlternatives = 3;
+
+  recogniser.onresult = (ev) => {
+    const alts = [...ev.results[0]].map((a) => a.transcript);
+    for (const heard of alts) {
+      const hit = matchAnswer(heard, outcomes);
+      if (hit) {
+        stopListening();
+        trace('heard', `"${heard.trim()}"`, hit.outcome.say, 'speech');
+        captionEl.textContent = `Heard "${heard.trim()}" — taken as "${hit.outcome.say}".`;
+        return answer(hit.outcome);
+      }
+    }
+    // Heard something, understood none of it. Say so and keep listening rather than guessing.
+    captionEl.textContent = `Heard "${alts[0]?.trim() ?? ''}" and couldn't match it to an answer.`;
+    try { recogniser.start(); } catch { /* already restarting */ }
+  };
+
+  recogniser.onerror = () => { recogniser = null; }; // no mic, or refused: the buttons still work
+  try { recogniser.start(); } catch { recogniser = null; }
 }
 
 async function answer(outcome) {
+  stopListening();
   const result = await post('/api/diagnosis/observe', { space: dx.space, outcome });
   trace('observe', outcome.value, result.contradiction ? 'contradiction' : `${result.eliminated.length} ruled out`, 'prune');
 
@@ -697,7 +776,8 @@ async function teach() {
 
 function reset() {
   if (window.speechSynthesis) window.speechSynthesis.cancel();
-  stopCamera(); // a camera left running after a reset is a light nobody asked to leave on
+  stopListening(); // a microphone left open after a reset is worse than a camera light
+  stopCamera();    // a camera left running after a reset is a light nobody asked to leave on
   APPLIANCE = { ...DEFAULT_APPLIANCE };
   stage = 'idle';
   dx = null;
@@ -745,8 +825,13 @@ $('#reset').addEventListener('click', reset);
 $('#speak').addEventListener('click', () => {
   voiceOn = !voiceOn;
   $('#speak').textContent = `Speak: ${voiceOn ? 'on' : 'off'}`;
-  if (!voiceOn && window.speechSynthesis) window.speechSynthesis.cancel();
-  else speak('Right. I can talk you through this.');
+  if (!voiceOn) {
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
+    stopListening();
+  } else {
+    speak('Right. I can talk you through this. Answer out loud when I ask.');
+    if (pending) listenForAnswer(pending.test.outcomes); // already mid-question
+  }
 });
 
 /**
