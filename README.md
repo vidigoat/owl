@@ -388,12 +388,34 @@ checks and an irreducibly linear curve.
 Against **observations** — *"can you hear the pump?"*, consistent with several causes at once — the
 same algorithm is logarithmic. Thirty-two causes in five questions instead of thirty-one.
 
-This is a real limitation, it is visible in the numbers above, and it says exactly what the next
-piece of work is: the machines in `data/service-data.js` have hand-authored observations and the
-learned ones do not. Deriving observations from a manual's prose, rather than only remedies, is
-where the generality path currently stops being as good as the built-in one.
+That gap was invisible until the measurement was written — and once written, it could be closed.
 
-That gap was invisible until the measurement was written. It is here rather than quietly absent.
+### Reading the question out of the manual
+
+A remedy line very often contains its own condition:
+
+> Replace the drain pump **if it does not turn**
+
+That subordinate clause is not part of the repair. It is the *observation that justifies* the
+repair, and it is a far better question than the repair itself — **"Does it turn?"** is answered by
+looking. *"Replace the drain pump — did that fix it?"* is answered by buying a pump.
+
+So the parser lifts conditions out of remedy lines and offers them as checks. Nothing is invented:
+every one of these questions is a clause that was printed on the page, and a manual containing no
+conditions yields no observations and still works exactly as before.
+
+The measured effect, over every answer path on every machine:
+
+```
+  mean effort   2.3  →  1.1        (free 0 · easy 1 · awkward 4 · heavy 12)
+```
+
+Same number of questions. **Less than half the work**, because it stopped asking people to replace
+parts in order to find out what is wrong. `npm run demo` used to ask *"Replace the drain pump if it
+does not turn — did that fix it?"* as a diagnostic step; it now asks *"Does it turn?"*
+
+That was the thing [decision 003](docs/decisions/003-replacement-is-not-a-test.md) said was wrong
+and could not previously be fixed for a machine learned at runtime.
 
 ---
 

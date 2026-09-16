@@ -178,18 +178,26 @@ function parse({ model, text, sourceName = 'manual' }) {
     if (causes.length === 0) return;
     found++;
 
+    // A remedy check tests exactly one cause, so a table of them is irreducibly linear: a "no"
+    // removes one possibility. An OBSERVATION is consistent with several causes at once, which is
+    // what makes choosing the question worth anything — see eval/questions.js for the measurement
+    // that made this gap visible.
+    const remedyTests = causes.map((c, k) => ({
+      id: `${c.id}-check`,
+      question: following[k].endsWith('?') ? following[k] : `${following[k]} — did that fix it?`,
+      effort: effortOf(following[k]),
+      kind: 'remedy',
+      outcomes: [
+        { value: 'yes', say: 'yes, that was it', consistentWith: [c.id] },
+        { value: 'no', say: 'no, still faulty', consistentWith: causes.filter((x) => x.id !== c.id).map((x) => x.id) },
+      ],
+    }));
+
     codes[code] = {
       meaning: description,
       causes,
-      tests: causes.map((c, k) => ({
-        id: `${c.id}-check`,
-        question: following[k].endsWith('?') ? following[k] : `${following[k]} — did that fix it?`,
-        effort: effortOf(following[k]),
-        outcomes: [
-          { value: 'yes', say: 'yes, that was it', consistentWith: [c.id] },
-          { value: 'no', say: 'no, still faulty', consistentWith: causes.filter((x) => x.id !== c.id).map((x) => x.id) },
-        ],
-      })),
+      // Observations first: they cost the same to ask and rule out more.
+      tests: [...observationsFrom(causes, following), ...remedyTests],
     };
   });
 
@@ -223,4 +231,91 @@ function merge(existing = {}, graph) {
   return codes;
 }
 
-module.exports = { parse, extract, merge, effortOf, isMains, remedyToCause, matchCodeLine, joinOrphanCodes, CODE_LINE };
+/**
+ * The conditions a manual already contains.
+ *
+ *   "Replace the drain pump IF IT DOES NOT TURN"
+ *   "Replace the inlet valve IF IT DOES NOT OPEN"
+ *   "Check the machine is level ON ALL FOUR FEET"
+ *
+ * That subordinate clause is not part of the repair. It is the *observation that justifies* the
+ * repair, and it is a far better question than the repair itself — "does the pump turn?" can be
+ * answered by looking, costs nothing, and its answer says something about every other cause too.
+ *
+ * Asking "replace the drain pump — did that fix it?" makes somebody buy a pump to find out.
+ *
+ * A manual that contains no conditions yields no observations, and the remedy checks still work.
+ * Nothing is invented: every question here is a clause that was printed on the page.
+ */
+/**
+ * Third person singular, for a phrase read aloud.
+ *
+ * Only the first word is a verb — "turn on the tap" conjugates to "turns on the tap" — and only the
+ * bare infinitive needs it. Anything already inflected, or not obviously a verb, is left alone:
+ * a clumsy sentence is better than a wrong one, and this is spoken to somebody.
+ */
+function conjugate(phrase) {
+  const [head, ...rest] = String(phrase).trim().split(/\s+/);
+  if (!head) return phrase;
+  const tail = rest.length ? ` ${rest.join(' ')}` : '';
+  // Already third-person, past, or a participle: leave it.
+  if (/(s|ed|ing)$/i.test(head)) return phrase;
+  if (/(s|sh|ch|x|z|o)$/i.test(head)) return `${head}es${tail}`;
+  if (/[^aeiou]y$/i.test(head)) return `${head.slice(0, -1)}ies${tail}`;
+  return `${head}s${tail}`;
+}
+
+const CONDITION = /\b(?:if|when|where|unless)\s+(?:it\s+|the\s+\w+\s+|they\s+)?(does not|doesn't|is not|isn't|will not|won't|fails to|cannot|can't|has|is|are)\s+([a-z][a-z\s]{2,40}?)\s*$/i;
+
+function observationsFrom(causes, remedies) {
+  const out = [];
+
+  remedies.forEach((remedy, k) => {
+    const m = CONDITION.exec(remedy.trim().replace(/[.;]$/, ''));
+    if (!m) return;
+
+    const negated = /not|n't|fails|cannot/i.test(m[1]);
+    const thing = m[2].trim().replace(/\s+/g, ' ');
+    const cause = causes[k];
+    if (!cause) return;
+
+    // "does not turn" → "Does it turn?" — the affirmative, because that is how a person checks.
+    const question = `Does it ${thing}?`;
+
+    // The question takes the bare infinitive ("Does it turn?") and the answer does not ("yes, it
+    // turns"). This is read aloud by a voice assistant, so "yes, it turn" is not a detail.
+    const affirmative = conjugate(thing);
+
+    // The manual's own implication, followed rather than guessed at. "Replace the pump if it does
+    // not turn" is the manufacturer asserting that a pump which does not turn IS the fault; taking
+    // them at their word is citing the manual, and every cause here already cites it.
+    //
+    // The information is the same as the remedy check it was derived from. What differs is the
+    // PRICE of asking: "does the pump turn?" is answered by looking, and "replace the pump — did
+    // that fix it?" is answered by buying a pump. next_test weighs bits against effort, so the
+    // cheaper question wins on its own merits and this needs no special case.
+    const holds = negated
+      ? { value: 'no', say: `no, it does not ${thing}` }
+      : { value: 'yes', say: `yes, it ${affirmative}` };
+    const fails = negated
+      ? { value: 'yes', say: `yes, it ${affirmative}` }
+      : { value: 'no', say: `no, it does not ${thing}` };
+
+    out.push({
+      id: `${cause.id}-observe`,
+      question,
+      // Looking is easy. Replacing is heavy. That gap is the entire point of deriving this.
+      effort: 'easy',
+      kind: 'observation',
+      derivedFrom: remedy,
+      outcomes: [
+        { ...holds, consistentWith: [cause.id] },
+        { ...fails, consistentWith: causes.filter((c) => c.id !== cause.id).map((c) => c.id) },
+      ],
+    });
+  });
+
+  return out;
+}
+
+module.exports = { parse, extract, merge, effortOf, isMains, remedyToCause, matchCodeLine, joinOrphanCodes, observationsFrom, conjugate, CONDITION, CODE_LINE };

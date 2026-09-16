@@ -75,13 +75,73 @@ it('marks anything behind mains voltage as not an owner repair', () => {
   mainsCauses.forEach((c) => assert.equal(c.ownerFixable, false));
 });
 
-it('generates a check for every cause, with an effort the person would recognise', () => {
+it('generates at least one check per cause, plus any observation the manual gave us', () => {
   const g = parse({ model: 'TEST-1', text: MANUAL });
-  assert.equal(g.codes.E24.tests.length, g.codes.E24.causes.length);
-  g.codes.E24.tests.forEach((t) => {
+  const { tests, causes } = g.codes.E24;
+
+  // Every cause is reachable by at least its own remedy check.
+  const remedies = tests.filter((t) => t.kind === 'remedy');
+  assert.equal(remedies.length, causes.length);
+
+  // And any remedy phrased as a condition also yields an observation, which is a cheaper way of
+  // asking the same question. More tests than causes is the intended shape, not a bug.
+  assert.ok(tests.length >= causes.length);
+
+  tests.forEach((t) => {
     assert.ok(['free', 'easy', 'awkward', 'heavy'].includes(t.effort));
     assert.equal(t.outcomes.length, 2);
+    assert.ok(t.outcomes.every((o) => Array.isArray(o.consistentWith) && o.consistentWith.length),
+      'an outcome consistent with nothing would empty the space and read as a contradiction');
   });
+});
+
+it('a condition in a remedy becomes a question you can answer by looking', () => {
+  // "Replace the drain pump if it does not turn" carries the manufacturer's own implication: a pump
+  // that does not turn IS the fault. The information is the same as the remedy check; the price of
+  // asking is not. One is answered by looking, the other by buying a pump.
+  const g = parse({ model: 'TEST-2', sourceName: 'manual', text: `Fault codes
+OE   The machine cannot drain
+     Check the drain filter for blockages
+     Replace the drain pump if it does not turn
+` });
+  const obs = g.codes.OE.tests.filter((t) => t.kind === 'observation');
+  assert.equal(obs.length, 1, `expected one observation, got ${JSON.stringify(g.codes.OE.tests.map((t) => t.question))}`);
+  assert.match(obs[0].question, /^Does it turn\?$/);
+  assert.equal(obs[0].effort, 'easy', 'looking at something is not heavy work');
+  assert.match(obs[0].derivedFrom, /Replace the drain pump/);
+
+  // The condition holding points at that cause; it failing rules that cause out and leaves the rest.
+  const pump = g.codes.OE.causes.find((c) => /pump/i.test(c.label));
+  const holds = obs[0].outcomes.find((o) => /does not turn/.test(o.say));
+  assert.deepEqual(holds.consistentWith, [pump.id]);
+  const fails = obs[0].outcomes.find((o) => o !== holds);
+  assert.ok(!fails.consistentWith.includes(pump.id));
+});
+
+it('an answer that is read aloud is grammatical', () => {
+  // "yes, it turn" is not a detail when a voice assistant says it to somebody.
+  const { conjugate } = require('./faultgraph');
+  assert.equal(conjugate('turn'), 'turns');
+  assert.equal(conjugate('open'), 'opens');
+  assert.equal(conjugate('turn on the tap'), 'turns on the tap');
+  assert.equal(conjugate('wash'), 'washes');
+  assert.equal(conjugate('go'), 'goes');
+  assert.equal(conjugate('dry'), 'dries');
+  // Already inflected, or not a bare verb: better clumsy than wrong.
+  assert.equal(conjugate('turns'), 'turns');
+  assert.equal(conjugate('locked'), 'locked');
+  assert.equal(conjugate('running'), 'running');
+});
+
+it('a manual with no conditions in it yields no observations, and still works', () => {
+  const g = parse({ model: 'TEST-3', sourceName: 'manual', text: `Fault codes
+F01  The machine has stopped
+     Check the door is closed
+     Clean the filter
+` });
+  assert.equal(g.codes.F01.tests.filter((t) => t.kind === 'observation').length, 0,
+    'nothing was invented out of a manual that said nothing');
+  assert.equal(g.codes.F01.tests.length, g.codes.F01.causes.length);
 });
 
 it('phrases causes as what is wrong, not as an instruction', () => {
