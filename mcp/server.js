@@ -119,6 +119,7 @@ const TOOLS = [
         imageBase64: { type: 'string', description: 'The image itself, from a camera or an upload' },
         model: { type: 'string', description: 'The model, if already known' },
         code: { type: 'string', description: 'Skip the photograph and interpret a code directly' },
+        noCodeShown: { type: 'boolean', description: 'The person looked and there is no code on the display. An established absence, not a failed read.' },
       },
     },
     handler: read_error,

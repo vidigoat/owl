@@ -30,8 +30,24 @@ const description =
  * @param {string} [arg.imageBase64]  bytes from a camera or a dropped file
  * @param {string} [arg.model]        the machine, if the caller already knows it
  * @param {string} [arg.code]         skip the photograph entirely and just interpret a code
+ * @param {boolean} [arg.noCodeShown]  the caller looked and there is no code on the display
  */
-async function read_error({ imagePath, imageBase64, model, code } = {}) {
+async function read_error({ imagePath, imageBase64, model, code, noCodeShown } = {}) {
+  // Somebody looked, and there was nothing. An agent that asks "any lights on the panel?" and hears
+  // "nothing" had no way to say so before — its only route was to send a photograph, which is a lot
+  // to ask of a person who has already answered the question. This is an ESTABLISHED absence and is
+  // reported as one; it is not the same as a read that failed, and the two must never merge.
+  if (noCodeShown) {
+    return {
+      abstain: true,
+      code: null,
+      healthy: true,
+      observedBy: 'the person',
+      reason: 'No fault code on the display.',
+      note: 'Nothing to diagnose. That is the correct answer, not a failed read.',
+    };
+  }
+
   let confidence = null;
   let readFromPhotograph = false;
 

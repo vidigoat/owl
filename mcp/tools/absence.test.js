@@ -67,14 +67,16 @@ const isUnknown = (r) =>
     // things. "I looked and there is no fault" ends the conversation happily; "I could not look"
     // must not.
     //
-    // Only one of them is reachable without a camera, and that is itself a gap worth naming: a
-    // caller who looked themselves and saw nothing ("no lights at all") has no way to say so
-    // except by sending a photograph. The healthy branch is exercised against a real clean panel
-    // by `npm run eval`, which is where it belongs, since establishing it needs an actual read.
+    const looked = await read_error({ noCodeShown: true, model: 'SHE3AR75UC' });
+    assert.equal(looked.healthy, true, 'a person who looked and saw nothing is a real answer');
+    assert.equal(looked.observedBy, 'the person');
+    assert.match(looked.note || '', /correct answer/i);
+
     const unreadable = await read_error({ imagePath: '/nowhere.jpg' });
     assert.notEqual(unreadable.healthy, true, 'a failed read must never be reported as a healthy machine');
     assert.ok(isUnknown(unreadable));
     assert.match(unreadable.reason || '', /\S/);
+    assert.notEqual(unreadable.observedBy, 'the person', 'nobody looked; do not say they did');
   });
 
   await it('a repair is confirmed only on a read good enough to rely on', () => {
