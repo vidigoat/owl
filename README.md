@@ -590,6 +590,8 @@ marks what is still stubbed.
 The short version, if you have two minutes: `npm start`, open localhost:8792, press **Start the
 repair** and walk it through. Then press **Show it refuse a job** — that screen is the product.
 
+- Submission text: [`docs/SUBMISSION.md`](docs/SUBMISSION.md)
+- Recording script: [`docs/DEMO-SCRIPT.md`](docs/DEMO-SCRIPT.md)
 - Friction log: [`docs/FRICTION-LOG.md`](docs/FRICTION-LOG.md)
 - Product feedback: [`docs/PRODUCT-FEEDBACK.md`](docs/PRODUCT-FEEDBACK.md)
 
