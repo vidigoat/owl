@@ -19,6 +19,10 @@ Two rules follow from it, and both have been broken once already during developm
 - **Diagnosis is a search, not a lookup.** `next_test` picks the check that removes the most
   uncertainty for the least human effort, the answer prunes the space, repeat. If you find yourself
   adding a fixed checklist, you are rebuilding the thing every competitor already has.
+- **Effort is what a question costs the person, wallet included.** "Replace the drain pump" is
+  physically trivial and financially irreversible, so it is the most expensive tier there is. If you
+  are adding an effort heuristic, ask what the answer costs someone, not how hard it is to move.
+  See `docs/decisions/003`.
 - **A manual's wording is read out verbatim.** When the procedure came from a service manual we were
   handed at runtime, the remedy line is spoken as written. The moment you paraphrase an instruction
   about dismantling an appliance, you are inventing a procedure, and someone could get hurt. If the
