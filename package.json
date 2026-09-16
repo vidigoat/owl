@@ -19,7 +19,8 @@
     "gif": "node scripts/gif.js",
     "panels": "node eval/panels.js",
     "questions": "node eval/questions.js",
-    "terminal-shot": "node scripts/terminal-shot.js"
+    "terminal-shot": "node scripts/terminal-shot.js",
+    "check-readme": "node scripts/check-readme.js"
   },
   "keywords": [
     "alexa-plus",
