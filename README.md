@@ -521,7 +521,7 @@ returning a display's fault code as the model number. Neither was findable offli
 ## The manual reader is also a library
 
 **[github.com/vidigoat/faultgraph](https://github.com/vidigoat/faultgraph)** — MIT, zero
-dependencies, 49 checks.
+dependencies, 50 checks.
 
 `manual/faultgraph.js` is published standalone, generalised until nothing in it knows what a
 dishwasher is — its test fixtures include a reciprocating compressor for that reason. It reads a
