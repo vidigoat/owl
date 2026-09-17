@@ -1,4 +1,28 @@
-# Submission text — Amazon Developer Hackathon (Alexa+ track)
+# Submission text — Amazon Developer Hackathon
+
+**Primary track: Alexa+.** **Mini challenges: AWS Builder, and Open Source.**
+
+**Deadline 24 October 2026, 00:30 IST.**
+
+Checklist against the stated requirements:
+
+| required | state |
+|---|---|
+| self-hosted MCP server, spec 2025-11-25+, Streamable HTTP | `mcp/server.js` — 17 tools, `tools/call` + `resources/read` |
+| the repo actually *calls* the track technology in code | yes — not a README mention |
+| repo public **or** private + shared with `testing@devpost.com` and `@AmazonAppDev` | **stays private; share at submission** |
+| text description of what it does and how | below |
+| 3-min public YouTube video showing the MCP server in action | `docs/DEMO-SCRIPT.md` |
+| product feedback on every tool, API and SDK used | `docs/PRODUCT-FEEDBACK.md` |
+| which tracks and minis | Alexa+ · AWS Builder · Open Source |
+| what changed during the window | built in it |
+| **AWS Builder mini**: AWS services with documented integrations | Bedrock Nova Lite — live, measured, `npm run preflight` |
+| **Open Source mini**: a *new additional* OSS project or public contribution | ⚠️ **see below** |
+| friction log — **up to 10% judging bonus** | `docs/FRICTION-LOG.md` |
+
+Note: the repo does **not** have to be public for this hackathon. Sharing it privately with
+`testing@devpost.com` and `@AmazonAppDev` satisfies the rule.
+
 
 Copy-paste for the submission form. Every number here comes out of a command in this repository;
 none is typed from memory. Re-run `npm test`, `npm run demo`, `npm run questions` and
