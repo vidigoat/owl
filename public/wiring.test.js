@@ -67,8 +67,16 @@ it('every screen the flow can reach is actually defined', () => {
 
 it('every stage a screen sets is reachable by the flow table', () => {
   const flowBlock = app.match(/const FLOW = \{([\s\S]*?)\};/)[1];
-  const flowKeys = new Set([...flowBlock.matchAll(/^\s*(\w+):/gm)].map((m) => m[1]));
-  const assigned = new Set([...app.matchAll(/\bstage = '(\w+)'/g)].map((m) => m[1]));
+  // Both patterns were `\w+`, which stops at a hyphen. A stage named `refused-read-manual` was
+  // therefore invisible to this check from both sides at once: not collected as assigned, and not
+  // collected as handled. The one guard against a button that leads nowhere had a blind spot for
+  // exactly the naming convention the rest of the file uses for anything but a single word.
+  const flowKeys = new Set([...flowBlock.matchAll(/^\s*'?([\w-]+)'?:/gm)].map((m) => m[1]));
+  const assigned = new Set([...app.matchAll(/\bstage = '([\w-]+)'/g)].map((m) => m[1]));
+
+  assert.ok(assigned.has('refused-read-manual'),
+    'a hyphenated stage is no longer being collected — the blind spot is back');
+
   // 'done' is terminal: it is assigned but nothing advances from it, which is correct.
   const orphans = [...assigned].filter((s) => !flowKeys.has(s) && s !== 'done');
   assert.deepEqual(orphans, [], `these stages are set but the flow cannot continue from them: ${orphans.join(', ')}`);
@@ -92,6 +100,31 @@ it('the demo appliance is defined in exactly one place', () => {
   const hardcoded = [...stripped.matchAll(/'(E24|SHE3AR75UC)'|"(E24|SHE3AR75UC)"/g)].map((m) => m[0]);
   assert.deepEqual(hardcoded, [], `hard-coded appliance values: ${hardcoded.join(', ')}`);
   assert.ok(app.includes('DEFAULT_APPLIANCE'), 'there should be a single definition to point at');
+});
+
+it('the trust gate\'s answer reaches the screen, not just the trace', () => {
+  /*
+   * renderConclusion fetched the verdict, wrote ABSTAIN into the trace, and rendered "ONE CAUSE
+   * LEFT" anyway. The refusal lived only behind the "Show it refuse a job" button, which is a demo.
+   * So in the flow a person actually walks, a surviving cause behind mains wiring was presented as
+   * a conclusion and followed by "Talk me through it" — the exact thing this project exists to
+   * refuse, in the exact place the trace was already printing the word ABSTAIN.
+   */
+  const fn = /async function renderConclusion\(\)[\s\S]*?\n}/.exec(app);
+  assert.ok(fn, 'renderConclusion has been renamed — this check is now watching nothing');
+  assert.ok(/if \(verdict\.abstain\)/.test(fn[0]),
+    'renderConclusion asks the gate for a verdict and does not branch on it');
+  assert.ok(fn[0].indexOf('verdict.abstain') < fn[0].indexOf('ONE CAUSE LEFT'),
+    'the conclusion screen is rendered before the abstain is considered');
+});
+
+it('every offer the refusal screen makes is a button that goes somewhere', () => {
+  // The gate now says "show me the manual page". A screen that offers a cheap way out and then
+  // does nothing when pressed is worse than one that just refuses.
+  assert.ok(/function renderRefusal/.test(app), 'the refusal screen has gone');
+  assert.ok(/stage = 'refused-read-manual'/.test(app), 'the read-manual offer sets no stage');
+  assert.ok(/'refused-read-manual': teach/.test(app),
+    'pressing "Show it the manual" leads nowhere — no FLOW entry for the stage it sets');
 });
 
 console.log(`\n${passed} passed`);

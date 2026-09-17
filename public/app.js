@@ -525,6 +525,21 @@ async function renderConclusion() {
   trace('verify_diagnosis', cause.id, verdict.abstain ? 'ABSTAIN' : 'UPHELD', 'trust gate', true);
 
   stage = 'conclusion';
+
+  /*
+   * The gate's answer is the answer.
+   *
+   * This function used to fetch the verdict, write ABSTAIN into the trace, and then render "ONE
+   * CAUSE LEFT" regardless — the refusal existed only behind the "Show it refuse a job" button,
+   * which is a demo, not the product. So in the flow a person actually walks, one surviving cause
+   * behind mains wiring was shown as a conclusion and followed by "Talk me through it".
+   *
+   * Narrowing to one cause is not permission to speak it as fact. That is the entire claim this
+   * project makes, the trace was already printing the word ABSTAIN next to a screen contradicting
+   * it, and nothing in the interface was reading the field it had just asked for.
+   */
+  if (verdict.abstain) return renderRefusal(cause, verdict);
+
   captionEl.textContent = 'One cause left — and only now does it talk about fixing it.';
   advanceBtn.textContent = 'Talk me through it';
   advanceBtn.disabled = false;
@@ -537,6 +552,38 @@ async function renderConclusion() {
       ${dx.performed.length ? `<p class="asked">Reached in ${dx.performed.length} question${dx.performed.length === 1 ? '' : 's'}.</p>` : ''}
     </div>
     ${say(`It's the ${cause.label.toLowerCase()}. Let me walk you through it.`)}`;
+}
+
+/**
+ * One cause left, and the gate would not stand behind it.
+ *
+ * Two shapes, because the gate now distinguishes two opposite reasons for having nothing to say.
+ * `read-manual` means the gap is ours and it is cheap to close — the machine is recognised, the
+ * code is understood, and nobody has written up its causes. Offering a callout there charges
+ * somebody for our missing rows. Everything else is a real stop.
+ */
+function renderRefusal(cause, verdict) {
+  const canRead = verdict.escalate === 'read-manual';
+
+  captionEl.textContent = canRead
+    ? "It has nothing verified to say — so it asks for the manual instead of for money."
+    : 'One cause left, and it still will not sell you a part. That screen is the product.';
+  advanceBtn.disabled = !canRead;
+  if (canRead) {
+    advanceBtn.textContent = 'Show it the manual';
+    stage = 'refused-read-manual';
+  }
+
+  screen.innerHTML = `
+    <div class="s-refuse">
+      <span class="refuse__seal">${canRead ? 'NOTHING VERIFIED YET' : 'NOT UPHELD — NO PART SOLD'}</span>
+      <p class="refuse__line">${canRead ? "I don't have this one written up." : "I'm not going to guess with your money."}</p>
+      <p class="refuse__why">${verdict.reason}</p>
+      ${cause && !canRead ? `<p class="done__sub">${cause.evidence || ''}</p>` : ''}
+    </div>
+    ${say(canRead
+      ? 'Point me at the fault-code page of the manual and I will read it. That costs nothing.'
+      : 'This one needs a technician.')}`;
 }
 
 function renderStuck(choice) {
@@ -732,6 +779,9 @@ const FLOW = {
   space: renderQuestion,
   question: renderQuestion,
   conclusion: renderGuide,
+  // The gate refused because nobody has written this code up — and this is the one product that
+  // can close that gap without charging anybody. The button it offers has to actually go there.
+  'refused-read-manual': teach,
   guide: renderPart,
   part: renderDone,
 };
