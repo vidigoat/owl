@@ -578,8 +578,8 @@ function renderRefusal(cause, verdict) {
     <div class="s-refuse">
       <span class="refuse__seal">${canRead ? 'NOTHING VERIFIED YET' : 'NOT UPHELD — NO PART SOLD'}</span>
       <p class="refuse__line">${canRead ? "I don't have this one written up." : "I'm not going to guess with your money."}</p>
-      <p class="refuse__why">${verdict.reason}</p>
-      ${cause && !canRead ? `<p class="done__sub">${cause.evidence || ''}</p>` : ''}
+      <p class="refuse__why">${esc(verdict.reason)}</p>
+      ${cause && !canRead ? `<p class="done__sub">${esc(cause.evidence || '')}</p>` : ''}
     </div>
     ${say(canRead
       ? 'Point me at the fault-code page of the manual and I will read it. That costs nothing.'
@@ -593,7 +593,7 @@ function renderStuck(choice) {
     <div class="s-refuse">
       <span class="refuse__seal">NOT ESTABLISHED</span>
       <p class="refuse__line">I can't narrow this down any further from here.</p>
-      <p class="refuse__why">${choice.reason}. Anything I told you now would be a guess, and guesses cost you a part you may not need.</p>
+      <p class="refuse__why">${esc(choice.reason)}. Anything I told you now would be a guess, and guesses cost you a part you may not need.</p>
       ${spaceMarkup(dx.space)}
     </div>
     ${say("I've run out of checks that would tell me anything. This one needs a technician.")}`;
@@ -606,7 +606,7 @@ function renderContradiction(result) {
     <div class="s-refuse">
       <span class="refuse__seal">CONTRADICTION</span>
       <p class="refuse__line">That rules out everything the manual lists.</p>
-      <p class="refuse__why">${result.reason}</p>
+      <p class="refuse__why">${esc(result.reason)}</p>
     </div>
     ${say("That shouldn't be possible according to the manual. Something else is going on here.")}`;
 }
@@ -632,7 +632,7 @@ async function renderGuide() {
       <div class="s-refuse">
         <span class="refuse__seal">NO VERIFIED PROCEDURE</span>
         <p class="refuse__line">I know what's wrong, but I don't have the steps for this one.</p>
-        <p class="refuse__why">${g.reason} I'm not going to talk you through taking a machine apart from guesswork.</p>
+        <p class="refuse__why">${esc(g.reason)} I'm not going to talk you through taking a machine apart from guesswork.</p>
       </div>
       ${say("I know what it is, but I don't have a procedure I trust for this model.")}`;
     return;
@@ -674,7 +674,7 @@ async function renderPart() {
       <div class="s-refuse">
         <span class="refuse__seal">NOTHING TO SELL YOU</span>
         <p class="refuse__line">${cart.refused ? "I'm not going to order anything." : 'No part available.'}</p>
-        <p class="refuse__why">${cart.reason}</p>
+        <p class="refuse__why">${esc(cart.reason)}</p>
         ${cart.alternative ? `<p class="asked">A service call would be about $${cart.alternative.price}.</p>` : ''}
       </div>
       ${say(cart.reason)}`;
@@ -762,7 +762,7 @@ async function renderDone() {
     <div class="s-refuse">
       <span class="refuse__seal">${check.stillFaulty ? 'STILL FAULTY' : 'NOT VERIFIED'}</span>
       <p class="refuse__line">${check.stillFaulty ? 'That did not fix it.' : "I can't confirm it worked."}</p>
-      <p class="refuse__why">${check.reason}</p>
+      <p class="refuse__why">${esc(check.reason)}</p>
       ${saved.note ? `<p class="asked">${saved.note}</p>` : ''}
       ${dueLine}
     </div>
@@ -799,7 +799,7 @@ async function advance() {
       <div class="s-refuse">
         <span class="refuse__seal">SOMETHING BROKE</span>
         <p class="refuse__line">That step didn't complete.</p>
-        <p class="refuse__why">${e.message}. Press reset to start again — nothing was ordered.</p>
+        <p class="refuse__why">${esc(e.message)}. Press reset to start again — nothing was ordered.</p>
       </div>`;
     trace('error', stage, e.message, 'device');
   }
@@ -820,7 +820,7 @@ async function showRefusal() {
       <div class="readout"><span class="readout__k">fault</span><span class="fault-chip">E09</span></div>
       <span class="refuse__seal">NOT UPHELD — NO PART SOLD</span>
       <p class="refuse__line">I'm not going to guess with your money.</p>
-      <p class="refuse__why">${r.reason}</p>
+      <p class="refuse__why">${esc(r.reason)}</p>
     </div>
     ${say("Three things could cause this and one of them is mains wiring. This one needs a technician.")}`;
 }
@@ -869,7 +869,7 @@ async function teach() {
       <div class="s-refuse">
         <span class="refuse__seal">NOTHING RECOVERED</span>
         <p class="refuse__line">I couldn't get a fault table out of that manual.</p>
-        <p class="refuse__why">${learned.reason || learned.coverage}</p>
+        <p class="refuse__why">${esc(learned.reason || learned.coverage)}</p>
       </div>
       ${say("That manual doesn't have anything I can use. I'd be guessing.")}`;
     return;

@@ -127,4 +127,18 @@ it('every offer the refusal screen makes is a button that goes somewhere', () =>
     'pressing "Show it the manual" leads nowhere — no FLOW entry for the stage it sets');
 });
 
+it('every server-supplied string on a refusal screen is escaped', () => {
+  /*
+   * The refusal screens print text that came from somewhere else: a gate reason quoting a model
+   * number, a learned-manual failure quoting what was transcribed. On the manual path that text
+   * originates in a PHOTOGRAPH somebody pointed a camera at, which is as untrusted as input gets —
+   * and this project already has a test file about a manual page written to manipulate a reader.
+   *
+   * Seven of these interpolated raw. `esc` existed and was used three lines away.
+   */
+  const raw = [...app.matchAll(/class="refuse__why">\$\{([^}]*)\}/g)].map((m) => m[1]);
+  const unescaped = raw.filter((expr) => !expr.trim().startsWith('esc('));
+  assert.deepEqual(unescaped, [], `interpolated without esc(): ${unescaped.join(' · ')}`);
+});
+
 console.log(`\n${passed} passed`);
