@@ -195,4 +195,49 @@ it('a repair is never confirmed on a read too poor to trust', () => {
   assert.ok(CONFIRM_FLOOR >= 0.4, 'a floor this low is not a floor');
 });
 
+it('a fault whose every cause is behind mains settles instead of getting stuck', () => {
+  /*
+   * Bosch E09: three causes, all behind mains wiring. A person can narrow this all afternoon and
+   * the answer does not move — verify_diagnosis refuses a mains cause at any confidence, so no
+   * answer they give unlocks a repair they are allowed to do.
+   *
+   * It used to fall through to "no tests left to run", which is true and reads as failure: as
+   * though the tool tried and could not manage it. It did not try. It knew, before asking.
+   */
+  const { space } = buildSpace({ model: 'SHE3AR75UC', code: 'E09' });
+  assert.ok(space.every((c) => c.mains), 'the fixture has changed — E09 is no longer all-mains');
+
+  const choice = nextTest({ space, tests: [] });
+  assert.equal(choice.test, null);
+  assert.equal(choice.settled, true, 'an all-mains fault was reported as stuck rather than settled');
+  assert.equal(choice.stuck, false, '"ran out of ideas" invites a second opinion from something that guesses');
+  assert.equal(choice.escalate, 'technician');
+  assert.match(choice.reason, /behind mains wiring/);
+  assert.ok(choice.why, 'it declined to ask and did not say why');
+});
+
+it('an ordinary fault is not settled, however few tests remain', () => {
+  // The guard must not swallow the honest "I have run out of checks" ending.
+  const { space, tests } = buildSpace({ model: 'SHE3AR75UC', code: 'E24' });
+  assert.ok(space.some((c) => !c.mains));
+
+  const exhausted = nextTest({ space, tests: [], performed: [] });
+  assert.notEqual(exhausted.settled, true, 'a fault with owner-fixable causes was declared settled');
+  assert.equal(exhausted.stuck, true);
+});
+
+it('settling never happens once a non-mains cause survives', () => {
+  // Property, not a fixture: whatever the space, settled implies every surviving cause is mains.
+  const spaces = [
+    [{ id: 'a', prior: 0.5, mains: true }, { id: 'b', prior: 0.5, mains: true }],
+    [{ id: 'a', prior: 0.5, mains: true }, { id: 'b', prior: 0.5, mains: false }],
+    [{ id: 'a', prior: 0.5, mains: false }, { id: 'b', prior: 0.5, mains: false }],
+  ];
+  for (const space of spaces) {
+    const r = nextTest({ space, tests: [] });
+    if (r.settled) assert.ok(space.every((c) => c.mains), 'settled with an owner-fixable cause still standing');
+    else assert.ok(space.some((c) => !c.mains), 'an all-mains space was not settled');
+  }
+});
+
 console.log(`\n${passed} passed`);

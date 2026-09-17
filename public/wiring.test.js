@@ -137,8 +137,15 @@ it('every server-supplied string on a refusal screen is escaped', () => {
    * Seven of these interpolated raw. `esc` existed and was used three lines away.
    */
   const raw = [...app.matchAll(/class="refuse__why">\$\{([^}]*)\}/g)].map((m) => m[1]);
-  const unescaped = raw.filter((expr) => !expr.trim().startsWith('esc('));
+  // A single expression per screen, by construction — anything needing a ternary computes it into a
+  // variable first, so "is this escaped" is answerable by looking at one expression rather than by
+  // parsing nested template literals. `why` is such a variable and is checked separately below.
+  const unescaped = raw.filter((expr) => !expr.trim().startsWith('esc(') && expr.trim() !== 'why');
   assert.deepEqual(unescaped, [], `interpolated without esc(): ${unescaped.join(' · ')}`);
+
+  // The one indirection, checked at its definition.
+  const why = /const why = settled\n?\s*\? esc\(choice\.why[\s\S]{0,240}?esc\(choice\.reason\)/.exec(app);
+  assert.ok(why, 'renderStuck\'s `why` is no longer built from esc() on both branches');
 });
 
 console.log(`\n${passed} passed`);

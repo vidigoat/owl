@@ -149,7 +149,14 @@ if (require.main === module) {
   for (const [model, m] of Object.entries({ ...MODELS, ...LEARNED })) {
     for (const code of Object.keys(m.codes)) {
       const r = measure(model, code);
-      if (r) rows.push({ ...r, brand: m.brand || '', learned: Boolean(m.generated) });
+      if (r) {
+        // A code whose every cause is behind mains is settled before a question is asked. Marked,
+        // because a 0.0 in this column otherwise reads as "trivially easy" when it means "there was
+        // never anything to ask a householder".
+        const space = buildSpace({ model, code });
+        const allMains = space.known && space.space.length > 0 && space.space.every((c) => c.mains);
+        rows.push({ ...r, brand: m.brand || '', learned: Boolean(m.generated), allMains });
+      }
     }
   }
 
@@ -162,7 +169,8 @@ if (require.main === module) {
       `${String(r.causes).padEnd(7)} ${String(r.paths).padEnd(6)} ` +
       `${r.mean.toFixed(1).padEnd(6)} ${String(r.worst).padEnd(6)} ` +
       `${better ? C.green : C.amber}${r.naiveWorst}${C.off}` +
-      `${r.learned ? `  ${C.dim}learned from its manual${C.off}` : ''}`
+      `${r.learned ? `  ${C.dim}learned from its manual${C.off}` : ''}` +
+      `${r.allMains ? `  ${C.amber}all causes behind mains — settled without asking${C.off}` : ''}`
     );
   }
 
@@ -177,6 +185,27 @@ if (require.main === module) {
   console.log(`  ${C.dim}Mean effort ${effort.toFixed(1)} (free 0 · easy 1 · awkward 4 · heavy 12).` +
     ` ${totalPaths} answer paths walked, every one of them.${C.off}`);
   console.log(`  ${C.dim}The worst case is the number that matters: it is the person who gives up.${C.off}`);
+
+  /*
+   * Where the mean moved, and why, because a number that improves on its own is a number to be
+   * suspicious of.
+   *
+   * It was 1.3 questions and 1.1 effort. Hotpoint F13 — "the water is not heating", two causes, both
+   * behind mains — used to be asked about: one question, "replace the heating element, did that fix
+   * it?". An owner is not allowed to replace a heating element, verify_diagnosis refuses a mains
+   * cause at any confidence, and no answer to that question could change what happens next. It was
+   * work with a fixed outcome.
+   *
+   * next_test now settles such a code before asking anything, so F13 costs 0 questions instead of 1
+   * and the averages fall. The improvement is real — a question nobody should have been asked is no
+   * longer asked — but it is the kind of improvement that could equally be a case being quietly
+   * dropped from the denominator, so F13 stays in the table, keeps its row, and is labelled.
+   */
+  const settled = rows.filter((r) => r.allMains);
+  if (settled.length) {
+    console.log(`\n  ${C.dim}${settled.length} code${settled.length === 1 ? '' : 's'} (${settled.map((r) => r.code).join(', ')}) ` +
+      `settled without a question: every cause behind mains. Still counted above, at 0.${C.off}`);
+  }
 
   /* ── does it matter at scale? ────────────────────────────────────────────
    * The table above is honest and modest: three causes per code is a small space, and 1.3 against

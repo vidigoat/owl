@@ -394,13 +394,15 @@ every fault code on every machine, and **every possible sequence of answers**, n
   LG LG-WM3900HWA        UE     1       1      0.0    0      1   learned from its manual
   Hotpoint HOTPOINT-FDW  H20    3       3      1.7    2      3   learned from its manual
   Hotpoint HOTPOINT-FDW  F05    3       3      1.7    2      3   learned from its manual
-  Hotpoint HOTPOINT-FDW  F13    2       2      1.0    1      2   learned from its manual
+  Hotpoint HOTPOINT-FDW  F13    2       1      0.0    0      2   learned · all causes behind mains
 
-  1.3 questions on average, worst case 2 — against 2.5 causes to ask about one at a time.
-  15 answer paths walked, every one of them.
+  1.1 questions on average, worst case 2 — against 2.5 causes to ask about one at a time.
+  14 answer paths walked, every one of them.
+
+  1 code (F13) settled without a question: every cause behind mains. Still counted above, at 0.
 ```
 
-**Two honest readings of that table.**
+**Three honest readings of that table.**
 
 The one worth having: a machine learned from its manual thirty seconds ago diagnoses exactly as
 efficiently as the one the fixtures were written around — 1.7 questions either way. The generality
@@ -413,6 +415,20 @@ The claim "three questions instead of twenty" is not supported by this data and 
 The number that actually matters is **worst case 2**. The mean describes a typical repair; the worst
 case describes the person who gives up, and there is no path through any of these machines that asks
 more than twice.
+
+And the one to be suspicious of: **the mean improved on its own**, from 1.3 to 1.1, which is exactly
+what a case quietly leaving the denominator looks like. It is not that. Hotpoint F13 — *"the water is
+not heating"*, two causes, both behind mains — used to be asked about: one question, *"replace the
+heating element, did that fix it?"*. An owner is not allowed to replace a heating element, the trust
+gate refuses a mains cause at any confidence, and no answer to that question could change what
+happened next. It was work with a fixed outcome, and the tool now recognises that before opening its
+mouth:
+
+> Every cause for this code is behind mains wiring. Narrowing this down would not change what you
+> are allowed to do about it.
+
+F13 keeps its row, keeps its place in the average at 0, and is labelled — because the honest version
+of "we got faster" has to show which case got faster and why.
 
 ### When does choosing the question actually help?
 
@@ -454,7 +470,7 @@ conditions yields no observations and still works exactly as before.
 The measured effect, over every answer path on every machine:
 
 ```
-  mean effort   2.3  →  1.1        (free 0 · easy 1 · awkward 4 · heavy 12)
+  mean effort   2.3  →  0.9        (free 0 · easy 1 · awkward 4 · heavy 12)
 ```
 
 Same number of questions. **Less than half the work**, because it stopped asking people to replace

@@ -54,6 +54,7 @@ Shot list for the ≤3 minute submission video. Numbered so a second take can pi
 | 4 | it asks about the pump ALOUD and **stops** | "And it waits. It has no hands." | the pause is the product |
 | 5 | **say "it hums" out loud.** Trace shows `heard("it hums") → it hums · speech`. A cause strikes through; `0.43 bits left` | "I didn't touch anything. My hands are in the machine." | **the best shot in the video.** Voice in, voice out, hands never leave the appliance |
 | 6 | **Show it refuse a job** → NOT UPHELD — NO PART SOLD | "I'm not going to guess with your money." | the frame that wins it |
+| 6a | **do not press the refusal button.** Point the camera at a machine showing **E09** and walk the ordinary flow. It reads the code, builds three causes — and stops before asking anything: **NOT AN OWNER REPAIR · Every cause for this code is behind mains wiring** | "It didn't ask me a single question. It already knew." | ⭐⭐ **the shot.** The refusal arriving on its own, in the flow, not behind a button labelled with it. A labelled button can be read as staged; this cannot |
 | 7 | trace: `verify_diagnosis(E09) → ABSTAIN · trust gate` | "It books a technician instead of selling me a pump." | every competitor sells the part |
 | 8 | **Teach it a new machine** → LG manual → three cited causes | "No file in this project mentions this machine." | kills "you hardcoded it" |
 | 8b | on that screen, **drop a photo of a real manual page** (or hold the booklet to the camera). It transcribes the fault table and learns the machine | "And I don't need the text of the manual. I have the booklet." | ⭐ second-best shot. Nobody has the text of a fault table; everybody has the booklet |
@@ -76,24 +77,25 @@ This one is built around the case where it does not know.
 
 **Do not** re-record shot 4 to be faster. The pause is the thing being demonstrated.
 
-**A shot that is not in this list, and why.**
+**On shot 6a, which nearly did not exist.**
 
-The obvious addition after today's work would be: narrow a diagnosis to one surviving cause, and
-have the trust gate refuse *there*, in the ordinary flow, rather than behind a button labelled
-"Show it refuse a job". That is a much stronger frame than shot 6, because a judge is entitled to
-read a labelled button as staged.
+The wanted shot was: the refusal arriving *in the ordinary flow*, not behind a button labelled
+"Show it refuse a job" — because a judge is entitled to read a labelled button as staged.
 
-It is not in the list because **it cannot be recorded on the machines this project ships with.**
-The gate reaching a refusal at that point needs a single surviving cause that is behind mains
-voltage. E24's three causes are none of them mains; E09's three all are, but E09 carries no test
-list, so a diagnosis of it goes to NOT ESTABLISHED without ever narrowing; and the LG learned from
-its manual has no mains cause either. The code path is real, is now wired to the screen, and is
-covered by `mcp/tools/gate-reachability.test.js` — but it has no camera in front of it.
+The first attempt at scripting it was: narrow a diagnosis to one surviving mains cause and let the
+gate refuse there. That shot **cannot be recorded on these machines.** It needs one surviving cause
+behind mains: E24's three are none of them mains, and the learned LG has no mains cause. It was
+written into this file and then taken out, because scripting a shot nobody can shoot is the same
+error as quoting a number nobody can reproduce.
 
-Scripting it anyway would be writing a shot nobody can shoot, which is the same error as quoting a
-number nobody can reproduce. To make it recordable, one machine needs a code whose causes include a
-mains one *and* a test list that can eliminate down to it. That is a service-data change, and
-service data does not get written here until it has been checked per model.
+Taking it out is what produced 6a. E09 — three causes, all behind mains — *did* have an ending in
+the ordinary flow, and the ending was **NOT ESTABLISHED: I can't narrow this down any further**.
+Which is a lie of tone. It did not run out of ideas. Every cause was behind mains before a single
+question was asked, the trust gate refuses a mains cause at any confidence, and no answer a
+householder could give would have changed what they are allowed to do. The tool knew, and said it
+had failed.
 
-Until then shot 6 carries the refusal, and 9b carries the other half of the same argument: when it
-*does* uphold a cause, it is equally careful about what it does not know.
+`next_test` now settles such a code before asking anything, which is both a better product and the
+shot that was wanted: a refusal, in the ordinary flow, arriving on its own. It costs one question
+less in the measurements too — see `npm run questions`, where F13 fell from 1 question to 0 and is
+labelled so the improvement cannot be mistaken for a case leaving the denominator.

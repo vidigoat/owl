@@ -587,16 +587,40 @@ function renderRefusal(cause, verdict) {
 }
 
 function renderStuck(choice) {
-  captionEl.textContent = 'It ran out of useful questions — so it stops, rather than guessing.';
+  /*
+   * Two different endings, and they were one screen saying NOT ESTABLISHED.
+   *
+   * "Settled" means every surviving cause is behind mains: the tool did not run out of ideas, it
+   * knew before asking anything that no answer a householder could give would change what they are
+   * allowed to do. Presenting that as a failure to narrow it down is both wrong and worse — "I ran
+   * out of ideas" invites a second opinion from something that guesses, and "this is behind mains
+   * wiring, whoever is asking" does not.
+   */
+  const settled = choice.settled === true;
+
+  // Computed here rather than inline: an interpolation into a refusal screen must be a single
+  // esc(...) call, so that "is this escaped" stays a question anybody — including wiring.test.js —
+  // can answer by looking at one expression.
+  const why = settled
+    ? esc(choice.why || '')
+    : `${esc(choice.reason)}. Anything I told you now would be a guess, and guesses cost you a part you may not need.`;
+
+  captionEl.textContent = settled
+    ? 'It did not run out of ideas. There was never a question worth asking.'
+    : 'It ran out of useful questions — so it stops, rather than guessing.';
   advanceBtn.disabled = true;
   screen.innerHTML = `
     <div class="s-refuse">
-      <span class="refuse__seal">NOT ESTABLISHED</span>
-      <p class="refuse__line">I can't narrow this down any further from here.</p>
-      <p class="refuse__why">${esc(choice.reason)}. Anything I told you now would be a guess, and guesses cost you a part you may not need.</p>
+      <span class="refuse__seal">${settled ? 'NOT AN OWNER REPAIR' : 'NOT ESTABLISHED'}</span>
+      <p class="refuse__line">${settled
+        ? "Every cause for this code is behind mains wiring."
+        : "I can't narrow this down any further from here."}</p>
+      <p class="refuse__why">${why}</p>
       ${spaceMarkup(dx.space)}
     </div>
-    ${say("I've run out of checks that would tell me anything. This one needs a technician.")}`;
+    ${say(settled
+      ? "I'm not going to have you open this one. Every cause here is behind mains wiring — that's a technician."
+      : "I've run out of checks that would tell me anything. This one needs a technician.")}`;
 }
 
 function renderContradiction(result) {

@@ -58,6 +58,35 @@ function nextTest({ space, tests, performed = [] }) {
     return { test: null, reason: 'one cause left', done: true };
   }
 
+  /*
+   * Every cause behind mains. There is nothing to ask.
+   *
+   * Not "stuck" — settled, and settled before a single question. A person can narrow this all
+   * afternoon and the answer does not move: `verify_diagnosis` refuses a mains cause at any
+   * confidence, so no answer they could give unlocks a repair they are allowed to do. Asking anyway
+   * is asking somebody to work for an outcome that is already fixed.
+   *
+   * It used to fall through to "no tests left to run", which is true and reads as failure — as
+   * though the tool tried and could not manage it. It did not try. It knew. On the Bosch E09 (three
+   * causes, all mains) that was the entire experience of the fault: a person walked a diagnosis and
+   * was told at the end that nothing could be established.
+   *
+   * The distinction matters beyond tone. "I ran out of ideas" invites a second opinion from
+   * something that guesses; "this is behind mains wiring, whoever is asking" does not.
+   */
+  if (space.every((c) => c.mains)) {
+    return {
+      test: null,
+      reason: 'every cause for this code is behind mains wiring',
+      settled: true,
+      stuck: false,
+      done: false,
+      escalate: 'technician',
+      // Said before any question is asked. If it cannot explain why it is not asking, it should ask.
+      why: 'Narrowing this down would not change what you are allowed to do about it.',
+    };
+  }
+
   const done = new Set(performed);
   const available = tests.filter((t) => !done.has(t.id));
   if (available.length === 0) {
