@@ -273,6 +273,8 @@ footer { max-width: 1140px; margin: 0 auto; padding: 22px 24px; display: flex; j
 }
 .refuse__line { font-size: 26px; font-weight: 600; margin: 0; max-width: 22ch; }
 .refuse__why { color: var(--graphite); margin: 0; max-width: 42ch; font-size: 15px; }
+/* What to do next. A refusal that does not hand back a move is just a wall. */
+.refuse__next { color: var(--ink); margin: 0; max-width: 42ch; font-size: 15px; font-weight: 500; }
 
 @media (prefers-reduced-motion: no-preference) {
   .s-listen__ring { animation: pulse 2.4s ease-in-out infinite; }

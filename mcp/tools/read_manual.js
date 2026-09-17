@@ -109,7 +109,7 @@ const notRead = (reason) => ({
  * @param {string} [arg.brand]
  * @param {string} [arg.kind]
  */
-async function read_manual({ imagePath, imageBase64, model, brand, kind } = {}) {
+async function read_manual({ imagePath, imageBase64, model, brand, kind, transcribe } = {}) {
   if (!model) {
     return {
       abstain: true,
@@ -126,16 +126,29 @@ async function read_manual({ imagePath, imageBase64, model, brand, kind } = {}) 
     base64 = (m ? m[2] : String(imageBase64)).replace(/\s+/g, '');
     format = FORMATS[`.${(m?.[1] || '').toLowerCase()}`] || 'jpeg';
     if (!/^[A-Za-z0-9+/=]+$/.test(base64)) return notRead('That did not decode as an image.');
-  } else {
-    if (!imagePath || !fs.existsSync(imagePath)) return notRead(`No image at ${imagePath}`);
+  } else if (imagePath) {
+    if (!fs.existsSync(imagePath)) return notRead(`No image at ${imagePath}`);
     format = FORMATS[path.extname(imagePath).toLowerCase()] || 'jpeg';
     base64 = fs.readFileSync(imagePath).toString('base64');
+  } else if (!transcribe) {
+    // No bytes and nothing to turn bytes into characters. Said plainly rather than thrown: this
+    // tool is called by a model, and a stack trace is not an answer it can act on.
+    return notRead('No image at undefined');
   }
 
   let text;
   try {
-    const envelope = JSON.parse(await invoke(base64, format));
-    text = envelope?.output?.message?.content?.map((c) => c.text).filter(Boolean).join('\n') ?? '';
+    /*
+     * `transcribe` is an injection point, and it exists for one reason: everything after this line
+     * decides what a person is TOLD, and none of it should need a camera and an AWS account to
+     * test. It is not a mock of the model's judgement — the model's only job here is turning pixels
+     * into characters, and a test supplying characters directly is testing the same code path with
+     * the same input the model would have produced.
+     */
+    text = transcribe
+      ? await transcribe({ base64, format })
+      : (JSON.parse(await invoke(base64, format))?.output?.message?.content
+          ?.map((c) => c.text).filter(Boolean).join('\n') ?? '');
   } catch (e) {
     return notRead(e.message);
   }
@@ -156,12 +169,31 @@ async function read_manual({ imagePath, imageBase64, model, brand, kind } = {}) 
   const codes = Object.keys(graph.codes || {});
 
   if (!codes.length) {
+    /*
+     * Two ways to get here, and they need opposite things from somebody holding a booklet.
+     *
+     * With orphan codes, the transcription found things that look like fault codes and no remedies
+     * under them — which almost always means a two-column table, the remedy to the right of the
+     * code. That person is looking at the right page. "Try the fault-code page" sends them hunting
+     * for something already in their hand, and this is spoken aloud.
+     */
+    const layout = graph.orphanCodes > 0;
     return {
       abstain: true,
       learned: false,
       transcribed: text.slice(0, 600),
-      reason: 'I read the page, but could not get a fault table out of it.',
+      reason: layout
+        ? `I read the page and found ${graph.orphanCodes} fault code${graph.orphanCodes === 1 ? '' : 's'}, ` +
+          'but no remedies underneath them. This looks like the right page in a layout I cannot read.'
+        : 'I read the page, but could not get a fault table out of it.',
+      // What to do next, which differs entirely between the two. Named `nextStep` to match every
+      // other refusal in this file — a second field meaning the same thing is how a caller ends up
+      // rendering one of them and silently dropping the other.
+      nextStep: layout
+        ? 'If the remedies are in a column to the right of the codes, photograph that column too, or read it to me.'
+        : 'Look for the page headed "fault codes", "error codes" or "troubleshooting".',
       coverage: graph.coverage,
+      orphanCodes: graph.orphanCodes,
       note: 'Transcribed text is included above so you can see what it actually saw.',
     };
   }

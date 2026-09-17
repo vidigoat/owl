@@ -26,6 +26,7 @@ const { confirm_fix, CONFIRM_FLOOR } = require('./confirm_fix');
 const { read_error } = require('./read_error');
 const { identify_appliance } = require('./identify_appliance');
 const { verify_diagnosis } = require('./verify_diagnosis');
+const { read_manual } = require('./read_manual');
 
 let passed = 0;
 const it = async (name, fn) => {
@@ -114,5 +115,58 @@ const isUnknown = (r) =>
       assert.ok(String(r.reason || '').length > 10, `refusal ${i} came back without a reason: ${JSON.stringify(r)}`));
   });
 
-  console.log(`\n${passed} passed`);
+  it('read_manual tells a wrong page from a page it cannot read', async () => {
+  /*
+   * The last mile of the two-column fix. The parser distinguishes them, and the distinction was
+   * being thrown away here: both came back as "I read the page, but could not get a fault table out
+   * of it", which the device speaks aloud to somebody holding a booklet.
+   *
+   * A person told to go and find the fault-code page, while holding the fault-code page, gives up.
+   *
+   * `transcribe` is the injection point. The model's only job in this tool is turning pixels into
+   * characters, so a test supplying the characters exercises the same code with the same input the
+   * model would have produced — no camera, no AWS account, no cost.
+   */
+  const layout = await read_manual({
+    model: 'TEST-LAYOUT',
+    transcribe: async () => 'E24  Water cannot leave    Check the drain filter\nE15  Water in base tray    Check the door seal',
+  });
+  assert.equal(layout.learned, false);
+  assert.ok(layout.orphanCodes > 0, 'the codes it did see were not reported');
+  assert.match(layout.reason, /no remedies underneath them/);
+  assert.match(layout.nextStep, /column to the right/, 'it refused and handed back no move');
+
+  const wrongPage = await read_manual({
+    model: 'TEST-WRONG',
+    transcribe: async () => 'Before first use, remove all packaging and install by a competent person.',
+  });
+  assert.equal(wrongPage.learned, false);
+  assert.equal(wrongPage.orphanCodes, 0);
+  assert.match(wrongPage.nextStep, /troubleshooting|fault codes/i);
+  assert.notEqual(layout.reason, wrongPage.reason, 'the two failures still share a sentence');
+  assert.notEqual(layout.nextStep, wrongPage.nextStep, 'and still send the person the same way');
+});
+
+it('a readable page still learns, through the same seam', () => {
+  // The seam must not be a path that only ever fails. If injecting a transcription cannot also
+  // succeed, the two tests above are exercising an error handler rather than the tool.
+  return read_manual({
+    model: 'TEST-GOOD',
+    transcribe: async () => 'E24  Water cannot leave the machine\nCheck the drain filter for debris.',
+  }).then((r) => {
+    assert.equal(r.learned, true, 'the injected path cannot succeed — it is not the real code path');
+    assert.deepEqual(r.codes, ['E24']);
+    assert.equal(r.orphanCodes, undefined, 'a successful read is reporting orphans');
+  });
+});
+
+it('no bytes and no transcriber is an answer, not a crash', () => {
+  // This tool is called by a model. A stack trace is not something it can act on.
+  return read_manual({ model: 'TEST-NOTHING' }).then((r) => {
+    assert.equal(r.learned, false);
+    assert.ok(r.reason, 'it failed without saying why');
+  });
+});
+
+console.log(`\n${passed} passed`);
 })();

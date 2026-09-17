@@ -148,4 +148,29 @@ it('every server-supplied string on a refusal screen is escaped', () => {
   assert.ok(why, 'renderStuck\'s `why` is no longer built from esc() on both branches');
 });
 
+it('the field names the script reads are the field names the tools return', () => {
+  /*
+   * A refusal screen renders `r.<field>` from a tool's response. Rename the field in the tool and
+   * the screen renders an empty string — no error, no warning, and the tool's tests still pass
+   * because the tool is correct. It is only wrong at the join, which is what this file is for.
+   *
+   * Caught exactly this: `read_manual` was changed to return `nextStep` (matching every other
+   * refusal in that file) while app.js still read `tryNext`. The "what to do next" line would have
+   * silently vanished from the one screen whose whole job is handing back a move.
+   */
+  const fs2 = require('node:fs');
+  const readManual = fs2.readFileSync(path.join(HERE, '..', 'mcp', 'tools', 'read_manual.js'), 'utf8');
+
+  for (const field of ['reason', 'nextStep', 'transcribed', 'orphanCodes', 'coverage']) {
+    assert.ok(new RegExp(`\\b${field}:`).test(readManual), `read_manual no longer returns ${field}`);
+  }
+
+  // And nothing the manual screen reads may be absent from what read_manual returns.
+  const screenBlock = /if \(!r\.learned\) \{[\s\S]*?\n  \}/.exec(app);
+  assert.ok(screenBlock, 'the manual-failure screen has been renamed — this check is watching nothing');
+  const read = [...screenBlock[0].matchAll(/\br\.([a-zA-Z]+)/g)].map((m) => m[1]);
+  const missing = [...new Set(read)].filter((f) => !new RegExp(`\\b${f}:`).test(readManual));
+  assert.deepEqual(missing, [], `the screen reads fields read_manual never returns: ${missing.join(', ')}`);
+});
+
 console.log(`\n${passed} passed`);

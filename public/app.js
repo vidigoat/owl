@@ -262,14 +262,25 @@ async function learnFromPhoto(file) {
     r.simulated ? 'fallback' : 'Bedrock vision');
 
   if (!r.learned) {
+    // "Wrong page" and "right page, wrong layout" send a person in opposite directions, and this is
+    // spoken aloud to somebody holding a booklet. Telling them to go and find a page they are
+    // already holding is the failure worth avoiding.
+    const layout = r.orphanCodes > 0;
+    const why = esc(r.reason || '');
+    const next = esc(r.nextStep || '');
     screen.innerHTML = `
       <div class="s-refuse">
-        <span class="refuse__seal">NOTHING RECOVERED</span>
-        <p class="refuse__line">I couldn't get a fault table off that page.</p>
-        <p class="refuse__why">${esc(r.reason || '')}</p>
+        <span class="refuse__seal">${layout ? 'RIGHT PAGE, WRONG SHAPE' : 'NOTHING RECOVERED'}</span>
+        <p class="refuse__line">${layout
+          ? "I can see the codes. I can't see what to do about them."
+          : "I couldn't get a fault table off that page."}</p>
+        <p class="refuse__why">${why}</p>
+        ${next ? `<p class="refuse__next">${next}</p>` : ''}
         ${r.transcribed ? `<pre class="teach__manual">${esc(r.transcribed)}</pre>` : ''}
       </div>
-      ${say("There's no fault table I can use on that page. I'd be guessing.")}`;
+      ${say(layout
+        ? "You've got the right page. The remedies must be in a column I can't line up — read me the one next to the code."
+        : "There's no fault table I can use on that page. I'd be guessing.")}`;
     advanceBtn.disabled = false;
     return;
   }
