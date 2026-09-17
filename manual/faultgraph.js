@@ -151,12 +151,35 @@ function joinOrphanCodes(lines) {
   return out;
 }
 
+/**
+ * What came back, including the two different ways it can be empty.
+ *
+ *   0 codes, 0 orphans   wrong page. Go and find the fault table.
+ *   0 codes, 5 orphans   RIGHT page — the remedies are not underneath the codes. Almost always a
+ *                        two-column layout with the remedy in a column to the right.
+ *
+ * The second told somebody to go and photograph a page they were already photographing.
+ */
+function coverageOf(found, orphanCodes) {
+  if (found > 0) return `${found} fault code${found === 1 ? '' : 's'} recovered`;
+  if (orphanCodes > 0) {
+    return `${orphanCodes} fault code${orphanCodes === 1 ? '' : 's'} seen, none with remedies beneath them — ` +
+      'this looks like the right page, in a layout I cannot read. Are the remedies in a column to the right?';
+  }
+  return 'nothing usable found';
+}
+
 function parse({ model, text, sourceName = 'manual' }) {
   const lines = joinOrphanCodes(String(text).split(/\r?\n/));
   /** Joined-array index → the line a reader would count to on the original page. */
   const onPage = (idx) => (lines.origin ? lines.origin[idx] : idx) + 1;
   const codes = {};
   let found = 0;
+  // Codes that looked like codes but carried no remedies beneath them. Counted separately because
+  // "this page has no fault table on it" and "this page has one and I cannot read its layout" are
+  // different problems needing opposite things from somebody holding a manual, and they were
+  // sharing one sentence — which this product then reads out loud.
+  let orphanCodes = 0;
 
   lines.forEach((line, i) => {
     const m = matchCodeLine(line);
@@ -195,7 +218,7 @@ function parse({ model, text, sourceName = 'manual' }) {
       source: { line: atLine[k], codeLine: onPage(i), manual: sourceName },
     }));
 
-    if (causes.length === 0) return;
+    if (causes.length === 0) { orphanCodes++; return; }
     found++;
 
     // A remedy check tests exactly one cause, so a table of them is irreducibly linear: a "no"
@@ -229,7 +252,8 @@ function parse({ model, text, sourceName = 'manual' }) {
     found,
     // Said out loud in the interface. A graph with two codes from a 90-page manual is a thin graph
     // and the product should admit it rather than imply it read the whole thing.
-    coverage: found === 0 ? 'nothing usable found' : `${found} fault code${found === 1 ? '' : 's'} recovered`,
+    coverage: coverageOf(found, orphanCodes),
+    orphanCodes,
   };
 }
 

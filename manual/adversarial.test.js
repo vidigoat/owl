@@ -129,4 +129,29 @@ OE   The machine cannot drain
   assert.ok(g.codes.OE.tests.some((t) => t.kind === 'observation'), 'still derives the cheap question');
 });
 
+it('a table it cannot read is not reported as a page with no table', () => {
+  /*
+   * Two-column layouts — the remedy to the RIGHT of the code rather than below it — are common and
+   * this parser cannot read them. It used to say "nothing usable found", which is what it says for
+   * a page with no fault table on it at all.
+   *
+   * Those need opposite things from somebody kneeling in front of a machine with a booklet: one
+   * means go and find the fault-code page, the other means you are holding it. This product reads
+   * that sentence out loud, so sending a person to photograph a page they are already photographing
+   * is not a cosmetic failure.
+   */
+  const twoColumn = parse({
+    text: 'E24  Water cannot leave    Check the drain filter\nE15  Water in base tray    Check the door seal',
+    sourceName: 'two-column manual',
+  });
+  assert.equal(twoColumn.found, 0, 'the fixture has stopped being unparseable');
+  assert.equal(twoColumn.orphanCodes, 2, 'codes were seen and went uncounted');
+  assert.match(twoColumn.coverage, /column to the right/, 'it does not say what is probably wrong');
+
+  const wrongPage = parse({ text: 'Before first use, remove all packaging.', sourceName: 'installation guide' });
+  assert.equal(wrongPage.orphanCodes, 0);
+  assert.equal(wrongPage.coverage, 'nothing usable found');
+  assert.notEqual(twoColumn.coverage, wrongPage.coverage, 'the two empty outcomes still share a sentence');
+});
+
 console.log(`\n${passed} passed`);
