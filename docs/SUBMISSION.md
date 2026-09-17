@@ -17,11 +17,45 @@ Checklist against the stated requirements:
 | which tracks and minis | Alexa+ · AWS Builder · Open Source |
 | what changed during the window | built in it |
 | **AWS Builder mini**: AWS services with documented integrations | Bedrock Nova Lite — live, measured, `npm run preflight` |
-| **Open Source mini**: a *new additional* OSS project or public contribution | ⚠️ **see below** |
+| **Open Source mini**: a *new additional* OSS project or public contribution | **[github.com/vidigoat/faultgraph](https://github.com/vidigoat/faultgraph)** — MIT, public, built in the window |
 | friction log — **up to 10% judging bonus** | `docs/FRICTION-LOG.md` |
 
 Note: the repo does **not** have to be public for this hackathon. Sharing it privately with
 `testing@devpost.com` and `@AmazonAppDev` satisfies the rule.
+
+
+## Open Source mini — `faultgraph`
+
+**https://github.com/vidigoat/faultgraph** · MIT · zero dependencies · 49 checks
+
+A new, additional open-source library, written during the window and published under MIT. It is the
+manual-reading half of this project, extracted and generalised until nothing in it knows what a
+dishwasher is — the test fixtures include a reciprocating compressor for exactly that reason.
+
+It reads the fault-code table out of equipment manual text and returns a graph you can diagnose
+with: causes ranked by the manual's own ordering, each citing the line it came from, and questions
+chosen by expected information gain divided by what the check costs the person doing it.
+
+It is not a token gesture carved off to satisfy a rule. Extracting it and writing a test suite
+against the extracted surface found **two real defects, both of which were live in this project**:
+
+1. **Citations drifted after an orphan-code join.** A code alone on its line is joined to the line
+   below it, which shortens the array and shifts every line number after that point. The citations
+   still looked plausible and pointed at the wrong line of a page somebody was holding. Line numbers
+   are now carried alongside the joined text rather than recomputed from it.
+
+2. **A whole branch of `next_test` was unreachable.** A second pass took "the cheapest test within
+   85% of the best one's bits", and carried its own explanation sentence — *"Nearly as telling as the
+   harder check, and you don't have to move anything"* — shown on screen to a person. Ranking already
+   divides bits by `(1 + effort)`, so for a costlier test to rank first it must carry proportionally
+   more information, and the smallest step on the scale is a factor of two. The two conditions
+   contradict each other at every pair of effort levels the scale defines, which a brute force over
+   the scale confirms. The branch had never once fired, which means **that sentence has never been
+   shown to anybody**. Dead code is untidy; a dead sentence describing product behaviour is a claim
+   that reads as true and is not. Both are gone.
+
+Both fixes are in this repository too. That is the argument for the extraction: a library with its
+own tests and its own README is examined differently from the same code sitting in a subfolder.
 
 
 Copy-paste for the submission form. Every number here comes out of a command in this repository;

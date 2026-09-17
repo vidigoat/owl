@@ -74,10 +74,27 @@ function nextTest({ space, tests, performed = [] }) {
     return { test: null, reason: 'nothing left that would tell us anything', stuck: true };
   }
 
-  // The cheapest test within a whisker of the best one wins. Being marginally more informative
-  // does not justify asking someone to pull an appliance out from under a counter.
-  const nearlyAsGood = ranked.filter((r) => r.bits >= best.bits * 0.85);
-  const chosen = nearlyAsGood.sort((a, b) => a.effort - b.effort || b.bits - a.bits)[0];
+  /*
+   * There was a second pass here: among tests within 85% of the best one's bits, take the cheapest,
+   * "because being marginally more informative does not justify asking someone to pull an appliance
+   * out from under a counter".
+   *
+   * It has never fired, and it cannot. Ranking already divides bits by (1 + effort), so a
+   * higher-effort test only reaches the top by carrying proportionally more information — and the
+   * smallest step on this scale, free to easy, is a factor of two. For the cheaper test to also be
+   * within 15% of the best, it would have to be both under half as informative and over 85% as
+   * informative. Solve it across every pair of effort levels EFFORT defines and the window is empty
+   * every time.
+   *
+   * The preference for cheap checks therefore lives entirely in the ranking, which is where it
+   * belongs. What the dead pass carried with it was a second `why` string — a sentence shown to a
+   * person, which no person has ever been shown. That is worse than dead code: it is a claim about
+   * the product's behaviour that reads as true and is not.
+   *
+   * Found by extracting this scorer into the `faultgraph` library and writing a test that asserted
+   * the second message. The test could not be made to pass.
+   */
+  const chosen = best;
 
   return {
     test: chosen.test,
@@ -86,10 +103,7 @@ function nextTest({ space, tests, performed = [] }) {
     done: false,
     stuck: false,
     // Said on screen. If it cannot explain why it is asking, it should not ask.
-    why:
-      chosen.test.id === best.test.id
-        ? `Rules out the most for the least effort.`
-        : `Nearly as telling as the harder check, and you don't have to move anything.`,
+    why: `Rules out the most for the least effort.`,
   };
 }
 

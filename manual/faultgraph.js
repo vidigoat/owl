@@ -122,6 +122,11 @@ function remedyToCause(remedy) {
  */
 function joinOrphanCodes(lines) {
   const out = [];
+  // Joining two lines into one shifts every line number after it, so a citation computed from the
+  // joined array points at the wrong line of the page somebody is holding. The original index of
+  // each surviving line is carried alongside.
+  const origin = [];
+
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     const bare = /^\s*([A-Za-z]{0,3}[:\-]?\d{0,3}[A-Za-z]?)\s*$/.exec(line);
@@ -131,16 +136,25 @@ function joinOrphanCodes(lines) {
     if (bare && bare[1].length >= 2 && /[A-Za-z0-9]/.test(bare[1]) && next && next.trim().length > 5
         && !NOT_A_CODE.has(bare[1].trim().toUpperCase())) {
       out.push(`${bare[1].trim()}   ${next.trim()}`);
+      origin.push(i);
       i++; // the meaning has been consumed
       continue;
     }
     out.push(line);
+    origin.push(i);
   }
+
+  // Metadata, not content: non-enumerable so that `joinOrphanCodes(x)` still deep-equals the plain
+  // array of lines it produced. A line-number table riding along as a visible element would make
+  // every caller that iterates or compares the result subtly wrong.
+  Object.defineProperty(out, 'origin', { value: origin });
   return out;
 }
 
 function parse({ model, text, sourceName = 'manual' }) {
   const lines = joinOrphanCodes(String(text).split(/\r?\n/));
+  /** Joined-array index → the line a reader would count to on the original page. */
+  const onPage = (idx) => (lines.origin ? lines.origin[idx] : idx) + 1;
   const codes = {};
   let found = 0;
 
@@ -153,10 +167,13 @@ function parse({ model, text, sourceName = 'manual' }) {
 
     // Remedy lines directly beneath a code line usually belong to it.
     const following = [];
+    // Each remedy carries its own line number. A citation pointing at the code line instead of the
+    // remedy is not a citation, it is a gesture at roughly the right part of the page.
+    const atLine = [];
     for (let j = i + 1; j < Math.min(i + 5, lines.length); j++) {
       const next = lines[j].trim();
       if (!next || CODE_LINE.test(lines[j])) break;
-      if (REMEDY_HINTS.test(next)) following.push(next);
+      if (REMEDY_HINTS.test(next)) { following.push(next); atLine.push(onPage(j)); }
     }
 
     const causes = following.map((remedy, k) => ({
@@ -175,7 +192,7 @@ function parse({ model, text, sourceName = 'manual' }) {
       // The manual's own wording, kept verbatim. This is what the guide reads aloud, because a
       // remedy line IS the repair step — paraphrasing it would be inventing a procedure.
       remedy,
-      source: { line: i + 1, manual: sourceName },
+      source: { line: atLine[k], codeLine: onPage(i), manual: sourceName },
     }));
 
     if (causes.length === 0) return;
