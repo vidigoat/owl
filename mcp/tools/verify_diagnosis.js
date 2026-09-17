@@ -37,12 +37,37 @@ function verify_diagnosis({ model, code, causeId, ruledOut = [] }) {
     .filter((c) => !ruledOut.includes(c.id))
     .sort((a, b) => b.likelihood - a.likelihood);
 
+  /*
+   * Nothing left to consider — and two opposite facts arrive here wearing the same shape.
+   *
+   *   found.causes is empty          we have never written up this code for this machine
+   *   found.causes existed, all gone the owner checked every one of them and cleared them
+   *
+   * They were one branch, with one sentence, sending both to a paid technician. That is the
+   * "could not establish X" / "X is absent" confusion this project has a whole test file about
+   * (mcp/tools/absence.test.js), and it had reappeared in the one function allowed to authorise
+   * spending.
+   *
+   * It matters most in the first case. Three of the four machines in service-data.js carry a code
+   * with no causes filled in — deliberately, because nothing goes in there until it is checked per
+   * model — and this told their owners to book a callout. They were being billed for a gap in our
+   * data. This product can read the fault table off a photograph of the manual page, which is the
+   * entire differentiator, and the gate was routing past it.
+   */
   if (causes.length === 0) {
+    const neverHadAny = found.causes.length === 0;
     return {
       abstain: true,
       confidence: 0,
-      reason: `Service data for ${model} lists ${code} but no verified causes yet.`,
-      escalate: 'technician',
+      reason: neverHadAny
+        ? `I know ${model} and I know what ${code} means, but I have no verified causes for it yet. ` +
+          `Show me the fault-code page of the manual and I'll read it — that costs nothing.`
+        : `Every cause I have for ${code} has been ruled out. Something is going on that this ` +
+          `machine's service data does not describe.`,
+      // 'read-manual' is a cheaper next step than a callout and this product can actually do it.
+      // The second case genuinely has nowhere else to go: the manual is where those causes came
+      // from, so reading it again returns the same list the owner has already cleared.
+      escalate: neverHadAny ? 'read-manual' : 'technician',
     };
   }
 

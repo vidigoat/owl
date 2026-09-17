@@ -124,6 +124,22 @@ grounds, any one of which is enough:
 When it abstains, no cart is opened — not an empty one, not a cancelled one. `begin_checkout`
 refuses outright on a cause that was not upheld, so there is no path from a guess to a charge.
 
+Those four grounds are not a comment. `mcp/tools/gate-reachability.test.js` walks every model, every
+code, every cause and **every subset of ruled-out causes** in the service data — 67 calls through the
+real gate — and asserts each ground is produced by some real input, that no refusal ever comes back
+spendable, and that upholding still happens. A ladder of early returns hides dead rules perfectly:
+they read as coverage and never run.
+
+That walk found one. **A refusal was billing people for a gap in our own data.** "I have no verified
+causes for this code" and "you have ruled out every cause I have" were the same branch, with the same
+sentence, both escalating to a paid technician. They are opposite facts. The second is a machine
+doing something its manual does not describe, and a callout is the honest answer. The first is a row
+we never wrote — and this product can read the fault table off a photograph of the manual page, which
+is the entire differentiator. Three of the four machines here reach it. They now say:
+
+> I know this machine and I know what F21 means, but I have no verified causes for it yet. Show me
+> the fault-code page of the manual and I'll read it — that costs nothing.
+
 ![NOT UPHELD — no part sold: the gate refusing to spend money on a guess](docs/media/refusal.png)
 
 The screen above is the product. A repair copilot that sells you a pump when it isn't sure is worse
