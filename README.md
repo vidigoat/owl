@@ -518,6 +518,32 @@ returning a display's fault code as the model number. Neither was findable offli
 
 ---
 
+## The manual reader is also a library
+
+**[github.com/vidigoat/faultgraph](https://github.com/vidigoat/faultgraph)** — MIT, zero
+dependencies, 49 checks.
+
+`manual/faultgraph.js` is published standalone, generalised until nothing in it knows what a
+dishwasher is — its test fixtures include a reciprocating compressor for that reason. It reads a
+fault table out of equipment manual text and returns causes ranked by the manual's own ordering,
+each citing the line it came from, plus the cheap observations lifted out of remedy conditions.
+
+Extracting it was not a gesture. Writing a test suite against the extracted surface found two
+defects that were live *here*:
+
+- **Citations drifted after an orphan-code join.** A code alone on its line is joined to the line
+  below it, which shortens the array and shifted every line number after that point. The citation
+  still looked plausible and pointed at the wrong line of a page somebody is holding — the one thing
+  a citation exists to prevent.
+- **A branch of the question chooser was unreachable**, and carried its own sentence shown on
+  screen: *"Nearly as telling as the harder check, and you don't have to move anything."* Ranking
+  already divides bits by `(1 + effort)`, and the smallest step on that scale is a factor of two,
+  well past the 15% window the branch allowed; brute-forcing every pair of effort levels gives an
+  empty window at all of them. That sentence has therefore never been shown to anybody.
+
+Both are fixed in both places. A library with its own tests and its own README gets examined
+differently from the same code in a subfolder, which is the argument for doing it.
+
 ## Decisions
 
 The arguments worth not having twice — what was decided, what it cost, and what would have to be
