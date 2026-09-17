@@ -47,8 +47,21 @@ const { TOOLS } = (() => {
   return { TOOLS: (src.match(/^\s{4}name: '/gm) || []).length };
 })();
 
+/*
+ * `where` makes a claim contextual, and the tool count is why it exists.
+ *
+ * Every check here was "does the README contain this string anywhere". For a two-digit number that
+ * is close to vacuous: "17" appears in this README inside a version, a price, a port number. The
+ * check passed cheerfully for weeks while the text said **"all 14 tools"**, and the demo script's
+ * outro said 14 as well. FRICTION-LOG records the same failure a third time, in AGENTS.md and
+ * docs/JUDGING.md, with a check count.
+ *
+ * Three instances of one bug means the checker was the problem, not the prose. A claim with a
+ * `where` pattern must now match IN CONTEXT: every place the README says "<n> tools" has to say the
+ * right n, and a README that has stopped mentioning it at all fails too.
+ */
 const CLAIMS = [
-  { what: 'MCP tools registered', value: String(TOOLS) },
+  { what: 'MCP tools registered', value: String(TOOLS), where: /(\d+) (?:MCP )?tools\b/g },
   { what: 'questions asked, mean', value: from(questions, /([0-9.]+) questions on average/, 'mean') },
   { what: 'questions asked, worst case', value: from(questions, /worst case (\d+)/, 'worst case') },
   { what: 'mean effort', value: from(questions, /Mean effort ([0-9.]+)/, 'effort') },
@@ -59,8 +72,21 @@ console.log('\n  README figures, against the commands that produce them\n');
 
 let stale = 0;
 for (const c of CLAIMS) {
-  const present = README.includes(c.value);
-  console.log(`  ${present ? C.green + 'ok  ' : C.red + 'MISSING'}${C.off} ${c.what.padEnd(32)} ${C.dim}${c.value}${C.off}`);
+  let present;
+  let detail = '';
+
+  if (c.where) {
+    // Every occurrence, not the first: one corrected sentence next to three stale ones reads as
+    // fixed and is not.
+    const found = [...README.matchAll(c.where)].map((m) => m[1]);
+    const wrong = found.filter((v) => v !== c.value);
+    present = found.length > 0 && wrong.length === 0;
+    detail = found.length === 0 ? ' — the README no longer mentions it' : wrong.length ? ` — README says ${[...new Set(wrong)].join(', ')}` : '';
+  } else {
+    present = README.includes(c.value);
+  }
+
+  console.log(`  ${present ? C.green + 'ok  ' : C.red + 'STALE  '}${C.off} ${c.what.padEnd(32)} ${C.dim}${c.value}${detail}${C.off}`);
   if (!present) stale++;
 }
 
