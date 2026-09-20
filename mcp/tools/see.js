@@ -17,6 +17,11 @@
  */
 
 const { execFile } = require('node:child_process');
+const { Budget } = require('../budget');
+
+/** One per process, built lazily so importing this module never touches the filesystem. */
+let _budget;
+const budget = () => (_budget ||= new Budget());
 const fs = require('node:fs');
 const path = require('node:path');
 const os = require('node:os');
@@ -129,6 +134,21 @@ function invokeBedrock(base64, format) {
       return reject(e);
     }
 
+    /*
+     * The ceiling, checked BEFORE the call rather than regretted after it.
+     *
+     * Every invocation below bills a real AWS account — the owner's production one, since a
+     * separate IAM user isolates permissions and not billing. Nothing used to stop a loop, a stuck
+     * retry, or a tab left refreshing. A product whose headline feature is refusing to spend your
+     * money without being sure should not spend its owner's without a limit.
+     */
+    try {
+      budget().check({ label: 'a Bedrock vision call', images: 1 });
+    } catch (e) {
+      clean();
+      return reject(e);
+    }
+
     const args = [
       'bedrock-runtime',
       'invoke-model',
@@ -154,6 +174,22 @@ function invokeBedrock(base64, format) {
         return reject(e);
       }
       clean();
+
+      /*
+       * Record what it cost, from the usage Bedrock reports, before the caller is told it worked.
+       *
+       * Recorded from the REAL usage block rather than the pre-flight estimate — the estimate
+       * deliberately runs high so the ceiling errs toward refusing, and using it here would make
+       * the ledger drift steadily above what was actually billed. An unparseable response costs 0
+       * rather than NaN, which would poison every later comparison against the ceiling.
+       */
+      try {
+        const usage = JSON.parse(out)?.usage;
+        if (usage) budget().record(budget().costOf(usage), { tool: 'see' });
+      } catch {
+        /* the caller is about to fail on this same body; do not mask that with a ledger error */
+      }
+
       resolve(out);
     });
   });

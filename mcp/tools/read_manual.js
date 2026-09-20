@@ -19,6 +19,11 @@
  */
 
 const fs = require('node:fs');
+const { Budget } = require('../budget');
+
+/** One per process, built lazily so importing this module never touches the filesystem. */
+let _budget;
+const budget = () => (_budget ||= new Budget());
 const os = require('node:os');
 const path = require('node:path');
 const { execFile } = require('node:child_process');
@@ -77,6 +82,10 @@ function invoke(base64, format) {
       // a table cut off halfway is worse than no table — it looks complete.
       inferenceConfig: { maxTokens: 2000, temperature: 0 },
     }));
+
+    // The same ceiling as see.js. A manual page is a photograph too, and this path can be driven in
+    // a loop by a caller dropping images — see mcp/budget.js.
+    budget().check({ label: 'a Bedrock manual transcription', images: 1, maxTokens: 1400 });
 
     const args = ['bedrock-runtime', 'invoke-model', '--model-id', MODEL_ID, '--region', REGION,
       '--content-type', 'application/json', '--cli-binary-format', 'raw-in-base64-out',
