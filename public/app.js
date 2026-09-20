@@ -510,10 +510,31 @@ async function answer(outcome) {
 
   // Show the elimination before moving on — this is the moment the product is understood.
   screen.querySelector('.s-question').innerHTML = `
-    <p class="question question--answered">${pending.test.question}</p>
-    <p class="answered__you">you said: <b>${outcome.say}</b></p>
+    <p class="question question--answered">${esc(pending.test.question)}</p>
+    <p class="answered__you">you said: <b>${esc(outcome.say)}</b></p>
     ${spaceMarkup(result.space, result.eliminated)}
     ${bitsLine(result.bits)}`;
+
+  /*
+   * The voice moves on.
+   *
+   * The spoken line is rendered once by renderQuestion and was left alone here, so after an answer
+   * the screen showed the same sentence twice: the question as a heading at the top, and the same
+   * question again in serif at the bottom, still being asked. On the screen where the product is
+   * actually understood — a cause striking through because of something the person just did — a
+   * third of the space was a stale repeat.
+   *
+   * A person who has just answered hears what their answer did, not the question again.
+   */
+  const spoken = screen.querySelector('.saying span');
+  if (spoken) {
+    const gone = result.eliminated.map((c) => c.label.toLowerCase());
+    spoken.textContent = gone.length === 0
+      ? "That doesn't rule anything out, so I'll ask something else."
+      : gone.length === 1
+        ? `Good — that rules out the ${gone[0]}.`
+        : `Good — that rules out the ${gone.slice(0, -1).join(', the ')} and the ${gone[gone.length - 1]}.`;
+  }
 
   dx.space = result.space;
   dx.bits = result.bits;
