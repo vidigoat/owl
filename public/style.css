@@ -13,6 +13,8 @@
   --rule: #cfc6b8;
 
   --display: "Bricolage Grotesque", system-ui, sans-serif;
+  /* The voice. Used for one thing only: the sentence being said out loud. */
+  --spoken: "Newsreader", Georgia, serif;
   --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
 }
 
@@ -83,7 +85,29 @@ h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -0.015em; }
 
 /* ── screen contents ─────────────────────────────── */
 .s-listen { display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 1; text-align: center; gap: 18px; }
-.s-listen__ring { width: 74px; height: 74px; border-radius: 50%; border: 3px solid var(--proof); opacity: .9; }
+/*
+ * Listening.
+ *
+ * It was a 3px outline circle, which reads as a loading spinner that forgot to spin. Presence is
+ * the thing being drawn here — the device is awake and waiting for you — so it gets a soft field
+ * with a solid core, the way a lamp is on rather than a border being present. Still no face: two
+ * eyes and a mouth would make a machine that refuses to sell you a part look like it is joking.
+ */
+.s-listen__ring {
+  width: 74px; height: 74px; border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--proof) 55%, transparent);
+  background:
+    radial-gradient(circle at 50% 50%,
+      color-mix(in srgb, var(--proof) 26%, transparent) 0%,
+      color-mix(in srgb, var(--proof) 8%, transparent) 55%,
+      transparent 72%);
+  position: relative;
+}
+.s-listen__ring::after {
+  content: ""; position: absolute; inset: 50% auto auto 50%;
+  width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px;
+  border-radius: 50%; background: var(--proof);
+}
 .s-listen p { font-size: 21px; max-width: 26ch; margin: 0; }
 
 .s-cam { flex: 1; border: 2px dashed var(--graphite); border-radius: 6px; display: flex; flex-direction: column;
@@ -153,8 +177,42 @@ h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -0.015em; }
 .done__line { font-size: 26px; font-weight: 600; max-width: 24ch; }
 .done__sub { color: var(--graphite); margin: 0; max-width: 40ch; }
 
-.saying { border-top: 1px solid var(--rule); margin-top: 18px; padding-top: 14px; font-size: 15px; color: var(--graphite); display: flex; gap: 10px; }
-.saying i { color: var(--proof); font-style: normal; font-family: var(--mono); font-size: 12px; padding-top: 3px; }
+/*
+ * The spoken line.
+ *
+ * This is the product. The person it is for is kneeling in front of a machine with their hands
+ * inside it and their eyes nowhere near the screen — so of everything rendered here, this is the
+ * part that actually reaches them, and it was set at 15px in grey under a hairline, which is how
+ * you style a caption.
+ *
+ * It now gets the one serif in the product. Newsreader appears nowhere else, so the change of voice
+ * marks the difference between what you can look at and what you will still have heard with your
+ * head inside a dishwasher. Everything else on the device screen is Bricolage.
+ */
+.saying {
+  border-top: 1px solid var(--rule);
+  margin-top: 20px; padding-top: 18px;
+  display: flex; gap: 14px; align-items: baseline;
+}
+.saying span {
+  font-family: var(--spoken);
+  font-size: clamp(19px, 2.1vw, 24px);
+  line-height: 1.38;
+  letter-spacing: -.006em;
+  color: var(--ink);
+  max-width: 34ch;
+}
+/*
+ * The speaker mark. A label reading "says" in the middle of a sentence being spoken is chrome
+ * describing the obvious; a small stable tick reads as an indicator and gets out of the way.
+ */
+.saying i {
+  flex: none;
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--proof);
+  font-size: 0;
+  position: relative; top: -4px;
+}
 
 /* ── trace ───────────────────────────────────────── */
 .trace { background: var(--chrome-dk); border-radius: 12px; padding: 22px; color: var(--paper); }
@@ -279,6 +337,9 @@ footer { max-width: 1140px; margin: 0 auto; padding: 22px 24px; display: flex; j
 @media (prefers-reduced-motion: no-preference) {
   .s-listen__ring { animation: pulse 2.4s ease-in-out infinite; }
   @keyframes pulse { 0%,100% { transform: scale(1); opacity: .9; } 50% { transform: scale(1.09); opacity: .55; } }
+  /* The spoken line arrives rather than appearing, because it is the thing being said. */
+  .saying span { animation: spoken 420ms cubic-bezier(.22,.61,.36,1) both; }
+  @keyframes spoken { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
 }
 
 /* ── a real photograph, dropped onto the device ─────────── */
