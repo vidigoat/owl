@@ -178,3 +178,47 @@ shipped it four more times, which suggests a rule is not enough and the shape ne
 **Suggestion for AWS:** `invoke-model` taking an output path *and* printing metadata to stdout is a
 trap that costs everyone the same hour. Either write metadata to stderr, or refuse `/dev/stdout` as
 an output path with a message saying why.
+
+### 2026-09-20 · Bedrock has no spend ceiling you can set
+
+**What happened.** This project makes a Bedrock call every time it looks at anything: a control
+panel, a rating plate, a manual page, a repair being confirmed. For most of its life nothing
+bounded that. A loop in a demo, a stuck retry, or a browser tab left refreshing would have billed
+until somebody noticed on a statement.
+
+We looked for a ceiling to set and there isn't one. Budgets in Cost Explorer **alert**; they do not
+**stop**. The closest mechanism is an SCP or an IAM deny that somebody has to write, test, and
+remember to remove — which is a lot of ceremony for "do not let this exceed a dollar".
+
+**Why it matters more than usual here.** A separate IAM user isolates *permissions*, not *billing*,
+so a hackathon project created carefully under its own user still spends the owner's production
+account. We found this while checking whether the project was safe to leave running — it was not.
+
+**What we did instead.** Wrote one: `mcp/budget.js`, an on-disk ledger with a pre-flight check that
+refuses a call which *could* exceed the ceiling, and which fails closed when it cannot read its own
+ledger. Sixty lines. Every project doing vision at any volume is going to write this same file.
+
+**Suggestion:** a per-IAM-principal or per-inference-profile monthly cap in the Bedrock console that
+returns a distinct throttling error when reached. Alerting after the money is gone is the wrong end
+of the problem, and for anyone trying something new on a personal card it is the difference between
+experimenting and not.
+
+---
+
+### 2026-09-20 · `invoke-model` reports usage, and that is genuinely good
+
+Worth recording alongside the complaints, because it is the thing that made the ceiling above
+possible to build honestly.
+
+The response body carries `usage.inputTokens` and `usage.outputTokens`, so a caller can record what
+a call **actually** cost rather than what it estimated. Our ledger keeps the real figure and uses the
+estimate only for the pre-flight check — which means the ceiling errs toward refusing while the
+recorded total stays true to the bill.
+
+Several providers make you infer this. Not having to is the reason the number this project prints
+is a measurement rather than a guess, and that distinction is load-bearing for a product whose whole
+argument is about not guessing.
+
+**One small thing:** images are charged as tokens and the response does not break out how many were
+image tokens versus text. We over-count images at a flat 3,000 in the pre-flight estimate because we
+cannot see the real split, which makes the ceiling blunter than it needs to be.
