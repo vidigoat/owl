@@ -173,4 +173,27 @@ it('the field names the script reads are the field names the tools return', () =
   assert.deepEqual(missing, [], `the screen reads fields read_manual never returns: ${missing.join(', ')}`);
 });
 
+it('the spoken-line dedupe compares live text and can unhide', () => {
+  /*
+   * Two bugs found by rendering this rather than trusting it.
+   *
+   * It compared `data-say`, which records what was said when the block was RENDERED. The voice
+   * moves on: after an answer the span is rewritten to "Good — that rules out the failed drain
+   * pump" while the attribute still holds the question — so the dedupe hid exactly the sentence
+   * that was no longer a duplicate, on the one screen where this product is understood.
+   *
+   * And `el.hidden = true` did nothing, because `.saying` is display:flex and a class beats the
+   * user-agent stylesheet. The attribute was set, nothing moved, and it looked like the JS had not
+   * run at all.
+   */
+  assert.match(app, /const span = block\.querySelector\('span'\);/,
+    'the dedupe is not reading the live text');
+  assert.ok(!/const spoken = \(block\.dataset\.say/.test(app),
+    'the dedupe is back to comparing the stale data-say attribute');
+  assert.match(app, /block\.hidden = false;/,
+    'a line hidden for one render can never come back');
+  assert.match(css, /\[hidden\] \{ display: none !important; \}/,
+    'without this, el.hidden is inert on anything this stylesheet gives a display to');
+});
+
 console.log(`\n${passed} passed`);

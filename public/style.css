@@ -20,6 +20,18 @@
 
 * { box-sizing: border-box; }
 
+/*
+ * The attribute must win.
+ *
+ * Any element this stylesheet gives a `display` to — `.saying` is flex — ignores the `hidden`
+ * attribute entirely, because a class beats the user-agent stylesheet. So `el.hidden = true` sets
+ * the attribute, changes nothing visible, and the bug looks like the JavaScript never ran.
+ *
+ * Cost about fifteen minutes of chasing a dedupe that was working perfectly. The sibling project's
+ * stylesheet carries this same rule with the same comment, which is the annoying part.
+ */
+[hidden] { display: none !important; }
+
 body {
   margin: 0;
   background: var(--chrome);

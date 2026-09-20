@@ -64,10 +64,56 @@ function speak(text) {
   window.speechSynthesis.speak(u);
 }
 
+/**
+ * The line being said out loud.
+ *
+ * `data-say` carries the text so `dedupeSpoken()` can compare it against what is already on the
+ * screen. The word "says" is gone from the markup — a label reading "says" next to a sentence being
+ * spoken is chrome describing the obvious — and the element is now a speaker tick that indicates
+ * and gets out of the way.
+ */
 const say = (text) => {
   speak(text);
-  return `<div class="saying"><i>says</i><span>${text}</span></div>`;
+  return `<div class="saying" data-say="${esc(text)}"><i></i><span>${esc(text)}</span></div>`;
 };
+
+/**
+ * Do not print the same sentence twice on a 400-pixel screen.
+ *
+ * Several screens show the current step or question as a heading AND hand the identical string to
+ * `say()`, so it appeared once in Bricolage at the top and again in Newsreader at the bottom. On
+ * the guided-repair screen that is the same sentence twice in one view, which on a device read from
+ * across a kitchen is a third of the available room spent saying nothing new.
+ *
+ * The voice still SPEAKS it — `speak()` has already run by the time this is called, and the audio
+ * is the point. This only removes the second printing.
+ */
+function dedupeSpoken() {
+  const block = screen.querySelector('.saying');
+  if (!block) return;
+
+  /*
+   * Compare the LIVE text, not `data-say`.
+   *
+   * `data-say` records what was said when the block was rendered, and the voice moves on: after an
+   * answer, renderAnswer rewrites the span to "Good — that rules out the failed drain pump" while
+   * the attribute still holds the question. Comparing the attribute hid exactly the sentence that
+   * was no longer a duplicate — the one moment on the one screen where this product is understood.
+   */
+  const span = block.querySelector('span');
+  const spoken = (span ? span.textContent : '').trim().toLowerCase();
+  if (!spoken) return;
+
+  // It may have been hidden for a previous render whose text HAS since changed.
+  block.hidden = false;
+
+  // The classes that actually carry a sentence big enough to read across a room. Listed rather
+  // than guessed at: the first attempt included `.step__text` and `.guide__step`, neither of which
+  // exists, so the dedupe silently never fired and the guide screen kept printing its step twice.
+  const headings = [...screen.querySelectorAll('.step__say, .question, .refuse__line, h2, h3')];
+  const duplicated = headings.some((h) => h.textContent.trim().toLowerCase() === spoken);
+  if (duplicated) block.hidden = true;
+}
 
 /** Anything a vision model read off a stranger's photograph is untrusted text, not markup. */
 const esc = (s) => String(s ?? '').replace(/[<>&"]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c]));
@@ -988,6 +1034,15 @@ function handsFree() {
     }
     advance();
   }, 2600);
+}
+
+/*
+ * Every screen render goes through `screen.innerHTML`, in a dozen different functions. Rather than
+ * remembering to call dedupeSpoken() in each of them — which is the kind of thing that gets
+ * remembered eleven times out of twelve — watch the element and run it whenever the screen changes.
+ */
+if (typeof MutationObserver === 'function') {
+  new MutationObserver(() => dedupeSpoken()).observe(screen, { childList: true, subtree: true });
 }
 
 async function boot() {
