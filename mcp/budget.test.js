@@ -130,7 +130,7 @@ it('recording accumulates and counts calls', () => {
   assert.match(b.summary(), /across 2 calls/);
 });
 
-it('both Bedrock call sites are behind the ceiling', () => {
+it('every Bedrock call site is behind the ceiling', () => {
   // A guard on one of two doors is not a guard. Checked structurally, because the alternative is
   // making real billed calls to find out.
   for (const f of ['tools/see.js', 'tools/read_manual.js']) {
@@ -138,6 +138,28 @@ it('both Bedrock call sites are behind the ceiling', () => {
     assert.match(src, /budget\(\)\.check\(/, `${f} invokes Bedrock without checking the ceiling`);
     assert.match(src, /require\('\.\.\/budget'\)/, `${f} does not import the budget`);
   }
+});
+
+it('no tool reaches Bedrock by a route that skips the ceiling', () => {
+  /*
+   * The check above names two files. This one proves there are only two.
+   *
+   * `read_error`, `identify_appliance` and `confirm_fix` all reach the model through `see()`, so
+   * they inherit the ceiling — today. A fourth tool calling the AWS CLI directly would be guarded
+   * by nothing and would look exactly like the other three from the outside. So the rule is stated
+   * as a rule: if you invoke Bedrock, you check the budget in the same file.
+   */
+  const dir = path.join(__dirname, 'tools');
+  const unguarded = [];
+
+  for (const file of fs.readdirSync(dir).filter((f) => f.endsWith('.js') && !f.includes('.test.'))) {
+    const src = fs.readFileSync(path.join(dir, file), 'utf8');
+    const invokes = /invoke-model|bedrock-runtime/.test(src);
+    if (invokes && !/budget\(\)\.check\(/.test(src)) unguarded.push(file);
+  }
+
+  assert.deepEqual(unguarded, [],
+    `these invoke Bedrock and never check the ceiling: ${unguarded.join(', ')}`);
 });
 
 console.log(`\n${passed} passed`);
