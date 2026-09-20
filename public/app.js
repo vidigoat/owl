@@ -110,7 +110,11 @@ function dedupeSpoken() {
   // The classes that actually carry a sentence big enough to read across a room. Listed rather
   // than guessed at: the first attempt included `.step__text` and `.guide__step`, neither of which
   // exists, so the dedupe silently never fired and the guide screen kept printing its step twice.
-  const headings = [...screen.querySelectorAll('.step__say, .question, .refuse__line, h2, h3')];
+  // `.refuse__why` is in this list because the checkout refusal prints its explanation as body text
+  // and then says the identical sentence — "That cause costs nothing to fix. There is no part to
+  // buy." — twice in one view. It is safe to include precisely because the match must be EXACT:
+  // the mains refusal has a different `why` from its spoken line and keeps both.
+  const headings = [...screen.querySelectorAll('.step__say, .question, .refuse__line, .refuse__why, h2, h3')];
   const duplicated = headings.some((h) => h.textContent.trim().toLowerCase() === spoken);
   if (duplicated) block.hidden = true;
 }
