@@ -326,11 +326,28 @@ footer { max-width: 1140px; margin: 0 auto; padding: 22px 24px; display: flex; j
 
 /* ── refusal: calm and certain, never an error ───────────── */
 .refuse__seal {
-  align-self: flex-start; font-family: var(--mono); font-size: 12px;
+  align-self: flex-start; font-family: var(--mono); font-size: 11px; letter-spacing: .06em;
   color: var(--amber); border: 1px solid var(--amber); border-radius: 999px; padding: 4px 12px;
 }
-.refuse__line { font-size: 26px; font-weight: 600; margin: 0; max-width: 22ch; }
-.refuse__why { color: var(--graphite); margin: 0; max-width: 42ch; font-size: 15px; }
+/*
+ * The line this whole project exists to be able to say.
+ *
+ * It was 26px, which is a heading. Nothing else is competing for this screen — the seal above it is
+ * eleven characters and the reason below is two lines — so sizing it like a heading was sizing it
+ * for a page that does not exist. It is the sentence a judge will screenshot, and the sentence
+ * somebody hears at the moment the product declines to take their money, so it gets the room.
+ *
+ * Tracking goes negative as it grows, which large display type needs and 26px did not.
+ */
+.refuse__line {
+  font-size: clamp(30px, 3.4vw, 40px);
+  font-weight: 600;
+  letter-spacing: -.026em;
+  line-height: 1.12;
+  margin: 0;
+  max-width: 18ch;
+}
+.refuse__why { color: var(--graphite); margin: 0; max-width: 42ch; font-size: 16px; line-height: 1.55; }
 /* What to do next. A refusal that does not hand back a move is just a wall. */
 .refuse__next { color: var(--ink); margin: 0; max-width: 42ch; font-size: 15px; font-weight: 500; }
 
