@@ -46,7 +46,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -0.015em; }
 
 /* ── top ─────────────────────────────────────────── */
 .top { max-width: 1140px; margin: 0 auto; padding: 56px 24px 30px; color: var(--paper); }
-.top h1 { font-size: clamp(42px, 7vw, 76px); font-weight: 800; line-height: 0.95; letter-spacing: -0.03em; }
+.top h1 { font-size: clamp(42px, 7vw, 76px); font-weight: 800; line-height: 0.95; letter-spacing: -0.03em; text-wrap: balance; }
 .tagline { max-width: 58ch; margin: 16px 0 0; color: #b9c0c8; font-size: 18px; }
 
 /* ── stage: device + trace ───────────────────────── */
@@ -59,7 +59,48 @@ h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -0.015em; }
   gap: 32px;
   align-items: start;
 }
-@media (max-width: 900px) { .stage { grid-template-columns: 1fr; } }
+/*
+ * `minmax(0, 1fr)`, not `1fr`.
+ *
+ * A bare `1fr` is `minmax(auto, 1fr)`, and `auto` floors the track at its MIN-CONTENT width. The
+ * trace panel carries unbreakable strings — `Streamable HTTP · 2025-11-25`, model ids, tool
+ * signatures — so the column refused to go below their width and pushed the whole page sideways.
+ * At 420px the masthead was cut off mid-word and the device ran off the right edge.
+ */
+@media (max-width: 900px) { .stage { grid-template-columns: minmax(0, 1fr); } }
+
+/* ── phone ────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 560px) {
+  .top { padding: 34px 18px 22px; }
+  .top h1 { font-size: clamp(30px, 10vw, 44px); }
+  .tagline { font-size: 16px; }
+
+  .stage { padding: 0 18px 40px; gap: 22px; }
+  main section { padding: 44px 18px; }
+
+  /* The device is a device, not a page. It keeps its proportions and loses its padding. */
+  .device__bezel { padding: 10px 10px 20px; border-radius: 14px; }
+  .screen { padding: 20px 18px; min-height: 360px; }
+  .step__say { font-size: 24px; }
+  .refuse__line { font-size: 27px; }
+  .done__line { font-size: 22px; }
+
+  /* Two columns of evidence side by side is unreadable at this width. */
+  .compare { grid-template-columns: minmax(0, 1fr); }
+  .device__controls { gap: 8px; }
+  .device__controls .btn { font-size: 14px; padding: 9px 14px; }
+}
+
+/*
+ * Nothing on this page may push it sideways.
+ *
+ * The trace is full of strings a browser will not break on its own — tool signatures, model ids,
+ * ISO dates joined by middle dots. Long ones scroll inside their own block rather than widening
+ * the document, because a horizontally scrolling page reads as broken on a phone.
+ */
+.trace__list li, .totals, .cite { overflow-wrap: anywhere; }
+.teach__manual { max-width: 100%; overflow-x: auto; }
 
 .device__bezel {
   position: relative;

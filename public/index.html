@@ -12,7 +12,13 @@
 <body>
 
 <header class="top">
-  <h1>Second&nbsp;Set of&nbsp;Hands</h1>
+  <!--
+    No &nbsp; here. It used to read "Second&nbsp;Set of&nbsp;Hands" to control the line break on a
+    wide screen, and a non-breaking space cannot break — so at 420px the title could not wrap, the
+    h1 stayed wider than the viewport, and the whole page scrolled sideways with the masthead cut
+    off mid-word. Wrapping is what a narrow screen is FOR.
+  -->
+  <h1>Second Set of Hands</h1>
   <p class="tagline">
     Point your Echo Show at the blinking panel. It reads the fault, proves the diagnosis,
     talks you through the repair, and orders the exact part.
