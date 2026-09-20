@@ -17,7 +17,23 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const ROOT = path.join(__dirname, '..');
-const README = fs.readFileSync(path.join(ROOT, 'README.md'), 'utf8');
+/*
+ * Both documents, not just the README.
+ *
+ * This only ever read README.md, and docs/SUBMISSION.md is the one that gets SUBMITTED. Today it
+ * was caught claiming "1.3 questions on average" and "mean effort 2.3 → 1.1" hours after both
+ * figures had moved — corrected in the README, missed here, because nothing was looking. A stale
+ * number in a README is embarrassing; the same number in the submission is the number a judge
+ * checks against a command that disagrees with it.
+ */
+const DOCS = ['README.md', path.join('docs', 'SUBMISSION.md')];
+const README = DOCS.map((f) => {
+  try {
+    return fs.readFileSync(path.join(ROOT, f), 'utf8');
+  } catch {
+    return ''; // a document that does not exist cannot be stale
+  }
+}).join('\n\n');
 const strip = (s) => s.replace(/\x1b\[[0-9;]*m/g, '');
 
 const run = (args) => {
@@ -91,7 +107,7 @@ for (const c of CLAIMS) {
 }
 
 console.log(stale
-  ? `\n  ${C.red}${stale} figure(s) the commands produce do not appear in the README.${C.off}\n  Either the README is stale, or it stopped quoting something worth quoting.\n`
-  : `\n  ${C.green}Every figure the README quotes is one a command still produces.${C.off}\n`);
+  ? `\n  ${C.red}${stale} figure(s) the commands produce do not appear in README.md or docs/SUBMISSION.md.${C.off}\n  Either the README is stale, or it stopped quoting something worth quoting.\n`
+  : `\n  ${C.green}Every figure these documents quote is one a command still produces.${C.off}\n`);
 
 if (stale) process.exitCode = 1;

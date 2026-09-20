@@ -193,7 +193,7 @@ nothing to attach money to.
 **We measured the claims instead of asserting them.**
 
 `npm run questions` walks every fault code on every machine and **every possible sequence of
-answers** — not a sample. 1.3 questions on average, **worst case 2**. The mean describes a typical
+answers** — not a sample. 1.1 questions on average, **worst case 2**. The mean describes a typical
 repair; the worst case describes the person who gives up.
 
 That measurement then found a limitation nobody had noticed: information gain cannot beat working
@@ -205,11 +205,19 @@ The fix was already printed on the page. Manuals write *"Replace the drain pump 
 turn**"*, and that clause is not part of the repair — it is the observation that justifies it:
 
 ```
-mean effort   2.3  →  1.1
+mean effort   2.3  →  0.9
 ```
 
-Same number of questions, **less than half the work**, because it stopped asking people to buy a
-pump in order to find out what is wrong.
+Same number of questions, **a third of the work**, because it stopped asking people to buy a pump
+in order to find out what is wrong.
+
+Part of that last step came later and is worth separating out, because a number that improves on its
+own deserves suspicion. Hotpoint F13 — *"the water is not heating"*, two causes, both behind mains —
+used to be asked about: one question, *"replace the heating element, did that fix it?"*, put to
+somebody who is not allowed to replace a heating element and whose answer could not change what
+happens next. The tool now recognises that before opening its mouth, so F13 costs 0 questions
+instead of 1 and the averages fall. It keeps its row in the table at 0 rather than leaving the
+denominator.
 
 **The reader is scored, including on the panels it fails.** Against real Bedrock, on deliberately
 hard panels — a specular highlight across the digits, a crouching angle, an unlit utility room, a
