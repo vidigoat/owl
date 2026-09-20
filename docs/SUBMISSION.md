@@ -220,6 +220,27 @@ real fault is something else.
 
 ---
 
+**It refuses to spend its owner's money too.**
+
+`verify_diagnosis` is the gate that will not sell you a part it cannot stand behind. For most of
+this project's life, the project itself had no such limit: every vision call billed a real AWS
+account — the owner's *production* one, since a separate IAM user isolates permissions and not
+billing — and a loop, a stuck retry or a tab left refreshing would have run until somebody noticed
+on a statement.
+
+Bedrock has no ceiling you can set. Cost Explorer budgets alert; they do not stop. So `mcp/budget.js`
+is one: an on-disk ledger, a pre-flight check that refuses a call which *could* exceed the limit
+rather than one that already did, and a failure mode that stops rather than assuming nothing has
+been spent. The estimate over-counts so the ceiling errs toward refusing; what gets *recorded* is
+the real usage Bedrock reports, so the ledger stays true to the bill.
+
+```
+npm run eval    13 vision calls · $0.0016 · 7/9 fault codes, 1/1 model numbers
+```
+
+A product built around not guessing with somebody's money should be able to say what it has spent
+of its own. Now it can.
+
 ## What's next
 
 AgentCore Memory (refused by this IAM identity today — `AmazonBedrockFullAccess` does not cover
