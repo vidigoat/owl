@@ -341,6 +341,34 @@ npm run terminal-shot   # and the one of the demo's own output
 npm run eval            # the vision evaluation (needs photographs in eval/photos/)
 ```
 
+### When it is spending real money
+
+Everything above runs without credentials. With `AWS_PROFILE` set, the four vision tools make real
+Bedrock calls against a real account, and this project bounds itself rather than trusting you to
+notice:
+
+```bash
+AWS_PROFILE=bedrock npm run eval        # 13 vision calls · about $0.0016
+
+HANDS_BUDGET_USD=2.00 npm run eval      # raise the ceiling, deliberately
+HANDS_LEDGER=/tmp/x.json npm run eval   # somewhere else to count
+```
+
+The ceiling defaults to **$0.50** — roughly a hundred full evals — and is enforced *before* each
+call rather than regretted after it. The ledger is on disk, so a crashed run or a second terminal
+cannot start the count again, and an unreadable ledger stops everything rather than assuming nothing
+has been spent.
+
+Bedrock offers no such limit itself: Cost Explorer budgets alert, they do not stop. And a separate
+IAM user isolates permissions, not billing — so a project created carefully under its own user still
+spends the owner's account. A product built around not guessing with your money ought to be able to
+say what it has spent of its own.
+
+```
+$ node -e "const{Budget}=require('./mcp/budget');console.log(new Budget().summary())"
+$0.0016 of $0.50 spent across 13 calls
+```
+
 ![The whole loop in one screen: a real Bedrock read, a machine learned from its manual, and a refusal to sell](docs/media/terminal.png)
 
 `npm run demo` runs the complete procedure against an LG washing machine that nothing in this
