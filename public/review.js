@@ -200,6 +200,20 @@ function renderSymptoms(entry) {
     li.tabIndex = 0;
 
     const remedy = (first.remedies || [])[0] || '';
+
+    /*
+     * A row the parser flagged as unreadable, pointed at.
+     *
+     * Four rows across twelve manuals come out truncated — a cause beginning mid-sentence because
+     * the columns collided part-way down its symptom. The parser cannot fix them and does not
+     * pretend to; the least it can do is put the reviewer's eye on the one row that needs it,
+     * instead of leaving it to look like the nine that are fine.
+     */
+    const suspect = s.suspect || (s.causes || []).some((c) => c.suspect)
+      ? '<p class="code-none code-none--suspect">This reads as cut off — the two columns ran ' +
+        'together part-way down this row and the start of it was lost. Check it against the page ' +
+        'before admitting it.</p>'
+      : '';
     const more = (s.causes || []).length > 1
       ? `<p class="code-more">and ${s.causes.length - 1} more cause${s.causes.length > 2 ? 's' : ''} listed under this</p>`
       : '';
@@ -210,6 +224,7 @@ function renderSymptoms(entry) {
         `<span class="code-name">${esc(s.symptom)}</span>` +
         `<p class="code-meaning">${esc(first.label || 'no cause stated')}</p>` +
         (remedy ? `<p class="code-quote">“${esc(remedy)}”</p>` : '') +
+        suspect +
         (first.evidence ? `<p class="code-src">${esc(first.evidence.split(':')[0])}</p>` : '') +
         more +
       `</span>`;

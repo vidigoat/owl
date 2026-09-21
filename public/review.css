@@ -258,3 +258,6 @@
   color: var(--graphite);
 }
 .again b { color: var(--ink); font-weight: 500; }
+
+/* A row the parser flagged as cut off. The only amber thing in the list, so the eye goes to it. */
+.code-none--suspect { border-left: 2px solid var(--amber); color: var(--ink); }
