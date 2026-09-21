@@ -210,4 +210,61 @@ it('a German heading counts too', () => {
   assert.equal(pdf.scorePage('Fehlercode-Tabelle\nE24    Zulauf    Prüfen').heading, true);
 });
 
+/* ── a manual that documents symptoms and prints no codes ────────────────── */
+
+/*
+ * Real, from a current Bosch US dishwasher manual. Measured across ten of them: every one carries
+ * ten to thirteen pages headed `Fault | Cause and troubleshooting`, and not one contains a fault
+ * code. The left column is a described symptom where the 2019 European manual for the same kind of
+ * machine says "Fault code E:07 is lit."
+ */
+const SYMPTOM_TABLE = `                                                      Troubleshooting   en-us
+Fault                     Cause and troubleshooting
+Excessive formation of    Rinse aid has been spilled.
+foam occurs.                 Remove the rinse aid with a cloth.
+                          Detergent used causes excessive foaming.
+                             Change the brand of detergent.
+All LEDs light up or      Electronics have detected a fault.
+flash.                       Press the main switch button for approx. 4 seconds.
+                             Switch off the appliance.
+                             Contact customer service.`;
+
+it('a troubleshooting table with no codes is recognised as one', () => {
+  /*
+   * A fact about what manufacturers publish, not a parsing failure, and the two must not report the
+   * same way. "I could not read this page" sends somebody looking for a better scan. "This manual
+   * documents symptoms and prints no codes" tells them the codes are in the repair documentation,
+   * which is a different and findable thing.
+   */
+  assert.equal(pdf.symptomTable(SYMPTOM_TABLE), true);
+  assert.equal(pdf.scorePage(SYMPTOM_TABLE).symptomsOnly, true);
+});
+
+it('a table that has the heading AND codes is not symptoms-only', () => {
+  // Both halves matter: a manual can head a table "Cause and troubleshooting" and still list codes
+  // down the left of it, and that one is worth every vision call it takes.
+  const withCodes = SYMPTOM_TABLE.replace('Excessive formation of', 'Fault code E:07 is lit.   ');
+  assert.equal(pdf.symptomTable(withCodes), false);
+});
+
+it('the real fault table is never mistaken for a symptom table', () => {
+  assert.equal(pdf.symptomTable(REAL_TABLE), false, 'a manual full of fault codes was called symptom-keyed');
+  assert.equal(pdf.symptomTable(PROSE), false);
+  assert.equal(pdf.symptomTable(''), false);
+});
+
+it('it still reads as a table, because it is one', () => {
+  /*
+   * The page is found either way — on the real manuals these excerpts come from it scored 33
+   * against a threshold of 18. What changes is what the pipeline does with it and what it says.
+   *
+   * Asserted on the structure rather than on the total, because a ten-line excerpt of a full page
+   * scores 15 and that is a fact about the fixture, not about the scorer.
+   */
+  const s = pdf.scorePage(SYMPTOM_TABLE);
+  assert.ok(s.columnar >= 5, 'the column structure was not detected');
+  assert.equal(s.heading, true);
+  assert.ok(s.remedyLines >= 3, 'the remedies were not seen');
+});
+
 console.log(`\n${passed} passed`);

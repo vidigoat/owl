@@ -85,6 +85,17 @@ async function learnOne(file, flags) {
 
   const runs = pdf.joinAdjacent(candidates);
   const best = runs[0];
+
+  /*
+   * Judged on the pages actually chosen, not on every page that scored.
+   *
+   * The first version asked whether ALL candidates were symptom tables, and candidates include
+   * pages that merely scored well and were never used — an unrelated page 12 and page 20 were
+   * enough to make it false for a manual whose entire troubleshooting section is symptom-keyed.
+   */
+  report.symptomsOnly = candidates
+    .filter((c) => c.page >= best.from && c.page <= best.to)
+    .every((c) => c.symptomsOnly);
   report.bestPages = `${best.from}–${best.to}`;
   report.garbled = candidates.some((c) => c.garbled);
   report.english = candidates[0].english;
@@ -100,7 +111,14 @@ async function learnOne(file, flags) {
   // then hand faultgraph French, which faultgraph cannot parse, and we would have paid for the
   // privilege. Not spending is the correct behaviour here, and saying why is the difference between
   // a budget guard and a silent skip.
-  if (graph.found === 0 && report.english === false && !flags['force-vision']) {
+  if (graph.found === 0 && report.symptomsOnly && !flags['force-vision']) {
+    /*
+     * A troubleshooting table with no codes in it. Rendering it and asking a vision model to
+     * transcribe the codes would produce, correctly, nothing — for money. The finding is that this
+     * manual documents symptoms, and it is worth more than a failed read.
+     */
+    report.steps.push('skipped the vision model: this table is keyed on described symptoms, not codes, so there are none to find');
+  } else if (graph.found === 0 && report.english === false && !flags['force-vision']) {
     report.steps.push('skipped the vision model: the parser cannot read this language either, so the call would cost money and change nothing');
   } else if (graph.found === 0 && !flags['text-only']) {
     const { read_manual } = require('../mcp/tools/read_manual');
@@ -145,9 +163,11 @@ async function learnOne(file, flags) {
    */
   report.outcome = graph.found
     ? 'learned'
-    : report.english === false
-      ? 'not-english'
-      : 'nothing-recovered';
+    : report.symptomsOnly
+      ? 'symptoms-only'
+      : report.english === false
+        ? 'not-english'
+        : 'nothing-recovered';
   report.graph = graph;
   return report;
 }
@@ -182,11 +202,15 @@ async function learnOne(file, flags) {
       report.outcome === 'learned' ? `${C.green}learned${C.off}` :
       report.outcome === 'no-table-found' ? `${C.amber}no table${C.off}` :
       report.outcome === 'not-english' ? `${C.amber}lang   ${C.off}` :
+      report.outcome === 'symptoms-only' ? `${C.amber}symptom${C.off}` :
       `${C.red}empty  ${C.off}`;
 
-    const note = report.outcome === 'not-english'
-      ? `fault table found on ${report.bestPages}, but this manual is not in English`
-      : report.coverage || report.error || '';
+    const note =
+      report.outcome === 'not-english'
+        ? `fault table found on ${report.bestPages}, but this manual is not in English`
+      : report.outcome === 'symptoms-only'
+        ? `troubleshooting table on ${report.bestPages}, keyed on symptoms — this manual prints no fault codes`
+        : report.coverage || report.error || '';
     console.log(`  ${tag} ${path.basename(file).padEnd(30)} ${C.dim}${note}${C.off}`);
     for (const s of report.steps) console.log(`          ${C.dim}· ${s}${C.off}`);
 

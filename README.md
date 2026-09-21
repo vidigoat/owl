@@ -760,6 +760,38 @@ diagnosis is. That is not a gap to close later; it is the product.
 **A manual with no fault table.** It recovers nothing and says **NOTHING RECOVERED**, rather than
 producing a plausible-looking hypothesis space out of prose.
 
+**A manual that prints no fault codes at all.** This is the biggest thing measurement changed about
+this project's picture of the world, and it is worth stating plainly.
+
+The route to manuals now works: `scripts/source-manuals.js` goes sitemap → product page → typed
+document list, which is how you get English editions instead of the language duplicates that
+defeated ID-scanning. Pointed at Bosch's US dishwashers it found 57 models and fetched ten manuals.
+
+**Not one of them contains a fault code.** Every one carries ten to thirteen pages headed
+`Fault | Cause and troubleshooting`, and the left column is a described symptom —
+
+```
+Fault                     Cause and troubleshooting
+Excessive formation of    Rinse aid has been spilled.
+foam occurs.                 Remove the rinse aid with a cloth.
+All LEDs light up or      Electronics have detected a fault.
+flash.                       Press the main switch button for approx. 4 seconds.
+```
+
+— where the 2019 European manual for the same kind of machine says *"Fault code E:07 is lit."* The
+codes live in the repair documentation (`RH`), which these models do not publish publicly.
+
+The pipeline reports that as its own outcome rather than as a failed read, and skips the vision call
+rather than paying a model to transcribe codes that do not exist. *"I could not read this page"*
+sends somebody looking for a better scan; *"this manual documents symptoms and prints no codes"*
+tells them where the codes actually are.
+
+What it means for the product is larger: **the entry point assumption — a code on a panel — matches
+what Bosch published in 2019 and not what it publishes now.** A table keyed on *"all the lights are
+flashing"* has the same shape as a fault table and is arguably the commoner way somebody arrives at
+this problem. Reading those is the next piece of work, and it is a parser change rather than a
+sourcing one.
+
 **A manual that is not in English.** Manufacturers publish one document per language, so roughly
 four in five of what you find on a manufacturer's CDN is not English. Those tables are *found* — the
 page scorer reads columns and headings in six languages, and Bosch's French edition scores 39

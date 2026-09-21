@@ -158,6 +158,37 @@ function looksGarbled(text) {
   return suspicious >= 8 && suspicious / letters > 0.008;
 }
 
+/*
+ * A troubleshooting table with no fault codes in it.
+ *
+ * Measured across ten current Bosch US dishwasher manuals: every one carries ten to thirteen pages
+ * headed `Fault | Cause and troubleshooting`, and not one of them contains a fault code. The left
+ * column is a described symptom — "All LEDs light up or flash", "Excessive formation of foam
+ * occurs" — where a 2019 European manual for the same kind of machine says "Fault code E:07 is
+ * lit."
+ *
+ * That is a fact about what manufacturers publish, not a parsing failure, and the two must not
+ * report the same way. "I could not read this page" sends somebody looking for a better scan.
+ * "This manual documents symptoms and prints no codes" tells them the codes are in the repair
+ * documentation instead, which is a different and findable thing.
+ *
+ * It also stops the pipeline paying a vision model to re-read a table whose codes do not exist.
+ */
+const SYMPTOM_HEADING = /\bcause\s+and\s+troubleshooting\b|\bfault\s+cause\s+and\s+remedy\b/i;
+const ANY_CODE = /\b(?:fault|error)\s+code\b|^\s*(?:E:?\s?\d{1,3}|F\d{1,2}|[A-Z]\d[A-Z]?)\s{2,}/im;
+
+/**
+ * Does this page document symptoms rather than codes?
+ *
+ * Both halves matter. The heading alone is not enough — a manual can head a table "Cause and
+ * troubleshooting" and still list codes down the left of it — so this is only true when the
+ * heading is there AND nothing on the page looks like a code.
+ */
+function symptomTable(text) {
+  const t = String(text);
+  return SYMPTOM_HEADING.test(t) && !ANY_CODE.test(t);
+}
+
 /**
  * A page's score, plus the evidence for it — so a low score can be argued with.
  *
@@ -196,6 +227,7 @@ function scorePage(text) {
     heading: Boolean(heading),
     garbled: looksGarbled(text),
     english: probablyEnglish(text),
+    symptomsOnly: symptomTable(text),
     lines: lines.length,
   };
 }
@@ -271,5 +303,5 @@ function renderPage(file, page, { dir, dpi = 150 } = {}) {
 
 module.exports = {
   available, pages, pageCount, scorePage, faultTablePages, joinAdjacent,
-  looksGarbled, renderPage, probablyEnglish, COLUMNAR,
+  looksGarbled, renderPage, probablyEnglish, symptomTable, COLUMNAR,
 };
