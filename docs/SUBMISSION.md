@@ -188,6 +188,33 @@ nothing to attach money to.
 
 ---
 
+**The manuals do not print fault codes any more.** The whole product is built around a code on a
+panel, and that assumption came from a 2019 Bosch manual. Building a sourcing route — sitemap →
+product page → typed document list, which is how you get English editions instead of the language
+duplicates that defeat ID-scanning — and pointing it at Bosch's current US dishwashers produced ten
+manuals containing **zero fault codes between them**. Ten to thirteen pages each of
+`Fault | Cause and troubleshooting`, keyed on a described symptom. Fetching a `RH` *self-repair
+hints* document to find the codes — 482 pages for a fridge-freezer — turned up zero as well; it is
+a disassembly guide.
+
+Nothing Bosch publishes to owners carries fault codes. So the symptom table is not a fallback, it
+is the only door, and `manual/symptoms.js` reads it: the column boundary from the page's own header,
+and within column two, **indent is the grammar** — flush is a cause, indented is a remedy under it.
+
+**What that parser refuses is the part worth reading.** Some rows have columns that have collided:
+the left column ran long, the typesetter squeezed the gap to a single space, and
+`Home Connect cannot Home Connect set incorrectly.` could break before the second "Home" or after
+it. Backing off to the nearest space produced the symptom *"Home Connect cannot Home"* with the
+cause *"Connect set incorrectly."* — wrong in a way that looks right. Those rows are skipped, along
+with the rest of the symptom they belong to, and counted. One page went from 14 symptoms of which
+six were mangled to 8 that are all correct.
+
+**A simulated build overwrote a real index.** On the sibling project, a command invoked with
+`--simulated` and no limit wrote 8,623 fabricated entries over 705 genuine observations, and nothing
+in a single entry said which was which. Fabricated data indistinguishable from observed data is the
+one failure that makes a library worthless. Both repositories now mark provenance per record and
+refuse to mix.
+
 ## Accomplishments we're proud of
 
 **We measured the claims instead of asserting them.**
@@ -248,6 +275,28 @@ npm run eval    13 vision calls · $0.0016 · 7/9 fault codes, 1/1 model numbers
 
 A product built around not guessing with somebody's money should be able to say what it has spent
 of its own. Now it can.
+
+**The review bench.** A vision model reading a fault table is right *most of the time*, which is
+exactly the standard that produces a library nobody can trust. So nothing enters this one until a
+person has held the manual page against the parse — rendered page on the left, parsed rows on the
+right each quoting the sentence they came from, every row unticked by default, admission per row.
+
+It found a real error the first time it was used, on the first machine: the manual prints **E:16**
+and the model read **E18**. A seven-segment `6` is an `8` with two segments missing. Nothing
+downstream could have caught it — the output was well formed and confidently wrong about a real
+machine — and a person looking at the page sees it in a second.
+
+Twelve machines are on the bench now across dishwashers, a washer and a refrigerator: 103 symptoms,
+144 causes, every one citing its page. Six are in the library, and the library reports **three
+tiers separately** — written by hand, read and checked, read and unchecked — because a single
+"6 machines known" would be the most flattering way to say it and the least true.
+
+**`replace_or_repair` refuses by default.** The most consequential question an owner has needs three
+numbers and there are one and a half: the repair cost (known when a part is verified for that exact
+model), how the machine has behaved (free, from the household's own history), and what the machine
+is *worth* — which no service manual contains and this will not guess. It names the missing figure
+and answers the moment somebody supplies it. It never returns a verdict, and a test asserts that in
+every state.
 
 ## What's next
 
