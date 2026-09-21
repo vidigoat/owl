@@ -163,6 +163,100 @@ function known(model) {
   return Boolean(find(model));
 }
 
+/**
+ * Answer by described symptom, for the machines that have no codes to answer by.
+ *
+ * Current manuals key their troubleshooting on a sentence — "all the lights are flashing", "there
+ * is water in the bottom" — and that is also what somebody says out loud. So the match is on words
+ * rather than on an identifier, and it is deliberately dumb: overlap of meaningful words, with a
+ * floor, and every candidate returned rather than one picked.
+ *
+ * Returning the shortlist is the point. A fault code is unambiguous and a sentence is not, so the
+ * honest move is to hand back what it might be and let the device ask — which is a thing this
+ * product already does well — instead of guessing and being confidently wrong about somebody's
+ * dishwasher.
+ */
+const NOISE = new Set([
+  'the', 'a', 'an', 'is', 'are', 'was', 'were', 'be', 'been', 'and', 'or', 'of', 'in', 'on', 'at',
+  'to', 'for', 'with', 'my', 'it', 'its', 'this', 'that', 'there', 'has', 'have', 'does', 'do',
+  'not', 'no', 'up', 'out', 'appliance', 'machine', 'unit',
+]);
+
+/*
+ * A trailing "s" is not a different word here, and pretending it is chose the opposite answer.
+ *
+ * "The rinse aid light keeps coming on" scored 0.6 against "Refill indicator for rinse aid DOES NOT
+ * light up" and 0.4 against "...lights up" — under the floor — so the one symptom returned was the
+ * opposite of the one meant. The entire difference was "light" against "lights".
+ *
+ * Stemmed, both score the same and both come back, which is the honest answer: a sentence that
+ * crude a measure cannot separate is a sentence to ask about, not to resolve.
+ */
+const stem = (w) => (w.length > 3 && w.endsWith('s') && !w.endsWith('ss') ? w.slice(0, -1) : w);
+
+const words = (s) =>
+  new Set(
+    String(s).toLowerCase().match(/[a-z]{2,}/g)?.filter((w) => !NOISE.has(w)).map(stem) || []
+  );
+
+/** How much two descriptions share, as a fraction of the shorter one. Nothing clever. */
+function overlap(a, b) {
+  const A = words(a);
+  const B = words(b);
+  if (!A.size || !B.size) return 0;
+  let shared = 0;
+  for (const w of A) if (B.has(w)) shared++;
+  return shared / Math.min(A.size, B.size);
+}
+
+/**
+ * @param {string} model
+ * @param {string} said   what the owner described, in their words
+ * @returns {{known: boolean, matches?: object[], reason?: string}}
+ */
+function lookupSymptom(model, said) {
+  const m = find(model);
+  if (!m) return { known: false, reason: `No service data for model ${model}.` };
+
+  const list = m.symptoms || [];
+  if (!list.length) {
+    /*
+     * Not "nothing is wrong with it". This model's data is keyed on fault codes, and a description
+     * cannot be matched against codes — a different question, not an empty answer.
+     */
+    return {
+      known: false,
+      reason: `${model} is recorded by fault code, not by description. Read the code off the panel and ask again.`,
+    };
+  }
+
+  const scored = list
+    .map((s) => ({ ...s, match: Number(overlap(said, s.symptom).toFixed(3)) }))
+    .filter((s) => s.match >= 0.5)
+    .sort((a, b) => b.match - a.match);
+
+  if (!scored.length) {
+    return {
+      known: false,
+      reason: `Nothing in ${model}'s manual matches that description. It lists ${list.length} ` +
+        `problems and none of them is this one, which is not the same as nothing being wrong.`,
+      available: list.map((s) => s.symptom),
+    };
+  }
+
+  return {
+    known: true,
+    brand: m.brand,
+    kind: m.kind,
+    provenance: provenance(model),
+    /*
+     * Every candidate, never one. A sentence is ambiguous where a code is not, and picking is a
+     * guess dressed as an answer.
+     */
+    matches: scored.map((s) => ({ symptom: s.symptom, match: s.match, causes: s.causes })),
+  };
+}
+
 function lookup(model, code) {
   const m = find(model);
   if (!m) return { known: false, reason: `No service data for model ${model}.` };
@@ -178,4 +272,4 @@ function lookup(model, code) {
   };
 }
 
-module.exports = { MODELS, LEARNED, ADMITTED, lookup, learn, known, provenance, loadAdmitted };
+module.exports = { MODELS, LEARNED, ADMITTED, lookup, lookupSymptom, learn, known, provenance, loadAdmitted, overlap };

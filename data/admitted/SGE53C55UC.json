@@ -1,0 +1,197 @@
+{
+  "model": "SGE53C55UC",
+  "brand": "Bosch",
+  "kind": "Dishwasher",
+  "source": "SGE53C55UC.pdf",
+  "pages": "45–46",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "connection-to-home-network-is-not-establ",
+      "symptom": "Connection to home network is not established.",
+      "causes": [
+        {
+          "id": "connection-to-home-network-is-not-establ-0",
+          "label": "WLAN on router is not active.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check the wireless network connection of your router."
+          ],
+          "evidence": "Bosch manual, page 45: \"WLAN on router is not active.\"",
+          "source": {
+            "line": 8,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "special-salt-refill-indicator-lights-up",
+      "symptom": "Special salt refill indicator lights up.",
+      "causes": [
+        {
+          "id": "special-salt-refill-indicator-lights-up-0",
+          "label": "Insufficient special salt.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Add Special salt."
+          ],
+          "evidence": "Bosch manual, page 45: \"Insufficient special salt.\"",
+          "source": {
+            "line": 20,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        },
+        {
+          "id": "special-salt-refill-indicator-lights-up-1",
+          "label": "Sensor does not detect special salt tablets.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Do not use special salt tablets."
+          ],
+          "evidence": "Bosch manual, page 45: \"Sensor does not detect special salt tablets.\"",
+          "source": {
+            "line": 22,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "refill-indicator-for-special-salt-does-n",
+      "symptom": "Refill indicator for special salt does not light up.",
+      "causes": [
+        {
+          "id": "refill-indicator-for-special-salt-does-n-0",
+          "label": "Water softening system is switched off.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Set the water softening system."
+          ],
+          "evidence": "Bosch manual, page 45: \"Water softening system is switched off.\"",
+          "source": {
+            "line": 24,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "refill-indicator-for-rinse-aid-lights-up",
+      "symptom": "Refill indicator for rinse aid lights up.",
+      "causes": [
+        {
+          "id": "refill-indicator-for-rinse-aid-lights-up-0",
+          "label": "No rinse aid.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Add Rinse aid Page 21.",
+            "Set the amount of rinse aid to be dispensed."
+          ],
+          "evidence": "Bosch manual, page 45: \"No rinse aid.\"",
+          "source": {
+            "line": 27,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "refill-indicator-for-rinse-aid-does-not-",
+      "symptom": "Refill indicator for rinse aid does not light up.",
+      "causes": [
+        {
+          "id": "refill-indicator-for-rinse-aid-does-not--0",
+          "label": "Rinse aid system is switched off.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Set the amount of rinse aid."
+          ],
+          "evidence": "Bosch manual, page 45: \"Rinse aid system is switched off.\"",
+          "source": {
+            "line": 31,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "display-flashes",
+      "symptom": "Display flashes.",
+      "causes": [
+        {
+          "id": "display-flashes-0",
+          "label": "Appliance door is not closed properly.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Close the appliance door.",
+            "Arrange the dishware so that no parts project beyond the rack and prevent the appliance door from closing properly."
+          ],
+          "evidence": "Bosch manual, page 45: \"Appliance door is not closed properly.\"",
+          "source": {
+            "line": 34,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "all-leds-light-up-or-flash",
+      "symptom": "All LEDs light up or flash.",
+      "causes": [
+        {
+          "id": "all-leds-light-up-or-flash-0",
+          "label": "A software update is possibly installing.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wait until the software update has been installed."
+          ],
+          "evidence": "Bosch manual, page 45: \"A software update is possibly installing.\"",
+          "source": {
+            "line": 39,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        },
+        {
+          "id": "all-leds-light-up-or-flash-1",
+          "label": "This process can take approx. 30 minutes.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "45"
+          ],
+          "evidence": "Bosch manual, page 45: \"This process can take approx. 30 minutes.\"",
+          "source": {
+            "line": 41,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "up-appears-on-the-a-display"
+  ],
+  "reviewed": true,
+  "reviewedBy": "claude, against the rendered page",
+  "reviewedAt": "2026-09-21T14:25:12.259Z",
+  "learnedAt": "2026-09-21T14:15:18.391Z"
+}

@@ -25,6 +25,7 @@ const { confirm_fix } = require('./tools/confirm_fix');
 const { beginCheckout, confirmCheckout } = require('./tools/order_part');
 const { receipt, due, history } = require('./tools/home');
 const { replace_or_repair } = require('./tools/replace_or_repair');
+const { lookupSymptom } = require('../data/service-data');
 const { buildSpace, prune } = require('./tools/hypotheses');
 const { nextTest } = require('./tools/next_test');
 
@@ -226,6 +227,23 @@ const TOOLS = [
       'breakdown.',
     inputSchema: { type: 'object', properties: {} },
     handler: due,
+  },
+  {
+    name: 'describe_problem',
+    description:
+      'Find a machine\'s documented problem from what the owner said, for the machines whose manuals ' +
+      'print no fault codes — which is most of the ones sold now. Returns every candidate ranked ' +
+      'rather than picking one, because a sentence is ambiguous where a code is not. Says plainly ' +
+      'when the manual covers nothing like it, which is not the same as nothing being wrong.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        model: { type: 'string' },
+        said: { type: 'string', description: "What the owner described, in their own words." },
+      },
+      required: ['model', 'said'],
+    },
+    handler: ({ model, said }) => lookupSymptom(model, said),
   },
   {
     name: 'replace_or_repair',
