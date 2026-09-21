@@ -10,7 +10,8 @@ const { guide } = require('./mcp/tools/guide');
 const { find_part } = require('./mcp/tools/find_part');
 const { buildSpace, prune } = require('./mcp/tools/hypotheses');
 const { nextTest } = require('./mcp/tools/next_test');
-const { MODELS, LEARNED, learn } = require('./data/service-data');
+const lib = require('./data/service-data');
+const { learn } = lib;
 const { parse: parseManual } = require('./manual/faultgraph');
 const { see } = require('./mcp/tools/see');
 const { read_manual } = require('./mcp/tools/read_manual');
@@ -161,7 +162,13 @@ function handler(req, res) {
 
           if (step === 'start') {
             const built = buildSpace({ model: body.model, code: body.code });
-            const fault = MODELS[body.model]?.codes?.[body.code];
+            /*
+             * Every tier, through one door. `MODELS[model]` skipped ADMITTED, and the optional
+             * chaining meant no crash — just a hypothesis space with no tests attached, silently,
+             * for every machine reviewed at the bench. A quiet wrong answer beats a loud one only
+             * for whoever wrote it.
+             */
+            const fault = lib.machine(body.model)?.codes?.[body.code];
             return send(res, 200, JSON.stringify({ ...built, tests: fault?.tests || [] }), 'application/json');
           }
 
