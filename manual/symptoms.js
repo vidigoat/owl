@@ -1,0 +1,249 @@
+/**
+ * The table manufacturers actually print now.
+ *
+ * Every current Bosch US dishwasher manual carries ten to thirteen pages headed
+ * `Fault | Cause and troubleshooting`, and not one of them contains a fault code. Measured across
+ * ten of them: zero code mentions, against ten in the 2019 European manual for the same kind of
+ * machine. The codes moved to repair documentation those models do not publish.
+ *
+ * So the entry point this project was built on — a code on a panel — matches what Bosch published
+ * in 2019 and not what it publishes now. What it publishes now is keyed on a described symptom:
+ *
+ *   Fault                  Cause and troubleshooting
+ *   Excessive formation of Hand soap got in the rinse aid dispenser.
+ *   foam occurs.              Immediately add rinse aid to the dispenser.
+ *                          Rinse aid has been spilled.
+ *                             Remove the rinse aid with a cloth.
+ *
+ * Which is the same shape. A key, its causes, and the remedy under each cause — and arguably a
+ * commoner way to arrive at the problem, because "all the lights are flashing" is what somebody
+ * says out loud and `E:22` is not.
+ *
+ * ── Why this is its own file ────────────────────────────────────────────────
+ *
+ * `faultgraph` is keyed on codes at line starts and has a test suite that says so. This needs
+ * different key detection and identical cause/remedy handling, and bolting a second mode onto a
+ * tested parser to save a file is how a working thing stops working. The output shape is
+ * deliberately the same, so both can feed the same hypothesis space.
+ *
+ * ── How the columns are read ────────────────────────────────────────────────
+ *
+ * The header line gives the boundary: whatever column `Cause` starts at is where column two
+ * begins. Then, within column two, INDENT is the grammar — flush with the boundary is a cause, and
+ * indented past it is a remedy belonging to the cause above. That is the whole trick, and it is
+ * why `pdftotext -layout` is required: a de-layouted extraction destroys exactly this.
+ *
+ * Both columns wrap, and both hyphenate across the break (`estab-` / `lished.`), so joining is
+ * part of reading rather than a tidy-up afterwards.
+ */
+
+/** The two headings these tables use. The capture is what fixes the column boundary. */
+const HEADER = /^(\s*)(?:Fault|Problem|Symptom)\s{2,}(Cause and troubleshooting|Cause and remedy|Cause\b.*)$/im;
+
+/** A cross-reference, not a remedy. `"Adding rinse aid", Page 16` tells you where to read, not what to do. */
+const CROSS_REFERENCE = /^["“].*["”],?\s*(?:Page|page)\s+\d+/;
+
+/** A numbered step is still a step. The number is scaffolding, not content. */
+const stripStep = (s) => s.replace(/^\d+\.\s*/, '').trim();
+
+/** Join a wrapped line to the one before it, healing the hyphen the typesetter added. */
+function joinWrapped(a, b) {
+  if (!a) return b;
+  if (/[‐-]$/.test(a)) return a.replace(/[‐-]$/, '') + b;
+  return `${a} ${b}`;
+}
+
+/**
+ * Where column two begins, from the page's own header line.
+ *
+ * Taken from the page rather than guessed, because the boundary differs between manuals — 23 in one
+ * of these, 25 in another — and a hard-coded column is a parser that works on the manual it was
+ * written against.
+ *
+ * @returns {{at: number, line: number}|null}
+ */
+function columnBoundary(lines) {
+  for (let i = 0; i < lines.length; i++) {
+    const m = HEADER.exec(lines[i]);
+    if (!m) continue;
+    const at = lines[i].indexOf(m[2]);
+    if (at > 4) return { at, line: i };
+  }
+  return null;
+}
+
+/**
+ * Read one page of a symptom-keyed troubleshooting table.
+ *
+ * @param {object} opts
+ * @param {string} opts.text        the page, from `pdftotext -layout`
+ * @param {string} opts.sourceName  what to cite — every remedy carries where it came from
+ * @param {number} [opts.page]      page number, for the citation
+ * @returns {{found: number, symptoms: object[], coverage: string, boundary: number|null}}
+ */
+function readSymptoms({ text, sourceName = 'service manual', page = null } = {}) {
+  const lines = String(text || '').split(/\r?\n/);
+  const boundary = columnBoundary(lines);
+
+  if (!boundary) {
+    /*
+     * No header, no boundary, no parse. Guessing the column from the text's own whitespace was the
+     * first thing tried and it finds a boundary in ordinary prose too — which produced confident
+     * nonsense out of a safety page. A table says it is a table at the top of itself.
+     */
+    return { found: 0, symptoms: [], boundary: null, coverage: 'no column header on this page, so no table to read' };
+  }
+
+  const { at } = boundary;
+  const symptoms = [];
+  let current = null;   // the symptom being built
+  let cause = null;     // the cause being built, inside it
+  let lastKind = null;  // 'cause' | 'remedy' — what the previous right-column line was
+  let leftWasBlank = true;
+
+  for (let i = boundary.line + 1; i < lines.length; i++) {
+    const raw = lines[i];
+    if (!raw.trim()) { leftWasBlank = true; continue; }
+
+    /*
+     * The boundary is a guide, not a guillotine.
+     *
+     * A row whose left column runs long has no space at the boundary column, and slicing there
+     * cuts a word in half: `Home Connect cannot Home Connect set incorrectly.` became the symptom
+     * "Home Connect cannot Hom" and the cause "e Connect set incorrectly." Back off to the last
+     * space at or before the boundary when that happens.
+     */
+    const cut = splitAt(raw, at);
+    const left = raw.slice(0, cut).trim();
+    const rightRaw = raw.slice(cut);
+    const right = rightRaw.trim();
+    // Indent measured from the boundary: flush is a cause, past it is a remedy under that cause.
+    const indent = Math.max(0, (rightRaw.length - rightRaw.trimStart().length) - (at - cut));
+
+    /* ── column one: the symptom ──────────────────────────────────────────── */
+
+    if (left) {
+      /*
+       * A new symptom starts when the one before it is FINISHED, not merely when the left column
+       * was blank. Two symptoms can sit on consecutive lines — `...is not estab-` / `lished.` then
+       * `WLAN display is flash-` — and a blank-line rule merged them into
+       * "Connection to home network is not established. WLAN display is flashing."
+       *
+       * Sentence-ending punctuation is the signal, and it is the typesetter's own: a wrapped line
+       * ends mid-phrase or on a hyphen, a finished one ends on a full stop.
+       */
+      const finished = current && /[.!?:]$/.test(current.symptom);
+      if (leftWasBlank || finished) {
+        current = { symptom: left, causes: [], line: i };
+        symptoms.push(current);
+        cause = null;
+        lastKind = null;
+      } else if (current) {
+        current.symptom = joinWrapped(current.symptom, left);
+      } else {
+        current = { symptom: left, causes: [], line: i };
+        symptoms.push(current);
+      }
+      leftWasBlank = false;
+    } else {
+      leftWasBlank = true;
+    }
+
+    /* ── column two: causes, and the remedies under them ──────────────────── */
+
+    if (!right || !current) continue;
+    if (CROSS_REFERENCE.test(right)) continue;
+
+    /*
+     * A numbered step is a remedy wherever it sits.
+     *
+     * `1. Add Rinse aid` is printed flush with the boundary in these manuals, not indented, so the
+     * indent rule read it as a cause and glued three repair steps into one cause label: "No rinse
+     * aid. 1. Add Rinse aid Page 16. 2. Set the amount of rinse aid to be dispensed."
+     */
+    const numbered = /^\d+\.\s/.test(right);
+
+    if (indent === 0 && !numbered) {
+      /*
+       * Flush with the boundary. A new cause — unless the previous right-column line was also a
+       * cause, in which case this is the rest of it wrapping. "Detergent or machine care product
+       * used causes ex-" / "cessive foaming." is one cause, not two.
+       */
+      if (lastKind === 'cause' && cause) {
+        cause.label = joinWrapped(cause.label, right);
+      } else {
+        cause = { label: right, remedies: [], line: i };
+        current.causes.push(cause);
+      }
+      lastKind = 'cause';
+    } else {
+      const step = stripStep(right);
+      if (!step) continue;
+      if (!cause) {
+        // A remedy with no cause above it. The manual gave a step and no reason; keep it under an
+        // unnamed cause rather than dropping a real instruction on the floor.
+        cause = { label: null, remedies: [], line: i };
+        current.causes.push(cause);
+      }
+      // Remedies wrap too, and a wrapped remedy is not a second remedy.
+      const last = cause.remedies[cause.remedies.length - 1];
+      if (lastKind === 'remedy' && last && !/[.:!?]$/.test(last.text)) {
+        last.text = joinWrapped(last.text, step);
+      } else {
+        cause.remedies.push({ text: step, line: i });
+      }
+      lastKind = 'remedy';
+    }
+  }
+
+  /*
+   * A symptom with no causes is a row we saw the left of and could not read the right of. Dropped,
+   * and counted, so the coverage line is about what was recovered rather than what was noticed.
+   */
+  const usable = symptoms.filter((s) => s.causes.length);
+  const dropped = symptoms.length - usable.length;
+
+  const out = usable.map((s) => ({
+    symptom: s.symptom,
+    causes: s.causes.map((c, k) => ({
+      id: `${slug(s.symptom)}-${k}`,
+      label: c.label,
+      // The manual's ordering is the prior: the first cause listed is the commonest.
+      likelihood: Number((1 / (k + 1.6)).toFixed(3)),
+      // A manual lists remedies, never prices. Null, not zero — zero would mean free.
+      cost: null,
+      remedies: c.remedies.map((r) => r.text),
+      evidence: `${sourceName}${page ? `, page ${page}` : ''}: "${c.label || c.remedies[0]?.text || ''}"`,
+      source: { line: c.line, manual: sourceName, page },
+    })),
+  }));
+
+  return {
+    found: out.length,
+    symptoms: out,
+    boundary: at,
+    dropped,
+    coverage: out.length
+      ? `${out.length} symptom${out.length === 1 ? '' : 's'} recovered` +
+        (dropped ? `, ${dropped} row${dropped === 1 ? '' : 's'} had no readable cause` : '')
+      : 'a column header, but nothing readable beneath it',
+  };
+}
+
+/**
+ * Where to actually cut a line into its two columns.
+ *
+ * At the boundary, unless that lands inside a word — in which case the last space at or before it,
+ * which is where the typesetter would have put the gap if the left column had been narrower.
+ */
+function splitAt(raw, at) {
+  if (at >= raw.length) return at;
+  if (raw[at] === ' ' || raw[at - 1] === ' ') return at;
+  const back = raw.lastIndexOf(' ', at);
+  return back > 0 ? back : at;
+}
+
+const slug = (s) =>
+  String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40) || 'symptom';
+
+module.exports = { readSymptoms, columnBoundary, HEADER };

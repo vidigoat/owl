@@ -35,6 +35,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const pdf = require('../manual/pdf');
 const { parse } = require('../manual/faultgraph');
+const { readSymptoms } = require('../manual/symptoms');
 
 const C = process.stdout.isTTY
   ? { red: '\x1b[31m', green: '\x1b[32m', amber: '\x1b[33m', dim: '\x1b[2m', bold: '\x1b[1m', off: '\x1b[0m' }
@@ -113,11 +114,17 @@ async function learnOne(file, flags) {
   // a budget guard and a silent skip.
   if (graph.found === 0 && report.symptomsOnly && !flags['force-vision']) {
     /*
-     * A troubleshooting table with no codes in it. Rendering it and asking a vision model to
-     * transcribe the codes would produce, correctly, nothing — for money. The finding is that this
-     * manual documents symptoms, and it is worth more than a failed read.
+     * A troubleshooting table with no codes in it — so read it as what it is.
+     *
+     * Rendering it and asking a vision model to transcribe fault codes would produce, correctly,
+     * nothing, for money. The table is perfectly readable; it is simply keyed on a described
+     * symptom instead of a code, and the text layer is enough because the symptom is set in an
+     * ordinary typeface rather than the seven-segment display font that mangles codes.
      */
-    report.steps.push('skipped the vision model: this table is keyed on described symptoms, not codes, so there are none to find');
+    report.steps.push('keyed on described symptoms, not codes — reading it as a symptom table, no vision call needed');
+    const found = readSymptoms({ text: best.text, sourceName: `${brand} manual`, page: best.from });
+    report.symptoms = found.symptoms;
+    report.steps.push(`symptom table: ${found.coverage}`);
   } else if (graph.found === 0 && report.english === false && !flags['force-vision']) {
     report.steps.push('skipped the vision model: the parser cannot read this language either, so the call would cost money and change nothing');
   } else if (graph.found === 0 && !flags['text-only']) {
@@ -163,11 +170,13 @@ async function learnOne(file, flags) {
    */
   report.outcome = graph.found
     ? 'learned'
-    : report.symptomsOnly
-      ? 'symptoms-only'
-      : report.english === false
-        ? 'not-english'
-        : 'nothing-recovered';
+    : report.symptoms?.length
+      ? 'symptoms'
+      : report.symptomsOnly
+        ? 'symptoms-only'
+        : report.english === false
+          ? 'not-english'
+          : 'nothing-recovered';
   report.graph = graph;
   return report;
 }
@@ -202,19 +211,22 @@ async function learnOne(file, flags) {
       report.outcome === 'learned' ? `${C.green}learned${C.off}` :
       report.outcome === 'no-table-found' ? `${C.amber}no table${C.off}` :
       report.outcome === 'not-english' ? `${C.amber}lang   ${C.off}` :
+      report.outcome === 'symptoms' ? `${C.green}symptom${C.off}` :
       report.outcome === 'symptoms-only' ? `${C.amber}symptom${C.off}` :
       `${C.red}empty  ${C.off}`;
 
     const note =
       report.outcome === 'not-english'
         ? `fault table found on ${report.bestPages}, but this manual is not in English`
+      : report.outcome === 'symptoms'
+        ? `${report.symptoms.length} symptoms from ${report.bestPages} — this manual prints no fault codes`
       : report.outcome === 'symptoms-only'
-        ? `troubleshooting table on ${report.bestPages}, keyed on symptoms — this manual prints no fault codes`
+        ? `troubleshooting table on ${report.bestPages}, keyed on symptoms, and nothing readable under it`
         : report.coverage || report.error || '';
     console.log(`  ${tag} ${path.basename(file).padEnd(30)} ${C.dim}${note}${C.off}`);
     for (const s of report.steps) console.log(`          ${C.dim}· ${s}${C.off}`);
 
-    if (report.outcome === 'learned') {
+    if (report.outcome === 'learned' || report.outcome === 'symptoms') {
       learned++;
       // Pending, not admitted. Every entry is reviewed by a person before it reaches the library.
       const out = path.join(PENDING, `${report.model}.json`);
@@ -226,6 +238,9 @@ async function learnOne(file, flags) {
         pages: report.bestPages,
         readWith: report.readWith || 'text-layer',
         codes: report.graph.codes,
+        // Symptoms sit beside codes rather than replacing them. A manual can have both, and a
+        // machine known only by symptom is still a machine known.
+        symptoms: report.symptoms || [],
         coverage: report.coverage,
         transcribed: report.transcribed || null,
         pageImage: report.pageImage || null,
