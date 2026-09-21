@@ -572,7 +572,7 @@ returning a display's fault code as the model number. Neither was findable offli
 ## The manual reader is also a library
 
 **[github.com/vidigoat/faultgraph](https://github.com/vidigoat/faultgraph)** — MIT, zero
-dependencies, 79 checks.
+dependencies, 81 checks.
 
 It reads both kinds of table now: `parse()` for fault codes, and `readSymptoms()` for the
 symptom-keyed troubleshooting tables that current manuals print instead. Both were driven out of
@@ -829,7 +829,7 @@ the sentence it began with. A cause that starts mid-sentence is obvious to a per
 puts it next to the page it came from, which is the whole reason the bench exists. It is a real
 limit, not a solved problem.
 
-Twelve machines have been read — **112 symptoms, 166 causes**, every one citing its
+Twelve machines have been read — **107 symptoms, 166 causes**, every one citing its
 page — across dishwashers, a washer and a refrigerator, which is the same parser reading three
 different kinds of appliance. Four of them have been reviewed and admitted, which with the
 hand-written ones makes **8 machines in the library**; the rest are on the bench, because nobody has
