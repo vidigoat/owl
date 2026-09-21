@@ -565,7 +565,11 @@ returning a display's fault code as the model number. Neither was findable offli
 ## The manual reader is also a library
 
 **[github.com/vidigoat/faultgraph](https://github.com/vidigoat/faultgraph)** — MIT, zero
-dependencies, 50 checks.
+dependencies, 72 checks.
+
+It reads both kinds of table now: `parse()` for fault codes, and `readSymptoms()` for the
+symptom-keyed troubleshooting tables that current manuals print instead. Both were driven out of
+this project and generalised until nothing in either knows what a dishwasher is.
 
 `manual/faultgraph.js` is published standalone, generalised until nothing in it knows what a
 dishwasher is — its test fixtures include a reciprocating compressor for that reason. It reads a

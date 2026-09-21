@@ -26,7 +26,11 @@ Note: the repo does **not** have to be public for this hackathon. Sharing it pri
 
 ## Open Source mini — `faultgraph`
 
-**https://github.com/vidigoat/faultgraph** · MIT · zero dependencies · 50 checks
+**https://github.com/vidigoat/faultgraph** · MIT · zero dependencies · 72 checks
+
+It reads both kinds of table: `parse()` for fault codes, and `readSymptoms()` for the symptom-keyed
+troubleshooting tables that current manuals print instead — which is the finding that reshaped this
+project, generalised into a library anybody can use.
 
 A new, additional open-source library, written during the window and published under MIT. It is the
 manual-reading half of this project, extracted and generalised until nothing in it knows what a
