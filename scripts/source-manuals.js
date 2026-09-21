@@ -1,0 +1,268 @@
+#!/usr/bin/env node
+/**
+ * Where the manuals come from.
+ *
+ *   node scripts/source-manuals.js --kind dishwashers --limit 20
+ *   node scripts/source-manuals.js --list            # what is available, download nothing
+ *
+ * The machine library has been the bottleneck since the first day, and it was never a code problem:
+ * `faultgraph` reads four manufacturers' code schemes and the reader finds the fault table in a
+ * fifty-three page PDF. The problem was that getting from "a manufacturer publishes manuals" to
+ * "here are two hundred PDFs" had no route.
+ *
+ * ── Why the obvious approach failed ─────────────────────────────────────────
+ *
+ * Bosch document IDs look enumerable — `9001234567_A.pdf` resolves, so `9001234568_A.pdf` should
+ * too. It does, and it is the French edition of the same dishwasher. Walking the ID space yields
+ * language duplicates of machines you already have, not new machines, and there is nothing in a
+ * document ID that tells you which is which until you have downloaded and read it.
+ *
+ * ── The route that works ────────────────────────────────────────────────────
+ *
+ *   sitemap.xml  →  product page  →  a typed list of that product's documents
+ *
+ * The product page carries its documents as JSON, and every entry has a TYPE and a LOCALE:
+ *
+ *   {"titleKey":"user-manuals","type":"IU","filename":"9002099076_A.pdf",
+ *    "url":"https://media3.bsh-group.com/Documents/9002099076_A.pdf","locale":"en-US"}
+ *
+ * `IU` is the user manual and `RH` is repair hints — between them, the fault tables. `locale` is
+ * what kills the duplicate problem outright: the French edition is a different locale, visible
+ * before a single byte is downloaded rather than after.
+ *
+ * ── Being a good guest ──────────────────────────────────────────────────────
+ *
+ * One request a second, a user agent that says who this is, and nothing fetched from a path the
+ * site's robots.txt disallows — `/manual/`, `/*ajax/`, `/spareparts/media/pdf/` and `/*​/search/`
+ * are excluded, and the route above uses none of them. There IS a faster search endpoint; it lives
+ * under `/*ajax/` and is disallowed, so this takes the slower allowed road instead. The document
+ * hosts serve no robots.txt at all.
+ *
+ * Caps, because a scraper with no ceiling is how somebody's bandwidth bill becomes a surprise:
+ * nothing over `--max-mb` (default 60) is downloaded, and the run stops at `--budget-mb`
+ * (default 250) however many manuals are left.
+ */
+
+const fs = require('node:fs');
+const path = require('node:path');
+const { execFileSync } = require('node:child_process');
+
+const UA = 'second-set-of-hands/0.1 (appliance fault-table research; contact via repo)';
+const POLITE_MS = 1000;
+
+const SITEMAPS = {
+  bosch: 'https://www.bosch-home.com/us/sitemap.xml',
+  siemens: 'https://www.siemens-home.bsh-group.com/uk/sitemap.xml',
+};
+
+/*
+ * Paths this must not touch, from each site's robots.txt. The pipeline above uses none of them;
+ * they are listed so that a future change which starts using one fails here rather than quietly
+ * becoming a robots violation.
+ */
+const DISALLOWED = [/\/manual\//, /ajax/, /\/spareparts\/media\/pdf\//, /\/search\//];
+
+/** The documents worth having. IU is the user manual; RH is repair hints. */
+const WANTED_TYPES = new Set(['IU', 'RH']);
+
+const C = process.stdout.isTTY
+  ? { green: '\x1b[32m', amber: '\x1b[33m', red: '\x1b[31m', dim: '\x1b[2m', bold: '\x1b[1m', off: '\x1b[0m' }
+  : { green: '', amber: '', red: '', dim: '', bold: '', off: '' };
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+function parseArgs(argv) {
+  const flags = {};
+  for (let i = 0; i < argv.length; i++) {
+    if (!argv[i].startsWith('--')) continue;
+    const [k, inline] = argv[i].slice(2).split('=');
+    flags[k] = inline ?? (argv[i + 1] && !argv[i + 1].startsWith('--') ? argv[++i] : true);
+  }
+  return flags;
+}
+
+function allowed(url) {
+  return !DISALLOWED.some((re) => re.test(url));
+}
+
+/** Fetch text, politely, with the identity of whoever is doing it attached. */
+function get(url, { binary = false, out } = {}) {
+  if (!allowed(url)) throw new Error(`refusing ${url} — robots.txt disallows that path`);
+  const args = ['-sL', '--max-time', '60', '-A', UA];
+  if (binary) args.push('-o', out, '-w', '%{http_code} %{size_download} %{content_type}');
+  return execFileSync('curl', [...args, url], {
+    encoding: binary ? 'utf8' : 'utf8',
+    maxBuffer: 96 * 1024 * 1024,
+  });
+}
+
+/**
+ * The product pages in a sitemap, minus the accessories.
+ *
+ * Roughly three quarters of a manufacturer's product URLs are cutlery baskets, water filters and
+ * baking stones. They have manuals too, and none of them has a fault table.
+ */
+function productPages(sitemapXml, { kind } = {}) {
+  const urls = [...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+  return urls.filter((u) => {
+    if (!/\/product\//.test(u)) return false;
+    if (/accessor|cleaning-and-care|care-and-cleaning/i.test(u)) return false;
+    // A bare numeric last segment is a part number; a model number has letters in it.
+    const last = u.split('/').pop();
+    if (/^\d+$/.test(last)) return false;
+    if (kind && !u.includes(`/${kind}/`)) return false;
+    return true;
+  });
+}
+
+/**
+ * The documents a product page lists, with their type and language.
+ *
+ * Pulled with a regex rather than a DOM parse because the page embeds this as escaped JSON inside a
+ * script payload — there is no element to query, and a whole HTML parser to reach a string that is
+ * already a string would be a dependency for nothing.
+ */
+function documentsOn(html) {
+  const out = [];
+  const seen = new Set();
+  for (const m of html.matchAll(/\{\\?"id\\?":.{0,600}?\.pdf\\?"[^{}]{0,200}?\}/g)) {
+    let raw = m[0].replace(/\\"/g, '"');
+    let doc;
+    try {
+      doc = JSON.parse(raw);
+    } catch {
+      continue; // a fragment that looked like an object and is not one
+    }
+    if (!doc.url || !doc.type || seen.has(doc.url)) continue;
+    seen.add(doc.url);
+    out.push({ type: doc.type, title: doc.titleKey, url: doc.url, locale: doc.locale || null });
+  }
+  return out;
+}
+
+/** English editions of the document types that carry fault tables. */
+const worthHaving = (docs) =>
+  docs.filter((d) => WANTED_TYPES.has(d.type) && (!d.locale || /^en/i.test(d.locale)));
+
+/** The model number, which is the last path segment of a product URL. */
+const modelFrom = (url) => url.split('/').filter(Boolean).pop().toUpperCase();
+
+(async () => {
+  const flags = parseArgs(process.argv.slice(2));
+  const brand = String(flags.brand || 'bosch').toLowerCase();
+  const sitemapUrl = SITEMAPS[brand];
+  if (!sitemapUrl) {
+    console.error(`\n  No sitemap known for "${brand}". Known: ${Object.keys(SITEMAPS).join(', ')}\n`);
+    process.exit(3);
+  }
+
+  const outDir = path.resolve(flags.out || path.join(__dirname, '..', 'manuals'));
+  const limit = Number(flags.limit) || 20;
+  const maxMb = Number(flags['max-mb']) || 60;
+  const budgetMb = Number(flags['budget-mb']) || 250;
+  const listOnly = Boolean(flags.list);
+
+  console.log(`\n  ${C.bold}sourcing ${brand} manuals${C.off}`);
+  console.log(`  ${C.dim}sitemap → product page → typed document list. One request a second.${C.off}\n`);
+
+  // 1. The sitemap, cached — it is three megabytes and does not change hourly.
+  const cache = path.join(outDir, `.sitemap-${brand}.xml`);
+  fs.mkdirSync(outDir, { recursive: true });
+  let xml;
+  if (fs.existsSync(cache) && Date.now() - fs.statSync(cache).mtimeMs < 86400000) {
+    xml = fs.readFileSync(cache, 'utf8');
+    console.log(`  ${C.dim}sitemap from cache${C.off}`);
+  } else {
+    xml = get(sitemapUrl);
+    fs.writeFileSync(cache, xml);
+    await sleep(POLITE_MS);
+  }
+
+  const pages = productPages(xml, { kind: flags.kind });
+  console.log(`  ${pages.length} product pages${flags.kind ? ` under "${flags.kind}"` : ''}\n`);
+  if (!pages.length) process.exit(0);
+
+  // 2. Walk them, collecting documents.
+  const manifestFile = path.join(outDir, 'manifest.json');
+  const manifest = fs.existsSync(manifestFile) ? JSON.parse(fs.readFileSync(manifestFile, 'utf8')) : {};
+  let downloaded = 0;
+  let bytes = 0;
+
+  for (const page of pages.slice(0, limit)) {
+    const model = modelFrom(page);
+    if (manifest[model] && !flags.force) {
+      console.log(`  ${C.dim}have  ${model}${C.off}`);
+      continue;
+    }
+
+    let html;
+    try {
+      html = get(page);
+    } catch (e) {
+      console.log(`  ${C.red}fail  ${C.off}${model} ${C.dim}${e.message.slice(0, 50)}${C.off}`);
+      await sleep(POLITE_MS);
+      continue;
+    }
+
+    const docs = worthHaving(documentsOn(html));
+    if (!docs.length) {
+      console.log(`  ${C.amber}none  ${C.off}${model} ${C.dim}no English user manual or repair hints listed${C.off}`);
+      manifest[model] = { page, documents: [], checkedAt: new Date().toISOString() };
+      await sleep(POLITE_MS);
+      continue;
+    }
+
+    // One document per model: the first user manual, or repair hints if that is all there is.
+    // A model listing four IU files is listing variants of the same book; taking all four is how
+    // a bandwidth budget disappears into duplicates.
+    const pick = docs.find((d) => d.type === 'RH') || docs[0];
+    const file = path.join(outDir, `${model}.pdf`);
+
+    if (listOnly) {
+      console.log(`  ${C.dim}would  ${model}  ${pick.type}  ${pick.url}${C.off}`);
+      manifest[model] = { page, documents: docs, checkedAt: new Date().toISOString() };
+      await sleep(POLITE_MS);
+      continue;
+    }
+
+    if (bytes / 1e6 > budgetMb) {
+      console.log(`\n  ${C.amber}stopping: ${Math.round(bytes / 1e6)} MB downloaded, budget is ${budgetMb} MB${C.off}`);
+      break;
+    }
+
+    let status;
+    try {
+      status = get(pick.url, { binary: true, out: file });
+    } catch (e) {
+      console.log(`  ${C.red}fail  ${C.off}${model} ${C.dim}${e.message.slice(0, 50)}${C.off}`);
+      await sleep(POLITE_MS);
+      continue;
+    }
+
+    const [code, size, type] = status.trim().split(/\s+/);
+    const mb = Number(size) / 1e6;
+
+    if (code !== '200' || !/pdf/i.test(type || '')) {
+      fs.rmSync(file, { force: true });
+      console.log(`  ${C.red}fail  ${C.off}${model} ${C.dim}HTTP ${code}, ${type}${C.off}`);
+    } else if (mb > maxMb) {
+      fs.rmSync(file, { force: true });
+      console.log(`  ${C.amber}big   ${C.off}${model} ${C.dim}${mb.toFixed(1)} MB, over the ${maxMb} MB ceiling${C.off}`);
+    } else {
+      downloaded++;
+      bytes += Number(size);
+      console.log(`  ${C.green}got   ${C.off}${model} ${C.dim}${pick.type} · ${mb.toFixed(1)} MB${C.off}`);
+      manifest[model] = {
+        page, documents: docs, took: pick, file: path.basename(file),
+        bytes: Number(size), fetchedAt: new Date().toISOString(),
+      };
+    }
+
+    fs.writeFileSync(manifestFile, JSON.stringify(manifest, null, 2));
+    await sleep(POLITE_MS);
+  }
+
+  fs.writeFileSync(manifestFile, JSON.stringify(manifest, null, 2));
+  console.log(`\n  ${C.green}${downloaded} manuals${C.off}, ${(bytes / 1e6).toFixed(1)} MB → ${path.relative(process.cwd(), outDir)}`);
+  console.log(`  ${C.dim}Next: node scripts/learn-manual.js ${path.relative(process.cwd(), outDir)}/*.pdf --brand Bosch --kind Dishwasher${C.off}\n`);
+})();
