@@ -858,6 +858,13 @@ knows how to ask a question, and picking one would be a guess dressed as an answ
 test, because the first version *did* pick: it returned the "does not light up" row alone, and the
 entire difference was the word "light" against "lights".
 
+![Saying what the machine is doing, and getting the manual's own words back](docs/media/describe.jpg)
+
+**It is on the device**, not only in the tool surface — *Say what it is doing* opens its own screen,
+and the trace panel beside it shows the real `describe_problem` call and where the answer came from.
+The manual's instructions are set in the reading face because that is what they are: sentences
+somebody printed, quoted, never paraphrased.
+
 Three refusals matter more than the matching. A description the manual does not cover says so and
 says how many it **does** cover, because *"no record of this"* must never read as *"nothing is
 wrong"*. A machine recorded by fault code says it is recorded by fault code and tells you to read

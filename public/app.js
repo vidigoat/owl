@@ -890,6 +890,10 @@ const FLOW = {
   'refused-read-manual': teach,
   guide: renderPart,
   part: renderDone,
+  // Describing a symptom is a whole answer on its own — the manual's causes and remedies, read out
+  // — so there is nothing to advance INTO. It goes back to the start rather than leaving a button
+  // that does nothing, which wiring.test.js is right to refuse.
+  describe: renderIdle,
 };
 
 async function advance() {
@@ -1056,6 +1060,77 @@ async function boot() {
     .join('');
   renderIdle();
 }
+
+/* ── "tell me what it is doing" ───────────────────────────────────────────── */
+
+/*
+ * The door for machines with no code to read.
+ *
+ * Current manuals print no fault codes — ten Bosch US dishwasher manuals fetched today contain none
+ * between them — so their troubleshooting is keyed on a described symptom. Which is also what
+ * somebody says out loud: nobody stands in a kitchen and thinks "E:22".
+ *
+ * Its own stage, reached only from its own button. The scripted demo never enters it, so nothing
+ * here can change what `advance()` does on the path a reviewer walks first.
+ */
+const DESCRIBE_MODEL = 'SGE53C55UC';
+
+function renderDescribe(said = '', result = null) {
+  stage = 'describe';
+  captionEl.textContent = 'No code on the panel. Say what it is doing instead.';
+  advanceBtn.textContent = 'Back to the start';
+  advanceBtn.disabled = false;
+
+  const rows = !result ? ''
+    : result.known
+      ? result.matches.map((m) => `
+          <div class="sym">
+            <p class="sym__name">${esc(m.symptom)}</p>
+            ${m.causes.map((c) => `
+              <p class="sym__cause">${esc(c.label || 'no cause stated')}</p>
+              ${(c.remedies || []).map((r) => `<p class="sym__remedy">${esc(r)}</p>`).join('')}
+              <p class="sym__cite">${esc((c.evidence || '').split(':')[0])}</p>
+            `).join('')}
+          </div>`).join('')
+      : `<p class="sym__none">${esc(result.reason)}</p>` +
+        (result.available
+          ? `<p class="sym__cite">It does cover: ${esc(result.available.slice(0, 4).join(' · '))}${result.available.length > 4 ? ' …' : ''}</p>`
+          : '');
+
+  screen.innerHTML = `
+    <div class="s-describe">
+      <p class="s-describe__model">${esc(DESCRIBE_MODEL)} — this manual prints no fault codes</p>
+      <form id="sayform" class="s-describe__form">
+        <input id="saidinput" class="s-describe__input" placeholder="the rinse aid light keeps coming on"
+               value="${esc(said)}" autocomplete="off">
+        <button class="btn" type="submit">Ask</button>
+      </form>
+      ${rows}
+    </div>
+    ${result ? say(result.known
+        ? `Your manual lists ${result.matches.length === 1 ? 'one thing' : result.matches.length + ' things'} like that.`
+        : 'Your manual does not list anything like that, which is not the same as nothing being wrong.') : ''}`;
+
+  const form = $('#sayform');
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const words = $('#saidinput').value.trim();
+      if (!words) return;
+      const r = await (await fetch(
+        `/api/describe?model=${encodeURIComponent(DESCRIBE_MODEL)}&said=${encodeURIComponent(words)}`
+      )).json();
+      trace('describe_problem', esc(`"${words}"`),
+        r.known ? `${r.matches.length} candidate${r.matches.length === 1 ? '' : 's'}` : 'nothing like it',
+        r.provenance || '');
+      renderDescribe(words, r);
+    });
+    $('#saidinput').focus();
+  }
+}
+
+const describeBtn = $('#describe-btn');
+if (describeBtn) describeBtn.addEventListener('click', () => renderDescribe());
 
 advanceBtn.addEventListener('click', advance);
 $('#handsfree').addEventListener('click', handsFree);

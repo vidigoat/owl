@@ -198,6 +198,22 @@ function handler(req, res) {
       return send(res, 200, JSON.stringify(find_part({ model, causeId })), 'application/json');
     }
 
+    /*
+     * "Tell me what it is doing" — the door for machines with no code to read.
+     *
+     * Current manuals print no fault codes, so for most machines sold now this is the only way in.
+     * It returns every candidate rather than one, because a sentence is ambiguous where a code is
+     * not — see data/service-data.js.
+     */
+    if (url.pathname === '/api/describe') {
+      const model = url.searchParams.get('model');
+      const said = url.searchParams.get('said');
+      if (!model || !said) {
+        return send(res, 400, JSON.stringify({ error: 'needs a model and what was said' }), 'application/json');
+      }
+      return send(res, 200, JSON.stringify(lib.lookupSymptom(model, said)), 'application/json');
+    }
+
     /* ── the review queue: nothing reaches the library without a person saying so ── */
 
     if (url.pathname === '/api/review/queue') {

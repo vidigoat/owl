@@ -455,3 +455,38 @@ footer { max-width: 1140px; margin: 0 auto; padding: 22px 24px; display: flex; j
 .ways__here::before { content: "▸ "; color: rgba(239, 234, 225, 0.4); }
 .ways__to { color: rgba(239, 234, 225, 0.55); text-decoration: none; border-bottom: 1px solid transparent; }
 .ways__to:hover { color: var(--paper); border-bottom-color: rgba(239, 234, 225, 0.4); }
+
+/* ── "say what it is doing" ───────────────────────────────────────────────── */
+
+/*
+ * The door for machines with no code to read. Set on the device's paper, in its reading face for
+ * the manual's own words — because that is what these are: sentences somebody printed, not a
+ * summary of them.
+ */
+.s-describe { padding: 18px 20px 4px; }
+.s-describe__model { font: 400 12px/1.4 var(--mono); color: var(--graphite); margin: 0 0 12px; }
+.s-describe__form { display: flex; gap: 8px; margin: 0 0 18px; }
+.s-describe__input {
+  flex: 1;
+  min-width: 0;
+  font: 400 15px/1.4 var(--mono);
+  padding: 9px 11px;
+  border: 1px solid var(--rule);
+  background: #fff;
+  color: var(--ink);
+}
+.s-describe__input:focus { outline: 2px solid var(--proof); outline-offset: -1px; }
+
+.sym { border-top: 1px solid var(--rule); padding: 12px 0; }
+.sym__name { font: 500 16px/1.3 var(--display); margin: 0 0 6px; }
+.sym__cause { font: 400 14px/1.5 var(--mono); color: var(--graphite); margin: 6px 0 0; }
+/* The manual's own instruction, in the reading face. Never paraphrased. */
+.sym__remedy {
+  font: italic 400 15px/1.5 var(--spoken);
+  color: var(--ink);
+  margin: 4px 0 0;
+  padding-left: 11px;
+  border-left: 2px solid var(--amber);
+}
+.sym__cite { font: 400 11px/1.4 var(--mono); color: var(--graphite); margin: 5px 0 0; }
+.sym__none { font: 400 14px/1.6 var(--mono); color: var(--fault); margin: 0 0 6px; max-width: 54ch; }
