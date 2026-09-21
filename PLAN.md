@@ -44,6 +44,37 @@ points-per-hour item in the whole submission.
 
 ---
 
+## 1b. Status, 21 September — what the plan met, and what it got wrong
+
+Phases 1 to 3 are built. The thing the plan got wrong is more interesting than the things it got
+right, so it goes first.
+
+**The plan assumed fault codes exist.** Every phase is written around "a code on a panel". Measured
+against ten current Bosch US dishwasher manuals fetched from Bosch's own site: **zero fault codes,
+in any of them.** Ten to thirteen pages each of `Fault | Cause and troubleshooting`, keyed on a
+described symptom. The 2019 European manual this project was built against has ten code mentions;
+the 2024 US ones have none. Fetching a `RH` *self-repair hints* document to find them — 482 pages
+for a fridge-freezer — turned up zero as well; it is a disassembly guide.
+
+Nothing Bosch publishes to owners carries fault codes any more. For current machines the symptom
+table is not a fallback, it is the only door. `manual/symptoms.js` reads it, and the entry point
+needs rethinking rather than defending: *"all the lights are flashing"* is what somebody says out
+loud, and `E:22` is not.
+
+| phase | stated | where it got to |
+|---|---|---|
+| 1 · library pipeline | 40 machines | **Route solved.** `source-manuals.js` does sitemap → product page → typed document list; the ID-scanning that yielded language duplicates is dead. 12 machines on the bench (103 symptoms, 144 causes) across dishwashers, a washer and a refrigerator. Target unmet, and the reason is the finding above, not the pipeline. |
+| 1b · review | "a review queue" | **Built as a screen**, not a queue. Evidence on the left, parse on the right, admission per code. It caught a real error on its first use — the manual prints `E:16`, the model read `E18`. |
+| 2 · the household | shorter second conversation | **Recurrence** added: the same fault on the same machine on separate occasions, with dates and confirmed-fix counts, and no conclusion drawn from them. |
+| 3 · replace-vs-repair | a verdict | **Built as a refusal.** It reports what is known and names the figure it cannot have — what the machine is worth — and answers the moment somebody supplies it. It never returns a verdict, and a test asserts that in every state. |
+| 4 · surfaces | design | Partly. The bench and the library view exist; the device screens are unchanged. |
+
+**Deployable.** The server is a handler now rather than a `listen()` call, `api/index.js` re-exports
+it, and a test asserts the hosted copy is the same object. Not deployed — that is a public URL and
+Vidit's call.
+
+267 checks across 23 suites, green. Spend $0.015 of a $0.50 ceiling.
+
 ## 2. The thesis, made bigger
 
 Today's framing is "a repair copilot". That is too small, and it is reactive.
