@@ -34,10 +34,40 @@ const CODE_PATTERNS = [
   /^\s*([A-Z]{2,3})\s*(?:[-–—:]\s*|\s{2,})(.{6,200})$/,               // OE, UE, dE, FE
 ];
 
+/*
+ * "Fault code E24 is lit." — the code in a sentence, not in a column.
+ *
+ * Found in a real Bosch dishwasher manual, and it is the phrasing that survives when a
+ * three-column table is read aloud by a vision model: the table's first column becomes a sentence
+ * and the code lands in the middle of it. Every pattern above wants the code at the START of the
+ * line, so this format recovered nothing at all until it was handled.
+ *
+ * The line carries no meaning — "is lit" is not a description of the fault — so a code matched this
+ * way takes its meaning from the first line beneath it that is not itself a remedy.
+ */
+const CODE_IN_SENTENCE =
+  /^\s*(?:fault|error|alarm)\s+code\s+["'\u201C\u2018]?([A-Z]{0,2}[:\-\s]?\d{1,3}[A-Z]?|[A-Z]{2,3})["'\u201D\u2019]?\s+(?:is\s+)?(?:lit|shown|displayed|flashing|appears)/i;
+
 /* Words that would otherwise read as a letter-only fault code at the start of a line. */
 const NOT_A_CODE = new Set(['THE', 'AND', 'FOR', 'ARE', 'NOT', 'YOU', 'USE', 'SEE', 'ALL', 'ANY', 'CAN', 'ITS', 'OFF', 'ON', 'IF', 'IN', 'TO', 'OF', 'OR', 'AT', 'IS', 'IT', 'BE', 'DO', 'NO', 'WARNING', 'NOTE']);
 
+/**
+ * Phrases that are not a description of a fault.
+ *
+ * "E:07 is lit." parses cleanly — code, then six-plus characters of text — and hands back the
+ * meaning "is lit.", which tells a reader nothing and looks like a bug in the interface. The page
+ * simply does not state a meaning for these codes; the causes carry all of it. An empty meaning is
+ * the honest answer and the caller can decide how to show a code with no description.
+ */
+const NOT_A_MEANING = /^(?:is\s+)?(?:lit|shown|displayed|flashing|on|appears|illuminated)\.?$/i;
+
 function matchCodeLine(line) {
+  const sentence = CODE_IN_SENTENCE.exec(line);
+  if (sentence && !NOT_A_CODE.has(sentence[1].toUpperCase().replace(/[:\-\s]/g, ''))) {
+    // No meaning on this line. `parse` fills it from the first non-remedy line beneath.
+    return [line, sentence[1], ''];
+  }
+
   for (const pattern of CODE_PATTERNS) {
     const m = line.match(pattern);
     if (!m) continue;
@@ -51,7 +81,7 @@ function matchCodeLine(line) {
 const CODE_LINE = { test: (line) => matchCodeLine(line) !== null };
 
 /** Words that mark a line as describing a remedy rather than a symptom. */
-const REMEDY_HINTS = /\b(check|clean|clear|replace|inspect|remove|tighten|straighten|reset|ensure)\b/i;
+const REMEDY_HINTS = /\b(check|clean|clear|replace|inspect|remove|tighten|straighten|reset|ensure|lock|install|unscrew|descale|refill|arrange)\b/i;
 
 /**
  * Rough cost of asking a person to do the thing described. Drives information gain.
@@ -91,6 +121,12 @@ const CAUSE_PHRASINGS = [
   [/^(?:check|inspect)\s+(?:the\s+)?(.+?)\s+for\s+(.+)$/i, (m) => `${m[1]} — ${m[2]}`],
   [/^(?:check|inspect|ensure)\s+(?:the\s+)?(.+)$/i, (m) => `${m[1]}`],
 ];
+
+/** Sentence case, trailing full stop removed — the shape every other label in here has. */
+function tidy(text) {
+  const t = String(text).trim().replace(/[.;]$/, '');
+  return t.charAt(0).toUpperCase() + t.slice(1);
+}
 
 function remedyToCause(remedy) {
   const text = remedy.replace(/\.$/, '').trim();
@@ -186,22 +222,83 @@ function parse({ model, text, sourceName = 'manual' }) {
     if (!m) return;
 
     const code = normaliseCode(m[1]);
-    const description = m[2].trim();
+    const raw = m[2].trim();
+    // "is lit" is not a fault description. Better an empty meaning than a meaningless one.
+    const description = NOT_A_MEANING.test(raw) ? '' : raw;
 
-    // Remedy lines directly beneath a code line usually belong to it.
+    /*
+     * Remedy lines directly beneath a code line usually belong to it — and so, it turns out, do the
+     * lines between them.
+     *
+     * A three-column fault table (Fault | Reason | Remedial action) flattens into alternating
+     * lines when it is transcribed:
+     *
+     *     Fault code E24 is lit.
+     *     Waste-water hose kinked or blocked.              ← the manufacturer's REASON
+     *     Install hose without kinks, remove any residue.  ← the remedial ACTION
+     *     Siphon connection still sealed.                  ← reason
+     *     Check connection to siphon and open if required. ← action
+     *
+     * Only the action lines carry a remedy verb, so an earlier version kept those and threw the
+     * reasons away — then derived a cause back out of the remedy with `remedyToCause`. That works,
+     * and it is strictly worse than reading the reason the manufacturer printed. "Waste-water hose
+     * kinked or blocked" is their sentence; "Hose has failed" is our guess at their sentence.
+     *
+     * So a non-remedy line immediately above a remedy is kept as that remedy's stated cause.
+     */
     const following = [];
     // Each remedy carries its own line number. A citation pointing at the code line instead of the
     // remedy is not a citation, it is a gesture at roughly the right part of the page.
     const atLine = [];
-    for (let j = i + 1; j < Math.min(i + 5, lines.length); j++) {
+    /** The manufacturer's own words for the cause, where the page gave them. Sparse by design. */
+    const statedCause = [];
+    let pendingReason = null;
+
+    // Twelve lines, not five: a real table runs several reason/action pairs under one code, and a
+    // window sized for a short fixture truncated every genuine manual at the third cause.
+    for (let j = i + 1; j < Math.min(i + 12, lines.length); j++) {
       const next = lines[j].trim();
       if (!next || CODE_LINE.test(lines[j])) break;
-      if (REMEDY_HINTS.test(next)) { following.push(next); atLine.push(onPage(j)); }
+
+      /*
+       * An explicitly labelled row beats any inference.
+       *
+       * A transcription that says `REASON:` and `REMEDY:` has already told us which cell is which,
+       * and guessing from verbs when the answer is written down would be perverse. "Water
+       * protection system activated" carries no remedy verb and "Turn off water supply" does, so
+       * the inference happens to work here — but "Check the door seal" as a REASON would fool it,
+       * and a labelled line never can.
+       */
+      const labelled = /^(REASON|CAUSE|REMEDY|ACTION|REMEDIAL ACTION)\s*:\s*(.+)$/i.exec(next);
+      if (labelled) {
+        const kind = labelled[1].toUpperCase();
+        const body = labelled[2].trim();
+        if (kind === 'REASON' || kind === 'CAUSE') {
+          pendingReason = body;
+        } else {
+          following.push(body);
+          atLine.push(onPage(j));
+          statedCause.push(pendingReason);
+          pendingReason = null;
+        }
+        continue;
+      }
+
+      if (REMEDY_HINTS.test(next)) {
+        following.push(next);
+        atLine.push(onPage(j));
+        statedCause.push(pendingReason);
+        pendingReason = null;
+      } else {
+        // Not a remedy. Hold it: if a remedy follows, this was its reason.
+        pendingReason = next;
+      }
     }
 
     const causes = following.map((remedy, k) => ({
       id: `${code.toLowerCase()}-${k}`,
-      label: remedyToCause(remedy),
+      // The manufacturer's stated reason when the page gave one; our derivation when it did not.
+      label: statedCause[k] ? tidy(statedCause[k]) : remedyToCause(remedy),
       // The manual's ordering is the prior: the first remedy listed is the most common.
       likelihood: Number((1 / (k + 1.6)).toFixed(3)),
       // Null, not 0. A service manual lists remedies, never prices — so what this costs is

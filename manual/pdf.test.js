@@ -1,0 +1,153 @@
+/**
+ * Finding the fault table in a manual.
+ *
+ *   node manual/pdf.test.js
+ *
+ * Every assertion here exists because a real Bosch dishwasher manual, downloaded from Bosch's own
+ * CDN, defeated the first version of this file completely. Three fixtures written from imagination
+ * had all worked; the real document scored its fault table at 11 against a threshold of 12 and the
+ * pipeline recovered nothing from a 53-page manual.
+ *
+ * The reason is worth stating because it shapes everything below: **the fault codes in a real
+ * manual do not survive text extraction.** They are set in a seven-segment display face, and that
+ * face maps its glyphs to whatever codepoints the foundry chose, so `E:24` comes out of the PDF as
+ * `“:‹ˆ`. Any scorer that looks for codes finds none. What survives is SHAPE — the page is a table,
+ * whatever the font did to it.
+ *
+ * Nothing here needs a PDF on disk: the scoring functions take text, which is the part that has to
+ * be right.
+ */
+
+const assert = require('node:assert');
+const pdf = require('./pdf');
+
+let passed = 0;
+const it = (name, fn) => {
+  try {
+    fn();
+    passed++;
+    console.log('  ok  ', name);
+  } catch (e) {
+    console.error('  FAIL', name, '\n       ', e.message);
+    process.exitCode = 1;
+  }
+};
+
+/** A real fault table, as `pdftotext -layout` actually returns one. Codes mangled, columns intact. */
+const REAL_TABLE = `                                                              Fault, what to do? en
+
+Fault table
+Fault                      Reason                              Remedial action
+Fault code “:‹ˆ is lit.    Intake opening (on right inside of  Arrange utensils so that the intake
+                           appliance) covered by utensils.     opening is not obstructed.
+Fault code “:‚ƒ is lit.    Heating element calcified or        Clean appliance with dishwasher cleaning
+                           soiled.                             agent or descaler.
+Fault code “:‚… is lit.    Water protection system             Turn off water supply.
+                           activated.                          Call customer service.
+Fault code “:ƒƒ is lit.    Filters are soiled or               Clean filters.
+                           blocked.`;
+
+/** A page that talks ABOUT errors without being a table. The commonest false positive. */
+const PROSE = `Safety information
+
+Read these instructions carefully. Failure to observe them may result in an error being
+displayed on the appliance. If an error code appears, do not attempt to repair the appliance
+yourself. Contact customer service. Errors caused by incorrect installation are not covered
+by the warranty. Check that the appliance has been installed by a competent person.`;
+
+console.log('finding the fault table');
+
+/* ── shape beats vocabulary ──────────────────────────────────────────────── */
+
+it('a real fault table outscores a page that merely discusses errors', () => {
+  const table = pdf.scorePage(REAL_TABLE);
+  const prose = pdf.scorePage(PROSE);
+  assert.ok(
+    table.score > prose.score * 1.5,
+    `table ${table.score} vs prose ${prose.score} — vocabulary is winning over shape`
+  );
+});
+
+it('the real table scores even though not one code is readable', () => {
+  /*
+   * The whole lesson. `codeLines` is zero here — the display font destroyed every code — and the
+   * page still has to be found, because the codes are recoverable later from a rendered image.
+   */
+  const s = pdf.scorePage(REAL_TABLE);
+  assert.equal(s.codeLines, 0, 'the fixture no longer represents a font-mangled manual');
+  assert.ok(s.score >= 18, `scored ${s.score}; the default threshold would miss it`);
+  assert.ok(s.columnar >= 5, 'the column structure was not detected');
+});
+
+it('columns are what survive', () => {
+  assert.equal(pdf.COLUMNAR('Fault code E24     Hose kinked     Straighten the hose'), true);
+  assert.equal(pdf.COLUMNAR('This is an ordinary sentence of prose in a manual.'), false);
+  assert.equal(pdf.COLUMNAR(''), false);
+  // Two spaces is word spacing after a full stop; three or more is a column.
+  assert.equal(pdf.COLUMNAR('One sentence.  Another sentence.'), false);
+});
+
+/* ── knowing when the text cannot be trusted ─────────────────────────────── */
+
+it('a font-mangled page is recognised as such', () => {
+  /*
+   * This flag is what sends the page to a vision model instead of a parser. Without it the
+   * pipeline would parse the text layer, recover nothing, and report "no fault table" about a page
+   * that plainly has one.
+   */
+  assert.equal(pdf.looksGarbled(REAL_TABLE), true, 'the mangled codes were not noticed');
+  assert.equal(pdf.looksGarbled(PROSE), false, 'ordinary prose was called garbled');
+});
+
+it('normal typography is not mistaken for mangling', () => {
+  // A manual uses real quotation marks and apostrophes. It does not use forty of them on one page.
+  const quoted = `The display shows "Check water supply". Don't open the door.
+See "Water softening system" on page 15. The appliance's filter needs cleaning.`;
+  assert.equal(pdf.looksGarbled(quoted), false, 'curly quotes alone triggered the garbled flag');
+});
+
+/* ── tables that run across a page break ─────────────────────────────────── */
+
+it('consecutive pages are joined before parsing', () => {
+  // A table spanning 39–40 parsed as two pages splits a code from its remedies at the seam.
+  const joined = pdf.joinAdjacent([
+    { page: 40, text: 'second half', score: 41 },
+    { page: 39, text: 'first half', score: 33 },
+  ]);
+  assert.equal(joined.length, 1);
+  assert.equal(joined[0].from, 39);
+  assert.equal(joined[0].to, 40);
+  assert.equal(joined[0].text, 'first half\nsecond half', 'the halves were joined out of order');
+  assert.equal(joined[0].score, 74);
+});
+
+it('pages that are not adjacent stay apart', () => {
+  const joined = pdf.joinAdjacent([
+    { page: 12, text: 'a', score: 20 },
+    { page: 40, text: 'b', score: 30 },
+  ]);
+  assert.equal(joined.length, 2);
+  assert.equal(joined[0].from, 40, 'runs are not ordered by score');
+});
+
+it('a single candidate is a run of one', () => {
+  const joined = pdf.joinAdjacent([{ page: 7, text: 'x', score: 19 }]);
+  assert.deepEqual(joined, [{ from: 7, to: 7, text: 'x', score: 19 }]);
+});
+
+/* ── honesty about the tool ──────────────────────────────────────────────── */
+
+it('availability is reported rather than assumed', () => {
+  // This shells out to poppler. That is not an npm dependency, but it IS something that has to
+  // exist on the machine, and every caller is expected to degrade rather than crash.
+  assert.equal(typeof pdf.available(), 'boolean');
+});
+
+it('an empty page scores zero and is not garbled', () => {
+  const s = pdf.scorePage('');
+  assert.equal(s.score, 0);
+  assert.equal(s.garbled, false);
+  assert.equal(pdf.scorePage(undefined).score, 0);
+});
+
+console.log(`\n${passed} passed`);

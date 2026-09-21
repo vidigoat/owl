@@ -55,19 +55,51 @@ const FORMATS = { '.jpg': 'jpeg', '.jpeg': 'jpeg', '.png': 'png', '.webp': 'webp
  * downstream cites the manual, so a model-invented remedy would arrive wearing a citation to a line
  * that does not exist. Copying is the whole job.
  */
+/*
+ * Read the table AS A TABLE.
+ *
+ * The first version asked for a transcription of the page and got exactly that — the page, in
+ * visual line order. Real fault tables are three columns (Fault | Reason | Remedial action) and
+ * every cell wraps, so line order interleaves the columns:
+ *
+ *     Fault code E:07 is lit.
+ *     Intake opening (on right inside of      ← reason, line 1
+ *     Arrange utensils so that the intake     ← remedy, line 1
+ *     appliance) covered by utensils.         ← reason, line 2
+ *
+ * which parsed into the cause "Intake opening (on right inside of" — truncated mid-phrase — and a
+ * fabricated-looking one beginning "Agent or descaler". Both were faithful transcriptions of what
+ * the pixels said and both were useless.
+ *
+ * Reassembling a wrapped cell is not interpretation. The row exists on the page; the line breaks
+ * are an artefact of column width. "Transcribe, never interpret" still holds — the model may not
+ * add, rephrase or tidy a remedy, and that instruction is stated more firmly here than before,
+ * precisely because this one asks it to rearrange.
+ */
 const PROMPT = `This is a page from an appliance service manual. Transcribe the FAULT CODE TABLE
 from it, exactly as printed.
 
+This table has COLUMNS — usually Fault, then Reason, then Remedial action — and the text inside a
+cell WRAPS onto several lines. Read it as a table, one row at a time. Join the wrapped lines of a
+cell back into one line. Do not read straight across the page, or the columns will interleave and
+every entry will be cut in half.
+
+Format each row as exactly three lines:
+
+  <fault code>
+  REASON: <the whole reason cell, on one line>
+  REMEDY: <the whole remedial-action cell, on one line>
+
 Rules:
-- Copy the text. Do not explain it, do not rephrase it, do not tidy it up, and do not add a remedy
-  that is not printed on the page.
-- One code per block. Put the code first, then its meaning, then each remedy step on its own
-  indented line, in the order the page lists them. That order is information.
-- Codes look like E24, F21, OE, dE, 4C, 5E, H20.
-- If a code or a line is not legible, leave it out. Do not guess at a character.
+- Copy the words. Do not explain, rephrase, tidy, summarise, or add a remedy the page does not
+  print. Joining a cell's own wrapped lines is the ONLY rearranging allowed.
+- One row per reason. If a code lists three reasons, that is three rows, all under the same code.
+- Codes look like E24, E:07, F21, OE, dE, 4C, 5E, H20. Keep the code exactly as printed.
+- If a cell or a code is not legible, leave that row out. Never guess at a character.
+- Ignore page numbers, headers, footers and cross-references like "see page 38".
 - If this page has no fault code table on it, reply with exactly: NO FAULT TABLE
 
-Reply with the transcription and nothing else. No preamble, no commentary.`;
+Reply with the rows and nothing else. No preamble, no commentary.`;
 
 function invoke(base64, format) {
   return new Promise((resolve, reject) => {
@@ -154,10 +186,24 @@ async function read_manual({ imagePath, imageBase64, model, brand, kind, transcr
      * into characters, and a test supplying characters directly is testing the same code path with
      * the same input the model would have produced.
      */
-    text = transcribe
-      ? await transcribe({ base64, format })
-      : (JSON.parse(await invoke(base64, format))?.output?.message?.content
-          ?.map((c) => c.text).filter(Boolean).join('\n') ?? '');
+    if (transcribe) {
+      text = await transcribe({ base64, format });
+    } else {
+      const envelope = JSON.parse(await invoke(base64, format));
+      text = envelope?.output?.message?.content?.map((c) => c.text).filter(Boolean).join('\n') ?? '';
+
+      /*
+       * Record what it cost.
+       *
+       * This checked the ceiling before the call and then never recorded the spend — so the ledger
+       * under-reported, and a run of manual transcriptions could pass a limit it had already
+       * exceeded. Found by transcribing a real Bosch manual page and watching the ledger not move.
+       *
+       * A guard that counts only half the spending is a guard that eventually does not guard.
+       */
+      const usage = envelope?.usage;
+      if (usage) budget().record(budget().costOf(usage), { tool: 'read_manual' });
+    }
   } catch (e) {
     return notRead(e.message);
   }
