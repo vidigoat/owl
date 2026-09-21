@@ -145,8 +145,8 @@ function readSymptoms({ text, sourceName = 'service manual', page = null } = {})
      * its continuations behind as orphans, and the page came out listing symptoms called "foam
      * occurs.", "ing." and "be implemented correctly."
      *
-     * So skip forward until a symptom plainly begins again: a clean line, with something in its
-     * left column, following a line that had nothing there.
+     * So skip forward until a symptom plainly begins again — see the `skipping` block below for
+     * what "plainly" turned out to have to mean.
      */
     if (cut === null) {
       collided++;
