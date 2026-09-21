@@ -4,7 +4,7 @@
   "kind": "Dishwasher",
   "source": "SGV43C53UC.pdf",
   "pages": "45–45",
-  "readWith": "text-layer",
+  "readWith": "text layer, with the collided rows read from the page",
   "codes": {},
   "symptoms": [
     {
@@ -148,11 +148,120 @@
           }
         }
       ]
+    },
+    {
+      "id": "excessive-formation-of-foam-occurs",
+      "symptom": "Excessive formation of foam occurs.",
+      "causes": [
+        {
+          "id": "excessive-formation-of-foam-occurs-0",
+          "label": "Hand soap got in the rinse aid dispenser.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Immediately add rinse aid to the dispenser.",
+            "\"Adding rinse aid\", Page 21"
+          ],
+          "evidence": "Bosch manual, page 45: \"Hand soap got in the rinse aid dispenser.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 45,
+            "readWith": "bedrock"
+          }
+        },
+        {
+          "id": "excessive-formation-of-foam-occurs-1",
+          "label": "Rinse aid has been spilled.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Remove the rinse aid with a cloth."
+          ],
+          "evidence": "Bosch manual, page 45: \"Rinse aid has been spilled.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 45,
+            "readWith": "bedrock"
+          }
+        },
+        {
+          "id": "excessive-formation-of-foam-occurs-2",
+          "label": "Detergent or machine care product used causes excessive foaming.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Change the brand of detergent."
+          ],
+          "evidence": "Bosch manual, page 45: \"Detergent or machine care product used causes excessive foaming.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 45,
+            "readWith": "bedrock"
+          }
+        }
+      ]
+    },
+    {
+      "id": "wlan-display-is-flashing",
+      "symptom": "WLAN display is flashing.",
+      "causes": [
+        {
+          "id": "wlan-display-is-flashing-0",
+          "label": "Connection to home network is not available.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Activate the wireless network connection on your router."
+          ],
+          "evidence": "Bosch manual, page 45: \"Connection to home network is not available.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 45,
+            "readWith": "bedrock"
+          }
+        }
+      ]
+    },
+    {
+      "id": "home-connect-cannot-be-implemented-corre",
+      "symptom": "Home Connect cannot be implemented correctly.",
+      "causes": [
+        {
+          "id": "home-connect-cannot-be-implemented-corre-0",
+          "label": "Home Connect set incorrectly.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Please consult the documents supplied for Home Connect®."
+          ],
+          "evidence": "Bosch manual, page 45: \"Home Connect set incorrectly.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 45,
+            "readWith": "bedrock"
+          }
+        },
+        {
+          "id": "home-connect-cannot-be-implemented-corre-1",
+          "label": "There is a technical error.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Please consult the information on support in the documents supplied for Home Connect®."
+          ],
+          "evidence": "Bosch manual, page 45: \"There is a technical error.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 45,
+            "readWith": "bedrock"
+          }
+        }
+      ]
     }
   ],
   "rejected": [],
   "reviewed": true,
-  "reviewedBy": "claude — structure checked, pages spot-checked",
-  "reviewedAt": "2026-09-21T16:03:22.805Z",
-  "learnedAt": "2026-09-21T16:02:12.658Z"
+  "reviewedBy": "claude — read against the pages",
+  "reviewedAt": "2026-09-21T16:19:15.449Z",
+  "learnedAt": "2026-09-21T16:16:49.690Z"
 }

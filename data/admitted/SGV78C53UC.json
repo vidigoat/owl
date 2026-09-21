@@ -4,7 +4,7 @@
   "kind": "Dishwasher",
   "source": "SGV78C53UC.pdf",
   "pages": "48–49",
-  "readWith": "text-layer",
+  "readWith": "text layer, with the collided rows read from the page",
   "codes": {},
   "symptoms": [
     {
@@ -328,11 +328,87 @@
           }
         }
       ]
+    },
+    {
+      "id": "appliance-cannot-be-switched-on-or-opera",
+      "symptom": "Appliance cannot be switched on or operated.",
+      "causes": [
+        {
+          "id": "appliance-cannot-be-switched-on-or-opera-0",
+          "label": "Software update is taking place.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wait until the software update has finished."
+          ],
+          "evidence": "Bosch manual, page 49: \"Software update is taking place.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 49,
+            "readWith": "bedrock"
+          }
+        },
+        {
+          "id": "appliance-cannot-be-switched-on-or-opera-1",
+          "label": "Appliance functions have failed.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Pull out the power cord plug or switch off the breaker.",
+            "Wait at least 2 minutes.",
+            "Connect the appliance to the power supply.",
+            "Switch the appliance on."
+          ],
+          "evidence": "Bosch manual, page 49: \"Appliance functions have failed.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 49,
+            "readWith": "bedrock"
+          }
+        }
+      ]
+    },
+    {
+      "id": "appliance-stops-during-the-cycle-or-cuts",
+      "symptom": "Appliance stops during the cycle or cuts out.",
+      "causes": [
+        {
+          "id": "appliance-stops-during-the-cycle-or-cuts-0",
+          "label": "Appliance door is not closed properly.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Close the appliance door."
+          ],
+          "evidence": "Bosch manual, page 49: \"Appliance door is not closed properly.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 49,
+            "readWith": "bedrock"
+          }
+        },
+        {
+          "id": "appliance-stops-during-the-cycle-or-cuts-1",
+          "label": "Power and/or water supply has been interrupted.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the power supply.",
+            "Check the water supply."
+          ],
+          "evidence": "Bosch manual, page 49: \"Power and/or water supply has been interrupted.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 49,
+            "readWith": "bedrock"
+          }
+        }
+      ]
     }
   ],
   "rejected": [],
   "reviewed": true,
-  "reviewedBy": "claude — structure checked, pages spot-checked",
-  "reviewedAt": "2026-09-21T16:03:22.805Z",
-  "learnedAt": "2026-09-21T16:02:13.064Z"
+  "reviewedBy": "claude — read against the pages",
+  "reviewedAt": "2026-09-21T16:19:15.449Z",
+  "learnedAt": "2026-09-21T16:17:01.323Z"
 }

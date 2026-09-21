@@ -1,0 +1,310 @@
+{
+  "model": "B18IF905SP",
+  "brand": "Bosch",
+  "kind": "Dishwasher",
+  "source": "B18IF905SP.pdf",
+  "pages": "16–17",
+  "readWith": "bedrock",
+  "codes": {
+    "E24": {
+      "meaning": "REASON: The water inlet valve is stuck open",
+      "causes": [
+        {
+          "id": "e24-0",
+          "label": "Water inlet valve — blockages and replace if necessary",
+          "likelihood": 0.625,
+          "cost": null,
+          "mains": false,
+          "ownerFixable": true,
+          "evidence": "Bosch service manual, page 16: \"Check the water inlet valve for blockages and replace if necessary\"",
+          "remedy": "Check the water inlet valve for blockages and replace if necessary",
+          "source": {
+            "line": 5,
+            "codeLine": 3,
+            "manual": "Bosch service manual, page 16"
+          }
+        }
+      ],
+      "tests": [
+        {
+          "id": "e24-0-check",
+          "question": "Check the water inlet valve for blockages and replace if necessary — did that fix it?",
+          "effort": "heavy",
+          "kind": "remedy",
+          "outcomes": [
+            {
+              "value": "yes",
+              "say": "yes, that was it",
+              "consistentWith": [
+                "e24-0"
+              ]
+            },
+            {
+              "value": "no",
+              "say": "no, still faulty",
+              "consistentWith": []
+            }
+          ]
+        }
+      ]
+    },
+    "E07": {
+      "meaning": "REASON: The water inlet valve is stuck open",
+      "causes": [
+        {
+          "id": "e07-0",
+          "label": "Water inlet valve — blockages and replace if necessary",
+          "likelihood": 0.625,
+          "cost": null,
+          "mains": false,
+          "ownerFixable": true,
+          "evidence": "Bosch service manual, page 16: \"Check the water inlet valve for blockages and replace if necessary\"",
+          "remedy": "Check the water inlet valve for blockages and replace if necessary",
+          "source": {
+            "line": 9,
+            "codeLine": 7,
+            "manual": "Bosch service manual, page 16"
+          }
+        }
+      ],
+      "tests": [
+        {
+          "id": "e07-0-check",
+          "question": "Check the water inlet valve for blockages and replace if necessary — did that fix it?",
+          "effort": "heavy",
+          "kind": "remedy",
+          "outcomes": [
+            {
+              "value": "yes",
+              "say": "yes, that was it",
+              "consistentWith": [
+                "e07-0"
+              ]
+            },
+            {
+              "value": "no",
+              "say": "no, still faulty",
+              "consistentWith": []
+            }
+          ]
+        }
+      ]
+    },
+    "F21": {
+      "meaning": "REASON: The water inlet valve is stuck open",
+      "causes": [
+        {
+          "id": "f21-0",
+          "label": "Water inlet valve — blockages and replace if necessary",
+          "likelihood": 0.625,
+          "cost": null,
+          "mains": false,
+          "ownerFixable": true,
+          "evidence": "Bosch service manual, page 16: \"Check the water inlet valve for blockages and replace if necessary\"",
+          "remedy": "Check the water inlet valve for blockages and replace if necessary",
+          "source": {
+            "line": 13,
+            "codeLine": 11,
+            "manual": "Bosch service manual, page 16"
+          }
+        }
+      ],
+      "tests": [
+        {
+          "id": "f21-0-check",
+          "question": "Check the water inlet valve for blockages and replace if necessary — did that fix it?",
+          "effort": "heavy",
+          "kind": "remedy",
+          "outcomes": [
+            {
+              "value": "yes",
+              "say": "yes, that was it",
+              "consistentWith": [
+                "f21-0"
+              ]
+            },
+            {
+              "value": "no",
+              "say": "no, still faulty",
+              "consistentWith": []
+            }
+          ]
+        }
+      ]
+    },
+    "OE": {
+      "meaning": "REASON: The water inlet valve is stuck open",
+      "causes": [
+        {
+          "id": "oe-0",
+          "label": "Water inlet valve — blockages and replace if necessary",
+          "likelihood": 0.625,
+          "cost": null,
+          "mains": false,
+          "ownerFixable": true,
+          "evidence": "Bosch service manual, page 16: \"Check the water inlet valve for blockages and replace if necessary\"",
+          "remedy": "Check the water inlet valve for blockages and replace if necessary",
+          "source": {
+            "line": 17,
+            "codeLine": 15,
+            "manual": "Bosch service manual, page 16"
+          }
+        }
+      ],
+      "tests": [
+        {
+          "id": "oe-0-check",
+          "question": "Check the water inlet valve for blockages and replace if necessary — did that fix it?",
+          "effort": "heavy",
+          "kind": "remedy",
+          "outcomes": [
+            {
+              "value": "yes",
+              "say": "yes, that was it",
+              "consistentWith": [
+                "oe-0"
+              ]
+            },
+            {
+              "value": "no",
+              "say": "no, still faulty",
+              "consistentWith": []
+            }
+          ]
+        }
+      ]
+    },
+    "4C": {
+      "meaning": "REASON: The water inlet valve is stuck open",
+      "causes": [
+        {
+          "id": "4c-0",
+          "label": "Water inlet valve — blockages and replace if necessary",
+          "likelihood": 0.625,
+          "cost": null,
+          "mains": false,
+          "ownerFixable": true,
+          "evidence": "Bosch service manual, page 16: \"Check the water inlet valve for blockages and replace if necessary\"",
+          "remedy": "Check the water inlet valve for blockages and replace if necessary",
+          "source": {
+            "line": 25,
+            "codeLine": 23,
+            "manual": "Bosch service manual, page 16"
+          }
+        }
+      ],
+      "tests": [
+        {
+          "id": "4c-0-check",
+          "question": "Check the water inlet valve for blockages and replace if necessary — did that fix it?",
+          "effort": "heavy",
+          "kind": "remedy",
+          "outcomes": [
+            {
+              "value": "yes",
+              "say": "yes, that was it",
+              "consistentWith": [
+                "4c-0"
+              ]
+            },
+            {
+              "value": "no",
+              "say": "no, still faulty",
+              "consistentWith": []
+            }
+          ]
+        }
+      ]
+    },
+    "5E": {
+      "meaning": "REASON: The water inlet valve is stuck open",
+      "causes": [
+        {
+          "id": "5e-0",
+          "label": "Water inlet valve — blockages and replace if necessary",
+          "likelihood": 0.625,
+          "cost": null,
+          "mains": false,
+          "ownerFixable": true,
+          "evidence": "Bosch service manual, page 16: \"Check the water inlet valve for blockages and replace if necessary\"",
+          "remedy": "Check the water inlet valve for blockages and replace if necessary",
+          "source": {
+            "line": 29,
+            "codeLine": 27,
+            "manual": "Bosch service manual, page 16"
+          }
+        }
+      ],
+      "tests": [
+        {
+          "id": "5e-0-check",
+          "question": "Check the water inlet valve for blockages and replace if necessary — did that fix it?",
+          "effort": "heavy",
+          "kind": "remedy",
+          "outcomes": [
+            {
+              "value": "yes",
+              "say": "yes, that was it",
+              "consistentWith": [
+                "5e-0"
+              ]
+            },
+            {
+              "value": "no",
+              "say": "no, still faulty",
+              "consistentWith": []
+            }
+          ]
+        }
+      ]
+    },
+    "H20": {
+      "meaning": "REASON: The water inlet valve is stuck open",
+      "causes": [
+        {
+          "id": "h20-0",
+          "label": "Water inlet valve — blockages and replace if necessary",
+          "likelihood": 0.625,
+          "cost": null,
+          "mains": false,
+          "ownerFixable": true,
+          "evidence": "Bosch service manual, page 16: \"Check the water inlet valve for blockages and replace if necessary\"",
+          "remedy": "Check the water inlet valve for blockages and replace if necessary",
+          "source": {
+            "line": 33,
+            "codeLine": 31,
+            "manual": "Bosch service manual, page 16"
+          }
+        }
+      ],
+      "tests": [
+        {
+          "id": "h20-0-check",
+          "question": "Check the water inlet valve for blockages and replace if necessary — did that fix it?",
+          "effort": "heavy",
+          "kind": "remedy",
+          "outcomes": [
+            {
+              "value": "yes",
+              "say": "yes, that was it",
+              "consistentWith": [
+                "h20-0"
+              ]
+            },
+            {
+              "value": "no",
+              "say": "no, still faulty",
+              "consistentWith": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "symptoms": [],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "claude — read against the pages",
+  "reviewedAt": "2026-09-21T16:19:15.446Z",
+  "learnedAt": "2026-09-21T16:12:18.086Z"
+}

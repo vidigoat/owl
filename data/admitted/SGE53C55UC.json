@@ -4,7 +4,7 @@
   "kind": "Dishwasher",
   "source": "SGE53C55UC.pdf",
   "pages": "45–46",
-  "readWith": "text-layer",
+  "readWith": "text layer, with the collided rows read from the page",
   "codes": {},
   "symptoms": [
     {
@@ -291,11 +291,125 @@
           }
         }
       ]
+    },
+    {
+      "id": "excessive-formation-of-foam-occurs",
+      "symptom": "Excessive formation of foam occurs.",
+      "causes": [
+        {
+          "id": "excessive-formation-of-foam-occurs-0",
+          "label": "Rinse aid has been spilled.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Remove the rinse aid with a cloth."
+          ],
+          "evidence": "Bosch manual, page 45: \"Rinse aid has been spilled.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 45,
+            "readWith": "bedrock"
+          }
+        },
+        {
+          "id": "excessive-formation-of-foam-occurs-1",
+          "label": "Detergent or machine care product used causes excessive foaming.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Change the brand of detergent."
+          ],
+          "evidence": "Bosch manual, page 45: \"Detergent or machine care product used causes excessive foaming.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 45,
+            "readWith": "bedrock"
+          }
+        }
+      ]
+    },
+    {
+      "id": "wlan-display-is-flashing",
+      "symptom": "WLAN display is flashing.",
+      "causes": [
+        {
+          "id": "wlan-display-is-flashing-0",
+          "label": "Connection to home network is not available.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Activate the wireless network connection on your router."
+          ],
+          "evidence": "Bosch manual, page 45: \"Connection to home network is not available.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 45,
+            "readWith": "bedrock"
+          }
+        }
+      ]
+    },
+    {
+      "id": "home-connect-cannot-be-implemented-corre",
+      "symptom": "Home Connect cannot be implemented correctly.",
+      "causes": [
+        {
+          "id": "home-connect-cannot-be-implemented-corre-0",
+          "label": "Home Connect set incorrectly.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Please consult the documents supplied for Home Connect."
+          ],
+          "evidence": "Bosch manual, page 45: \"Home Connect set incorrectly.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 45,
+            "readWith": "bedrock"
+          }
+        },
+        {
+          "id": "home-connect-cannot-be-implemented-corre-1",
+          "label": "There is a technical error.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Please consult the information on support in the documents supplied for Home Connect."
+          ],
+          "evidence": "Bosch manual, page 45: \"There is a technical error.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 45,
+            "readWith": "bedrock"
+          }
+        }
+      ]
+    },
+    {
+      "id": "appliance-cannot-be-switched-on-or-opera",
+      "symptom": "Appliance cannot be switched on or operated.",
+      "causes": [
+        {
+          "id": "appliance-cannot-be-switched-on-or-opera-0",
+          "label": "Software update is taking place.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wait until the software update has finished."
+          ],
+          "evidence": "Bosch manual, page 46: \"Software update is taking place.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 46,
+            "readWith": "bedrock"
+          }
+        }
+      ]
     }
   ],
   "rejected": [],
   "reviewed": true,
-  "reviewedBy": "claude — structure checked, pages spot-checked",
-  "reviewedAt": "2026-09-21T16:03:22.803Z",
-  "learnedAt": "2026-09-21T16:02:12.276Z"
+  "reviewedBy": "claude — read against the pages",
+  "reviewedAt": "2026-09-21T16:19:15.448Z",
+  "learnedAt": "2026-09-21T16:16:43.485Z"
 }

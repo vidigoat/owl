@@ -4,7 +4,7 @@
   "kind": "Dishwasher",
   "source": "SHE41CM2N.pdf",
   "pages": "38–39",
-  "readWith": "text-layer",
+  "readWith": "text layer, with the collided rows read from the page",
   "codes": {},
   "symptoms": [
     {
@@ -309,13 +309,50 @@
           }
         }
       ]
+    },
+    {
+      "id": "home-connect-cannot-be-implemented-corre",
+      "symptom": "Home Connect cannot be implemented correctly.",
+      "causes": [
+        {
+          "id": "home-connect-cannot-be-implemented-corre-0",
+          "label": "Home Connect set incorrectly.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Please consult the documents supplied for Home Connect."
+          ],
+          "evidence": "Bosch manual, page 38: \"Home Connect set incorrectly.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 38,
+            "readWith": "bedrock"
+          }
+        },
+        {
+          "id": "home-connect-cannot-be-implemented-corre-1",
+          "label": "There is a technical error.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Please consult the information on support in the documents supplied for Home Connect."
+          ],
+          "evidence": "Bosch manual, page 38: \"There is a technical error.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 38,
+            "readWith": "bedrock"
+          }
+        }
+      ]
     }
   ],
   "rejected": [
-    "appliance-stops-during-the-cycle-or-cuts"
+    "appliance-stops-during-the-cycle-or-cuts",
+    "electronics-have-detected-a-fault"
   ],
   "reviewed": true,
-  "reviewedBy": "claude — structure checked, pages spot-checked",
-  "reviewedAt": "2026-09-21T16:03:22.806Z",
-  "learnedAt": "2026-09-21T16:02:14.817Z"
+  "reviewedBy": "claude — read against the pages",
+  "reviewedAt": "2026-09-21T16:19:15.451Z",
+  "learnedAt": "2026-09-21T16:17:59.108Z"
 }

@@ -109,7 +109,14 @@ REMEDY: <the whole remedial-action cell, on one line>
 
 Reply with the entries and nothing else. No preamble, no commentary.`;
 
-function invoke(base64, format) {
+/**
+ * One Bedrock call, one budget check, one place failures are handled.
+ *
+ * `prompt` defaults to the fault-code one. read_symptoms.js passes its own rather than growing a
+ * second call path beside this: the spend ceiling has to see every image that goes out, and a
+ * second copy of this function is a second thing to forget to meter.
+ */
+function invoke(base64, format, prompt = PROMPT) {
   return new Promise((resolve, reject) => {
     const stamp = `${process.pid}-${Date.now()}`;
     const bodyFile = path.join(os.tmpdir(), `ssoh-man-${stamp}.json`);
@@ -117,7 +124,7 @@ function invoke(base64, format) {
     const clean = () => { fs.rmSync(bodyFile, { force: true }); fs.rmSync(outFile, { force: true }); };
 
     fs.writeFileSync(bodyFile, JSON.stringify({
-      messages: [{ role: 'user', content: [{ image: { format, source: { bytes: base64 } } }, { text: PROMPT }] }],
+      messages: [{ role: 'user', content: [{ image: { format, source: { bytes: base64 } } }, { text: prompt }] }],
       // Generous: a fault table is the longest thing this project ever asks a model to produce, and
       // a table cut off halfway is worse than no table — it looks complete.
       inferenceConfig: { maxTokens: 3000, temperature: 0 },
@@ -277,4 +284,6 @@ async function read_manual({ imagePath, imageBase64, model, brand, kind, transcr
   };
 }
 
-module.exports = { name, description, read_manual, PROMPT, MODEL_ID };
+// `invoke` is exported so read_symptoms.js can use the same Bedrock path, the same budget
+// check and the same failure handling rather than growing a second one beside it.
+module.exports = { name, description, read_manual, invoke, PROMPT, MODEL_ID };

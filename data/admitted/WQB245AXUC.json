@@ -4,7 +4,7 @@
   "kind": "Dishwasher",
   "source": "WQB245AXUC.pdf",
   "pages": "41–41",
-  "readWith": "text-layer",
+  "readWith": "text layer, with the collided rows read from the page",
   "codes": {},
   "symptoms": [
     {
@@ -61,11 +61,33 @@
           }
         }
       ]
+    },
+    {
+      "id": "odors-have-formed-in-the-appliance",
+      "symptom": "Odors have formed in the appliance.",
+      "causes": [
+        {
+          "id": "odors-have-formed-in-the-appliance-0",
+          "label": "Stubborn dirt in the appliance or an extended appliance downtime of more than one month.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Run the intensive appliance care program.",
+            "Page 34"
+          ],
+          "evidence": "Bosch manual, page 41: \"Stubborn dirt in the appliance or an extended appliance downtime of more than one month.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 41,
+            "readWith": "bedrock"
+          }
+        }
+      ]
     }
   ],
   "rejected": [],
   "reviewed": true,
-  "reviewedBy": "claude — structure checked, pages spot-checked",
-  "reviewedAt": "2026-09-21T16:03:22.807Z",
-  "learnedAt": "2026-09-21T16:02:15.976Z"
+  "reviewedBy": "claude — read against the pages",
+  "reviewedAt": "2026-09-21T16:19:15.453Z",
+  "learnedAt": "2026-09-21T16:18:46.392Z"
 }

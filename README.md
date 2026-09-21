@@ -822,6 +822,22 @@ symptom *"Home Connect cannot Home"* with the cause *"Connect set incorrectly."*
 that looks right. Those rows are skipped, along with the rest of the symptom they belong to, and
 counted. On one page that took 14 symptoms of which six were mangled down to 8 that are all correct.
 
+### The expensive step, on the rows that earned it
+
+The text layer is free, offline and right about most of a table. It fails on rows where the two
+columns collided, and it **says so** rather than guessing. A picture of the page does not have that
+problem — columns are plainly columns to anything that can see — so when the free reader reports a
+collision, and only then, the page is rendered and a vision model reads it.
+
+The two readings are **merged, not picked between**. Whichever read more is the wrong question: the
+text layer is right about the rows it could split, and the model is the only one that can read the
+rows it could not. Anything the model saw that the text layer did not is the recovery; anything they
+both saw stays as the text layer had it, because that reading is deterministic and free.
+
+Across the twelve symptom-keyed manuals that recovered **32 symptoms and 62 causes** the columns had
+swallowed, for **$0.005**. The model transcribes a line-break hyphen faithfully — *"implemented
+cor- rectly"* — so those are healed before merging, or the same symptom arrives twice.
+
 **Not every collision is caught — and the ones that are not are flagged.** Where the columns collide
 part-way down a symptom rather than on its first line, the rest survives and the cause comes out
 truncated: a real one on a Bosch fridge-freezer reads *"system is heavily iced up. Requirement:
@@ -832,10 +848,10 @@ lower case — so those rows carry `suspect: true` and the bench puts an amber n
 what to check. Four rows across twelve manuals. The library cannot fix them and does not pretend to;
 it points at them, which is the difference between a question and a fact.
 
-Twelve machines have been read — **99 symptoms, 153 causes**, every one citing its
+Twelve machines have been read — **131 symptoms, 215 causes**, every one citing its
 page — across dishwashers, a washer and a refrigerator, which is the same parser reading three
 different kinds of appliance. All twelve have now been reviewed and admitted, which with the
-hand-written ones makes **17 machines in the library** — 95 symptoms and 156 causes, each citing its
+hand-written ones makes **18 machines in the library** — 121 symptoms and 208 causes, each citing its
 page, and four rows rejected because the parser flagged them as cut off.
 
 Reviewing is not rubber-stamping. `SHE43DM2N` went in with three of its five symptoms: one had

@@ -4,7 +4,7 @@
   "kind": "Dishwasher",
   "source": "SHE43DM2N.pdf",
   "pages": "40–40",
-  "readWith": "text-layer",
+  "readWith": "text layer, with the collided rows read from the page",
   "codes": {},
   "symptoms": [
     {
@@ -155,11 +155,32 @@
           }
         }
       ]
+    },
+    {
+      "id": "appliance-cannot-be-switched-on-or-opera",
+      "symptom": "Appliance cannot be switched on or operated.",
+      "causes": [
+        {
+          "id": "appliance-cannot-be-switched-on-or-opera-0",
+          "label": "Software update is taking place.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wait until the software update has finished."
+          ],
+          "evidence": "Bosch manual, page 40: \"Software update is taking place.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 40,
+            "readWith": "bedrock"
+          }
+        }
+      ]
     }
   ],
   "rejected": [],
   "reviewed": true,
-  "reviewedBy": "claude — structure checked, pages spot-checked",
-  "reviewedAt": "2026-09-21T16:03:22.807Z",
-  "learnedAt": "2026-09-21T16:02:15.565Z"
+  "reviewedBy": "claude — read against the pages",
+  "reviewedAt": "2026-09-21T16:19:15.452Z",
+  "learnedAt": "2026-09-21T16:18:16.449Z"
 }

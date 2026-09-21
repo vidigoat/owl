@@ -132,7 +132,7 @@ async function learnOne(file, flags) {
      * symptom instead of a code, and the text layer is enough because the symptom is set in an
      * ordinary typeface rather than the seven-segment display font that mangles codes.
      */
-    report.steps.push('keyed on described symptoms, not codes — reading it as a symptom table, no vision call needed');
+    report.steps.push('keyed on described symptoms, not codes — reading it as a symptom table');
     const found = readSymptoms({ text: best.text, sourceName: `${brand} manual`, page: best.from });
     report.symptoms = found.symptoms;
     report.steps.push(`symptom table: ${found.coverage}`);
@@ -145,13 +145,70 @@ async function learnOne(file, flags) {
      * ticks boxes. Rendering is `pdftoppm` on this machine: free, offline, and about two hundred
      * kilobytes.
      */
+    let png = null;
     try {
-      const png = pdf.renderPage(file, best.from);
+      png = pdf.renderPage(file, best.from);
       if (png) {
         fs.copyFileSync(png, path.join(PENDING, `${model}.png`));
         report.pageImage = `${model}.png`;
       }
     } catch { /* the entry is still reviewable from the manual itself */ }
+
+    /*
+     * The expensive step, on the rows that earned it.
+     *
+     * The text layer is free, offline and right about most of this table. It fails on rows where
+     * the two columns collided — the left column ran long and the gap between them became a single
+     * space — and it SAYS SO rather than guessing. A picture of the page does not have that
+     * problem: columns are plainly columns to anything that can see.
+     *
+     * So this runs only when the free path reported a collision, and only on the page that had
+     * one. Cheapest step first; the expensive one earns its place by fixing a named failure instead
+     * of being the default.
+     */
+    if (found.collided && png && !flags['text-only']) {
+      const { read_symptom_table } = require('../mcp/tools/read_symptoms');
+      report.steps.push(`${found.collided} row${found.collided === 1 ? '' : 's'} had their columns run together — asking the model to read the page`);
+      try {
+        /*
+         * Merged, not picked between.
+         *
+         * Whichever read MORE is the wrong question. The text layer is right about the rows it
+         * could split and the model is the only one that can read the rows it could not, so taking
+         * a winner throws away whichever half the loser was better at. The collided rows are
+         * precisely the ones missing from the text layer's reading, so anything the model saw that
+         * the text layer did not is the recovery — and anything they both saw stays as the text
+         * layer had it, because that reading is deterministic and free.
+         */
+        const have = new Set(found.symptoms.map((x) => x.id));
+        const added = [];
+
+        for (let pg = best.from; pg <= best.to; pg++) {
+          const shot = pg === best.from ? png : pdf.renderPage(file, pg);
+          if (!shot) continue;
+          const seen = await read_symptom_table({ imagePath: shot, sourceName: `${brand} manual`, page: pg });
+          report.steps.push(`page ${pg} via Bedrock: ${seen.coverage || seen.reason}`);
+          for (const sym of seen.symptoms || []) {
+            if (have.has(sym.id)) continue;
+            have.add(sym.id);
+            added.push(sym);
+          }
+        }
+
+        if (added.length) {
+          report.symptoms = [...found.symptoms, ...added];
+          report.readWith = 'text layer, with the collided rows read from the page';
+          report.steps.push(
+            `recovered ${added.length} symptom${added.length === 1 ? '' : 's'} the columns had swallowed: ` +
+            added.map((x) => `"${x.symptom.slice(0, 40)}"`).join(', ')
+          );
+        } else {
+          report.steps.push('the model found nothing the text layer had missed');
+        }
+      } catch (e) {
+        report.steps.push(`the model could not be reached: ${e.message.slice(0, 60)}`);
+      }
+    }
   } else if (graph.found === 0 && report.english === false && !flags['force-vision']) {
     report.steps.push('skipped the vision model: the parser cannot read this language either, so the call would cost money and change nothing');
   } else if (graph.found === 0 && !flags['text-only']) {

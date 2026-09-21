@@ -4,7 +4,7 @@
   "kind": "Dishwasher",
   "source": "B24CB50ESS.pdf",
   "pages": "25–25",
-  "readWith": "text-layer",
+  "readWith": "text layer, with the collided rows read from the page",
   "codes": {},
   "symptoms": [
     {
@@ -157,22 +157,26 @@
       ]
     },
     {
-      "id": "condensation-accumulates-on-the-surface-",
-      "symptom": "Condensation accumulates on the surface of the appliance 1.",
+      "id": "the-set-temperature-is-not-reached-fully",
+      "symptom": "The set temperature is not reached. Fully automatic defrosting no longer works.",
       "causes": [
         {
-          "id": "condensation-accumulates-on-the-surface--0",
-          "label": "The water contained in warm and humid air condenses on the colder surfaces of the appliance.",
+          "id": "the-set-temperature-is-not-reached-fully-0",
+          "label": "The freezer compartment door was open for a long time. The evaporator (refrigeration unit) in the NoFrost system is heavily iced up.",
           "likelihood": 0.625,
           "cost": null,
           "remedies": [
-            "Wipe away the condensation water with a soft, dry"
+            "Store the frozen food well insulated in a cool place.",
+            "Switch off the appliance. ->Page 15",
+            "Disconnect the appliance from the power supply. Unplug the power plug or switch off the circuit breaker in the fuse box.",
+            "Call customer service.",
+            "\"Customer Service\", Page 28"
           ],
-          "evidence": "Bosch manual, page 25: \"The water contained in warm and humid air condenses on the colder surfaces of the appliance.\"",
+          "evidence": "Bosch manual, page 25: \"The freezer compartment door was open for a long time. The evaporator (refrigeration unit) in the NoFrost system is heavily iced up.\"",
           "source": {
-            "line": 40,
             "manual": "Bosch manual",
-            "page": 25
+            "page": 25,
+            "readWith": "bedrock"
           }
         }
       ]
@@ -180,10 +184,11 @@
   ],
   "rejected": [
     "fully-automatic-defrosting-no-longer-wor",
+    "condensation-accumulates-on-the-surface-",
     "and-on-the-shelves-inside"
   ],
   "reviewed": true,
-  "reviewedBy": "claude — structure checked, pages spot-checked",
-  "reviewedAt": "2026-09-21T16:03:22.802Z",
-  "learnedAt": "2026-09-21T16:02:09.380Z"
+  "reviewedBy": "claude — read against the pages",
+  "reviewedAt": "2026-09-21T16:19:15.447Z",
+  "learnedAt": "2026-09-21T16:18:22.570Z"
 }

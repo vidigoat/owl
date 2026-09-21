@@ -4,7 +4,7 @@
   "kind": "Dishwasher",
   "source": "SHE2ADF5N.pdf",
   "pages": "38–39",
-  "readWith": "text-layer",
+  "readWith": "text layer, with the collided rows read from the page",
   "codes": {},
   "symptoms": [
     {
@@ -299,11 +299,125 @@
           }
         }
       ]
+    },
+    {
+      "id": "home-connect-cannot-be-implemented-corre",
+      "symptom": "Home Connect cannot be implemented correctly.",
+      "causes": [
+        {
+          "id": "home-connect-cannot-be-implemented-corre-0",
+          "label": "Home Connect set incorrectly.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Please consult the documents supplied for Home Connect®."
+          ],
+          "evidence": "Bosch manual, page 38: \"Home Connect set incorrectly.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 38,
+            "readWith": "bedrock"
+          }
+        },
+        {
+          "id": "home-connect-cannot-be-implemented-corre-1",
+          "label": "There is a technical error.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Please consult the information on support in the documents supplied for Home Connect®."
+          ],
+          "evidence": "Bosch manual, page 38: \"There is a technical error.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 38,
+            "readWith": "bedrock"
+          }
+        }
+      ]
+    },
+    {
+      "id": "appliance-cannot-be-switched-on-or-opera",
+      "symptom": "Appliance cannot be switched on or operated.",
+      "causes": [
+        {
+          "id": "appliance-cannot-be-switched-on-or-opera-0",
+          "label": "Software update is taking place.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wait until the software update has finished."
+          ],
+          "evidence": "Bosch manual, page 39: \"Software update is taking place.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 39,
+            "readWith": "bedrock"
+          }
+        },
+        {
+          "id": "appliance-cannot-be-switched-on-or-opera-1",
+          "label": "Appliance functions have failed.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Pull out the power cord plug or switch off the breaker.",
+            "Wait at least 2 minutes.",
+            "Connect the appliance to the power supply.",
+            "Switch the appliance on."
+          ],
+          "evidence": "Bosch manual, page 39: \"Appliance functions have failed.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 39,
+            "readWith": "bedrock"
+          }
+        }
+      ]
+    },
+    {
+      "id": "appliance-stops-during-the-cycle-or-cuts",
+      "symptom": "Appliance stops during the cycle or cuts out.",
+      "causes": [
+        {
+          "id": "appliance-stops-during-the-cycle-or-cuts-0",
+          "label": "Appliance door is not closed properly.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Close the appliance door."
+          ],
+          "evidence": "Bosch manual, page 39: \"Appliance door is not closed properly.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 39,
+            "readWith": "bedrock"
+          }
+        },
+        {
+          "id": "appliance-stops-during-the-cycle-or-cuts-1",
+          "label": "Power and/or water supply has been interrupted.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the power supply.",
+            "Check the water supply."
+          ],
+          "evidence": "Bosch manual, page 39: \"Power and/or water supply has been interrupted.\"",
+          "source": {
+            "manual": "Bosch manual",
+            "page": 39,
+            "readWith": "bedrock"
+          }
+        }
+      ]
     }
   ],
-  "rejected": [],
+  "rejected": [
+    "electronics-have-detected-a-fault"
+  ],
   "reviewed": true,
-  "reviewedBy": "claude — structure checked, pages spot-checked",
-  "reviewedAt": "2026-09-21T16:03:22.806Z",
-  "learnedAt": "2026-09-21T16:02:14.098Z"
+  "reviewedBy": "claude — read against the pages",
+  "reviewedAt": "2026-09-21T16:19:15.450Z",
+  "learnedAt": "2026-09-21T16:17:36.002Z"
 }

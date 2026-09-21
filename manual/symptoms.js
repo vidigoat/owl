@@ -517,6 +517,9 @@ function readSymptoms({ text, sourceName = 'service manual', page = null } = {})
     symptoms: out,
     boundary: at,
     dropped,
+    // How many rows the columns ran together on. A caller that can render the page and pay a model
+    // to look at it uses this to decide whether that is worth doing — see mcp/tools/read_symptoms.js.
+    collided,
     coverage: out.length
       ? `${out.length} symptom${out.length === 1 ? '' : 's'} recovered` +
         (collided ? `, ${collided} row${collided === 1 ? '' : 's'} skipped where the two columns run together` : '') +
