@@ -1,0 +1,189 @@
+{
+  "model": "B24CB50ESS",
+  "brand": "Bosch",
+  "kind": "Dishwasher",
+  "source": "B24CB50ESS.pdf",
+  "pages": "25–25",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "a-warning-signal-sounds-and-alarm-lights",
+      "symptom": "A warning signal sounds and \"alarm\" lights up.",
+      "causes": [
+        {
+          "id": "a-warning-signal-sounds-and-alarm-lights-0",
+          "label": "Various causes are possible.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Press alarm.",
+            "The alarm is switched off."
+          ],
+          "evidence": "Bosch manual, page 25: \"Various causes are possible.\"",
+          "source": {
+            "line": 3,
+            "manual": "Bosch manual",
+            "page": 25
+          }
+        },
+        {
+          "id": "a-warning-signal-sounds-and-alarm-lights-1",
+          "label": "The appliance door is open.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Close the appliance door."
+          ],
+          "evidence": "Bosch manual, page 25: \"The appliance door is open.\"",
+          "source": {
+            "line": 6,
+            "manual": "Bosch manual",
+            "page": 25
+          }
+        }
+      ]
+    },
+    {
+      "id": "all-temperature-displays-and-alarm-light",
+      "symptom": "All temperature displays and \"alarm\" light up.",
+      "causes": [
+        {
+          "id": "all-temperature-displays-and-alarm-light-0",
+          "label": "A sensor is defective.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Call customer service."
+          ],
+          "evidence": "Bosch manual, page 25: \"A sensor is defective.\"",
+          "source": {
+            "line": 8,
+            "manual": "Bosch manual",
+            "page": 25
+          }
+        }
+      ]
+    },
+    {
+      "id": "a-warning-tone-sounds-and-the-set-temper",
+      "symptom": "A warning tone sounds and the set temperature (freezer compartment) and \"alarm\" flash.",
+      "causes": [
+        {
+          "id": "a-warning-tone-sounds-and-the-set-temper-0",
+          "label": "Various causes are possible.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Press alarm.",
+            "The alarm is switched off."
+          ],
+          "evidence": "Bosch manual, page 25: \"Various causes are possible.\"",
+          "source": {
+            "line": 11,
+            "manual": "Bosch manual",
+            "page": 25
+          }
+        },
+        {
+          "id": "a-warning-tone-sounds-and-the-set-temper-1",
+          "label": "The freezer compartment door is open.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Close the freezer compartment door."
+          ],
+          "evidence": "Bosch manual, page 25: \"The freezer compartment door is open.\"",
+          "source": {
+            "line": 14,
+            "manual": "Bosch manual",
+            "page": 25
+          }
+        },
+        {
+          "id": "a-warning-tone-sounds-and-the-set-temper-2",
+          "label": "External ventilation openings are covered up.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Remove any obstructions from in front of the external ventilation openings."
+          ],
+          "evidence": "Bosch manual, page 25: \"External ventilation openings are covered up.\"",
+          "source": {
+            "line": 16,
+            "manual": "Bosch manual",
+            "page": 25
+          }
+        },
+        {
+          "id": "a-warning-tone-sounds-and-the-set-temper-3",
+          "label": "Large quantities of fresh food have been placed inside.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Do not exceed the freezing capacity."
+          ],
+          "evidence": "Bosch manual, page 25: \"Large quantities of fresh food have been placed inside.\"",
+          "source": {
+            "line": 19,
+            "manual": "Bosch manual",
+            "page": 25
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-temperature-differs-greatly-from-the",
+      "symptom": "The temperature differs greatly from the setting.",
+      "causes": [
+        {
+          "id": "the-temperature-differs-greatly-from-the-0",
+          "label": "Various causes are possible.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Switch off the appliance. Page 15",
+            "Switch the appliance back on after approximately",
+            "5 minutes. Page 15 If the temperature is too warm, check the temperature again after a couple of hours.",
+            "If the temperature is too cold, check the temperature again on the following day."
+          ],
+          "evidence": "Bosch manual, page 25: \"Various causes are possible.\"",
+          "source": {
+            "line": 32,
+            "manual": "Bosch manual",
+            "page": 25
+          }
+        }
+      ]
+    },
+    {
+      "id": "condensation-accumulates-on-the-surface-",
+      "symptom": "Condensation accumulates on the surface of the appliance 1.",
+      "causes": [
+        {
+          "id": "condensation-accumulates-on-the-surface--0",
+          "label": "The water contained in warm and humid air condenses on the colder surfaces of the appliance.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wipe away the condensation water with a soft, dry"
+          ],
+          "evidence": "Bosch manual, page 25: \"The water contained in warm and humid air condenses on the colder surfaces of the appliance.\"",
+          "source": {
+            "line": 40,
+            "manual": "Bosch manual",
+            "page": 25
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "fully-automatic-defrosting-no-longer-wor",
+    "and-on-the-shelves-inside"
+  ],
+  "reviewed": true,
+  "reviewedBy": "claude — structure checked, pages spot-checked",
+  "reviewedAt": "2026-09-21T16:03:22.802Z",
+  "learnedAt": "2026-09-21T16:02:09.380Z"
+}

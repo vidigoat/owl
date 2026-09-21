@@ -175,7 +175,10 @@
           "likelihood": 0.385,
           "cost": null,
           "remedies": [
-            "45"
+            "If the appliance is not ready to use after 30 minutes,",
+            "perform a reset.",
+            "Press the main switch button for approx. 4 seconds.",
+            "Your appliance is resetting."
           ],
           "evidence": "Bosch manual, page 45: \"This process can take approx. 30 minutes.\"",
           "source": {
@@ -183,15 +186,116 @@
             "manual": "Bosch manual",
             "page": 45
           }
+        },
+        {
+          "id": "all-leds-light-up-or-flash-2",
+          "label": "Electronics have detected a fault.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Press the main switch button for approx. 4 seconds. The appliance is reset and restarted.",
+            "If the problem occurs again:",
+            "Switch off the appliance.",
+            "Unplug the power plug or switch off the circuit breaker in the fuse box.",
+            "Wait at least 2 minutes.",
+            "Switch on the circuit breaker in the fuse box or plug in the power plug.",
+            "Switch on the appliance.",
+            "If the problem occurs again:",
+            "Contact customer service."
+          ],
+          "evidence": "Bosch manual, page 45: \"Electronics have detected a fault.\"",
+          "source": {
+            "line": 54,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "up-appears-on-the-display",
+      "symptom": "UP appears on the display.",
+      "causes": [
+        {
+          "id": "up-appears-on-the-display-0",
+          "label": "A software update is available.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Press the remote start button to install the software update.",
+            "After a successful software update, \"Suc\" appears on the display for a few seconds."
+          ],
+          "evidence": "Bosch manual, page 45: \"A software update is available.\"",
+          "source": {
+            "line": 69,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-is-left-in-the-appliance-at-the-en",
+      "symptom": "Water is left in the appliance at the end of the program.",
+      "causes": [
+        {
+          "id": "water-is-left-in-the-appliance-at-the-en-0",
+          "label": "Filter system or area under the filters is blocked.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Clean the Filters Page 35.",
+            "Clean the Drain pump Page 48."
+          ],
+          "evidence": "Bosch manual, page 45: \"Filter system or area under the filters is blocked.\"",
+          "source": {
+            "line": 74,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        },
+        {
+          "id": "water-is-left-in-the-appliance-at-the-en-1",
+          "label": "Program has not yet ended.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Wait until the program ends or terminate the program with Reset."
+          ],
+          "evidence": "Bosch manual, page 45: \"Program has not yet ended.\"",
+          "source": {
+            "line": 77,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "appliance-does-not-start",
+      "symptom": "Appliance does not start.",
+      "causes": [
+        {
+          "id": "appliance-does-not-start-0",
+          "label": "The breaker has tripped.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check the relevant breaker."
+          ],
+          "evidence": "Bosch manual, page 45: \"The breaker has tripped.\"",
+          "source": {
+            "line": 89,
+            "manual": "Bosch manual",
+            "page": 45
+          }
         }
       ]
     }
   ],
-  "rejected": [
-    "up-appears-on-the-a-display"
-  ],
+  "rejected": [],
   "reviewed": true,
-  "reviewedBy": "claude, against the rendered page",
-  "reviewedAt": "2026-09-21T14:25:12.259Z",
-  "learnedAt": "2026-09-21T14:15:18.391Z"
+  "reviewedBy": "claude — structure checked, pages spot-checked",
+  "reviewedAt": "2026-09-21T16:03:22.803Z",
+  "learnedAt": "2026-09-21T16:02:12.276Z"
 }

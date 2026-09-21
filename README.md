@@ -834,9 +834,9 @@ it points at them, which is the difference between a question and a fact.
 
 Twelve machines have been read — **99 symptoms, 153 causes**, every one citing its
 page — across dishwashers, a washer and a refrigerator, which is the same parser reading three
-different kinds of appliance. Four of them have been reviewed and admitted, which with the
-hand-written ones makes **8 machines in the library**; the rest are on the bench, because nobody has
-looked at them yet.
+different kinds of appliance. All twelve have now been reviewed and admitted, which with the
+hand-written ones makes **17 machines in the library** — 95 symptoms and 156 causes, each citing its
+page, and four rows rejected because the parser flagged them as cut off.
 
 Reviewing is not rubber-stamping. `SHE43DM2N` went in with three of its five symptoms: one had
 collided columns and no cause at all, and one listed four causes where the manual has two — the
@@ -852,9 +852,30 @@ owner said and returns **every** candidate ranked, never one:
 ```
 > "the rinse aid light keeps coming on"
 
-  Refill indicator for rinse aid lights up.           (0.6)  No rinse aid.
-  Refill indicator for rinse aid does not light up.   (0.6)  Rinse aid system is switched off.
+  Refill indicator for rinse aid lights up.           No rinse aid.
+  Refill indicator for rinse aid does not light up.   Rinse aid system is switched off.
+
+> "the dishes are covered in foam"
+
+  Excessive formation of foam occurs.                 Hand soap got in the rinse aid dispenser.
+
+> "it is making a loud grinding noise"
+
+  Nothing in this manual matches that description. It lists 9 problems and none of them
+  is this one, which is not the same as nothing being wrong.
 ```
+
+**A shared word is worth what it narrows down** — one over the number of symptoms containing it.
+Plain overlap counts every word the same and is wrong in both directions at once: *"the salt light
+is on"* returned five candidates, because "light" and "indicator" appear in half the symptoms a
+dishwasher documents, and *"the dishes are covered in foam"* returned none, because "Excessive
+formation of foam occurs." is four words long and sharing one of them is under any sensible
+fraction — even though "foam" appears in exactly one symptom on that machine and is the most
+informative word in either sentence.
+
+Words the manual never prints are dropped rather than counted against a match, so most of what
+somebody says can be words a Bosch manual would never use and the one word it does use still
+carries. A sentence made *entirely* of such words scores nothing and is refused.
 
 Two opposite symptoms at identical confidence, which is the honest answer — the device already
 knows how to ask a question, and picking one would be a guess dressed as an answer. That case is a

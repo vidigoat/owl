@@ -235,6 +235,58 @@ function overlap(a, b) {
   return shared / Math.min(A.size, B.size);
 }
 
+/*
+ * How much a shared word is worth, on THIS machine's list of symptoms.
+ *
+ * Plain overlap counts every word the same, and that is wrong in both directions at once. Measured
+ * on a real machine: "the salt light is on" came back with five candidates, because "light" and
+ * "indicator" appear in half the symptoms a dishwasher documents and a two-word query is half
+ * matched by any of them. And "the dishes are covered in foam" came back with NONE, because
+ * "excessive formation of foam occurs" is four words long and sharing one of them is under any
+ * sensible fraction — even though "foam" appears in exactly one symptom on that machine and is
+ * therefore the most informative word either sentence contains.
+ *
+ * So a word is worth what it narrows down: one over the number of symptoms containing it. Crude
+ * inverse document frequency, over a document set of a dozen sentences. No model, no corpus, and
+ * it reads the same list the answer comes from.
+ */
+function weights(symptoms) {
+  const seen = new Map();
+  for (const s of symptoms) {
+    for (const w of words(s.symptom)) seen.set(w, (seen.get(w) || 0) + 1);
+  }
+  return seen;
+}
+
+/*
+ * How much of what the OWNER said this symptom accounts for.
+ *
+ * Scoring against the symptom's own words instead — how much of IT the description covers —
+ * penalises long symptoms, and manuals write long ones: "the dishes are covered in foam" can never
+ * account for much of "Excessive formation of foam occurs.", and it was refused for that reason
+ * even though "foam" appears in exactly one symptom on the machine.
+ *
+ * Words the manual never uses anywhere are dropped rather than counted against the match. "The
+ * dishes are covered in foam" is mostly words a Bosch manual does not print, and the one it does
+ * print is the whole question. A description made ENTIRELY of such words — "loud grinding noise" —
+ * scores nothing and is refused, which is correct: the manual is silent, not the machine healthy.
+ */
+function score(said, symptom, seen) {
+  const A = words(said);
+  const B = words(symptom);
+  if (!A.size || !B.size) return 0;
+
+  let got = 0;
+  let total = 0;
+  for (const w of A) {
+    if (!seen.has(w)) continue;           // the manual never uses this word; it is not evidence
+    const worth = 1 / seen.get(w);
+    total += worth;
+    if (B.has(w)) got += worth;
+  }
+  return total ? got / total : 0;
+}
+
 /**
  * @param {string} model
  * @param {string} said   what the owner described, in their words
@@ -256,10 +308,20 @@ function lookupSymptom(model, said) {
     };
   }
 
-  const scored = list
-    .map((s) => ({ ...s, match: Number(overlap(said, s.symptom).toFixed(3)) }))
-    .filter((s) => s.match >= 0.5)
+  /*
+   * Ranked by how much of the symptom's INFORMATIVE content the description accounts for, then cut
+   * relative to the best match rather than at a fixed line. A query that matches one symptom well
+   * and three others faintly should return one, and an absolute threshold cannot tell those apart
+   * on a list of a dozen sentences.
+   */
+  const seen = weights(list);
+  const ranked = list
+    .map((s) => ({ ...s, match: Number(score(said, s.symptom, seen).toFixed(3)) }))
+    .filter((s) => s.match > 0)
     .sort((a, b) => b.match - a.match);
+
+  const best = ranked[0]?.match ?? 0;
+  const scored = best >= 0.3 ? ranked.filter((s) => s.match >= best * 0.6).slice(0, 4) : [];
 
   if (!scored.length) {
     return {

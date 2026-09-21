@@ -1,0 +1,309 @@
+{
+  "model": "SHE2ADF6N",
+  "brand": "Bosch",
+  "kind": "Dishwasher",
+  "source": "SHE2ADF6N.pdf",
+  "pages": "38–39",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "excessive-formation-of-foam-occurs",
+      "symptom": "Excessive formation of foam occurs.",
+      "causes": [
+        {
+          "id": "excessive-formation-of-foam-occurs-0",
+          "label": "Hand soap got in the rinse aid dispenser.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Immediately add rinse aid to the dispenser."
+          ],
+          "evidence": "Bosch manual, page 38: \"Hand soap got in the rinse aid dispenser.\"",
+          "source": {
+            "line": 3,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        },
+        {
+          "id": "excessive-formation-of-foam-occurs-1",
+          "label": "Rinse aid has been spilled.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Remove the rinse aid with a cloth."
+          ],
+          "evidence": "Bosch manual, page 38: \"Rinse aid has been spilled.\"",
+          "source": {
+            "line": 6,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        },
+        {
+          "id": "excessive-formation-of-foam-occurs-2",
+          "label": "Detergent or machine care product used causes excessive foaming.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Change the brand of detergent."
+          ],
+          "evidence": "Bosch manual, page 38: \"Detergent or machine care product used causes excessive foaming.\"",
+          "source": {
+            "line": 8,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        }
+      ]
+    },
+    {
+      "id": "connection-to-home-network-is-not-establ",
+      "symptom": "Connection to home network is not established.",
+      "causes": [
+        {
+          "id": "connection-to-home-network-is-not-establ-0",
+          "label": "WLAN on router is not active.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check the wireless network connection of your router."
+          ],
+          "evidence": "Bosch manual, page 38: \"WLAN on router is not active.\"",
+          "source": {
+            "line": 11,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        }
+      ]
+    },
+    {
+      "id": "wlan-display-is-flashing",
+      "symptom": "WLAN display is flashing.",
+      "causes": [
+        {
+          "id": "wlan-display-is-flashing-0",
+          "label": "Connection to home network is not available.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Activate the wireless network connection on your router."
+          ],
+          "evidence": "Bosch manual, page 38: \"Connection to home network is not available.\"",
+          "source": {
+            "line": 14,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        }
+      ]
+    },
+    {
+      "id": "refill-indicator-for-rinse-aid-lights-up",
+      "symptom": "Refill indicator for rinse aid lights up.",
+      "causes": [
+        {
+          "id": "refill-indicator-for-rinse-aid-lights-up-0",
+          "label": "No rinse aid.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Add Rinse aid Page 16.",
+            "Set the amount of rinse aid to be dispensed."
+          ],
+          "evidence": "Bosch manual, page 38: \"No rinse aid.\"",
+          "source": {
+            "line": 23,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        }
+      ]
+    },
+    {
+      "id": "refill-indicator-for-rinse-aid-does-not-",
+      "symptom": "Refill indicator for rinse aid does not light up.",
+      "causes": [
+        {
+          "id": "refill-indicator-for-rinse-aid-does-not--0",
+          "label": "Rinse aid system is switched off.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Set the amount of rinse aid."
+          ],
+          "evidence": "Bosch manual, page 38: \"Rinse aid system is switched off.\"",
+          "source": {
+            "line": 27,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        }
+      ]
+    },
+    {
+      "id": "all-leds-light-up-or-flash",
+      "symptom": "All LEDs light up or flash.",
+      "causes": [
+        {
+          "id": "all-leds-light-up-or-flash-0",
+          "label": "A software update is possibly installing.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wait until the software update has been installed. This process can take approx. 30 minutes.",
+            "If the appliance is not ready to use after 30 minutes,",
+            "perform a reset.",
+            "Press the main switch button for approx. 4 seconds.",
+            "Your appliance is resetting."
+          ],
+          "evidence": "Bosch manual, page 38: \"A software update is possibly installing.\"",
+          "source": {
+            "line": 30,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        },
+        {
+          "id": "all-leds-light-up-or-flash-1",
+          "label": "Electronics have detected a fault.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Press the main switch button for approx. 4 seconds. The appliance is reset and restarted.",
+            "If the problem occurs again:",
+            "Switch off the appliance.",
+            "Unplug the power plug or switch off the circuit breaker in the fuse box.",
+            "Wait at least 2 minutes.",
+            "Switch on the circuit breaker in the fuse box or plug in the power plug.",
+            "Switch on the appliance.",
+            "If the problem occurs again:",
+            "Contact customer service."
+          ],
+          "evidence": "Bosch manual, page 38: \"Electronics have detected a fault.\"",
+          "source": {
+            "line": 37,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-is-left-in-the-appliance-at-the-en",
+      "symptom": "Water is left in the appliance at the end of the program.",
+      "causes": [
+        {
+          "id": "water-is-left-in-the-appliance-at-the-en-0",
+          "label": "Filter system or area under the filters is blocked.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Clean the Filters Page 30.",
+            "Clean the Drain pump Page 41."
+          ],
+          "evidence": "Bosch manual, page 38: \"Filter system or area under the filters is blocked.\"",
+          "source": {
+            "line": 59,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        },
+        {
+          "id": "water-is-left-in-the-appliance-at-the-en-1",
+          "label": "Program has not yet ended.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Wait until the program ends or terminate the program with Reset."
+          ],
+          "evidence": "Bosch manual, page 38: \"Program has not yet ended.\"",
+          "source": {
+            "line": 62,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        }
+      ]
+    },
+    {
+      "id": "appliance-does-not-start",
+      "symptom": "Appliance does not start.",
+      "causes": [
+        {
+          "id": "appliance-does-not-start-0",
+          "label": "The breaker has tripped.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check the relevant breaker."
+          ],
+          "evidence": "Bosch manual, page 38: \"The breaker has tripped.\"",
+          "source": {
+            "line": 74,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        },
+        {
+          "id": "appliance-does-not-start-1",
+          "label": "Power cord is not inserted.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check whether the power outlet is working.",
+            "Check whether the power cord plug is properly in-",
+            "serted in the power outlet and on the rear of the appliance."
+          ],
+          "evidence": "Bosch manual, page 38: \"Power cord is not inserted.\"",
+          "source": {
+            "line": 76,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        },
+        {
+          "id": "appliance-does-not-start-2",
+          "label": "Appliance door is not closed properly.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Close the appliance door."
+          ],
+          "evidence": "Bosch manual, page 38: \"Appliance door is not closed properly.\"",
+          "source": {
+            "line": 81,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        }
+      ]
+    },
+    {
+      "id": "wash-cycle-starts-up-automatically",
+      "symptom": "Wash cycle starts up automatically.",
+      "causes": [
+        {
+          "id": "wash-cycle-starts-up-automatically-0",
+          "label": "You did not wait until the cycle ended.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [],
+          "evidence": "Bosch manual, page 38: \"You did not wait until the cycle ended.\"",
+          "source": {
+            "line": 83,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "claude — structure checked, pages spot-checked",
+  "reviewedAt": "2026-09-21T16:03:22.806Z",
+  "learnedAt": "2026-09-21T16:02:14.411Z"
+}

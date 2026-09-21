@@ -1,0 +1,71 @@
+{
+  "model": "WQB245AXUC",
+  "brand": "Bosch",
+  "kind": "Dishwasher",
+  "source": "WQB245AXUC.pdf",
+  "pages": "41–41",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "all-other-fault-codes",
+      "symptom": "All other fault codes.",
+      "causes": [
+        {
+          "id": "all-other-fault-codes-0",
+          "label": "Operational fault",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "To restart the appliance, press and hold for ap-",
+            "proximately 5 seconds.",
+            "If the fault occurs again, disconnect the appliance",
+            "from the power supply for at least 30 seconds."
+          ],
+          "evidence": "Bosch manual, page 41: \"Operational fault\"",
+          "source": {
+            "line": 7,
+            "manual": "Bosch manual",
+            "page": 41
+          }
+        },
+        {
+          "id": "all-other-fault-codes-1",
+          "label": "Unplug the power plug or switch off the circuit breaker in the fuse box.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "If the fault persists, call customer service.",
+            "Page 41"
+          ],
+          "evidence": "Bosch manual, page 41: \"Unplug the power plug or switch off the circuit breaker in the fuse box.\"",
+          "source": {
+            "line": 12,
+            "manual": "Bosch manual",
+            "page": 41
+          }
+        },
+        {
+          "id": "all-other-fault-codes-2",
+          "label": "Please specify the exact error message when calling. If possible, document the fault with photos and videos.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Dispose of the appliance in an en-"
+          ],
+          "evidence": "Bosch manual, page 41: \"Please specify the exact error message when calling. If possible, document the fault with photos and videos.\"",
+          "source": {
+            "line": 16,
+            "manual": "Bosch manual",
+            "page": 41
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "claude — structure checked, pages spot-checked",
+  "reviewedAt": "2026-09-21T16:03:22.807Z",
+  "learnedAt": "2026-09-21T16:02:15.976Z"
+}

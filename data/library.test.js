@@ -172,6 +172,46 @@ it('a plural is not a different word', () => {
   assert.equal(r.matches[0].match, r.matches[1].match, 'one was ranked above the other on a plural');
 });
 
+it('a rare word outweighs a common one', () => {
+  /*
+   * Plain overlap counts every word the same and is wrong in both directions at once. Measured on
+   * a real machine: "the salt light is on" came back with FIVE candidates, because "light" and
+   * "indicator" appear in half the symptoms a dishwasher documents. And "the dishes are covered in
+   * foam" came back with NONE, because "Excessive formation of foam occurs." is four words long
+   * and sharing one of them is under any sensible fraction — even though "foam" appears in exactly
+   * one symptom on that machine and is the most informative word either sentence contains.
+   */
+  const lib = library([machine({
+    symptoms: [
+      { id: 'foam', symptom: 'Excessive formation of foam occurs.', causes: [{ id: 'f', label: 'Rinse aid spilled.', remedies: ['Wipe it.'] }] },
+      { id: 'rinse-on', symptom: 'Refill indicator for rinse aid lights up.', causes: [{ id: 'a', label: 'No rinse aid.', remedies: ['Add some.'] }] },
+      { id: 'rinse-off', symptom: 'Refill indicator for rinse aid does not light up.', causes: [{ id: 'b', label: 'System is off.', remedies: ['Set it.'] }] },
+      { id: 'salt-on', symptom: 'Special salt refill indicator lights up.', causes: [{ id: 'c', label: 'No salt.', remedies: ['Add salt.'] }] },
+    ],
+  })]);
+
+  const foam = lib.lookupSymptom('TESTDW1', 'the dishes are covered in foam');
+  assert.equal(foam.known, true, 'the one informative word in the sentence was ignored');
+  assert.equal(foam.matches[0].symptom, 'Excessive formation of foam occurs.');
+
+  // "salt" narrows to one symptom; "indicator" and "light" narrow to nothing much.
+  const salt = lib.lookupSymptom('TESTDW1', 'the salt light is on');
+  assert.equal(salt.matches[0].symptom, 'Special salt refill indicator lights up.');
+  assert.ok(salt.matches.length <= 2, `a two-word query returned ${salt.matches.length} candidates`);
+});
+
+it('a description made only of words the manual never uses is refused', () => {
+  /*
+   * "Loud grinding noise" shares nothing with anything, and the answer is that the manual is
+   * silent — not that the machine is healthy. Words the manual never prints are dropped rather
+   * than counted against a match, so a sentence made entirely of them scores nothing at all.
+   */
+  const lib = library([machine()]);
+  const r = lib.lookupSymptom('TESTDW1', 'it is making a loud grinding noise');
+  assert.equal(r.known, false);
+  assert.match(r.reason, /not the same as nothing being wrong/);
+});
+
 it('overlap is a fraction of the shorter description, and is symmetric', () => {
   const { overlap } = library([]);
   assert.equal(overlap('rinse aid light', 'rinse aid light'), 1);
