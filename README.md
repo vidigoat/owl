@@ -605,6 +605,11 @@ npm start                                               # http://localhost:8792/
 
 ![The review bench — the manual page on the left, what was parsed out of it on the right, each row quoting the sentence it came from](docs/media/bench.jpg)
 
+*Look at the fourth row. Its cause begins "system is heavily iced up" — mid-sentence, because the
+two columns collided part-way down that symptom and the beginning was lost. That is the parser
+limit described further down this README, and a reviewer leaves that box unticked in about a
+second. It is in this screenshot on purpose.*
+
 The rendered page sits on the left at a size you can read, the parsed fault codes on the right, each
 quoting the sentence in the manual it came from. Every code starts unticked, because a reviewer
 arriving at a pre-approved screen is being asked to find mistakes rather than confirm readings, and
