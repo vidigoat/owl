@@ -572,7 +572,7 @@ returning a display's fault code as the model number. Neither was findable offli
 ## The manual reader is also a library
 
 **[github.com/vidigoat/faultgraph](https://github.com/vidigoat/faultgraph)** — MIT, zero
-dependencies, 81 checks.
+dependencies, 82 checks.
 
 It reads both kinds of table now: `parse()` for fault codes, and `readSymptoms()` for the
 symptom-keyed troubleshooting tables that current manuals print instead. Both were driven out of
