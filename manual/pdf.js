@@ -82,9 +82,52 @@ const CODE_AT_LINE_START = /^\s*(?:[A-Z]{1,3}[\s:\-]?\d{1,3}[A-Z]?|[A-Z]{2,3}|\d
 /*
  * Wider than faultgraph's own verb list on purpose. This decides WHICH PAGE to look at, where a
  * false positive costs one wasted parse and a false negative costs the whole manual.
+ *
+ * Multilingual, because this file's whole claim is that it scores SHAPE rather than vocabulary and
+ * an English-only verb list quietly makes that false. A French fault table of the same size as an
+ * English one scored six points lower for no reason but its language — close enough to the
+ * threshold that a shorter table would have been missed outright. The remedy column of a fault
+ * table is imperative verbs in every language these appear in; there is no reason to recognise
+ * only one set.
+ *
+ * This finds the page. PARSING it is a separate matter and still English-only — see TABLE_WORDS.
  */
-const REMEDY_VERB = /\b(check|clean|clear|replace|inspect|remove|tighten|straighten|reset|ensure|contact|turn|switch|install|unscrew|arrange|call|descale|refill)\b/i;
-const TABLE_WORDS = /\b(fault|error|alarm)\s+(code|codes|table|display)|troubleshoot/i;
+const REMEDY_VERB =
+  /\b(check|clean|clear|replace|inspect|remove|tighten|straighten|reset|ensure|contact|turn|switch|install|unscrew|arrange|call|descale|refill)\b/i;
+const REMEDY_VERB_OTHER =
+  /\b(nettoyez|v[ée]rifiez|remplacez|fermez|ouvrez|appelez|contactez|retirez|installez|d[ée]branchez|reinigen|pr[üu]fen|ersetzen|austauschen|schlie[ßs]en|[öo]ffnen|entfernen|einsetzen|wenden|limpie|compruebe|sustituya|cierre|retire|llame|pulire|pulisca|controllare|sostituire|chiudere|contattare|reinig|controleer|vervang)\b/i;
+/*
+ * The heading, in the languages these manuals actually ship in.
+ *
+ * A Bosch dishwasher manual exists as one document per language, and the French edition's fault
+ * table is headed "Dérangement | Cause | Solution". The column SHAPE found that page anyway —
+ * which is the argument for scoring shape — but the heading is worth five points and there is no
+ * reason to leave them on the table for four fifths of Europe.
+ *
+ * Finding the page is not the same as being able to PARSE it: faultgraph's remedy verbs are
+ * English, so a French table is located and then recovers nothing. That is reported as its own
+ * outcome rather than as "no fault table", because the two need opposite things from whoever is
+ * holding the manual.
+ */
+const TABLE_WORDS =
+  /\b(fault|error|alarm)\s+(code|codes|table|display)|troubleshoot|d[ée]rangement|code\s+d'erreur|fehlercode|st[öo]rung|c[óo]digo\s+de\s+error|codice\s+di\s+errore|storingstabel/i;
+
+/*
+ * Roughly, is this page English?
+ *
+ * Counted from function words, which are the most reliable signal in a short sample and do not
+ * need a dictionary. Used only to explain a failure — never to refuse a page. A table we cannot
+ * parse should say WHY, and "this manual is in French" is a far more useful thing to be told than
+ * "nothing usable found".
+ */
+const ENGLISH_MARKERS = /\b(the|and|with|from|for|is|are|not|this|water|check|clean|replace)\b/gi;
+const OTHER_MARKERS = /\b(le|la|les|des|und|der|die|das|für|el|los|para|con|il|della|het|een)\b/gi;
+
+function probablyEnglish(text) {
+  const en = (String(text).match(ENGLISH_MARKERS) || []).length;
+  const other = (String(text).match(OTHER_MARKERS) || []).length;
+  return en >= other;
+}
 
 /**
  * A line laid out in columns.
@@ -133,7 +176,7 @@ function scorePage(text) {
 
   for (const line of lines) {
     if (CODE_AT_LINE_START.test(line)) codeLines++;
-    if (REMEDY_VERB.test(line)) remedyLines++;
+    if (REMEDY_VERB.test(line) || REMEDY_VERB_OTHER.test(line)) remedyLines++;
     if (COLUMNAR(line)) columnar++;
   }
 
@@ -152,6 +195,7 @@ function scorePage(text) {
     columnar,
     heading: Boolean(heading),
     garbled: looksGarbled(text),
+    english: probablyEnglish(text),
     lines: lines.length,
   };
 }
@@ -227,5 +271,5 @@ function renderPage(file, page, { dir, dpi = 150 } = {}) {
 
 module.exports = {
   available, pages, pageCount, scorePage, faultTablePages, joinAdjacent,
-  looksGarbled, renderPage, COLUMNAR,
+  looksGarbled, renderPage, probablyEnglish, COLUMNAR,
 };

@@ -668,6 +668,15 @@ diagnosis is. That is not a gap to close later; it is the product.
 **A manual with no fault table.** It recovers nothing and says **NOTHING RECOVERED**, rather than
 producing a plausible-looking hypothesis space out of prose.
 
+**A manual that is not in English.** Manufacturers publish one document per language, so roughly
+four in five of what you find on a manufacturer's CDN is not English. Those tables are *found* — the
+page scorer reads columns and headings in six languages, and Bosch's French edition scores 39
+against the English edition's 41 — but the parser's remedy verbs are English, so nothing comes back
+out. `learn-manual` reports that as **lang**, naming the page it found and the reason it stopped,
+and skips the vision call rather than paying a model to transcribe a table the parser cannot read
+either way. "Go and fetch the English edition, which exists" is a different instruction from "this
+manual is no good", and the two should not look the same.
+
 ---
 
 ## For reviewers

@@ -84,14 +84,22 @@ async function learnOne(file, flags) {
   const best = runs[0];
   report.bestPages = `${best.from}–${best.to}`;
   report.garbled = candidates.some((c) => c.garbled);
+  report.english = candidates[0].english;
   report.steps.push(`pages ${report.bestPages} scored ${best.score}${report.garbled ? ', codes look font-mangled' : ''}`);
 
   // 3. The free attempt.
   let graph = parse({ model, text: best.text, sourceName: `${brand} service manual` });
   report.steps.push(`text layer: ${graph.coverage}`);
 
-  // 4. The paid attempt, only if the free one came back empty.
-  if (graph.found === 0 && !flags['text-only']) {
+  // 4. The paid attempt, only if the free one came back empty — and only if it could possibly help.
+  //
+  // A vision model reads French perfectly well and would transcribe that table faithfully. It would
+  // then hand faultgraph French, which faultgraph cannot parse, and we would have paid for the
+  // privilege. Not spending is the correct behaviour here, and saying why is the difference between
+  // a budget guard and a silent skip.
+  if (graph.found === 0 && report.english === false && !flags['force-vision']) {
+    report.steps.push('skipped the vision model: the parser cannot read this language either, so the call would cost money and change nothing');
+  } else if (graph.found === 0 && !flags['text-only']) {
     const { read_manual } = require('../mcp/tools/read_manual');
     for (let page = best.from; page <= best.to; page++) {
       const png = pdf.renderPage(file, page);
@@ -110,7 +118,21 @@ async function learnOne(file, flags) {
 
   report.coverage = graph.coverage;
   report.codes = Object.keys(graph.codes);
-  report.outcome = graph.found ? 'learned' : 'nothing-recovered';
+  /*
+   * Failing for a knowable reason is a different fact from failing for an unknown one.
+   *
+   * Manufacturers publish the same manual once per language, so half of what a scraper collects is
+   * not English. The page scorer finds those tables fine — columns are columns — but faultgraph's
+   * remedy verbs are English, so the parse comes back empty and the honest report is "this manual
+   * is not in a language this library reads", not "no fault table". The first tells you to go find
+   * the English edition, which exists; the second tells you to go find a better manual, which does
+   * not.
+   */
+  report.outcome = graph.found
+    ? 'learned'
+    : report.english === false
+      ? 'not-english'
+      : 'nothing-recovered';
   report.graph = graph;
   return report;
 }
@@ -144,9 +166,13 @@ async function learnOne(file, flags) {
     const tag =
       report.outcome === 'learned' ? `${C.green}learned${C.off}` :
       report.outcome === 'no-table-found' ? `${C.amber}no table${C.off}` :
+      report.outcome === 'not-english' ? `${C.amber}lang   ${C.off}` :
       `${C.red}empty  ${C.off}`;
 
-    console.log(`  ${tag} ${path.basename(file).padEnd(30)} ${C.dim}${report.coverage || report.error || ''}${C.off}`);
+    const note = report.outcome === 'not-english'
+      ? `fault table found on ${report.bestPages}, but this manual is not in English`
+      : report.coverage || report.error || '';
+    console.log(`  ${tag} ${path.basename(file).padEnd(30)} ${C.dim}${note}${C.off}`);
     for (const s of report.steps) console.log(`          ${C.dim}· ${s}${C.off}`);
 
     if (report.outcome === 'learned') {

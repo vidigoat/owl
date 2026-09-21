@@ -150,4 +150,64 @@ it('an empty page scores zero and is not garbled', () => {
   assert.equal(pdf.scorePage(undefined).score, 0);
 });
 
+/* ── the manual that is not in English ───────────────────────────────────── */
+
+/*
+ * The same Bosch dishwasher, French edition. Real: document 9001234568 from Bosch's own CDN, page
+ * 42. Same appliance, same table, same display-font mangling — different words.
+ *
+ * Manufacturers publish one document per language, so a scraper pointed at a manufacturer's CDN
+ * collects these by the dozen. They are not corrupt files and they are not missing their tables;
+ * they are simply unreadable to an English verb list, and the pipeline has to say which.
+ */
+const FRENCH_TABLE = `                                                      Dérangement, que faire ? fr
+
+Tableau des dérangements
+Dérangement                 Cause                              Solution
+Code d'erreur “:ƒƒ          Filtres 1Z encrassés ou            Nettoyez les filtres.
+apparaît.                   bouchés.
+Code d'erreur “:‚ƒ          Résistance entartrée ou            Nettoyez l'appareil avec un produit
+apparaît.                   encrassée.                         de nettoyage pour lave-vaisselle.
+Code d'erreur “:‚…          Système de sécurité contre         Fermez le robinet d'eau.
+apparaît.                   les dégâts d'eau activé.           Appelez le service après-vente.`;
+
+it('a French fault table scores like the English one — language is not a penalty', () => {
+  /*
+   * The real assertion, and the reason it is a comparison rather than a threshold. This file claims
+   * to score SHAPE rather than vocabulary; an English-only verb list made that claim false without
+   * making any test fail, because the English fixtures all passed. Measured on Bosch's own French
+   * edition the same table scored 27 against the English edition's 41 — a third of the page's score
+   * lost to nothing but its language, and close enough to the floor that a shorter table would have
+   * been missed outright.
+   *
+   * Holding the two fixtures against each other is what catches that coming back. A threshold would
+   * not have: 27 cleared it.
+   */
+  const fr = pdf.scorePage(FRENCH_TABLE);
+  const en = pdf.scorePage(REAL_TABLE);
+  assert.ok(fr.columnar >= 5, 'the column structure was not detected');
+  assert.equal(fr.heading, true, 'the French heading was not recognised');
+  assert.ok(
+    fr.score >= en.score * 0.8,
+    `French ${fr.score} vs English ${en.score} — the scorer is reading vocabulary, not shape`
+  );
+});
+
+it('and it is reported as not English, so the failure can be explained', () => {
+  // The pipeline uses this to skip a vision call that would cost money and change nothing.
+  assert.equal(pdf.scorePage(FRENCH_TABLE).english, false);
+  assert.equal(pdf.scorePage(REAL_TABLE).english, true);
+});
+
+it('language detection does not refuse short or empty pages', () => {
+  // It only ever explains a failure. Defaulting an unknowable page to "not English" would suppress
+  // the vision call that is the whole reason the expensive path exists.
+  assert.equal(pdf.probablyEnglish(''), true);
+  assert.equal(pdf.probablyEnglish('E24'), true);
+});
+
+it('a German heading counts too', () => {
+  assert.equal(pdf.scorePage('Fehlercode-Tabelle\nE24    Zulauf    Prüfen').heading, true);
+});
+
 console.log(`\n${passed} passed`);
