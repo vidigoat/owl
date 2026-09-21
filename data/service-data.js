@@ -320,8 +320,33 @@ function lookupSymptom(model, said) {
     .filter((s) => s.match > 0)
     .sort((a, b) => b.match - a.match);
 
+  /*
+   * A match resting entirely on a common word is worse than a refusal.
+   *
+   * "The salt light came on", asked of a machine whose manual never says "salt", drops that word
+   * and matches on "light" alone — which appears in five of thirteen symptoms — and came back
+   * pointing at the rinse aid. Confidently, and at the wrong indicator.
+   *
+   * So a match has to rest on at least one word that NARROWS: present in a quarter or fewer of the
+   * symptoms this machine documents. Everything else about the scoring stays; this only decides
+   * whether there is an answer at all.
+   */
+  /*
+   * "Rare" has to be relative to the list. A fixed cutoff let "light" through — it appears in three
+   * of this machine's thirteen symptoms, which is not rare enough to decide anything, and "the salt
+   * light came on" went on pointing at the rinse aid. A narrowing word is one in a fifth or fewer.
+   */
+  // A fifth of the list, and never fewer than two — on a list of three symptoms nothing is rare and
+  // demanding a word that appears exactly once refuses everything.
+  const rare = Math.max(2, Math.floor(list.length * 0.2));
+  const narrows = (s) =>
+    [...words(said)].some((w) => seen.has(w) && seen.get(w) <= rare && words(s.symptom).has(w));
+
   const best = ranked[0]?.match ?? 0;
-  const scored = best >= 0.3 ? ranked.filter((s) => s.match >= best * 0.6).slice(0, 4) : [];
+  const scored =
+    best >= 0.3 && ranked.some(narrows)
+      ? ranked.filter((s) => s.match >= best * 0.6).slice(0, 4)
+      : [];
 
   if (!scored.length) {
     return {

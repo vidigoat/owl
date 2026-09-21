@@ -200,6 +200,34 @@ it('a rare word outweighs a common one', () => {
   assert.ok(salt.matches.length <= 2, `a two-word query returned ${salt.matches.length} candidates`);
 });
 
+it('a match resting only on a common word is refused', () => {
+  /*
+   * "The salt light came on", asked of a machine whose manual never says "salt", drops that word
+   * and matches on "light" alone — which appears in three of that machine's thirteen symptoms —
+   * and came back pointing confidently at the rinse aid. At the wrong indicator.
+   *
+   * A match has to rest on at least one word that NARROWS: present in a fifth or fewer of the
+   * symptoms this machine documents. "Rare" is relative to the list, because a fixed cutoff let
+   * "light" through on a list of thirteen.
+   */
+  const cause = (i) => [{ id: `c${i}`, label: 'Something.', remedies: ['Do something.'] }];
+  const symptoms = Array.from({ length: 11 }, (_, i) => ({
+    id: `s${i}`,
+    symptom: `Indicator light for thing ${'x'.repeat(i + 2)} comes on.`,
+    causes: cause(i),
+  }));
+  // One symptom with a word of its own, so the list is not uniformly uninformative.
+  symptoms.push({ id: 'foam', symptom: 'Excessive formation of foam occurs.', causes: cause('f') });
+  const lib = library([machine({ symptoms })]);
+
+  // "light" is in eleven of twelve; nothing in this question narrows anything.
+  assert.equal(lib.lookupSymptom('TESTDW1', 'the salt light came on').known, false);
+  // "foam" is in exactly one, so it decides.
+  const foam = lib.lookupSymptom('TESTDW1', 'there is foam everywhere');
+  assert.equal(foam.known, true);
+  assert.equal(foam.matches[0].symptom, 'Excessive formation of foam occurs.');
+});
+
 it('a description made only of words the manual never uses is refused', () => {
   /*
    * "Loud grinding noise" shares nothing with anything, and the answer is that the manual is

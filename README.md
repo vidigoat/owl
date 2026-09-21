@@ -893,6 +893,12 @@ Words the manual never prints are dropped rather than counted against a match, s
 somebody says can be words a Bosch manual would never use and the one word it does use still
 carries. A sentence made *entirely* of such words scores nothing and is refused.
 
+**And a match has to rest on a word that narrows.** *"The salt light came on"*, asked of a machine
+whose manual never says "salt", drops that word and matches on "light" alone — which appears in
+three of that machine's thirteen symptoms — and came back pointing confidently at the rinse aid. At
+the wrong indicator. A match now needs at least one shared word present in a fifth or fewer of the
+symptoms; without one it refuses, which on that question is the true answer.
+
 Two opposite symptoms at identical confidence, which is the honest answer — the device already
 knows how to ask a question, and picking one would be a guess dressed as an answer. That case is a
 test, because the first version *did* pick: it returned the "does not light up" row alone, and the
