@@ -603,6 +603,8 @@ node scripts/learn-manual.js manual.pdf --brand Bosch   # writes a candidate to 
 npm start                                               # http://localhost:8792/review.html
 ```
 
+![The review bench — the manual page on the left, what was parsed out of it on the right, each row quoting the sentence it came from](docs/media/bench.jpg)
+
 The rendered page sits on the left at a size you can read, the parsed fault codes on the right, each
 quoting the sentence in the manual it came from. Every code starts unticked, because a reviewer
 arriving at a pre-approved screen is being asked to find mistakes rather than confirm readings, and
