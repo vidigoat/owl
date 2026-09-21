@@ -3,13 +3,29 @@
 Four criteria, equally weighted, plus the mini challenge and the friction-log bonus. Every row points
 at something runnable — no claim here needs to be taken on trust.
 
+## Start here
+
+Two screens. The device at `/` is the thing an owner talks to; **the bench at `/review.html` is the
+thing that makes the device trustworthy** — a rendered manual page on the left, what was parsed out
+of it on the right, and nothing reaching the library until somebody ticks a row.
+
+It caught a real error the first time it was used, on the first machine: the manual prints **E:16**
+and the model read **E18**. The output was well formed and confidently wrong, and nothing
+downstream could have caught it.
+
+The larger finding is on that screen too. Ten current Bosch US dishwasher manuals, fetched from
+Bosch's own site by `scripts/source-manuals.js`, contain **zero fault codes between them** — the
+troubleshooting tables are keyed on described symptoms now. The entry point this product was built
+on matches what Bosch published in 2019 and not what it publishes today, which is written up
+honestly in `PLAN.md` rather than papered over.
+
 ## Tech implementation
 *How effectively does it use the required technology for the Alexa+ track?*
 
 | what to look at | where |
 |---|---|
 | The MCP server — JSON-RPC over Streamable HTTP, spec 2025-11-25 | `mcp/server.js` |
-| Sixteen tools genuinely registered and invoked, not described | `mcp/tools/` — answer `tools/list` over Streamable HTTP; the README table names the file each lives in |
+| Nineteen tools genuinely registered and invoked, not described | `mcp/tools/` — answer `tools/list` over Streamable HTTP; the README table names the file each lives in |
 | **Vision that actually runs** — real Bedrock Nova Lite, scored against deliberately hard panels | `npm run eval` → 7/9 codes, 1/1 model, **0 invented**; the two misses return null rather than guess. `mcp/tools/see.js` |
 | **A camera, and a voice** — point it at a machine, answer out loud | `public/app.js` — `getUserMedia`, `speechSynthesis`, `SpeechRecognition` |
 | **Learns a machine from a photograph of its manual** | `mcp/tools/read_manual.js` — verified on a Hotpoint FDW60 whose codes appear nowhere in this repo |
@@ -19,6 +35,11 @@ at something runnable — no claim here needs to be taken on trust.
 | **The diagnosis engine** — entropy over a hypothesis space, cost-weighted information gain | `mcp/tools/next_test.js` |
 | **Learning a machine at runtime** from its own service manual | `manual/faultgraph.js`, `POST /api/learn` |
 | The device calls those same modules; the front-end knows nothing | `server.js` → `/api/diagnosis/*`, `/api/learn`, `/api/verify`, `/api/guide`, `/api/part` |
+| **Where the manuals come from** — sitemap → product page → typed document list, robots-respecting, capped | `scripts/source-manuals.js` — run it and watch it fetch |
+| **Reading the table manufacturers print now**, keyed on a described symptom rather than a code | `manual/symptoms.js` — the column boundary from the page's own header, indent as the grammar |
+| **Answering in words**, returning every candidate rather than picking one | `describe_problem` → `data/service-data.js` `lookupSymptom` |
+| **Nothing enters the library without a person** — evidence and parse side by side, admission per row | `manual/review.js`, `public/review.html` at `/review.html` |
+| **Is it worth fixing** — refuses, and names the figure it cannot have | `mcp/tools/replace_or_repair.js`; it never returns a verdict and a test says so |
 | Every suite reported together, weighted towards the things that can cost someone money | `npm test` |
 
 The one worth running yourself:
