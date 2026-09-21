@@ -1079,9 +1079,10 @@ async function boot() {
  * The scripted flow starts with "my dishwasher is beeping and there's water in the bottom" and
  * answers it from a fault code. This model answers the same complaint the other way — its manual
  * lists "Water is left in the appliance at the end of the program." — which is the whole point of
- * the screen and worth being able to type verbatim.
+ * the screen and worth being able to type verbatim. It is also the richest of the twelve, with ten
+ * symptoms, so the other things people actually say have somewhere to land.
  */
-const DESCRIBE_MODEL = 'SHE43DM2N';
+const DESCRIBE_MODEL = 'SHE41CM2N';
 
 function renderDescribe(said = '', result = null) {
   stage = 'describe';
