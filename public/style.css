@@ -435,3 +435,23 @@ footer { max-width: 1140px; margin: 0 auto; padding: 22px 24px; display: flex; j
   color: #f5f3ee; background: #16181b; border: 0; border-radius: 10px; }
 .s-cam__cancel { padding: 12px 18px; font: inherit; font-size: 15px; cursor: pointer; color: inherit;
   background: transparent; border: 1px solid rgba(22,24,27,.28); border-radius: 10px; }
+
+/*
+ * The way to the other surface. A bar, not a link in the prose: the bench answers a different
+ * question from the device, and burying it in a paragraph is how it stayed unfindable.
+ */
+.ways {
+  display: flex;
+  gap: 18px;
+  align-items: baseline;
+  padding: 10px clamp(16px, 3vw, 32px);
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+/* Light on the dark chrome: --ink here is the colour of the device SCREEN's text, not the page's. */
+.ways { border-bottom-color: rgba(207, 198, 184, 0.16); }
+.ways__here { color: var(--paper); }
+.ways__here::before { content: "▸ "; color: rgba(239, 234, 225, 0.4); }
+.ways__to { color: rgba(239, 234, 225, 0.55); text-decoration: none; border-bottom: 1px solid transparent; }
+.ways__to:hover { color: var(--paper); border-bottom-color: rgba(239, 234, 225, 0.4); }

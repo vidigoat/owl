@@ -191,3 +191,6 @@
   border-left: 2px dashed var(--rule);
   max-width: 62ch;
 }
+
+.bench-back { color: var(--graphite); text-decoration: none; font-size: 13px; border-bottom: 1px solid transparent; }
+.bench-back:hover { color: var(--ink); border-bottom-color: var(--rule); }
