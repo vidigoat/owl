@@ -228,18 +228,35 @@ function handler(req, res) {
      * the overclaim this product is built to avoid.
      */
     if (url.pathname === '/api/library') {
-      const { MODELS: HAND, ADMITTED: CHECKED, LEARNED: UNCHECKED } = require('./data/service-data');
+      const lib = require('./data/service-data');
+      const HAND = lib.MODELS;
+      const CHECKED = lib.admittedNow();
+      const UNCHECKED = lib.LEARNED;
 
       const describe = (model, rec, tier) => {
         const codes = Object.values(rec.codes || {});
+        const symptoms = rec.symptoms || [];
         return {
           model,
           brand: rec.brand || 'Unknown',
           kind: rec.kind || null,
           tier,
+          /*
+           * Codes and symptoms counted separately, because they are answered by different
+           * questions — one by reading a panel, the other by describing what is happening. Summing
+           * them into "10 things known" would hide which question a machine can answer.
+           */
           codes: codes.length,
-          codesWithCauses: codes.filter((c) => (c.causes || []).length).length,
-          causes: codes.reduce((n, c) => n + (c.causes || []).length, 0),
+          symptoms: symptoms.length,
+          // Named for what it counts. It was `codesWithCauses` and then started counting symptoms
+          // too, which made it larger than the number of codes — a field whose name had quietly
+          // stopped being true.
+          withCauses:
+            codes.filter((c) => (c.causes || []).length).length +
+            symptoms.filter((s) => (s.causes || []).length).length,
+          causes:
+            codes.reduce((n, c) => n + (c.causes || []).length, 0) +
+            symptoms.reduce((n, s) => n + (s.causes || []).length, 0),
           source: rec.source || null,
           rejected: rec.rejected || [],
           reviewedBy: rec.reviewedBy || null,
@@ -260,7 +277,8 @@ function handler(req, res) {
           checked: machines.filter((m) => m.tier === 'checked').length,
           unchecked: machines.filter((m) => m.tier === 'unchecked').length,
           codes: machines.reduce((n, m) => n + m.codes, 0),
-          codesWithCauses: machines.reduce((n, m) => n + m.codesWithCauses, 0),
+          symptoms: machines.reduce((n, m) => n + m.symptoms, 0),
+          withCauses: machines.reduce((n, m) => n + m.withCauses, 0),
           causes: machines.reduce((n, m) => n + m.causes, 0),
           rejected: machines.reduce((n, m) => n + m.rejected.length, 0),
         },
@@ -272,6 +290,9 @@ function handler(req, res) {
         .then((body) => {
           const accept = Array.isArray(body.accept) ? body.accept : [];
           const result = review.admit(body.model, accept, body.by || 'unattributed');
+          // The library is read once at startup. Something just added to it, so read it again —
+          // otherwise the screen that admits machines and the screen that lists them disagree.
+          if (result.admitted) require('./data/service-data').reload();
           return send(res, result.admitted ? 200 : 400, JSON.stringify(result), 'application/json');
         })
         .catch((e) => send(res, 400, JSON.stringify({ error: e.message }), 'application/json'));

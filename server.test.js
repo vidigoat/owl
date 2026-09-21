@@ -103,8 +103,8 @@ const get = (p) => fetch(`${BASE}${p}`);
     assert.equal(t.machines, lib.machines.length);
     assert.equal(t.hand + t.checked + t.unchecked, t.machines, 'the tiers do not add up to the total');
     assert.ok(
-      t.codesWithCauses <= t.codes,
-      'more fault codes carry causes than there are fault codes'
+      t.withCauses <= t.codes + t.symptoms,
+      'more entries carry causes than there are entries'
     );
   });
 

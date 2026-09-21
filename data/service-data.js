@@ -123,7 +123,20 @@ function learn({ model, brand = 'Unknown', kind = 'Appliance', codes, source }) 
  * Collapsing them would erase the one distinction this library exists to maintain. A caller that
  * wants to know how a fact got here can ask; `provenance()` answers.
  */
-const ADMITTED = loadAdmitted();
+let ADMITTED = loadAdmitted();
+
+/**
+ * Re-read what has been admitted.
+ *
+ * The library is loaded once at startup, which is right for a process that only reads it — and
+ * wrong the moment something can ADD to it. A machine reviewed on the bench did not appear in the
+ * library until the server was restarted, so the screen that admits machines and the screen that
+ * lists them disagreed with each other for as long as the process lived.
+ */
+function reload() {
+  ADMITTED = loadAdmitted();
+  return ADMITTED;
+}
 
 function loadAdmitted() {
   const dir = path.join(__dirname, 'admitted');
@@ -147,6 +160,9 @@ function loadAdmitted() {
 
 /** Hand-written first, then human-checked, then this session's unchecked reading. */
 const find = (model) => MODELS[model] || ADMITTED[model] || LEARNED[model];
+
+/** The admitted tier, live rather than captured at require time. */
+const admittedNow = () => ADMITTED;
 
 /** How a machine's data got here, for anything that needs to say so out loud. */
 function provenance(model) {
@@ -272,4 +288,8 @@ function lookup(model, code) {
   };
 }
 
-module.exports = { MODELS, LEARNED, ADMITTED, lookup, lookupSymptom, learn, known, provenance, loadAdmitted, overlap };
+module.exports = {
+  MODELS, LEARNED, lookup, lookupSymptom, learn, known, provenance, loadAdmitted, reload, overlap,
+  get ADMITTED() { return ADMITTED; },
+  admittedNow,
+};

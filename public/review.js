@@ -298,8 +298,8 @@ async function loadLibrary() {
   $('libSum').innerHTML =
     `<b>${t.machines}</b> machines &mdash; <b>${t.hand}</b> written by hand, <b>${t.checked}</b> ` +
     `read and checked here` + (t.unchecked ? `, <b>${t.unchecked}</b> read and not yet checked` : '') + `. ` +
-    `<b>${t.codes}</b> fault codes, of which <b>${t.codesWithCauses}</b> carry causes; the rest are ` +
-    `codes the library can name and cannot yet explain.` +
+    `<b>${t.codes}</b> fault codes and <b>${t.symptoms}</b> described symptoms, of which ` +
+    `<b>${t.withCauses}</b> carry causes; the rest the library can name and cannot yet explain.` +
     (t.rejected ? ` <b>${t.rejected}</b> reading${t.rejected === 1 ? ' was' : 's were'} rejected at this bench and recorded.` : '');
 
   const rows = $('libRows');
@@ -310,8 +310,8 @@ async function loadLibrary() {
     tr.innerHTML =
       `<td>${esc(m.model)}</td>` +
       `<td>${esc(m.brand)}${m.kind ? ' ' + esc(m.kind.toLowerCase()) : '<span class="lib-none"> — kind not recorded</span>'}</td>` +
-      `<td class="lib-n">${m.codes}</td>` +
-      `<td class="lib-n">${m.codesWithCauses || '<span class="lib-none">none</span>'}</td>` +
+      `<td class="lib-n">${m.codes + m.symptoms}</td>` +
+      `<td class="lib-n">${m.withCauses || '<span class="lib-none">none</span>'}</td>` +
       `<td class="${cls}">${esc(label)}` +
         (m.rejected.length ? `, ${esc(m.rejected.join(', '))} rejected` : '') +
       `</td>`;

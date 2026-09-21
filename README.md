@@ -802,6 +802,29 @@ Twelve machines are on the review bench now — **103 symptoms, 144 causes**, ev
 page — across dishwashers, a washer and a refrigerator, which is the same parser reading three
 different kinds of appliance. None of them is in the library, because nobody has looked at them yet.
 
+### Asking in words
+
+Because the manuals are keyed on sentences now, so is the library. `describe_problem` takes what the
+owner said and returns **every** candidate ranked, never one:
+
+```
+> "the rinse aid light keeps coming on"
+
+  Refill indicator for rinse aid lights up.           (0.6)  No rinse aid.
+  Refill indicator for rinse aid does not light up.   (0.6)  Rinse aid system is switched off.
+```
+
+Two opposite symptoms at identical confidence, which is the honest answer — the device already
+knows how to ask a question, and picking one would be a guess dressed as an answer. That case is a
+test, because the first version *did* pick: it returned the "does not light up" row alone, and the
+entire difference was the word "light" against "lights".
+
+Three refusals matter more than the matching. A description the manual does not cover says so and
+says how many it **does** cover, because *"no record of this"* must never read as *"nothing is
+wrong"*. A machine recorded by fault code says it is recorded by fault code and tells you to read
+the panel, rather than answering emptily. And an unreviewed record never answers, checked at the
+lookup as well as at the loader.
+
 ### Where the fault codes went
 
 The obvious answer was "the repair documentation", and it is wrong. Bosch publishes a `RH` document
