@@ -6,6 +6,13 @@ Point an Echo Show at a blinking appliance panel. It reads the fault code and th
 diagnosis against that model's service data before asking you to spend anything, talks you through the
 repair while your hands are inside the machine, and orders the exact part through Amazon Wallet.
 
+**A fault code is not always there to read.** Ten current Bosch US dishwasher manuals, fetched from
+Bosch's own site, contain none between them — their troubleshooting tables are keyed on a described
+symptom now, and *"all the lights are flashing"* is what somebody says out loud anyway. So the
+library answers both ways, and how it knows travels with every answer. That finding, and what it
+means for a product built around a code on a panel, is
+[the honest part of this README](#where-the-fault-codes-went).
+
 > **Status:** running. Every screenshot below is a real capture of a real run — `npm run capture`
 > and `npm run gif` generate them by pressing the same buttons a person would, and the capture fails
 > if any two frames come out identical. What is not yet real is named plainly in
