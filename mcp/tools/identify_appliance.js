@@ -18,7 +18,7 @@
  */
 
 const { see } = require('./see');
-const { known, MODELS, LEARNED } = require('../../data/service-data');
+const { known, machine } = require('../../data/service-data');
 
 const name = 'identify_appliance';
 
@@ -70,7 +70,9 @@ async function identify_appliance({ imagePath, imageBase64, model } = {}) {
 }
 
 function describe(model, { read, confidence, code = null }) {
-  const record = MODELS[model] || LEARNED[model];
+  // Every tier, through one door. Reaching into MODELS and LEARNED directly skipped ADMITTED, so a
+  // machine reviewed at the bench passed `known()` and then crashed on an undefined record.
+  const record = machine(model);
 
   if (!known(model)) {
     return {
@@ -99,7 +101,24 @@ function describe(model, { read, confidence, code = null }) {
     learned: Boolean(record.generated),
     // Which codes we could actually help with. An agent can use this to set expectations before
     // asking the person to go and look at the display.
-    knownCodes: Object.keys(record.codes),
+    knownCodes: Object.keys(record.codes || {}),
+
+    /*
+     * And which PROBLEMS, for the machines that have no codes.
+     *
+     * This returned `knownCodes` alone, and on a symptom-keyed machine that is an empty array — so
+     * an agent using this to set expectations would conclude the machine was unknown and send
+     * somebody to read a display that has no code on it. Current manuals print no fault codes at
+     * all; see manual/symptoms.js.
+     *
+     * `answersBy` is the field worth acting on: it says which question to ask.
+     */
+    knownSymptoms: (record.symptoms || []).map((x) => x.symptom),
+    answersBy:
+      Object.keys(record.codes || {}).length && (record.symptoms || []).length ? 'code or description'
+        : Object.keys(record.codes || {}).length ? 'code'
+        : (record.symptoms || []).length ? 'description'
+        : 'nothing yet',
     source: record.source || 'service data',
   };
 }

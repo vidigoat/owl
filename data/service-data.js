@@ -164,6 +164,16 @@ const find = (model) => MODELS[model] || ADMITTED[model] || LEARNED[model];
 /** The admitted tier, live rather than captured at require time. */
 const admittedNow = () => ADMITTED;
 
+/**
+ * The record for a machine, whichever tier it is in.
+ *
+ * Exported because callers were reaching into the tiers themselves — `MODELS[model] ||
+ * LEARNED[model]` — and that skipped ADMITTED entirely. `known()` checks all three, so a machine
+ * reviewed at the bench answered "yes, known" and then handed back `undefined`, which is a crash
+ * rather than a wrong answer. One way in, so a fourth tier could never do this again.
+ */
+const machine = (model) => find(model) || null;
+
 /** How a machine's data got here, for anything that needs to say so out loud. */
 function provenance(model) {
   if (MODELS[model]) return 'written by hand from the manual';
@@ -289,7 +299,7 @@ function lookup(model, code) {
 }
 
 module.exports = {
-  MODELS, LEARNED, lookup, lookupSymptom, learn, known, provenance, loadAdmitted, reload, overlap,
+  MODELS, LEARNED, lookup, lookupSymptom, learn, known, machine, provenance, loadAdmitted, reload, overlap,
   get ADMITTED() { return ADMITTED; },
   admittedNow,
 };
