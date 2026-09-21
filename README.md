@@ -572,7 +572,7 @@ returning a display's fault code as the model number. Neither was findable offli
 ## The manual reader is also a library
 
 **[github.com/vidigoat/faultgraph](https://github.com/vidigoat/faultgraph)** — MIT, zero
-dependencies, 85 checks.
+dependencies, 86 checks.
 
 It reads both kinds of table now: `parse()` for fault codes, and `readSymptoms()` for the
 symptom-keyed troubleshooting tables that current manuals print instead. Both were driven out of
@@ -832,7 +832,7 @@ lower case — so those rows carry `suspect: true` and the bench puts an amber n
 what to check. Four rows across twelve manuals. The library cannot fix them and does not pretend to;
 it points at them, which is the difference between a question and a fact.
 
-Twelve machines have been read — **100 symptoms, 159 causes**, every one citing its
+Twelve machines have been read — **99 symptoms, 153 causes**, every one citing its
 page — across dishwashers, a washer and a refrigerator, which is the same parser reading three
 different kinds of appliance. Four of them have been reviewed and admitted, which with the
 hand-written ones makes **8 machines in the library**; the rest are on the bench, because nobody has
