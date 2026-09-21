@@ -1,9 +1,9 @@
 {
   "model": "SMS46KI01E",
   "brand": "Bosch",
-  "kind": "Appliance",
+  "kind": "Dishwasher",
   "source": "SMS46KI01E.pdf",
-  "pages": "39–40",
+  "pages": "39\u201340",
   "readWith": "bedrock",
   "codes": {
     "E07": {
@@ -28,7 +28,7 @@
       "tests": [
         {
           "id": "e07-0-check",
-          "question": "Arrange utensils so that the intake opening is not obstructed. — did that fix it?",
+          "question": "Arrange utensils so that the intake opening is not obstructed. \u2014 did that fix it?",
           "effort": "easy",
           "kind": "remedy",
           "outcomes": [
@@ -70,7 +70,7 @@
       "tests": [
         {
           "id": "e12-0-check",
-          "question": "Clean appliance with dishwasher cleaning agent or descaler. Operate the dishwasher with water softening system and check the setting. \"Water softening system/special salt\" on page 15 — did that fix it?",
+          "question": "Clean appliance with dishwasher cleaning agent or descaler. Operate the dishwasher with water softening system and check the setting. \"Water softening system/special salt\" on page 15 \u2014 did that fix it?",
           "effort": "easy",
           "kind": "remedy",
           "outcomes": [
@@ -112,7 +112,7 @@
       "tests": [
         {
           "id": "e14-0-check",
-          "question": "Turn off water supply. — did that fix it?",
+          "question": "Turn off water supply. \u2014 did that fix it?",
           "effort": "easy",
           "kind": "remedy",
           "outcomes": [
@@ -154,7 +154,7 @@
       "tests": [
         {
           "id": "e15-0-check",
-          "question": "Call customer service and quote the fault code. — did that fix it?",
+          "question": "Call customer service and quote the fault code. \u2014 did that fix it?",
           "effort": "easy",
           "kind": "remedy",
           "outcomes": [
@@ -196,7 +196,7 @@
       "tests": [
         {
           "id": "e22-0-check",
-          "question": "Clean filters. \"Filters\" on page 37 — did that fix it?",
+          "question": "Clean filters. \"Filters\" on page 37 \u2014 did that fix it?",
           "effort": "easy",
           "kind": "remedy",
           "outcomes": [

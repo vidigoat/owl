@@ -53,6 +53,7 @@
     <section class="claim-col">
       <h1 class="cand" id="candName"></h1>
       <p class="cand-meta" id="candMeta"></p>
+      <p class="again" id="again" hidden></p>
 
       <ul class="codes" id="codes"></ul>
 
@@ -67,6 +68,29 @@
       <p class="done" id="done" hidden></p>
     </section>
   </div>
+
+  <!--
+    What the bench has built. Three tiers, reported separately, because a machine somebody wrote out
+    by hand, one a model read and a person checked, and one nobody has looked at are three different
+    kinds of fact. A single "5 machines known" would be the most flattering way to say it.
+  -->
+  <section class="library" id="library" hidden>
+    <h2 class="lib-head">in the library</h2>
+    <p class="lib-sum" id="libSum"></p>
+
+    <table class="lib">
+      <thead>
+        <tr>
+          <th scope="col">machine</th>
+          <th scope="col">what it is</th>
+          <th scope="col" class="lib-n">codes</th>
+          <th scope="col" class="lib-n">with causes</th>
+          <th scope="col" class="lib-how">how we know</th>
+        </tr>
+      </thead>
+      <tbody id="libRows"></tbody>
+    </table>
+  </section>
 </main>
 
 <script src="review.js"></script>

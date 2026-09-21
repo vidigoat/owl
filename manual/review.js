@@ -122,7 +122,9 @@ function admit(model, accept, by = 'unattributed') {
   const record = {
     model: entry.model,
     brand: entry.brand,
-    kind: entry.kind || 'Appliance',
+    // Kept as-is, null included. A machine whose kind nobody recorded is not "an Appliance"; the
+    // library says the brand and stays quiet about the rest.
+    kind: entry.kind || null,
     source: entry.source,
     pages: entry.pages,
     readWith: entry.readWith,

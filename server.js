@@ -205,6 +205,59 @@ http
         err ? send(res, 404, 'not found', 'text/plain') : send(res, 200, buf, 'image/png'));
     }
 
+    /*
+     * What the library actually holds, by how it came to hold it.
+     *
+     * The three tiers are reported separately rather than summed. A machine somebody wrote out by
+     * hand, one a model read and a person checked, and one a model read that nobody has looked at
+     * are three different kinds of fact, and a single "5 machines known" would be the most
+     * flattering way to say it and the least true.
+     *
+     * `codes` and `codesWithCauses` are also kept apart. Several models here carry a fault code for
+     * breadth with its causes deliberately not filled in — the library knows the code exists and
+     * what it means, and has nothing to say about why. Counting those as coverage would be exactly
+     * the overclaim this product is built to avoid.
+     */
+    if (url.pathname === '/api/library') {
+      const { MODELS: HAND, ADMITTED: CHECKED, LEARNED: UNCHECKED } = require('./data/service-data');
+
+      const describe = (model, rec, tier) => {
+        const codes = Object.values(rec.codes || {});
+        return {
+          model,
+          brand: rec.brand || 'Unknown',
+          kind: rec.kind || null,
+          tier,
+          codes: codes.length,
+          codesWithCauses: codes.filter((c) => (c.causes || []).length).length,
+          causes: codes.reduce((n, c) => n + (c.causes || []).length, 0),
+          source: rec.source || null,
+          rejected: rec.rejected || [],
+          reviewedBy: rec.reviewedBy || null,
+        };
+      };
+
+      const machines = [
+        ...Object.entries(HAND).map(([m, r]) => describe(m, r, 'hand')),
+        ...Object.entries(CHECKED).map(([m, r]) => describe(m, r, 'checked')),
+        ...Object.entries(UNCHECKED).map(([m, r]) => describe(m, r, 'unchecked')),
+      ].sort((a, b) => a.brand.localeCompare(b.brand) || a.model.localeCompare(b.model));
+
+      return send(res, 200, JSON.stringify({
+        machines,
+        totals: {
+          machines: machines.length,
+          hand: machines.filter((m) => m.tier === 'hand').length,
+          checked: machines.filter((m) => m.tier === 'checked').length,
+          unchecked: machines.filter((m) => m.tier === 'unchecked').length,
+          codes: machines.reduce((n, m) => n + m.codes, 0),
+          codesWithCauses: machines.reduce((n, m) => n + m.codesWithCauses, 0),
+          causes: machines.reduce((n, m) => n + m.causes, 0),
+          rejected: machines.reduce((n, m) => n + m.rejected.length, 0),
+        },
+      }), 'application/json');
+    }
+
     if (req.method === 'POST' && url.pathname === '/api/review/admit') {
       return readJson(req)
         .then((body) => {

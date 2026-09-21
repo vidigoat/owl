@@ -64,7 +64,10 @@ function modelFromName(file) {
 async function learnOne(file, flags) {
   const model = flags.model || modelFromName(file);
   const brand = flags.brand || 'Unknown';
-  const report = { file, model, brand, steps: [] };
+  // No default. A manual does not say what kind of machine it is in any parseable way, and
+  // "Appliance" is a non-answer dressed as an answer — it reads as a fact and carries none.
+  const kind = flags.kind || null;
+  const report = { file, model, brand, kind, steps: [] };
 
   if (!pdf.available()) {
     report.error = 'pdftotext is not installed — the cheap path is unavailable';
@@ -154,7 +157,7 @@ async function learnOne(file, flags) {
 
   if (!files.length) {
     console.log(`\n  ${C.bold}learn-manual${C.off} ${C.dim}— a manufacturer PDF becomes a machine this project knows${C.off}\n`);
-    console.log(`    node scripts/learn-manual.js <pdf...> [--brand Bosch] [--model SMS46] [--text-only]\n`);
+    console.log(`    node scripts/learn-manual.js <pdf...> [--brand Bosch] [--kind Dishwasher] [--model SMS46] [--text-only]\n`);
     console.log(`  ${C.dim}--text-only   never call Bedrock. Free, and fails on manuals whose codes are`);
     console.log(`                set in a display font — which is most of the good ones.${C.off}\n`);
     process.exit(3);
@@ -194,6 +197,7 @@ async function learnOne(file, flags) {
       fs.writeFileSync(out, JSON.stringify({
         model: report.model,
         brand: report.brand,
+        kind: report.kind,
         source: path.basename(file),
         pages: report.bestPages,
         readWith: report.readWith || 'text-layer',

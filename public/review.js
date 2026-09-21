@@ -77,6 +77,34 @@ async function show(model) {
 
   renderCodes(entry);
   updateVerdict();
+  noteIfAlreadyKnown(entry);
+}
+
+/*
+ * A machine can be in the queue and in the library at once, and that is not a mistake.
+ *
+ * Every time the parser improves, the honest thing to do is read the manual again — and the second
+ * reading arrives as a fresh candidate for a machine already admitted. A reviewer who does not know
+ * that is looking at what seems to be duplicate work. Saying it turns a confusing state into the
+ * normal one it actually is.
+ */
+async function noteIfAlreadyKnown(entry) {
+  const note = $('again');
+  note.hidden = true;
+  try {
+    const lib = await (await fetch('/api/library')).json();
+    const held = lib.machines.find((m) => m.model === entry.model && m.tier === 'checked');
+    if (!held) return;
+
+    const now = Object.keys(entry.codes || {}).length;
+    const diff = now - held.codes;
+    note.hidden = false;
+    note.innerHTML =
+      `<b>${esc(entry.model)}</b> is already in the library with ${held.codes} fault code` +
+      `${held.codes === 1 ? '' : 's'}. This is a fresh reading of the same manual` +
+      (diff > 0 ? `, and it found ${diff} more.` : diff < 0 ? `, and it found ${-diff} fewer.` : ' with the same codes.') +
+      ` Admitting replaces what is held.`;
+  } catch { /* the bench still works without it */ }
 }
 
 function renderCodes(entry) {
@@ -183,7 +211,58 @@ $('admit').addEventListener('click', async () => {
 
   // Straight on to the next candidate, because a queue that makes you navigate back is a queue
   // people stop working through.
-  setTimeout(load, 1400);
+  setTimeout(() => { load(); loadLibrary(); }, 1400);
 });
 
+/* ── what the bench has built ─────────────────────────────────────────────── */
+
+const HOW = {
+  hand: ['written out by hand from the manual', 'how'],
+  checked: ['read by a model, checked against the page', 'how--checked'],
+  unchecked: ['read by a model, checked by nobody', 'how--unchecked'],
+};
+
+async function loadLibrary() {
+  let data;
+  try {
+    data = await (await fetch('/api/library')).json();
+  } catch {
+    return;
+  }
+  if (!data.machines.length) return;
+
+  const t = data.totals;
+  $('library').hidden = false;
+
+  /*
+   * Codes and codes-with-causes are quoted separately on purpose. Several machines here carry a
+   * fault code for breadth with its causes deliberately not filled in: the library knows the code
+   * exists and what it means, and has nothing to say about why. Rolling those into one number would
+   * be the overclaim this whole product is built to avoid.
+   */
+  $('libSum').innerHTML =
+    `<b>${t.machines}</b> machines &mdash; <b>${t.hand}</b> written by hand, <b>${t.checked}</b> ` +
+    `read and checked here` + (t.unchecked ? `, <b>${t.unchecked}</b> read and not yet checked` : '') + `. ` +
+    `<b>${t.codes}</b> fault codes, of which <b>${t.codesWithCauses}</b> carry causes; the rest are ` +
+    `codes the library can name and cannot yet explain.` +
+    (t.rejected ? ` <b>${t.rejected}</b> reading${t.rejected === 1 ? ' was' : 's were'} rejected at this bench and recorded.` : '');
+
+  const rows = $('libRows');
+  rows.textContent = '';
+  for (const m of data.machines) {
+    const [label, cls] = HOW[m.tier] || [m.tier, 'how'];
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      `<td>${esc(m.model)}</td>` +
+      `<td>${esc(m.brand)}${m.kind ? ' ' + esc(m.kind.toLowerCase()) : '<span class="lib-none"> — kind not recorded</span>'}</td>` +
+      `<td class="lib-n">${m.codes}</td>` +
+      `<td class="lib-n">${m.codesWithCauses || '<span class="lib-none">none</span>'}</td>` +
+      `<td class="${cls}">${esc(label)}` +
+        (m.rejected.length ? `, ${esc(m.rejected.join(', '))} rejected` : '') +
+      `</td>`;
+    rows.appendChild(tr);
+  }
+}
+
 load();
+loadLibrary();

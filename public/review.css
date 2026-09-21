@@ -15,6 +15,23 @@
 
 [hidden] { display: none !important; }
 
+/*
+ * style.css carries `main section { max-width: 1140px; margin: 0 auto; padding: 72px 24px;
+ * border-bottom: 1px solid ... }` for the device page, and it was landing on every section here:
+ * the evidence column, the claim column and the library all picked up a centred 1140px box and a
+ * stray horizontal rule underneath. The grid hid most of it, which is why it took a screenshot to
+ * notice the library sitting 180px in from everything above it.
+ *
+ * Reset rather than override piecemeal. The bench shares this project's palette and typefaces; it
+ * does not share its page furniture.
+ */
+.bench section {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 0;
+}
+
 .bench-body {
   background: var(--paper);
   color: var(--ink);
@@ -43,7 +60,7 @@
 
 /* ── empty ────────────────────────────────────────────────────────────────── */
 
-.bench-empty { padding: clamp(40px, 10vh, 96px) clamp(16px, 3vw, 32px); max-width: 60ch; }
+.bench .bench-empty { padding: clamp(40px, 10vh, 96px) clamp(16px, 3vw, 32px); max-width: 60ch; }
 .bench-empty h1 { font: 700 21px/1.3 var(--display); margin: 0 0 12px; }
 .bench-empty p { color: var(--graphite); margin: 0 0 16px; }
 .bench-cmd {
@@ -194,3 +211,50 @@
 
 .bench-back { color: var(--graphite); text-decoration: none; font-size: 13px; border-bottom: 1px solid transparent; }
 .bench-back:hover { color: var(--ink); border-bottom-color: var(--rule); }
+
+/* ── what the bench has built ─────────────────────────────────────────────── */
+
+.bench .library { padding: 30px clamp(16px, 3vw, 32px) 80px; border-top: 1px solid var(--rule); }
+.lib-head { font: 700 17px/1 var(--display); margin: 0 0 8px; }
+.lib-sum { color: var(--graphite); margin: 0 0 20px; max-width: 76ch; font-size: 13px; }
+.lib-sum b { color: var(--ink); font-weight: 500; }
+
+.lib { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.lib thead th {
+  text-align: left;
+  font-weight: 400;
+  font-size: 11px;
+  color: var(--graphite);
+  padding: 9px 10px;
+  border-bottom: 1px solid var(--rule);
+}
+.lib-n { text-align: right !important; width: 9ch; }
+.lib-how { width: 34%; }
+.lib tbody td { padding: 9px 10px; border-bottom: 1px solid var(--rule); font-size: 13px; }
+.lib tbody td:first-child { padding-left: 0; font-weight: 500; }
+.lib tbody td.lib-n { text-align: right; }
+
+/*
+ * How a fact got here. Not a badge — a sentence, because the distinction is the product and a
+ * coloured pill would invite the eye to skip it.
+ */
+.how { color: var(--graphite); }
+.how--checked { color: var(--proof); }
+.how--unchecked { color: var(--fault); }
+.lib-none { color: var(--graphite); }
+
+@media (max-width: 720px) {
+  .lib-how, .lib tbody td:nth-child(5) { display: none; }
+}
+
+/* A machine already in the library, read again. Normal, and worth saying so. */
+.again {
+  margin: -8px 0 22px;
+  padding: 10px 13px;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--amber);
+  font-size: 13px;
+  color: var(--graphite);
+}
+.again b { color: var(--ink); font-weight: 500; }
