@@ -25,10 +25,12 @@
   <section class="bench-empty" id="empty" hidden>
     <h1>Nothing is waiting.</h1>
     <p>
-      Candidates arrive here when a manual has been read and not yet checked. Point the reader at a
-      manufacturer PDF and one will be.
+      Candidates arrive here when a manual has been read and not yet checked. Nothing is bundled —
+      the bench reviews the manuals <em>you</em> fetched, and a queue that shipped pre-filled would
+      be somebody else's homework already marked.
     </p>
-    <pre class="bench-cmd">node scripts/learn-manual.js manual.pdf --brand Bosch</pre>
+    <pre class="bench-cmd">node scripts/source-manuals.js --kind dishwashers --limit 10
+node scripts/learn-manual.js manuals/*.pdf --brand Bosch --kind Dishwasher</pre>
   </section>
 
   <div class="bench-cols" id="cols" hidden>
