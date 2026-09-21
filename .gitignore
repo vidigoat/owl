@@ -5,6 +5,19 @@ node_modules/
 .DS_Store
 /tmp/
 dist/
+# What one household remembers. Somebody's machines and repairs; not this repository's business.
 data/home.json
+
+# The review queue, deliberately.
+#
+# A fresh clone gets an EMPTY bench, and that is the honest state: the bench is for reviewing
+# manuals you fetched, and a bundled queue would be somebody else's homework pre-marked. Run
+# `node scripts/source-manuals.js` and then `scripts/learn-manual.js` and it fills up.
+#
+# It also keeps rendered pages of manufacturer manuals out of a public repository. The parsed facts
+# in data/admitted/ ARE committed — short attributed quotations with a citation each, which is the
+# library — but redistributing the pages themselves is a different thing and not one to do casually.
 data/pending/
+
+# The manuals. Hundreds of megabytes, fetched from the manufacturer, reproducible with one command.
 manuals/
