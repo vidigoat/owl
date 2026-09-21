@@ -798,6 +798,13 @@ symptom *"Home Connect cannot Home"* with the cause *"Connect set incorrectly."*
 that looks right. Those rows are skipped, along with the rest of the symptom they belong to, and
 counted. On one page that took 14 symptoms of which six were mangled down to 8 that are all correct.
 
+**Not every collision is caught.** Where the columns collide part-way down a symptom rather than on
+its first line, the rest survives and the cause comes out truncated — a real one on a Bosch
+fridge-freezer reads *"system is heavily iced up. Requirement: Store the frozen food..."*, missing
+the sentence it began with. A cause that starts mid-sentence is obvious to a person, and the bench
+puts it next to the page it came from, which is the whole reason the bench exists. It is a real
+limit, not a solved problem.
+
 Twelve machines are on the review bench now — **103 symptoms, 144 causes**, every one citing its
 page — across dishwashers, a washer and a refrigerator, which is the same parser reading three
 different kinds of appliance. None of them is in the library, because nobody has looked at them yet.
