@@ -122,14 +122,28 @@ it('two symptoms on consecutive lines stay two symptoms', () => {
   assert.equal(b.symptom, 'WLAN display is flashing.');
 });
 
-it('a long left column does not get cut mid-word', () => {
+it('a row whose columns have collided is refused, not guessed at', () => {
   /*
-   * `Home Connect cannot Home Connect set incorrectly.` has no space at column 23, so slicing there
-   * produced the symptom "Home Connect cannot Hom" and the cause "e Connect set incorrectly."
+   * This assertion replaced one that claimed the row was recoverable, because it is not, and the
+   * first version only appeared to recover it.
+   *
+   * `Home Connect cannot Home Connect set incorrectly.` is one line of a two-column table whose
+   * columns have collided: the left column ran long and the typesetter squeezed the gap to a single
+   * space. Slicing at the boundary gave "Home Connect cannot Hom" / "e Connect set incorrectly.";
+   * backing off to the nearest space gave "Home Connect cannot Home" / "Connect set incorrectly.",
+   * which is wrong in a way that looks right, and is exactly the kind of confident nonsense this
+   * project exists to refuse. Nothing in the text layer says where the break belongs.
+   *
+   * So the row is dropped and counted. A reviewer can reject a row they can see; they cannot repair
+   * the words inside one.
    */
-  const s = find(read(), 'Home Connect cannot');
-  assert.equal(s.symptom, 'Home Connect cannot be implemented correctly.');
-  assert.equal(s.causes[0].label, 'Home Connect set incorrectly.');
+  const r = read();
+  assert.equal(find(r, 'Home Connect'), undefined, 'a collided row was emitted anyway');
+  for (const s of r.symptoms) {
+    assert.ok(!/Hom$|^e Connect/.test(s.symptom), `a mangled symptom survived: ${s.symptom}`);
+  }
+  assert.ok(r.dropped >= 1, 'the dropped row was not counted');
+  assert.match(r.coverage, /columns run together/);
 });
 
 it('a numbered step is a remedy wherever it is printed', () => {

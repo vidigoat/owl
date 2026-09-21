@@ -70,7 +70,15 @@ function queue() {
         pages: entry.pages,
         readWith: entry.readWith,
         codes: Object.keys(entry.codes || {}),
-        causes: Object.values(entry.codes || {}).reduce((n, c) => n + (c.causes?.length || 0), 0),
+        /*
+         * Symptoms counted beside codes, not instead of them. Current manuals key their
+         * troubleshooting tables on a described symptom rather than a code, and a queue that
+         * counted only codes showed ten machines with nothing in them.
+         */
+        symptoms: (entry.symptoms || []).length,
+        causes:
+          Object.values(entry.codes || {}).reduce((n, c) => n + (c.causes?.length || 0), 0) +
+          (entry.symptoms || []).reduce((n, s) => n + (s.causes?.length || 0), 0),
         hasPage: Boolean(entry.pageImage),
         learnedAt: entry.learnedAt,
       };
@@ -107,16 +115,26 @@ function admit(model, accept, by = 'unattributed') {
   const entry = candidate(model);
   if (!entry) return { admitted: false, reason: `Nothing pending for ${model}.` };
 
-  const all = Object.keys(entry.codes || {});
+  /*
+   * Codes and symptoms are reviewed the same way and admitted from the same list.
+   *
+   * A machine known only by symptom is still a machine known — and on every manual published in the
+   * last few years, it is the only way it can be known at all.
+   */
+  const allCodes = Object.keys(entry.codes || {});
+  const allSymptoms = (entry.symptoms || []).map((s) => s.id);
+  const all = [...allCodes, ...allSymptoms];
+
   const wanted = all.filter((c) => accept.includes(c));
   const rejected = all.filter((c) => !accept.includes(c));
 
   if (!wanted.length) {
-    return { admitted: false, reason: 'No fault codes were accepted, so there is nothing to admit.', rejected };
+    return { admitted: false, reason: 'Nothing was accepted, so there is nothing to admit.', rejected };
   }
 
   const codes = {};
-  for (const c of wanted) codes[c] = entry.codes[c];
+  for (const c of wanted.filter((w) => allCodes.includes(w))) codes[c] = entry.codes[c];
+  const symptoms = (entry.symptoms || []).filter((s) => wanted.includes(s.id));
 
   fs.mkdirSync(ADMITTED, { recursive: true });
   const record = {
@@ -129,6 +147,7 @@ function admit(model, accept, by = 'unattributed') {
     pages: entry.pages,
     readWith: entry.readWith,
     codes,
+    symptoms,
     rejected,
     reviewed: true,
     reviewedBy: by,
@@ -143,7 +162,7 @@ function admit(model, accept, by = 'unattributed') {
     JSON.stringify({ ...entry, reviewed: true, reviewedAt: record.reviewedAt, rejected }, null, 2)
   );
 
-  return { admitted: true, model, codes: wanted, rejected };
+  return { admitted: true, model, codes: wanted, rejected, symptoms: symptoms.length };
 }
 
 /** Everything a person has signed off, for the library to load at startup. */

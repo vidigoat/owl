@@ -72,6 +72,19 @@ function columnBoundary(lines) {
   return null;
 }
 
+/*
+ * Deriving the column from the rows instead was tried, and is worse.
+ *
+ * The idea was that the header word and the rows might be set at different columns. They are not —
+ * in these manuals the causes begin exactly where `Cause and troubleshooting` begins. What differs
+ * is the REMEDIES, which are indented three further, and there are more of them than there are
+ * causes. So a modal column across all rows elects the remedy indent, puts the split three columns
+ * too far right, and fragments every symptom on the page: "Excessive formation of foam occurs."
+ * came out as "Excessive formation of Rinse foam occurs."
+ *
+ * The header is the right source. It is also why the indent rule works at all.
+ */
+
 /**
  * Read one page of a symptom-keyed troubleshooting table.
  *
@@ -100,20 +113,69 @@ function readSymptoms({ text, sourceName = 'service manual', page = null } = {})
   let cause = null;     // the cause being built, inside it
   let lastKind = null;  // 'cause' | 'remedy' — what the previous right-column line was
   let leftWasBlank = true;
+  let collided = 0;   // rows whose two columns run together and cannot be split
+  let skipping = false; // inside a symptom whose first row collided, so none of it can be trusted
+  let lastLeft = null;  // the previous line's left column, for deciding where a skipped symptom ends
 
   for (let i = boundary.line + 1; i < lines.length; i++) {
     const raw = lines[i];
     if (!raw.trim()) { leftWasBlank = true; continue; }
 
     /*
-     * The boundary is a guide, not a guillotine.
+     * The boundary is a guide, not a guillotine — and sometimes there is no boundary at all.
      *
-     * A row whose left column runs long has no space at the boundary column, and slicing there
-     * cuts a word in half: `Home Connect cannot Home Connect set incorrectly.` became the symptom
-     * "Home Connect cannot Hom" and the cause "e Connect set incorrectly." Back off to the last
-     * space at or before the boundary when that happens.
+     * `Home Connect cannot Home Connect set incorrectly.` is one line of a two-column table whose
+     * columns have COLLIDED: the left column ran long, the typesetter squeezed the gap to a single
+     * space, and the only thing separating "Home Connect cannot" from "Home Connect set
+     * incorrectly." is that space. Slicing at the boundary gave "Home Connect cannot Hom" and
+     * "e Connect set incorrectly."; backing off one word gave "...cannot Home" and "Connect set
+     * incorrectly.", which is wrong in a way that looks right.
+     *
+     * There is no signal in the text layer that recovers it. So the row is dropped and counted,
+     * because a mangled symptom on screen is worse than an absent one — a reviewer can reject a
+     * row they can see, and cannot repair the words in it.
      */
     const cut = splitAt(raw, at);
+
+    /*
+     * A collided row takes its whole symptom with it.
+     *
+     * The line that cannot be split is the one that STARTS a symptom — the left column ran long
+     * precisely because it was the first line of a long description. Dropping only that line left
+     * its continuations behind as orphans, and the page came out listing symptoms called "foam
+     * occurs.", "ing." and "be implemented correctly."
+     *
+     * So skip forward until a symptom plainly begins again: a clean line, with something in its
+     * left column, following a line that had nothing there.
+     */
+    if (cut === null) {
+      collided++;
+      skipping = true;
+      current = null;
+      cause = null;
+      lastKind = null;
+      leftWasBlank = false;
+      // Judged against the collided line itself, not against nothing: its left portion is a
+      // symptom mid-sentence, so the line after it is a continuation rather than a fresh start.
+      lastLeft = raw.slice(0, at).trim();
+      continue;
+    }
+
+    if (skipping) {
+      /*
+       * A skipped symptom ends where the next one begins, and the signal is the same one that
+       * starts a symptom anywhere else: a left column with something in it, following a left
+       * column that was blank or had finished its sentence.
+       *
+       * The blank-line half alone was not enough — in a dense table every row has something in its
+       * left column, so the skip never cleared and it swallowed the rest of the page.
+       */
+      const thisLeft = raw.slice(0, at).trim();
+      const ended = !lastLeft || /[.!?:]$/.test(lastLeft);
+      lastLeft = thisLeft;
+      if (thisLeft && ended) skipping = false;
+      else continue;
+    }
     const left = raw.slice(0, cut).trim();
     const rightRaw = raw.slice(cut);
     const right = rightRaw.trim();
@@ -201,10 +263,21 @@ function readSymptoms({ text, sourceName = 'service manual', page = null } = {})
    * and counted, so the coverage line is about what was recovered rather than what was noticed.
    */
   const usable = symptoms.filter((s) => s.causes.length);
-  const dropped = symptoms.length - usable.length;
+  const dropped = symptoms.length - usable.length + collided;
+
+  /*
+   * A run of spaces inside a symptom is a column gap that survived the split — the boundary landed
+   * just after a space, so the cut was allowed, and part of column two came along. "UP appears on
+   * the        A display." is one symptom's worth of left column with a stray "A" from the next.
+   * Collapsing is a repair, not a tidy-up: no symptom a manual prints contains three spaces.
+   */
+  const tidy = (t) => String(t).replace(/\s{3,}\S*\s*$/, '').replace(/\s{2,}/g, ' ').trim();
 
   const out = usable.map((s) => ({
-    symptom: s.symptom,
+    // A stable handle for the row, so a reviewer can accept or reject this symptom by name. The
+    // symptom text itself is a sentence and makes a poor key.
+    id: slug(tidy(s.symptom)),
+    symptom: tidy(s.symptom),
     causes: s.causes.map((c, k) => ({
       id: `${slug(s.symptom)}-${k}`,
       label: c.label,
@@ -225,22 +298,33 @@ function readSymptoms({ text, sourceName = 'service manual', page = null } = {})
     dropped,
     coverage: out.length
       ? `${out.length} symptom${out.length === 1 ? '' : 's'} recovered` +
-        (dropped ? `, ${dropped} row${dropped === 1 ? '' : 's'} had no readable cause` : '')
+        (collided ? `, ${collided} row${collided === 1 ? '' : 's'} skipped where the two columns run together` : '') +
+        (dropped - collided > 0 ? `, ${dropped - collided} had no readable cause` : '')
       : 'a column header, but nothing readable beneath it',
   };
 }
 
 /**
- * Where to actually cut a line into its two columns.
+ * Where to cut a line into its two columns, or `null` when it cannot be done.
  *
- * At the boundary, unless that lands inside a word — in which case the last space at or before it,
- * which is where the typesetter would have put the gap if the left column had been narrower.
+ * Clean when the boundary lands on a space, or just after one: a left column that exactly fills its
+ * width leaves a single space before column two, and that is normal rather than a problem.
+ *
+ * `null` when the boundary lands INSIDE a word, which means the columns have collided — the left
+ * column ran long, the typesetter squeezed the gap to a single space, and column two now begins
+ * somewhere to the left of where the header says it does. `Home Connect cannot Home Connect set
+ * incorrectly.` is one line of a two-column table and nothing in the text layer says whether the
+ * break is before the second "Home" or after it.
+ *
+ * Backing off to the nearest space was tried and is worse than refusing: it produced the symptom
+ * "Home Connect cannot Home" and the cause "Connect set incorrectly.", which is wrong in a way that
+ * looks right. Some recoverable rows are dropped by this rule. That is the correct trade — a
+ * reviewer can reject a row they can see and cannot repair the words inside one.
  */
 function splitAt(raw, at) {
   if (at >= raw.length) return at;
   if (raw[at] === ' ' || raw[at - 1] === ' ') return at;
-  const back = raw.lastIndexOf(' ', at);
-  return back > 0 ? back : at;
+  return null;
 }
 
 const slug = (s) =>

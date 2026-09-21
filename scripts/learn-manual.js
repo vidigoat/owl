@@ -125,6 +125,22 @@ async function learnOne(file, flags) {
     const found = readSymptoms({ text: best.text, sourceName: `${brand} manual`, page: best.from });
     report.symptoms = found.symptoms;
     report.steps.push(`symptom table: ${found.coverage}`);
+
+    /*
+     * Keep the page anyway.
+     *
+     * No vision model was called, but the review bench still needs the evidence — its entire value
+     * is a person holding the parse against the page, and a reviewer with nothing to check against
+     * ticks boxes. Rendering is `pdftoppm` on this machine: free, offline, and about two hundred
+     * kilobytes.
+     */
+    try {
+      const png = pdf.renderPage(file, best.from);
+      if (png) {
+        fs.copyFileSync(png, path.join(PENDING, `${model}.png`));
+        report.pageImage = `${model}.png`;
+      }
+    } catch { /* the entry is still reviewable from the manual itself */ }
   } else if (graph.found === 0 && report.english === false && !flags['force-vision']) {
     report.steps.push('skipped the vision model: the parser cannot read this language either, so the call would cost money and change nothing');
   } else if (graph.found === 0 && !flags['text-only']) {

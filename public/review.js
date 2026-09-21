@@ -52,8 +52,14 @@ async function show(model) {
   const read = entry.readWith === 'bedrock'
     ? 'read from a rendered page by a vision model'
     : 'read from the PDF text layer';
+  const nCodes = Object.keys(entry.codes || {}).length;
+  const nSymptoms = (entry.symptoms || []).length;
+  const what = [
+    nCodes ? `${nCodes} fault code${nCodes === 1 ? '' : 's'}` : null,
+    nSymptoms ? `${nSymptoms} symptom${nSymptoms === 1 ? '' : 's'}` : null,
+  ].filter(Boolean).join(' and ') || 'nothing';
   $('candMeta').textContent =
-    `${read} · pages ${entry.pages} of ${entry.source} · ${Object.keys(entry.codes || {}).length} fault codes recovered`;
+    `${read} · pages ${entry.pages} of ${entry.source} · ${what} recovered`;
 
   $('evSrc').textContent = entry.source;
   $('evPages').textContent = `pages ${entry.pages}`;
@@ -76,6 +82,7 @@ async function show(model) {
   }
 
   renderCodes(entry);
+  renderSymptoms(entry);
   updateVerdict();
   noteIfAlreadyKnown(entry);
 }
@@ -168,14 +175,61 @@ function renderCodes(entry) {
   }
 }
 
+/*
+ * Symptom rows, in the same list and reviewed the same way.
+ *
+ * Current manuals key their troubleshooting tables on a described symptom rather than a code, so
+ * for most machines this is the whole candidate. The row shows the symptom as its heading and the
+ * manual's first cause beneath it, because that pair is what a reviewer checks against the page.
+ */
+function renderSymptoms(entry) {
+  const list = $('codes');
+
+  for (const s of entry.symptoms || []) {
+    const first = s.causes?.[0] || {};
+    const li = document.createElement('li');
+    li.className = 'code';
+    li.setAttribute('role', 'checkbox');
+    li.setAttribute('aria-checked', 'false');
+    li.tabIndex = 0;
+
+    const remedy = (first.remedies || [])[0] || '';
+    const more = (s.causes || []).length > 1
+      ? `<p class="code-more">and ${s.causes.length - 1} more cause${s.causes.length > 2 ? 's' : ''} listed under this</p>`
+      : '';
+
+    li.innerHTML =
+      `<span class="code-box" aria-hidden="true"></span>` +
+      `<span>` +
+        `<span class="code-name">${esc(s.symptom)}</span>` +
+        `<p class="code-meaning">${esc(first.label || 'no cause stated')}</p>` +
+        (remedy ? `<p class="code-quote">“${esc(remedy)}”</p>` : '') +
+        (first.evidence ? `<p class="code-src">${esc(first.evidence.split(':')[0])}</p>` : '') +
+        more +
+      `</span>`;
+
+    const toggle = () => {
+      if (accepted.has(s.id)) accepted.delete(s.id);
+      else accepted.add(s.id);
+      li.setAttribute('aria-checked', String(accepted.has(s.id)));
+      updateVerdict();
+    };
+    li.addEventListener('click', toggle);
+    li.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+    list.appendChild(li);
+  }
+}
+
 function updateVerdict() {
-  const total = Object.keys(current?.codes || {}).length;
+  const total = Object.keys(current?.codes || {}).length + (current?.symptoms || []).length;
   const n = accepted.size;
   const btn = $('admit');
 
   btn.disabled = n === 0;
   btn.textContent = n === 0
-    ? 'Select the codes that match the page'
+    ? 'Select the rows that match the page'
     : n === total
       ? `Admit all ${n} to the library`
       : `Admit ${n} of ${total}, reject ${total - n}`;
@@ -202,11 +256,12 @@ $('admit').addEventListener('click', async () => {
   }
 
   $('done').hidden = false;
+  const n = result.codes.length;
   $('done').innerHTML =
-    `<b>${esc(result.model)}</b> is in the library with ${result.codes.length} fault code` +
-    `${result.codes.length === 1 ? '' : 's'}: ${esc(result.codes.join(', '))}.` +
+    `<b>${esc(result.model)}</b> is in the library with ${n} ` +
+    `${n === 1 ? 'entry' : 'entries'} you checked against the page.` +
     (result.rejected.length
-      ? ` ${esc(result.rejected.join(', '))} ${result.rejected.length === 1 ? 'was' : 'were'} rejected and recorded.`
+      ? ` ${result.rejected.length} ${result.rejected.length === 1 ? 'was' : 'were'} rejected and recorded.`
       : '');
 
   // Straight on to the next candidate, because a queue that makes you navigate back is a queue
