@@ -81,4 +81,21 @@ it('it still states what the gate refuses', () => {
     assert.match(README, new RegExp(needle, 'i'), `the README no longer mentions: ${needle}`));
 });
 
+it('every file the judging map points at is really there', () => {
+  /*
+   * The sibling project's map rotted badly — it pointed at four files from an earlier restructure,
+   * and nothing caught it because README.md was the checked document and `docs/JUDGING.md` was not.
+   * It is the first thing a reviewer opens. A map to files that do not exist spends their goodwill
+   * before they have seen anything.
+   *
+   * This one is clean today. The test is here so it stays that way.
+   */
+  const map = fs.readFileSync(path.join(__dirname, 'docs', 'JUDGING.md'), 'utf8');
+  const named = [...map.matchAll(/`([a-zA-Z][a-zA-Z0-9_/.-]*\.(?:js|md|json|css|html))`/g)].map((m) => m[1]);
+  const missing = [...new Set(named)].filter(
+    (f) => !fs.existsSync(path.join(__dirname, f)) && !fs.existsSync(path.join(__dirname, 'docs', f))
+  );
+  assert.deepEqual(missing, [], `docs/JUDGING.md points at files that do not exist: ${missing.join(', ')}`);
+});
+
 console.log(`\n${passed} passed`);
