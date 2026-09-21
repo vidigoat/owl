@@ -490,3 +490,9 @@ footer { max-width: 1140px; margin: 0 auto; padding: 22px 24px; display: flex; j
 }
 .sym__cite { font: 400 11px/1.4 var(--mono); color: var(--graphite); margin: 5px 0 0; }
 .sym__none { font: 400 14px/1.6 var(--mono); color: var(--fault); margin: 0 0 6px; max-width: 54ch; }
+
+.sym__steps { list-style: decimal; margin: 4px 0 0; padding-left: 26px; }
+.sym__steps .sym__remedy { padding-left: 0; border-left: 0; margin: 4px 0 0; }
+/* The step being read out. The only thing that moves on this screen. */
+.sym__remedy.is-now { background: #fff5d6; box-shadow: -4px 0 0 var(--amber); }
+.sym__walk { margin-top: 8px; font-size: 13px; padding: 6px 12px; }

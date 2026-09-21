@@ -147,7 +147,9 @@ it('the describe screen escapes everything the server hands it', () => {
     // Fragments assembled elsewhere in this same function, and `say()`, which escapes its own
     // argument. Everything that carries a STRING from the server or the person must be esc()'d.
     .filter((x) => !/^(rows|noRemedy|more|quote|say\(|esc\()/.test(x))
-    .filter((x) => !/\.length|\?/.test(x));
+    .filter((x) => !/\.length|\?/.test(x))
+    // Loop indices. Numbers this file generates, not strings anyone outside it controls.
+    .filter((x) => !/^(si|ci|i|k)$/.test(x) && !/^\$\{?(si|ci)}?-/.test(x));
 
   assert.deepEqual(holes, [], `unescaped into the describe screen: ${holes.join(' | ')}`);
 });

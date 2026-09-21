@@ -1091,13 +1091,18 @@ function renderDescribe(said = '', result = null) {
 
   const rows = !result ? ''
     : result.known
-      ? result.matches.map((m) => `
+      ? result.matches.map((m, si) => `
           <div class="sym">
             <p class="sym__name">${esc(m.symptom)}</p>
-            ${m.causes.map((c) => `
+            ${m.causes.map((c, ci) => `
               <p class="sym__cause">${esc(c.label || 'no cause stated')}</p>
-              ${(c.remedies || []).map((r) => `<p class="sym__remedy">${esc(r)}</p>`).join('')}
+              <ol class="sym__steps">
+                ${(c.remedies || []).map((r) => `<li class="sym__remedy">${esc(r)}</li>`).join('')}
+              </ol>
               <p class="sym__cite">${esc((c.evidence || '').split(':')[0])}</p>
+              ${(c.remedies || []).length
+                ? `<button class="btn btn--ghost sym__walk" data-walk="${si}-${ci}">Walk me through it</button>`
+                : ''}
             `).join('')}
           </div>`).join('')
       : `<p class="sym__none">${esc(result.reason)}</p>` +
@@ -1177,6 +1182,44 @@ function renderDescribe(said = '', result = null) {
       mic.title = 'This browser has no speech recognition';
     }
   }
+
+  /*
+   * "Walk me through it" — the manual's steps, one at a time, read out.
+   *
+   * No procedure is invented and nothing is rephrased: these are the remedy lines the manual
+   * printed, in the order it printed them, spoken verbatim. The device already reads a repair aloud
+   * on the fault-code path, and a symptom-keyed machine deserves the same rather than a list you
+   * have to hold in your head with your hands inside a dishwasher.
+   */
+  screen.querySelectorAll('.sym__walk').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const [si, ci] = btn.dataset.walk.split('-').map(Number);
+      const cause = result.matches[si].causes[ci];
+      const steps = cause.remedies || [];
+      const lines = [...screen.querySelectorAll('.sym')[si].querySelectorAll('.sym__steps')[ci].children];
+
+      trace('guide', esc(`"${cause.label || 'that cause'}"`),
+        `${steps.length} step${steps.length === 1 ? '' : 's'}, read out`, 'the manual, verbatim');
+
+      let i = 0;
+      const tick = () => {
+        if (i >= steps.length) {
+          lines.forEach((el) => el.classList.remove('is-now'));
+          captionEl.textContent = 'That is everything the manual lists for that cause.';
+          speak('That is everything the manual lists for that cause.');
+          return;
+        }
+        lines.forEach((el, k) => el.classList.toggle('is-now', k === i));
+        captionEl.textContent = `Step ${i + 1} of ${steps.length}.`;
+        speak(steps[i]);
+        const said = steps[i];
+        i += 1;
+        // Paced from the words, the same way the fault-code guide paces a repair.
+        setTimeout(tick, Math.min(9000, 2600 + said.length * 55));
+      };
+      tick();
+    });
+  });
 }
 
 const describeBtn = $('#describe-btn');
