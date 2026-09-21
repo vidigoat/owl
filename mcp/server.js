@@ -24,6 +24,7 @@ const { RESOURCES, spaceCard, stepCard, refusalCard, checkoutCard } = require('.
 const { confirm_fix } = require('./tools/confirm_fix');
 const { beginCheckout, confirmCheckout } = require('./tools/order_part');
 const { receipt, due, history } = require('./tools/home');
+const { replace_or_repair } = require('./tools/replace_or_repair');
 const { buildSpace, prune } = require('./tools/hypotheses');
 const { nextTest } = require('./tools/next_test');
 
@@ -225,6 +226,26 @@ const TOOLS = [
       'breakdown.',
     inputSchema: { type: 'object', properties: {} },
     handler: due,
+  },
+  {
+    name: 'replace_or_repair',
+    description:
+      'Whether a machine is worth fixing. Reports what is known — the repair cost where a part is ' +
+      'verified for that exact model, and whether this fault has come back before — and refuses to ' +
+      'conclude without what the machine is worth, which no service manual contains and this will ' +
+      'not guess. Never returns a verdict; the decision is the owner\'s.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        model: { type: 'string' },
+        code: { type: 'string' },
+        causeId: { type: 'string' },
+        machineValue: { type: 'number', description: 'What a replacement costs, or what this one is worth. Supplied by the owner; never inferred.' },
+        threshold: { type: 'number', description: 'Override the rule of thumb (default 0.5 of replacement).' },
+      },
+      required: ['model'],
+    },
+    handler: replace_or_repair,
   },
   {
     name: 'repair_history',

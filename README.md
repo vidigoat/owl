@@ -393,7 +393,7 @@ it upholds the part.
 
 | | Status |
 |---|---|
-| The MCP server and all 17 tools, over Streamable HTTP | **Real**, tested |
+| The MCP server and all 18 tools, over Streamable HTTP | **Real**, tested |
 | The trust gate — the only thing that can authorise spending | **Real**, tested. It refuses on mains voltage, on a cheaper cause not yet ruled out, on too little separation, and on no evidence at all |
 | Test selection by information gain per unit of owner effort | **Real**, tested |
 | Learning a machine from its manual at runtime | **Real**, tested against Bosch, Whirlpool, LG and Samsung code schemes |
@@ -688,6 +688,52 @@ go and look at their drain hose.
 that an honest manual is not punished for the existence of dishonest ones.
 
 ---
+
+## Is this worth fixing?
+
+The most consequential question an owner has, and the one this project is least equipped to answer.
+It turns on three numbers and there are one and a half of them here:
+
+| | |
+|---|---|
+| what the repair costs | known when a part is verified against that exact model. Usually it is not. |
+| what the machine is worth | **nobody here knows.** A service manual lists remedies and never prices. |
+| how it has behaved | known, and free — the household remembers every diagnosis it has run. |
+
+So `replace_or_repair` refuses by default and names the figure it is missing, and becomes able to
+answer the moment somebody supplies it:
+
+```
+> Is the dishwasher worth fixing?
+
+  What I know
+    E24 has come back 3 times on this machine, the first 120 days ago and the last 4,
+    with 2 repairs confirmed as having worked at the time.
+
+  What I can't know
+    What the machine is worth, or what replacing it costs. A service manual lists
+    remedies and never prices, so this has to come from you.
+
+  The decision is yours, and it needs the missing figure above.
+```
+
+Tell it the machine is worth £320 and it compares, and shows its working: *the repair is 12% of what
+the machine is worth, which is under the 50% line this tool draws*.
+
+**That line is a policy of this tool, not a fact about appliances.** "Repair over half of
+replacement" is a rule of thumb nobody's manufacturer wrote down, so it travels in the output with
+its number — and it is an argument, so a reader who disagrees can change it and see what happens.
+
+It never returns a verdict. A test asserts that, in every state. It reports which side of a stated
+line some arithmetic falls on; the rest of the decision involves things it has no access to — whether
+you can afford it this month, whether the kitchen is being redone anyway, whether it was a gift.
+
+The recurrence is the one finding that survives every price being unknown, and it is still not a
+verdict: a fault that keeps returning can mean a failing part, a wrong diagnosis, or an owner who
+keeps triggering the same condition, and three timestamps cannot tell those apart. What it does
+separate is a fault that came back after repairs somebody **confirmed** had worked from one that
+came back after attempts nobody ever finished — the difference between a wasted afternoon and a
+wasted six hundred pounds.
 
 ## What it cannot do
 
