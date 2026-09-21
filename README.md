@@ -652,6 +652,12 @@ LEARNED    read by a machine this session and confirmed by nobody, never persist
 `lookup()` returns which of the three a fact came from. Merging them would erase the one distinction
 this library exists to maintain.
 
+![The library, with how each machine came to be known and what was rejected on the way](docs/media/library.jpg)
+
+Rejections stay on the row. `SGE53C55UC` carries *up-appears-on-the-a-display rejected* and
+`SMS46KI01E` carries *E18 rejected* — the second of those is the misread `E:16`. A library that
+quietly dropped what it got wrong would be a library you could not audit.
+
 ## Decisions
 
 The arguments worth not having twice — what was decided, what it cost, and what would have to be
