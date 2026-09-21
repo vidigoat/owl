@@ -32,6 +32,17 @@
     Point your Echo Show at the blinking panel. It reads the fault, proves the diagnosis,
     talks you through the repair, and orders the exact part.
   </p>
+  <!--
+    The second door, said where the first one is promised.
+    
+    "It reads the fault code" is true of the machine in the demo and false of most machines sold
+    now: ten current Bosch manuals fetched from Bosch's own site contain no fault codes at all.
+    A headline that promises what the body walks back is worse than a longer headline.
+  -->
+  <p class="tagline tagline--alt">
+    And when there is no code on the panel — which is most machines now — you tell it what the
+    machine is doing, in your own words, and it answers out of that model's own manual.
+  </p>
 </header>
 
 <!-- ─────────────────── the device + the tool trace ─────────────────── -->
@@ -42,12 +53,23 @@
       <div class="device__cam" title="camera"></div>
     </div>
     <p class="device__caption" id="caption">Bosch dishwasher, flashing a code, water in the bottom.</p>
-    <div class="device__controls">
+    <!--
+      Two doors, then the controls.
+      
+      There are exactly two ways into this product: show it the panel, or say what the machine is
+      doing. They were the first and fifth of seven buttons in one undifferentiated row, which made
+      the second one — the only door that works on a machine whose manual has no fault codes, which
+      is most machines sold now — look like a demo toggle.
+    -->
+    <div class="device__doors">
       <button class="btn" id="advance">Start the repair</button>
+      <span class="device__or">or</span>
+      <button class="btn btn--alt" id="describe-btn">Say what it is doing</button>
+    </div>
+    <div class="device__controls">
       <button class="btn btn--ghost" id="handsfree">Hands-free</button>
       <button class="btn btn--ghost" id="speak">Speak: off</button>
       <button class="btn btn--ghost" id="teach-btn">Teach it a new machine</button>
-      <button class="btn btn--ghost" id="describe-btn">Say what it is doing</button>
       <button class="btn btn--ghost" id="abstain-btn">Show it refuse a job</button>
       <button class="btn btn--ghost" id="reset">Reset</button>
     </div>

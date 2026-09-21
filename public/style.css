@@ -496,3 +496,28 @@ footer { max-width: 1140px; margin: 0 auto; padding: 22px 24px; display: flex; j
 /* The step being read out. The only thing that moves on this screen. */
 .sym__remedy.is-now { background: #fff5d6; box-shadow: -4px 0 0 var(--amber); }
 .sym__walk { margin-top: 8px; font-size: 13px; padding: 6px 12px; }
+
+/*
+ * The two doors.
+ *
+ * Show it the panel, or say what the machine is doing. They were the first and fifth of seven
+ * buttons in one row, which made the second — the only door that works on a machine whose manual
+ * prints no fault codes, and that is most machines sold now — read as a demo toggle.
+ *
+ * Both are solid, because they are peers. The "or" is what carries the meaning: it says these are
+ * alternatives rather than a sequence, which is the whole point.
+ */
+.device__doors {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+.device__or { font-family: var(--mono); font-size: 13px; color: #8d959e; }
+/* The second door. Solid like the first, in the colour that means "proven" everywhere else here. */
+.btn--alt { background: var(--proof); color: #fff; border-color: var(--proof); }
+.btn--alt:hover { background: #0b6867; border-color: #0b6867; }
+
+/* The second door, said where the first is promised. Quieter, because it is the caveat. */
+.tagline--alt { margin-top: 10px; font-size: 16px; color: #98a1ab; max-width: 62ch; }
