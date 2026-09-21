@@ -21,14 +21,22 @@
  *
  *   sitemap.xml  →  product page  →  a typed list of that product's documents
  *
- * The product page carries its documents as JSON, and every entry has a TYPE and a LOCALE:
+ * The product page carries its documents as JSON, and every entry has a TYPE:
  *
  *   {"titleKey":"user-manuals","type":"IU","filename":"9002099076_A.pdf",
  *    "url":"https://media3.bsh-group.com/Documents/9002099076_A.pdf","locale":"en-US"}
  *
- * `IU` is the user manual and `RH` is repair hints — between them, the fault tables. `locale` is
- * what kills the duplicate problem outright: the French edition is a different locale, visible
- * before a single byte is downloaded rather than after.
+ * `IU` is the user manual and `RH` is repair hints — between them, the fault tables. That is the
+ * part that works, and it is what the ID space could never tell you.
+ *
+ * `locale` is a trap, and it cost twenty downloads to find out. It reads `en-US` on every entry
+ * because it is the locale of the PAGE, not of the document. A model lists three `IU` files all
+ * marked en-US and they are the Spanish, English and French-Canadian editions of the same book —
+ * with the Spanish one first, consistently. Filtering on `locale` looks like it works and selects
+ * at random; the first twenty manuals this fetched were every one of them in Spanish.
+ *
+ * So language is decided by reading the file, and a rejected edition is deleted and the next
+ * candidate tried. In practice that is two downloads a model, not three.
  *
  * ── Being a good guest ──────────────────────────────────────────────────────
  *
@@ -140,9 +148,40 @@ function documentsOn(html) {
   return out;
 }
 
-/** English editions of the document types that carry fault tables. */
-const worthHaving = (docs) =>
-  docs.filter((d) => WANTED_TYPES.has(d.type) && (!d.locale || /^en/i.test(d.locale)));
+/**
+ * The document types that carry fault tables.
+ *
+ * `locale` is NOT a filter, and finding that out cost twenty downloads. Every entry on a US product
+ * page says `"locale":"en-US"` — that is the locale of the PAGE, not of the document. A model lists
+ * four `IU` files, all marked en-US, and they are the English, Spanish and French-Canadian editions
+ * of the same book. Filtering on it looks like it works and selects at random.
+ *
+ * So language is decided after downloading, by reading the thing. See `isEnglish` below.
+ */
+const worthHaving = (docs) => docs.filter((d) => WANTED_TYPES.has(d.type));
+
+/**
+ * Is this PDF in English?
+ *
+ * Counted from function words in the first few pages, which needs no dictionary and no model. Used
+ * to reject a Spanish edition and move to the next candidate for the same model — the English one
+ * is almost always in the list, just not first and not distinguishable beforehand.
+ */
+const EN = /\b(the|and|with|from|for|is|are|not|this|water|check|clean|your)\b/gi;
+const NOT_EN = /\b(el|la|los|las|para|con|del|une|des|les|pour|avec|dans|sur)\b/gi;
+
+function isEnglish(file) {
+  let text;
+  try {
+    text = execFileSync('pdftotext', ['-l', '6', file, '-'], { encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 });
+  } catch {
+    return null; // no text layer: cannot tell, so do not reject it on a guess
+  }
+  const en = (text.match(EN) || []).length;
+  const other = (text.match(NOT_EN) || []).length;
+  if (en + other < 20) return null; // too little text to judge
+  return en > other;
+}
 
 /** The model number, which is the last path segment of a product URL. */
 const modelFrom = (url) => url.split('/').filter(Boolean).pop().toUpperCase();
@@ -212,14 +251,12 @@ const modelFrom = (url) => url.split('/').filter(Boolean).pop().toUpperCase();
       continue;
     }
 
-    // One document per model: the first user manual, or repair hints if that is all there is.
-    // A model listing four IU files is listing variants of the same book; taking all four is how
-    // a bandwidth budget disappears into duplicates.
-    const pick = docs.find((d) => d.type === 'RH') || docs[0];
+    // Repair hints first where a model has them; otherwise the user manuals, in the order listed.
+    const ordered = [...docs.filter((d) => d.type === 'RH'), ...docs.filter((d) => d.type !== 'RH')];
     const file = path.join(outDir, `${model}.pdf`);
 
     if (listOnly) {
-      console.log(`  ${C.dim}would  ${model}  ${pick.type}  ${pick.url}${C.off}`);
+      console.log(`  ${C.dim}would  ${model}  ${ordered[0].type}  ${ordered.length} candidate${ordered.length === 1 ? '' : 's'}${C.off}`);
       manifest[model] = { page, documents: docs, checkedAt: new Date().toISOString() };
       await sleep(POLITE_MS);
       continue;
@@ -230,31 +267,67 @@ const modelFrom = (url) => url.split('/').filter(Boolean).pop().toUpperCase();
       break;
     }
 
-    let status;
-    try {
-      status = get(pick.url, { binary: true, out: file });
-    } catch (e) {
-      console.log(`  ${C.red}fail  ${C.off}${model} ${C.dim}${e.message.slice(0, 50)}${C.off}`);
-      await sleep(POLITE_MS);
-      continue;
+    /*
+     * Try each candidate until one is in English.
+     *
+     * A model lists several `IU` documents and they are the English, Spanish and French-Canadian
+     * editions of the same book — all tagged `en-US`, because that is the page's locale rather than
+     * the document's. The only way to tell is to read one. A rejected edition is deleted rather
+     * than kept, so a wrong guess costs bandwidth and no disk.
+     */
+    let took = null;
+    let rejected = 0;
+    for (const doc of ordered) {
+      let status;
+      try {
+        status = get(doc.url, { binary: true, out: file });
+      } catch (e) {
+        console.log(`  ${C.red}fail  ${C.off}${model} ${C.dim}${e.message.slice(0, 50)}${C.off}`);
+        await sleep(POLITE_MS);
+        continue;
+      }
+
+      const [code, size, type] = status.trim().split(/\s+/);
+      const mb = Number(size) / 1e6;
+
+      if (code !== '200' || !/pdf/i.test(type || '')) {
+        fs.rmSync(file, { force: true });
+        console.log(`  ${C.red}fail  ${C.off}${model} ${C.dim}HTTP ${code}, ${type}${C.off}`);
+        await sleep(POLITE_MS);
+        continue;
+      }
+      if (mb > maxMb) {
+        fs.rmSync(file, { force: true });
+        console.log(`  ${C.amber}big   ${C.off}${model} ${C.dim}${mb.toFixed(1)} MB, over the ${maxMb} MB ceiling${C.off}`);
+        await sleep(POLITE_MS);
+        continue;
+      }
+
+      bytes += Number(size);
+      // null means "could not tell", which is not a reason to reject a document.
+      if (isEnglish(file) === false) {
+        rejected++;
+        fs.rmSync(file, { force: true });
+        await sleep(POLITE_MS);
+        continue;
+      }
+
+      took = { ...doc, bytes: Number(size), mb };
+      break;
     }
 
-    const [code, size, type] = status.trim().split(/\s+/);
-    const mb = Number(size) / 1e6;
-
-    if (code !== '200' || !/pdf/i.test(type || '')) {
-      fs.rmSync(file, { force: true });
-      console.log(`  ${C.red}fail  ${C.off}${model} ${C.dim}HTTP ${code}, ${type}${C.off}`);
-    } else if (mb > maxMb) {
-      fs.rmSync(file, { force: true });
-      console.log(`  ${C.amber}big   ${C.off}${model} ${C.dim}${mb.toFixed(1)} MB, over the ${maxMb} MB ceiling${C.off}`);
+    if (!took) {
+      console.log(`  ${C.amber}none  ${C.off}${model} ${C.dim}${rejected} edition${rejected === 1 ? '' : 's'} downloaded, none in English${C.off}`);
+      manifest[model] = { page, documents: docs, checkedAt: new Date().toISOString(), noEnglish: true };
     } else {
       downloaded++;
-      bytes += Number(size);
-      console.log(`  ${C.green}got   ${C.off}${model} ${C.dim}${pick.type} · ${mb.toFixed(1)} MB${C.off}`);
+      console.log(
+        `  ${C.green}got   ${C.off}${model} ${C.dim}${took.type} · ${took.mb.toFixed(1)} MB` +
+        `${rejected ? ` · skipped ${rejected} non-English edition${rejected === 1 ? '' : 's'}` : ''}${C.off}`
+      );
       manifest[model] = {
-        page, documents: docs, took: pick, file: path.basename(file),
-        bytes: Number(size), fetchedAt: new Date().toISOString(),
+        page, documents: docs, took, file: path.basename(file),
+        bytes: took.bytes, fetchedAt: new Date().toISOString(),
       };
     }
 
