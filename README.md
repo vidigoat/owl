@@ -829,9 +829,16 @@ the sentence it began with. A cause that starts mid-sentence is obvious to a per
 puts it next to the page it came from, which is the whole reason the bench exists. It is a real
 limit, not a solved problem.
 
-Twelve machines are on the review bench now — **103 symptoms, 144 causes**, every one citing its
+Twelve machines have been read — **103 symptoms, 144 causes**, every one citing its
 page — across dishwashers, a washer and a refrigerator, which is the same parser reading three
-different kinds of appliance. None of them is in the library, because nobody has looked at them yet.
+different kinds of appliance. **Three of them have been reviewed and are in the library**; the rest
+are on the bench, because nobody has looked at them yet.
+
+Reviewing is not rubber-stamping. `SHE43DM2N` went in with three of its five symptoms: one had
+collided columns and no cause at all, and one listed four causes where the manual has two — the
+parser had promoted *"This process can take approx. 30 minutes."* and *"The appliance is reset and
+restarted."* to causes alongside the real ones. Both rejections are recorded on its row, so the
+thing the parser keeps getting wrong is findable rather than forgotten.
 
 ### Asking in words
 

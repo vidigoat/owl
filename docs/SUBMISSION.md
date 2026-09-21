@@ -291,9 +291,14 @@ downstream could have caught it — the output was well formed and confidently w
 machine — and a person looking at the page sees it in a second.
 
 Twelve machines are on the bench now across dishwashers, a washer and a refrigerator: 103 symptoms,
-144 causes, every one citing its page. Six are in the library, and the library reports **three
-tiers separately** — written by hand, read and checked, read and unchecked — because a single
-"6 machines known" would be the most flattering way to say it and the least true.
+144 causes, every one citing its page. Seven are in the library, and it reports **three tiers
+separately** — written by hand, read and checked, read and unchecked — because a single "7 machines
+known" would be the most flattering way to say it and the least true.
+
+Reviewing is not rubber-stamping. `SHE43DM2N` went in with three of its five symptoms: one had
+collided columns and no cause at all, and one listed four causes where the manual has two — the
+parser had promoted *"This process can take approx. 30 minutes."* and *"The appliance is reset and
+restarted."* to causes alongside the real ones. Both rejections are recorded on the row.
 
 **`replace_or_repair` refuses by default.** The most consequential question an owner has needs three
 numbers and there are one and a half: the repair cost (known when a part is verified for that exact

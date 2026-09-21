@@ -1,0 +1,99 @@
+{
+  "model": "SHE43DM2N",
+  "brand": "Bosch",
+  "kind": "Dishwasher",
+  "source": "SHE43DM2N.pdf",
+  "pages": "40–40",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "refill-indicator-for-rinse-aid-lights-up",
+      "symptom": "Refill indicator for rinse aid lights up.",
+      "causes": [
+        {
+          "id": "refill-indicator-for-rinse-aid-lights-up-0",
+          "label": "No rinse aid.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Add Rinse aid Page 17.",
+            "Set the amount of rinse aid to be dispensed."
+          ],
+          "evidence": "Bosch manual, page 40: \"No rinse aid.\"",
+          "source": {
+            "line": 6,
+            "manual": "Bosch manual",
+            "page": 40
+          }
+        }
+      ]
+    },
+    {
+      "id": "refill-indicator-for-rinse-aid-does-not-",
+      "symptom": "Refill indicator for rinse aid does not light up.",
+      "causes": [
+        {
+          "id": "refill-indicator-for-rinse-aid-does-not--0",
+          "label": "Rinse aid system is switched off.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Set the amount of rinse aid."
+          ],
+          "evidence": "Bosch manual, page 40: \"Rinse aid system is switched off.\"",
+          "source": {
+            "line": 10,
+            "manual": "Bosch manual",
+            "page": 40
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-is-left-in-the-appliance-at-the-en",
+      "symptom": "Water is left in the appliance at the end of the program.",
+      "causes": [
+        {
+          "id": "water-is-left-in-the-appliance-at-the-en-0",
+          "label": "Filter system or area under the filters is blocked.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Clean the Filters Page 31.",
+            "Clean the Drain pump Page 42."
+          ],
+          "evidence": "Bosch manual, page 40: \"Filter system or area under the filters is blocked.\"",
+          "source": {
+            "line": 36,
+            "manual": "Bosch manual",
+            "page": 40
+          }
+        },
+        {
+          "id": "water-is-left-in-the-appliance-at-the-en-1",
+          "label": "Program has not yet ended.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Wait until the program ends or terminate the program with Reset."
+          ],
+          "evidence": "Bosch manual, page 40: \"Program has not yet ended.\"",
+          "source": {
+            "line": 39,
+            "manual": "Bosch manual",
+            "page": 40
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "home-connect-cannot-there-be-implemented",
+    "all-leds-light-up-or-flash"
+  ],
+  "reviewed": true,
+  "reviewedBy": "claude, line by line against page 40",
+  "reviewedAt": "2026-09-21T15:00:48.531Z",
+  "learnedAt": "2026-09-21T14:15:21.745Z"
+}
