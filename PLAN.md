@@ -147,117 +147,142 @@ distinguishes "wrong page" from "right page, layout I cannot read".
 
 ---
 
-## 4. Phases
+## 4. Phases — rewritten 21 September, because the ground moved
 
-### Phase 1 · The machine library pipeline (21–27 Sep)
+Phases 1 to 3 are built and the plan they were written against was wrong about the one thing it
+assumed hardest. What follows is the work that is actually left, not the work that was imagined.
 
-- A `scripts/learn-manual.js` that takes a PDF or a directory of them, finds the fault-table pages,
-  runs `faultgraph`, and writes a verified entry — or refuses and says which of the two failures it
-  hit.
-- Page detection: fault tables are findable by density of short alphanumeric tokens at line starts.
-  Where that fails, Bedrock reads the page — and the spend ceiling already governs that.
-- A **review queue**: every machine is spot-checked by a human before admission. A library of
-  confidently wrong fault codes is worse than no library, and this product's entire argument is
-  about not being confidently wrong.
-- `data/README.md` already documents the shape: `cost: 0` (free) vs `cost: null` (unknown),
-  `mains`, `likelihood`, `evidence`. New entries obey it or fail the tests.
+### Phase 1 · The machine library — **done, and the target was the wrong target**
 
-**Done when:** 40 machines are in, `npm run questions` still walks every answer path on all of them
-exhaustively, and the worst case is still bounded.
+Sourcing is solved. `scripts/source-manuals.js` goes sitemap → product page → typed document list,
+which is how you get English editions instead of the language duplicates that defeated ID-scanning.
+Bosch alone exposes 259 non-accessory product pages across seven appliance categories; 27 manuals
+were fetched in an evening under a bandwidth cap.
 
-### Phase 2 · The household (28 Sep – 4 Oct)
+**The target of "40 machines" was set when a machine meant a fault-code table.** It does not any
+more, and the honest replacement is two numbers rather than one:
 
-- Machines: what you own, from a rating-plate photograph or a spoken model number.
-- Repairs: every diagnosis that concluded, what fixed it, what it cost, when.
-- Due: derived from the manual's own service intervals where stated, never invented.
-- **`whats_due` becomes a product**, not a tool: "three things in this house need attention."
-- This is Alexa+'s "state across sessions" criterion, met literally.
+```
+machines the library can answer for      18   (4 by hand, 14 read and checked)
+of those, answerable BY CODE              5
+of those, answerable BY DESCRIPTION      14
+```
 
-**Done when:** a second conversation about the same machine is visibly shorter than the first, and
-the device can answer "what needs doing?" without being asked about a specific machine.
+A machine known only by description is fully known — for machines sold now it is the only way it
+can be known. Chasing 40 by counting either kind is fine; chasing 40 *fault-code* machines would
+mean chasing documentation manufacturers have stopped publishing.
 
-### Phase 3 · The replace-vs-repair verdict (5–8 Oct)
+**Still to do here:** Whirlpool and LG. Both routes are verified and written down in
+`docs/NEEDS.md` — Whirlpool is one JSON endpoint covering two brands, LG is a server-rendered page
+plus a file id. Both need a browser engine for the HTML step, which is the only reason they are not
+done. Samsung is excluded on purpose: its robots.txt forbids both halves of the route.
 
-- Rules over the household's own history. Repeated identical failures; a repair whose known cost
-  exceeds a stated fraction of a machine's known value *only where both are known*; age where the
-  manual states a service life.
-- **Refuses to guess.** Where replacement value is unknown — which is most of the time — it says
-  the fact and stops: *"third pump in two years"*, not an invented number.
-- Same gate architecture: rules decide, Nova explains, and the explanation cites the history.
+### Phase 2 · The household — **done, narrowly**
 
-**Done when:** a seeded household with three pump repairs produces the verdict, and a household
-with one does not.
+`whats_due` reports two kinds of thing and keeps them apart: a consumable past its stated interval,
+and a fault that has come back. Recurrence is counted by **occasion, not by receipt** — a single
+diagnosis writes several, and walking the demo twice writes a dozen; run against the real store it
+first reported one fault thirty-two times.
 
-### Phase 4 · Surfaces and design (9–12 Oct)
+It draws no conclusion. What a recurrence *means* is not derivable from three timestamps, and a
+test asserts the returned object carries no verdict, severity or advice.
 
-Design is 25% of the score and our weakest axis. This is not polish; it is a quarter of the total.
+**Still to do:** nothing required. The stated bar — a second conversation visibly shorter than the
+first — is met by the library answering at all.
 
-- **The device** is the primary surface and already has a direction that works: dark chrome page,
-  warm paper screen, Bricolage throughout, Newsreader reserved for the one sentence being spoken.
-  Signature motion is the strike-through as a cause is eliminated.
-- **The household view** — the service record, readable. Dense and typographic: a list of machines,
-  a history per machine, what is due. This is the screen that makes it look like a product rather
-  than a demo, and it must not become a dashboard of cards.
-- Real brand assets from official press kits only. **Never a redrawn logo.**
-- Banned: gradient hero, three-column feature grid, emoji-as-icon, big-number-small-label,
-  `01 / 02 / 03` markers, tracked-out ALL-CAPS eyebrows.
-- `~/hackathon-design` is the studio, and `node check.js` there verifies every colour and typeface
-  it claims against this repository's real CSS. **The product wins; the mockup gets corrected.**
+### Phase 3 · The replace-vs-repair verdict — **done as a refusal, which is the better product**
+
+It needs three numbers and there are one and a half: the repair cost (known when a part is verified
+for that exact model), the machine's behaviour (free, from the household's own history), and what
+the machine is *worth* — which no manual contains and this will not guess.
+
+So it names the missing figure and answers the moment somebody supplies it. It never returns a
+verdict, and a test asserts that in every state including both extremes. The threshold it compares
+against is stated as a policy of the tool, with its number, and is an argument.
+
+### Phase 4 · Surfaces — **half done, and the half that is left is the smaller half**
+
+Built: the review bench, the library view, the describe screen with speech and a spoken walkthrough,
+and two doors on the device given equal weight instead of one buried among seven buttons.
+
+**Still to do, in order of what a reviewer would notice:**
+
+1. **Per-cause admission.** Admission is per symptom, so one truncated cause costs the two good ones
+   above it — that happened twice tonight and both times the right call was to throw away work.
+   Nested checkboxes under each symptom. Half a day.
+2. **The household view.** Still the screen that turns a demo into a product: machines, history per
+   machine, what is due. Dense and typographic, and it must not become a dashboard of cards.
+3. **Drift on the fleet page's sibling** — not applicable here; skip.
+
+Still banned, and still the difference between designed and assembled: gradient hero, three-column
+feature grid, emoji-as-icon, big-number-small-label, `01 / 02 / 03` markers, tracked-out ALL-CAPS
+eyebrows. Real brand assets from official press kits only. **Never a redrawn logo.**
 
 ### Phase 5 · Freeze (13–15 Oct), then record and submit
 
 - No new capability after freeze. Review, record, submit.
-- Repo may stay **private** — sharing with `testing@devpost.com` and `@AmazonAppDev` satisfies the
-  rule. Vidit's call.
-- `docs/FRICTION-LOG.md` finalised. **Up to 10% of the score**, assessed by Amazon's internal team.
-  Twelve entries exist; every genuine hour of friction from Phases 1–4 goes in as it happens, not
-  reconstructed afterwards.
+- **Deploy first.** `npx vercel --prod`, one command, no config; `DEPLOY.md` states what the hosted
+  version cannot do and what it says instead. Not run — a deploy publishes a URL and that is
+  Vidit's call.
+- Repo may stay **private**: sharing with `testing@devpost.com` and `@AmazonAppDev` satisfies the
+  rule.
+- `docs/FRICTION-LOG.md` finalised. **Up to 10% of the score.** Written as it happens, never
+  reconstructed.
 - `docs/PRODUCT-FEEDBACK.md` on every tool, API and SDK used — a stated requirement.
-- Both mini challenges submitted: **AWS Builder** (Bedrock, live and measured) and **Open Source**
-  (`faultgraph`, public, MIT). Only one can be won; both can be entered.
+- Both mini challenges: **AWS Builder** (Bedrock, live and measured) and **Open Source**
+  (`faultgraph`, public, MIT, 86 checks, now reading both kinds of table).
 
 ---
 
 ## 5. Cut order — what dies first
 
 ```
-1st to go    the household web view       the device already shows history; the view is a nicety
-2nd          replace-vs-repair verdict    strongest idea, but the gate already refuses well
-3rd          library 200 → 40             40 machines is still 40× today
-4th          `whats_due` as a product     falls back to being a tool that works
-NEVER cut    the trust gate               it is the product
-NEVER cut    the absence tests            "could not establish X" ≠ "X is absent" is the spine
-NEVER cut    the friction log             it is up to 10% of the score for writing, not code
+1st to go    the household view          the device already shows history; the view is a nicety
+2nd          per-cause admission         per-symptom works; it just wastes good rows sometimes
+3rd          Whirlpool and LG            18 machines is already 3.6× the morning's library
+4th          the spoken walkthrough      the steps are on screen and numbered either way
+NEVER cut    the review bench            it caught E:16 read as E18 on its first use
+NEVER cut    the absence tests           "could not establish X" ≠ "X is absent" is the spine
+NEVER cut    the trust gate              mains work is refused at the gate; that is the product
+NEVER cut    the friction log            up to 10% of the score, for writing rather than code
 ```
 
 ---
 
 ## 6. Risks, and what we do about each
 
-**Manual sourcing is slower than hoped.** *Most likely failure.* → The floor is 40 machines and the
-pipeline is the same either way. Cut breadth, never the verification step.
+**~~Manual sourcing is slower than hoped.~~** **Solved.** The route is sitemap → product page →
+typed document list, it is polite and capped, and it fetched 27 manuals in an evening. What it
+found instead is the risk below.
 
-**A wrong fault code reaches the library.** *The dangerous one* — this product's whole claim is
-that it does not guess. → Human spot-check before admission is non-negotiable, and
-`manual/adversarial.test.js` already covers hostile and malformed pages.
+**The entry point does not match what manufacturers publish.** *The real one, and it was invisible
+until measured.* Ten current Bosch manuals contain no fault codes between them. → Already answered:
+the library reads and answers by described symptom, the device has a door for it, and both are on
+the first screen rather than buried. The residual risk is a reviewer who tries the code path on a
+current machine and finds nothing — which is why the hero paragraph now says so before they can.
 
-**No appliance photographs.** → `eval/photos/` is empty and the evaluation **says so**, loudly, in
-its own output. Scored on rendered panels today. Real photographs move this from "unproven" to
-proven and they are the single highest-value thing Vidit can hand over.
+**A wrong reading reaches the library.** *The dangerous one* — this product's whole claim is about
+not being confidently wrong. → Nothing is admitted without a person; admission is per row; every
+rejection is recorded rather than deleted; a row the parser could not read cleanly is **flagged**
+rather than presented as fact. The bench caught a misread fault code on its first use and a
+mislabelled symptom on its last.
 
-**AgentCore stays refused.** `AmazonBedrockFullAccess` does not cover `bedrock-agentcore:*`. → The
-memory layer is ours already; AgentCore is a "what's next" line, not a dependency.
+**A parser that is wrong in a way nothing notices.** *The one that nearly got through.* Nine parser
+bugs were found tonight by READING candidates, not by running tests — page furniture read as
+symptoms, columns that move between pages, causes swallowed into remedies, a table with no idea
+where it ended. Every one was silent; several produced output that looked perfectly well formed.
+→ Reviewing is the detector, and it is now also the habit. A sweep for odd-looking rows across every
+machine runs in one command and finds one flagged row where it used to find junk on half of them.
 
-**Running out of time because of the other hackathon.** → Amazon has priority until 15 Oct. Nebius
-gets 15–22 Oct alone, in parallel with Vidit recording this one.
-
----
+**Bedrock spend runs away.** → A persistent ceiling on disk that refuses before it spends, not
+after; every image that goes out passes through one metered call. Tonight's total: **$0.024 of
+$0.50**, including reading 27 manuals and escalating a dozen pages to vision.
 
 ## 7. What the submission has to contain
 
 | required | state |
 |---|---|
-| self-hosted MCP server, spec 2025-11-25+, Streamable HTTP | 17 tools + resources, verified |
+| self-hosted MCP server, spec 2025-11-25+, Streamable HTTP | 19 tools + resources, verified |
 | the repo genuinely *calls* the track technology in code | yes — Bedrock live, not a README mention |
 | public repo **or** private + shared with reviewers | private is allowed; share at submission |
 | text description | `docs/SUBMISSION.md` |
@@ -266,26 +291,43 @@ gets 15–22 Oct alone, in parallel with Vidit recording this one.
 | tracks + minis | Alexa+ · AWS Builder · Open Source |
 | what changed during the window | built in it |
 | **friction log — up to 10% bonus** | `docs/FRICTION-LOG.md`, 12 entries |
+| a working URL | one command away; **not deployed** — that is Vidit's call |
 
 ---
 
-## 8. Measurable targets
+## 8. Measurable targets — restated 21 September
+
+The old table counted one thing and the world turned out to have two in it.
 
 ```
-                             today              target          floor
-machines known properly      1                  150–200         40
-real appliance photos        0                  10              6
-household memory             a tool             a product       the tool, wired
-replace-vs-repair            none               shipping        cut if needed
-MCP tools                    17                 20+             17
-tests                        191                300+            keep green
-eval: fault codes            7/9 on renders     7/9 on PHOTOS   scored honestly either way
+                            this morning    tonight        target       floor
+machines the library knows        5            18          150–200        40
+  · by fault code                 4             5             —            —
+  · by described symptom          1            14             —            —
+symptoms recovered                0           121             —            —
+causes, each citing a page       11           208             —            —
+readings rejected and kept        0            11          (a health sign, not a target)
+manuals fetched from source       1            27          hundreds      dozens
+MCP tools                        17            19            20+          17
+tests (this repo)               201           297           keep green
+faultgraph (public, MIT)         50            86           keep green
+Bedrock spend               $0.0021       $0.0241       under $0.50   hard ceiling
+real appliance photographs        0             0             10            6
 ```
 
-The last row is the one that matters. Moving from rendered panels to real photographs is the
-difference between a claim and a measurement, and it is blocked on six photographs.
+**Two rows are the honest scoreboard now.**
 
----
+*Machines by described symptom* went from 1 to 14 in an evening, and that is the number that scales:
+the manuals exist in the hundreds, the route to them works, and the reader is free and offline for
+all but the collided rows.
+
+*Readings rejected and kept* is the one nobody would think to put on a scoreboard. Eleven readings
+were looked at and refused, and each one is recorded on the machine's row rather than deleted. A
+library with zero rejections has either perfect inputs or no reviewer, and it is never the first.
+
+The photographs row is unchanged and still blocked, and it is still not blocking: `npm run eval`
+scores the vision reader on rendered panels at 7/9 codes and 0 invented, and moving to real
+photographs turns a measurement into a better measurement rather than turning a claim into one.
 
 ## 9. What is needed from Vidit
 
