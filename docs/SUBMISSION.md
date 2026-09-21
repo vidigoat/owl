@@ -26,7 +26,7 @@ Note: the repo does **not** have to be public for this hackathon. Sharing it pri
 
 ## Open Source mini — `faultgraph`
 
-**https://github.com/vidigoat/faultgraph** · MIT · zero dependencies · 74 checks
+**https://github.com/vidigoat/faultgraph** · MIT · zero dependencies · 77 checks
 
 It reads both kinds of table: `parse()` for fault codes, and `readSymptoms()` for the symptom-keyed
 troubleshooting tables that current manuals print instead — which is the finding that reshaped this
@@ -291,7 +291,7 @@ downstream could have caught it — the output was well formed and confidently w
 machine — and a person looking at the page sees it in a second.
 
 Twelve machines are on the bench now across dishwashers, a washer and a refrigerator: 103 symptoms,
-126 causes, every one citing its page. With the hand-written ones that is **7 machines in the
+117 causes, every one citing its page. With the hand-written ones that is **7 machines in the
 library**, and it reports **three tiers
 separately** — written by hand, read and checked, read and unchecked — because a single "7 machines
 known" would be the most flattering way to say it and the least true.
