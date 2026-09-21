@@ -781,16 +781,25 @@ flash.                       Press the main switch button for approx. 4 seconds.
 — where the 2019 European manual for the same kind of machine says *"Fault code E:07 is lit."* The
 codes live in the repair documentation (`RH`), which these models do not publish publicly.
 
-The pipeline reports that as its own outcome rather than as a failed read, and skips the vision call
-rather than paying a model to transcribe codes that do not exist. *"I could not read this page"*
-sends somebody looking for a better scan; *"this manual documents symptoms and prints no codes"*
-tells them where the codes actually are.
+So `manual/symptoms.js` reads them. It is the same shape — a key, its causes, and the remedies
+under each — and *"all the lights are flashing"* is what somebody actually says out loud, where
+`E:22` is not. No vision call: the symptom is set in an ordinary typeface, so the text layer is
+enough, and the whole thing costs nothing.
 
-What it means for the product is larger: **the entry point assumption — a code on a panel — matches
-what Bosch published in 2019 and not what it publishes now.** A table keyed on *"all the lights are
-flashing"* has the same shape as a fault table and is arguably the commoner way somebody arrives at
-this problem. Reading those is the next piece of work, and it is a parser change rather than a
-sourcing one.
+The column boundary comes from the page's own header rather than a constant (it is 23 in one of
+these manuals and 26 in another), and within column two **indent is the grammar**: flush with the
+boundary is a cause, indented past it is a remedy under that cause.
+
+**What it refuses is the interesting part.** Some rows have columns that have *collided* — the left
+column ran long, the typesetter squeezed the gap to a single space, and
+`Home Connect cannot Home Connect set incorrectly.` could break before the second "Home" or after
+it, with nothing in the text layer to say which. Backing off to the nearest space produced the
+symptom *"Home Connect cannot Home"* with the cause *"Connect set incorrectly."* — wrong in a way
+that looks right. Those rows are skipped, along with the rest of the symptom they belong to, and
+counted. On one page that took 14 symptoms of which six were mangled down to 8 that are all correct.
+
+Ten machines are on the review bench now: **88 symptoms, 122 causes**, every one citing its page.
+None of them is in the library, because nobody has looked at them yet.
 
 **A manual that is not in English.** Manufacturers publish one document per language, so roughly
 four in five of what you find on a manufacturer's CDN is not English. Those tables are *found* — the
