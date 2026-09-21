@@ -55,9 +55,20 @@ function parseArgs(argv) {
   return { flags, files };
 }
 
-/** A model number, guessed from the filename, and clearly marked as a guess. */
+/**
+ * A model number, from the filename.
+ *
+ * The whole basename wins when it already looks like a model number, because `source-manuals.js`
+ * names every file after the model it fetched. Searching inside it was for filenames a person typed
+ * — and it mangled the real ones: `B24CB50ESS` came out as `CB50ESS`, because the pattern wanted
+ * two to four letters before the digits and `B24` is one letter and two. A machine filed under the
+ * wrong model number is a machine nobody can look up.
+ */
+const MODEL_SHAPED = /^[A-Z0-9][A-Z0-9-]{3,31}$/i;
+
 function modelFromName(file) {
   const base = path.basename(file, path.extname(file));
+  if (MODEL_SHAPED.test(base)) return base.toUpperCase();
   const m = /([A-Z]{2,4}[0-9]{2,}[A-Z0-9]*)/i.exec(base);
   return m ? m[1].toUpperCase() : base.toUpperCase().slice(0, 32);
 }

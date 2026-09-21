@@ -798,8 +798,21 @@ symptom *"Home Connect cannot Home"* with the cause *"Connect set incorrectly."*
 that looks right. Those rows are skipped, along with the rest of the symptom they belong to, and
 counted. On one page that took 14 symptoms of which six were mangled down to 8 that are all correct.
 
-Ten machines are on the review bench now: **88 symptoms, 122 causes**, every one citing its page.
-None of them is in the library, because nobody has looked at them yet.
+Twelve machines are on the review bench now — **103 symptoms, 144 causes**, every one citing its
+page — across dishwashers, a washer and a refrigerator, which is the same parser reading three
+different kinds of appliance. None of them is in the library, because nobody has looked at them yet.
+
+### Where the fault codes went
+
+The obvious answer was "the repair documentation", and it is wrong. Bosch publishes a `RH` document
+type — *self-repair hints* — and one was fetched: 482 pages for a fridge-freezer, in every language
+Bosch ships. Its English section contains **zero fault codes**. It is a disassembly guide: *removing
+the partition and cover of the fruit and vegetable container*, *replacing the LED side bar light*.
+
+So the conclusion is stronger than "the codes are elsewhere": **nothing Bosch publishes to owners
+carries fault codes any more** — not the user manual, not the self-repair hints. They exist in
+dealer and service documentation that is not public. Which means for current machines the symptom
+table is not a fallback. It is the only door.
 
 **A manual that is not in English.** Manufacturers publish one document per language, so roughly
 four in five of what you find on a manufacturer's CDN is not English. Those tables are *found* — the
