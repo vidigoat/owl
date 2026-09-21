@@ -218,7 +218,11 @@ const TOOLS = [
   },
   {
     name: 'whats_due',
-    description: 'Consumables now due across the household, so it can speak first instead of waiting for a breakdown.',
+    description:
+      'What needs attention in this house: consumables past their stated interval, and faults that ' +
+      'have come back. Reports the dates and draws no conclusion from them — what a recurrence ' +
+      'means is not derivable from three timestamps. Lets it speak first instead of waiting for a ' +
+      'breakdown.',
     inputSchema: { type: 'object', properties: {} },
     handler: due,
   },

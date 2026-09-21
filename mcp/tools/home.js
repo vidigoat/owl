@@ -95,7 +95,91 @@ function history({ model }) {
   };
 }
 
-/** Consumables now due. This is what lets it speak first. */
+/*
+ * A fault that keeps coming back.
+ *
+ * The household's own history answers a question no manual can: whether this has happened before.
+ * A dishwasher throwing E24 once is a blocked filter. The same machine throwing E24 three times in
+ * four months is a different fact about a different problem, and it is the only thing here that can
+ * be known without a service call or a price list.
+ *
+ * Reported as a count and the dates, and nothing more. What it MEANS — that a part is failing, that
+ * the machine is near its end, that this is worth a technician — is not derivable from three
+ * timestamps, and saying any of it would be the confident guess this project is built to refuse.
+ * The dates are the finding. The owner, or whoever they call, draws the conclusion.
+ *
+ * `within` is a window, not a threshold on the machine's whole life: two identical faults four
+ * years apart are two faults, not a pattern.
+ */
+const RECURRENCE_WINDOW_DAYS = 365;
+
+function recurring({ today = new Date(), within = RECURRENCE_WINDOW_DAYS } = {}) {
+  const state = read();
+  const seen = new Map();
+
+  for (const r of state.receipts) {
+    if (!r.model || !r.code) continue;
+    const days = Math.floor((today - new Date(r.at)) / 86400000);
+    if (!Number.isFinite(days) || days > within || days < 0) continue;
+
+    const key = `${r.model}\u0000${r.code}`;
+    if (!seen.has(key)) seen.set(key, { model: r.model, code: r.code, byDay: new Map() });
+
+    /*
+     * One occasion per day, not one per receipt.
+     *
+     * A single diagnosis writes several receipts — a guided step, a part, a confirmation — and
+     * walking the demo twice writes a dozen. Run against the real household store this counted 32
+     * occurrences of E24 over five days, every one of them seconds apart, and reported it as a
+     * machine failing thirty-two times. It was the same fault, looked at twice.
+     *
+     * A recurrence has to mean separate OCCASIONS, and a calendar day is the coarsest defensible
+     * boundary that a person would also draw. The confirmed flag survives the collapse: if any
+     * receipt that day says the repair was confirmed, that day was a confirmed fix.
+     */
+    const day = String(r.at).slice(0, 10);
+    const bucket = seen.get(key).byDay;
+    const existing = bucket.get(day);
+    if (existing) {
+      existing.confirmed = existing.confirmed || Boolean(r.confirmed);
+      existing.daysAgo = Math.min(existing.daysAgo, days);
+    } else {
+      bucket.set(day, { at: r.at, daysAgo: days, confirmed: Boolean(r.confirmed) });
+    }
+  }
+
+  return [...seen.values()]
+    .map((x) => ({ ...x, occurrences: [...x.byDay.values()] }))
+    .filter((x) => x.occurrences.length > 1)
+    .map((x) => {
+      const occ = x.occurrences.sort((a, b) => a.daysAgo - b.daysAgo);
+      return {
+        model: x.model,
+        code: x.code,
+        times: occ.length,
+        daysSinceFirst: occ[occ.length - 1].daysAgo,
+        daysSinceLast: occ[0].daysAgo,
+        /*
+         * How many of those repairs the owner actually confirmed as fixed. A fault that recurred
+         * after three CONFIRMED fixes is a stronger fact than one that recurred after three
+         * attempts nobody ever said worked — and conflating them would turn "we never finished the
+         * job" into "the machine is failing".
+         */
+        confirmedFixes: occ.filter((o) => o.confirmed).length,
+        occurrences: occ,
+      };
+    })
+    .sort((a, b) => b.times - a.times || a.daysSinceLast - b.daysSinceLast);
+}
+
+/**
+ * What needs attention in this house. This is what lets it speak first.
+ *
+ * Two kinds of finding, kept apart because they are different claims. A consumable past its stated
+ * interval is a schedule. A fault that keeps returning is a pattern in this household's own
+ * history. `count` remains the number of consumables due, so nothing that already reads it starts
+ * counting something else.
+ */
 function due({ today = new Date() } = {}) {
   const state = read();
   const out = [];
@@ -109,7 +193,8 @@ function due({ today = new Date() } = {}) {
     }
   });
 
-  return { due: out, count: out.length };
+  const repeats = recurring({ today });
+  return { due: out, count: out.length, recurring: repeats, attention: out.length + repeats.length };
 }
 
-module.exports = { name: 'home', remember, receipt, history, due, ordinal, STORE, DUE_AFTER };
+module.exports = { name: 'home', remember, receipt, history, due, recurring, ordinal, STORE, DUE_AFTER, RECURRENCE_WINDOW_DAYS };
