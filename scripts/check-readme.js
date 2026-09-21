@@ -76,12 +76,36 @@ const { TOOLS } = (() => {
  * `where` pattern must now match IN CONTEXT: every place the README says "<n> tools" has to say the
  * right n, and a README that has stopped mentioning it at all fails too.
  */
+/*
+ * Counted from the same modules the product counts them from, so a figure in prose is checked
+ * against the thing itself rather than against another piece of prose.
+ */
+const bench = require('../manual/review').queue();
+const BENCH = {
+  symptoms: bench.reduce((n, x) => n + x.symptoms, 0),
+  causes: bench.reduce((n, x) => n + x.causes, 0),
+};
+const lib = require('../data/service-data');
+const LIBRARY = Object.keys(lib.MODELS).length + Object.keys(lib.ADMITTED).length;
+
 const CLAIMS = [
   { what: 'MCP tools registered', value: String(TOOLS), where: /(\d+) (?:MCP )?tools\b/g },
   { what: 'questions asked, mean', value: from(questions, /([0-9.]+) questions on average/, 'mean') },
   { what: 'questions asked, worst case', value: from(questions, /worst case (\d+)/, 'worst case') },
   { what: 'mean effort', value: from(questions, /Mean effort ([0-9.]+)/, 'effort') },
   { what: 'separation threshold', value: `${Math.round(require('../mcp/tools/verify_diagnosis').SEPARATION * 100)}%` },
+
+  /*
+   * What the bench is actually holding.
+   *
+   * These move whenever the parser improves, and they moved twice in one evening: 144 causes became
+   * 126 when explanatory sentences stopped being read as causes, and both documents went on quoting
+   * the old figure. A number that changes every time the code gets better is exactly the number a
+   * checker should own.
+   */
+  { what: 'symptoms on the bench', value: String(BENCH.symptoms), where: /(\d+) symptoms, \d+ causes/g },
+  { what: 'causes on the bench', value: String(BENCH.causes), where: /\d+ symptoms, (\d+) causes/g },
+  { what: 'machines in the library', value: String(LIBRARY), where: /(\d+) machines? (?:are |is )?in the library/gi },
 ];
 
 console.log('\n  README figures, against the commands that produce them\n');
