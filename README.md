@@ -829,7 +829,7 @@ the sentence it began with. A cause that starts mid-sentence is obvious to a per
 puts it next to the page it came from, which is the whole reason the bench exists. It is a real
 limit, not a solved problem.
 
-Twelve machines have been read — **103 symptoms, 144 causes**, every one citing its
+Twelve machines have been read — **103 symptoms, 126 causes**, every one citing its
 page — across dishwashers, a washer and a refrigerator, which is the same parser reading three
 different kinds of appliance. **Three of them have been reviewed and are in the library**; the rest
 are on the bench, because nobody has looked at them yet.

@@ -291,7 +291,7 @@ downstream could have caught it — the output was well formed and confidently w
 machine — and a person looking at the page sees it in a second.
 
 Twelve machines are on the bench now across dishwashers, a washer and a refrigerator: 103 symptoms,
-144 causes, every one citing its page. Seven are in the library, and it reports **three tiers
+126 causes, every one citing its page. Seven are in the library, and it reports **three tiers
 separately** — written by hand, read and checked, read and unchecked — because a single "7 machines
 known" would be the most flattering way to say it and the least true.
 
