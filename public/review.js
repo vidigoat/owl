@@ -103,13 +103,19 @@ async function noteIfAlreadyKnown(entry) {
     const held = lib.machines.find((m) => m.model === entry.model && m.tier === 'checked');
     if (!held) return;
 
-    const now = Object.keys(entry.codes || {}).length;
-    const diff = now - held.codes;
+    /*
+     * Entries, not codes. A symptom-keyed machine has zero fault codes, and counting only those
+     * made the bench announce "already in the library with 0 fault codes" about a machine holding
+     * seven perfectly good symptoms.
+     */
+    const now = Object.keys(entry.codes || {}).length + (entry.symptoms || []).length;
+    const there = held.codes + held.symptoms;
+    const diff = now - there;
     note.hidden = false;
     note.innerHTML =
-      `<b>${esc(entry.model)}</b> is already in the library with ${held.codes} fault code` +
-      `${held.codes === 1 ? '' : 's'}. This is a fresh reading of the same manual` +
-      (diff > 0 ? `, and it found ${diff} more.` : diff < 0 ? `, and it found ${-diff} fewer.` : ' with the same codes.') +
+      `<b>${esc(entry.model)}</b> is already in the library with ${there} ` +
+      `${there === 1 ? 'entry' : 'entries'}. This is a fresh reading of the same manual` +
+      (diff > 0 ? `, and it found ${diff} more.` : diff < 0 ? `, and it found ${-diff} fewer.` : ' with the same rows.') +
       ` Admitting replaces what is held.`;
   } catch { /* the bench still works without it */ }
 }
