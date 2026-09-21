@@ -127,6 +127,45 @@ it('every offer the refusal screen makes is a button that goes somewhere', () =>
     'pressing "Show it the manual" leads nowhere — no FLOW entry for the stage it sets');
 });
 
+it('the describe screen escapes everything the server hands it', () => {
+  /*
+   * Its inputs are the worst on the page: a sentence the PERSON typed, and text a model read out of
+   * a PDF. Both reach `innerHTML`.
+   *
+   * Every template literal in the function that contains a tag is checked — not just the one
+   * assigned to `innerHTML`. The first version looked only at the assignment and passed while
+   * `${m.symptom}` sat unescaped in a row fragment two lines away, which is exactly where the
+   * danger is: the assignment interpolates `rows`, and `rows` is where the server's words live.
+   * Verified by deliberately unescaping that line and watching this fail.
+   */
+  const block = app.slice(app.indexOf('function renderDescribe'), app.indexOf('const describeBtn'));
+  const templates = [...block.matchAll(/`([^`]*<[^`]*)`/g)].map((m) => m[1]);
+  assert.ok(templates.length >= 2, 'the describe screen stopped building markup — this check is dead');
+
+  const holes = templates
+    .flatMap((t) => [...t.matchAll(/\$\{([^}]+)\}/g)].map((m) => m[1].trim()))
+    // Fragments assembled elsewhere in this same function, and `say()`, which escapes its own
+    // argument. Everything that carries a STRING from the server or the person must be esc()'d.
+    .filter((x) => !/^(rows|noRemedy|more|quote|say\(|esc\()/.test(x))
+    .filter((x) => !/\.length|\?/.test(x));
+
+  assert.deepEqual(holes, [], `unescaped into the describe screen: ${holes.join(' | ')}`);
+});
+
+it('the describe screen asks the route that exists', () => {
+  // A screen calling a path the server does not serve is a screen that silently shows nothing.
+  const block = app.slice(app.indexOf('function renderDescribe'), app.indexOf('const describeBtn'));
+  const called = [...block.matchAll(/fetch\(\s*`([^`?]+)/g)].map((m) => m[1].replace(/\$\{.*/, ''));
+  const server = fs.readFileSync(path.join(__dirname, '..', 'server.js'), 'utf8');
+  for (const route of called) {
+    assert.ok(
+      server.includes(`'${route.replace(/\/$/, '')}'`),
+      `the describe screen calls ${route} and server.js does not serve it`
+    );
+  }
+  assert.ok(called.length, 'the describe screen stopped calling anything');
+});
+
 it('every server-supplied string on a refusal screen is escaped', () => {
   /*
    * The refusal screens print text that came from somewhere else: a gate reason quoting a model
