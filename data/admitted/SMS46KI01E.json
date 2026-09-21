@@ -1,0 +1,227 @@
+{
+  "model": "SMS46KI01E",
+  "brand": "Bosch",
+  "kind": "Appliance",
+  "source": "SMS46KI01E.pdf",
+  "pages": "39–40",
+  "readWith": "bedrock",
+  "codes": {
+    "E07": {
+      "meaning": "",
+      "causes": [
+        {
+          "id": "e07-0",
+          "label": "Intake opening (on right inside of appliance) covered by utensils",
+          "likelihood": 0.625,
+          "cost": null,
+          "mains": false,
+          "ownerFixable": true,
+          "evidence": "Bosch service manual, page 39: \"Arrange utensils so that the intake opening is not obstructed.\"",
+          "remedy": "Arrange utensils so that the intake opening is not obstructed.",
+          "source": {
+            "line": 7,
+            "codeLine": 5,
+            "manual": "Bosch service manual, page 39"
+          }
+        }
+      ],
+      "tests": [
+        {
+          "id": "e07-0-check",
+          "question": "Arrange utensils so that the intake opening is not obstructed. — did that fix it?",
+          "effort": "easy",
+          "kind": "remedy",
+          "outcomes": [
+            {
+              "value": "yes",
+              "say": "yes, that was it",
+              "consistentWith": [
+                "e07-0"
+              ]
+            },
+            {
+              "value": "no",
+              "say": "no, still faulty",
+              "consistentWith": []
+            }
+          ]
+        }
+      ]
+    },
+    "E12": {
+      "meaning": "",
+      "causes": [
+        {
+          "id": "e12-0",
+          "label": "Heating element calcified or soiled",
+          "likelihood": 0.625,
+          "cost": null,
+          "mains": false,
+          "ownerFixable": true,
+          "evidence": "Bosch service manual, page 39: \"Clean appliance with dishwasher cleaning agent or descaler. Operate the dishwasher with water softening system and check the setting. \"Water softening system/special salt\" on page 15\"",
+          "remedy": "Clean appliance with dishwasher cleaning agent or descaler. Operate the dishwasher with water softening system and check the setting. \"Water softening system/special salt\" on page 15",
+          "source": {
+            "line": 11,
+            "codeLine": 9,
+            "manual": "Bosch service manual, page 39"
+          }
+        }
+      ],
+      "tests": [
+        {
+          "id": "e12-0-check",
+          "question": "Clean appliance with dishwasher cleaning agent or descaler. Operate the dishwasher with water softening system and check the setting. \"Water softening system/special salt\" on page 15 — did that fix it?",
+          "effort": "easy",
+          "kind": "remedy",
+          "outcomes": [
+            {
+              "value": "yes",
+              "say": "yes, that was it",
+              "consistentWith": [
+                "e12-0"
+              ]
+            },
+            {
+              "value": "no",
+              "say": "no, still faulty",
+              "consistentWith": []
+            }
+          ]
+        }
+      ]
+    },
+    "E14": {
+      "meaning": "",
+      "causes": [
+        {
+          "id": "e14-0",
+          "label": "Water protection system activated",
+          "likelihood": 0.625,
+          "cost": null,
+          "mains": false,
+          "ownerFixable": true,
+          "evidence": "Bosch service manual, page 39: \"Turn off water supply.\"",
+          "remedy": "Turn off water supply.",
+          "source": {
+            "line": 15,
+            "codeLine": 13,
+            "manual": "Bosch service manual, page 39"
+          }
+        }
+      ],
+      "tests": [
+        {
+          "id": "e14-0-check",
+          "question": "Turn off water supply. — did that fix it?",
+          "effort": "easy",
+          "kind": "remedy",
+          "outcomes": [
+            {
+              "value": "yes",
+              "say": "yes, that was it",
+              "consistentWith": [
+                "e14-0"
+              ]
+            },
+            {
+              "value": "no",
+              "say": "no, still faulty",
+              "consistentWith": []
+            }
+          ]
+        }
+      ]
+    },
+    "E15": {
+      "meaning": "",
+      "causes": [
+        {
+          "id": "e15-0",
+          "label": "Call customer service and quote the fault code",
+          "likelihood": 0.625,
+          "cost": null,
+          "mains": false,
+          "ownerFixable": true,
+          "evidence": "Bosch service manual, page 39: \"Call customer service and quote the fault code.\"",
+          "remedy": "Call customer service and quote the fault code.",
+          "source": {
+            "line": 19,
+            "codeLine": 17,
+            "manual": "Bosch service manual, page 39"
+          }
+        }
+      ],
+      "tests": [
+        {
+          "id": "e15-0-check",
+          "question": "Call customer service and quote the fault code. — did that fix it?",
+          "effort": "easy",
+          "kind": "remedy",
+          "outcomes": [
+            {
+              "value": "yes",
+              "say": "yes, that was it",
+              "consistentWith": [
+                "e15-0"
+              ]
+            },
+            {
+              "value": "no",
+              "say": "no, still faulty",
+              "consistentWith": []
+            }
+          ]
+        }
+      ]
+    },
+    "E22": {
+      "meaning": "",
+      "causes": [
+        {
+          "id": "e22-0",
+          "label": "Filters [27] are soiled or blocked",
+          "likelihood": 0.625,
+          "cost": null,
+          "mains": false,
+          "ownerFixable": true,
+          "evidence": "Bosch service manual, page 39: \"Clean filters. \"Filters\" on page 37\"",
+          "remedy": "Clean filters. \"Filters\" on page 37",
+          "source": {
+            "line": 27,
+            "codeLine": 25,
+            "manual": "Bosch service manual, page 39"
+          }
+        }
+      ],
+      "tests": [
+        {
+          "id": "e22-0-check",
+          "question": "Clean filters. \"Filters\" on page 37 — did that fix it?",
+          "effort": "easy",
+          "kind": "remedy",
+          "outcomes": [
+            {
+              "value": "yes",
+              "say": "yes, that was it",
+              "consistentWith": [
+                "e22-0"
+              ]
+            },
+            {
+              "value": "no",
+              "say": "no, still faulty",
+              "consistentWith": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "rejected": [
+    "E18"
+  ],
+  "reviewed": true,
+  "reviewedBy": "bench",
+  "reviewedAt": "2026-09-21T13:26:26.666Z",
+  "learnedAt": "2026-09-21T13:25:30.063Z"
+}

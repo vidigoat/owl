@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>the review bench</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz@0,6..72;1,6..72&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="review.css">
+</head>
+<body class="bench-body">
+
+<header class="bench-bar">
+  <span class="bench-title">the review bench</span>
+  <span class="bench-sub">nothing reaches the library until somebody here says so</span>
+  <span class="bench-spacer"></span>
+  <span class="bench-count" id="count"></span>
+</header>
+
+<main class="bench" id="bench">
+
+  <section class="bench-empty" id="empty" hidden>
+    <h1>Nothing is waiting.</h1>
+    <p>
+      Candidates arrive here when a manual has been read and not yet checked. Point the reader at a
+      manufacturer PDF and one will be.
+    </p>
+    <pre class="bench-cmd">node scripts/learn-manual.js manual.pdf --brand Bosch</pre>
+  </section>
+
+  <div class="bench-cols" id="cols" hidden>
+
+    <!-- The evidence. Not a thumbnail: this is the thing being checked against. -->
+    <section class="evidence">
+      <div class="evidence-head">
+        <span id="evSrc"></span>
+        <span class="evidence-pages" id="evPages"></span>
+      </div>
+      <div class="evidence-frame" id="evFrame">
+        <img id="page" alt="" hidden>
+        <p class="evidence-none" id="evNone" hidden>
+          No page image was kept for this candidate, so there is nothing to check the parse
+          against here. What the reader transcribed is below.
+        </p>
+        <pre class="evidence-text" id="evText" hidden></pre>
+      </div>
+    </section>
+
+    <!-- The claim, code by code. Admission is per code: one wrong reading should not cost the other four. -->
+    <section class="claim-col">
+      <h1 class="cand" id="candName"></h1>
+      <p class="cand-meta" id="candMeta"></p>
+
+      <ul class="codes" id="codes"></ul>
+
+      <div class="verdict">
+        <button class="admit" id="admit" disabled>Select the codes that match the page</button>
+        <p class="verdict-note" id="note">
+          Codes you leave unticked are recorded as rejected, not deleted &mdash; a reading the
+          parser keeps getting wrong is a bug report about it.
+        </p>
+      </div>
+
+      <p class="done" id="done" hidden></p>
+    </section>
+  </div>
+</main>
+
+<script src="review.js"></script>
+</body>
+</html>

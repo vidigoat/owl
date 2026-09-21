@@ -84,22 +84,30 @@ cell WRAPS onto several lines. Read it as a table, one row at a time. Join the w
 cell back into one line. Do not read straight across the page, or the columns will interleave and
 every entry will be cut in half.
 
-Format each row as exactly three lines:
-
-  <fault code>
-  REASON: <the whole reason cell, on one line>
-  REMEDY: <the whole remedial-action cell, on one line>
+MERGED CELLS. Manufacturers draw one reason cell, or one remedy cell, across several consecutive
+fault codes, with no horizontal rule through it. Decide which codes a cell covers by where the
+horizontal rules actually are, then repeat that cell's words in full for every code it covers. Do
+not slide the reasons up: if three codes share two reason cells, the shared one belongs to the
+codes above it, not below. Every fault code printed in the first column gets its own entry, even
+when it shares every cell with its neighbour.
 
 Rules:
 - Copy the words. Do not explain, rephrase, tidy, summarise, or add a remedy the page does not
   print. Joining a cell's own wrapped lines is the ONLY rearranging allowed.
-- One row per reason. If a code lists three reasons, that is three rows, all under the same code.
+- If one code lists several separate reasons, that is several entries under the same code.
 - Codes look like E24, E:07, F21, OE, dE, 4C, 5E, H20. Keep the code exactly as printed.
-- If a cell or a code is not legible, leave that row out. Never guess at a character.
+- If a cell or a code is not legible, leave it out. Never guess at a character.
 - Ignore page numbers, headers, footers and cross-references like "see page 38".
 - If this page has no fault code table on it, reply with exactly: NO FAULT TABLE
 
-Reply with the rows and nothing else. No preamble, no commentary.`;
+OUTPUT FORMAT. Every entry is exactly three lines, each on its own line, with a blank line between
+entries:
+
+<fault code>
+REASON: <the whole reason cell, on one line>
+REMEDY: <the whole remedial-action cell, on one line>
+
+Reply with the entries and nothing else. No preamble, no commentary.`;
 
 function invoke(base64, format) {
   return new Promise((resolve, reject) => {
@@ -112,7 +120,7 @@ function invoke(base64, format) {
       messages: [{ role: 'user', content: [{ image: { format, source: { bytes: base64 } } }, { text: PROMPT }] }],
       // Generous: a fault table is the longest thing this project ever asks a model to produce, and
       // a table cut off halfway is worse than no table — it looks complete.
-      inferenceConfig: { maxTokens: 2000, temperature: 0 },
+      inferenceConfig: { maxTokens: 3000, temperature: 0 },
     }));
 
     // The same ceiling as see.js. A manual page is a photograph too, and this path can be driven in

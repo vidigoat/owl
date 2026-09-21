@@ -249,4 +249,74 @@ it('reports its coverage honestly rather than implying it read everything', () =
   assert.match(g.coverage, /fault codes? recovered/);
 });
 
+/* ── cells a manufacturer merged across several codes ────────────────────── */
+
+/*
+ * Real, from the Bosch dishwasher manual this project was built against. Page 39 draws ONE reason
+ * cell across E:14 and E:15, and one remedy cell across all three codes below it — no horizontal
+ * rule through either. A faithful transcription of that gives the codes underneath a bare
+ * `REASON:` or `REMEDY:` with nothing after it.
+ *
+ * Both of the bugs below were found by a person holding the rendered page against the parse, which
+ * is the entire argument for the review bench existing.
+ */
+const MERGED = `Fault code E:14 is lit.
+REASON: Water protection system activated.
+REMEDY: Turn off water supply.
+
+Fault code E:15 is lit.
+REASON:
+REMEDY: Call customer service and quote the fault code.
+
+Fault code E:16 is lit.
+REASON: Constant water supply.
+REMEDY:`;
+
+it('a label with nothing after it is a merged cell, not a cause called "REASON:"', () => {
+  /*
+   * The regex wanted at least one character after the colon, so a bare `REASON:` failed to match,
+   * fell through to the remedy-verb test, and was stored as a cause. The literal string "REASON:"
+   * then appeared on screen as the meaning of a real fault code on a real machine.
+   */
+  const g = parse({ model: 'X', text: MERGED, sourceName: 'Bosch manual' });
+  const labels = Object.values(g.codes).flatMap((f) => f.causes.map((c) => c.label));
+  for (const l of labels) {
+    assert.ok(!/^REASON:?$/i.test(l), `a cause was labelled "${l}"`);
+    assert.ok(!/^REMEDY:?$/i.test(l), `a cause was labelled "${l}"`);
+  }
+});
+
+it('a code whose remedy cell is shared is kept, not dropped', () => {
+  /*
+   * E:16 is printed in the manual, has its own stated reason, and its remedy sits in a cell shared
+   * with the codes above it. Requiring a remedy silently deleted it — and a machine that answers
+   * "I have no record of E16" about a code printed in its own manual is worse than one that says
+   * what it means and admits it cannot say what to do.
+   */
+  const g = parse({ model: 'X', text: MERGED, sourceName: 'Bosch manual' });
+  assert.deepEqual(Object.keys(g.codes).sort(), ['E14', 'E15', 'E16']);
+
+  const [cause] = g.codes.E16.causes;
+  assert.equal(cause.label, 'Constant water supply');
+  assert.equal(cause.remedy, null, 'a remedy was invented for a cell the manual left shared');
+  assert.match(cause.evidence, /prints no remedy/, 'the evidence did not say why there is none');
+});
+
+it('a cause with no remedy is unknown about mains, not declared safe', () => {
+  // `false` here would read as a positive finding that this is safe to touch, which is the one
+  // thing the gate must never be told by accident.
+  const g = parse({ model: 'X', text: MERGED, sourceName: 'Bosch manual' });
+  const [cause] = g.codes.E16.causes;
+  assert.equal(cause.mains, null);
+  assert.equal(cause.ownerFixable, null);
+});
+
+it('a cause with no remedy produces no test to try', () => {
+  // There is nothing to ask somebody to do. Inventing a step to keep the list tidy is the failure
+  // this whole file exists to prevent.
+  const g = parse({ model: 'X', text: MERGED, sourceName: 'Bosch manual' });
+  const tests = g.codes.E16.tests || [];
+  assert.equal(tests.filter((t) => t.kind === 'remedy').length, 0);
+});
+
 console.log(`\n${passed} passed`);

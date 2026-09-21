@@ -1,3 +1,6 @@
+const fs = require('node:fs');
+const path = require('node:path');
+
 /**
  * Service data, keyed by model.
  *
@@ -106,16 +109,73 @@ function learn({ model, brand = 'Unknown', kind = 'Appliance', codes, source }) 
   return { learned: true, model, codes: Object.keys(codes).length };
 }
 
+/**
+ * Machines read from a manufacturer's manual and then checked by a person, one fault code at a
+ * time, on the review bench. Loaded from `data/admitted/` at startup.
+ *
+ * Kept as its own tier rather than merged into MODELS, because the three have genuinely different
+ * provenance and the difference is the product:
+ *
+ *   MODELS    written by hand against a manual somebody read.
+ *   ADMITTED  read by a machine, then confirmed code by code against the page it came from.
+ *   LEARNED   read by a machine this session and confirmed by nobody. Never persisted.
+ *
+ * Collapsing them would erase the one distinction this library exists to maintain. A caller that
+ * wants to know how a fact got here can ask; `provenance()` answers.
+ */
+const ADMITTED = loadAdmitted();
+
+function loadAdmitted() {
+  const dir = path.join(__dirname, 'admitted');
+  const out = {};
+  let files = [];
+  try {
+    files = fs.readdirSync(dir).filter((f) => f.endsWith('.json'));
+  } catch {
+    return out; // nothing has been reviewed yet, which is the normal state of a new checkout
+  }
+  for (const f of files) {
+    try {
+      const rec = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
+      // Belt and braces: `admit` only ever writes reviewed records, but this directory is on disk
+      // and the one thing that must not happen is an unreviewed machine answering as a reviewed one.
+      if (rec && rec.model && rec.reviewed === true) out[rec.model] = rec;
+    } catch { /* an unreadable record is not a machine */ }
+  }
+  return out;
+}
+
+/** Hand-written first, then human-checked, then this session's unchecked reading. */
+const find = (model) => MODELS[model] || ADMITTED[model] || LEARNED[model];
+
+/** How a machine's data got here, for anything that needs to say so out loud. */
+function provenance(model) {
+  if (MODELS[model]) return 'written by hand from the manual';
+  if (ADMITTED[model]) {
+    const r = ADMITTED[model];
+    return `read from ${r.source || 'a manual'} and checked by ${r.reviewedBy || 'a reviewer'}`;
+  }
+  if (LEARNED[model]) return 'read from a manual this session and checked by nobody';
+  return null;
+}
+
 function known(model) {
-  return Boolean(MODELS[model] || LEARNED[model]);
+  return Boolean(find(model));
 }
 
 function lookup(model, code) {
-  const m = MODELS[model] || LEARNED[model];
+  const m = find(model);
   if (!m) return { known: false, reason: `No service data for model ${model}.` };
   const c = m.codes[code];
   if (!c) return { known: false, reason: `No record of ${code} for ${model}.` };
-  return { known: true, brand: m.brand, kind: m.kind, meaning: c.meaning, causes: c.causes };
+  return {
+    known: true,
+    brand: m.brand,
+    kind: m.kind,
+    meaning: c.meaning,
+    causes: c.causes,
+    provenance: provenance(model),
+  };
 }
 
-module.exports = { MODELS, LEARNED, lookup, learn, known };
+module.exports = { MODELS, LEARNED, ADMITTED, lookup, learn, known, provenance, loadAdmitted };

@@ -588,6 +588,52 @@ defects that were live *here*:
 Both are fixed in both places. A library with its own tests and its own README gets examined
 differently from the same code in a subfolder, which is the argument for doing it.
 
+## The review bench
+
+A vision model reading a seven-segment fault table is right *most of the time*, which is exactly
+the standard that produces a library nobody can trust. So nothing enters this one until a person has
+held the manual page against the parse.
+
+```bash
+node scripts/learn-manual.js manual.pdf --brand Bosch   # writes a candidate to data/pending/
+npm start                                               # http://localhost:8792/review.html
+```
+
+The rendered page sits on the left at a size you can read, the parsed fault codes on the right, each
+quoting the sentence in the manual it came from. Every code starts unticked, because a reviewer
+arriving at a pre-approved screen is being asked to find mistakes rather than confirm readings, and
+people are much worse at the first. Admission is per code: one misreading should not cost the other
+five. Codes left unticked are recorded as rejected rather than deleted — a reading the parser keeps
+getting wrong is a bug report about `faultgraph`, and throwing it away means finding it again on the
+next manual from the same manufacturer.
+
+It found a real error the first time it was used, on the first machine, and two of its own:
+
+**The manual prints E:16. The model read E18.** A seven-segment `6` is an `8` with two segments
+missing, and at 150 DPI that is a genuinely hard call. Nothing downstream could have caught it —
+the output was well formed and confidently wrong about a real machine. A person looking at the page
+sees it in a second, which is the entire argument for this screen existing.
+
+**A merged cell shifted every reason up by one code.** Bosch draws one reason cell across E:14 and
+E:15 with no rule through it, and the earlier prompt asked for one row per reason, so E:15 was given
+E:16's words and E:16 vanished. Fixed in the prompt and in `faultgraph`: an empty `REASON:` is read
+as a shared cell rather than as a cause named "REASON:", and a code with a stated cause and no
+remedy beside it is kept with `remedy: null`. A library that answers *no record of E16* about a code
+printed in its own manual is worse than one that says what the code means and admits it cannot
+advise a fix. `mains` is `null` there too, never `false` — `false` would read as a finding that
+something is safe to touch.
+
+Admitted machines land in `data/admitted/` and the library loads them as their own tier:
+
+```
+MODELS     written by hand from a manual somebody read
+ADMITTED   read by a machine, then confirmed code by code against the page
+LEARNED    read by a machine this session and confirmed by nobody, never persisted
+```
+
+`lookup()` returns which of the three a fact came from. Merging them would erase the one distinction
+this library exists to maintain.
+
 ## Decisions
 
 The arguments worth not having twice — what was decided, what it cost, and what would have to be

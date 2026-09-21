@@ -14,6 +14,7 @@ const { MODELS, LEARNED, learn } = require('./data/service-data');
 const { parse: parseManual } = require('./manual/faultgraph');
 const { see } = require('./mcp/tools/see');
 const { read_manual } = require('./mcp/tools/read_manual');
+const review = require('./manual/review');
 const { confirm_fix } = require('./mcp/tools/confirm_fix');
 const { beginCheckout, confirmCheckout } = require('./mcp/tools/order_part');
 const { remember: rememberAppliance, receipt: writeReceipt, due: dueNow } = require('./mcp/tools/home');
@@ -179,6 +180,39 @@ http
       const model = url.searchParams.get('model');
       const causeId = url.searchParams.get('causeId');
       return send(res, 200, JSON.stringify(find_part({ model, causeId })), 'application/json');
+    }
+
+    /* ── the review queue: nothing reaches the library without a person saying so ── */
+
+    if (url.pathname === '/api/review/queue') {
+      return send(res, 200, JSON.stringify({ pending: review.queue() }), 'application/json');
+    }
+
+    if (url.pathname === '/api/review/candidate') {
+      const entry = review.candidate(url.searchParams.get('model'));
+      if (!entry) return send(res, 404, JSON.stringify({ error: 'nothing pending for that model' }), 'application/json');
+      return send(res, 200, JSON.stringify(entry), 'application/json');
+    }
+
+    /*
+     * The page the parse came from. A reviewer who has to go and find the PDF will approve on
+     * trust instead, which would make the whole step theatre.
+     */
+    if (url.pathname === '/api/review/page') {
+      const file = review.pageImagePath(url.searchParams.get('model'));
+      if (!file) return send(res, 404, 'no page kept for that model', 'text/plain');
+      return fs.readFile(file, (err, buf) =>
+        err ? send(res, 404, 'not found', 'text/plain') : send(res, 200, buf, 'image/png'));
+    }
+
+    if (req.method === 'POST' && url.pathname === '/api/review/admit') {
+      return readJson(req)
+        .then((body) => {
+          const accept = Array.isArray(body.accept) ? body.accept : [];
+          const result = review.admit(body.model, accept, body.by || 'unattributed');
+          return send(res, result.admitted ? 200 : 400, JSON.stringify(result), 'application/json');
+        })
+        .catch((e) => send(res, 400, JSON.stringify({ error: e.message }), 'application/json'));
     }
 
     const rel = url.pathname === '/' ? 'index.html' : url.pathname.slice(1);

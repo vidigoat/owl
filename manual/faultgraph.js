@@ -269,14 +269,38 @@ function parse({ model, text, sourceName = 'manual' }) {
        * the inference happens to work here — but "Check the door seal" as a REASON would fool it,
        * and a labelled line never can.
        */
-      const labelled = /^(REASON|CAUSE|REMEDY|ACTION|REMEDIAL ACTION)\s*:\s*(.+)$/i.exec(next);
+      /*
+       * `(.*)`, not `(.+)`: a label with nothing after it is a MERGED CELL, not a malformed line.
+       *
+       * Where a manual draws one reason cell across three fault codes, a faithful transcription
+       * gives the second and third codes a bare `REASON:`. Requiring a body made that line fail to
+       * match, fall through to the verb test, and be stored as a cause whose text was the literal
+       * string "REASON:" — which then appeared on screen, under a real fault code, as the meaning
+       * of E15.
+       */
+      const labelled = /^(REASON|CAUSE|REMEDY|ACTION|REMEDIAL ACTION)\s*:\s*(.*)$/i.exec(next);
       if (labelled) {
         const kind = labelled[1].toUpperCase();
         const body = labelled[2].trim();
         if (kind === 'REASON' || kind === 'CAUSE') {
-          pendingReason = body;
-        } else {
+          // Empty means the cell was shared with the code above. Not a reason, and not a string.
+          pendingReason = body || null;
+        } else if (body) {
           following.push(body);
+          atLine.push(onPage(j));
+          statedCause.push(pendingReason);
+          pendingReason = null;
+        } else if (pendingReason) {
+          /*
+           * A reason with no remedy beside it. The manual lists this code and states what it means
+           * but prints its remedy in a cell shared with the codes above, which we cannot attribute.
+           *
+           * Recorded anyway, with no remedy. Dropping it would delete a fault code the manual
+           * plainly documents — and a machine that answers "I have no record of E16" about a code
+           * printed in its own manual is worse than one that says what it means and admits it
+           * cannot tell you what to do about it.
+           */
+          following.push(null);
           atLine.push(onPage(j));
           statedCause.push(pendingReason);
           pendingReason = null;
@@ -306,9 +330,13 @@ function parse({ model, text, sourceName = 'manual' }) {
       // pump costs nothing to fix, which is both wrong and exactly the kind of confident wrong
       // answer the gate exists to prevent.
       cost: null,
-      mains: isMains(remedy),
-      ownerFixable: !isMains(remedy),
-      evidence: `${sourceName}: "${remedy}"`,
+      // With no remedy there is nothing to judge as mains work, and `false` would read as a
+      // positive finding that this is safe to touch. Unknown, and the gate treats it as such.
+      mains: remedy ? isMains(remedy) : null,
+      ownerFixable: remedy ? !isMains(remedy) : null,
+      evidence: remedy
+        ? `${sourceName}: "${remedy}"`
+        : `${sourceName}: the manual states this cause but prints no remedy beside it`,
       // The manual's own wording, kept verbatim. This is what the guide reads aloud, because a
       // remedy line IS the repair step — paraphrasing it would be inventing a procedure.
       remedy,
@@ -322,16 +350,21 @@ function parse({ model, text, sourceName = 'manual' }) {
     // removes one possibility. An OBSERVATION is consistent with several causes at once, which is
     // what makes choosing the question worth anything — see eval/questions.js for the measurement
     // that made this gap visible.
-    const remedyTests = causes.map((c, k) => ({
-      id: `${c.id}-check`,
-      question: following[k].endsWith('?') ? following[k] : `${following[k]} — did that fix it?`,
-      effort: effortOf(following[k]),
-      kind: 'remedy',
-      outcomes: [
-        { value: 'yes', say: 'yes, that was it', consistentWith: [c.id] },
-        { value: 'no', say: 'no, still faulty', consistentWith: causes.filter((x) => x.id !== c.id).map((x) => x.id) },
-      ],
-    }));
+    // A cause with no remedy printed beside it yields no test. There is nothing to ask somebody to
+    // try, and inventing a step to keep the list tidy is the exact failure this whole file is
+    // written to avoid. The cause still exists and is still named; it just cannot be checked.
+    const remedyTests = causes
+      .map((c, k) => (following[k] == null ? null : {
+        id: `${c.id}-check`,
+        question: following[k].endsWith('?') ? following[k] : `${following[k]} — did that fix it?`,
+        effort: effortOf(following[k]),
+        kind: 'remedy',
+        outcomes: [
+          { value: 'yes', say: 'yes, that was it', consistentWith: [c.id] },
+          { value: 'no', say: 'no, still faulty', consistentWith: causes.filter((x) => x.id !== c.id).map((x) => x.id) },
+        ],
+      }))
+      .filter(Boolean);
 
     codes[code] = {
       meaning: description,
@@ -417,6 +450,8 @@ function observationsFrom(causes, remedies) {
   const out = [];
 
   remedies.forEach((remedy, k) => {
+    // No remedy printed, so no conditional clause to mine an observation out of.
+    if (!remedy) return;
     const m = CONDITION.exec(remedy.trim().replace(/[.;]$/, ''));
     if (!m) return;
 

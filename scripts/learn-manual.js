@@ -108,6 +108,18 @@ async function learnOne(file, flags) {
       const read = await read_manual({ imagePath: png, model, brand });
       report.steps.push(`page ${page} via Bedrock: ${read.coverage || read.reason}`);
       if (read.learned) {
+        /*
+         * Keep the page.
+         *
+         * Review means holding what was parsed against what the page actually says, and a reviewer
+         * who has to go and find the PDF, then the right page, will approve on trust instead —
+         * which would make the review step theatre. The image is the evidence; it belongs next to
+         * the claim.
+         */
+        try {
+          fs.copyFileSync(png, path.join(PENDING, `${model}.png`));
+          report.pageImage = `${model}.png`;
+        } catch { /* the entry is still reviewable from its transcript */ }
         graph = parse({ model, text: read.transcribed, sourceName: `${brand} service manual, page ${page}` });
         report.transcribed = read.transcribed;
         report.readWith = 'bedrock';
@@ -188,6 +200,7 @@ async function learnOne(file, flags) {
         codes: report.graph.codes,
         coverage: report.coverage,
         transcribed: report.transcribed || null,
+        pageImage: report.pageImage || null,
         reviewed: false,
         learnedAt: new Date().toISOString(),
       }, null, 2));
