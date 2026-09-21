@@ -861,9 +861,13 @@ entire difference was the word "light" against "lights".
 ![Saying what the machine is doing, and getting the manual's own words back](docs/media/describe.jpg)
 
 **It is on the device**, not only in the tool surface — *Say what it is doing* opens its own screen,
-and the trace panel beside it shows the real `describe_problem` call and where the answer came from.
-The manual's instructions are set in the reading face because that is what they are: sentences
-somebody printed, quoted, never paraphrased.
+and you can type it or say it out loud. The trace panel shows the real `describe_problem` call and
+where the answer came from. The manual's instructions are set in the reading face because that is
+what they are: sentences somebody printed, quoted, never paraphrased.
+
+The screenshot is the demo's own opening line. The scripted flow starts with *"my dishwasher is
+beeping and there's water in the bottom"* and answers it from a fault code; this answers the same
+complaint the other way, on a machine whose manual has no codes at all.
 
 Three refusals matter more than the matching. A description the manual does not cover says so and
 says how many it **does** cover, because *"no record of this"* must never read as *"nothing is

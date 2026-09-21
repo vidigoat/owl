@@ -1073,7 +1073,15 @@ async function boot() {
  * Its own stage, reached only from its own button. The scripted demo never enters it, so nothing
  * here can change what `advance()` does on the path a reviewer walks first.
  */
-const DESCRIBE_MODEL = 'SGE53C55UC';
+/*
+ * A machine whose manual has no codes, chosen so the demo's own opening line works here.
+ *
+ * The scripted flow starts with "my dishwasher is beeping and there's water in the bottom" and
+ * answers it from a fault code. This model answers the same complaint the other way — its manual
+ * lists "Water is left in the appliance at the end of the program." — which is the whole point of
+ * the screen and worth being able to type verbatim.
+ */
+const DESCRIBE_MODEL = 'SHE43DM2N';
 
 function renderDescribe(said = '', result = null) {
   stage = 'describe';
@@ -1103,6 +1111,7 @@ function renderDescribe(said = '', result = null) {
       <form id="sayform" class="s-describe__form">
         <input id="saidinput" class="s-describe__input" placeholder="the rinse aid light keeps coming on"
                value="${esc(said)}" autocomplete="off">
+        <button class="btn btn--ghost" type="button" id="saymic" title="Say it out loud">Say it</button>
         <button class="btn" type="submit">Ask</button>
       </form>
       ${rows}
@@ -1113,10 +1122,7 @@ function renderDescribe(said = '', result = null) {
 
   const form = $('#sayform');
   if (form) {
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const words = $('#saidinput').value.trim();
-      if (!words) return;
+    const ask = async (words) => {
       const r = await (await fetch(
         `/api/describe?model=${encodeURIComponent(DESCRIBE_MODEL)}&said=${encodeURIComponent(words)}`
       )).json();
@@ -1124,8 +1130,52 @@ function renderDescribe(said = '', result = null) {
         r.known ? `${r.matches.length} candidate${r.matches.length === 1 ? '' : 's'}` : 'nothing like it',
         r.provenance || '');
       renderDescribe(words, r);
+    };
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const words = $('#saidinput').value.trim();
+      if (words) ask(words);
     });
     $('#saidinput').focus();
+
+    /*
+     * And you can just say it.
+     *
+     * This is the one screen where free speech is the right input. Everywhere else the recogniser
+     * is deliberately narrow — `matchAnswer` only ever chooses between the buttons already on
+     * screen, so the worst it can do is pick the wrong one of two. Here there is nothing to choose
+     * between: the words ARE the question, and they go to a lookup that returns every candidate
+     * and refuses when it matches none. Mishearing costs a wrong search, not a wrong diagnosis.
+     *
+     * What was heard is put in the box before it is used, so the person can see what the machine
+     * thought they said and correct it.
+     */
+    const R = Recognition();
+    const mic = $('#saymic');
+    if (mic && R) {
+      mic.addEventListener('click', () => {
+        stopListening();
+        recogniser = new R();
+        recogniser.lang = 'en-US';
+        recogniser.interimResults = false;
+        recogniser.onresult = (ev) => {
+          const heard = ev.results[0][0].transcript.trim();
+          stopListening();
+          $('#saidinput').value = heard;
+          captionEl.textContent = `Heard "${heard}".`;
+          trace('heard', esc(`"${heard}"`), 'used as the description', 'speech');
+          ask(heard);
+        };
+        recogniser.onerror = () => { captionEl.textContent = 'I did not catch that. Type it instead.'; stopListening(); };
+        recogniser.start();
+        captionEl.textContent = 'Listening — say what it is doing.';
+      });
+    } else if (mic) {
+      // No recogniser in this browser. Say so rather than leaving a button that does nothing.
+      mic.disabled = true;
+      mic.title = 'This browser has no speech recognition';
+    }
   }
 }
 
