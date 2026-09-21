@@ -52,9 +52,18 @@ const send = (res, code, body, type) => {
   res.end(body);
 };
 
-http
-  .createServer((req, res) => {
-    const url = new URL(req.url, `http://${req.headers.host}`);
+/**
+ * The request handler, as a function.
+ *
+ * Separated from the listening so a host can serve exactly this code rather than a second, subtly
+ * different copy. It used to be an anonymous callback inside `http.createServer(...).listen()`,
+ * which meant the only way to run this project was to run this process — fine on a laptop, and a
+ * dead end for anything that wants a URL.
+ *
+ * Importing this file gives you the handler and starts nothing. `node server.js` still listens.
+ */
+function handler(req, res) {
+    const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
 
     if (url.pathname === '/api/session') {
       return send(res, 200, JSON.stringify({
@@ -275,5 +284,12 @@ http
       if (err) return send(res, 404, 'not found', 'text/plain');
       send(res, 200, buf, TYPES[path.extname(file)] || 'application/octet-stream');
     });
-  })
-  .listen(PORT, () => console.log(`second-set-of-hands  http://localhost:${PORT}`));
+}
+
+module.exports = handler;
+module.exports.handler = handler;
+
+// Only listen when run directly. Imported — by a host, or by a test — this is just a function.
+if (require.main === module) {
+  http.createServer(handler).listen(PORT, () => console.log(`second-set-of-hands  http://localhost:${PORT}`));
+}
