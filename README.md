@@ -848,12 +848,56 @@ lower case — so those rows carry `suspect: true` and the bench puts an amber n
 what to check. Four rows across twelve manuals. The library cannot fix them and does not pretend to;
 it points at them, which is the difference between a question and a fact.
 
-Fourteen machines have been read — **140 symptoms, 221 causes**, every one citing its
-page — across dishwashers, a dryer, a refrigerator and two Siemens ovens, which is the same parser
-reading five kinds of appliance from two manufacturers. With the hand-written ones that makes
-**19 machines in the library** — 129 symptoms and 213 causes, each citing its page, and twelve rows
-rejected because the parser flagged them as cut off or because the page's symbols did not survive
-the text layer.
+Nineteen machines have been read — **233 symptoms, 519 causes**, every one citing its page —
+across dishwashers, a dryer, refrigerators and two Siemens ovens: the same parser reading five
+kinds of appliance from two manufacturers. With the hand-written ones that is **22 machines in the library** —
+203 symptoms and 490 causes, and 26 rows rejected rather than admitted quietly.
+
+### Every quotation, re-read off the page it cites
+
+`node scripts/verify-against-pages.js` re-extracts the cited page from the manufacturer's own PDF
+and asks whether the sentence the library is quoting is actually printed there. Not similar to.
+Printed.
+
+It is the half of the review a machine can do exactly, and it is the half that does not scale for a
+person: nineteen machines at twenty-seven causes each is five hundred rows, and the fifth hundred
+does not get the attention the first one did. `scripts/admit-verified.js` then admits what verifies
+and refuses what does not, **by name**, recorded on the machine's own row. 477 of 496 causes were
+found on their pages; the 19 that were not are rejected and listed.
+
+What it cannot tell you is the rest of the review, and the library says so rather than implying
+otherwise: a machine admitted this way is recorded as `reviewedBy: "script — every quotation re-read
+off the manufacturer page it cites"`, which is a narrower claim than *checked against the pages* and
+should read as one. Whether a cause belongs to the symptom it was filed under, whether a remedy is
+safe, whether a dropped row mattered — those still need a person and a page. That is the bench.
+
+### Three bugs that were costing most of the library
+
+**The run stopped four pages early.** `faultTablePages` takes the top four scoring pages in the
+whole document, and a troubleshooting section is not four pages long — it is however long it is.
+`SGE53C55UC` prints its table across pages 43 to 47; the four slots went to two of those plus a
+Home Connect page and an installation page that happened to score well. Three pages of that
+machine's symptoms were never read, and nothing said so: the run reported itself as 45–46 and
+looked complete. Runs now grow outward while the neighbouring page **reprints the column header**,
+which is the precise signal — a table crossing a page break introduces itself again, and a page
+that merely mentions the word "troubleshooting" does not.
+
+Measured across every manual on disk: **14 machines and 107 symptoms became 19 machines and 263
+symptoms.** Two and a half times the data, out of pages that were always there.
+
+**Every citation past the first page was wrong.** `readSymptoms` took one page number and stamped
+it on every row, so a table running 37 to 48 cited all of its causes to page 37. An owner following
+one of them opens the manual to the wrong page and finds nothing — and a citation that does not
+survive being checked is worse than no citation, because it was believed. `joinAdjacent` now keeps
+a form feed at each seam, which is `pdftotext`'s own page separator, and each cause records the
+page it was actually printed on.
+
+**And the verifier itself was wrong twice before it was right.** It flattened the whole page, which
+interleaves the two columns — so a cause wrapping over three lines came back with the symptom's own
+continuation spliced into it, and 133 correct citations were accused of being invented. Then it
+read column two only, which cannot see a row whose columns collided into a single line, and accused
+another 51. It checks both readings now, and the page after the cited one, because a cause can
+begin at the foot of one page and finish at the head of the next.
 
 ### Two things a reviewer reading row by row cannot see
 

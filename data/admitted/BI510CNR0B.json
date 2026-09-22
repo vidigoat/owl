@@ -3,7 +3,7 @@
   "brand": "Siemens",
   "kind": "Oven",
   "source": "BI510CNR0B.pdf",
-  "pages": "5–6",
+  "pages": "5–7",
   "readWith": "text-layer",
   "codes": {},
   "symptoms": [
@@ -19,10 +19,10 @@
           "remedies": [
             "Check whether the lighting in your room or other appliances are working."
           ],
-          "evidence": "Siemens manual, page 5: \"There has been a power cut.\"",
+          "evidence": "Bosch manual, page 5: \"There has been a power cut.\"",
           "source": {
             "line": 148,
-            "manual": "Siemens manual",
+            "manual": "Bosch manual",
             "page": 5
           }
         },
@@ -34,11 +34,193 @@
           "remedies": [
             "Switch the appliance on."
           ],
-          "evidence": "Siemens manual, page 5: \"The appliance is switched off.\"",
+          "evidence": "Bosch manual, page 5: \"The appliance is switched off.\"",
           "source": {
             "line": 151,
-            "manual": "Siemens manual",
+            "manual": "Bosch manual",
             "page": 5
+          }
+        },
+        {
+          "id": "the-cookware-or-food-is-not-heating-up-2",
+          "label": "The warming drawer is not completely closed.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Close the warming drawer."
+          ],
+          "evidence": "Bosch manual, page 6: \"The warming drawer is not completely closed.\"",
+          "source": {
+            "line": 163,
+            "manual": "Bosch manual",
+            "page": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-appliance-is-not-working",
+      "symptom": "The appliance is not working.",
+      "causes": [
+        {
+          "id": "the-appliance-is-not-working-0",
+          "label": "The circuit breaker is faulty.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check the circuit breaker in the fuse box."
+          ],
+          "evidence": "Bosch manual, page 6: \"The circuit breaker is faulty.\"",
+          "source": {
+            "line": 166,
+            "manual": "Bosch manual",
+            "page": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-cookware-or-food-does-not-get-warm-e",
+      "symptom": "The cookware or food does not get warm enough.",
+      "causes": [
+        {
+          "id": "the-cookware-or-food-does-not-get-warm-e-0",
+          "label": "The cookware or food has not been heated for long enough.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Heat the cookware or the food for a longer period of time."
+          ],
+          "evidence": "Bosch manual, page 6: \"The cookware or food has not been heated for long enough.\"",
+          "source": {
+            "line": 168,
+            "manual": "Bosch manual",
+            "page": 6
+          }
+        },
+        {
+          "id": "the-cookware-or-food-does-not-get-warm-e-1",
+          "label": "The warming drawer is not completely closed.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Close the warming drawer."
+          ],
+          "evidence": "Bosch manual, page 6: \"The warming drawer is not completely closed.\"",
+          "source": {
+            "line": 171,
+            "manual": "Bosch manual",
+            "page": 6
+          }
+        },
+        {
+          "id": "the-cookware-or-food-does-not-get-warm-e-2",
+          "label": "The warming drawer was open for a long time.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Close the warming drawer."
+          ],
+          "evidence": "Bosch manual, page 6: \"The warming drawer was open for a long time.\"",
+          "source": {
+            "line": 173,
+            "manual": "Bosch manual",
+            "page": 6
+          }
+        },
+        {
+          "id": "the-cookware-or-food-does-not-get-warm-e-3",
+          "label": "The warming drawer was not adequately preheated.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Preheat the warming drawer sufficiently."
+          ],
+          "evidence": "Bosch manual, page 6: \"The warming drawer was not adequately preheated.\"",
+          "source": {
+            "line": 175,
+            "manual": "Bosch manual",
+            "page": 6
+          }
+        },
+        {
+          "id": "the-cookware-or-food-does-not-get-warm-e-4",
+          "label": "The ventilation opening has been blocked by tableware.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Remove tall tableware from the ventilation opening."
+          ],
+          "evidence": "Bosch manual, page 6: \"The ventilation opening has been blocked by tableware.\"",
+          "source": {
+            "line": 177,
+            "manual": "Bosch manual",
+            "page": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-operation-indicator-light-does-not-l",
+      "symptom": "The operation indicator light does not light up.",
+      "causes": [
+        {
+          "id": "the-operation-indicator-light-does-not-l-0",
+          "label": "The operation indicator light is defective.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Call → \"Customer Service\", Page 9."
+          ],
+          "evidence": "Bosch manual, page 6: \"The operation indicator light is defective.\"",
+          "source": {
+            "line": 179,
+            "manual": "Bosch manual",
+            "page": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-fuse-in-the-fuse-box-has-blown",
+      "symptom": "The fuse in the fuse box has blown.",
+      "causes": [
+        {
+          "id": "the-fuse-in-the-fuse-box-has-blown-0",
+          "label": "The circuit breaker is faulty.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Pull out the mains plug.",
+            "Call → \"Customer Service\", Page 9."
+          ],
+          "evidence": "Bosch manual, page 6: \"The circuit breaker is faulty.\"",
+          "source": {
+            "line": 182,
+            "manual": "Bosch manual",
+            "page": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": "12-how-it-works-here-you-can-find-the-id",
+      "symptom": "12 How it works Here, you can find the ideal settings tailored these recommendations to your",
+      "causes": [
+        {
+          "id": "12-how-it-works-here-you-can-find-the-id-0",
+          "label": "for various dishes as well as the best accessories and cookware. We have",
+          "suspect": true,
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "appliance."
+          ],
+          "evidence": "Bosch manual, page 6: \"for various dishes as well as the best accessories and cookware. We have\"",
+          "source": {
+            "line": 193,
+            "manual": "Bosch manual",
+            "page": 6
           }
         }
       ]
@@ -46,7 +228,7 @@
   ],
   "rejected": [],
   "reviewed": true,
-  "reviewedBy": "claude — read against pages 5 and 6",
-  "reviewedAt": "2026-09-22T14:14:55.605Z",
-  "learnedAt": "2026-09-22T14:14:37.664Z"
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-09-22T15:22:07.343Z",
+  "learnedAt": "2026-09-22T15:19:11.148Z"
 }

@@ -131,8 +131,26 @@ function readSymptoms({ text, sourceName = 'service manual', page = null } = {})
   let prose = 0;      // consecutive full-width lines: the page has moved past the table
   let lastLeft = null;  // the previous line's left column, for deciding where a skipped symptom ends
 
+  /*
+   * Which page we are on, as the table crosses page breaks.
+   *
+   * `joinAdjacent` puts a form feed at each seam — `pdftotext`'s own page separator — so counting
+   * them is counting pages. Without this every row in a run carried the number of the page the run
+   * STARTED on: a table running 37 to 48 cited all two hundred of its causes to page 37, and an
+   * owner following one of them would open the manual to the wrong page and find nothing. A
+   * citation that does not survive being checked is worse than no citation, because it was
+   * believed.
+   */
+  let pageNow = page;
+
   for (let i = boundary.line + 1; i < lines.length; i++) {
-    const raw = lines[i];
+    let raw = lines[i];
+
+    if (raw.includes('\f')) {
+      if (typeof pageNow === 'number') pageNow += raw.split('\f').length - 1;
+      raw = raw.replace(/\f/g, '');
+    }
+
     if (!raw.trim()) { leftWasBlank = true; continue; }
 
     /*
@@ -431,7 +449,7 @@ function readSymptoms({ text, sourceName = 'service manual', page = null } = {})
       if (lastKind === 'cause' && cause) {
         cause.label = joinWrapped(cause.label, right);
       } else {
-        cause = { label: right, remedies: [], line: i };
+        cause = { label: right, remedies: [], line: i, page: pageNow };
         current.causes.push(cause);
       }
       lastKind = 'cause';
@@ -441,7 +459,7 @@ function readSymptoms({ text, sourceName = 'service manual', page = null } = {})
       if (!cause) {
         // A remedy with no cause above it. The manual gave a step and no reason; keep it under an
         // unnamed cause rather than dropping a real instruction on the floor.
-        cause = { label: null, remedies: [], line: i };
+        cause = { label: null, remedies: [], line: i, page: pageNow };
         current.causes.push(cause);
       }
       // Remedies wrap too, and a wrapped remedy is not a second remedy.
@@ -551,8 +569,13 @@ function readSymptoms({ text, sourceName = 'service manual', page = null } = {})
       // A manual lists remedies, never prices. Null, not zero — zero would mean free.
       cost: null,
       remedies: c.remedies.map((r) => r.text),
-      evidence: `${sourceName}${page ? `, page ${page}` : ''}: "${c.label || c.remedies[0]?.text || ''}"`,
-      source: { line: c.line, manual: sourceName, page },
+      /*
+       * The page THIS cause was printed on, recorded when it was read rather than taken from the
+       * run afterwards. A run spanning pages 37 to 48 has causes on twelve different pages, and
+       * both a first-page and a last-page answer are wrong for almost all of them.
+       */
+      evidence: `${sourceName}${c.page ? `, page ${c.page}` : ''}: "${c.label || c.remedies[0]?.text || ''}"`,
+      source: { line: c.line, manual: sourceName, page: c.page ?? null },
     })),
   }));
 

@@ -117,7 +117,14 @@ it('consecutive pages are joined before parsing', () => {
   assert.equal(joined.length, 1);
   assert.equal(joined[0].from, 39);
   assert.equal(joined[0].to, 40);
-  assert.equal(joined[0].text, 'first half\nsecond half', 'the halves were joined out of order');
+  /*
+   * A form feed at the seam, which is `pdftotext`'s own page separator and the thing `pages()`
+   * split on. Joined with a bare newline the boundary was gone, so a parser reading the run could
+   * only cite the page it started on — and every row on pages two onwards carried the first page's
+   * number. An owner sent to page 38 for a sentence printed on page 39 has a wrong citation, which
+   * is the one thing a citation must not be.
+   */
+  assert.equal(joined[0].text, 'first half\n\fsecond half', 'the halves were joined out of order');
   assert.equal(joined[0].score, 74);
 });
 

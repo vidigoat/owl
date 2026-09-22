@@ -238,6 +238,14 @@ function scorePage(text) {
  * Returns a scored, sorted list rather than one answer, because tables run across page breaks and
  * the second-best page is very often the rest of the first.
  */
+/**
+ * The column header a symptom table introduces itself with, on every page it runs across.
+ *
+ * It is the one unambiguous sign that the page in front of you is a continuation of the table
+ * behind it — a page that merely mentions troubleshooting does not reprint the header.
+ */
+const TABLE_HEADER = /^(\s*)(?:Fault|Problem|Symptom)\s{2,}(?:Cause and troubleshooting|Cause and remedy|Cause\b.*)$/im;
+
 function faultTablePages(file, { take = 4, min = 18 } = {}) {
   const all = pages(file);
   const scored = all
@@ -245,7 +253,41 @@ function faultTablePages(file, { take = 4, min = 18 } = {}) {
     .filter((p) => p.score >= min)
     .sort((a, b) => b.score - a.score);
 
-  return { total: all.length, candidates: scored.slice(0, take) };
+  const top = scored.slice(0, take);
+
+  /*
+   * ── Grow each run until the table stops ───────────────────────────────────
+   *
+   * `take` is a document-wide top-N, and a troubleshooting section is not N pages long — it is
+   * however long it is. `SGE53C55UC` prints its table across pages 43 to 47, and the four slots
+   * went to pages 45 and 46 plus two unrelated pages that happened to score well (a Home Connect
+   * page, an installation page). Three pages of that machine's symptoms were never read, and
+   * nothing anywhere said so: the run reported itself as 45–46 and looked complete.
+   *
+   * So after the top-N picks a starting point, each run grows outward while the neighbouring page
+   * REPRINTS THE COLUMN HEADER. That is the precise signal — a table that runs across a page break
+   * introduces itself again on the next page, and a page that merely mentions the word
+   * "troubleshooting" in prose does not. Growing on score alone would swallow the neighbours that
+   * caused this in the first place.
+   */
+  const grown = new Map(top.map((c) => [c.page, c]));
+
+  for (const start of top) {
+    for (const step of [-1, 1]) {
+      let n = start.page + step;
+      while (n >= 1 && n <= all.length && !grown.has(n)) {
+        const text = all[n - 1];
+        if (!TABLE_HEADER.test(text)) break;
+        grown.set(n, { page: n, text, ...scorePage(text) });
+        n += step;
+      }
+    }
+  }
+
+  return {
+    total: all.length,
+    candidates: [...grown.values()].sort((a, b) => b.score - a.score),
+  };
 }
 
 /**
@@ -263,7 +305,14 @@ function joinAdjacent(candidates) {
     const last = runs[runs.length - 1];
     if (last && c.page === last.to + 1) {
       last.to = c.page;
-      last.text += `\n${c.text}`;
+      /*
+       * A form feed at the seam, which is what `pdftotext` puts between pages before `pages()`
+       * splits on it. Joined with a bare newline the page boundary was simply gone, so a parser
+       * reading the run could only cite the page it started on — and every row on pages two
+       * onwards got the first page's number. An owner sent to page 38 for a sentence printed on
+       * page 39 has been given a wrong citation, which is the one thing a citation must not be.
+       */
+      last.text += `\n\f${c.text}`;
       last.score += c.score;
     } else {
       runs.push({ from: c.page, to: c.page, text: c.text, score: c.score });
@@ -302,6 +351,7 @@ function renderPage(file, page, { dir, dpi = 150 } = {}) {
 }
 
 module.exports = {
+  TABLE_HEADER,
   available, pages, pageCount, scorePage, faultTablePages, joinAdjacent,
   looksGarbled, renderPage, probablyEnglish, symptomTable, COLUMNAR,
 };
