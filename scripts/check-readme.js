@@ -131,7 +131,13 @@ function readerClaims() {
     // Written as a range — "99.3–100% of poppler's words" — so the per cent sign belongs to the
     // upper bound, not to the figure being checked.
     { what: 'pdf reader: worst word recall', value: String(m.worstWordRecall), where: /([\d.]+)–100%\*{0,2} of poppler/g },
-    { what: 'pdf reader: rows recovered', value: `${m.rowsRecoveredExactly}%`, where: /\*\*([\d.]+%)\*\* recovered word for word/g },
+    /*
+     * Both phrasings. The README and the submission write "**87.5%** recovered word for word"; the
+     * judging map writes "87.5% of its parsed rows word for word" — and a contextual check only
+     * checks the occurrences it matches, so anchoring on one of them left the other free to say
+     * anything. Found by drifting the map's figure and watching this pass.
+     */
+    { what: 'pdf reader: rows recovered', value: `${m.rowsRecoveredExactly}%`, where: /\*{0,2}([\d.]+%)\*{0,2} (?:recovered word for word|of (?:its|poppler's) parsed rows)/g },
     { what: 'pdf reader: rows poppler missed', value: String(m.rowsPopplerDidNotProduce), where: /plus (\d+) rows poppler did not produce/g },
   ];
 }
