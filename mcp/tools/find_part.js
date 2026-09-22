@@ -22,7 +22,7 @@ const CATALOGUE = {
 
 const ALTERNATIVE = { label: 'Service call', price: 179, eta: '7+ day wait' };
 
-function find_part({ model, causeId }) {
+function find_part({ model, causeId } = {}) {
   const part = CATALOGUE[`${model}:${causeId}`];
 
   if (!part) {

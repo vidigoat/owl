@@ -29,7 +29,7 @@ const money = (n) => Number(n.toFixed(2));
  * Open a checkout. Returns what the person is about to agree to, in full, and a session id.
  * It does not charge anything — `confirm` does that, and only with the session id.
  */
-function beginCheckout({ model, code, causeId, ruledOut = [] }) {
+function beginCheckout({ model, code, causeId, ruledOut = [] } = {}) {
   const verdict = verify_diagnosis({ model, code, causeId, ruledOut });
   if (verdict.abstain) {
     return {
@@ -81,7 +81,7 @@ function beginCheckout({ model, code, causeId, ruledOut = [] }) {
  * was not read. The wallet handler is recorded because the caller has to know which credential
  * type was used.
  */
-function confirmCheckout({ sessionId, handler = 'amazon_pay_network_token' }) {
+function confirmCheckout({ sessionId, handler = 'amazon_pay_network_token' } = {}) {
   const session = sessions.get(sessionId);
   if (!session) return { ok: false, reason: 'No such checkout. Nothing was charged.' };
   if (session.state === 'complete') return { ok: false, reason: 'That order was already placed.', order: session.order };
@@ -101,7 +101,7 @@ function confirmCheckout({ sessionId, handler = 'amazon_pay_network_token' }) {
 }
 
 /** Nothing ordered, nothing owed. */
-function cancelCheckout({ sessionId }) {
+function cancelCheckout({ sessionId } = {}) {
   const session = sessions.get(sessionId);
   if (!session) return { ok: false, reason: 'No such checkout.' };
   if (session.state === 'complete') return { ok: false, reason: 'That order was already placed — cancel it in your orders.' };

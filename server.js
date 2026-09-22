@@ -49,7 +49,18 @@ const readJson = (req) =>
     });
     req.on('end', () => {
       try {
-        resolve(body ? JSON.parse(body) : {});
+        const parsed = body ? JSON.parse(body) : {};
+        /*
+         * Every route here expects an options object, and `JSON.parse` will happily hand back
+         * `null`, `[]`, `7` or `"hi"` — all valid JSON, none of them a request. Three routes
+         * answered a body of `null` with an internal JavaScript message, two of them as a 500:
+         * "Cannot read properties of null (reading 'model')". That is a crash leaking out of the
+         * process to a client that was merely wrong.
+         *
+         * Normalised once, here, rather than in nineteen tools — a tool's contract is an answer or
+         * a refusal, and every one of them now gets something it can refuse.
+         */
+        resolve(parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {});
       } catch (e) {
         reject(e);
       }

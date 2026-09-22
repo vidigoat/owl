@@ -452,6 +452,36 @@ function buildPdf(stream, compressed) {
     assert.match(scan.refused, /scan/i);
   });
 
+  await it('a request body that is valid JSON but is not a request cannot crash a route', async () => {
+    /*
+     * `JSON.parse` accepts `null`, `[]`, `7` and `"hi"`. Three routes answered a body of `null`
+     * with an internal JavaScript message — two of them as a 500 — including
+     * `Cannot read properties of null (reading 'model')`, which is a crash leaking out of the
+     * process to a client that was merely wrong.
+     *
+     * Worse: one malformed POST to `/api/remember` wrote a receipt with a non-string part, and
+     * every later call to `due()` threw over it. A single bad request permanently broke the
+     * household view for a household that had done nothing.
+     */
+    const routes = ['/api/diagnose', '/api/verify', '/api/checkout/begin', '/api/remember', '/api/confirm'];
+    for (const route of routes) {
+      for (const body of ['null', '[]', '7', '"hi"', '{"part":{}}', '{"model":[]}']) {
+        const res = await fetch(`${BASE}${route}`, {
+          method: 'POST', headers: { 'content-type': 'application/json' }, body,
+        });
+        assert.ok(res.status < 500, `${route} answered ${res.status} to a body of ${body}`);
+        const text = await res.text();
+        assert.doesNotMatch(
+          text,
+          /Cannot read propert|Cannot destructure|is not a function|undefined is not/,
+          `${route} leaked a JavaScript error for a body of ${body}`
+        );
+      }
+      // And the household view still answers afterwards, rather than having been poisoned.
+      assert.equal((await get('/api/household')).status, 200, `${route} broke /api/household`);
+    }
+  });
+
   await it('the hosted routes keep their own path', () => {
     const cfg = JSON.parse(fs.readFileSync(path.join(__dirname, 'vercel.json'), 'utf8'));
     for (const r of cfg.rewrites || []) {

@@ -17,7 +17,7 @@ const { lookup } = require('../../data/service-data');
 
 const SEPARATION = 0.15; // the top cause must lead the runner-up by this much
 
-function verify_diagnosis({ model, code, causeId, ruledOut = [] }) {
+function verify_diagnosis({ model, code, causeId, ruledOut = [] } = {}) {
   const found = lookup(model, code);
 
   if (!found.known) {

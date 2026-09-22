@@ -35,7 +35,7 @@ function normalise(space) {
  * Build the space for one fault code on one model.
  * The manual's own fault table supplies the ordering; that ordering becomes the prior.
  */
-function buildSpace({ model, code }) {
+function buildSpace({ model, code } = {}) {
   const found = lookup(model, code);
   if (!found.known) return { known: false, reason: found.reason, space: [] };
   if (found.causes.length === 0) {
@@ -64,7 +64,7 @@ function buildSpace({ model, code }) {
  * the return value rather than discarded silently — the interface shows them greying out, and that
  * moment is how a person understands what just happened.
  */
-function prune({ space, outcome }) {
+function prune({ space, outcome } = {}) {
   const keepIds = new Set(outcome.consistentWith);
   const survivors = space.filter((c) => keepIds.has(c.id));
   const eliminated = space.filter((c) => !keepIds.has(c.id));

@@ -37,7 +37,7 @@ const PACE = { free: 10, easy: 25, awkward: 45, heavy: 90 };
  * rephrasing instructions about dismantling an appliance, we are inventing a procedure, and the
  * whole argument of this project is that it does not do that.
  */
-function fromLearnedManual({ model, code, causeId }) {
+function fromLearnedManual({ model, code, causeId } = {}) {
   const found = lookup(model, code);
   if (!found.known) return null;
 
@@ -69,7 +69,7 @@ function fromLearnedManual({ model, code, causeId }) {
   };
 }
 
-function guide({ model, code, causeId }) {
+function guide({ model, code, causeId } = {}) {
   const key = `${model}:${code}:${causeId}`;
   const steps = STEPS[key];
 

@@ -43,7 +43,7 @@ function write(state) {
 }
 
 /** Record an appliance the household owns. */
-function remember({ model, brand, kind, nickname }) {
+function remember({ model, brand, kind, nickname } = {}) {
   const state = read();
   state.appliances[model] = {
     model,
@@ -61,8 +61,25 @@ function remember({ model, brand, kind, nickname }) {
  * This is the thing worth keeping — a list of appliances is a spreadsheet; a history of repairs is
  * what lets it say "we did this last March and it came back".
  */
-function receipt({ model, code, cause, action, part, cost, confirmed, at }) {
+function receipt({ model, code, cause, action, part, cost, confirmed, at } = {}) {
   const state = read();
+
+  /*
+   * What goes in has to be the shape of what comes out.
+   *
+   * A receipt is written by an HTTP route, which is fed by a client, which may send anything. One
+   * POST with a non-string `part` was enough to make `due()` throw for every subsequent call —
+   * `(r.part || '').toLowerCase is not a function` — so a single malformed request permanently
+   * broke the household view for a household that had done nothing wrong. This file persists, and
+   * anything that persists has to refuse bad input at the door rather than at every reader.
+   */
+  const text = (v) => (typeof v === 'string' ? v : v == null ? undefined : String(v));
+  model = text(model);
+  code = text(code);
+  cause = text(cause);
+  action = text(action);
+  part = text(part);
+  cost = typeof cost === 'number' && Number.isFinite(cost) ? cost : undefined;
 
   /*
    * When it happened, not when it was typed in.
@@ -104,7 +121,7 @@ function receipt({ model, code, cause, action, part, cost, confirmed, at }) {
 }
 
 /** What the house owns, and what it has been through. */
-function history({ model }) {
+function history({ model } = {}) {
   const state = read();
   return {
     appliance: state.appliances[model] || null,
@@ -208,7 +225,10 @@ function due({ today = new Date(), state = read() } = {}) {
   const out = [];
 
   state.receipts.forEach((r) => {
-    const window = Object.entries(DUE_AFTER).find(([name]) => (r.part || '').toLowerCase().includes(name));
+    // Defensive as well, because a state file written by an older build is not reachable by the
+    // guard above — and a reader that throws over one bad row loses every good one with it.
+    const part = typeof r?.part === 'string' ? r.part : '';
+    const window = Object.entries(DUE_AFTER).find(([name]) => part.toLowerCase().includes(name));
     if (!window) return;
     const days = Math.floor((today - new Date(r.at)) / 86400000);
     if (days >= window[1]) {

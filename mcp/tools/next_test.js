@@ -53,7 +53,7 @@ function score(space, test) {
  * would tell us anything. Both are real answers, and the caller must handle them: one means we are
  * done, the other means we are stuck and should refuse rather than guess.
  */
-function nextTest({ space, tests, performed = [] }) {
+function nextTest({ space, tests, performed = [] } = {}) {
   if (space.length <= 1) {
     return { test: null, reason: 'one cause left', done: true };
   }

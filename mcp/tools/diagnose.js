@@ -10,7 +10,7 @@
 
 const { lookup } = require('../../data/service-data');
 
-function diagnose({ model, code }) {
+function diagnose({ model, code } = {}) {
   const found = lookup(model, code);
 
   if (!found.known) {
