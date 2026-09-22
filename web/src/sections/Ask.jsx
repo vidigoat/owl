@@ -263,11 +263,21 @@ function Refused({ out }) {
       <h3>It will not guess</h3>
       <p>{out.reason}</p>
       {out.available?.length > 0 && (
-        <ul>
-          {out.available.map((a) => (
-            <li key={a}>{a}</li>
-          ))}
-        </ul>
+        <>
+          {/*
+            A dozen, then a count. Thirty-nine of them is a wall somebody scrolls past, and the
+            list is here to be READ — it is how a person recognises their own problem in the
+            manufacturer's words.
+          */}
+          <ul>
+            {out.available.slice(0, 12).map((a) => (
+              <li key={a}>{a}</li>
+            ))}
+          </ul>
+          {out.available.length > 12 && (
+            <p className="refusal__more">…and {out.available.length - 12} more it does cover</p>
+          )}
+        </>
       )}
     </div>
   );

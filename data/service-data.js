@@ -379,11 +379,29 @@ function lookupSymptom(model, said) {
       : [];
 
   if (!scored.length) {
+    /*
+     * What the manual DOES cover — minus the rows it could not read cleanly.
+     *
+     * A row cut off at a column collision comes out as "E:32-00 lights up alter-" or "E:01-00 to",
+     * and those are in the library on purpose: flagged `suspect`, kept so a reviewer's eye goes to
+     * them. They have no business in this list. It exists so somebody can scan it and recognise
+     * their own problem in the manufacturer's words, and a half-sentence cannot be recognised —
+     * it can only make a careful answer look careless.
+     */
+    const readable = list.filter((s) => {
+      const text = String(s.symptom || '').trim();
+      if (s.suspect) return false;
+      if (/[-–]$/.test(text)) return false;              // cut off mid-word: "…lights up alter-"
+      // A finished sentence, or long enough that it plainly is one. "E:01-00 to" is neither, and
+      // it is a row the columns collided on rather than a problem anybody can recognise.
+      return /[.!?]$/.test(text) || text.split(/\s+/).length >= 5;
+    });
+
     return {
       known: false,
       reason: `Nothing in ${model}'s manual matches that description. It lists ${list.length} ` +
         `problems and none of them is this one, which is not the same as nothing being wrong.`,
-      available: list.map((s) => s.symptom),
+      available: readable.map((s) => s.symptom),
     };
   }
 

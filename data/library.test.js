@@ -296,4 +296,37 @@ it('stemming is consistent, not correct English', () => {
   assert.equal(overlap('draining', 'drying'), 0, 'two different words were merged');
 });
 
+it('a refusal lists what the manual covers, minus the rows it could not read', () => {
+  /*
+   * The refusal exists so somebody can scan the list and recognise their own problem in the
+   * manufacturer's words. A row cut off at a column collision — "E:32-00 lights up alter-",
+   * "E:01-00 to" — cannot be recognised; it can only make a careful answer look careless. Those
+   * rows stay in the library, flagged, because a reviewer needs to see them. They do not belong
+   * in this list.
+   */
+  const lib = library([
+    machine({
+      model: 'TESTDW3',
+      symptoms: [
+        { id: 'a', symptom: 'Water is left in the appliance.', causes: [{ id: 'a-0', label: 'Blocked filter.', likelihood: 0.6, remedies: [], evidence: 'manual, page 1' }] },
+        { id: 'b', symptom: 'E:32-00 lights up alter-', causes: [{ id: 'b-0', label: 'Unknown.', likelihood: 0.5, remedies: [], evidence: 'manual, page 1' }] },
+        { id: 'c', symptom: 'E:01-00 to', causes: [{ id: 'c-0', label: 'Unknown.', likelihood: 0.5, remedies: [], evidence: 'manual, page 1' }] },
+        { id: 'd', symptom: 'Display flashes.', causes: [{ id: 'd-0', label: 'Software update.', likelihood: 0.5, remedies: [], evidence: 'manual, page 1' }] },
+      ],
+    }),
+  ]);
+
+  const r = lib.lookupSymptom('TESTDW3', 'there is a burning smell');
+  assert.equal(r.known, false);
+
+  assert.ok(r.available.includes('Water is left in the appliance.'));
+  // Two words, and a finished sentence. Short is not the same as unreadable.
+  assert.ok(r.available.includes('Display flashes.'), 'a real short symptom was thrown out');
+  assert.ok(!r.available.includes('E:32-00 lights up alter-'), 'a row cut off mid-word was offered');
+  assert.ok(!r.available.includes('E:01-00 to'), 'a row cut off mid-phrase was offered');
+
+  // And the count in the sentence is still the honest one: everything the manual lists.
+  assert.match(r.reason, /lists 4 problems/);
+});
+
 console.log(`\n${passed} passed`);

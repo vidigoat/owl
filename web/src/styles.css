@@ -740,3 +740,9 @@ footer {
   font-size: var(--t-small);
   color: var(--faint);
 }
+
+.refusal__more {
+  margin: 10px 0 0;
+  font: 400 var(--t-mono)/1.5 var(--mono);
+  color: var(--faint);
+}
