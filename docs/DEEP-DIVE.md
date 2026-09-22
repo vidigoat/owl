@@ -18,13 +18,13 @@ means for a product built around a code on a panel, is
 > if any two frames come out identical. What is not yet real is named plainly in
 > [What is real and what is simulated](#what-is-real-and-what-is-simulated).
 
-![Show it the machine: drop a photograph, or point the camera](docs/media/camera.png)
+![Show it the machine: drop a photograph, or point the camera](media/camera.png)
 
 You do not type a fault code into this. You show it the machine — a photograph, or the camera
 pointed at the panel — and whatever Bedrock reads is what it diagnoses, including when that is
 nothing at all.
 
-![The device mid-repair: one question, the causes still in play beneath it](docs/media/hero.png)
+![The device mid-repair: one question, the causes still in play beneath it](media/hero.png)
 
 ---
 
@@ -77,13 +77,13 @@ minutes — and the reason they don't is not that the repair is hard. It is that
 The three bold rows are the difference between this and a repair app. Everything else guesses once
 from a photo; this runs a procedure and can stop halfway through to say it doesn't know.
 
-![Repair steps, one at a time, paced to the work and readable at arm's length](docs/media/guide.png)
+![Repair steps, one at a time, paced to the work and readable at arm's length](media/guide.png)
 
 The guide screen shows one instruction at a time because your hands are inside the machine and your
 eyes are not on the screen. Each step carries how long it usually takes, so the device knows when to
 speak next instead of waiting to be asked.
 
-![The itemised part, with what the service call would have cost beside it](docs/media/checkout.png)
+![The itemised part, with what the service call would have cost beside it](media/checkout.png)
 
 And the part is only ever offered after the gate upheld the cause — with the $179 alternative next
 to it, because the comparison is the reason any of this is worth doing.
@@ -107,7 +107,7 @@ Two minutes, in this order:
 If you are driving it by voice instead, the utterances are: *"something's wrong with my
 dishwasher"* → *"what should I check?"* → *"it hums"* → *"is it the filter?"* → *"order it"*.
 
-![The whole loop: read the panel, narrow the causes, do the repair, refuse to claim it worked](docs/media/flow.gif)
+![The whole loop: read the panel, narrow the causes, do the repair, refuse to claim it worked](media/flow.gif)
 
 ---
 
@@ -147,7 +147,7 @@ is the entire differentiator. Three of the four machines here reach it. They now
 > I know this machine and I know what F21 means, but I have no verified causes for it yet. Show me
 > the fault-code page of the manual and I'll read it — that costs nothing.
 
-![NOT UPHELD — no part sold: the gate refusing to spend money on a guess](docs/media/refusal.png)
+![NOT UPHELD — no part sold: the gate refusing to spend money on a guess](media/refusal.png)
 
 The screen above is the product. A repair copilot that sells you a pump when it isn't sure is worse
 than no copilot, because you now have a $89 part and the original fault.
@@ -156,9 +156,9 @@ Below it is the other half: the hypothesis space collapsing because of something
 `next_test` picks each question by bits of uncertainty removed per unit of effort — which is why
 this asks three questions where a decision tree asks twenty.
 
-![NOT UPHELD — no part sold: the gate refusing to spend money on a guess](docs/media/refusal.png)
+![NOT UPHELD — no part sold: the gate refusing to spend money on a guess](media/refusal.png)
 
-![The hypothesis space collapsing: a cause struck out by something the owner did](docs/media/collapse.png)
+![The hypothesis space collapsing: a cause struck out by something the owner did](media/collapse.png)
 
 ---
 
@@ -174,7 +174,7 @@ this asks three questions where a decision tree asks twenty.
                                      guide ──► part ──► order ──► confirm ──► remember
 ```
 
-Full detail: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
+Full detail: [`docs/ARCHITECTURE.md`](ARCHITECTURE.md)
 
 ---
 
@@ -282,7 +282,7 @@ interpret.** The model is asked to copy characters, not to explain what a fault 
 remedy it thinks is likely — because everything downstream cites the manual, and a model-invented
 remedy would arrive wearing a citation to a line that does not exist.
 
-![An LG washer nothing in this project knows, learned from its manual at runtime](docs/media/learned.png)
+![An LG washer nothing in this project knows, learned from its manual at runtime](media/learned.png)
 
 That is an LG washer — `LG-WM3900HWA`, fault `OE`. No file in this project mentions it. The trace
 beside it is the whole trick: `manual.parse` recovers two fault codes, `learn` installs them, and
@@ -377,7 +377,7 @@ $ node -e "const{Budget}=require('./mcp/budget');console.log(new Budget().summar
 $0.0016 of $0.50 spent across 13 calls
 ```
 
-![The whole loop in one screen: a real Bedrock read, a machine learned from its manual, and a refusal to sell](docs/media/terminal.png)
+![The whole loop in one screen: a real Bedrock read, a machine learned from its manual, and a refusal to sell](media/terminal.png)
 
 `npm run demo` runs the complete procedure against an LG washing machine that nothing in this
 repository has ever heard of: it reads the manual, builds the hypothesis space, picks each check by
@@ -513,7 +513,7 @@ Same number of questions. **Less than half the work**, because it stopped asking
 parts in order to find out what is wrong. `npm run demo` used to ask *"Replace the drain pump if it
 does not turn — did that fix it?"* as a diagnostic step; it now asks *"Does it turn?"*
 
-That was the thing [decision 003](docs/decisions/003-replacement-is-not-a-test.md) said was wrong
+That was the thing [decision 003](decisions/003-replacement-is-not-a-test.md) said was wrong
 and could not previously be fixed for a machine learned at runtime.
 
 ---
@@ -611,7 +611,7 @@ node scripts/learn-manual.js manual.pdf --brand Bosch   # writes a candidate to 
 npm start                                               # http://localhost:8792/review.html
 ```
 
-![The review bench — the manual page on the left, what was parsed out of it on the right, each row quoting the sentence it came from](docs/media/bench.jpg)
+![The review bench — the manual page on the left, what was parsed out of it on the right, each row quoting the sentence it came from](media/bench.jpg)
 
 *Look at the fourth row. Its cause begins "system is heavily iced up" — mid-sentence, because the
 two columns collided part-way down that symptom and the beginning was lost. That is the parser
@@ -653,7 +653,7 @@ LEARNED    read by a machine this session and confirmed by nobody, never persist
 `lookup()` returns which of the three a fact came from. Merging them would erase the one distinction
 this library exists to maintain.
 
-![The library, with how each machine came to be known and what was rejected on the way](docs/media/library.jpg)
+![The library, with how each machine came to be known and what was rejected on the way](media/library.jpg)
 
 Rejections stay on the row. `SGE53C55UC` carries *up-appears-on-the-a-display rejected* and
 `SMS46KI01E` carries *E18 rejected* — the second of those is the misread `E:16`. A library that
@@ -666,11 +666,11 @@ true to change it. Written for whoever picks this up next, including an agent.
 
 | | | |
 |---|---|---|
-| [001](docs/decisions/001-refuse-rather-than-guess.md) | Only report what actually reproduced | load-bearing; do not soften |
-| [002](docs/decisions/002-pacing-belongs-to-the-tool.md) | The demo must refuse something real | |
-| [003](docs/decisions/003-replacement-is-not-a-test.md) | Replacing a part is not a diagnostic step | |
-| [004](docs/decisions/004-unknown-is-not-absent.md) | "I could not establish X" is not "X is absent" | the one that cost four bugs in an afternoon |
-| [005](docs/decisions/005-read-the-question-out-of-the-manual.md) | Read the question out of the manual, not just the remedy | found by measuring, not by looking |
+| [001](decisions/001-refuse-rather-than-guess.md) | Only report what actually reproduced | load-bearing; do not soften |
+| [002](decisions/002-pacing-belongs-to-the-tool.md) | The demo must refuse something real | |
+| [003](decisions/003-replacement-is-not-a-test.md) | Replacing a part is not a diagnostic step | |
+| [004](decisions/004-unknown-is-not-absent.md) | "I could not establish X" is not "X is absent" | the one that cost four bugs in an afternoon |
+| [005](decisions/005-read-the-question-out-of-the-manual.md) | Read the question out of the manual, not just the remedy | found by measuring, not by looking |
 
 ---
 
@@ -1033,7 +1033,7 @@ knows how to ask a question, and picking one would be a guess dressed as an answ
 test, because the first version *did* pick: it returned the "does not light up" row alone, and the
 entire difference was the word "light" against "lights".
 
-![Saying what the machine is doing, and getting the manual's own words back](docs/media/describe.jpg)
+![Saying what the machine is doing, and getting the manual's own words back](media/describe.jpg)
 
 **It is on the device**, not only in the tool surface — *Say what it is doing* opens its own screen,
 and you can type it or say it out loud. The trace panel shows the real `describe_problem` call and
@@ -1075,17 +1075,17 @@ manual is no good", and the two should not look the same.
 
 ## For reviewers
 
-[`docs/JUDGING.md`](docs/JUDGING.md) maps each criterion — tech implementation, design, potential
+[`docs/JUDGING.md`](JUDGING.md) maps each criterion — tech implementation, design, potential
 impact, quality of the idea — to the file or screen that answers it, covers the mini challenge, and
 marks what is still stubbed.
 
 The short version, if you have two minutes: `npm start`, open localhost:8792, press **Start the
 repair** and walk it through. Then press **Show it refuse a job** — that screen is the product.
 
-- Submission text: [`docs/SUBMISSION.md`](docs/SUBMISSION.md)
-- Recording script: [`docs/DEMO-SCRIPT.md`](docs/DEMO-SCRIPT.md)
-- Friction log: [`docs/FRICTION-LOG.md`](docs/FRICTION-LOG.md)
-- Product feedback: [`docs/PRODUCT-FEEDBACK.md`](docs/PRODUCT-FEEDBACK.md)
+- Submission text: [`docs/SUBMISSION.md`](SUBMISSION.md)
+- Recording script: [`docs/DEMO-SCRIPT.md`](DEMO-SCRIPT.md)
+- Friction log: [`docs/FRICTION-LOG.md`](FRICTION-LOG.md)
+- Product feedback: [`docs/PRODUCT-FEEDBACK.md`](PRODUCT-FEEDBACK.md)
 
 ---
 
@@ -1113,4 +1113,4 @@ second-set-of-hands/
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT — see [LICENSE](../LICENSE).
