@@ -19,11 +19,56 @@ Checklist against the stated requirements:
 | **AWS Builder mini**: AWS services with documented integrations | Bedrock Nova Lite — live, measured, `npm run preflight` |
 | **Open Source mini**: a *new additional* OSS project or public contribution | **[github.com/vidigoat/faultgraph](https://github.com/vidigoat/faultgraph)** — MIT, public, built in the window |
 | friction log — **up to 10% judging bonus** | `docs/FRICTION-LOG.md` |
-| a place to see it without installing anything | **<https://second-set-of-hands.vercel.app>** — ask a real manual a question and get the manufacturer's sentence and its page number, or a refusal naming what that manual does cover. The review bench is at `/review.html`. |
+| a place to see it without installing anything | **<https://second-set-of-hands.vercel.app>** — ask a real manual a question and get the manufacturer's sentence and its page number, or a refusal naming what that manual does cover. And at `/review.html`, **drop in a manual of your own** and watch it be read. |
 
 Note: the repo does **not** have to be public for this hackathon. Sharing it privately with
 `testing@devpost.com` and `@AmazonAppDev` satisfies the rule.
 
+
+
+## Read a manual on the URL, with nothing installed
+
+The capability this project exists for was, until this week, the one thing a visitor to the demo URL
+could not see. Reading a PDF shelled out to `pdftotext` — poppler, a binary that is on the machine
+this was written on and is not on a serverless host — so the hosted review bench was permanently
+empty and said "Nothing is waiting."
+
+`manual/pdf-read.js` reads the PDF format itself, with **no dependencies**: the cross-reference,
+object streams, fonts and their `ToUnicode` maps, the content stream, and the glyph positions that
+put a three-column fault table back into three columns. Node ships `zlib`, which is the only
+genuinely hard part.
+
+So the bench now has a drop target. Give it any manufacturer's PDF — any brand, nothing here is
+coded for yours — and the fault table comes back in a few hundred milliseconds with the page each
+cause is printed on. **It admits nothing**: a machine-read table is a candidate, and the review step
+is the part of this project worth copying.
+
+It is measured, not asserted. `npm run pdf:compare` runs the built-in reader and poppler over every
+manual on the machine and scores the only thing that decides anything — whether `readSymptoms`
+recovers the same rows:
+
+| | |
+|---|---|
+| page count | identical on all **1,881** pages of **30** manuals |
+| words | **98.4–100%** of poppler's, on every manual |
+| parsed rows | **87.5%** recovered word for word, plus 287 rows poppler did not produce |
+
+Five bugs on the way, every one of which returned text that looked perfectly fine: characters
+dropped where two glyphs claimed one grid cell; a column header that became
+`Causeandtroubleshooting` because a subset font declared a space three times wider than the one it
+drew; `I m p o r t a n t   s a f e t y` from an advance that ignored the text matrix; a line
+rendered backwards because the producer drew the right-hand column first; and columns that stopped
+agreeing between a header and its own rows. Each is a check in `manual/pdf-read.test.js` that fails
+when reverted.
+
+poppler still goes first where it exists, and **which reader answered travels with every result**.
+`server.test.js` runs the read twice — once as this machine, once with the binary reader switched
+off — because proving the hosted path on a laptop that has poppler proves the wrong thing.
+
+**What it still cannot do.** The host refuses a request body over about 4.5 MB before the function
+runs, so manuals bigger than that are refused by the page itself, with the size and the command that
+reads any size. The honest fix is to stop uploading at all — the reader needs one Node API the
+browser already has as `DecompressionStream` — and that is the next thing, not a thing that is done.
 
 ## Open Source mini — `faultgraph`
 
