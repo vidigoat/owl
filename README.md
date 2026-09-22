@@ -848,10 +848,10 @@ lower case — so those rows carry `suspect: true` and the bench puts an amber n
 what to check. Four rows across twelve manuals. The library cannot fix them and does not pretend to;
 it points at them, which is the difference between a question and a fact.
 
-Nineteen machines have been read — **233 symptoms, 519 causes**, every one citing its page —
+Nineteen machines have been read — **433 symptoms, 795 causes**, every one citing its page —
 across dishwashers, a dryer, refrigerators and two Siemens ovens: the same parser reading five
-kinds of appliance from two manufacturers. With the hand-written ones that is **22 machines in the library** —
-203 symptoms and 490 causes, and 26 rows rejected rather than admitted quietly.
+kinds of appliance from two manufacturers. With the hand-written ones that is **23 machines in the library** —
+406 symptoms and 774 causes, and 28 rows rejected rather than admitted quietly.
 
 ### Every quotation, re-read off the page it cites
 
@@ -862,8 +862,8 @@ Printed.
 It is the half of the review a machine can do exactly, and it is the half that does not scale for a
 person: nineteen machines at twenty-seven causes each is five hundred rows, and the fifth hundred
 does not get the attention the first one did. `scripts/admit-verified.js` then admits what verifies
-and refuses what does not, **by name**, recorded on the machine's own row. 477 of 496 causes were
-found on their pages; the 19 that were not are rejected and listed.
+and refuses what does not, **by name**, recorded on the machine's own row. 779 of 790 causes were
+found on their pages; the 11 that were not are rejected and listed.
 
 What it cannot tell you is the rest of the review, and the library says so rather than implying
 otherwise: a machine admitted this way is recorded as `reviewedBy: "script — every quotation re-read
@@ -882,8 +882,21 @@ looked complete. Runs now grow outward while the neighbouring page **reprints th
 which is the precise signal — a table crossing a page break introduces itself again, and a page
 that merely mentions the word "troubleshooting" does not.
 
-Measured across every manual on disk: **14 machines and 107 symptoms became 19 machines and 263
-symptoms.** Two and a half times the data, out of pages that were always there.
+Measured across every manual on disk: **14 machines and 107 symptoms became 19 machines and 463
+symptoms.** Four times the data, out of pages that were always there.
+
+**And then the count went up while the library got worse, which is the most dangerous shape a
+regression has.** `SGE53C55UC` prints an error-code table on pages 37–42 and its symptom table on
+43–48, and both are headed `Fault | Cause and troubleshooting`. Read as one joined block, the
+parser took the code rows as symptoms — *"E:20-60 lights up alternately."* — and its end-of-table
+rule then cut the real symptom table short. Asking the live page *"there is water left in the
+bottom at the end of the program"* stopped returning *"Water is left in the appliance at the end of
+the program"* and started returning a fault code instead.
+
+Each page of a run is parsed on its own now and the results merged. Every page gets its own column
+boundary — which genuinely differs between pages of one manual — its own end-of-table decision, and
+its own page number. The cost is a row that wraps across a page break, which comes out truncated
+and is flagged `suspect` rather than silently kept.
 
 **Every citation past the first page was wrong.** `readSymptoms` took one page number and stamped
 it on every row, so a table running 37 to 48 cited all of its causes to page 37. An owner following

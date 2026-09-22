@@ -109,7 +109,7 @@
           "remedies": [],
           "evidence": "Bosch manual, page 37: \"Not a fault. The cooling process is active. No action required. Note: Do not change the program during the cooling process. The cooling process takes up to 10 minutes.\"",
           "source": {
-            "line": 44,
+            "line": 3,
             "manual": "Bosch manual",
             "page": 37
           }
@@ -130,7 +130,7 @@
           ],
           "evidence": "Bosch manual, page 37: \"The basic appliance care program should be run.\"",
           "source": {
-            "line": 48,
+            "line": 7,
             "manual": "Bosch manual",
             "page": 37
           }
@@ -145,7 +145,7 @@
           ],
           "evidence": "Bosch manual, page 37: \"The lint screen is soiled.\"",
           "source": {
-            "line": 50,
+            "line": 9,
             "manual": "Bosch manual",
             "page": 37
           }
@@ -168,7 +168,7 @@
           ],
           "evidence": "Bosch manual, page 37: \"Software fault.\"",
           "source": {
-            "line": 52,
+            "line": 11,
             "manual": "Bosch manual",
             "page": 37
           }
@@ -187,7 +187,7 @@
           "remedies": [],
           "evidence": "Bosch manual, page 37: \"Various causes are possible.\"",
           "source": {
-            "line": 59,
+            "line": 18,
             "manual": "Bosch manual",
             "page": 37
           }
@@ -208,7 +208,7 @@
           ],
           "evidence": "Bosch manual, page 37: \"The lint screen is soiled.\"",
           "source": {
-            "line": 70,
+            "line": 29,
             "manual": "Bosch manual",
             "page": 37
           }
@@ -223,7 +223,7 @@
           ],
           "evidence": "Bosch manual, page 37: \"The ambient temperature is lower than 59 °F (15 °C) or higher than 86 °F (30 °C).\"",
           "source": {
-            "line": 72,
+            "line": 31,
             "manual": "Bosch manual",
             "page": 37
           }
@@ -238,7 +238,7 @@
           ],
           "evidence": "Bosch manual, page 37: \"The air circulation at the appliance's installation location is insufficient.\"",
           "source": {
-            "line": 76,
+            "line": 35,
             "manual": "Bosch manual",
             "page": 37
           }
@@ -253,7 +253,7 @@
           ],
           "evidence": "Bosch manual, page 37: \"Insufficient condensation for automatic self-cleaning when permanently drying small loads of laundry.\"",
           "source": {
-            "line": 79,
+            "line": 38,
             "manual": "Bosch manual",
             "page": 37
           }
@@ -272,7 +272,7 @@
           "remedies": [],
           "evidence": "Bosch manual, page 38: \"Not a fault. The compressor, compressor ventilation or condensation pump is active. No action required.\"",
           "source": {
-            "line": 96,
+            "line": 8,
             "manual": "Bosch manual",
             "page": 38
           }
@@ -293,7 +293,7 @@
           ],
           "evidence": "Bosch manual, page 38: \"The selected program is unsuitable for the type of fabric.\"",
           "source": {
-            "line": 123,
+            "line": 35,
             "manual": "Bosch manual",
             "page": 38
           }
@@ -309,56 +309,9 @@
           ],
           "evidence": "Bosch manual, page 38: \"The load is unsuitable.\"",
           "source": {
-            "line": 126,
+            "line": 38,
             "manual": "Bosch manual",
             "page": 38
-          }
-        },
-        {
-          "id": "creasing-2",
-          "label": "The laundry lies in the drum for too long after drying.",
-          "likelihood": 0.278,
-          "cost": null,
-          "remedies": [
-            "Remove the laundry from the drum as soon as the",
-            "drying program has finished.",
-            "Spread out the items of laundry to cool."
-          ],
-          "evidence": "Bosch manual, page 39: \"The laundry lies in the drum for too long after drying.\"",
-          "source": {
-            "line": 138,
-            "manual": "Bosch manual",
-            "page": 39
-          }
-        },
-        {
-          "id": "creasing-3",
-          "label": "Easy Care fabrics have been dried for too long.",
-          "likelihood": 0.217,
-          "cost": null,
-          "remedies": [
-            "Change or adjust the dryness level. Page 28"
-          ],
-          "evidence": "Bosch manual, page 39: \"Easy Care fabrics have been dried for too long.\"",
-          "source": {
-            "line": 142,
-            "manual": "Bosch manual",
-            "page": 39
-          }
-        },
-        {
-          "id": "creasing-4",
-          "label": "The crease-reduction function is not activated.",
-          "likelihood": 0.179,
-          "cost": null,
-          "remedies": [
-            "Activate the crease-reduction function. Page 21"
-          ],
-          "evidence": "Bosch manual, page 39: \"The crease-reduction function is not activated.\"",
-          "source": {
-            "line": 144,
-            "manual": "Bosch manual",
-            "page": 39
           }
         }
       ]
@@ -380,7 +333,7 @@
           ],
           "evidence": "Bosch manual, page 39: \"Operational fault\"",
           "source": {
-            "line": 155,
+            "line": 20,
             "manual": "Bosch manual",
             "page": 39
           }
@@ -396,7 +349,7 @@
           ],
           "evidence": "Bosch manual, page 39: \"Unplug the power plug or switch off the circuit breaker in the fuse box.\"",
           "source": {
-            "line": 160,
+            "line": 25,
             "manual": "Bosch manual",
             "page": 39
           }
@@ -409,7 +362,7 @@
           "remedies": [],
           "evidence": "Bosch manual, page 39: \"Please specify the exact error message when calling. If possible, document the fault with photos and videos.\"",
           "source": {
-            "line": 164,
+            "line": 29,
             "manual": "Bosch manual",
             "page": 39
           }
@@ -422,6 +375,6 @@
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-09-22T15:22:09.781Z",
-  "learnedAt": "2026-09-22T15:19:19.052Z"
+  "reviewedAt": "2026-09-22T15:27:14.569Z",
+  "learnedAt": "2026-09-22T15:26:54.063Z"
 }

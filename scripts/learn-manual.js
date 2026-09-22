@@ -124,9 +124,49 @@ async function learnOne(file, flags) {
      * ordinary typeface rather than the seven-segment display font that mangles codes.
      */
     report.steps.push('keyed on described symptoms, not codes — reading it as a symptom table');
-    const found = readSymptoms({ text: best.text, sourceName: `${brand} manual`, page: best.from });
+
+    /*
+     * ── One page at a time, then merged ─────────────────────────────────────
+     *
+     * The joined run was parsed as a single block, and that was wrong in two ways that only showed
+     * up once runs got longer.
+     *
+     * It merged different tables. `SGE53C55UC` prints an error-code table on pages 37–42 and its
+     * symptom table on 43–48, and both are headed `Fault | Cause and troubleshooting`. Read as one
+     * block the parser took the code rows as symptoms — "E:20-60 lights up alternately." — and its
+     * end-of-table rule then cut the real symptom table short. The count went UP and the library
+     * got worse, which is the most dangerous shape a regression can have.
+     *
+     * And one page's prose could truncate the next page's table, because the "two full-width lines
+     * end the table" rule ran once across the whole run rather than once per page.
+     *
+     * Per page, each gets its own column boundary — which genuinely differs between pages of the
+     * same manual — its own end-of-table decision, and its own page number for the citation. The
+     * cost is a row that wraps across a page break, which comes out truncated on the first page and
+     * is flagged `suspect` for a reviewer rather than silently kept.
+     */
+    const pageTexts = pdf.pages(file);
+    const merged = new Map();
+    let coverage = [];
+
+    for (let n = best.from; n <= best.to; n++) {
+      const one = readSymptoms({
+        text: pageTexts[n - 1] || '',
+        sourceName: `${brand} manual`,
+        page: n,
+      });
+      if (!one.found) continue;
+      coverage.push(`p${n}:${one.found}`);
+      // First reading wins: a symptom repeated on a later page is the table's own header block
+      // reappearing, not a second symptom.
+      for (const s of one.symptoms) if (!merged.has(s.id)) merged.set(s.id, s);
+    }
+
+    const found = { symptoms: [...merged.values()] };
     report.symptoms = found.symptoms;
-    report.steps.push(`symptom table: ${found.coverage}`);
+    report.steps.push(
+      `symptom table: ${found.symptoms.length} symptoms across ${coverage.length} pages (${coverage.join(' ')})`
+    );
 
     /*
      * Keep the page anyway.

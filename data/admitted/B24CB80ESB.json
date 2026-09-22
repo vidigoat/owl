@@ -106,7 +106,7 @@
           ],
           "evidence": "Bosch manual, page 27: \"Not a fault. Modern refrigeration machines ensure a more even temperature in the refrigerator compartment. The back wall of the refrigerator compartment is defrosted automatically at regular intervals.\"",
           "source": {
-            "line": 52,
+            "line": 3,
             "manual": "Bosch manual",
             "page": 27
           }
@@ -127,7 +127,7 @@
           ],
           "evidence": "Bosch manual, page 27: \"A sensor is defective.\"",
           "source": {
-            "line": 78,
+            "line": 29,
             "manual": "Bosch manual",
             "page": 27
           }
@@ -146,7 +146,7 @@
           "remedies": [],
           "evidence": "Bosch manual, page 28: \"The freezer compartment door was open for a long time. The evaporator (refrigeration unit) in the NoFrost\"",
           "source": {
-            "line": 100,
+            "line": 3,
             "manual": "Bosch manual",
             "page": 28
           }
@@ -170,7 +170,7 @@
           ],
           "evidence": "Bosch manual, page 28: \"system is heavily iced up. Requirement: Store the frozen food well insulated in a cool place.\"",
           "source": {
-            "line": 102,
+            "line": 5,
             "manual": "Bosch manual",
             "page": 28
           }
@@ -194,7 +194,7 @@
           ],
           "evidence": "Bosch manual, page 28: \"Various causes are possible.\"",
           "source": {
-            "line": 111,
+            "line": 14,
             "manual": "Bosch manual",
             "page": 28
           }
@@ -213,9 +213,303 @@
           "remedies": [],
           "evidence": "Bosch manual, page 28: \"The water contained in warm and humid air condenses on the colder surfaces of the appliance.\"",
           "source": {
-            "line": 119,
+            "line": 22,
             "manual": "Bosch manual",
             "page": 28
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-output-is-reduced",
+      "symptom": "Water output is reduced.",
+      "causes": [
+        {
+          "id": "water-output-is-reduced-0",
+          "label": "Low water pressure.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check the pressure of the water supply system or the external water filter system, e.g. reverse osmosis system."
+          ],
+          "evidence": "Bosch manual, page 29: \"Low water pressure.\"",
+          "source": {
+            "line": 3,
+            "manual": "Bosch manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "water-output-is-reduced-1",
+          "label": "Connect the appliance only to a water connection with sufficient water pressure. Page 9 The water filter is blocked.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Change the water filter."
+          ],
+          "evidence": "Bosch manual, page 29: \"Connect the appliance only to a water connection with sufficient water pressure. Page 9 The water filter is blocked.\"",
+          "source": {
+            "line": 7,
+            "manual": "Bosch manual",
+            "page": 29
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-is-dripping-from-the-water-dispens",
+      "symptom": "Water is dripping from the water dispenser.",
+      "causes": [
+        {
+          "id": "water-is-dripping-from-the-water-dispens-0",
+          "label": "Air is in the water system.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Keep dispensing water until it contains no more air."
+          ],
+          "evidence": "Bosch manual, page 29: \"Air is in the water system.\"",
+          "source": {
+            "line": 11,
+            "manual": "Bosch manual",
+            "page": 29
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-water-dispenser-is-not-functioning",
+      "symptom": "The water dispenser is not functioning.",
+      "causes": [
+        {
+          "id": "the-water-dispenser-is-not-functioning-0",
+          "label": "There is no water being supplied to the appliance.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Ensure that there is a water supply and that the shutoff valve on the water connection is open."
+          ],
+          "evidence": "Bosch manual, page 29: \"There is no water being supplied to the appliance.\"",
+          "source": {
+            "line": 13,
+            "manual": "Bosch manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "the-water-dispenser-is-not-functioning-1",
+          "label": "Contact an installer if necessary. Kink in the water hose.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Turn off the water supply and straighten the kink in water hose."
+          ],
+          "evidence": "Bosch manual, page 29: \"Contact an installer if necessary. Kink in the water hose.\"",
+          "source": {
+            "line": 16,
+            "manual": "Bosch manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "the-water-dispenser-is-not-functioning-2",
+          "label": "If necessary, replace the water hose.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [],
+          "evidence": "Bosch manual, page 29: \"If necessary, replace the water hose.\"",
+          "source": {
+            "line": 20,
+            "manual": "Bosch manual",
+            "page": 29
+          }
+        }
+      ]
+    },
+    {
+      "id": "ice-cube-production-is-low",
+      "symptom": "Ice cube production is low.",
+      "causes": [
+        {
+          "id": "ice-cube-production-is-low-0",
+          "label": "The appliance has only recently been connected.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wait approximately 4 hours until the first batch of ice cubes is ready."
+          ],
+          "evidence": "Bosch manual, page 29: \"The appliance has only recently been connected.\"",
+          "source": {
+            "line": 21,
+            "manual": "Bosch manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "ice-cube-production-is-low-1",
+          "label": "The freezer compartment has been opened frequently or for an extended period of time.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check ice cube production after a few hours."
+          ],
+          "evidence": "Bosch manual, page 29: \"The freezer compartment has been opened frequently or for an extended period of time.\"",
+          "source": {
+            "line": 24,
+            "manual": "Bosch manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "ice-cube-production-is-low-2",
+          "label": "Low water pressure.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Check the pressure of the water supply system or the external water filter system, e.g. reverse osmosis system."
+          ],
+          "evidence": "Bosch manual, page 29: \"Low water pressure.\"",
+          "source": {
+            "line": 27,
+            "manual": "Bosch manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "ice-cube-production-is-low-3",
+          "label": "Connect the appliance only to a water connection with sufficient water pressure. Page 9 The water filter is blocked.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Change the water filter."
+          ],
+          "evidence": "Bosch manual, page 29: \"Connect the appliance only to a water connection with sufficient water pressure. Page 9 The water filter is blocked.\"",
+          "source": {
+            "line": 31,
+            "manual": "Bosch manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "ice-cube-production-is-low-4",
+          "label": "Food or objects are blocking the fill level sensor for the ice maker.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Remove all food and objects from the ice storage container."
+          ],
+          "evidence": "Bosch manual, page 29: \"Food or objects are blocking the fill level sensor for the ice maker.\"",
+          "source": {
+            "line": 35,
+            "manual": "Bosch manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "ice-cube-production-is-low-5",
+          "label": "Fault in the ice maker.",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "Switch off the appliance. Page 15",
+            "Disconnect the appliance from the power supply. Unplug the power plug or switch off the circuit breaker in the fuse box.",
+            "Reconnect the appliance after 5 minutes."
+          ],
+          "evidence": "Bosch manual, page 29: \"Fault in the ice maker.\"",
+          "source": {
+            "line": 39,
+            "manual": "Bosch manual",
+            "page": 29
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-ice-maker-is-not-functioning",
+      "symptom": "The ice maker is not functioning.",
+      "causes": [
+        {
+          "id": "the-ice-maker-is-not-functioning-0",
+          "label": "Ice cube production is switched off.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Switch on ice cube production. Page 22"
+          ],
+          "evidence": "Bosch manual, page 30: \"Ice cube production is switched off.\"",
+          "source": {
+            "line": 6,
+            "manual": "Bosch manual",
+            "page": 30
+          }
+        },
+        {
+          "id": "the-ice-maker-is-not-functioning-1",
+          "label": "There is no water being supplied to the appliance.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Ensure that there is a water supply and that the shutoff valve on the water connection is open."
+          ],
+          "evidence": "Bosch manual, page 30: \"There is no water being supplied to the appliance.\"",
+          "source": {
+            "line": 8,
+            "manual": "Bosch manual",
+            "page": 30
+          }
+        },
+        {
+          "id": "the-ice-maker-is-not-functioning-2",
+          "label": "Contact an installer if necessary. Kink in the water hose.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Turn off the water supply and straighten the kink in water hose."
+          ],
+          "evidence": "Bosch manual, page 30: \"Contact an installer if necessary. Kink in the water hose.\"",
+          "source": {
+            "line": 11,
+            "manual": "Bosch manual",
+            "page": 30
+          }
+        },
+        {
+          "id": "the-ice-maker-is-not-functioning-3",
+          "label": "If necessary, replace the water hose. Fault in the ice maker.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Switch off the appliance. Page 15",
+            "Disconnect the appliance from the power supply. Unplug the power plug or switch off the circuit breaker in the fuse box.",
+            "Reconnect the appliance after 5 minutes.",
+            "Switch on the appliance. Page 15",
+            "If the fault persists, call customer service.",
+            "Page 32"
+          ],
+          "evidence": "Bosch manual, page 30: \"If necessary, replace the water hose. Fault in the ice maker.\"",
+          "source": {
+            "line": 15,
+            "manual": "Bosch manual",
+            "page": 30
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-appliance-hums",
+      "symptom": "The appliance hums,",
+      "causes": [
+        {
+          "id": "the-appliance-hums-0",
+          "label": "Not a fault. A motor is running, e.g. refrigerating unit,",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [],
+          "evidence": "Bosch manual, page 30: \"Not a fault. A motor is running, e.g. refrigerating unit,\"",
+          "source": {
+            "line": 25,
+            "manual": "Bosch manual",
+            "page": 30
           }
         }
       ]
@@ -226,6 +520,6 @@
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-09-22T15:22:07.176Z",
-  "learnedAt": "2026-09-22T15:19:10.495Z"
+  "reviewedAt": "2026-09-22T15:27:12.035Z",
+  "learnedAt": "2026-09-22T15:26:43.698Z"
 }

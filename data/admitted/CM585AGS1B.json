@@ -1,0 +1,183 @@
+{
+  "model": "CM585AGS1B",
+  "brand": "Siemens",
+  "kind": "Oven",
+  "source": "CM585AGS1B.pdf",
+  "pages": "18–21",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "the-appliance-is-not-working",
+      "symptom": "The appliance is not working.",
+      "causes": [
+        {
+          "id": "the-appliance-is-not-working-0",
+          "label": "The mains plug of the power cord is not plugged in.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Connect the appliance to the power supply."
+          ],
+          "evidence": "Bosch manual, page 20: \"The mains plug of the power cord is not plugged in.\"",
+          "source": {
+            "line": 31,
+            "manual": "Bosch manual",
+            "page": 20
+          }
+        },
+        {
+          "id": "the-appliance-is-not-working-1",
+          "label": "The circuit breaker in the fuse box has tripped.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the circuit breaker in the fuse box."
+          ],
+          "evidence": "Bosch manual, page 20: \"The circuit breaker in the fuse box has tripped.\"",
+          "source": {
+            "line": 33,
+            "manual": "Bosch manual",
+            "page": 20
+          }
+        },
+        {
+          "id": "the-appliance-is-not-working-2",
+          "label": "There has been a power cut.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Check whether the lighting in your room or other appliances are working."
+          ],
+          "evidence": "Bosch manual, page 20: \"There has been a power cut.\"",
+          "source": {
+            "line": 35,
+            "manual": "Bosch manual",
+            "page": 20
+          }
+        },
+        {
+          "id": "the-appliance-is-not-working-3",
+          "label": "Malfunction",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Switch off the fuse in the fuse box.",
+            "Switch the fuse back on after approx. 10 seconds.",
+            "If the fault was a one-off, the message disappears.",
+            "If the message appears again, call the after-sales service. Please specify the",
+            "exact error message when calling."
+          ],
+          "evidence": "Bosch manual, page 20: \"Malfunction\"",
+          "source": {
+            "line": 37,
+            "manual": "Bosch manual",
+            "page": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "appliance-is-not-heating-colon-is-flashi",
+      "symptom": "Appliance is not heating, colon is flashing in the display.",
+      "causes": [
+        {
+          "id": "appliance-is-not-heating-colon-is-flashi-0",
+          "label": "Demo mode is activated.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Briefly disconnect the appliance from the power supply by switching the circuit",
+            "breaker in the fuse box off and then on again.",
+            "Deactivate demo mode within 5 minutes by changing the basic setting        to ."
+          ],
+          "evidence": "Bosch manual, page 20: \"Demo mode is activated.\"",
+          "source": {
+            "line": 44,
+            "manual": "Bosch manual",
+            "page": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-takes-longer-than-usual-to-heat-up",
+      "symptom": "Food takes longer than usual to heat up.",
+      "causes": [
+        {
+          "id": "food-takes-longer-than-usual-to-heat-up-0",
+          "label": "The microwave power setting was too low.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Select a higher microwave power setting."
+          ],
+          "evidence": "Bosch manual, page 20: \"The microwave power setting was too low.\"",
+          "source": {
+            "line": 55,
+            "manual": "Bosch manual",
+            "page": 20
+          }
+        },
+        {
+          "id": "food-takes-longer-than-usual-to-heat-up-1",
+          "label": "You have placed a larger amount of food than normal in the appliance.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Set a longer cooking time."
+          ],
+          "evidence": "Bosch manual, page 20: \"You have placed a larger amount of food than normal in the appliance.\"",
+          "source": {
+            "line": 57,
+            "manual": "Bosch manual",
+            "page": 20
+          }
+        },
+        {
+          "id": "food-takes-longer-than-usual-to-heat-up-2",
+          "label": "Double the amount needs double the cooking time. The food was colder than usual.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Stir or turn the food during cooking."
+          ],
+          "evidence": "Bosch manual, page 20: \"Double the amount needs double the cooking time. The food was colder than usual.\"",
+          "source": {
+            "line": 59,
+            "manual": "Bosch manual",
+            "page": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "microwave-not-working",
+      "symptom": "Microwave not working.",
+      "causes": [
+        {
+          "id": "microwave-not-working-0",
+          "label": "The door was not fully closed.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check whether food residue or debris is trapped in the door."
+          ],
+          "evidence": "Bosch manual, page 20: \"The door was not fully closed.\"",
+          "source": {
+            "line": 62,
+            "manual": "Bosch manual",
+            "page": 20
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "the-appliance-is-not-in-operation-a-cook"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-09-22T15:27:12.357Z",
+  "learnedAt": "2026-09-22T15:26:45.441Z"
+}

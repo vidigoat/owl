@@ -19,11 +19,11 @@
           "remedies": [
             "Check whether the lighting in your room or other appliances are working."
           ],
-          "evidence": "Bosch manual, page 5: \"There has been a power cut.\"",
+          "evidence": "Bosch manual, page 6: \"There has been a power cut.\"",
           "source": {
-            "line": 148,
+            "line": 66,
             "manual": "Bosch manual",
-            "page": 5
+            "page": 6
           }
         },
         {
@@ -34,24 +34,9 @@
           "remedies": [
             "Switch the appliance on."
           ],
-          "evidence": "Bosch manual, page 5: \"The appliance is switched off.\"",
+          "evidence": "Bosch manual, page 6: \"The appliance is switched off.\"",
           "source": {
-            "line": 151,
-            "manual": "Bosch manual",
-            "page": 5
-          }
-        },
-        {
-          "id": "the-cookware-or-food-is-not-heating-up-2",
-          "label": "The warming drawer is not completely closed.",
-          "likelihood": 0.278,
-          "cost": null,
-          "remedies": [
-            "Close the warming drawer."
-          ],
-          "evidence": "Bosch manual, page 6: \"The warming drawer is not completely closed.\"",
-          "source": {
-            "line": 163,
+            "line": 69,
             "manual": "Bosch manual",
             "page": 6
           }
@@ -70,11 +55,11 @@
           "remedies": [
             "Check the circuit breaker in the fuse box."
           ],
-          "evidence": "Bosch manual, page 6: \"The circuit breaker is faulty.\"",
+          "evidence": "Bosch manual, page 7: \"The circuit breaker is faulty.\"",
           "source": {
-            "line": 166,
+            "line": 7,
             "manual": "Bosch manual",
-            "page": 6
+            "page": 7
           }
         }
       ]
@@ -91,11 +76,11 @@
           "remedies": [
             "Heat the cookware or the food for a longer period of time."
           ],
-          "evidence": "Bosch manual, page 6: \"The cookware or food has not been heated for long enough.\"",
+          "evidence": "Bosch manual, page 7: \"The cookware or food has not been heated for long enough.\"",
           "source": {
-            "line": 168,
+            "line": 9,
             "manual": "Bosch manual",
-            "page": 6
+            "page": 7
           }
         },
         {
@@ -106,11 +91,11 @@
           "remedies": [
             "Close the warming drawer."
           ],
-          "evidence": "Bosch manual, page 6: \"The warming drawer is not completely closed.\"",
+          "evidence": "Bosch manual, page 7: \"The warming drawer is not completely closed.\"",
           "source": {
-            "line": 171,
+            "line": 12,
             "manual": "Bosch manual",
-            "page": 6
+            "page": 7
           }
         },
         {
@@ -121,11 +106,11 @@
           "remedies": [
             "Close the warming drawer."
           ],
-          "evidence": "Bosch manual, page 6: \"The warming drawer was open for a long time.\"",
+          "evidence": "Bosch manual, page 7: \"The warming drawer was open for a long time.\"",
           "source": {
-            "line": 173,
+            "line": 14,
             "manual": "Bosch manual",
-            "page": 6
+            "page": 7
           }
         },
         {
@@ -136,11 +121,11 @@
           "remedies": [
             "Preheat the warming drawer sufficiently."
           ],
-          "evidence": "Bosch manual, page 6: \"The warming drawer was not adequately preheated.\"",
+          "evidence": "Bosch manual, page 7: \"The warming drawer was not adequately preheated.\"",
           "source": {
-            "line": 175,
+            "line": 16,
             "manual": "Bosch manual",
-            "page": 6
+            "page": 7
           }
         },
         {
@@ -151,11 +136,11 @@
           "remedies": [
             "Remove tall tableware from the ventilation opening."
           ],
-          "evidence": "Bosch manual, page 6: \"The ventilation opening has been blocked by tableware.\"",
+          "evidence": "Bosch manual, page 7: \"The ventilation opening has been blocked by tableware.\"",
           "source": {
-            "line": 177,
+            "line": 18,
             "manual": "Bosch manual",
-            "page": 6
+            "page": 7
           }
         }
       ]
@@ -172,11 +157,11 @@
           "remedies": [
             "Call → \"Customer Service\", Page 9."
           ],
-          "evidence": "Bosch manual, page 6: \"The operation indicator light is defective.\"",
+          "evidence": "Bosch manual, page 7: \"The operation indicator light is defective.\"",
           "source": {
-            "line": 179,
+            "line": 20,
             "manual": "Bosch manual",
-            "page": 6
+            "page": 7
           }
         }
       ]
@@ -194,11 +179,11 @@
             "Pull out the mains plug.",
             "Call → \"Customer Service\", Page 9."
           ],
-          "evidence": "Bosch manual, page 6: \"The circuit breaker is faulty.\"",
+          "evidence": "Bosch manual, page 7: \"The circuit breaker is faulty.\"",
           "source": {
-            "line": 182,
+            "line": 23,
             "manual": "Bosch manual",
-            "page": 6
+            "page": 7
           }
         }
       ]
@@ -216,11 +201,11 @@
           "remedies": [
             "appliance."
           ],
-          "evidence": "Bosch manual, page 6: \"for various dishes as well as the best accessories and cookware. We have\"",
+          "evidence": "Bosch manual, page 7: \"for various dishes as well as the best accessories and cookware. We have\"",
           "source": {
-            "line": 193,
+            "line": 34,
             "manual": "Bosch manual",
-            "page": 6
+            "page": 7
           }
         }
       ]
@@ -229,6 +214,6 @@
   "rejected": [],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-09-22T15:22:07.343Z",
-  "learnedAt": "2026-09-22T15:19:11.148Z"
+  "reviewedAt": "2026-09-22T15:27:12.200Z",
+  "learnedAt": "2026-09-22T15:26:44.470Z"
 }

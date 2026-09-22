@@ -52,40 +52,6 @@
             "manual": "Bosch manual",
             "page": 23
           }
-        },
-        {
-          "id": "the-refrigeration-unit-is-switching-on-m-1",
-          "label": "External ventilation openings are covered up.",
-          "likelihood": 0.385,
-          "cost": null,
-          "remedies": [
-            "Remove any obstructions from in front of the external ventilation openings."
-          ],
-          "evidence": "Bosch manual, page 24: \"External ventilation openings are covered up.\"",
-          "source": {
-            "line": 46,
-            "manual": "Bosch manual",
-            "page": 24
-          }
-        },
-        {
-          "id": "the-refrigeration-unit-is-switching-on-m-2",
-          "label": "Not a fault. Modern refrigeration machines switch on more frequently and have different power levels to cool more efficiently.",
-          "likelihood": 0.278,
-          "cost": null,
-          "remedies": [
-            "Remove any obstructions from in front of the external ventilation openings.",
-            "Install the appliance as far away as possible from heating elements, cookers and other heat sources.",
-            "Avoid prolonged exposure of the appliance to direct sunlight.",
-            "Only open the appliance door as briefly as necessary.",
-            "Allow hot food and drinks to cool down first before storing in the appliance."
-          ],
-          "evidence": "Bosch manual, page 24: \"Not a fault. Modern refrigeration machines switch on more frequently and have different power levels to cool more efficiently.\"",
-          "source": {
-            "line": 49,
-            "manual": "Bosch manual",
-            "page": 24
-          }
         }
       ]
     },
@@ -101,7 +67,7 @@
           "remedies": [],
           "evidence": "Bosch manual, page 24: \"Not a fault. Modern refrigeration machines ensure a more even temperature in the refrigerator compartment. The back wall of the refrigerator compartment is defrosted automatically at regular intervals.\"",
           "source": {
-            "line": 66,
+            "line": 23,
             "manual": "Bosch manual",
             "page": 24
           }
@@ -123,7 +89,7 @@
           ],
           "evidence": "Bosch manual, page 25: \"Various causes are possible.\"",
           "source": {
-            "line": 96,
+            "line": 3,
             "manual": "Bosch manual",
             "page": 25
           }
@@ -138,7 +104,7 @@
           ],
           "evidence": "Bosch manual, page 25: \"The appliance door is open.\"",
           "source": {
-            "line": 99,
+            "line": 6,
             "manual": "Bosch manual",
             "page": 25
           }
@@ -159,7 +125,7 @@
           ],
           "evidence": "Bosch manual, page 25: \"A sensor is defective.\"",
           "source": {
-            "line": 101,
+            "line": 8,
             "manual": "Bosch manual",
             "page": 25
           }
@@ -181,7 +147,7 @@
           ],
           "evidence": "Bosch manual, page 25: \"Various causes are possible.\"",
           "source": {
-            "line": 104,
+            "line": 11,
             "manual": "Bosch manual",
             "page": 25
           }
@@ -196,7 +162,7 @@
           ],
           "evidence": "Bosch manual, page 25: \"The freezer compartment door is open.\"",
           "source": {
-            "line": 107,
+            "line": 14,
             "manual": "Bosch manual",
             "page": 25
           }
@@ -211,7 +177,7 @@
           ],
           "evidence": "Bosch manual, page 25: \"External ventilation openings are covered up.\"",
           "source": {
-            "line": 109,
+            "line": 16,
             "manual": "Bosch manual",
             "page": 25
           }
@@ -226,7 +192,7 @@
           ],
           "evidence": "Bosch manual, page 25: \"Large quantities of fresh food have been placed inside.\"",
           "source": {
-            "line": 112,
+            "line": 19,
             "manual": "Bosch manual",
             "page": 25
           }
@@ -250,7 +216,7 @@
           ],
           "evidence": "Bosch manual, page 25: \"system is heavily iced up. Requirement: Store the frozen food well insulated in a cool place.\"",
           "source": {
-            "line": 116,
+            "line": 23,
             "manual": "Bosch manual",
             "page": 25
           }
@@ -274,7 +240,7 @@
           ],
           "evidence": "Bosch manual, page 25: \"Various causes are possible.\"",
           "source": {
-            "line": 125,
+            "line": 32,
             "manual": "Bosch manual",
             "page": 25
           }
@@ -296,30 +262,9 @@
           ],
           "evidence": "Bosch manual, page 25: \"The water contained in warm and humid air condenses on the colder surfaces of the appliance.\"",
           "source": {
-            "line": 133,
+            "line": 40,
             "manual": "Bosch manual",
             "page": 25
-          }
-        }
-      ]
-    },
-    {
-      "id": "condensation-accumulates-on-the-surface-",
-      "symptom": "Condensation accumulates on the surface of the appliance and on the shelves inside.",
-      "causes": [
-        {
-          "id": "condensation-accumulates-on-the-surface--0",
-          "label": null,
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "Ensure that the appliance is always closed properly."
-          ],
-          "evidence": "Bosch manual, page 26: \"Ensure that the appliance is always closed properly.\"",
-          "source": {
-            "line": 144,
-            "manual": "Bosch manual",
-            "page": 26
           }
         }
       ]
@@ -340,7 +285,7 @@
           ],
           "evidence": "Bosch manual, page 26: \"Depending on the food and quantity stored, condensation may form in the fruit and vegetable container.\"",
           "source": {
-            "line": 149,
+            "line": 8,
             "manual": "Bosch manual",
             "page": 26
           }
@@ -359,7 +304,7 @@
           "remedies": [],
           "evidence": "Bosch manual, page 26: \"Not an issue. A motor is running, e.g. refrigerating unit, fan. Refrigerant is flowing through the pipes. The motor, switches or solenoid valves are switching on or off. Automatic defrosting is running. No action required.\"",
           "source": {
-            "line": 158,
+            "line": 17,
             "manual": "Bosch manual",
             "page": 26
           }
@@ -380,7 +325,7 @@
           ],
           "evidence": "Bosch manual, page 26: \"The appliance is not level.\"",
           "source": {
-            "line": 163,
+            "line": 22,
             "manual": "Bosch manual",
             "page": 26
           }
@@ -395,7 +340,7 @@
           ],
           "evidence": "Bosch manual, page 26: \"The appliance is not free-standing.\"",
           "source": {
-            "line": 166,
+            "line": 25,
             "manual": "Bosch manual",
             "page": 26
           }
@@ -410,7 +355,7 @@
           ],
           "evidence": "Bosch manual, page 26: \"Fittings wobble or stick.\"",
           "source": {
-            "line": 168,
+            "line": 27,
             "manual": "Bosch manual",
             "page": 26
           }
@@ -425,7 +370,7 @@
           ],
           "evidence": "Bosch manual, page 26: \"Bottles or containers are touching.\"",
           "source": {
-            "line": 171,
+            "line": 30,
             "manual": "Bosch manual",
             "page": 26
           }
@@ -438,7 +383,7 @@
           "remedies": [],
           "evidence": "Bosch manual, page 26: \"Super freezing is switched on. No action required.\"",
           "source": {
-            "line": 174,
+            "line": 33,
             "manual": "Bosch manual",
             "page": 26
           }
@@ -449,6 +394,6 @@
   "rejected": [],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-09-22T15:22:07.043Z",
-  "learnedAt": "2026-09-22T15:19:10.185Z"
+  "reviewedAt": "2026-09-22T15:27:11.902Z",
+  "learnedAt": "2026-09-22T15:26:43.277Z"
 }

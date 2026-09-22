@@ -19,11 +19,11 @@
           "remedies": [
             "Check the circuit breaker in the fuse box."
           ],
-          "evidence": "Bosch manual, page 12: \"The circuit breaker in the fuse box has tripped.\"",
+          "evidence": "Bosch manual, page 13: \"The circuit breaker in the fuse box has tripped.\"",
           "source": {
-            "line": 120,
+            "line": 53,
             "manual": "Bosch manual",
-            "page": 12
+            "page": 13
           }
         },
         {
@@ -36,11 +36,11 @@
             "Open the appliance. Following a power cut, the touch fields light up in ascending order from left to right. The display goes out after approx. 30 seconds and the appliance is ready for operation.",
             "Start the required operating mode."
           ],
-          "evidence": "Bosch manual, page 12: \"There has been a power cut.\"",
+          "evidence": "Bosch manual, page 13: \"There has been a power cut.\"",
           "source": {
-            "line": 122,
+            "line": 55,
             "manual": "Bosch manual",
-            "page": 12
+            "page": 13
           }
         }
       ]
@@ -57,11 +57,11 @@
           "remedies": [
             "Call Customer Service Page 15."
           ],
-          "evidence": "Bosch manual, page 12: \"The operation indicator is defective.\"",
+          "evidence": "Bosch manual, page 13: \"The operation indicator is defective.\"",
           "source": {
-            "line": 130,
+            "line": 63,
             "manual": "Bosch manual",
-            "page": 12
+            "page": 13
           }
         }
       ]
@@ -78,11 +78,11 @@
           "remedies": [
             "Wait until the appliance has finished heating up."
           ],
-          "evidence": "Bosch manual, page 13: \"The appliance heats up.\"",
+          "evidence": "Bosch manual, page 14: \"The appliance heats up.\"",
           "source": {
-            "line": 142,
+            "line": 4,
             "manual": "Bosch manual",
-            "page": 13
+            "page": 14
           }
         }
       ]
@@ -99,11 +99,11 @@
           "remedies": [
             "Check whether the lighting in your room or other appliances are working."
           ],
-          "evidence": "Bosch manual, page 13: \"There has been a power cut.\"",
+          "evidence": "Bosch manual, page 14: \"There has been a power cut.\"",
           "source": {
-            "line": 159,
+            "line": 21,
             "manual": "Bosch manual",
-            "page": 13
+            "page": 14
           }
         },
         {
@@ -114,11 +114,11 @@
           "remedies": [
             "Heat the cookware or the food for a longer period of time."
           ],
-          "evidence": "Bosch manual, page 13: \"The cookware or food has not been heated for long enough.\"",
+          "evidence": "Bosch manual, page 14: \"The cookware or food has not been heated for long enough.\"",
           "source": {
-            "line": 161,
+            "line": 23,
             "manual": "Bosch manual",
-            "page": 13
+            "page": 14
           }
         },
         {
@@ -129,11 +129,11 @@
           "remedies": [
             "Close the appliance."
           ],
-          "evidence": "Bosch manual, page 13: \"The appliance is not completely closed.\"",
+          "evidence": "Bosch manual, page 14: \"The appliance is not completely closed.\"",
           "source": {
-            "line": 163,
+            "line": 25,
             "manual": "Bosch manual",
-            "page": 13
+            "page": 14
           }
         }
       ]
@@ -153,11 +153,11 @@
             "covered.",
             "Check whether an oven integrated above is in pyrolytic self-cleaning mode."
           ],
-          "evidence": "Bosch manual, page 13: \"The appliance has overheated.\"",
+          "evidence": "Bosch manual, page 14: \"The appliance has overheated.\"",
           "source": {
-            "line": 165,
+            "line": 27,
             "manual": "Bosch manual",
-            "page": 13
+            "page": 14
           }
         }
       ]
@@ -174,11 +174,11 @@
           "remedies": [
             "Switch the appliance back on."
           ],
-          "evidence": "Bosch manual, page 13: \"The safety shut-off has switched the appliance off.\"",
+          "evidence": "Bosch manual, page 14: \"The safety shut-off has switched the appliance off.\"",
           "source": {
-            "line": 182,
+            "line": 44,
             "manual": "Bosch manual",
-            "page": 13
+            "page": 14
           }
         }
       ]
@@ -195,11 +195,11 @@
           "remedies": [
             "Deactivate demo mode. Page 14"
           ],
-          "evidence": "Bosch manual, page 13: \"Demo mode is activated.\"",
+          "evidence": "Bosch manual, page 14: \"Demo mode is activated.\"",
           "source": {
-            "line": 184,
+            "line": 46,
             "manual": "Bosch manual",
-            "page": 13
+            "page": 14
           }
         }
       ]
@@ -216,11 +216,11 @@
           "remedies": [
             "Adjust the front panel. Page 21"
           ],
-          "evidence": "Bosch manual, page 13: \"The front panel was not aligned during installation.\"",
+          "evidence": "Bosch manual, page 14: \"The front panel was not aligned during installation.\"",
           "source": {
-            "line": 192,
+            "line": 54,
             "manual": "Bosch manual",
-            "page": 13
+            "page": 14
           }
         }
       ]
@@ -229,6 +229,6 @@
   "rejected": [],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-09-22T15:22:07.412Z",
-  "learnedAt": "2026-09-22T15:19:11.576Z"
+  "reviewedAt": "2026-09-22T15:27:12.265Z",
+  "learnedAt": "2026-09-22T15:26:44.939Z"
 }

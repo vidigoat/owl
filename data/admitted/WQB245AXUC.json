@@ -223,7 +223,7 @@
           ],
           "evidence": "Bosch manual, page 39: \"The control panel lock is activated.\"",
           "source": {
-            "line": 54,
+            "line": 7,
             "manual": "Bosch manual",
             "page": 39
           }
@@ -238,7 +238,7 @@
           ],
           "evidence": "Bosch manual, page 39: \"Finish in is activated.\"",
           "source": {
-            "line": 56,
+            "line": 9,
             "manual": "Bosch manual",
             "page": 39
           }
@@ -257,7 +257,7 @@
           "remedies": [],
           "evidence": "Bosch manual, page 39: \"A low ambient temperature extends the duration of the crease-removal function. No action required.\"",
           "source": {
-            "line": 81,
+            "line": 34,
             "manual": "Bosch manual",
             "page": 39
           }
@@ -279,118 +279,9 @@
           ],
           "evidence": "Bosch manual, page 39: \"The selected program is unsuitable for the type of fabric.\"",
           "source": {
-            "line": 87,
+            "line": 40,
             "manual": "Bosch manual",
             "page": 39
-          }
-        },
-        {
-          "id": "laundry-is-too-damp-1",
-          "label": "The load is too large.",
-          "likelihood": 0.385,
-          "cost": null,
-          "remedies": [
-            "Observe the program's maximum load capacity.",
-            "Page 22"
-          ],
-          "evidence": "Bosch manual, page 40: \"The load is too large.\"",
-          "source": {
-            "line": 97,
-            "manual": "Bosch manual",
-            "page": 40
-          }
-        },
-        {
-          "id": "laundry-is-too-damp-2",
-          "label": "After the end of the program, warm laundry feels damper than it actually is.",
-          "likelihood": 0.278,
-          "cost": null,
-          "remedies": [
-            "Remove the laundry from the drum as soon as the",
-            "drying program has finished.",
-            "Spread out the items of laundry to cool."
-          ],
-          "evidence": "Bosch manual, page 40: \"After the end of the program, warm laundry feels damper than it actually is.\"",
-          "source": {
-            "line": 100,
-            "manual": "Bosch manual",
-            "page": 40
-          }
-        },
-        {
-          "id": "laundry-is-too-damp-3",
-          "label": "The selected dryness level is unsuitable.",
-          "likelihood": 0.217,
-          "cost": null,
-          "remedies": [
-            "Change the dryness level. Page 29"
-          ],
-          "evidence": "Bosch manual, page 40: \"The selected dryness level is unsuitable.\"",
-          "source": {
-            "line": 105,
-            "manual": "Bosch manual",
-            "page": 40
-          }
-        },
-        {
-          "id": "laundry-is-too-damp-4",
-          "label": "The dryness level is not adjusted.",
-          "likelihood": 0.179,
-          "cost": null,
-          "remedies": [
-            "Adjust the dryness level. Page 29"
-          ],
-          "evidence": "Bosch manual, page 40: \"The dryness level is not adjusted.\"",
-          "source": {
-            "line": 107,
-            "manual": "Bosch manual",
-            "page": 40
-          }
-        },
-        {
-          "id": "laundry-is-too-damp-5",
-          "label": "The load is too small.",
-          "likelihood": 0.152,
-          "cost": null,
-          "remedies": [
-            "Set a time program for subsequent drying.",
-            "Page 23"
-          ],
-          "evidence": "Bosch manual, page 40: \"The load is too small.\"",
-          "source": {
-            "line": 109,
-            "manual": "Bosch manual",
-            "page": 40
-          }
-        },
-        {
-          "id": "laundry-is-too-damp-6",
-          "label": "The moisture sensor is dirty.",
-          "likelihood": 0.132,
-          "cost": null,
-          "remedies": [
-            "Clean the moisture sensor. Page 37"
-          ],
-          "evidence": "Bosch manual, page 40: \"The moisture sensor is dirty.\"",
-          "source": {
-            "line": 112,
-            "manual": "Bosch manual",
-            "page": 40
-          }
-        },
-        {
-          "id": "laundry-is-too-damp-7",
-          "label": "The appliance has interrupted the drying process due to the condensation container being full.",
-          "likelihood": 0.116,
-          "cost": null,
-          "remedies": [
-            "Empty the condensation container. Page 28"
-          ],
-          "evidence": "Bosch manual, page 40: \"The appliance has interrupted the drying process due to the condensation container being full.\"",
-          "source": {
-            "line": 114,
-            "manual": "Bosch manual",
-            "page": 40
           }
         }
       ]
@@ -409,7 +300,7 @@
           ],
           "evidence": "Bosch manual, page 40: \"The selected program is unsuitable for the type of fabric.\"",
           "source": {
-            "line": 117,
+            "line": 23,
             "manual": "Bosch manual",
             "page": 40
           }
@@ -425,7 +316,7 @@
           ],
           "evidence": "Bosch manual, page 40: \"The load is unsuitable.\"",
           "source": {
-            "line": 120,
+            "line": 26,
             "manual": "Bosch manual",
             "page": 40
           }
@@ -442,7 +333,7 @@
           ],
           "evidence": "Bosch manual, page 40: \"The laundry lies in the drum for too long after drying.\"",
           "source": {
-            "line": 124,
+            "line": 30,
             "manual": "Bosch manual",
             "page": 40
           }
@@ -457,7 +348,7 @@
           ],
           "evidence": "Bosch manual, page 40: \"Easy Care fabrics have been dried for too long.\"",
           "source": {
-            "line": 128,
+            "line": 34,
             "manual": "Bosch manual",
             "page": 40
           }
@@ -472,7 +363,7 @@
           ],
           "evidence": "Bosch manual, page 40: \"The crease-reduction function is not activated.\"",
           "source": {
-            "line": 130,
+            "line": 36,
             "manual": "Bosch manual",
             "page": 40
           }
@@ -493,7 +384,7 @@
           ],
           "evidence": "Bosch manual, page 40: \"Appliance is not correctly aligned.\"",
           "source": {
-            "line": 132,
+            "line": 38,
             "manual": "Bosch manual",
             "page": 40
           }
@@ -509,7 +400,7 @@
           ],
           "evidence": "Bosch manual, page 40: \"Water outlet hose is not connected correctly.\"",
           "source": {
-            "line": 134,
+            "line": 40,
             "manual": "Bosch manual",
             "page": 40
           }
@@ -533,7 +424,7 @@
           ],
           "evidence": "Bosch manual, page 41: \"Operational fault\"",
           "source": {
-            "line": 148,
+            "line": 7,
             "manual": "Bosch manual",
             "page": 41
           }
@@ -549,7 +440,7 @@
           ],
           "evidence": "Bosch manual, page 41: \"Unplug the power plug or switch off the circuit breaker in the fuse box.\"",
           "source": {
-            "line": 153,
+            "line": 12,
             "manual": "Bosch manual",
             "page": 41
           }
@@ -564,7 +455,7 @@
           ],
           "evidence": "Bosch manual, page 41: \"Please specify the exact error message when calling. If possible, document the fault with photos and videos.\"",
           "source": {
-            "line": 157,
+            "line": 16,
             "manual": "Bosch manual",
             "page": 41
           }
@@ -578,6 +469,6 @@
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-09-22T15:22:09.704Z",
-  "learnedAt": "2026-09-22T15:19:18.807Z"
+  "reviewedAt": "2026-09-22T15:27:14.495Z",
+  "learnedAt": "2026-09-22T15:26:53.769Z"
 }
