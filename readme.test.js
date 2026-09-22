@@ -43,13 +43,30 @@ it('every figure it quotes is one a command still produces', () => {
   assert.match(out, /Every figure these documents quote/);
 });
 
-it('it does not promise a command that does not exist', () => {
-  // The first thing a reviewer tries. A README pointing at a script that is not there costs more
-  // trust than a wrong number does.
+it('no document promises a command that does not exist', () => {
+  /*
+   * The first thing a reviewer tries. A document pointing at a script that is not there costs more
+   * trust than a wrong number does.
+   *
+   * This was the README only, and matched `[a-z-]+` — so it saw neither `npm run mcp:session`,
+   * because of the colon, nor `npm run verify-against-pages` in the recording script, because that
+   * is a different file. Both were named in documents while one of them was not a script at all,
+   * which is exactly what somebody discovers with a camera running.
+   */
   const scripts = require('./package.json').scripts;
-  const promised = [...README.matchAll(/npm run ([a-z-]+)/g)].map((m) => m[1]);
-  const missing = [...new Set(promised)].filter((s) => !scripts[s]);
-  assert.deepEqual(missing, [], `README promises: ${missing.map((m) => `npm run ${m}`).join(', ')}`);
+  const docs = [
+    'README.md',
+    ...fs.readdirSync(path.join(__dirname, 'docs'))
+      .filter((f) => f.endsWith('.md'))
+      .map((f) => path.join('docs', f)),
+  ];
+
+  for (const doc of docs) {
+    const text = fs.readFileSync(path.join(__dirname, doc), 'utf8');
+    const promised = [...text.matchAll(/npm run ([a-z][a-z0-9:-]*)/g)].map((m) => m[1]);
+    const missing = [...new Set(promised)].filter((s) => !scripts[s]);
+    assert.deepEqual(missing, [], `${doc} promises: ${missing.map((m) => `npm run ${m}`).join(', ')}`);
+  }
 });
 
 it('every file it points at is really there', () => {

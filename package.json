@@ -22,7 +22,9 @@
     "questions": "node eval/questions.js",
     "terminal-shot": "node scripts/terminal-shot.js",
     "check-readme": "node scripts/check-readme.js",
-    "mcp:session": "node scripts/mcp-session.js"
+    "mcp:session": "node scripts/mcp-session.js",
+    "verify-against-pages": "node scripts/verify-against-pages.js",
+    "admit-verified": "node scripts/admit-verified.js"
   },
   "keywords": [
     "alexa-plus",
