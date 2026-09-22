@@ -906,6 +906,24 @@ survive being checked is worse than no citation, because it was believed. `joinA
 a form feed at each seam, which is `pdftotext`'s own page separator, and each cause records the
 page it was actually printed on.
 
+**And the reader itself was a binary we had decided we could not design away.** `pdftotext` is
+poppler; poppler is not on a serverless host; so the hosted review bench had never once been able to
+read a manual, and the single capability this project exists for was the one thing a visitor to the
+URL could not see. `manual/pdf-read.js` reads the format directly with **no dependencies** — the
+cross-reference, object streams, fonts and their `ToUnicode` maps, the content stream, and the glyph
+positions that put a three-column fault table back into three columns, because `symptoms.js` reads
+indent as grammar and de-layouted text destroys exactly that structure.
+
+It ships because it is measured, not because it works on the pages we tried. poppler is on the
+laptop, so it is ground truth: `npm run pdf:compare` runs both readers over every manual here and
+scores whether `readSymptoms` recovers the same ROWS — 1,881 pages, identical page counts, 98.4–100%
+of poppler's words, 87.5% of its parsed rows word for word. Five bugs surfaced that way and every
+one returned text that looked perfectly fine: characters dropped where two glyphs claimed one grid
+cell, a header that became `Causeandtroubleshooting` because a subset font declared a space three
+times wider than the one it drew, `I m p o r t a n t   s a f e t y` from an advance that ignored the
+text matrix, a line rendered backwards because the producer drew the right column first, and columns
+that stopped agreeing between a header and its own rows. A text extractor does not fail by crashing.
+
 **And the verifier itself was wrong twice before it was right.** It flattened the whole page, which
 interleaves the two columns — so a cause wrapping over three lines came back with the symptom's own
 continuation spliced into it, and 133 correct citations were accused of being invented. Then it
