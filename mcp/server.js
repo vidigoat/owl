@@ -401,9 +401,24 @@ async function handle(msg) {
 
 const server = http.createServer((req, res) => {
   if (req.method === 'GET' && req.url.startsWith('/mcp')) {
-    // A real Streamable HTTP server opens an SSE stream here. TODO.
-    res.writeHead(200, { 'content-type': 'text/plain' });
-    return res.end(`second-set-of-hands MCP server, spec ${PROTOCOL_VERSION}. POST JSON-RPC to /mcp.`);
+    /*
+     * No server-initiated stream here, said the way the spec asks it to be said.
+     *
+     * Streamable HTTP makes the GET stream optional: a server that does not offer one **should**
+     * answer 405. This answered 200 with `text/plain`, which is worse than not offering it — a
+     * client that opened the stream got a successful response that is not a stream, and has to
+     * work out from the content type that it was refused. 405 is unambiguous, and the sentence
+     * says what to do instead.
+     *
+     * Nothing in this server pushes: every tool answers the call that asked for it. When something
+     * does — a repair step advancing on its own pace is the obvious candidate — this is where it
+     * goes, and it will be a stream rather than a note about one.
+     */
+    res.writeHead(405, { 'content-type': 'text/plain; charset=utf-8', allow: 'POST' });
+    return res.end(
+      `second-set-of-hands MCP server, spec ${PROTOCOL_VERSION}.\n` +
+        'No server-initiated SSE stream is offered on GET. POST JSON-RPC to /mcp.\n'
+    );
   }
 
   if (req.method !== 'POST' || !req.url.startsWith('/mcp')) {

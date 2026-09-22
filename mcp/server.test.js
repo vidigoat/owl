@@ -10,6 +10,8 @@
  */
 
 const assert = require('node:assert');
+const fs = require('node:fs');
+const path = require('node:path');
 const { handle, TOOLS, PROTOCOL_VERSION } = require('./server');
 
 let passed = 0;
@@ -57,6 +59,20 @@ const call = (name, args = {}) => handle({ jsonrpc: '2.0', id: 1, method: 'tools
     // An id that IS there survives, so a client can match the error to what it sent.
     const answered = await handle({ id: 42, notmethod: true });
     assert.equal(answered.id, 42);
+  });
+
+  await it('GET /mcp refuses the way the spec asks, rather than answering 200 with prose', () => {
+    /*
+     * Streamable HTTP makes the server-initiated stream optional and says a server that does not
+     * offer one should answer 405. This answered 200 with `text/plain` — worse than not offering
+     * it, because a client that opened the stream got a SUCCESS that is not a stream and had to
+     * work that out from the content type.
+     */
+    const src = fs.readFileSync(path.join(__dirname, 'server.js'), 'utf8');
+    const get = src.slice(src.indexOf("req.method === 'GET'"), src.indexOf("req.method !== 'POST'"));
+    assert.match(get, /writeHead\(405/, 'GET /mcp does not answer 405');
+    assert.match(get, /allow: 'POST'/i, 'a 405 without an Allow header does not say what is allowed');
+    assert.doesNotMatch(get, /TODO/, 'the transport still carries a TODO');
   });
 
   await it('every registered tool has a description and a schema', async () => {
