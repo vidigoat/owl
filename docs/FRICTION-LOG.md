@@ -222,3 +222,54 @@ argument is about not guessing.
 **One small thing:** images are charged as tokens and the response does not break out how many were
 image tokens versus text. We over-count images at a flat 3,000 in the pre-flight estimate because we
 cannot see the real split, which makes the ceiling blunter than it needs to be.
+
+---
+
+### 2026-09-22 · The vision model reads a table off a page that has none
+
+Not a complaint about Bedrock so much as a finding about how to use it, and the most useful thing
+we learned this week.
+
+`B18IF905SP` is a Bosch refrigerator. Our page scorer picked its **Home Connect** pages — prose
+about joining an appliance to a Wi-Fi network, no fault table anywhere on them — and we asked Nova
+Lite to read the fault-code table on that page. It produced one: seven codes, every single one with
+the identical meaning *"REASON: The water inlet valve is stuck open"* and the identical cause. Four
+of the seven are not Bosch conventions at all — `OE` and `4C`/`5E` are LG and Samsung, `H20` is
+Whirlpool.
+
+It was admitted, and it sat in our library looking like seven facts.
+
+**It is reproducible.** Running that manual through the pipeline today does it again. On the facing
+page the model refuses correctly — *"There is no fault code table on that page"* — so the behaviour
+is not that it always invents; it is that a page with plausible structure and no table is enough.
+
+**What we did about it**, and it is not a prompt change. A reviewer reads one row at a time and
+every row is plausible; the tell exists only *across* rows. So the guard is arithmetic, in code:
+distinct codes mean distinct things — that is what a code is for — and a reading where they all say
+the same sentence is one answer copied down a page. `manual/faultgraph.js` refuses such a reading
+outright rather than trimming it, because there is no way to tell which of the seven, if any, came
+off the page.
+
+**What would have helped:** nothing in the response distinguishes "I read this" from "I produced
+something of the right shape". A per-field confidence, or even a flag for "the requested structure
+was not present", would have let us refuse it at the seam rather than three layers downstream. We
+would take that over a better model.
+
+---
+
+### 2026-09-22 · `pdftotext -layout` is the whole product, and it is not in npm
+
+Poppler does something no npm package does as well: it preserves horizontal position as runs of
+spaces, which is the only reason a two-column troubleshooting table can be read at all. Indent is
+the grammar; a de-layouted extraction destroys exactly the thing that carries the meaning.
+
+The friction is that it is a binary. We shell out to it and report `available()` rather than
+crashing, and every caller degrades to something honest — but a self-hosted MCP server that needs
+poppler on the host is a real install cost, and it is the one dependency we could not design away.
+
+**One thing that cost an afternoon:** `pdftotext` separates pages with a form feed, and our page
+splitter consumed it. Joining pages back together with a newline lost the boundary, so every row in
+a multi-page table was cited to the page the run *started* on. A table running pages 37 to 48 cited
+two hundred causes to page 37. An owner following one of them opens the manual to the wrong page
+and finds nothing — and a citation that does not survive being checked is worse than no citation,
+because it was believed. The fix is to keep the form feed at the seam and count them.
