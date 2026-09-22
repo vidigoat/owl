@@ -10,8 +10,41 @@
  * review interface that makes you scroll between the page and the parse is one where people tick
  * boxes without looking, and then the library fills up with confident nonsense.
  *
- * Inherits the tokens in style.css: --paper, --ink, --graphite, --rule, --fault, --proof, --amber.
+ * ── The tokens live HERE now ────────────────────────────────────────────────
+ *
+ * They used to be inherited from `style.css`, the device page's stylesheet — and when the device
+ * page was rebuilt in React, that file was deleted and took every colour on this one with it.
+ * Nothing crashed and nothing looked obviously broken: the text is dark on white either way. What
+ * went was the palette, and one thing that mattered a great deal more than a palette.
+ *
+ * `.code-box` sets `color: #fff` for the tick mark it holds when checked, and its border read
+ * `1.5px solid var(--graphite)`. An undefined custom property makes that declaration invalid, so
+ * the border fell back to `currentColor` — white, on a white box, on a white page. Every checkbox
+ * on the review bench was invisible, on the one screen in this project whose entire purpose is
+ * ticking rows and seeing which ones you ticked.
+ *
+ * A page that can stand on its own should not borrow its palette from another one.
  */
+
+:root {
+  --paper: #efeae1;
+  --paper-2: #e4ddd1;
+  --graphite: #3a4048;
+  --ink: #1b1f24;
+  --rule: #cfc6b8;
+
+  /* A parse that disagrees with the page. */
+  --fault: #c8352b;
+  /* Admitted, checked, held. */
+  --proof: #0e7c7b;
+  /* The manual's own callout colour — what it says, and where. */
+  --amber: #b06f18;
+
+  --display: "Bricolage Grotesque", system-ui, sans-serif;
+  /* The voice. Used for one thing only: the sentence being said out loud. */
+  --spoken: "Newsreader", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
 
 [hidden] { display: none !important; }
 

@@ -229,6 +229,65 @@ const it = async (name, fn) => {
     assert.notEqual(token('amber'), token('stop'), 'a callout and a refusal must not be the same colour');
   });
 
+  await it('every colour a stylesheet uses is defined in a stylesheet the page loads', () => {
+    /*
+     * This is here because of an invisible checkbox.
+     *
+     * `public/review.css` took its palette from `style.css`, the device page's stylesheet. When the
+     * device page was rebuilt in React that file was deleted, and took every colour on the review
+     * bench with it. Nothing crashed and nothing looked obviously broken — dark text on white
+     * either way.
+     *
+     * What went with it was `.code-box { border: 1.5px solid var(--graphite) }`. An undefined
+     * custom property makes the declaration invalid, so the border fell back to `currentColor`,
+     * which that rule sets to `#fff` for the tick it holds when checked. White border, white box,
+     * white page: every checkbox on the one screen whose entire purpose is ticking rows.
+     *
+     * So: every `var(--x)` a stylesheet uses has to be defined in a stylesheet its own page loads.
+     */
+    const pages = [
+      ['public/review.html', ['public/review.css']],
+      ['web/index.html', ['web/src/styles.css']],
+    ];
+
+    for (const [page, sheets] of pages) {
+      const pageFile = path.join(__dirname, page);
+      if (!fs.existsSync(pageFile)) continue;
+
+      const html = fs.readFileSync(pageFile, 'utf8');
+      const linked = [...html.matchAll(/<link[^>]+href="([^"]+\.css)"/g)].map((m) => m[1]);
+      for (const href of linked) {
+        if (href.startsWith('http')) continue;
+        const onDisk = path.join(path.dirname(pageFile), href);
+        assert.ok(fs.existsSync(onDisk), `${page} loads ${href}, which is not there`);
+      }
+
+      const css = sheets
+        .map((f) => (fs.existsSync(path.join(__dirname, f)) ? fs.readFileSync(path.join(__dirname, f), 'utf8') : ''))
+        .join('\n');
+      if (!css) continue;
+
+      const defined = new Set([...css.matchAll(/(--[a-z0-9-]+)\s*:/gi)].map((m) => m[1]));
+      const used = new Set([...css.matchAll(/var\(\s*(--[a-z0-9-]+)/gi)].map((m) => m[1]));
+
+      // A `var()` with its own fallback is answering for itself.
+      const withFallback = new Set(
+        [...css.matchAll(/var\(\s*(--[a-z0-9-]+)\s*,/gi)].map((m) => m[1])
+      );
+
+      /*
+       * `--radix-*` is set on the element by the library at runtime — it is how Radix hands the
+       * measured height of a panel to CSS — so no stylesheet defines it and none should. A narrow,
+       * named exception rather than a loosened rule: anything else undefined is the bug this test
+       * is for.
+       */
+      const missing = [...used].filter(
+        (v) => !defined.has(v) && !withFallback.has(v) && !v.startsWith('--radix-')
+      );
+      assert.deepEqual(missing, [], `${page} uses ${missing.join(', ')} and nothing defines them`);
+    }
+  });
+
   await it('the site is its own package, so the MCP server still has no dependencies', () => {
     const root = JSON.parse(fs.readFileSync(path.join(__dirname, 'package.json'), 'utf8'));
     assert.deepEqual(root.dependencies ?? {}, {}, 'the MCP server now has dependencies');
