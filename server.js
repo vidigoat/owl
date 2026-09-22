@@ -26,6 +26,16 @@ const { remember: rememberAppliance, receipt: writeReceipt, due: dueNow } = requ
 /** 28 MB: a phone photo becomes ~33% larger as base64, and see() caps the image itself at 20 MB. */
 const MAX_BODY = 28 * 1024 * 1024;
 
+/**
+ * What a hosted upload may weigh.
+ *
+ * Not chosen: measured. The platform answers `413 FUNCTION_PAYLOAD_TOO_LARGE` above roughly 4.5 MB,
+ * before this process is started, so nothing in here can make the refusal a good one. Four
+ * megabytes leaves room for the request's own overhead, and `GET /api/read-manual` hands the number
+ * to the page so the page can say so before spending somebody's upload.
+ */
+const UPLOAD_LIMIT = 4 * 1024 * 1024;
+
 const readJson = (req) =>
   new Promise((resolve, reject) => {
     let body = '';
@@ -271,9 +281,41 @@ function handler(req, res) {
      * and a route that quietly skipped that step would be removing the only part of this worth
      * copying.
      */
+    /*
+     * What this endpoint will accept, asked before anything is sent.
+     *
+     * The host refuses a request body over about four and a half megabytes BEFORE the function
+     * runs, so it answers `413 FUNCTION_PAYLOAD_TOO_LARGE` as a plain-text platform page. Half the
+     * manuals in this project's own corpus are bigger than that, and dropping one produced a raw
+     * platform error with no relation to anything on the page — the worst failure available, since
+     * it looks like the feature is broken rather than bounded.
+     *
+     * So the page asks first and says so itself. The limit lives here, next to the endpoint it
+     * describes, rather than being a number typed into a script that drifts from it.
+     */
+    if (req.method === 'GET' && url.pathname === '/api/read-manual') {
+      return send(res, 200, JSON.stringify({
+        maxBytes: UPLOAD_LIMIT,
+        why:
+          'The host refuses a request body larger than this before this function runs, so a bigger ' +
+          'manual has to be read where it already is: `node scripts/learn-manual.js <file.pdf>` ' +
+          'reads any size, and needs nothing installed either.',
+      }), 'application/json');
+    }
+
     if (req.method === 'POST' && url.pathname === '/api/read-manual') {
       return readBytes(req)
         .then((buf) => {
+          // The local server has no platform in front of it, so the same limit is applied here —
+          // otherwise a manual that works on a laptop fails on the URL, which is the worst way to
+          // find out about a limit.
+          if (buf.length > UPLOAD_LIMIT) {
+            return send(res, 413, JSON.stringify({
+              error: `That manual is ${(buf.length / 1024 / 1024).toFixed(1)} MB, and this endpoint accepts ${(UPLOAD_LIMIT / 1024 / 1024).toFixed(0)} MB.`,
+              maxBytes: UPLOAD_LIMIT,
+              instead: 'node scripts/learn-manual.js <file.pdf> reads any size, and needs nothing installed either.',
+            }), 'application/json');
+          }
           if (buf.length < 5 || buf.toString('latin1', 0, 5) !== '%PDF-') {
             return send(res, 400, JSON.stringify({
               error: 'that is not a PDF',

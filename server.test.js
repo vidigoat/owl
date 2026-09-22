@@ -348,6 +348,42 @@ function buildPdf(stream, compressed) {
     );
   });
 
+  await it('the upload limit is something the page can ask for, not something it guesses', async () => {
+    /*
+     * The host refuses a request body over about four and a half megabytes BEFORE this function
+     * runs, and answers with a plain-text platform page. Half the manuals in this project's own
+     * corpus are bigger than that, so dropping one produced a raw `FUNCTION_PAYLOAD_TOO_LARGE`
+     * with no relation to anything on the page — which reads as the feature being broken rather
+     * than bounded, and is the worst refusal available.
+     *
+     * The page asks first. The number has to come from the endpoint it describes, or it drifts.
+     */
+    const limits = await (await get('/api/read-manual')).json();
+    assert.ok(Number.isFinite(limits.maxBytes) && limits.maxBytes > 0);
+    assert.match(limits.why, /learn-manual/, 'it does not say what to do with a bigger manual');
+
+    const bench = fs.readFileSync(path.join(__dirname, 'public', 'review.js'), 'utf8');
+    assert.match(bench, /\/api\/read-manual/, 'the bench does not ask the endpoint anything');
+    assert.doesNotMatch(
+      bench.replace(/\/\*[\s\S]*?\*\//g, ''),
+      /4\s*\*\s*1024\s*\*\s*1024|4194304/,
+      'the bench has the limit typed into it, so it will drift from the endpoint'
+    );
+  });
+
+  await it('a manual over the limit is refused with the size and what to do instead', async () => {
+    const big = Buffer.concat([faultTablePdf(), Buffer.alloc(5 * 1024 * 1024, 0x20)]);
+    const res = await fetch(`${BASE}/api/read-manual`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/pdf' },
+      body: big,
+    });
+    assert.equal(res.status, 413);
+    const out = await res.json();
+    assert.match(out.error, /MB/, 'the refusal does not say how big it was');
+    assert.match(out.instead, /learn-manual/, 'the refusal does not say what to do instead');
+  });
+
   await it('something that is not a PDF is told so, rather than parsed', async () => {
     const res = await fetch(`${BASE}/api/read-manual`, {
       method: 'POST',

@@ -475,9 +475,40 @@ loadLibrary();
     return n;
   };
 
+  /*
+   * What the endpoint will accept, asked once, from the endpoint.
+   *
+   * The host refuses a body over about four and a half megabytes BEFORE the function runs, so it
+   * answers with a plain-text platform page and there is nothing the server can do to make that a
+   * good refusal. Half the manuals in this project's own corpus are bigger than that. Asked here,
+   * the page can say so itself and say what to do instead — and the number comes from the endpoint
+   * rather than being typed in beside it, where it would drift.
+   */
+  let limit = null;
+  fetch('/api/read-manual', { headers: { accept: 'application/json' } })
+    .then((r) => r.json())
+    .then((l) => {
+      limit = l;
+      if (l.maxBytes) {
+        document.getElementById('dropSub').textContent =
+          `PDF with a text layer, up to ${Math.round(l.maxBytes / 1024 / 1024)} MB. A scan needs the camera instead, and it will say so.`;
+      }
+    })
+    .catch(() => { /* the page still works; the server will refuse if it must */ });
+
   async function read(f) {
     if (!f) return;
     out.hidden = true;
+
+    if (limit?.maxBytes && f.size > limit.maxBytes) {
+      say(
+        `${f.name} is ${(f.size / 1024 / 1024).toFixed(1)} MB, and this page can send ` +
+          `${Math.round(limit.maxBytes / 1024 / 1024)} MB. ${limit.why}`,
+        'refused'
+      );
+      return;
+    }
+
     say(`Reading ${f.name} — ${(f.size / 1024 / 1024).toFixed(1)} MB…`);
 
     let data;
@@ -493,7 +524,7 @@ loadLibrary();
       return;
     }
 
-    if (data.error) return say(data.error, 'refused');
+    if (data.error) return say([data.error, data.instead].filter(Boolean).join(' '), 'refused');
 
     if (!data.ok) {
       /*
