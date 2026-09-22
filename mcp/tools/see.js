@@ -24,6 +24,7 @@ let _budget;
 const budget = () => (_budget ||= new Budget());
 const fs = require('node:fs');
 const path = require('node:path');
+const { localImage } = require('./local-file');
 const os = require('node:os');
 
 const MODEL_ID = process.env.BEDROCK_VISION_MODEL || 'us.amazon.nova-lite-v1:0';
@@ -238,12 +239,23 @@ async function see({ imagePath, imageBase64, imageFormat, expect = {} }) {
     if (!/^[A-Za-z0-9+/=\s]+$/.test(raw)) return simulatedRead('That did not decode as an image.');
     base64 = raw.replace(/\s+/g, '');
   } else {
-    format = FORMATS[path.extname(imagePath || '').toLowerCase()] || 'jpeg';
-    if (!imagePath || !fs.existsSync(imagePath)) {
+    /*
+     * A path from a caller is not a path this may read.
+     *
+     * `POST /api/see` hands the request body straight to this function, and `tools/call` hands a
+     * remote client's arguments straight to it, so `{"imagePath":"/etc/passwd"}` was read off the
+     * disk, base64'd, and would have been posted to Bedrock. The deployment has no AWS credentials
+     * today, so the call fails before anything leaves — which is luck rather than design.
+     */
+    const at = localImage(imagePath);
+    if (!at.ok) return simulatedRead(imagePath ? at.reason : `No image at ${imagePath}`);
+
+    format = FORMATS[path.extname(at.path).toLowerCase()] || 'jpeg';
+    if (!fs.existsSync(at.path)) {
       return simulatedRead(`No image at ${imagePath}`);
     }
     try {
-      base64 = fs.readFileSync(imagePath).toString('base64');
+      base64 = fs.readFileSync(at.path).toString('base64');
     } catch (e) {
       return simulatedRead(e.message);
     }

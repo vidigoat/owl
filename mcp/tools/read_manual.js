@@ -26,6 +26,7 @@ let _budget;
 const budget = () => (_budget ||= new Budget());
 const os = require('node:os');
 const path = require('node:path');
+const { localImage } = require('./local-file');
 const { execFile } = require('node:child_process');
 const { promisify } = require('node:util');
 
@@ -183,9 +184,12 @@ async function read_manual({ imagePath, imageBase64, model, brand, kind, transcr
     format = FORMATS[`.${(m?.[1] || '').toLowerCase()}`] || 'jpeg';
     if (!/^[A-Za-z0-9+/=]+$/.test(base64)) return notRead('That did not decode as an image.');
   } else if (imagePath) {
-    if (!fs.existsSync(imagePath)) return notRead(`No image at ${imagePath}`);
-    format = FORMATS[path.extname(imagePath).toLowerCase()] || 'jpeg';
-    base64 = fs.readFileSync(imagePath).toString('base64');
+    // Same boundary as `see`: a path from a caller is not a path this may read. See local-file.js.
+    const at = localImage(imagePath);
+    if (!at.ok) return notRead(at.reason);
+    if (!fs.existsSync(at.path)) return notRead(`No image at ${imagePath}`);
+    format = FORMATS[path.extname(at.path).toLowerCase()] || 'jpeg';
+    base64 = fs.readFileSync(at.path).toString('base64');
   } else if (!transcribe) {
     // No bytes and nothing to turn bytes into characters. Said plainly rather than thrown: this
     // tool is called by a model, and a stack trace is not an answer it can act on.
