@@ -22,6 +22,7 @@
 const assert = require('node:assert');
 const fs = require('node:fs');
 const path = require('node:path');
+const { execFileSync } = require('node:child_process');
 
 const WEB = path.join(__dirname, 'web', 'src');
 const read = (...p) => fs.readFileSync(path.join(WEB, ...p), 'utf8');
@@ -288,6 +289,43 @@ const it = async (name, fn) => {
     }
   });
 
+  await it('every API path a page calls is one the server answers', () => {
+    /*
+     * The bench once shipped with nothing linking to it. This is the same lesson one level down: a
+     * page can call a route that does not exist and look completely fine — the fetch resolves, the
+     * 404 body fails to parse, and the feature is simply dead on the deployed URL where nobody is
+     * opening a console.
+     *
+     * Proved by breaking it: changing the bench's `/api/read-manual` to `/api/read-manual-XXX` left
+     * every one of the thirty-three other checks green.
+     *
+     * The server is read as text rather than started, because this file checks properties of what
+     * was written and `server.test.js` is where things are actually run.
+     */
+    const server = fs.readFileSync(path.join(__dirname, 'server.js'), 'utf8');
+    /*
+     * Exact routes and prefix routes are kept apart on purpose. Treating every route as a prefix
+     * was the first version, and `/api/read-manual-XXX` starts with `/api/read-manual`, so the
+     * deliberate break this check was written for sailed straight through it.
+     */
+    const exact = new Set([...server.matchAll(/url\.pathname === '([^']+)'/g)].map((m) => m[1]));
+    const prefix = [...server.matchAll(/url\.pathname\.startsWith\('([^']+)'\)/g)].map((m) => m[1]);
+
+    const pages = [
+      ['public/review.js', fs.readFileSync(path.join(__dirname, 'public', 'review.js'), 'utf8')],
+      ...sources(),
+    ];
+
+    for (const [name, src] of pages) {
+      const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '');
+      for (const m of code.matchAll(/['"`](\/api\/[a-z0-9/-]*)/gi)) {
+        const called = m[1];
+        const ok = exact.has(called) || prefix.some((h) => called.startsWith(h));
+        assert.ok(ok, `${name} calls ${called}, and server.js has no route for it`);
+      }
+    }
+  });
+
   await it('the site is its own package, so the MCP server still has no dependencies', () => {
     const root = JSON.parse(fs.readFileSync(path.join(__dirname, 'package.json'), 'utf8'));
     assert.deepEqual(root.dependencies ?? {}, {}, 'the MCP server now has dependencies');
@@ -304,6 +342,23 @@ const it = async (name, fn) => {
      * this should get the site by running one command, not a blank page and an instruction to
      * install a toolchain. The skill keeps its no-build promise; the website pays for it.
      */
+    /*
+     * Asked of GIT, not of this disk.
+     *
+     * The first version asked `fs.existsSync`, which is true on any machine that has ever run a
+     * build and says nothing whatsoever about a clone. `dist/` was in .gitignore the entire time:
+     * neither `dist/index.html` nor `public/index.html` was tracked, so `git clone && npm start`
+     * served a 404 at `/` — the exact failure this check was written to prevent, on the only
+     * machine where it mattered, while passing everywhere it did not.
+     */
+    const tracked = execFileSync('git', ['ls-files', 'dist/index.html', 'public/index.html'], {
+      cwd: __dirname, encoding: 'utf8',
+    }).trim();
+    assert.ok(
+      tracked,
+      'nothing serves `/` on a fresh clone: neither dist/index.html nor public/index.html is in git'
+    );
+
     const index = path.join(__dirname, 'dist', 'index.html');
     assert.ok(fs.existsSync(index), 'dist/index.html is missing — `npm start` after a clone shows nothing');
 

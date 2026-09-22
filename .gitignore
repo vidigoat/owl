@@ -4,7 +4,11 @@ node_modules/
 *.log
 .DS_Store
 /tmp/
-dist/
+# NOT dist/. The built site is committed on purpose — see ui.test.js, "the built site is
+# committed": a judge who clones this should get the site by running one command, not a blank page
+# and an instruction to install a toolchain. It was in this list anyway for months, so the test
+# asserting the opposite passed on every machine that had run a build and would have failed on
+# every fresh clone, which is the only place it mattered.
 # What one household remembers. Somebody's machines and repairs; not this repository's business.
 data/home.json
 

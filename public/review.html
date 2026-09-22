@@ -32,6 +32,47 @@
 node scripts/learn-manual.js manuals/*.pdf --brand Bosch --kind Dishwasher</pre>
   </section>
 
+  <!--
+    Read a manual here, with nothing installed.
+
+    The commands above are the real pipeline and they need a terminal and a checkout. Somebody who
+    has only this URL could never see the one thing this project is for, so this is that: give it a
+    manufacturer's PDF and watch the fault table come out, with the page each cause is printed on.
+
+    It admits nothing. The parse is a candidate; the bench above is where a person makes it a fact.
+  -->
+  <section class="try" id="try">
+    <h2 class="try-head">Or read one now.</h2>
+    <p class="try-lede">
+      Drop a manufacturer's PDF — any appliance, any brand, nothing here is coded for yours. It is
+      read in this browser's request and thrown away; nothing is uploaded anywhere and nothing is
+      added to the library.
+    </p>
+
+    <label class="drop" id="drop">
+      <input type="file" id="file" accept="application/pdf,.pdf" hidden>
+      <span class="drop-main">Drop a manual here<span class="drop-or">, or choose a file</span></span>
+      <span class="drop-sub" id="dropSub">PDF with a text layer. A scan needs the camera instead, and it will say so.</span>
+    </label>
+
+    <p class="try-state" id="tryState" hidden></p>
+
+    <div class="try-out" id="tryOut" hidden>
+      <div class="try-meta" id="tryMeta"></div>
+      <div class="try-cols">
+        <div>
+          <p class="try-col-head">the page, as it was read</p>
+          <pre class="evidence-text try-text" id="tryText"></pre>
+        </div>
+        <div>
+          <p class="try-col-head">what came out of it</p>
+          <ul class="try-rows" id="tryRows"></ul>
+          <p class="try-note" id="tryNote"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <div class="bench-cols" id="cols" hidden>
 
     <!-- The evidence. Not a thumbnail: this is the thing being checked against. -->

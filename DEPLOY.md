@@ -19,11 +19,27 @@ Each of these degrades to a stated refusal, never to a plausible answer.
 | read a rating plate or a fault panel | Bedrock vision needs AWS credentials, and the demo has none | the vision tools abstain and say they were not configured |
 | the camera | needs a device with one | the device screen falls back to the typed model number |
 | record spend | the ledger needs a writable disk, and a serverless function has none | refuses to spend rather than spending unmetered |
-| learn a new manual | `pdftotext` and `pdftoppm` are not on the host | `pdf.available()` reports false and the reader says the cheap path is unavailable |
+| photograph a page a PDF cannot be read from | `pdftoppm` is not on the host | the scan path abstains and says the page could not be rendered |
 
-The last one matters for what a visitor sees: the **review bench** will show the machines already in
-`data/admitted/` and an empty queue, because nothing can be read on the host. That is the honest
-state, and the bench says so rather than showing a fabricated candidate.
+**Reading a manual is no longer on that list.** It was the worst thing on it — the one capability
+this project is for, unavailable to anybody who had only the URL, because `pdftotext` is a binary
+and the host has none. `manual/pdf-read.js` reads the PDF format directly with no dependencies, so
+the hosted review bench now has a drop target: give it a manufacturer's PDF and the fault table
+comes back with the page each cause is printed on, in a few hundred milliseconds.
+
+It is not a claim that it works — it is measured. `npm run pdf:compare` runs the built-in reader and
+poppler over every manual on the machine and scores them against each other on the thing that
+matters, which is whether `readSymptoms` recovers the same rows:
+
+```
+30 manuals · 1,881 pages · page count identical on every one
+99.3–100% of poppler's words on every manual
+87.5% of poppler's parsed rows recovered word for word
+```
+
+poppler still goes first where it exists, and which reader answered travels with every result.
+`server.test.js` runs the read twice — once as this machine, once with the binary reader switched
+off — because proving the hosted path on a laptop that has poppler proves the wrong thing.
 
 ## What it can do
 

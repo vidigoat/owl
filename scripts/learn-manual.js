@@ -81,10 +81,15 @@ async function learnOne(file, flags) {
   const kind = flags.kind || null;
   const report = { file, model, brand, kind, steps: [] };
 
-  if (!pdf.available()) {
-    report.error = 'pdftotext is not installed — the cheap path is unavailable';
-    return report;
-  }
+  /*
+   * Which reader is about to do the work, recorded before it does any.
+   *
+   * This used to be a bail-out: no poppler, no read. There is now a second reader with no
+   * requirements (`manual/pdf-read.js`), so the question changed from "can this run" to "what ran"
+   * — and the answer travels with the report, because a library entry that does not say what read
+   * it is an entry nobody can go back and check.
+   */
+  report.reader = pdf.reader();
 
   // 1–2. Find the pages that look like a fault table.
   const { total, candidates } = pdf.faultTablePages(file);

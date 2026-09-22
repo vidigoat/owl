@@ -1,0 +1,454 @@
+/*
+ * the review bench
+ *
+ * The device screens in this project are a warm consumer object you talk to. This is not that: it
+ * is the bench behind the counter where somebody checks the work before it goes out. Same palette,
+ * because it is the same product — but flatter, denser, and with no rounded, friendly anything.
+ *
+ * The layout is the argument. Evidence on the left at a size you can actually read, the claim on
+ * the right, and they stay side by side down to the width where that stops being possible. A
+ * review interface that makes you scroll between the page and the parse is one where people tick
+ * boxes without looking, and then the library fills up with confident nonsense.
+ *
+ * ── The tokens live HERE now ────────────────────────────────────────────────
+ *
+ * They used to be inherited from `style.css`, the device page's stylesheet — and when the device
+ * page was rebuilt in React, that file was deleted and took every colour on this one with it.
+ * Nothing crashed and nothing looked obviously broken: the text is dark on white either way. What
+ * went was the palette, and one thing that mattered a great deal more than a palette.
+ *
+ * `.code-box` sets `color: #fff` for the tick mark it holds when checked, and its border read
+ * `1.5px solid var(--graphite)`. An undefined custom property makes that declaration invalid, so
+ * the border fell back to `currentColor` — white, on a white box, on a white page. Every checkbox
+ * on the review bench was invisible, on the one screen in this project whose entire purpose is
+ * ticking rows and seeing which ones you ticked.
+ *
+ * A page that can stand on its own should not borrow its palette from another one.
+ */
+
+:root {
+  --paper: #efeae1;
+  --paper-2: #e4ddd1;
+  --graphite: #3a4048;
+  --ink: #1b1f24;
+  --rule: #cfc6b8;
+
+  /* A parse that disagrees with the page. */
+  --fault: #c8352b;
+  /* Admitted, checked, held. */
+  --proof: #0e7c7b;
+  /* The manual's own callout colour — what it says, and where. */
+  --amber: #b06f18;
+
+  --display: "Bricolage Grotesque", system-ui, sans-serif;
+  /* The voice. Used for one thing only: the sentence being said out loud. */
+  --spoken: "Newsreader", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+
+[hidden] { display: none !important; }
+
+/*
+ * style.css carries `main section { max-width: 1140px; margin: 0 auto; padding: 72px 24px;
+ * border-bottom: 1px solid ... }` for the device page, and it was landing on every section here:
+ * the evidence column, the claim column and the library all picked up a centred 1140px box and a
+ * stray horizontal rule underneath. The grid hid most of it, which is why it took a screenshot to
+ * notice the library sitting 180px in from everything above it.
+ *
+ * Reset rather than override piecemeal. The bench shares this project's palette and typefaces; it
+ * does not share its page furniture.
+ */
+.bench section {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 0;
+}
+
+.bench-body {
+  background: var(--paper);
+  color: var(--ink);
+  margin: 0;
+  font: 400 14px/1.55 var(--mono);
+}
+
+/* ── bar ──────────────────────────────────────────────────────────────────── */
+
+.bench-bar {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 16px clamp(16px, 3vw, 32px);
+  border-bottom: 2px solid var(--ink);
+  background: var(--paper);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+.bench-title { font: 700 17px/1 var(--display); letter-spacing: -0.01em; }
+.bench-sub { color: var(--graphite); font-size: 13px; }
+.bench-spacer { flex: 1; }
+.bench-count { color: var(--graphite); font-size: 13px; }
+
+/* ── empty ────────────────────────────────────────────────────────────────── */
+
+.bench .bench-empty { padding: clamp(40px, 10vh, 96px) clamp(16px, 3vw, 32px); max-width: 60ch; }
+.bench-empty h1 { font: 700 21px/1.3 var(--display); margin: 0 0 12px; }
+.bench-empty p { color: var(--graphite); margin: 0 0 16px; }
+.bench-cmd {
+  font: 400 13px/1.6 var(--mono);
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--ink);
+  padding: 11px 13px;
+  margin: 0;
+  overflow-x: auto;
+}
+
+/* ── the two columns ──────────────────────────────────────────────────────── */
+
+.bench-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(16px, 2.5vw, 34px);
+  padding: clamp(18px, 3vh, 30px) clamp(16px, 3vw, 32px) 80px;
+  align-items: start;
+}
+
+.evidence { position: sticky; top: 76px; }
+.evidence-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--graphite);
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 10px;
+}
+.evidence-pages { white-space: nowrap; }
+
+.evidence-frame {
+  background: #fff;
+  border: 1px solid var(--rule);
+  max-height: calc(100vh - 140px);
+  overflow: auto;
+}
+.evidence-frame img { display: block; width: 100%; height: auto; }
+.evidence-none { padding: 16px; margin: 0; color: var(--graphite); font-size: 13px; }
+.evidence-text {
+  margin: 0;
+  padding: 14px;
+  font: 400 12px/1.6 var(--mono);
+  white-space: pre-wrap;
+  color: var(--graphite);
+}
+
+/* ── the claim ────────────────────────────────────────────────────────────── */
+
+.cand { font: 700 clamp(22px, 3.4vw, 32px)/1.15 var(--display); margin: 0 0 6px; letter-spacing: -0.015em; }
+.cand-meta { color: var(--graphite); font-size: 13px; margin: 0 0 22px; }
+
+.codes { list-style: none; margin: 0; padding: 0; }
+
+/*
+ * One fault code. The whole row is the control — a 11px checkbox is a bad target for a decision
+ * that puts something into a library people act on.
+ */
+.code {
+  border-top: 1px solid var(--rule);
+  padding: 13px 0;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+.code:last-child { border-bottom: 1px solid var(--rule); }
+.code:hover .code-name { text-decoration: underline; text-underline-offset: 3px; }
+
+.code-box {
+  width: 15px;
+  height: 15px;
+  margin-top: 3px;
+  border: 1.5px solid var(--graphite);
+  background: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  line-height: 1;
+  color: #fff;
+}
+.code[aria-checked="true"] .code-box { background: var(--proof); border-color: var(--proof); }
+.code[aria-checked="true"] .code-box::after { content: "✓"; }
+
+.code-name { font: 500 15px/1.3 var(--display); }
+.code-meaning { color: var(--graphite); margin: 3px 0 0; }
+
+/* The sentence in the manual this came from. This is the thing you check against the page. */
+.code-quote {
+  font: italic 400 14px/1.5 var(--spoken);
+  color: var(--ink);
+  margin: 8px 0 0;
+  padding-left: 11px;
+  border-left: 2px solid var(--amber);
+}
+.code-src { font-size: 11px; color: var(--graphite); margin: 5px 0 0; }
+.code-more { font-size: 12px; color: var(--graphite); margin: 6px 0 0; }
+
+/* ── verdict ──────────────────────────────────────────────────────────────── */
+
+.verdict { margin-top: 26px; }
+.admit {
+  font: 500 15px/1 var(--display);
+  background: var(--ink);
+  color: var(--paper);
+  border: 0;
+  padding: 13px 20px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+.admit:disabled { background: transparent; color: var(--graphite); border: 1px dashed var(--rule); cursor: default; }
+.admit:not(:disabled):hover { background: var(--proof); }
+.verdict-note { font-size: 12px; color: var(--graphite); margin: 10px 0 0; max-width: 58ch; }
+
+.done {
+  margin-top: 22px;
+  padding: 13px 15px;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--proof);
+  font-size: 13px;
+}
+.done b { font-weight: 500; }
+
+@media (max-width: 860px) {
+  .bench-cols { grid-template-columns: 1fr; }
+  .evidence { position: static; }
+  .evidence-frame { max-height: 52vh; }
+}
+
+.code:focus-visible, .admit:focus-visible { outline: 2px solid var(--proof); outline-offset: 2px; }
+
+/* A code the manual documents but gives no remedy for. Stated, never filled in from the reason. */
+.code-none {
+  font-size: 12px;
+  color: var(--graphite);
+  margin: 8px 0 0;
+  padding-left: 11px;
+  border-left: 2px dashed var(--rule);
+  max-width: 62ch;
+}
+
+.bench-back { color: var(--graphite); text-decoration: none; font-size: 13px; border-bottom: 1px solid transparent; }
+.bench-back:hover { color: var(--ink); border-bottom-color: var(--rule); }
+
+/* ── what the bench has built ─────────────────────────────────────────────── */
+
+.bench .library { padding: 30px clamp(16px, 3vw, 32px) 80px; border-top: 1px solid var(--rule); }
+.lib-head { font: 700 17px/1 var(--display); margin: 0 0 8px; }
+.lib-sum { color: var(--graphite); margin: 0 0 20px; max-width: 76ch; font-size: 13px; }
+.lib-sum b { color: var(--ink); font-weight: 500; }
+
+.lib { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.lib thead th {
+  text-align: left;
+  font-weight: 400;
+  font-size: 11px;
+  color: var(--graphite);
+  padding: 9px 10px;
+  border-bottom: 1px solid var(--rule);
+}
+.lib-n { text-align: right !important; width: 9ch; }
+.lib-how { width: 34%; }
+.lib tbody td { padding: 9px 10px; border-bottom: 1px solid var(--rule); font-size: 13px; }
+.lib tbody td:first-child { padding-left: 0; font-weight: 500; }
+.lib tbody td.lib-n { text-align: right; }
+
+/*
+ * How a fact got here. Not a badge — a sentence, because the distinction is the product and a
+ * coloured pill would invite the eye to skip it.
+ */
+.how { color: var(--graphite); }
+.how--checked { color: var(--proof); }
+.how--unchecked { color: var(--fault); }
+.lib-none { color: var(--graphite); }
+
+@media (max-width: 720px) {
+  .lib-how, .lib tbody td:nth-child(5) { display: none; }
+}
+
+/* A machine already in the library, read again. Normal, and worth saying so. */
+.again {
+  margin: -8px 0 22px;
+  padding: 10px 13px;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--amber);
+  font-size: 13px;
+  color: var(--graphite);
+}
+.again b { color: var(--ink); font-weight: 500; }
+
+/* A row the parser flagged as cut off. The only amber thing in the list, so the eye goes to it. */
+.code-none--suspect { border-left: 2px solid var(--amber); color: var(--ink); }
+
+/* ── causes, each its own decision ────────────────────────────────────────
+ *
+ * The symptom is the heading and its causes are the rows under it, because that is the shape of
+ * the table on the page the reviewer is holding this against. Each one is its own checkbox: a
+ * symptom used to go in whole, so one cause the parser invented took the correct ones with it.
+ */
+.causes {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1px;
+}
+
+.cause {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  padding: 8px 10px;
+  cursor: pointer;
+  border-left: 2px solid transparent;
+}
+.cause:hover { background: rgba(0, 0, 0, 0.03); }
+.cause[aria-checked='true'] { border-left-color: var(--admit, #3f6b4e); }
+
+.cause-label { font-size: 14px; line-height: 1.45; }
+
+.cause--none {
+  grid-template-columns: minmax(0, 1fr);
+  cursor: default;
+  font-size: 13px;
+  color: var(--graphite);
+  font-style: italic;
+}
+.cause--none:hover { background: none; }
+
+/* The cause's own box, smaller than the symptom's, so the hierarchy is legible at a glance. */
+.cause .code-box { width: 14px; height: 14px; margin-top: 2px; }
+
+/* ── read a manual here ──────────────────────────────────────────────────────
+ *
+ * The bench's empty state used to be the end of the road for anybody who had only the URL: the
+ * commands it prints need a terminal and a checkout. This is the same capability, reachable.
+ *
+ * Styled as part of the bench rather than as a widget bolted onto it — same paper, same rules, same
+ * monospace for anything that came out of a machine. The one deliberate difference is the drop
+ * target, which is the only thing on the page asking to be used.
+ */
+
+/*
+ * `.bench section` sets `padding: 0` and is one specificity point heavier than a bare `.try`, so
+ * the first version of this ran flush to both edges of the window — text touching the glass at
+ * every width. Matching its shape is the fix; raising specificity elsewhere would only move the
+ * argument.
+ */
+.bench section.try {
+  padding: clamp(28px, 5vh, 56px) clamp(16px, 3vw, 32px) clamp(40px, 8vh, 80px);
+  max-width: 1100px;
+  border-top: 1px solid var(--rule);
+}
+.try-head { font: 700 21px/1.3 var(--display); margin: 0 0 10px; }
+.try-lede { color: var(--graphite); margin: 0 0 20px; max-width: 62ch; }
+
+.drop {
+  display: block;
+  padding: 30px 24px;
+  border: 1px dashed var(--rule);
+  border-radius: 3px;
+  background: color-mix(in oklab, var(--paper) 88%, #fff);
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.15s, background 0.15s;
+}
+.drop:hover,
+.drop:focus-within { border-color: var(--graphite); }
+.drop[data-over='true'] {
+  border-color: var(--proof);
+  border-style: solid;
+  background: color-mix(in oklab, var(--proof) 7%, var(--paper));
+}
+.drop-main { display: block; font: 500 16px/1.3 var(--display); }
+.drop-or { color: var(--graphite); font-weight: 400; }
+.drop-sub { display: block; margin-top: 7px; font: 400 12px/1.5 var(--mono); color: var(--graphite); }
+
+.try-state { margin: 16px 0 0; font: 400 13px/1.6 var(--mono); color: var(--graphite); }
+.try-state[data-kind='refused'] { color: var(--fault); }
+
+.try-out { margin-top: 26px; }
+.try-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule);
+  font: 400 12px/1.6 var(--mono);
+  color: var(--graphite);
+}
+.try-meta b { color: var(--ink); font-weight: 500; }
+
+.try-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 40px);
+  margin-top: 18px;
+}
+/* One column on a phone, and the page text keeps its own horizontal scroll rather than the body. */
+@media (max-width: 760px) {
+  .try-cols { grid-template-columns: minmax(0, 1fr); }
+}
+
+.try-col-head {
+  margin: 0 0 8px;
+  font: 400 11px/1.6 var(--mono);
+  color: var(--graphite);
+}
+.try-text {
+  max-height: 460px;
+  overflow: auto;
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.try-rows { list-style: none; margin: 0; padding: 0; }
+.try-rows li { padding: 12px 0; border-bottom: 1px solid var(--rule); }
+.try-sym { font: 500 15px/1.35 var(--display); margin: 0; }
+.try-cause { margin: 6px 0 0 0; padding-left: 12px; border-left: 2px solid var(--amber); }
+.try-cause-label { margin: 0; font-size: 14px; }
+.try-cite { margin: 3px 0 0; font: 400 11px/1.5 var(--mono); color: var(--amber); }
+.try-remedy { margin: 4px 0 0 14px; font-size: 13px; color: var(--graphite); }
+
+.try-note {
+  margin: 16px 0 0;
+  padding-left: 12px;
+  border-left: 2px solid var(--rule);
+  color: var(--graphite);
+  font-size: 13px;
+  max-width: 54ch;
+}
+
+/*
+ * The page text keeps its columns.
+ *
+ * `.evidence-text` wraps, which is right for a quote and wrong for this: the whole claim about
+ * this reader is that it puts every glyph back in the column it was printed in, and soft-wrapping
+ * the result folds the two columns of a fault table into one. It scrolls sideways in its own box
+ * instead, which is the one place on the page allowed to.
+ */
+.try-text {
+  white-space: pre;
+  overflow: auto;
+  overscroll-behavior-x: contain;
+}
+
+/* A cause the manual never named. It is a real answer, and it must not read like a label. */
+.try-cause-none { color: var(--graphite); font-style: italic; }

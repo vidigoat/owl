@@ -88,6 +88,27 @@ and the 11 that were not are refused by name.
 Nothing reaches the library without that check, and the bench above is where a person makes the one
 a machine cannot: whether a cause belongs to the symptom it was filed under.
 
+**Try it with your own machine's manual.** The bench has a drop target: give it a manufacturer's
+PDF and the fault table comes back in a few hundred milliseconds, every cause citing the page it is
+printed on. Nothing is uploaded and nothing is admitted — a machine-read table is a candidate.
+
+That works on the hosted URL because reading a PDF here needs nothing installed. It used to shell
+out to `pdftotext`, which is a binary, which the host does not have — so the live bench was
+permanently empty and the one capability this project is for was the one thing a visitor could not
+see. `manual/pdf-read.js` reads the format itself: cross-references, object streams, fonts, the
+content stream, and the glyph positions that put a three-column table back into three columns.
+
+It is measured rather than asserted. `npm run pdf:compare` runs it against poppler over every manual
+on the machine and scores the thing that matters — whether the same rows come out:
+
+| | |
+|---|---|
+| page count | identical on all **1,881** pages of **30** manuals |
+| words | **99.3–100%** of poppler's, on every manual |
+| parsed rows | **87.5%** recovered word for word, plus 287 rows poppler did not produce |
+
+poppler still goes first where it exists, and which reader answered travels with every result.
+
 ## Hands-free, because your hands are busy
 
 One step at a time, at the size of a headline, four feet away — and it does not advance until you

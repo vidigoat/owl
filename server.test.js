@@ -43,6 +43,88 @@ const it = async (name, fn) => {
 
 const get = (p) => fetch(`${BASE}${p}`);
 
+/**
+ * A one-page manual with a real fault table in it.
+ *
+ * Built here rather than read from `manuals/`, which is gitignored: a check that only runs on the
+ * machine that happens to have the PDFs is a check that does not run. The page is laid out at real
+ * coordinates because the thing being tested is whether the columns survive the round trip.
+ */
+function faultTablePdf({ rows } = {}) {
+  const zlib = require('node:zlib');
+  /*
+   * Long enough to actually score as a fault table.
+   *
+   * `scorePage` wants eighteen points and gets them from SHAPE — columnar lines and remedy verbs —
+   * rather than from the word "troubleshooting", which is the whole reason it can find a table in a
+   * manual that never uses the word. A four-row fixture scored eleven and was correctly ignored,
+   * which is the page-finder working and the fixture being unrealistic.
+   */
+  const table = rows || [
+    [72, 740, 'Troubleshooting'],
+    [72, 720, 'Fault'], [270, 720, 'Cause and troubleshooting'],
+    [72, 700, 'Water is left in the'], [270, 700, 'Filter system or area under the filters'],
+    [72, 688, 'appliance.'], [270, 688, 'is blocked.'],
+    [286, 674, 'Clean the filters.'],
+    [270, 660, 'The drain pump is blocked.'],
+    [286, 646, 'Clean the drain pump.'],
+    [72, 628, 'Appliance does not'], [270, 628, 'The breaker has tripped.'],
+    [72, 616, 'start.'], [286, 602, 'Switch on the circuit breaker.'],
+    [270, 588, 'The door is not closed.'],
+    [286, 574, 'Close the door firmly.'],
+    [72, 556, 'The dishes are not'], [270, 556, 'The rinse aid is empty.'],
+    [72, 544, 'drying.'], [286, 530, 'Refill the rinse aid.'],
+    [270, 516, 'The wrong programme was selected.'],
+    [286, 502, 'Select a programme with drying.'],
+    [72, 484, 'Excessive foam in the'], [270, 484, 'Washing-up liquid was used.'],
+    [72, 472, 'appliance.'], [286, 458, 'Clean the interior with a cloth.'],
+    [270, 444, 'Too much rinse aid was dispensed.'],
+    [286, 430, 'Reduce the rinse aid setting.'],
+    [72, 412, 'The appliance stops'], [270, 412, 'The power supply was interrupted.'],
+    [72, 400, 'during a programme.'], [286, 386, 'Check the fuse box.'],
+    [270, 372, 'The water supply is turned off.'],
+    [286, 358, 'Turn on the tap and check the hose.'],
+  ];
+  const content = table
+    .map(([x, y, t]) => `BT /F1 10 Tf 1 0 0 1 ${x} ${y} Tm (${t.replace(/([()\\])/g, '\\$1')}) Tj ET`)
+    .join('\n');
+  return buildPdf(zlib.deflateSync(Buffer.from(content, 'latin1')), true);
+}
+
+/** A PDF whose page has no text at all: a scan, as far as any text reader can tell. */
+function emptyPdf() {
+  return buildPdf(Buffer.from('q 1 0 0 1 0 0 cm Q', 'latin1'), false);
+}
+
+function buildPdf(stream, compressed) {
+  const objs = [
+    '<< /Type /Catalog /Pages 2 0 R >>',
+    '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
+    '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] ' +
+      '/Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>',
+    { dict: `<< /Length ${stream.length}${compressed ? ' /Filter /FlateDecode' : ''} >>`, stream },
+    '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /FirstChar 32 /LastChar 126 ' +
+      `/Widths [${Array.from({ length: 95 }, (_, i) => (i === 0 ? 278 : 556)).join(' ')}] >>`,
+  ];
+
+  let out = '%PDF-1.4\n';
+  const at = [];
+  objs.forEach((o, i) => {
+    at.push(out.length);
+    out += `${i + 1} 0 obj\n`;
+    out += typeof o === 'string'
+      ? `${o}\nendobj\n`
+      : `${o.dict}\nstream\n${o.stream.toString('latin1')}\nendstream\nendobj\n`;
+  });
+  const xref = out.length;
+  out += `xref\n0 ${objs.length + 1}\n0000000000 65535 f \n`;
+  for (const a of at) out += `${String(a).padStart(10, '0')} 00000 n \n`;
+  out += `trailer\n<< /Size ${objs.length + 1} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF\n`;
+  return Buffer.from(out, 'latin1');
+}
+
+
+
 (async () => {
   console.log('the server, as something a host can run');
 
@@ -168,6 +250,130 @@ const get = (p) => fetch(`${BASE}${p}`);
         `${name} does not ship the library, so the hosted copy knows nothing`
       );
     }
+  });
+
+  /* ── reading a manual over the wire, which is the whole reason the reader exists ── */
+
+  await it('a manual can be read by somebody who has only the URL', async () => {
+    /*
+     * Until this route existed, the hosted review bench was permanently empty: reading a manual
+     * needed `pdftotext`, which is a binary, which is not on the host. A visitor was told "Nothing
+     * is waiting" and never saw the one capability this repository is built around.
+     *
+     * The PDF is built here rather than read from `manuals/`, which is gitignored — a check that
+     * only runs on the machine that has the manuals is a check that does not run.
+     */
+    const res = await fetch(`${BASE}/api/read-manual`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/pdf' },
+      body: faultTablePdf(),
+    });
+    assert.equal(res.status, 200);
+    const out = await res.json();
+
+    assert.equal(out.ok, true, `the manual was refused: ${out.refused || out.error}`);
+    assert.equal(out.pages, 1);
+    assert.ok(['poppler', 'built-in'].includes(out.reader));
+
+    const page = (out.found || [])[0];
+    assert.ok(page, 'no page scored as a fault table');
+    const rows = page.symptoms.map((s) => `${s.symptom} :: ${(s.causes[0] || {}).label}`);
+    assert.ok(
+      rows.some((r) => /Water is left/.test(r) && /filter/i.test(r)),
+      `the table came back as: ${JSON.stringify(rows)}`
+    );
+    assert.equal(page.symptoms[0].causes[0].page, 1, 'a cause came back without the page it is printed on');
+  });
+
+  await it('and reads it the way the DEPLOYED server will, with no poppler at all', async () => {
+    /*
+     * The check above runs against whatever reader this machine has, which here is poppler. The
+     * deployment has none, and that difference is the entire reason `manual/pdf-read.js` was
+     * written — so proving it on a laptop that has poppler proves the wrong thing.
+     *
+     * A second server, with the binary reader switched off, answering the same request. If this
+     * passes and the one above passes, both halves are real: the one that runs here, and the one a
+     * visitor to the URL gets.
+     */
+    const PORT2 = PORT + 1;
+    const hosted = spawn(process.execPath, [path.join(__dirname, 'server.js')], {
+      env: { ...process.env, PORT: String(PORT2), MANUAL_READER: 'built-in' },
+      stdio: 'ignore',
+    });
+    try {
+      for (let i = 0; i < 80; i++) {
+        try { if ((await fetch(`http://localhost:${PORT2}/api/library`)).ok) break; } catch { /* not up */ }
+        await new Promise((r) => setTimeout(r, 50));
+      }
+
+      const res = await fetch(`http://localhost:${PORT2}/api/read-manual`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/pdf' },
+        body: faultTablePdf(),
+      });
+      const out = await res.json();
+
+      assert.equal(out.reader, 'built-in', 'poppler answered on a server told not to use it');
+      assert.equal(out.ok, true, `the hosted path refused the manual: ${out.refused}`);
+      const rows = (out.found[0]?.symptoms || []).map((s) => `${s.symptom} :: ${(s.causes[0] || {}).label}`);
+      assert.ok(
+        rows.some((r) => /Water is left/.test(r) && /filter/i.test(r)),
+        `with no poppler the table came back as: ${JSON.stringify(rows)}`
+      );
+    } finally {
+      hosted.kill();
+    }
+  });
+
+  await it('reading a manual adds nothing to the library', async () => {
+    /*
+     * The review step is the part of this project worth copying, and a route that quietly skipped
+     * it would be removing it. So: the library before, the library after, and they are the same.
+     */
+    const before = await (await get('/api/library')).json();
+    const res = await fetch(`${BASE}/api/read-manual`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/pdf' },
+      body: faultTablePdf(),
+    });
+    const out = await res.json();
+    const after = await (await get('/api/library')).json();
+
+    assert.equal(out.admitted, false);
+    assert.match(out.note, /candidate/i);
+    assert.deepEqual(
+      (after.machines || []).map((m) => m.model).sort(),
+      (before.machines || []).map((m) => m.model).sort(),
+      'reading a manual changed the library'
+    );
+  });
+
+  await it('something that is not a PDF is told so, rather than parsed', async () => {
+    const res = await fetch(`${BASE}/api/read-manual`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/pdf' },
+      body: Buffer.from('<html><body>not a manual</body></html>'),
+    });
+    assert.equal(res.status, 400);
+    const out = await res.json();
+    assert.match(out.error, /not a PDF/i);
+  });
+
+  await it('a scan is refused as a scan, not as "no fault table"', async () => {
+    /*
+     * Two different answers that need opposite things from whoever is holding the manual: one needs
+     * a camera, the other needs a different document. Collapsing them into "could not read this" is
+     * the failure this project keeps writing tests against.
+     */
+    const res = await fetch(`${BASE}/api/read-manual`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/pdf' },
+      body: emptyPdf(),
+    });
+    const out = await res.json();
+    assert.equal(out.ok, false);
+    assert.match(out.refused, /no text layer|scan/i);
+    assert.match(out.refused, /read_manual|camera/i, 'it does not say what to do instead');
   });
 
   await it('the hosted routes keep their own path', () => {

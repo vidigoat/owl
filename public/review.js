@@ -437,3 +437,158 @@ async function loadLibrary() {
 
 load();
 loadLibrary();
+
+/* ── read a manual here ──────────────────────────────────────────────────────
+ *
+ * The bench reviews manuals somebody already fetched with the commands in the empty state. That
+ * needs a terminal and a checkout, so anybody who has only the URL has never been able to see the
+ * one capability this project exists for.
+ *
+ * This is that capability, from the browser: hand it a manufacturer's PDF, and the fault table
+ * comes back with the page each cause is printed on. The bytes go to `/api/read-manual`, which
+ * reads them and returns; nothing is stored and nothing is admitted to the library. Saying so is
+ * not decoration — the review step is the part of this project worth copying, and a button that
+ * quietly skipped it would be removing it.
+ */
+(function readAManual() {
+  const drop = document.getElementById('drop');
+  const file = document.getElementById('file');
+  const state = document.getElementById('tryState');
+  const out = document.getElementById('tryOut');
+  const meta = document.getElementById('tryMeta');
+  const text = document.getElementById('tryText');
+  const rows = document.getElementById('tryRows');
+  const note = document.getElementById('tryNote');
+  if (!drop || !file) return;
+
+  const say = (message, kind) => {
+    state.textContent = message;
+    state.hidden = !message;
+    if (kind) state.dataset.kind = kind;
+    else delete state.dataset.kind;
+  };
+
+  const el = (tag, cls, content) => {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (content !== undefined) n.textContent = content;
+    return n;
+  };
+
+  async function read(f) {
+    if (!f) return;
+    out.hidden = true;
+    say(`Reading ${f.name} — ${(f.size / 1024 / 1024).toFixed(1)} MB…`);
+
+    let data;
+    try {
+      const res = await fetch('/api/read-manual', {
+        method: 'POST',
+        headers: { 'content-type': 'application/pdf' },
+        body: f,
+      });
+      data = await res.json();
+    } catch (e) {
+      say(`The request failed: ${e.message}`, 'refused');
+      return;
+    }
+
+    if (data.error) return say(data.error, 'refused');
+
+    if (!data.ok) {
+      /*
+       * A refusal, printed as a refusal.
+       *
+       * "No text layer" and "no fault table" are different answers and they need opposite things
+       * from whoever is holding the manual — one needs a camera, the other needs a different
+       * document. Collapsing them into "could not read this" is the failure this project keeps
+       * writing tests against.
+       */
+      say(data.refused || 'This manual could not be read here.', 'refused');
+      return;
+    }
+
+    say('');
+    out.hidden = false;
+
+    meta.replaceChildren();
+    const facts = [
+      ['pages', String(data.pages)],
+      ['with a text layer', String(data.withText)],
+      ['read by', data.reader === 'built-in' ? 'the built-in reader, no dependencies' : 'poppler'],
+      ['took', `${data.ms} ms`],
+      ['added to the library', 'nothing'],
+    ];
+    for (const [k, v] of facts) {
+      const span = el('span', null, `${k} `);
+      span.appendChild(el('b', null, v));
+      meta.appendChild(span);
+    }
+
+    const best = (data.found || []).find((f2) => f2.symptoms.length) || (data.found || [])[0];
+    if (!best) {
+      text.textContent = '';
+      rows.replaceChildren();
+      note.textContent = '';
+      say('No page in this manual scored as a fault table. That is an answer, not a failure — '
+        + 'plenty of manuals do not print one.', 'refused');
+      out.hidden = true;
+      return;
+    }
+
+    text.textContent = best.text;
+
+    rows.replaceChildren();
+    for (const s of best.symptoms) {
+      const li = document.createElement('li');
+      li.appendChild(el('p', 'try-sym', s.symptom));
+      for (const c of s.causes) {
+        const box = el('div', 'try-cause');
+        /*
+         * A symptom whose remedies are printed with no cause above them. The manual does that, and
+         * the parse reports it as a null rather than inventing a heading — which is right, and
+         * rendered an empty line where a cause should be. An absence has to look like one.
+         */
+        box.appendChild(
+          c.label
+            ? el('p', 'try-cause-label', c.label)
+            : el('p', 'try-cause-label try-cause-none', 'The manual lists these steps under this symptom without naming a cause.')
+        );
+        box.appendChild(el('p', 'try-cite', `read from page ${c.page} of the file you supplied`));
+        for (const r of c.remedies || []) box.appendChild(el('p', 'try-remedy', `→ ${r.text || r}`));
+        li.appendChild(box);
+      }
+      rows.appendChild(li);
+    }
+
+    const parts = [`Page ${best.page} of ${data.pages}, scored as a fault table.`];
+    if (best.codes?.length) parts.push(`It also prints fault codes: ${best.codes.slice(0, 8).join(', ')}.`);
+    if (best.refused) parts.push(best.refused);
+    parts.push(data.note);
+    note.textContent = parts.join(' ');
+  }
+
+  file.addEventListener('change', () => read(file.files[0]));
+
+  for (const type of ['dragenter', 'dragover']) {
+    drop.addEventListener(type, (e) => {
+      e.preventDefault();
+      drop.dataset.over = 'true';
+    });
+  }
+  for (const type of ['dragleave', 'drop']) {
+    drop.addEventListener(type, (e) => {
+      e.preventDefault();
+      delete drop.dataset.over;
+    });
+  }
+  drop.addEventListener('drop', (e) => read(e.dataTransfer?.files?.[0]));
+
+  // The label wraps a hidden input, so a click already opens the picker. Without this the click
+  // that lands on the label is forwarded to the input and opens it a second time.
+  drop.addEventListener('click', (e) => {
+    if (e.target === file) return;
+    e.preventDefault();
+    file.click();
+  });
+})();

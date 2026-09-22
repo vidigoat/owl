@@ -24,7 +24,8 @@
     "check-readme": "node scripts/check-readme.js",
     "mcp:session": "node scripts/mcp-session.js",
     "verify-against-pages": "node scripts/verify-against-pages.js",
-    "admit-verified": "node scripts/admit-verified.js"
+    "admit-verified": "node scripts/admit-verified.js",
+    "pdf:compare": "node scripts/pdf-compare.js"
   },
   "keywords": [
     "alexa-plus",

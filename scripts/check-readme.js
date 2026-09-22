@@ -88,8 +88,36 @@ const BENCH = {
 const lib = require('../data/service-data');
 const LIBRARY = Object.keys(lib.MODELS).length + Object.keys(lib.ADMITTED).length;
 
+/**
+ * The built-in PDF reader, against poppler.
+ *
+ * This comparison needs both readers and a folder of manuals, and `manuals/` is gitignored — so it
+ * cannot be re-run here, on a fresh clone, or in anybody else's checkout. `npm run pdf:compare`
+ * records its result in `docs/pdf-compare.json`, and that recording is what the documents are
+ * checked against: the figures cannot drift from a measurement that has been taken, and a reader
+ * can see the date it was taken on.
+ */
+function readerClaims() {
+  let m;
+  try {
+    m = JSON.parse(fs.readFileSync(path.join(ROOT, 'docs', 'pdf-compare.json'), 'utf8'));
+  } catch {
+    return [];
+  }
+  return [
+    { what: 'pdf reader: manuals compared', value: String(m.manuals), where: /of \*\*(\d+)\*\* manuals/g },
+    { what: 'pdf reader: pages compared', value: m.pages.toLocaleString(), where: /all \*\*([\d,]+)\*\* pages/g },
+    // Written as a range — "99.3–100% of poppler's words" — so the per cent sign belongs to the
+    // upper bound, not to the figure being checked.
+    { what: 'pdf reader: worst word recall', value: String(m.worstWordRecall), where: /([\d.]+)–100%\*{0,2} of poppler/g },
+    { what: 'pdf reader: rows recovered', value: `${m.rowsRecoveredExactly}%`, where: /\*\*([\d.]+%)\*\* recovered word for word/g },
+    { what: 'pdf reader: rows poppler missed', value: String(m.rowsPopplerDidNotProduce), where: /plus (\d+) rows poppler did not produce/g },
+  ];
+}
+
 const CLAIMS = [
   { what: 'MCP tools registered', value: String(TOOLS), where: /(\d+) (?:MCP )?tools\b/g },
+  ...readerClaims(),
   { what: 'questions asked, mean', value: from(questions, /([0-9.]+) questions on average/, 'mean') },
   { what: 'questions asked, worst case', value: from(questions, /worst case (\d+)/, 'worst case') },
   { what: 'mean effort', value: from(questions, /Mean effort ([0-9.]+)/, 'effort') },

@@ -1,0 +1,12 @@
+{
+  "measured": "2026-09-22",
+  "against": "poppler (pdftotext -layout)",
+  "manuals": 30,
+  "pages": 1881,
+  "pageCountIdentical": true,
+  "worstWordRecall": 99.3,
+  "rowsHere": 1155,
+  "rowsFromPoppler": 992,
+  "rowsRecoveredExactly": 87.5,
+  "rowsPopplerDidNotProduce": 287
+}

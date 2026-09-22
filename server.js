@@ -13,6 +13,8 @@ const { nextTest } = require('./mcp/tools/next_test');
 const lib = require('./data/service-data');
 const { learn } = lib;
 const { parse: parseManual } = require('./manual/faultgraph');
+const { readSymptoms } = require('./manual/symptoms');
+const pdf = require('./manual/pdf');
 const { see } = require('./mcp/tools/see');
 const { read_manual } = require('./mcp/tools/read_manual');
 const review = require('./manual/review');
@@ -42,6 +44,30 @@ const readJson = (req) =>
         reject(e);
       }
     });
+  });
+
+/**
+ * The request body as bytes.
+ *
+ * `readJson` concatenates into a string, which is correct for JSON and destroys a PDF — every byte
+ * above 0x7F becomes a replacement character and the document is unreadable before it is parsed.
+ * A binary upload needs buffers kept as buffers.
+ */
+const readBytes = (req) =>
+  new Promise((resolve, reject) => {
+    const chunks = [];
+    let size = 0;
+    req.on('data', (c) => {
+      size += c.length;
+      if (size > MAX_BODY) {
+        reject(new Error('that file is larger than this endpoint accepts'));
+        req.destroy();
+        return;
+      }
+      chunks.push(c);
+    });
+    req.on('end', () => resolve(Buffer.concat(chunks)));
+    req.on('error', reject);
   });
 
 const PORT = Number(process.env.PORT) || 8792;
@@ -223,6 +249,105 @@ function handler(req, res) {
         return send(res, 400, JSON.stringify({ error: 'needs a model and what was said' }), 'application/json');
       }
       return send(res, 200, JSON.stringify(lib.lookupSymptom(model, said)), 'application/json');
+    }
+
+    /*
+     * ── Read a manual, here, now, and admit nothing ──────────────────────────
+     *
+     * The one capability this project is for, made available to somebody who has only the URL.
+     *
+     * Until now reading a manual needed `pdftotext`, which is a binary, which is on the machine
+     * this was written on and is not on the host. So the hosted review bench has always been
+     * empty — a visitor is told "Nothing is waiting" and never sees the thing the whole repository
+     * is built around. `manual/pdf-read.js` reads the format itself with no dependencies, which is
+     * what makes this route possible at all.
+     *
+     * It takes the PDF as bytes from the browser rather than a URL to fetch. A server that fetches
+     * a URL somebody hands it is a server that can be pointed at the inside of its own network, and
+     * a demo is not worth that. The reader supplies the document; nothing here reaches out.
+     *
+     * And it admits NOTHING. It returns what it read and what it parsed, and the library is
+     * untouched — the review bench exists because a machine-read table is a candidate, not a fact,
+     * and a route that quietly skipped that step would be removing the only part of this worth
+     * copying.
+     */
+    if (req.method === 'POST' && url.pathname === '/api/read-manual') {
+      return readBytes(req)
+        .then((buf) => {
+          if (buf.length < 5 || buf.toString('latin1', 0, 5) !== '%PDF-') {
+            return send(res, 400, JSON.stringify({
+              error: 'that is not a PDF',
+              read: `${buf.length} bytes, beginning ${JSON.stringify(buf.toString('latin1', 0, 8))}`,
+            }), 'application/json');
+          }
+
+          const started = Date.now();
+          let pages;
+          let reader;
+          try {
+            ({ pages, reader } = pdf.read(buf));
+          } catch (e) {
+            return send(res, 200, JSON.stringify({
+              ok: false,
+              reader: pdf.reader(),
+              refused: e.code === 'ENCRYPTED'
+                ? 'the document is encrypted, so the text in it cannot be read without the password'
+                : `the document could not be parsed: ${e.message}`,
+            }), 'application/json');
+          }
+
+          const withText = pages.filter((p) => p.trim().length > 40).length;
+          if (!withText) {
+            /*
+             * A scan. Every page is a picture of a page, and there is nothing here to read — which
+             * is a different answer from "no fault table", and the two need opposite things from
+             * whoever is holding the manual.
+             */
+            return send(res, 200, JSON.stringify({
+              ok: false,
+              reader: pdf.reader(),
+              pages: pages.length,
+              refused: 'this document has no text layer — it is a scan. Reading it needs the ' +
+                'camera path (read_manual), which photographs the page and asks a vision model.',
+            }), 'application/json');
+          }
+
+          const { candidates } = pdf.faultTablePages(buf);
+          const found = candidates.slice(0, 3).map((c) => {
+            const symptoms = readSymptoms({ text: c.text, sourceName: 'the manual you supplied', page: c.page });
+            const codes = parseManual({ model: 'unknown', text: c.text, sourceName: 'the manual you supplied' });
+            return {
+              page: c.page,
+              score: c.score,
+              text: c.text.slice(0, 6000),
+              symptoms: (symptoms.symptoms || []).slice(0, 12).map((s) => ({
+                symptom: s.symptom,
+                causes: (s.causes || []).slice(0, 4).map((x) => ({
+                  label: x.label,
+                  page: x.source?.page ?? c.page,
+                  remedies: (x.remedies || []).slice(0, 3),
+                })),
+              })),
+              coverage: symptoms.coverage,
+              codes: Object.keys(codes.codes || {}).slice(0, 20),
+              refused: codes.refused || null,
+            };
+          });
+
+          return send(res, 200, JSON.stringify({
+            ok: true,
+            reader,
+            pages: pages.length,
+            withText,
+            ms: Date.now() - started,
+            found,
+            // Said plainly, because it is the part people assume is not true.
+            admitted: false,
+            note: 'Nothing here has been added to the library. A machine-read table is a candidate; '
+              + 'the review bench is where a person turns one into a fact.',
+          }), 'application/json');
+        })
+        .catch((e) => send(res, 400, JSON.stringify({ error: e.message }), 'application/json'));
     }
 
     /* ── the review queue: nothing reaches the library without a person saying so ── */
