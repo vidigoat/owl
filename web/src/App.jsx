@@ -158,20 +158,59 @@ export default function App() {
               </div>
             </dl>
 
+            {/*
+              The index, grouped by manufacturer.
+
+              It was nineteen flat rows reading "Bosch Dishwasher — 12 symptoms, 21 causes", with
+              the words "Bosch Dishwasher" repeated twelve times down the page. Low density and
+              visually numbing, which is a poor way to present the one part of this project that
+              took the most work. Grouped and columnar, the same data reads as what it is: an index
+              of documents, with the numbers aligned so they can be compared down the column.
+            */}
             <div className="shelf">
-              {lib.machines.map((m) => (
-                <div className="machine" key={m.model} data-tier={m.tier}>
-                  <span className="machine__model">{m.model}</span>
-                  <span className="machine__what">
-                    {m.brand} {m.kind} — {plural(m.symptoms || m.codes, m.symptoms ? 'symptom' : 'fault code')},{' '}
-                    {plural(m.causes, 'cause')}
-                    {m.rejected?.length ? `, ${m.rejected.length} rejected` : ''}
-                  </span>
-                  <span className="machine__tier">
-                    {m.tier === 'checked' ? 'read · checked' : m.tier === 'hand' ? 'by hand' : 'unchecked'}
-                  </span>
-                </div>
-              ))}
+              {Object.entries(
+                lib.machines.reduce((by, m) => {
+                  (by[m.brand] ||= []).push(m);
+                  return by;
+                }, {})
+              )
+                .sort((a, b) => b[1].length - a[1].length)
+                .map(([brand, list]) => (
+                  <div className="shelf__brand" key={brand}>
+                    <h3>
+                      {brand}
+                      <span>{plural(list.length, 'machine')}</span>
+                    </h3>
+
+                    <div className="shelf__head" aria-hidden="true">
+                      <span>model</span>
+                      <span>kind</span>
+                      <span>symptoms</span>
+                      <span>causes</span>
+                      <span>rejected</span>
+                      <span>read</span>
+                    </div>
+
+                    {list.map((m) => (
+                      <div className="machine" key={m.model} data-tier={m.tier}>
+                        <span className="machine__model">{m.model}</span>
+                        <span className="machine__kind">{m.kind || '—'}</span>
+                        <span className="machine__n">{m.symptoms || m.codes || 0}</span>
+                        <span className="machine__n">{m.causes}</span>
+                        <span className="machine__n machine__n--out">
+                          {m.rejected?.length || ''}
+                        </span>
+                        <span className="machine__tier">
+                          {m.tier === 'checked'
+                            ? 'checked'
+                            : m.tier === 'hand'
+                              ? 'by hand'
+                              : 'not yet'}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                ))}
             </div>
           </section>
         )}

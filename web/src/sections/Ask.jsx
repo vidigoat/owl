@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
+import TitleBlock from '../components/TitleBlock.jsx';
 import { describe, odds } from '../lib/api.js';
 
 /**
@@ -60,15 +61,29 @@ export default function Ask({ machines }) {
     <section className="hero wrap" id="ask">
       <p className="plate">Second Set of Hands · an appliance repair copilot for Alexa+</p>
 
-      <h1>
-        Tell it what the machine is doing. It answers with <em>the manufacturer's own words</em>,
-        and the page they are printed on.
-      </h1>
+      {/*
+        No accent in the headline.
+        
+        "the manufacturer's own words" used to be set in the callout ochre, which put the brightest
+        thing on the page inside a sentence — competing with the one element that has actually
+        earned that colour, the citation under each cause. The headline is the claim; the citation
+        is the evidence, and the evidence should be what the eye lands on.
+      */}
+      <div className="hero__top">
+        <div>
+          <h1>
+            Tell it what the machine is doing. It answers with the manufacturer's own words, and
+            the page they are printed on.
+          </h1>
 
-      <p className="hero__sub">
-        Not a summary of a manual. The sentence out of the manual, the cause listed beside it, and
-        the remedy printed under that — or a straight answer that this one is not in there.
-      </p>
+          <p className="hero__sub">
+            Not a summary of a manual. The sentence out of the manual, the cause listed beside it,
+            and the remedy printed under that — or a straight answer that this one is not in there.
+          </p>
+        </div>
+
+        <TitleBlock machine={readable.find((m) => m.model === model)} />
+      </div>
 
       <div className="ask">
         <form
@@ -124,6 +139,16 @@ export default function Ask({ machines }) {
         ))}
       </div>
 
+      {/*
+        Where the percentages come from, said once, before the first one appears. An unexplained
+        number on a repair page reads as a confidence score somebody computed; this one is the
+        manual's own ordering, which is a much weaker and much more honest claim.
+      */}
+      <p className="ask__basis">
+        The percentages are the manual's own ordering — it lists the likeliest cause first — not a
+        model's estimate. Nothing on this page is a guess about your machine.
+      </p>
+
       <AnimatePresence mode="wait">
         {out && (
           <motion.div
@@ -173,9 +198,15 @@ function Found({ out }) {
 
       {first.causes.map((c) => (
         <div className="cause" key={c.id}>
+          {/*
+            The number is the manual's own ordering, not a model's opinion. A manual lists the
+            likeliest cause first, so the first one carries more weight than the fourth — that is
+            the whole derivation, and it is worth labelling, because an unexplained percentage on a
+            repair page looks like a confidence score somebody computed.
+          */}
           <span className="cause__odds">
             {odds(c.likelihood)}
-            <small>listed</small>
+            <small>by order</small>
           </span>
           <div>
             {/*
