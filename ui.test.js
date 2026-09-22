@@ -289,6 +289,37 @@ const it = async (name, fn) => {
     }
   });
 
+  await it('every internal link goes somewhere that is actually served', () => {
+    /*
+     * The library section now sends a reader to `/review.html#try`, which is the only path from the
+     * device page to the one capability this project is for. A dead link there costs more than a
+     * missing feature: it is a promise made and broken in the same sentence, on the page a judge
+     * lands on.
+     *
+     * Checked against what is SERVED — `dist/` when it has been built, `public/` otherwise — which
+     * is what `server.js` itself does.
+     */
+    const roots = ['dist', 'public']
+      .map((d) => path.join(__dirname, d))
+      .filter((d) => fs.existsSync(d));
+
+    const pages = [
+      ['public/review.html', fs.readFileSync(path.join(__dirname, 'public', 'review.html'), 'utf8')],
+      ...sources(),
+    ];
+
+    for (const [name, src] of pages) {
+      for (const m of src.matchAll(/href=["'{`]*\/([a-z0-9._/-]+)/gi)) {
+        const target = m[1].split('#')[0].split('?')[0];
+        if (!target || target.startsWith('api/')) continue;
+        assert.ok(
+          roots.some((r) => fs.existsSync(path.join(r, target))),
+          `${name} links to /${target}, and nothing serves it`
+        );
+      }
+    }
+  });
+
   await it('every API path a page calls is one the server answers', () => {
     /*
      * The bench once shipped with nothing linking to it. This is the same lesson one level down: a

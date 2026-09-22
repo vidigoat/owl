@@ -142,6 +142,30 @@ section { padding-block: clamp(64px, 9vh, 112px); }
 }
 .lede b { color: var(--ink); font-weight: 600; }
 
+/*
+ * The one place on this page that asks the reader to do something.
+ *
+ * Set apart with a rule rather than a button: the page is a description of a device, and a call to
+ * action styled like a product button would read as marketing in the middle of an index. A rule and
+ * a link is the same invitation at the volume the rest of the page is speaking at.
+ */
+.invite {
+  max-width: 62ch;
+  margin: 18px 0 0;
+  padding-left: 14px;
+  border-left: 2px solid var(--amber);
+  color: var(--ink-2);
+  font-size: var(--t-body);
+}
+.invite a {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--amber);
+  text-underline-offset: 3px;
+}
+.invite a:hover { text-decoration-thickness: 2px; }
+
 /* ── hero ────────────────────────────────────────────────────────────────── */
 
 .hero { padding-block: clamp(56px, 9vh, 104px) clamp(40px, 6vh, 72px); }

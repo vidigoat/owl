@@ -135,6 +135,21 @@ export default function App() {
               than admitted quietly.
             </p>
 
+            {/*
+              The invitation, on the page where somebody is already looking at what it knows.
+
+              Reading a manual used to need `pdftotext`, which is a binary the host does not have —
+              so on this URL the capability the whole project is built around was the one thing a
+              visitor could not see. It reads the PDF format itself now, with no dependencies, and
+              the bench is where that is reachable. A list of what a thing knows, with no way to
+              find out what it would make of yours, is a brochure.
+            */}
+            <p className="invite">
+              <a href="/review.html#try">Read your own machine's manual</a> — any brand, nothing
+              here is coded for yours. The fault table comes back in under a second with the page
+              each cause is printed on. Nothing is uploaded and nothing is added to the library.
+            </p>
+
             <dl className="totals">
               <div>
                 <dt>machines</dt>
