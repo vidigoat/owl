@@ -1,0 +1,24 @@
+# What must not ride along to a public URL.
+#
+# The Vercel CLI does not read .gitignore. Everything below is kept out of this repository on
+# purpose, and without this file a deploy would upload all of it anyway.
+
+.env
+.env.local
+
+# One household's machines and repairs. Somebody's home, not this repository's business.
+data/home.json
+
+# Rendered pages of manufacturer manuals. The parsed facts in data/admitted/ are committed — short
+# attributed quotations with a citation each — but redistributing the pages themselves is a
+# different thing, and putting them on a public URL is the most public way to do it.
+data/pending/
+
+# 143MB of manuals, fetched from the manufacturer and reproducible with one command.
+manuals/
+
+node_modules/
+.git/
+.vercel
+*.log
+.DS_Store

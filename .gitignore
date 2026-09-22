@@ -21,3 +21,4 @@ data/pending/
 
 # The manuals. Hundreds of megabytes, fetched from the manufacturer, reproducible with one command.
 manuals/
+.vercel

@@ -127,6 +127,63 @@ const get = (p) => fetch(`${BASE}${p}`);
     assert.equal((await get('/api/nope')).status, 404);
   });
 
+  await it('a deploy cannot carry somebody\'s home off the machine', () => {
+    /*
+     * This happened on the other project in this pair, and the shape of it applies here with more
+     * at stake. A production deploy published a file that was gitignored — every page looked
+     * correct, because the only thing wrong was whose data it was.
+     *
+     * The cause: the Vercel CLI does not read `.gitignore`. Three things in this repository are
+     * deliberately not committed and would otherwise be uploaded to a public URL anyway.
+     */
+    const ignore = path.join(__dirname, '.vercelignore');
+    assert.ok(fs.existsSync(ignore), 'without .vercelignore a deploy uploads what .gitignore keeps out');
+
+    const lines = fs.readFileSync(ignore, 'utf8')
+      .split('\n').map((l) => l.trim()).filter((l) => l && !l.startsWith('#'));
+
+    // A household's machines and repairs; rendered manufacturer pages; 143MB of manuals.
+    for (const kept of ['data/home.json', 'data/pending/', 'manuals/', '.env']) {
+      assert.ok(lines.includes(kept), `${kept} is gitignored but a deploy would still publish it`);
+    }
+  });
+
+  await it('what ships is the parsed library, not the pages it was read from', () => {
+    /*
+     * `includeFiles: "{public,data}/**"` would put `data/pending/` inside the function bundle.
+     * The committed library — short attributed quotations with a citation each — is a different
+     * thing from the manufacturer's pages, and only one of them is ours to serve.
+     */
+    const cfg = JSON.parse(fs.readFileSync(path.join(__dirname, 'vercel.json'), 'utf8'));
+    for (const [name, fn] of Object.entries(cfg.functions || {})) {
+      const pattern = (fn.includeFiles || '').replace(/\/\*\*$/, '');
+      const inside = pattern.match(/^\{(.*)\}$/);
+      const shipped = (inside ? inside[1].split(',') : [pattern]).map((d) => d.trim());
+      assert.ok(
+        !shipped.includes('data'),
+        `${name} ships all of data/, which includes the pending pages and one household's file`
+      );
+      assert.ok(
+        shipped.includes('data/admitted'),
+        `${name} does not ship the library, so the hosted copy knows nothing`
+      );
+    }
+  });
+
+  await it('the hosted routes keep their own path', () => {
+    const cfg = JSON.parse(fs.readFileSync(path.join(__dirname, 'vercel.json'), 'utf8'));
+    for (const r of cfg.rewrites || []) {
+      assert.ok(
+        !/^\/api\/?$/.test(r.destination),
+        `the rewrite ${r.source} -> ${r.destination} throws the pathname away before the server sees it`
+      );
+    }
+    assert.ok(
+      fs.existsSync(path.join(__dirname, 'api', '[...path].js')),
+      'nothing serves /api/<anything> on the deployment'
+    );
+  });
+
   stop();
   console.log(`\n${passed} passed`);
 })();
