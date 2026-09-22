@@ -248,4 +248,52 @@ it('overlap is a fraction of the shorter description, and is symmetric', () => {
   assert.equal(overlap('', 'anything'), 0);
 });
 
+it('a verb and a state are the same word to an owner', () => {
+  /*
+   * The commonest way somebody differs from a manual, and the one the stemmer existed to miss.
+   *
+   * A manual writes a STATE — "Dishware is not dry." — and a person describes an ACTION: "the
+   * dishes are not drying." Stripping only a trailing "s" leaves those with no word in common, so
+   * the library refused, and the refusal was correct about its own arithmetic and useless to the
+   * person holding the door open.
+   */
+  const lib = library([
+    machine({
+      model: 'TESTDW2',
+      symptoms: [
+        {
+          id: 'not-dry',
+          symptom: 'Dishware is not dry.',
+          causes: [{ id: 'not-dry-0', label: 'No rinse aid.', likelihood: 0.6, remedies: ['Add rinse aid.'], evidence: 'manual, page 1' }],
+        },
+      ],
+    }),
+  ]);
+
+  const r = lib.lookupSymptom('TESTDW2', 'the dishes are not drying');
+  assert.equal(r.known, true, 'a tense change was enough to lose the match');
+  assert.equal(r.matches[0].symptom, 'Dishware is not dry.');
+});
+
+it('stemming is consistent, not correct English', () => {
+  /*
+   * Both sides go through the same rule, so it only has to agree with itself. These are the pairs
+   * the rule was built to collapse, and the doubled consonant is why "running" does not become
+   * "runn" and match nothing.
+   */
+  const { overlap } = library([]);
+  for (const [a, b] of [
+    ['drying', 'dry'],
+    ['draining', 'drains'],
+    ['running', 'run'],
+    ['making', 'makes'],
+    ['blocked', 'blocks'],
+  ]) {
+    assert.equal(overlap(a, b), 1, `"${a}" and "${b}" do not meet`);
+  }
+
+  // And it must not collapse things that are genuinely different.
+  assert.equal(overlap('draining', 'drying'), 0, 'two different words were merged');
+});
+
 console.log(`\n${passed} passed`);

@@ -22,11 +22,20 @@ import { describe, odds } from '../lib/api.js';
  * separates this from something that sounds confident about a machine it has never read.
  */
 
+/*
+ * Four things somebody would actually say, and the last one is the point.
+ *
+ * "there is a burning smell" is not in this manual, and the honest answer to it is a refusal that
+ * names what the manual DOES list. The chip used to be "it is making a grinding noise", which the
+ * matcher refused until stemming taught it that "making" and "noise" match "Filling valves making
+ * knocking noises" — a fair candidate, and no longer a demonstration of the refusal. A first screen
+ * that can only show the product succeeding is showing half of it.
+ */
 const TRIES = [
   'there is water left in the bottom at the end of the program',
-  'the appliance will not start',
+  'the dishes are not drying',
   'there is loads of foam coming out',
-  'it is making a grinding noise',
+  'there is a burning smell',
 ];
 
 export default function Ask({ machines }) {

@@ -218,7 +218,37 @@ const NOISE = new Set([
  * Stemmed, both score the same and both come back, which is the honest answer: a sentence that
  * crude a measure cannot separate is a sentence to ask about, not to resolve.
  */
-const stem = (w) => (w.length > 3 && w.endsWith('s') && !w.endsWith('ss') ? w.slice(0, -1) : w);
+/*
+ * ── And the tense, not just the plural ──────────────────────────────────────
+ *
+ * The rule above stripped a trailing "s" and nothing else, which left the commonest way an owner
+ * differs from a manual untouched. A manual writes a state — *"Dishware is not dry."* — and a
+ * person describes an action: *"the dishes are not drying."* Not one word in common after
+ * stemming, so the library refused, and the refusal was correct about its own arithmetic and
+ * useless to the person holding the door open.
+ *
+ * So: strip a verb ending, then strip a trailing "e", which is what makes the two halves meet —
+ * "drying" → "dry", and "makes" → "make" → "mak" alongside "making" → "mak". Both sides go through
+ * this, so the rule only has to be consistent, not correct English. A doubled consonant left
+ * behind by "-ing" is collapsed, or "running" becomes "runn" and matches nothing.
+ *
+ * Deliberately crude, and deliberately not a stemmer library: this is a small vocabulary of
+ * appliance faults, the cost of a wrong merge is a candidate the owner can see and reject, and a
+ * dependency here would be paid for by every person who installs this.
+ */
+const stem = (w) => {
+  let out = w;
+  if (out.length > 5 && out.endsWith('ing')) out = out.slice(0, -3);
+  else if (out.length > 4 && out.endsWith('ed')) out = out.slice(0, -2);
+  else if (out.length > 4 && out.endsWith('es')) out = out.slice(0, -2);
+  else if (out.length > 3 && out.endsWith('s') && !out.endsWith('ss')) out = out.slice(0, -1);
+
+  // "running" → "runn" → "run"
+  if (out.length > 3 && out.at(-1) === out.at(-2) && !'aeiou'.includes(out.at(-1))) out = out.slice(0, -1);
+  // "make" and "making" both reach "mak"
+  if (out.length > 3 && out.endsWith('e')) out = out.slice(0, -1);
+  return out;
+};
 
 const words = (s) =>
   new Set(
