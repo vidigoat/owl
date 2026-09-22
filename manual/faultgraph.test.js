@@ -319,4 +319,62 @@ it('a cause with no remedy produces no test to try', () => {
   assert.equal(tests.filter((t) => t.kind === 'remedy').length, 0);
 });
 
+/* ── the hallucination guard ──────────────────────────────────────────────── */
+
+it('a reading where every code says the same thing is refused, not kept', () => {
+  /*
+   * This is the real one, and it was live in the library.
+   *
+   * `B18IF905SP` is a Bosch refrigerator. The page scorer picked its Home Connect pages — prose
+   * about joining a Wi-Fi network, no fault table anywhere on them — and the vision model, asked to
+   * read the fault-code table on that page, produced one. Seven codes, every one with the identical
+   * meaning and the identical cause. Four of them are not Bosch conventions at all: OE and 4C/5E
+   * are LG and Samsung, H20 is Whirlpool.
+   *
+   * Read one row at a time, which is how a reviewer reads, every row is plausible. The tell only
+   * exists across rows.
+   */
+  const invented = [
+    'E24  REASON: The water inlet valve is stuck open',
+    '     Check the water inlet valve for blockages and replace if necessary',
+    'E07  REASON: The water inlet valve is stuck open',
+    '     Check the water inlet valve for blockages and replace if necessary',
+    'F21  REASON: The water inlet valve is stuck open',
+    '     Check the water inlet valve for blockages and replace if necessary',
+    'OE   REASON: The water inlet valve is stuck open',
+    '     Check the water inlet valve for blockages and replace if necessary',
+  ].join('\n');
+
+  const g = parse({ model: 'B18IF905SP', text: invented, sourceName: 'Bosch service manual' });
+
+  assert.equal(g.found, 0, `kept ${Object.keys(g.codes).join(', ')}`);
+  assert.deepEqual(g.codes, {});
+  assert.match(g.coverage, /all of them said the same thing/);
+  assert.ok(g.refused, 'nothing says why it was refused');
+});
+
+it('a real table of codes that differ is not refused', () => {
+  // The guard has to be quiet on every manual that is fine, which is all of them.
+  const g = parse({ model: 'SMS46KI01E', text: MANUAL, sourceName: 'Bosch service manual' });
+  assert.ok(g.found >= 2, `the guard swallowed a real reading: ${g.coverage}`);
+  assert.equal(g.refused, undefined);
+});
+
+it('two codes that agree are not enough to refuse a reading', () => {
+  /*
+   * Manuals really do list two codes with one remedy — a pair of sensor faults answered by the same
+   * check. Three is where "they all say the same thing" stops being a coincidence, and the cost of
+   * being wrong here is throwing away somebody's real table.
+   */
+  const pair = [
+    'E01  REASON: The door is open',
+    '     Close the door',
+    'E02  REASON: The door is open',
+    '     Close the door',
+  ].join('\n');
+
+  const g = parse({ model: 'X', text: pair, sourceName: 'manual' });
+  assert.equal(g.refused, undefined, 'a two-code manual was refused');
+});
+
 console.log(`\n${passed} passed`);

@@ -848,7 +848,7 @@ lower case — so those rows carry `suspect: true` and the bench puts an amber n
 what to check. Four rows across twelve manuals. The library cannot fix them and does not pretend to;
 it points at them, which is the difference between a question and a fact.
 
-Fourteen machines have been read — **140 symptoms, 228 causes**, every one citing its
+Fourteen machines have been read — **140 symptoms, 221 causes**, every one citing its
 page — across dishwashers, a dryer, a refrigerator and two Siemens ovens, which is the same parser
 reading five kinds of appliance from two manufacturers. With the hand-written ones that makes
 **19 machines in the library** — 129 symptoms and 213 causes, each citing its page, and twelve rows
@@ -860,12 +860,24 @@ the text layer.
 Both were live in this library, and both survived a per-row review, because neither is visible in
 any single row.
 
-**A collapsed parse.** `B18IF905SP` carried seven distinct fault codes — E24, E07, F21, OE, 4C, 5E,
-H20 — every one with the identical meaning *"REASON: The water inlet valve is stuck open"* and the
-identical cause. One row at a time, each looks plausible. Together they are one answer stamped
-seven times, and four of those codes are not Bosch conventions at all: `OE` and `4C`/`5E` are LG
-and Samsung, `H20` is Whirlpool. The manual is a refrigerator's. The record was **removed rather
-than corrected** — there is nothing in it that came off that page.
+**A hallucinated table, and it is still reproducible.** `B18IF905SP` carried seven distinct fault
+codes — E24, E07, F21, OE, 4C, 5E, H20 — every one with the identical meaning *"REASON: The water
+inlet valve is stuck open"* and the identical cause. Four of those are not Bosch conventions at
+all: `OE` and `4C`/`5E` are LG and Samsung, `H20` is Whirlpool.
+
+The bench shows why in one glance. The rendered page beside the parse is the manual's **Home
+Connect** section — prose about joining a refrigerator to a Wi-Fi network, with no fault table
+anywhere on it. The page scorer picked it, and a vision model asked to read the fault-code table on
+a page that has none produced one anyway. Running that manual through the pipeline today does it
+again, so this is a live failure and not a historical one.
+
+Read one row at a time — which is how a reviewer reads — every row is plausible. The tell exists
+only across rows, so the guard belongs in the code rather than in anybody's attention: **distinct
+codes mean distinct things**, that is what a code is for, and a reading where they all say the same
+sentence is one answer copied down a page. `manual/faultgraph.js` now refuses such a reading
+outright rather than trimming it — there is no way to tell which of the seven, if any, came off the
+page, and keeping one would be choosing at random and calling it a fact. The record was **removed
+rather than corrected**.
 
 **The wrong appliance.** `--kind Dishwasher` was passed to a batch containing a refrigerator and a
 dryer, and the flag was believed over the manuals. The library then said a fridge was a dishwasher,

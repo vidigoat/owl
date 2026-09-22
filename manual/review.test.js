@@ -206,4 +206,96 @@ it('no admitted directory is an empty library, not a crash', () => {
   assert.deepEqual(bench().mod.admitted(), {});
 });
 
+it('a symptom can be admitted without the causes the parser invented', () => {
+  /*
+   * Real, from SHE43DM2N. That symptom came back with four causes where the manual lists two — the
+   * parser had promoted "This process can take approx. 30 minutes." and "The appliance is reset and
+   * restarted." to causes, because both sit flush with the column boundary and flush is where a
+   * cause goes.
+   *
+   * Admission used to be all-or-nothing per symptom, so the only way to refuse those two was to
+   * throw away the two correct ones with them. Two real facts about somebody's dishwasher, lost to
+   * a layout quirk.
+   */
+  const { root, mod } = bench();
+  write(root, {
+    model: 'SHE43DM2N',
+    brand: 'Bosch',
+    kind: 'Dishwasher',
+    source: 'SHE43DM2N.pdf',
+    symptoms: [
+      {
+        id: 'appliance-does-not-start',
+        symptom: 'Appliance does not start.',
+        causes: [
+          { id: 'c-real-1', label: 'The breaker has tripped.', remedies: ['Check the breaker.'] },
+          { id: 'c-junk-1', label: 'This process can take approx. 30 minutes.', remedies: [] },
+          { id: 'c-real-2', label: 'The door is not closed.', remedies: ['Close the door.'] },
+          { id: 'c-junk-2', label: 'The appliance is reset and restarted.', remedies: [] },
+        ],
+      },
+    ],
+  });
+
+  const r = mod.admit('SHE43DM2N', ['appliance-does-not-start', 'c-real-1', 'c-real-2'], 'a person');
+  assert.equal(r.admitted, true);
+
+  const out = JSON.parse(fs.readFileSync(path.join(root, 'data', 'admitted', 'SHE43DM2N.json'), 'utf8'));
+  const causes = out.symptoms[0].causes.map((c) => c.id);
+  assert.deepEqual(causes, ['c-real-1', 'c-real-2'], `kept ${causes.join(', ')}`);
+
+  // And what was refused is on the record, not silently gone.
+  assert.ok(out.rejected.includes('c-junk-1'));
+  assert.ok(out.rejected.includes('c-junk-2'));
+});
+
+it('ticking a symptom and none of its causes still keeps all of them', () => {
+  // Every caller before per-cause admission meant "this whole symptom", and still does.
+  const { root, mod } = bench();
+  write(root, {
+    model: 'M1',
+    brand: 'Bosch',
+    symptoms: [
+      {
+        id: 's1',
+        symptom: 'It will not drain.',
+        causes: [
+          { id: 's1-0', label: 'Blocked filter.', remedies: [] },
+          { id: 's1-1', label: 'Kinked hose.', remedies: [] },
+        ],
+      },
+    ],
+  });
+
+  mod.admit('M1', ['s1'], 'a person');
+  const out = JSON.parse(fs.readFileSync(path.join(root, 'data', 'admitted', 'M1.json'), 'utf8'));
+  assert.equal(out.symptoms[0].causes.length, 2);
+});
+
+it('a symptom the parser found no cause for does not go in at all', () => {
+  /*
+   * It happens: the Siemens oven run reports "1 had no readable cause" in as many words. A symptom
+   * with no cause is not a fact about a machine, it is the name of a problem — and an assistant
+   * that answers "yes, that is a thing that happens" has helped nobody. Ticking it cannot admit it,
+   * and the refusal is recorded rather than silent.
+   */
+  const { root, mod } = bench();
+  write(root, {
+    model: 'M2',
+    brand: 'Bosch',
+    codes: {},
+    symptoms: [
+      { id: 's1', symptom: 'It will not drain.', causes: [] },
+      { id: 's2', symptom: 'It is loud.', causes: [{ id: 's2-0', label: 'Real cause.', remedies: [] }] },
+    ],
+  });
+
+  const r = mod.admit('M2', ['s1', 's2'], 'a person');
+  const out = JSON.parse(fs.readFileSync(path.join(root, 'data', 'admitted', 'M2.json'), 'utf8'));
+
+  assert.deepEqual(out.symptoms.map((s) => s.id), ['s2'], 'a causeless symptom was admitted');
+  assert.ok(out.rejected.includes('s1'), 'the dropped symptom is not on the record');
+  assert.equal(r.admitted, true);
+});
+
 console.log(`\n${passed} passed`);

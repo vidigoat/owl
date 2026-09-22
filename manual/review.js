@@ -134,7 +134,48 @@ function admit(model, accept, by = 'unattributed') {
 
   const codes = {};
   for (const c of wanted.filter((w) => allCodes.includes(w))) codes[c] = entry.codes[c];
-  const symptoms = (entry.symptoms || []).filter((s) => wanted.includes(s.id));
+
+  /*
+   * ── Admission, one cause at a time ──────────────────────────────────────
+   *
+   * A symptom used to be all-or-nothing, and that cost real facts. `SHE43DM2N` lists five symptoms;
+   * one of them came back with four causes where the manual has two, because the parser had
+   * promoted *"This process can take approx. 30 minutes."* and *"The appliance is reset and
+   * restarted."* — both of them explanation, sitting flush with the boundary — to causes alongside
+   * the real ones. Two correct causes went in the bin with the two wrong ones, because there was no
+   * way to say "these two, not those".
+   *
+   * So `accept` may also carry cause ids. The rule is deliberately one sentence: if a symptom's
+   * accepted list mentions any of its causes, it keeps exactly those; if it mentions none, it keeps
+   * all of them, which is what every existing caller means and what the queue did before.
+   *
+   * A symptom whose every cause was rejected is not admitted at all. A symptom with no cause is not
+   * a fact about a machine — it is the name of a problem — and the library already drops those.
+   */
+  const dropped = [];
+  const symptoms = [];
+
+  for (const s of entry.symptoms || []) {
+    if (!wanted.includes(s.id)) continue;
+
+    const causes = s.causes || [];
+    const named = causes.filter((c) => accept.includes(c.id));
+    const keep = named.length ? named : causes;
+
+    for (const c of causes) {
+      if (!keep.includes(c)) dropped.push(c.id);
+    }
+
+    if (!keep.length) {
+      dropped.push(s.id);
+      continue;
+    }
+    symptoms.push({ ...s, causes: keep });
+  }
+
+  // Rejections are recorded whole: whichever symptoms were not ticked, and whichever causes were
+  // ticked away inside the ones that were. The row on the queue has to show what was decided.
+  rejected.push(...dropped);
 
   fs.mkdirSync(ADMITTED, { recursive: true });
   const record = {

@@ -185,8 +185,20 @@ function renderCodes(entry) {
  * Symptom rows, in the same list and reviewed the same way.
  *
  * Current manuals key their troubleshooting tables on a described symptom rather than a code, so
- * for most machines this is the whole candidate. The row shows the symptom as its heading and the
- * manual's first cause beneath it, because that pair is what a reviewer checks against the page.
+ * for most machines this is the whole candidate.
+ *
+ * ── Every cause, and each one tickable ──────────────────────────────────────
+ *
+ * This used to show the first cause and "and 3 more listed under this", and admission was
+ * all-or-nothing per symptom. That cost real facts. `SHE43DM2N` had a symptom with four causes
+ * where the manual lists two — the parser had promoted "This process can take approx. 30 minutes."
+ * and "The appliance is reset and restarted." to causes, because both sit flush with the column
+ * boundary and flush is where a cause goes. The only way to refuse those two was to throw away the
+ * two correct ones with them.
+ *
+ * So the causes are all shown and each is its own checkbox. Ticking the symptom ticks all of them,
+ * which is what a reviewer means nine times out of ten; untick the one that is wrong and the rest
+ * still go in.
  */
 function renderSymptoms(entry) {
   const list = $('codes');
@@ -199,7 +211,7 @@ function renderSymptoms(entry) {
     li.setAttribute('aria-checked', 'false');
     li.tabIndex = 0;
 
-    const remedy = (first.remedies || [])[0] || '';
+    const causes = s.causes || [];
 
     /*
      * A row the parser flagged as unreadable, pointed at.
@@ -214,46 +226,129 @@ function renderSymptoms(entry) {
         'together part-way down this row and the start of it was lost. Check it against the page ' +
         'before admitting it.</p>'
       : '';
-    const more = (s.causes || []).length > 1
-      ? `<p class="code-more">and ${s.causes.length - 1} more cause${s.causes.length > 2 ? 's' : ''} listed under this</p>`
-      : '';
+    const causeRows = causes.length
+      ? causes
+          .map((c) => {
+            const remedy = (c.remedies || [])[0] || '';
+            return (
+              `<li class="cause" role="checkbox" aria-checked="false" tabindex="0" data-cause="${esc(c.id)}">` +
+                `<span class="code-box" aria-hidden="true"></span>` +
+                `<span>` +
+                  `<span class="cause-label">${esc(c.label || 'no cause stated')}</span>` +
+                  (remedy ? `<p class="code-quote">“${esc(remedy)}”</p>` : '') +
+                  (c.evidence ? `<p class="code-src">${esc(c.evidence.split(':')[0])}</p>` : '') +
+                `</span>` +
+              `</li>`
+            );
+          })
+          .join('')
+      : '<li class="cause cause--none">The parser found no cause under this one, so it cannot be admitted.</li>';
 
     li.innerHTML =
       `<span class="code-box" aria-hidden="true"></span>` +
       `<span>` +
         `<span class="code-name">${esc(s.symptom)}</span>` +
-        `<p class="code-meaning">${esc(first.label || 'no cause stated')}</p>` +
-        (remedy ? `<p class="code-quote">“${esc(remedy)}”</p>` : '') +
         suspect +
-        (first.evidence ? `<p class="code-src">${esc(first.evidence.split(':')[0])}</p>` : '') +
-        more +
+        `<ul class="causes">${causeRows}</ul>` +
       `</span>`;
 
-    const toggle = () => {
-      if (accepted.has(s.id)) accepted.delete(s.id);
-      else accepted.add(s.id);
-      li.setAttribute('aria-checked', String(accepted.has(s.id)));
+    /*
+     * The symptom's box is the whole row. Ticking it ticks every cause under it; unticking clears
+     * them, so the two controls can never disagree about what is going in.
+     */
+    const setAll = (on) => {
+      if (on) accepted.add(s.id);
+      else accepted.delete(s.id);
+      li.setAttribute('aria-checked', String(on));
+
+      for (const c of causes) {
+        if (on) accepted.add(c.id);
+        else accepted.delete(c.id);
+      }
+      li.querySelectorAll('[data-cause]').forEach((el) => {
+        el.setAttribute('aria-checked', String(on));
+      });
       updateVerdict();
     };
+
+    const toggle = (e) => {
+      // A click on a cause is a click on that cause, not on the symptom that contains it.
+      const row = e.target.closest?.('[data-cause]');
+      if (row) return;
+      setAll(!accepted.has(s.id));
+    };
+
     li.addEventListener('click', toggle);
     li.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+      if (e.target !== li) return;
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setAll(!accepted.has(s.id)); }
     });
+
+    li.querySelectorAll('[data-cause]').forEach((el) => {
+      const id = el.getAttribute('data-cause');
+      const flip = (e) => {
+        e.stopPropagation();
+        const on = !accepted.has(id);
+        if (on) accepted.add(id);
+        else accepted.delete(id);
+        el.setAttribute('aria-checked', String(on));
+
+        /*
+         * A symptom with no cause ticked is not going in, so its own box comes off with the last
+         * one — a row that still looked ticked while admitting nothing would be a lie told by a
+         * checkbox.
+         */
+        const anyOn = causes.some((c) => accepted.has(c.id));
+        if (anyOn) accepted.add(s.id);
+        else accepted.delete(s.id);
+        li.setAttribute('aria-checked', String(anyOn));
+        updateVerdict();
+      };
+      el.addEventListener('click', flip);
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(e); }
+      });
+    });
+
     list.appendChild(li);
   }
 }
 
+/*
+ * What the button says is what is about to happen.
+ *
+ * `accepted` holds two kinds of id now — rows and the causes inside them — so counting its size
+ * would report "Admit 12 of 5" the first time somebody ticked a symptom with four causes. Rows are
+ * counted as rows; causes left out of a row that IS going in are counted separately, because
+ * "admit 5 of 5, minus 2 causes" is a different decision from "admit 3 of 5" and the reviewer is
+ * the one who has to recognise their own.
+ */
 function updateVerdict() {
-  const total = Object.keys(current?.codes || {}).length + (current?.symptoms || []).length;
-  const n = accepted.size;
-  const btn = $('admit');
+  const rowIds = [
+    ...Object.keys(current?.codes || {}),
+    ...(current?.symptoms || []).map((s) => s.id),
+  ];
+  const rows = rowIds.filter((id) => accepted.has(id)).length;
+  const total = rowIds.length;
 
-  btn.disabled = n === 0;
-  btn.textContent = n === 0
+  let droppedCauses = 0;
+  for (const s of current?.symptoms || []) {
+    if (!accepted.has(s.id)) continue;
+    droppedCauses += (s.causes || []).filter((c) => !accepted.has(c.id)).length;
+  }
+
+  const btn = $('admit');
+  btn.disabled = rows === 0;
+
+  const minus = droppedCauses
+    ? `, without ${droppedCauses} cause${droppedCauses === 1 ? '' : 's'}`
+    : '';
+
+  btn.textContent = rows === 0
     ? 'Select the rows that match the page'
-    : n === total
-      ? `Admit all ${n} to the library`
-      : `Admit ${n} of ${total}, reject ${total - n}`;
+    : rows === total
+      ? `Admit all ${rows} to the library${minus}`
+      : `Admit ${rows} of ${total}, reject ${total - rows}${minus}`;
 }
 
 /* ── admission ────────────────────────────────────────────────────────────── */

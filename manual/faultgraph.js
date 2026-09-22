@@ -374,6 +374,47 @@ function parse({ model, text, sourceName = 'manual' }) {
     };
   });
 
+  /*
+   * ── One answer, stamped on every code ───────────────────────────────────
+   *
+   * This is a hallucination guard, and it is here because it caught a live one.
+   *
+   * `B18IF905SP` is a Bosch refrigerator. The page scorer picked its Home Connect pages — prose
+   * about joining a Wi-Fi network, with no fault table anywhere on them — and the vision model,
+   * asked to read the fault-code table on that page, produced one: seven codes (E24, E07, F21, OE,
+   * 4C, 5E, H20), every single one carrying the identical meaning "REASON: The water inlet valve is
+   * stuck open" and the identical cause. Four of those are not even Bosch conventions; OE and
+   * 4C/5E are LG and Samsung, H20 is Whirlpool. It was admitted, and it sat in the library looking
+   * like seven facts.
+   *
+   * Read one row at a time — which is how a reviewer reads — every row is plausible. The tell is
+   * only visible across rows, so it belongs here rather than in anybody's judgement: distinct codes
+   * mean distinct things. That is what a code is FOR. A reading where they all say the same
+   * sentence is not a manual that repeats itself; it is one answer copied down the page.
+   *
+   * Refused rather than trimmed. There is no way to tell which of the seven, if any, was read off
+   * the page rather than invented around it, and keeping one of them would be choosing at random
+   * and calling it a fact.
+   */
+  const meanings = new Set(
+    Object.values(codes).map((c) =>
+      JSON.stringify([c.meaning || '', (c.causes || []).map((x) => [x.label || '', x.remedy || ''])])
+    )
+  );
+
+  if (found >= 3 && meanings.size === 1) {
+    return {
+      model,
+      source: sourceName,
+      method: 'parsed',
+      codes: {},
+      found: 0,
+      refused: 'every code came back with the same meaning and the same cause, which is one answer copied down the page rather than a table',
+      coverage: `${found} codes were read and all of them said the same thing, so none of them was kept`,
+      orphanCodes,
+    };
+  }
+
   return {
     model,
     source: sourceName,

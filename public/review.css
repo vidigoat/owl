@@ -261,3 +261,43 @@
 
 /* A row the parser flagged as cut off. The only amber thing in the list, so the eye goes to it. */
 .code-none--suspect { border-left: 2px solid var(--amber); color: var(--ink); }
+
+/* ── causes, each its own decision ────────────────────────────────────────
+ *
+ * The symptom is the heading and its causes are the rows under it, because that is the shape of
+ * the table on the page the reviewer is holding this against. Each one is its own checkbox: a
+ * symptom used to go in whole, so one cause the parser invented took the correct ones with it.
+ */
+.causes {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1px;
+}
+
+.cause {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  padding: 8px 10px;
+  cursor: pointer;
+  border-left: 2px solid transparent;
+}
+.cause:hover { background: rgba(0, 0, 0, 0.03); }
+.cause[aria-checked='true'] { border-left-color: var(--admit, #3f6b4e); }
+
+.cause-label { font-size: 14px; line-height: 1.45; }
+
+.cause--none {
+  grid-template-columns: minmax(0, 1fr);
+  cursor: default;
+  font-size: 13px;
+  color: var(--graphite);
+  font-style: italic;
+}
+.cause--none:hover { background: none; }
+
+/* The cause's own box, smaller than the symptom's, so the hierarchy is legible at a glance. */
+.cause .code-box { width: 14px; height: 14px; margin-top: 2px; }
