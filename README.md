@@ -35,7 +35,7 @@ git clone <repo> && cd second-set-of-hands
 npm run demo          # the whole loop in a terminal, ~20 seconds
 npm run mcp:session   # a real MCP session — the Alexa+ deliverable, proven in one command
 npm start             # http://localhost:8792 — the device experience
-npm test              # 25 suites · 313 checks
+npm test              # 26 suites · 337 checks
 ```
 
 Nothing to install. The MCP server has zero dependencies and no build step.
@@ -104,7 +104,7 @@ on the machine and scores the thing that matters — whether the same rows come 
 | | |
 |---|---|
 | page count | identical on all **1,881** pages of **30** manuals |
-| words | **99.3–100%** of poppler's, on every manual |
+| words | **98.4–100%** of poppler's, on every manual |
 | parsed rows | **87.5%** recovered word for word, plus 287 rows poppler did not produce |
 
 poppler still goes first where it exists, and which reader answered travels with every result.

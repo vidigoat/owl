@@ -254,6 +254,46 @@ it('a table that has the heading AND codes is not symptoms-only', () => {
   assert.equal(pdf.symptomTable(withCodes), false);
 });
 
+it('a page that carries the column header outranks one that merely looks like a table', () => {
+  /*
+   * Found by dropping a real oven manual on the bench and getting nothing.
+   *
+   * `CM585AGS1B` prints its fault table on pages 20 and 21, headed `Fault | Cause and
+   * troubleshooting`. They scored 28 and 34. A page of default oven settings — three columns, a
+   * dozen imperative verbs, no fault table anywhere on it — scored 37 on shape alone and took the
+   * top slot, and the four candidates went to pages with no table on them. The manual came back as
+   * "no column header on this page", which was true of the pages it was handed and false of the
+   * manual.
+   *
+   * Shape is the right way to find a table in a manual that never uses the word, and it is also
+   * what a settings table looks like. The header is not one signal among several — `symptoms.js`
+   * already says why: a table says it is a table at the top of itself.
+   */
+  const headed = [
+    'Fault                          Cause and troubleshooting',
+    'The appliance is not working.  The mains plug is not plugged in.',
+    '                                  Plug the appliance in.',
+    'The oven does not heat.        Demo mode is activated.',
+    '                                  Switch demo mode off.',
+  ].join('\n');
+
+  // Wider, denser, more verbs, and not a fault table.
+  const settings = [
+    'Setting                        Meaning                          Default',
+    ...Array.from({ length: 30 }, (_, i) =>
+      `Option ${i}                       Check the value and adjust it    Clean after use`),
+  ].join('\n');
+
+  const a = pdf.scorePage(headed);
+  const b = pdf.scorePage(settings);
+  assert.equal(a.heading, true, 'the headed table was not recognised as headed');
+  assert.equal(b.heading, false, 'the settings table claimed a fault-table header');
+  assert.ok(b.score > a.score, `this test proves nothing unless the decoy outscores the table (${b.score} vs ${a.score})`);
+
+  const picked = pdf.rank([settings, headed]);
+  assert.equal(picked[0].page, 2, 'the settings table was ranked above the real fault table');
+});
+
 it('the real fault table is never mistaken for a symptom table', () => {
   assert.equal(pdf.symptomTable(REAL_TABLE), false, 'a manual full of fault codes was called symptom-keyed');
   assert.equal(pdf.symptomTable(PROSE), false);

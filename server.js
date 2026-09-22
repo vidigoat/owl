@@ -313,7 +313,7 @@ function handler(req, res) {
           }
 
           const { candidates } = pdf.faultTablePages(buf);
-          const found = candidates.slice(0, 3).map((c) => {
+          const found = candidates.map((c) => {
             const symptoms = readSymptoms({ text: c.text, sourceName: 'the manual you supplied', page: c.page });
             const codes = parseManual({ model: 'unknown', text: c.text, sourceName: 'the manual you supplied' });
             return {
@@ -334,13 +334,31 @@ function handler(req, res) {
             };
           });
 
+          /*
+           * Best first, where "best" is how much of it actually came out.
+           *
+           * Candidates are ranked by how much a page LOOKS like a fault table, which is the right
+           * way to choose what to read and the wrong way to choose what to show. One oven manual's
+           * page of default settings scored higher than its real fault table, so the page a reader
+           * was shown parsed to nothing and the bench reported "no column header on this page" —
+           * true of the page it picked, false of the manual, which has a fault table on the next
+           * two.
+           */
+          found.sort((a, b) => b.symptoms.length - a.symptoms.length || b.score - a.score);
+
           return send(res, 200, JSON.stringify({
             ok: true,
             reader,
             pages: pages.length,
             withText,
             ms: Date.now() - started,
-            found,
+            found: found.slice(0, 4),
+            /*
+             * Why nothing came out, when nothing came out. A page that scored as a table and parsed
+             * to nothing is a different answer from a manual with no table in it, and the parser
+             * already says which — it just had nowhere to say it.
+             */
+            why: found.some((f) => f.symptoms.length) ? null : (found[0]?.coverage ?? 'no page in this manual scored as a fault table'),
             // Said plainly, because it is the part people assume is not true.
             admitted: false,
             note: 'Nothing here has been added to the library. A machine-read table is a candidate; '

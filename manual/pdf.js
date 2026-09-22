@@ -330,12 +330,31 @@ function scorePage(text) {
  */
 const TABLE_HEADER = /^(\s*)(?:Fault|Problem|Symptom)\s{2,}(?:Cause and troubleshooting|Cause and remedy|Cause\b.*)$/im;
 
-function faultTablePages(file, { take = 4, min = 18 } = {}) {
-  const all = pages(file);
-  const scored = all
+  /*
+   * ── A page that carries the header outranks one that merely looks like a table ──
+   *
+   * Score is a measure of SHAPE, and shape is what finds a fault table in a manual that never uses
+   * the word. It is also what a settings table looks like. In `CM585AGS1B` the real table — headed
+   * `Fault | Cause and troubleshooting`, on pages 20 and 21 — scored 28 and 34, while a page of
+   * oven default settings scored 37 on column count alone and took the top slot. The four
+   * candidates went to three pages with no table on them, and the manual came back as "no column
+   * header on this page", which is true of the pages it was handed and false of the manual.
+   *
+   * `symptoms.js` already states the rule this needed: a table says it is a table at the top of
+   * itself. The header is not one signal among several, it is the definitive one, so it sorts
+   * first. Shape still finds the headerless tables — plenty of manuals print one — they simply
+   * rank below any page that introduced itself.
+   */
+function rank(pageTexts, { min = 0 } = {}) {
+  return pageTexts
     .map((text, i) => ({ page: i + 1, text, ...scorePage(text) }))
     .filter((p) => p.score >= min)
-    .sort((a, b) => b.score - a.score);
+    .sort((a, b) => Number(b.heading) - Number(a.heading) || b.score - a.score);
+}
+
+function faultTablePages(file, { take = 4, min = 18 } = {}) {
+  const all = pages(file);
+  const scored = rank(all, { min });
 
   const top = scored.slice(0, take);
 
@@ -436,6 +455,6 @@ function renderPage(file, page, { dir, dpi = 150 } = {}) {
 
 module.exports = {
   TABLE_HEADER,
-  available, poppler, reader, read, pages, pageCount, scorePage, faultTablePages, joinAdjacent,
+  available, poppler, reader, read, pages, pageCount, scorePage, rank, faultTablePages, joinAdjacent,
   looksGarbled, renderPage, probablyEnglish, symptomTable, COLUMNAR,
 };

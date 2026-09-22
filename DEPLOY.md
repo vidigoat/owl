@@ -33,7 +33,7 @@ matters, which is whether `readSymptoms` recovers the same rows:
 
 ```
 30 manuals · 1,881 pages · page count identical on every one
-99.3–100% of poppler's words on every manual
+98.4–100% of poppler's words on every manual
 87.5% of poppler's parsed rows recovered word for word
 ```
 

@@ -525,13 +525,24 @@ loadLibrary();
       meta.appendChild(span);
     }
 
-    const best = (data.found || []).find((f2) => f2.symptoms.length) || (data.found || [])[0];
-    if (!best) {
+    /*
+     * The server sends the candidates best-parsed first, so the first one is the one to show.
+     *
+     * Picking "the first with any symptoms, else the first at all" was this file's job before, and
+     * it meant a manual whose highest-SCORING page was a settings table got that page rendered with
+     * an empty parse beside it and a note that said nothing about why.
+     */
+    const best = (data.found || [])[0];
+    if (!best || !best.symptoms.length) {
       text.textContent = '';
       rows.replaceChildren();
       note.textContent = '';
-      say('No page in this manual scored as a fault table. That is an answer, not a failure — '
-        + 'plenty of manuals do not print one.', 'refused');
+      say(
+        `${data.why || 'No page in this manual scored as a fault table.'} That is an answer rather `
+          + 'than a failure — plenty of manuals do not print one, and a reader that invented a '
+          + 'table here would be worse than one that says so.',
+        'refused'
+      );
       out.hidden = true;
       return;
     }
