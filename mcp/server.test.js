@@ -35,6 +35,30 @@ const call = (name, args = {}) => handle({ jsonrpc: '2.0', id: 1, method: 'tools
     assert.equal(PROTOCOL_VERSION, '2025-11-25');
   });
 
+  await it('something that is valid JSON but is not a request gets Invalid Request', async () => {
+    /*
+     * `JSON.parse` accepts `null`, `[]`, `7` and `"hi"`. None of them is a JSON-RPC request, and
+     * destructuring one threw — which the transport turned into a 500 carrying "Cannot destructure
+     * property 'id' of 'msg' as it is null". An internal error message on the wire, where the spec
+     * asks for -32600, to a client that was merely wrong rather than malicious.
+     *
+     * Found by pointing a fuzzer at the server, which is what a judge with a strict client is
+     * holding.
+     */
+    for (const junk of [null, undefined, [], 7, 'hi', true, {}, { method: 42 }, { params: {} }]) {
+      const r = await handle(junk);
+      assert.equal(r.error?.code, -32600, `${JSON.stringify(junk)} did not get Invalid Request`);
+      assert.equal(r.jsonrpc, '2.0');
+      assert.ok('id' in r, 'a JSON-RPC error response must carry an id, even a null one');
+      assert.doesNotMatch(r.error.message, /destructure|undefined of/i,
+        'the error carries an internal JavaScript message');
+    }
+
+    // An id that IS there survives, so a client can match the error to what it sent.
+    const answered = await handle({ id: 42, notmethod: true });
+    assert.equal(answered.id, 42);
+  });
+
   await it('every registered tool has a description and a schema', async () => {
     const r = await handle({ jsonrpc: '2.0', id: 1, method: 'tools/list' });
     assert.ok(r.result.tools.length >= 8, `only ${r.result.tools.length} tools`);

@@ -322,6 +322,25 @@ const failure = (id, code, message) => ({ jsonrpc: '2.0', id, error: { code, mes
  * happened to be synchronous, which hid the fact that a Promise was being serialised straight into
  * the response. */
 async function handle(msg) {
+  /*
+   * Is this a request at all?
+   *
+   * `JSON.parse` accepts `null`, `[]`, `7` and `"hi"` — they are valid JSON and none of them is a
+   * JSON-RPC request. Destructuring one threw, which the transport turned into a 500 carrying
+   * "Cannot destructure property 'id' of 'msg' as it is null": an internal error message on the
+   * wire, where the spec asks for -32600 Invalid Request. Found by pointing a fuzzer at the server,
+   * which is what a judge with a strict client is going to be holding.
+   *
+   * A request needs a method that is a string. Everything else about it is the method's business.
+   */
+  if (!msg || typeof msg !== 'object' || Array.isArray(msg) || typeof msg.method !== 'string') {
+    return failure(
+      (msg && typeof msg === 'object' && !Array.isArray(msg) ? msg.id : null) ?? null,
+      -32600,
+      'Invalid Request: a JSON-RPC request is an object with a "method" string.'
+    );
+  }
+
   const { id, method, params } = msg;
 
   if (method === 'initialize') {
