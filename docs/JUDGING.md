@@ -9,6 +9,25 @@ Two screens. The device at `/` is the thing an owner talks to; **the bench at `/
 thing that makes the device trustworthy** — a rendered manual page on the left, what was parsed out
 of it on the right, and nothing reaching the library until somebody ticks a row.
 
+**Take it a manual of your own.** The bench has a drop target: give it any manufacturer's PDF — any
+brand, nothing here is coded for yours — and the fault table comes back in under a second with the
+page each cause is printed on. Nothing is uploaded anywhere, and **nothing is admitted**: a
+machine-read table is a candidate, which is the whole reason the bench exists.
+
+That works on the hosted URL because reading a PDF here needs nothing installed. It used to shell
+out to `pdftotext` — poppler, a binary the host does not have — so until this week the live bench
+was permanently empty and the one capability this project is for was the one thing a visitor could
+not see. `manual/pdf-read.js` reads the format itself: cross-references, object streams, fonts and
+their `ToUnicode` maps, the content stream, and the glyph positions that put a three-column table
+back into three columns.
+
+`npm run pdf:compare` is the measurement, not the claim — the built-in reader against poppler over
+every manual on the machine, scored on whether `readSymptoms` recovers the same rows: **1,881 pages,
+identical page counts, 98.4–100% of poppler's words, 87.5% of its parsed rows word for word**, plus
+287 rows poppler did not produce. Which reader answered travels with every result, and
+`server.test.js` runs the read twice — once as this machine, once with poppler switched off —
+because proving the hosted path on a laptop that has poppler proves the wrong thing.
+
 It caught a real error the first time it was used, on the first machine: the manual prints **E:16**
 and the model read **E18**. The output was well formed and confidently wrong, and nothing
 downstream could have caught it.
@@ -32,6 +51,8 @@ honestly in `PLAN.md` rather than papered over.
 | **Learns a machine from a photograph of its manual** | `mcp/tools/read_manual.js` — verified on a Hotpoint FDW60 whose codes appear nowhere in this repo |
 | **Rich cards as MCP resources** | `mcp/cards.js` — `resources/list` and `resources/read`; nothing appears only on a card |
 | **Survives a hostile manual** | `manual/adversarial.test.js` — a page trying to sell a £340 board cannot open a cart |
+| **Thirty-two attempts to make it spend money, zero carts** | `mcp/tools/gate-adversarial.test.js` — claiming the verdict in the arguments (`upheld`, `maySpend`, `force`, `skipVerification`, a `__proto__` payload), confusing the types it keys on, confirming an order for a cart that was never opened. The gate holds, and none of it throws — a tool that crashes hands its caller a crash to interpret |
+| **A path from a caller is not a path a tool may read** | `mcp/tools/local-file.test.js` — `{"imagePath":"/etc/passwd"}` used to be read off the disk and would have gone to Bedrock; images now come from this project or the renderer's scratch directory, symlinks resolved first |
 | **Measured, not asserted** | `npm run questions` (every answer path) · `npm run eval` (real Bedrock) |
 | **The diagnosis engine** — entropy over a hypothesis space, cost-weighted information gain | `mcp/tools/next_test.js` |
 | **Learning a machine at runtime** from its own service manual | `manual/faultgraph.js`, `POST /api/learn` |
