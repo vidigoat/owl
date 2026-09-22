@@ -849,11 +849,32 @@ what to check. Four rows across twelve manuals. The library cannot fix them and 
 it points at them, which is the difference between a question and a fact.
 
 Fourteen machines have been read — **140 symptoms, 228 causes**, every one citing its
-page — across dishwashers, a washer, a refrigerator and two Siemens ovens, which is the same parser
-reading four kinds of appliance from two manufacturers. All fourteen have been reviewed and
-admitted, which with the hand-written ones makes **20 machines in the library** — 129 symptoms and
-220 causes, each citing its page, and twelve rows rejected because the parser flagged them as cut
-off or because the page's symbols did not survive the text layer.
+page — across dishwashers, a dryer, a refrigerator and two Siemens ovens, which is the same parser
+reading five kinds of appliance from two manufacturers. With the hand-written ones that makes
+**19 machines in the library** — 129 symptoms and 213 causes, each citing its page, and twelve rows
+rejected because the parser flagged them as cut off or because the page's symbols did not survive
+the text layer.
+
+### Two things a reviewer reading row by row cannot see
+
+Both were live in this library, and both survived a per-row review, because neither is visible in
+any single row.
+
+**A collapsed parse.** `B18IF905SP` carried seven distinct fault codes — E24, E07, F21, OE, 4C, 5E,
+H20 — every one with the identical meaning *"REASON: The water inlet valve is stuck open"* and the
+identical cause. One row at a time, each looks plausible. Together they are one answer stamped
+seven times, and four of those codes are not Bosch conventions at all: `OE` and `4C`/`5E` are LG
+and Samsung, `H20` is Whirlpool. The manual is a refrigerator's. The record was **removed rather
+than corrected** — there is nothing in it that came off that page.
+
+**The wrong appliance.** `--kind Dishwasher` was passed to a batch containing a refrigerator and a
+dryer, and the flag was believed over the manuals. The library then said a fridge was a dishwasher,
+which is the kind of thing an assistant repeats out loud to somebody standing in front of their
+fridge.
+
+`data/admitted.test.js` now holds both: no two codes may share one meaning and one cause, and no
+machine may be filed as something its own manual contradicts. The first was verified by running it
+against the removed record rather than by assertion.
 
 ### Two bugs a second manufacturer found
 

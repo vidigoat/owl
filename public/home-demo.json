@@ -1,0 +1,71 @@
+{
+  "demo": true,
+  "describes": "a household made up for the hosted demo — the machines and the faults are real",
+  "builtBy": "scripts/make-home-demo.js",
+  "builtAt": "2026-09-22T14:17:58.144Z",
+  "appliances": {
+    "SHE3AR75UC": {
+      "model": "SHE3AR75UC",
+      "brand": "Bosch",
+      "kind": "Dishwasher",
+      "nickname": "the dishwasher",
+      "firstSeen": "2026-09-22T14:17:58.143Z"
+    },
+    "B24CB50ESS": {
+      "model": "B24CB50ESS",
+      "brand": "Bosch",
+      "kind": "Refrigerator",
+      "nickname": "the fridge",
+      "firstSeen": "2026-09-22T14:17:58.143Z"
+    },
+    "BI710C1B1B": {
+      "model": "BI710C1B1B",
+      "brand": "Siemens",
+      "kind": "Oven",
+      "nickname": "the warming drawer",
+      "firstSeen": "2026-09-22T14:17:58.144Z"
+    }
+  },
+  "receipts": [
+    {
+      "model": "SHE3AR75UC",
+      "code": "E24",
+      "cause": "Blocked filter or drain path",
+      "action": "Cleared the filter and the well underneath it",
+      "part": null,
+      "cost": 0,
+      "confirmed": false,
+      "at": "2026-02-20T14:17:58.142Z"
+    },
+    {
+      "model": "SHE3AR75UC",
+      "code": "E24",
+      "cause": "Blocked filter or drain path",
+      "action": "Cleared the filter again",
+      "part": null,
+      "cost": 0,
+      "confirmed": false,
+      "at": "2026-06-18T14:17:58.143Z"
+    },
+    {
+      "model": "SHE3AR75UC",
+      "code": "E24",
+      "cause": "Blocked filter or drain path",
+      "action": "Cleared the filter; the drain hose was also kinked behind the machine",
+      "part": null,
+      "cost": 0,
+      "confirmed": false,
+      "at": "2026-08-22T14:17:58.143Z"
+    },
+    {
+      "model": "B24CB50ESS",
+      "code": null,
+      "cause": "Scheduled replacement",
+      "action": "Replaced the fridge filter",
+      "part": "fridge filter",
+      "cost": 42.5,
+      "confirmed": false,
+      "at": "2026-02-24T14:17:58.143Z"
+    }
+  ]
+}

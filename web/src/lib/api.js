@@ -14,6 +14,7 @@ async function get(path) {
 
 export const library = () => get('/api/library');
 export const session = () => get('/api/session');
+export const household = () => get('/api/household');
 export const describe = (model, said) =>
   get(`/api/describe?model=${encodeURIComponent(model)}&said=${encodeURIComponent(said)}`);
 

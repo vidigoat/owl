@@ -61,8 +61,25 @@ function remember({ model, brand, kind, nickname }) {
  * This is the thing worth keeping — a list of appliances is a spreadsheet; a history of repairs is
  * what lets it say "we did this last March and it came back".
  */
-function receipt({ model, code, cause, action, part, cost, confirmed }) {
+function receipt({ model, code, cause, action, part, cost, confirmed, at }) {
   const state = read();
+
+  /*
+   * When it happened, not when it was typed in.
+   *
+   * This used to stamp `new Date()` unconditionally, which meant a repair could only ever be
+   * recorded at the moment it was recorded. That is wrong twice over. Somebody telling the
+   * assistant "the same thing happened back in March" had March silently rewritten to today; and
+   * both of the things this file computes — whether a consumable is overdue, and whether a fault
+   * has come back — are arithmetic on these dates and nothing else. A store where every receipt
+   * says "now" cannot answer either question, and answers them confidently anyway.
+   *
+   * An unparseable date falls back to now rather than being written as `Invalid Date`, which
+   * poisons every comparison downstream with NaN and reports nothing as ever being due.
+   */
+  const when = at ? new Date(at) : new Date();
+  const stamped = Number.isNaN(when.getTime()) ? new Date() : when;
+
   const entry = {
     model,
     code,
@@ -71,7 +88,7 @@ function receipt({ model, code, cause, action, part, cost, confirmed }) {
     part: part || null,
     cost: cost ?? null,
     confirmed: Boolean(confirmed),
-    at: new Date().toISOString(),
+    at: stamped.toISOString(),
   };
   state.receipts.push(entry);
   write(state);
@@ -113,8 +130,15 @@ function history({ model }) {
  */
 const RECURRENCE_WINDOW_DAYS = 365;
 
-function recurring({ today = new Date(), within = RECURRENCE_WINDOW_DAYS } = {}) {
-  const state = read();
+/*
+ * `state` is optional, and it is the reason this is a parameter rather than a read.
+ *
+ * The hosted demo's household is not the one on disk — it is a file built by
+ * scripts/make-home-demo.js and shipped with the site. Recomputing "what is overdue" and "what
+ * came back" for it anywhere else would be a second copy of the only arithmetic in this file, and
+ * two implementations of one rule eventually disagree about somebody's fridge.
+ */
+function recurring({ today = new Date(), within = RECURRENCE_WINDOW_DAYS, state = read() } = {}) {
   const seen = new Map();
 
   for (const r of state.receipts) {
@@ -180,8 +204,7 @@ function recurring({ today = new Date(), within = RECURRENCE_WINDOW_DAYS } = {})
  * history. `count` remains the number of consumables due, so nothing that already reads it starts
  * counting something else.
  */
-function due({ today = new Date() } = {}) {
-  const state = read();
+function due({ today = new Date(), state = read() } = {}) {
   const out = [];
 
   state.receipts.forEach((r) => {
@@ -193,7 +216,7 @@ function due({ today = new Date() } = {}) {
     }
   });
 
-  const repeats = recurring({ today });
+  const repeats = recurring({ today, state });
   return { due: out, count: out.length, recurring: repeats, attention: out.length + repeats.length };
 }
 

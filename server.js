@@ -261,6 +261,54 @@ function handler(req, res) {
      * what it means, and has nothing to say about why. Counting those as coverage would be exactly
      * the overclaim this product is built to avoid.
      */
+    /*
+     * What this household remembers.
+     *
+     * `data/home.json` is somebody's home — which machines they own, what has broken, what they
+     * paid — so it is gitignored and kept out of every deploy. A hosted page therefore has nothing
+     * of its own to show, and falls back to a household built by `scripts/make-home-demo.js`,
+     * which carries `demo: true` in the file itself so nothing downstream has to remember to
+     * label it.
+     *
+     * The arithmetic is done live either way: what is overdue and what has come back are computed
+     * from the receipts by `home.js`, not stored.
+     */
+    if (url.pathname === '/api/household') {
+      const home = require('./mcp/tools/home');
+      let state = null;
+      let demo = false;
+
+      try {
+        state = JSON.parse(fs.readFileSync(home.STORE, 'utf8'));
+      } catch {
+        state = null;
+      }
+
+      if (!state || !Object.keys(state.appliances || {}).length) {
+        try {
+          state = JSON.parse(fs.readFileSync(path.join(PUBLIC, 'home-demo.json'), 'utf8'));
+          demo = true;
+        } catch {
+          return send(res, 200, JSON.stringify({ known: false, demo: false,
+            reason: 'Nothing has been remembered on this machine yet.' }), 'application/json');
+        }
+      }
+
+      // The arithmetic runs over whichever household this is — `due` takes the state rather than
+      // reading the file, so the demo and the real one go through the same code.
+      const attention = home.due({ state });
+
+      return send(res, 200, JSON.stringify({
+        known: true,
+        demo,
+        describes: state.describes || null,
+        appliances: Object.values(state.appliances || {}),
+        receipts: state.receipts || [],
+        due: attention.due,
+        recurring: attention.recurring,
+      }), 'application/json');
+    }
+
     if (url.pathname === '/api/library') {
       const lib = require('./data/service-data');
       const HAND = lib.MODELS;

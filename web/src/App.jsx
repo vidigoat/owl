@@ -4,7 +4,8 @@ import { motion, useReducedMotion } from 'motion/react';
 import Ask from './sections/Ask.jsx';
 import Plate from './sections/Plate.jsx';
 import Device from './sections/Device.jsx';
-import { library, session as sessionApi, num, money, odds } from './lib/api.js';
+import Household from './sections/Household.jsx';
+import { library, session as sessionApi, household as householdApi, num, money, odds } from './lib/api.js';
 
 /**
  * ── Second Set of Hands ─────────────────────────────────────────────────────
@@ -41,14 +42,19 @@ const WONT = [
   },
 ];
 
+/** "1 fault codes" is the sort of thing that makes a careful page look careless. */
+const plural = (n, word) => `${num(n)} ${word}${n === 1 ? '' : 's'}`;
+
 export default function App() {
   const [lib, setLib] = useState(null);
   const [ses, setSes] = useState(null);
+  const [house, setHouse] = useState(null);
   const still = useReducedMotion();
 
   useEffect(() => {
     library().then(setLib).catch(() => {});
     sessionApi().then(setSes).catch(() => {});
+    householdApi().then(setHouse).catch(() => {});
   }, []);
 
   const t = lib?.totals;
@@ -157,8 +163,8 @@ export default function App() {
                 <div className="machine" key={m.model} data-tier={m.tier}>
                   <span className="machine__model">{m.model}</span>
                   <span className="machine__what">
-                    {m.brand} {m.kind} — {m.symptoms || m.codes}{' '}
-                    {m.symptoms ? 'symptoms' : 'fault codes'}, {m.causes} causes
+                    {m.brand} {m.kind} — {plural(m.symptoms || m.codes, m.symptoms ? 'symptom' : 'fault code')},{' '}
+                    {plural(m.causes, 'cause')}
                     {m.rejected?.length ? `, ${m.rejected.length} rejected` : ''}
                   </span>
                   <span className="machine__tier">
@@ -170,8 +176,10 @@ export default function App() {
           </section>
         )}
 
+        {house && <Household data={house} />}
+
         <section className="wrap" id="wont">
-          <p className="plate">5 · the refusals</p>
+          <p className="plate">6 · the refusals</p>
           <h2>What it will not do</h2>
           <p className="lede">
             A repair copilot that always has an answer is worse than useless — somebody is following
