@@ -273,3 +273,78 @@ a multi-page table was cited to the page the run *started* on. A table running p
 two hundred causes to page 37. An owner following one of them opens the manual to the wrong page
 and finds nothing — and a citation that does not survive being checked is worse than no citation,
 because it was believed. The fix is to keep the form feed at the seam and count them.
+
+---
+
+### 2026-09-23 · The one dependency we could not design away, designed away
+
+**Task:** make the hosted review bench able to read a manual.
+**Expected:** it already could — reading a PDF is the thing this project does.
+**Actual:** it never could. `pdftotext` is poppler, poppler is a binary, and a serverless host does
+not have one. The live bench had said "Nothing is waiting" since the day it was deployed, and the
+single capability the whole repository is built around was the one thing a visitor could not see.
+The entry above this one ends *"the one dependency we could not design away"*. That turned out to be
+false, and the cost of believing it was months of a demo URL that could not demo the product.
+**Severity:** high — not a bug in anything, which is why nothing caught it. Every test passed on a
+machine that had poppler installed.
+**Workaround:** none needed in the end. Node ships `zlib`, and `FlateDecode` is the only genuinely
+hard part of the PDF format; the rest is parsing. `manual/pdf-read.js` reads the cross-reference,
+object streams, fonts and their `ToUnicode` maps, the content stream, and the glyph positions that
+put a three-column fault table back into three columns.
+**Suggestion, to ourselves:** "we depend on a binary" is a design decision that should have been
+written down as one and revisited, rather than becoming a fact about the world. It sat in this log
+as a closed question for a week.
+
+**What made it safe to ship:** poppler is on the laptop, so it is ground truth. `npm run pdf:compare`
+runs both readers over every manual on the machine and scores the thing that decides anything —
+whether `readSymptoms` recovers the same rows. 1,881 pages, identical page counts, 98.4–100% of
+poppler's words, 87.5% of its parsed rows word for word. Five bugs surfaced that way, and every one
+of them returned text that looked perfectly fine: characters dropped where two glyphs claimed one
+grid cell; a column header that became `Causeandtroubleshooting` because a subset font declared a
+space three times wider than the one it drew; `I m p o r t a n t   s a f e t y` from an advance that
+ignored the text matrix; a line rendered backwards because the producer drew the right column first.
+**A text extractor does not fail by crashing.** It fails by returning something readable with three
+words missing from the middle of a table, and no measurement of "did we get text" sees any of it.
+
+---
+
+### 2026-09-23 · The platform's request-body limit is not the one in the changelog
+
+**Task:** drop a 4.4 MB manual on the hosted bench.
+**Expected:** it to work. Vercel's changelog says functions now accept 100 MB request bodies.
+**Actual:** `413 FUNCTION_PAYLOAD_TOO_LARGE`, as a plain-text platform page, refused before the
+function ran. Half the manuals in this project's own corpus are bigger than the real limit of about
+4.5 MB.
+**Severity:** medium — the feature works, it is just bounded, and the bound arrives as a raw error
+with no relation to anything on the page. That reads as *broken* rather than *bounded*, which is the
+worst way to be limited.
+**Workaround:** the page asks the endpoint what it accepts before it spends somebody's upload, and
+says so in the drop target's own line. Anything still too big gets its size, the limit, and the
+command that reads any size.
+**Suggestion:** when a limit is enforced by the platform ahead of the function, the error is the only
+thing the developer can never improve — so it is the one that most needs to say which limit was hit
+and where it is documented. And a changelog headline about a raised limit is worth a line about what
+still has the old one.
+
+---
+
+### 2026-09-23 · We shipped a denial of service and found it an hour later
+
+**Task:** check that the new reader survives hostile input, since it now parses uploads from anybody.
+**Expected:** some crashes on malformed files.
+**Actual:** no crashes at all across 267 malformed documents — bit-flipped and truncated real
+manuals, self-referential page trees, two-thousand-deep nesting, a fifty-thousand-entry array, absurd
+`/Length` values. But a **0.58 MB upload** — one content stream, deflate of six hundred megabytes of
+spaces — was inflated in full and took the process to **1.59 GB** of resident memory in under two
+seconds. The hosted function has 512 MB.
+**Severity:** high, and entirely ours. A file that costs the sender nothing and costs the server a
+gigabyte, on an endpoint with no authentication, shipped in the same hour as the feature.
+**Workaround:** none — fixed. zlib is told to stop (`maxOutputLength`) rather than this code told to
+check afterwards, with a budget per document as well, because a thousand streams each a byte under
+the limit is the same attack with more steps. Both caps are measured against the corpus rather than
+picked: the largest real decompressed stream is 18.8 MB and the largest document totals 43.3 MB.
+**Suggestion, to ourselves:** the lesson is not "remember decompression bombs". It is that adding an
+endpoint that accepts a file format changes what the threat model is, and the hour to notice that is
+the hour you add it. The fuzzing took twenty minutes and found this, a crash-to-client in the MCP
+envelope, an arbitrary-file-read in the vision tool, and a single malformed POST that permanently
+broke the household view.
