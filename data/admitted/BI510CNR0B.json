@@ -1,0 +1,52 @@
+{
+  "model": "BI510CNR0B",
+  "brand": "Siemens",
+  "kind": "Oven",
+  "source": "BI510CNR0B.pdf",
+  "pages": "5–6",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "the-cookware-or-food-is-not-heating-up",
+      "symptom": "The cookware or food is not heating up.",
+      "causes": [
+        {
+          "id": "the-cookware-or-food-is-not-heating-up-0",
+          "label": "There has been a power cut.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check whether the lighting in your room or other appliances are working."
+          ],
+          "evidence": "Siemens manual, page 5: \"There has been a power cut.\"",
+          "source": {
+            "line": 148,
+            "manual": "Siemens manual",
+            "page": 5
+          }
+        },
+        {
+          "id": "the-cookware-or-food-is-not-heating-up-1",
+          "label": "The appliance is switched off.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Switch the appliance on."
+          ],
+          "evidence": "Siemens manual, page 5: \"The appliance is switched off.\"",
+          "source": {
+            "line": 151,
+            "manual": "Siemens manual",
+            "page": 5
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "claude — read against pages 5 and 6",
+  "reviewedAt": "2026-09-22T14:14:55.605Z",
+  "learnedAt": "2026-09-22T14:14:37.664Z"
+}

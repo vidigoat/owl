@@ -1,0 +1,212 @@
+{
+  "model": "BI710C1B1B",
+  "brand": "Siemens",
+  "kind": "Oven",
+  "source": "BI710C1B1B.pdf",
+  "pages": "12–14",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "the-appliance-is-not-working",
+      "symptom": "The appliance is not working.",
+      "causes": [
+        {
+          "id": "the-appliance-is-not-working-0",
+          "label": "The circuit breaker in the fuse box has tripped.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check the circuit breaker in the fuse box."
+          ],
+          "evidence": "Siemens manual, page 12: \"The circuit breaker in the fuse box has tripped.\"",
+          "source": {
+            "line": 120,
+            "manual": "Siemens manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "the-appliance-is-not-working-1",
+          "label": "There has been a power cut.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check whether the lighting in your room or other appliances are working.",
+            "Open the appliance. Following a power cut, the touch fields light up in ascending order from left to right. The display goes out after approx. 30 seconds and the appliance is ready for operation.",
+            "Start the required operating mode."
+          ],
+          "evidence": "Siemens manual, page 12: \"There has been a power cut.\"",
+          "source": {
+            "line": 122,
+            "manual": "Siemens manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-appliance-is-switched-on-the-operati",
+      "symptom": "The appliance is switched on. The operation indicator does not light up.",
+      "causes": [
+        {
+          "id": "the-appliance-is-switched-on-the-operati-0",
+          "label": "The operation indicator is defective.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Call Customer Service Page 15."
+          ],
+          "evidence": "Siemens manual, page 12: \"The operation indicator is defective.\"",
+          "source": {
+            "line": 130,
+            "manual": "Siemens manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-operation-indicator-flashes",
+      "symptom": "The operation indicator flashes.",
+      "causes": [
+        {
+          "id": "the-operation-indicator-flashes-0",
+          "label": "The appliance heats up.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wait until the appliance has finished heating up."
+          ],
+          "evidence": "Siemens manual, page 12: \"The appliance heats up.\"",
+          "source": {
+            "line": 142,
+            "manual": "Siemens manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-cookware-or-food-does-not-get-warm-e",
+      "symptom": "The cookware or food does not get warm enough.",
+      "causes": [
+        {
+          "id": "the-cookware-or-food-does-not-get-warm-e-0",
+          "label": "There has been a power cut.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check whether the lighting in your room or other appliances are working."
+          ],
+          "evidence": "Siemens manual, page 12: \"There has been a power cut.\"",
+          "source": {
+            "line": 159,
+            "manual": "Siemens manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "the-cookware-or-food-does-not-get-warm-e-1",
+          "label": "The cookware or food has not been heated for long enough.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Heat the cookware or the food for a longer period of time."
+          ],
+          "evidence": "Siemens manual, page 12: \"The cookware or food has not been heated for long enough.\"",
+          "source": {
+            "line": 161,
+            "manual": "Siemens manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "the-cookware-or-food-does-not-get-warm-e-2",
+          "label": "The appliance is not completely closed.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Close the appliance."
+          ],
+          "evidence": "Siemens manual, page 12: \"The appliance is not completely closed.\"",
+          "source": {
+            "line": 163,
+            "manual": "Siemens manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-appliance-switches-off-all-displays-",
+      "symptom": "The appliance switches off. All displays are off.",
+      "causes": [
+        {
+          "id": "the-appliance-switches-off-all-displays--0",
+          "label": "The safety shut-off has switched the appliance off.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Switch the appliance back on."
+          ],
+          "evidence": "Siemens manual, page 12: \"The safety shut-off has switched the appliance off.\"",
+          "source": {
+            "line": 182,
+            "manual": "Siemens manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-indicators-light-up-the-appliance-is",
+      "symptom": "The indicators light up. The appliance is not heating up.",
+      "causes": [
+        {
+          "id": "the-indicators-light-up-the-appliance-is-0",
+          "label": "Demo mode is activated.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Deactivate demo mode. Page 14"
+          ],
+          "evidence": "Siemens manual, page 12: \"Demo mode is activated.\"",
+          "source": {
+            "line": 184,
+            "manual": "Siemens manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-front-panel-is-not-aligned",
+      "symptom": "The front panel is not aligned.",
+      "causes": [
+        {
+          "id": "the-front-panel-is-not-aligned-0",
+          "label": "The front panel was not aligned during installation.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Adjust the front panel. Page 21"
+          ],
+          "evidence": "Siemens manual, page 12: \"The front panel was not aligned during installation.\"",
+          "source": {
+            "line": 192,
+            "manual": "Siemens manual",
+            "page": 12
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "the-appliance-switches-off-and-light-up"
+  ],
+  "reviewed": true,
+  "reviewedBy": "claude — read against pages 13 and 14",
+  "reviewedAt": "2026-09-22T14:14:55.604Z",
+  "learnedAt": "2026-09-22T14:14:37.343Z"
+}

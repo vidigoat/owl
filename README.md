@@ -848,11 +848,49 @@ lower case — so those rows carry `suspect: true` and the bench puts an amber n
 what to check. Four rows across twelve manuals. The library cannot fix them and does not pretend to;
 it points at them, which is the difference between a question and a fact.
 
-Twelve machines have been read — **131 symptoms, 215 causes**, every one citing its
-page — across dishwashers, a washer and a refrigerator, which is the same parser reading three
-different kinds of appliance. All twelve have now been reviewed and admitted, which with the
-hand-written ones makes **18 machines in the library** — 121 symptoms and 208 causes, each citing its
-page, and four rows rejected because the parser flagged them as cut off.
+Fourteen machines have been read — **140 symptoms, 228 causes**, every one citing its
+page — across dishwashers, a washer, a refrigerator and two Siemens ovens, which is the same parser
+reading four kinds of appliance from two manufacturers. All fourteen have been reviewed and
+admitted, which with the hand-written ones makes **20 machines in the library** — 129 symptoms and
+220 causes, each citing its page, and twelve rows rejected because the parser flagged them as cut
+off or because the page's symbols did not survive the text layer.
+
+### Two bugs a second manufacturer found
+
+The reader had only ever been pointed at Bosch. Pointing it at Siemens — same parser, same rules,
+a different typesetter — found two faults that had been quietly losing data all along, and both
+failed in the worst possible way: by reporting *"nothing usable found"*, which reads as an answer.
+
+**A blank page vetoed a whole table.** A Siemens oven prints its troubleshooting table on pages 13
+and 14. Page 12 also scored as a candidate — it is a Home Connect page whose prose happens to
+contain the word "troubleshooting" — and it is not a symptom table, because it is not a table at
+all. The gate asked whether *every* scored page in the run was symptom-keyed, so one page that was
+not about anything discarded two pages with the entire table on them. The run then took the
+fault-code path instead: a rendered page, a vision call, money spent, and correctly nothing found.
+
+`symptomsOnly: false` does not mean "this table is keyed on codes" — it means "this page is not a
+symptom table", which a page with no table also satisfies. Only a page that carries a table has an
+opinion worth counting. Nine symptoms came back the moment the gate stopped letting a blank page
+vote (`scripts/learn-manual.js` `symptomKeyed`, tested in `scripts/learn-manual.test.js`).
+
+**A full stop split a symptom in half.** This is one symptom over three lines:
+
+```
+The appliance is switched on.        The operation indicator is defective.
+The operation indicator does not        Call Customer Service Page 15.
+light up.
+```
+
+Sentence punctuation is what tells a finished symptom from a wrapped one — and the first line ends
+in a full stop. So line two started a *new* symptom, which came back with no causes at all, while
+the cause that belonged to it stayed attached to the half above. Two wrong rows, neither of which
+looked wrong.
+
+The fix is the table's own grammar, the same rule the rest of this parser runs on: a new symptom
+always begins a new *cause*, so a line whose right column is a **remedy** — indented under the
+cause above it — cannot be the start of one, whatever punctuation the left column ends on. Two
+columns of indent, not one, because a single space is the jitter you get when a row's right column
+starts a character late; the remedies in these manuals are indented three.
 
 Reviewing is not rubber-stamping. `SHE43DM2N` went in with three of its five symptoms: one had
 collided columns and no cause at all, and one listed four causes where the manual has two — the

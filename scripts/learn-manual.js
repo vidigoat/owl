@@ -98,16 +98,7 @@ async function learnOne(file, flags) {
   const runs = pdf.joinAdjacent(candidates);
   const best = runs[0];
 
-  /*
-   * Judged on the pages actually chosen, not on every page that scored.
-   *
-   * The first version asked whether ALL candidates were symptom tables, and candidates include
-   * pages that merely scored well and were never used — an unrelated page 12 and page 20 were
-   * enough to make it false for a manual whose entire troubleshooting section is symptom-keyed.
-   */
-  report.symptomsOnly = candidates
-    .filter((c) => c.page >= best.from && c.page <= best.to)
-    .every((c) => c.symptomsOnly);
+  report.symptomsOnly = symptomKeyed(candidates, best);
   report.bestPages = `${best.from}–${best.to}`;
   report.garbled = candidates.some((c) => c.garbled);
   report.english = candidates[0].english;
@@ -265,7 +256,39 @@ async function learnOne(file, flags) {
   return report;
 }
 
-(async () => {
+/**
+ * Is the chosen run a troubleshooting table keyed on described symptoms rather than on codes?
+ *
+ * ── Why this is not `every` ─────────────────────────────────────────────────
+ *
+ * It was, and it threw away a whole manual. A Siemens oven's table sits on pages 13 and 14, both
+ * flagged `symptomsOnly`. Page 12 also scored — it is a Home Connect page whose prose happens to
+ * contain the word "troubleshooting" — and it carries `symptomsOnly: false` because it has no
+ * table of any kind. One page with nothing on it vetoed two pages with the entire table on them,
+ * and the run went down the fault-code path instead: a rendered page, a vision call, money spent,
+ * and, correctly, nothing found. Nine symptoms and their causes were lost to a page that was not
+ * about anything.
+ *
+ * `symptomsOnly: false` does not mean "this table is keyed on codes". It means "this page is not a
+ * symptom table", which a page with no table at all also satisfies. Only a page that actually
+ * carries a table has an opinion worth counting.
+ *
+ * So: any page in the run that IS a symptom table is enough. The cost of being wrong in this
+ * direction is nothing — `readSymptoms` refuses without a column header of its own and returns
+ * zero — while the cost of being wrong in the other direction is the whole table.
+ */
+function symptomKeyed(candidates, best) {
+  const inRun = candidates.filter((c) => c.page >= best.from && c.page <= best.to);
+  return inRun.some((c) => c.symptomsOnly);
+}
+
+/*
+ * Only when run directly. Imported — by its own test — this file is the functions in it, and a
+ * required module that starts doing work and printing usage is a module nobody can test.
+ */
+if (require.main === module) main();
+
+async function main() {
   const { flags, files } = parseArgs(process.argv.slice(2));
 
   if (!files.length) {
@@ -340,4 +363,7 @@ async function learnOne(file, flags) {
   console.log(`\n  ${C.green}${learned} learned${C.off}${empty ? `, ${C.dim}${empty} recovered nothing${C.off}` : ''}`);
   console.log(`  ${C.dim}Nothing is in the library yet. Review data/pending/ and admit what is right —`);
   console.log(`  a library of confidently wrong fault codes is worse than no library.${C.off}\n`);
-})();
+}
+
+// Exported for the test that fixed the veto. Nothing else imports this file.
+module.exports = { symptomKeyed };
