@@ -182,9 +182,20 @@ export default function App() {
                       <span>{plural(list.length, 'machine')}</span>
                     </h3>
 
+                    {/*
+                      Codes and symptoms are counted separately, and a machine that has none of a
+                      kind gets a dash rather than a nought.
+                      
+                      One column headed "symptoms" carried whichever of the two a machine happened
+                      to have, so the three hand-entered washers read "1 symptom, 0 causes" — which
+                      looks like a padded row and is not what they are. They translate a fault code
+                      into plain English and cannot go further than that, which is a small honest
+                      thing to know and worth saying accurately.
+                    */}
                     <div className="shelf__head" aria-hidden="true">
                       <span>model</span>
                       <span>kind</span>
+                      <span>codes</span>
                       <span>symptoms</span>
                       <span>causes</span>
                       <span>rejected</span>
@@ -195,8 +206,9 @@ export default function App() {
                       <div className="machine" key={m.model} data-tier={m.tier}>
                         <span className="machine__model">{m.model}</span>
                         <span className="machine__kind">{m.kind || '—'}</span>
-                        <span className="machine__n">{m.symptoms || m.codes || 0}</span>
-                        <span className="machine__n">{m.causes}</span>
+                        <span className="machine__n">{m.codes || '—'}</span>
+                        <span className="machine__n">{m.symptoms || '—'}</span>
+                        <span className="machine__n">{m.causes || '—'}</span>
                         <span className="machine__n machine__n--out">
                           {m.rejected?.length || ''}
                         </span>

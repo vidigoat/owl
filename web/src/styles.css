@@ -435,7 +435,7 @@ section { padding-block: clamp(64px, 9vh, 112px); }
 .shelf__head,
 .machine {
   display: grid;
-  grid-template-columns: 124px minmax(0, 1fr) 72px 64px 72px 84px;
+  grid-template-columns: 124px minmax(0, 1fr) 56px 72px 64px 72px 84px;
   gap: 14px;
   align-items: baseline;
   padding: 9px 0;
