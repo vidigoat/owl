@@ -99,3 +99,35 @@ had failed.
 shot that was wanted: a refusal, in the ordinary flow, arriving on its own. It costs one question
 less in the measurements too — see `npm run questions`, where F13 fell from 1 question to 0 and is
 labelled so the improvement cannot be mistaken for a case leaving the denominator.
+
+---
+
+## Where each shot actually lives (2026-09-22, after the site was rebuilt)
+
+The storyboard above is still the film. What changed is the surface each moment is recorded on —
+the web page was rebuilt around the manual lookup, and the question-asking flow it used to carry
+now lives in the terminal and the MCP session. **Read this before setting up, or half the shots
+above will not be where you look for them.**
+
+| moment | record it on | exactly |
+|---|---|---|
+| the hook — a sentence, answered with a citation | **the page**, <https://second-set-of-hands.vercel.app> | type *"there is water left in the bottom at the end of the program"*. The answer carries the manufacturer's own sentence and **Bosch manual, page 46**. This is the strongest single frame on the page and it is now the opening. |
+| **THE PAUSE** and **THE COLLAPSE** | **the terminal**, `npm run demo` | the narrowing is there in full: three causes, `1.50 bits`, the chosen check with its cost, the answer, the strike-through, the second question, one cause left. Let the pause run. |
+| the same thing over the wire | **the terminal**, `npm run mcp:session` | proves the Alexa+ deliverable in one command: handshake, 19 tools, a citation, a refusal, a code narrowed, and a cart the gate refuses to open |
+| hands-free steps | **the page**, section 2 | one step at headline size, the tick row, *needs both hands*, and **read it out loud** — press it, and let the speech be heard. It is the only moment in the film that sounds like an Alexa product. |
+| the camera | **the page**, section 1 | *Use the camera* → *Read the plate*. If the read is unreliable on the day, say on camera that it is simulated — the reading labels itself either way. |
+| **THE REFUSAL** | **the page**, the fourth chip | *"there is a burning smell"*. It refuses and names what the manual does cover. Twelve of the thirty-nine, then the count. |
+| the refusal that costs money | **the terminal**, end of `npm run demo` | **NO CART** — "I have no parts data for this machine, so I cannot tell you what this costs or sell you anything for it." |
+| provenance, if there is room | **the bench**, `/review.html` | the manufacturer's rendered page on the left, the parse on the right, every cause citing its page. Twenty seconds, no narration needed. |
+
+**Two things that are true now and were not when the storyboard was written.**
+
+The library is **23 machines across five manufacturers and five kinds of appliance** — dishwashers,
+a dryer, refrigerators, ovens, washers — with 406 symptoms and 774 causes, and **790 quotations
+re-read off the manufacturer's own pages** by `npm run verify-against-pages`. That number is worth
+saying out loud; it is the difference between a demo and a library.
+
+And **the model reads a table off a page that has none**, which is in the friction log and is a
+better thirty seconds than any feature: a Home Connect page produced seven fault codes, four of
+them using other manufacturers' conventions. The guard that catches it is arithmetic, not a prompt.
+If the video has room for one piece of engineering honesty, make it that one.
