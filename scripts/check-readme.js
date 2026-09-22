@@ -26,7 +26,15 @@ const ROOT = path.join(__dirname, '..');
  * number in a README is embarrassing; the same number in the submission is the number a judge
  * checks against a command that disagrees with it.
  */
-const DOCS = ['README.md', path.join('docs', 'SUBMISSION.md')];
+/*
+ * The three documents a reviewer actually reads.
+ *
+ * `docs/JUDGING.md` was not on this list. It is the FIRST thing a reviewer opens, and it quotes the
+ * same figures as the other two — which in the sibling project meant it drifted to "28 suites, 372
+ * checks" against a suite that had grown to 29 and 398, with nothing in a position to notice. This
+ * one is clean today. The list is how it stays that way.
+ */
+const DOCS = ['README.md', path.join('docs', 'SUBMISSION.md'), path.join('docs', 'JUDGING.md')];
 const README = DOCS.map((f) => {
   try {
     return fs.readFileSync(path.join(ROOT, f), 'utf8');
