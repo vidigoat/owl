@@ -323,14 +323,20 @@ function unpredict(data, parms) {
  *
  * The caps are measured rather than picked. Across the thirty manuals here the largest single
  * decompressed stream is 18.8 MB — an image — and the largest document totals 43.3 MB. Sixty-four
- * and two hundred and fifty-six leave room for a manual half again as heavy as anything seen, and
- * refuse the ratios a bomb needs.
+ * and a hundred and twenty-eight leave room for a manual three times heavier than anything seen,
+ * and refuse the ratios a bomb needs.
+ *
+ * The per-document figure started at 256 MB, which is fine for one request and is not the situation
+ * the host is in: it reuses one instance across concurrent requests, so two documents at the cap
+ * would be the whole 512 MB between them. A limit that only holds when nobody else is asking is not
+ * a limit. Three times the largest real manual is still generous and halves what a second caller
+ * can cost.
  *
  * `maxOutputLength` makes zlib stop rather than this code check afterwards, which is the difference
  * between refusing to allocate a gigabyte and noticing that you did.
  */
 const MAX_STREAM = 64 * 1024 * 1024;
-const MAX_TOTAL = 256 * 1024 * 1024;
+const MAX_TOTAL = 128 * 1024 * 1024;
 
 const inflate = (buf, budget = MAX_STREAM, onCapped = null) => {
   const cap = Math.max(0, Math.min(MAX_STREAM, budget));
