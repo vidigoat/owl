@@ -313,9 +313,29 @@ function unpredict(data, parms) {
   return out;
 }
 
-const inflate = (buf) => {
+/*
+ * ── What a decompressed stream may weigh ────────────────────────────────────
+ *
+ * A 0.58 MB upload, one content stream, deflate of six hundred megabytes of spaces: this reader
+ * inflated all of it and took the process to 1.59 GB of resident memory in under two seconds. The
+ * hosted function has 512 MB, so that upload is a denial of service against a public endpoint, and
+ * it arrived with the endpoint.
+ *
+ * The caps are measured rather than picked. Across the thirty manuals here the largest single
+ * decompressed stream is 18.8 MB — an image — and the largest document totals 43.3 MB. Sixty-four
+ * and two hundred and fifty-six leave room for a manual half again as heavy as anything seen, and
+ * refuse the ratios a bomb needs.
+ *
+ * `maxOutputLength` makes zlib stop rather than this code check afterwards, which is the difference
+ * between refusing to allocate a gigabyte and noticing that you did.
+ */
+const MAX_STREAM = 64 * 1024 * 1024;
+const MAX_TOTAL = 256 * 1024 * 1024;
+
+const inflate = (buf, budget = MAX_STREAM) => {
+  const cap = Math.max(0, Math.min(MAX_STREAM, budget));
   try {
-    return zlib.inflateSync(buf);
+    return zlib.inflateSync(buf, { maxOutputLength: cap });
   } catch {
     /*
      * A truncated or slightly corrupt deflate stream still has usable text in front of the damage,
@@ -323,10 +343,13 @@ const inflate = (buf) => {
      * keeps what was decoded instead of throwing it away.
      */
     try {
-      return zlib.inflateSync(buf, { finishFlush: zlib.constants.Z_SYNC_FLUSH });
+      return zlib.inflateSync(buf, { finishFlush: zlib.constants.Z_SYNC_FLUSH, maxOutputLength: cap });
     } catch {
       try {
-        return zlib.inflateRawSync(buf.subarray(1), { finishFlush: zlib.constants.Z_SYNC_FLUSH });
+        return zlib.inflateRawSync(buf.subarray(1), {
+          finishFlush: zlib.constants.Z_SYNC_FLUSH,
+          maxOutputLength: cap,
+        });
       } catch {
         return Buffer.alloc(0);
       }
@@ -390,6 +413,7 @@ class Doc {
     this.offsets = new Map();   // object number → byte offset
     this.cache = new Map();     // object number → parsed object
     this.compressed = new Map();// object number → [container stream number]
+    this.inflated = 0;          // bytes produced by decompression, against MAX_TOTAL
     this.scan();
     this.loadObjectStreams();
   }
@@ -467,6 +491,11 @@ class Doc {
 
     let data = stream.raw;
     const f = this.resolve(stream.dict.Filter);
+    /*
+     * The document's remaining budget. Per-stream caps alone are not enough: a thousand streams
+     * each a byte under the limit is the same attack with more steps.
+     */
+    const budget = MAX_TOTAL - this.inflated;
     const filters = (Array.isArray(f) ? f : f ? [f] : []).map((x) => this.resolve(x)?.name);
     const p = this.resolve(stream.dict.DecodeParms ?? stream.dict.DP);
     const parms = Array.isArray(p) ? p : [p];
@@ -475,7 +504,7 @@ class Doc {
       switch (name) {
         case 'FlateDecode':
         case 'Fl':
-          data = inflate(data);
+          data = inflate(data, budget);
           break;
         case 'ASCII85Decode':
         case 'A85':
@@ -502,6 +531,7 @@ class Doc {
       }
     });
 
+    this.inflated += data.length;
     stream.decoded = data;
     return data;
   }
@@ -1207,4 +1237,5 @@ function canRead(file) {
 module.exports = {
   Doc, Lexer, Ref, PdfStream, inflate, unpredict,
   readPages, canRead, layout, buildFont, parseToUnicode, runContent, glyphs,
+  MAX_STREAM, MAX_TOTAL,
 };

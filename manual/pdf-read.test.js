@@ -222,6 +222,76 @@ it('an encrypted document is refused rather than half-read', () => {
   assert.match(verdict.why, /encrypted/);
 });
 
+it('a decompression bomb is refused rather than allocated', () => {
+  /*
+   * This shipped, for about an hour.
+   *
+   * A 0.58 MB upload — one content stream, deflate of six hundred megabytes of spaces — was
+   * inflated in full and took the process to 1.59 GB of resident memory in under two seconds. The
+   * hosted function has 512 MB, and `/api/read-manual` accepts a PDF from anybody. A small file
+   * that costs the sender nothing and costs the server a gigabyte is a denial of service, and it
+   * arrived with the endpoint.
+   *
+   * The caps are measured, not picked: across the thirty manuals on the machine this was written
+   * on, the largest single decompressed stream is 18.8 MB and the largest document totals 43.3 MB.
+   *
+   * Built here rather than committed — a fixture that is a decompression bomb is a thing nobody
+   * wants in a repository, and a hundred megabytes of spaces deflates to a hundred kilobytes in
+   * about a second.
+   */
+  const payload = zlib.deflateSync(Buffer.alloc(100 * 1024 * 1024, 0x20));
+  assert.ok(payload.length < 200 * 1024, `the bomb should be small: ${payload.length} bytes`);
+
+  const bomb = Buffer.from(
+    '%PDF-1.4\n' +
+      '1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n' +
+      '2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n' +
+      '3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R >>\nendobj\n' +
+      `4 0 obj\n<< /Length ${payload.length} /Filter /FlateDecode >>\nstream\n${payload.toString('latin1')}\nendstream\nendobj\n` +
+      'trailer\n<< /Root 1 0 R >>\n',
+    'latin1'
+  );
+
+  const started = Date.now();
+  const verdict = canRead(bomb);
+
+  assert.equal(verdict.ok, false, 'a hundred megabytes of nothing was read as a manual');
+  assert.ok(Date.now() - started < 3000, `it took ${Date.now() - started}ms to refuse`);
+
+  /*
+   * Asserted on what was ALLOCATED, not on resident memory.
+   *
+   * The first version measured RSS across the call, which also measured the hundred-megabyte buffer
+   * this test allocates to build the bomb with — so it failed at 68 MB while the reader itself had
+   * allocated nothing. A measurement that includes the measurer is not one.
+   *
+   * `decode` is the thing being capped, so ask it directly: the content stream declares a hundred
+   * megabytes of output and comes back with none, because zlib was told to stop rather than this
+   * code told to check afterwards.
+   */
+  const doc = new Doc(bomb);
+  const stream = [...doc.offsets.keys()].map((n) => doc.at(n)).find((o) => o && o.dict?.Filter);
+  assert.ok(stream, 'the bomb has no compressed stream in it, so this proves nothing');
+  const out = doc.decode(stream);
+  assert.ok(
+    out.length <= 1024,
+    `the capped stream still produced ${(out.length / 1048576).toFixed(1)} MB`
+  );
+});
+
+it('and the caps are above anything a real manual needs', () => {
+  /*
+   * A cap that refuses real documents is a worse bug than the one it fixes, and it would fail
+   * quietly — as a manual that "has no text layer". Both limits are asserted against the largest
+   * sizes actually measured across this machine's corpus, so tightening one below what a manual
+   * needs fails here rather than in front of somebody.
+   */
+  const { MAX_STREAM, MAX_TOTAL } = require('./pdf-read');
+  assert.ok(MAX_STREAM >= 32 * 1024 * 1024, 'the per-stream cap is below the 18.8 MB a real manual holds');
+  assert.ok(MAX_TOTAL >= 128 * 1024 * 1024, 'the per-document cap is below the 43.3 MB a real manual totals');
+  assert.ok(MAX_TOTAL > MAX_STREAM, 'a single stream may exhaust the whole document budget');
+});
+
 it('a broken document reports that it cannot be read, and does not throw', () => {
   const verdict = canRead(Buffer.from('%PDF-1.4\nthis is not a pdf\n%%EOF'));
   assert.equal(verdict.ok, false);

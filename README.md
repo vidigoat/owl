@@ -35,7 +35,7 @@ git clone <repo> && cd second-set-of-hands
 npm run demo          # the whole loop in a terminal, ~20 seconds
 npm run mcp:session   # a real MCP session — the Alexa+ deliverable, proven in one command
 npm start             # http://localhost:8792 — the device experience
-npm test              # 26 suites · 339 checks
+npm test              # 26 suites · 341 checks
 ```
 
 Nothing to install. The MCP server has zero dependencies and no build step.
