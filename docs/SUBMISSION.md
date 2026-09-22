@@ -19,6 +19,7 @@ Checklist against the stated requirements:
 | **AWS Builder mini**: AWS services with documented integrations | Bedrock Nova Lite — live, measured, `npm run preflight` |
 | **Open Source mini**: a *new additional* OSS project or public contribution | **[github.com/vidigoat/faultgraph](https://github.com/vidigoat/faultgraph)** — MIT, public, built in the window |
 | friction log — **up to 10% judging bonus** | `docs/FRICTION-LOG.md` |
+| a place to see it without installing anything | **<https://second-set-of-hands.vercel.app>** — ask a real manual a question and get the manufacturer's sentence and its page number, or a refusal naming what that manual does cover. The review bench is at `/review.html`. |
 
 Note: the repo does **not** have to be public for this hackathon. Sharing it privately with
 `testing@devpost.com` and `@AmazonAppDev` satisfies the rule.
@@ -26,7 +27,7 @@ Note: the repo does **not** have to be public for this hackathon. Sharing it pri
 
 ## Open Source mini — `faultgraph`
 
-**https://github.com/vidigoat/faultgraph** · MIT · zero dependencies · 86 checks
+**https://github.com/vidigoat/faultgraph** · MIT · zero dependencies · 88 checks
 
 It reads both kinds of table: `parse()` for fault codes, and `readSymptoms()` for the symptom-keyed
 troubleshooting tables that current manuals print instead — which is the finding that reshaped this
