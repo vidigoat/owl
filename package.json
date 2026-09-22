@@ -21,7 +21,8 @@
     "panels": "node eval/panels.js",
     "questions": "node eval/questions.js",
     "terminal-shot": "node scripts/terminal-shot.js",
-    "check-readme": "node scripts/check-readme.js"
+    "check-readme": "node scripts/check-readme.js",
+    "mcp:session": "node scripts/mcp-session.js"
   },
   "keywords": [
     "alexa-plus",

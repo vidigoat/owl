@@ -25,6 +25,7 @@ honestly in `PLAN.md` rather than papered over.
 | what to look at | where |
 |---|---|
 | The MCP server — JSON-RPC over Streamable HTTP, spec 2025-11-25 | `mcp/server.js` |
+| **See it work in one command** | `npm run mcp:session` — starts the server, speaks the protocol properly (initialize, initialized, tools/list, resources/list) and walks a real repair through it: a sentence, a citation, a refusal, a fault code narrowed, and a cart the gate refuses to open. Nothing mocked. |
 | Nineteen tools genuinely registered and invoked, not described | `mcp/tools/` — answer `tools/list` over Streamable HTTP; the README table names the file each lives in |
 | **Vision that actually runs** — real Bedrock Nova Lite, scored against deliberately hard panels | `npm run eval` → 7/9 codes, 1/1 model, **0 invented**; the two misses return null rather than guess. `mcp/tools/see.js` |
 | **A camera, and a voice** — point it at a rating plate, hear the step out loud | `web/src/sections/Plate.jsx` (`getUserMedia` → `POST /api/see`), `web/src/sections/Device.jsx` (`speechSynthesis`); neither starts on its own |

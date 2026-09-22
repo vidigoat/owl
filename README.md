@@ -341,6 +341,7 @@ npm run demo            # ← start here: the whole loop in a terminal, 20 secon
 npm test                # every suite, reported together
 npm start               # http://localhost:8792 — the device experience
 npm run mcp             # http://localhost:8793/mcp — the server Alexa+ calls
+npm run mcp:session     # ← and one command that PROVES it: a real session, nothing mocked
 
 npm run preflight       # does AWS actually work? CLI, credentials, Bedrock, one real read
 npm run capture         # regenerate this README's screenshots from a real run (needs Chrome)
