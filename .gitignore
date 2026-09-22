@@ -22,3 +22,6 @@ data/pending/
 # The manuals. Hundreds of megabytes, fetched from the manufacturer, reproducible with one command.
 manuals/
 .vercel
+
+# web/ is the website's own package. The MCP server still installs nothing.
+web/node_modules/

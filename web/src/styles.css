@@ -1,0 +1,569 @@
+/*
+ * ── Second Set of Hands ─────────────────────────────────────────────────────
+ *
+ * The page is the service manual. The device is the hand.
+ *
+ * Two surfaces, and the contrast between them is the whole design. The page is printed: warm
+ * paper, black ink, hairline rules, a figure number where a figure number belongs. The device is
+ * the one dark panel on it — because that is what an Echo Show on a kitchen counter looks like at
+ * nine at night when you are on the floor with the door open, and because what it shows has to be
+ * readable from four feet away with wet hands.
+ *
+ * Deliberately not used:
+ *
+ *   #F4F1EA + terracotta   The cream-and-clay pairing every generated page arrives in. This paper
+ *                          is greyer and greener, and the spot colour is the ochre a manual
+ *                          actually prints its callouts in.
+ *   rounded cards          A manual is set in columns and rules. Boxes with soft shadows are a
+ *                          different document pretending to be this one.
+ *   an icon set            The illustrations in a service manual are line drawings of the actual
+ *                          part. Generic glyphs say nothing about a filter.
+ *   a chat bubble          This is not a chat. It is somebody kneeling on a floor being told the
+ *                          next thing to do.
+ */
+
+:root {
+  /* Paper. Warmer than grey, greener than cream. */
+  --paper: #e8e5dc;
+  --paper-2: #e1ddd2;
+  --card: #f1efe8;
+  --ink: #191714;
+  --ink-2: #4a453d;
+  --faint: #7d766a;
+  --rule: #c9c4b6;
+  --rule-soft: #d6d2c5;
+
+  /* What the manual itself says, and where it says it. The callout ochre. */
+  --amber: #b8761f;
+  /* A refusal, and nothing else. It appears when the copilot will not guess. */
+  --stop: #a8321f;
+  /* A verified, ordered, finished thing. */
+  --done: #3f6b4e;
+
+  /* The device. The single dark surface on the page. */
+  --screen: #14161a;
+  --screen-2: #1c1f25;
+  --screen-ink: #f2f0ea;
+  --screen-dim: #98a0aa;
+
+  --sans: Archivo, ui-sans-serif, system-ui, sans-serif;
+  --mono: 'DM Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --t-hero: clamp(2.05rem, 3.4vw, 2.9rem);
+  --t-head: clamp(1.55rem, 2.8vw, 2.2rem);
+  --t-body: 1.0625rem;
+  --t-small: 0.875rem;
+  --t-mono: 0.8125rem;
+
+  --gut: clamp(20px, 5vw, 56px);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 var(--t-body)/1.6 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection { background: color-mix(in oklab, var(--amber) 30%, transparent); }
+
+h1, h2, h3 { font-family: var(--sans); font-weight: 600; letter-spacing: -0.018em; margin: 0; line-height: 1.1; }
+
+a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--rule); }
+a:hover { text-decoration-color: var(--amber); }
+
+:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+
+code, .mono { font-family: var(--mono); font-size: 0.9em; }
+
+.wrap { width: min(1080px, 100% - var(--gut) * 2); margin-inline: auto; }
+section { padding-block: clamp(64px, 9vh, 112px); }
+
+/*
+ * The plate: a small mono label in the margin, the way a manual numbers its figures. It is the
+ * page's one piece of repeated furniture and it earns its place by saying WHERE you are in a
+ * document, not by decorating a heading.
+ */
+.plate {
+  font: 500 var(--t-mono)/1 var(--mono);
+  color: var(--faint);
+  letter-spacing: 0.04em;
+  margin: 0 0 14px;
+}
+
+.lede {
+  max-width: 62ch;
+  color: var(--ink-2);
+  font-size: var(--t-body);
+  margin: 16px 0 0;
+}
+.lede b { color: var(--ink); font-weight: 600; }
+
+/* ── hero ────────────────────────────────────────────────────────────────── */
+
+.hero { padding-block: clamp(56px, 9vh, 104px) clamp(40px, 6vh, 72px); }
+
+.hero h1 {
+  font-size: var(--t-hero);
+  /* Three lines, not five. At 3.6rem the headline pushed the input — which IS the product — most
+     of the way off a laptop screen, and the first thing anybody saw was a claim with no evidence
+     under it. */
+  max-width: 27ch;
+  font-weight: 700;
+  letter-spacing: -0.028em;
+}
+.hero h1 em { font-style: normal; color: var(--amber); }
+
+.hero__sub { max-width: 54ch; color: var(--ink-2); margin-top: 20px; }
+
+/* ── the ask: type what the machine is doing ─────────────────────────────── */
+
+.ask {
+  margin-top: clamp(28px, 4vh, 44px);
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--rule);
+  background: var(--card);
+}
+
+.ask__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 6px 6px 6px 18px;
+}
+@media (max-width: 560px) {
+  .ask__row { grid-template-columns: minmax(0, 1fr); padding: 12px; }
+}
+
+.ask input {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 16px 0;
+  font: 400 1.0625rem/1.4 var(--sans);
+  color: var(--ink);
+  width: 100%;
+}
+.ask input::placeholder { color: var(--faint); }
+.ask input:focus { outline: none; }
+.ask__row:focus-within { box-shadow: inset 0 -2px 0 var(--amber); }
+
+.ask__which {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  align-items: baseline;
+  padding: 10px 18px;
+  border-top: 1px solid var(--rule-soft);
+  font: 400 var(--t-mono)/1.5 var(--mono);
+  color: var(--faint);
+}
+.ask__which select {
+  font: 500 var(--t-mono)/1.5 var(--mono);
+  color: var(--ink);
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  padding: 2px 0;
+  cursor: pointer;
+}
+
+.tries { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.try {
+  appearance: none;
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font: 400 var(--t-small)/1 var(--sans);
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.try:hover { border-color: var(--ink); color: var(--ink); }
+
+/* ── the answer: the manufacturer's own words, and the page ──────────────── */
+
+.answer { margin-top: 26px; }
+
+.answer__symptom {
+  font: 600 1.25rem/1.35 var(--sans);
+  margin: 0 0 4px;
+}
+.answer__from {
+  font: 400 var(--t-mono)/1.5 var(--mono);
+  color: var(--faint);
+  margin: 0 0 18px;
+}
+
+.cause {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  gap: 18px;
+  padding: 16px 0;
+  border-top: 1px solid var(--rule);
+}
+.cause__odds {
+  font: 500 1rem/1.3 var(--mono);
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.cause__odds small { display: block; font-size: 0.62em; color: var(--faint); letter-spacing: 0.02em; }
+.cause__label { font-weight: 600; margin: 0 0 6px; }
+
+/*
+ * The quotation is set as a quotation: indented, in the manual's own ochre, with the page number.
+ * It is the single most important element on this page — it is the difference between a repair
+ * copilot and a machine that sounds confident.
+ */
+.quote {
+  border-left: 2px solid var(--amber);
+  padding: 2px 0 2px 14px;
+  margin: 0 0 10px;
+  color: var(--ink-2);
+  font-size: var(--t-small);
+}
+.quote--bare { padding-block: 0; margin-bottom: 8px; }
+.quote cite {
+  display: block;
+  font: 500 var(--t-mono)/1.6 var(--mono);
+  font-style: normal;
+  color: var(--amber);
+  margin-top: 4px;
+}
+
+.remedies { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; }
+.remedies li {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 8px;
+  font-size: var(--t-small);
+  color: var(--ink-2);
+}
+.remedies li::before { content: '→'; color: var(--faint); }
+
+/* ── the refusal ─────────────────────────────────────────────────────────── */
+
+.refusal {
+  border-left: 2px solid var(--stop);
+  padding: 4px 0 4px 16px;
+  margin-top: 26px;
+}
+.refusal h3 { color: var(--stop); font-size: 1.0625rem; margin-bottom: 6px; }
+.refusal p { margin: 0; color: var(--ink-2); font-size: var(--t-small); max-width: 60ch; }
+.refusal ul {
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 2px;
+  font: 400 var(--t-mono)/1.6 var(--mono);
+  color: var(--faint);
+}
+
+/* ── the device ──────────────────────────────────────────────────────────── */
+
+.device-band { background: var(--paper-2); border-block: 1px solid var(--rule); }
+
+.device {
+  background: var(--screen);
+  color: var(--screen-ink);
+  border-radius: 10px;
+  overflow: hidden;
+  /* The one thing on the page that sits above it. A screen on a counter does. */
+  box-shadow: 0 18px 40px -24px rgba(25, 23, 20, 0.55);
+}
+
+.device__bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--screen-2);
+  font: 400 var(--t-mono)/1 var(--mono);
+  color: var(--screen-dim);
+}
+.device__live {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--amber);
+  flex: none;
+}
+
+.device__body {
+  padding: clamp(24px, 4vw, 44px);
+  display: grid;
+  gap: clamp(24px, 4vw, 48px);
+}
+@media (min-width: 820px) {
+  .device__body { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); }
+}
+.device__now { display: grid; gap: 22px; align-content: start; }
+
+.device__why {
+  display: grid;
+  gap: 22px;
+  align-content: start;
+  border-top: 1px solid var(--screen-2);
+  padding-top: 20px;
+}
+@media (min-width: 820px) {
+  .device__why { border-top: 0; border-left: 1px solid var(--screen-2); padding: 0 0 0 clamp(22px, 3vw, 36px); }
+}
+.device__why-head {
+  font: 400 var(--t-mono)/1 var(--mono);
+  color: var(--screen-dim);
+  letter-spacing: 0.06em;
+  margin: 0 0 8px;
+}
+.device__why-what {
+  font: 500 1rem/1.35 var(--sans);
+  color: var(--screen-ink);
+  margin: 0 0 6px;
+}
+.device__why-what b { color: var(--amber); font-weight: 500; font-family: var(--mono); font-size: 0.85em; }
+.device__why-note { margin: 0; font-size: var(--t-small); color: var(--screen-dim); line-height: 1.5; }
+
+.device__step {
+  font: 600 clamp(1.5rem, 3.1vw, 2.35rem)/1.22 var(--sans);
+  letter-spacing: -0.02em;
+  margin: 0;
+  max-width: 20ch;
+}
+.device__detail { color: var(--screen-dim); margin: 0; max-width: 46ch; font-size: var(--t-small); }
+
+.device__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  align-items: center;
+  font: 400 var(--t-mono)/1 var(--mono);
+  color: var(--screen-dim);
+}
+
+.device__ticks { display: flex; gap: 6px; }
+.device__tick { width: 26px; height: 3px; background: var(--screen-2); border-radius: 2px; }
+.device__tick[data-on='true'] { background: var(--amber); }
+.device__tick[data-done='true'] { background: var(--screen-dim); }
+
+.device__foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--screen-2);
+  align-items: center;
+}
+
+.said {
+  font: 400 var(--t-small)/1.5 var(--sans);
+  color: var(--screen-dim);
+  margin: 0;
+}
+.said b { color: var(--screen-ink); font-weight: 500; }
+
+/* ── buttons ─────────────────────────────────────────────────────────────── */
+
+.btn {
+  appearance: none;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  font: 500 var(--t-small)/1 var(--sans);
+  padding: 13px 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease;
+}
+.btn:hover { background: var(--amber); border-color: var(--amber); }
+.btn:disabled { opacity: 0.4; cursor: default; }
+
+.btn--onscreen { border-color: var(--screen-ink); background: var(--screen-ink); color: var(--screen); }
+.btn--onscreen:hover { background: var(--amber); border-color: var(--amber); color: var(--screen); }
+.btn--quiet {
+  background: none;
+  color: var(--screen-dim);
+  border-color: var(--screen-2);
+}
+.btn--quiet:hover { background: none; color: var(--screen-ink); border-color: var(--screen-dim); }
+
+/* ── the library ─────────────────────────────────────────────────────────── */
+
+.totals {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-top: 30px;
+}
+.totals > div { background: var(--paper); padding: 16px 18px; }
+.totals dt { font-size: var(--t-small); color: var(--faint); margin-bottom: 4px; }
+.totals dd { margin: 0; font: 500 1.5rem/1 var(--mono); font-variant-numeric: tabular-nums; }
+
+.shelf { margin-top: 30px; border-top: 1px solid var(--rule); }
+.machine {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr) auto;
+  gap: 10px 18px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  align-items: baseline;
+}
+@media (max-width: 640px) {
+  .machine { grid-template-columns: minmax(0, 1fr) auto; }
+  .machine__model { grid-column: 1 / -1; }
+}
+.machine__model { font: 500 var(--t-small)/1.4 var(--mono); }
+.machine__what { color: var(--ink-2); font-size: var(--t-small); }
+.machine__tier { font: 400 var(--t-mono)/1.4 var(--mono); color: var(--faint); }
+.machine[data-tier='hand'] .machine__tier { color: var(--ink-2); }
+.machine[data-tier='checked'] .machine__tier { color: var(--done); }
+
+/* ── the part ────────────────────────────────────────────────────────────── */
+
+.part {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-top: 28px;
+}
+.part > div { background: var(--card); padding: 22px; display: grid; gap: 8px; align-content: start; }
+.part h3 { font-size: 1.0625rem; }
+.part .price { font: 500 1.75rem/1 var(--mono); font-variant-numeric: tabular-nums; }
+.part .when { font: 400 var(--t-mono)/1.4 var(--mono); color: var(--faint); }
+.part .note { font-size: var(--t-small); color: var(--ink-2); margin: 0; }
+.part > div.other { background: var(--paper); }
+.part > div.other .price { color: var(--ink-2); }
+
+/* ── the accordion of refusals ───────────────────────────────────────────── */
+
+.wont { margin-top: 28px; border-top: 1px solid var(--rule); }
+.wont__trigger {
+  width: 100%;
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  padding: 16px 0;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--rule-soft);
+  font: 600 var(--t-body)/1.4 var(--sans);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+.wont__trigger:hover { color: var(--amber); }
+.wont__sign { margin-left: auto; color: var(--faint); font: 400 var(--t-mono)/1 var(--mono); transition: transform 180ms ease; }
+.wont__trigger[data-state='open'] .wont__sign { transform: rotate(45deg); }
+
+.panel { overflow: hidden; }
+.panel[data-state='open'] { animation: panel-open 240ms cubic-bezier(0.16, 1, 0.3, 1); }
+.panel[data-state='closed'] { animation: panel-shut 180ms cubic-bezier(0.16, 1, 0.3, 1); }
+.panel p { margin: 0; padding: 6px 0 20px; color: var(--ink-2); font-size: var(--t-small); max-width: 62ch; }
+
+@keyframes panel-open {
+  from { height: 0; opacity: 0; }
+  to { height: var(--radix-accordion-content-height); opacity: 1; }
+}
+@keyframes panel-shut {
+  from { height: var(--radix-accordion-content-height); opacity: 1; }
+  to { height: 0; opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .panel[data-state='open'], .panel[data-state='closed'] { animation: none; }
+}
+
+/* ── footer ──────────────────────────────────────────────────────────────── */
+
+footer {
+  border-top: 1px solid var(--rule);
+  padding-block: 30px 52px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  font: 400 var(--t-mono)/1.5 var(--mono);
+  color: var(--faint);
+}
+
+/* ── the viewfinder ───────────────────────────────────────────────────────
+ *
+ * Off until somebody asks. There is no preview quietly running in the background of a page nobody
+ * agreed to be filmed by, and the frame says so in words rather than showing a black rectangle
+ * that could equally well be a camera that failed.
+ */
+.viewfinder {
+  display: grid;
+  gap: clamp(20px, 3vw, 34px);
+  margin-top: 30px;
+}
+@media (min-width: 820px) {
+  .viewfinder { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); align-items: start; }
+}
+
+.viewfinder__frame {
+  position: relative;
+  /* A rating plate is a wide sticker, and at 4:3 the frame was taller than the screen it sits on. */
+  aspect-ratio: 16 / 10;
+  max-width: 100%;
+  background: var(--screen);
+  border-radius: 8px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+.viewfinder__frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.viewfinder__off {
+  font: 400 var(--t-mono)/1 var(--mono);
+  color: var(--screen-dim);
+}
+
+/* The bracket you line the sticker up inside. The only instruction the frame needs. */
+.viewfinder__bracket {
+  position: absolute;
+  inset: 22% 14%;
+  border: 2px solid var(--amber);
+  border-radius: 3px;
+  box-shadow: 0 0 0 100vmax rgba(20, 22, 26, 0.34);
+}
+
+.viewfinder__side { display: grid; gap: 18px; align-content: start; }
+.viewfinder__controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.viewfinder__why {
+  margin: 0;
+  font-size: var(--t-small);
+  color: var(--stop);
+  max-width: 44ch;
+}
+
+.reading {
+  margin: 0;
+  display: grid;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+.reading > div { background: var(--card); padding: 12px 16px; display: flex; gap: 14px; align-items: baseline; }
+.reading dt { font: 400 var(--t-mono)/1.5 var(--mono); color: var(--faint); min-width: 72px; }
+.reading dd { margin: 0; font-weight: 500; }
+
+/* A stand-in says so, in the same place the reading appears, not in a footnote. */
+.reading__sim {
+  background: var(--paper-2);
+  padding: 12px 16px;
+  font: 400 var(--t-small)/1.5 var(--sans);
+  color: var(--ink-2);
+  border-left: 2px solid var(--amber);
+}
+.reading__unsure dt, .reading__unsure dd { color: var(--stop); }

@@ -45,7 +45,18 @@ const readJson = (req) =>
   });
 
 const PORT = Number(process.env.PORT) || 8792;
+/*
+ * Where the site is served from.
+ *
+ * `dist/` is the built site. `public/` holds what is not built — the review bench, which is an
+ * internal tool for admitting manuals — and is the fallback when nothing has been built yet.
+ *
+ * The site has its own dependencies in `web/`. The MCP server still has none and needs no build
+ * step, because an Alexa+ skill is something somebody else has to run.
+ */
+const DIST = path.join(__dirname, 'dist');
 const PUBLIC = path.join(__dirname, 'public');
+const ROOTS = fs.existsSync(DIST) ? [DIST, PUBLIC] : [PUBLIC];
 const TYPES = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.json': 'application/json' };
 
 const send = (res, code, body, type) => {
@@ -321,13 +332,24 @@ function handler(req, res) {
         .catch((e) => send(res, 400, JSON.stringify({ error: e.message }), 'application/json'));
     }
 
-    const rel = url.pathname === '/' ? 'index.html' : url.pathname.slice(1);
-    const file = path.join(PUBLIC, rel);
-    if (!file.startsWith(PUBLIC)) return send(res, 403, 'no', 'text/plain');
-    fs.readFile(file, (err, buf) => {
-      if (err) return send(res, 404, 'not found', 'text/plain');
-      send(res, 200, buf, TYPES[path.extname(file)] || 'application/octet-stream');
-    });
+    const rel = url.pathname === '/' ? 'index.html' : decodeURIComponent(url.pathname.slice(1));
+
+    /*
+     * Each root in turn. A path that climbs out of the root it was resolved against is refused
+     * rather than tried against the next one — `../server.js` must not become a miss that falls
+     * through to somewhere it does happen to exist.
+     */
+    const tryRoot = (i) => {
+      if (i >= ROOTS.length) return send(res, 404, 'not found', 'text/plain');
+      const root = ROOTS[i];
+      const file = path.resolve(root, rel);
+      if (!file.startsWith(root + path.sep)) return send(res, 403, 'no', 'text/plain');
+      fs.readFile(file, (err, buf) => {
+        if (err) return tryRoot(i + 1);
+        send(res, 200, buf, TYPES[path.extname(file)] || 'application/octet-stream');
+      });
+    };
+    tryRoot(0);
 }
 
 module.exports = handler;

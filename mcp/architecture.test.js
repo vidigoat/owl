@@ -32,14 +32,15 @@ const it = (name, fn) => {
 };
 
 const ROOT = path.join(__dirname, '..');
-const SKIP = new Set(['node_modules', '.git', 'docs', 'eval']);
+// `dist` is the built site — the same source twice, bundled, which would double every match here.
+const SKIP = new Set(['node_modules', '.git', 'docs', 'eval', 'dist']);
 
 function sources(dir = ROOT, found = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     if (SKIP.has(entry.name)) continue;
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) sources(full, found);
-    else if (entry.name.endsWith('.js') && !entry.name.endsWith('.test.js')) found.push(full);
+    else if (/\.jsx?$/.test(entry.name) && !entry.name.endsWith('.test.js')) found.push(full);
   }
   return found;
 }
@@ -112,10 +113,19 @@ it('the device decides nothing', () => {
   // Every fact on screen came back from a tool call. A front-end that computed a probability, a
   // severity or an eligibility would make the MCP surface decorative — and Alexa+ driving this
   // instead of a browser is the entire premise.
-  const app = find('public/app.js');
-  assert.ok(!/maySpend\s*:/.test(app), 'the device decides whether money may be spent');
-  assert.ok(!/function\s+entropy|Math\.log2/.test(app), 'the device computes its own uncertainty');
-  assert.ok(!/upheld\s*[:=]\s*(true|false)/.test(app), 'the device upholds a diagnosis by itself');
+  const screen = FILES.filter((f) => f.rel.startsWith(`web${path.sep}src`));
+  assert.ok(screen.length >= 3, `only found ${screen.length} files in the interface — the scan is broken`);
+
+  for (const { rel, text } of screen) {
+    assert.ok(!/maySpend\s*:/.test(text), `${rel} decides whether money may be spent`);
+    assert.ok(!/function\s+entropy|Math\.log2/.test(text), `${rel} computes its own uncertainty`);
+    assert.ok(!/upheld\s*[:=]\s*(true|false)/.test(text), `${rel} upholds a diagnosis by itself`);
+    // Nor may it re-rank what the diagnosis ranked. The order IS the diagnosis.
+    assert.ok(
+      !/causes[\s\S]{0,40}\.sort\(/.test(text),
+      `${rel} re-sorts the causes the diagnosis already ranked`
+    );
+  }
 });
 
 it('nothing outside see.js talks to Bedrock', () => {
