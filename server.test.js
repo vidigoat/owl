@@ -25,6 +25,7 @@ const assert = require('node:assert');
 const fs = require('node:fs');
 const path = require('node:path');
 const { spawn } = require('node:child_process');
+const zlib = require('node:zlib');
 
 const PORT = 8795;
 const BASE = `http://localhost:${PORT}`;
@@ -410,6 +411,45 @@ function buildPdf(stream, compressed) {
     assert.equal(out.ok, false);
     assert.match(out.refused, /no text layer|scan/i);
     assert.match(out.refused, /read_manual|camera/i, 'it does not say what to do instead');
+  });
+
+  await it('a document refused for decompressing too far is not called a scan', async () => {
+    /*
+     * Two refusals that need opposite things from whoever is holding the manual. A scan has no text
+     * in it and the answer is a camera. A document whose streams were refused for decompressing to
+     * more than the reader will allocate is not a scan, and photographing it would find nothing.
+     *
+     * It was reported as one: a 0.88 MB file that inflates to 900 MB came back as "this document
+     * has no text layer — it is a scan", which is false and is advice that wastes somebody's time.
+     */
+    const payload = zlib.deflateSync(Buffer.alloc(100 * 1024 * 1024, 0x20));
+    const bomb = Buffer.from(
+      '%PDF-1.4\n1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n' +
+        '2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n' +
+        '3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R >>\nendobj\n' +
+        `4 0 obj\n<< /Length ${payload.length} /Filter /FlateDecode >>\nstream\n${payload.toString('latin1')}\nendstream\nendobj\n` +
+        'trailer\n<< /Root 1 0 R >>\n',
+      'latin1'
+    );
+
+    const started = Date.now();
+    const out = await (await fetch(`${BASE}/api/read-manual`, {
+      method: 'POST', headers: { 'content-type': 'application/pdf' }, body: bomb,
+    })).json();
+
+    assert.equal(out.ok, false);
+    assert.ok(Date.now() - started < 10000, 'the endpoint spent real time on it');
+    assert.equal(out.capped, 1, 'the refused stream was not counted');
+    assert.match(out.refused, /decompress/i);
+    assert.doesNotMatch(out.refused, /scan/i, 'a refused stream was reported as a scan');
+    assert.match(out.refused, /learn-manual/, 'it does not say what would read it');
+
+    // And a document that really has no text still gets the camera.
+    const scan = await (await fetch(`${BASE}/api/read-manual`, {
+      method: 'POST', headers: { 'content-type': 'application/pdf' }, body: emptyPdf(),
+    })).json();
+    assert.equal(scan.capped, 0);
+    assert.match(scan.refused, /scan/i);
   });
 
   await it('the hosted routes keep their own path', () => {

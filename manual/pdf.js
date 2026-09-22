@@ -145,7 +145,8 @@ function read(file) {
     }
   }
 
-  return { pages: builtIn.readPages(file), reader: 'built-in' };
+  const seen = { capped: 0 };
+  return { pages: builtIn.readPages(file, { seen }), reader: 'built-in', capped: seen.capped };
 }
 
 /** Every page's text, in order. Page N is `pages[N - 1]`. */

@@ -326,8 +326,9 @@ function handler(req, res) {
           const started = Date.now();
           let pages;
           let reader;
+          let capped = 0;
           try {
-            ({ pages, reader } = pdf.read(buf));
+            ({ pages, reader, capped = 0 } = pdf.read(buf));
           } catch (e) {
             return send(res, 200, JSON.stringify({
               ok: false,
@@ -347,10 +348,25 @@ function handler(req, res) {
              */
             return send(res, 200, JSON.stringify({
               ok: false,
-              reader: pdf.reader(),
+              reader,
               pages: pages.length,
-              refused: 'this document has no text layer — it is a scan. Reading it needs the ' +
-                'camera path (read_manual), which photographs the page and asks a vision model.',
+              capped,
+              /*
+               * Two refusals, and they need opposite things from whoever is holding the manual.
+               *
+               * A scan has no text in it and the answer is a camera. A document whose streams were
+               * refused for decompressing to more than this reader will allocate is not a scan, and
+               * photographing it would find nothing — it was reported as one until a 0.88 MB file
+               * that inflates to 900 MB came back as "this is a scan, use the camera".
+               */
+              refused: capped
+                ? `${capped} stream${capped === 1 ? '' : 's'} in this document ` +
+                  `decompress${capped === 1 ? 'es' : ''} to more ` +
+                  'than this reader will allocate, so they were not read. That is a guard against a ' +
+                  'small file costing a server a gigabyte, not a judgement about the manual — ' +
+                  '`node scripts/learn-manual.js <file.pdf>` has the whole machine to work in.'
+                : 'this document has no text layer — it is a scan. Reading it needs the ' +
+                  'camera path (read_manual), which photographs the page and asks a vision model.',
             }), 'application/json');
           }
 

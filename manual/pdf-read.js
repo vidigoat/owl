@@ -332,11 +332,21 @@ function unpredict(data, parms) {
 const MAX_STREAM = 64 * 1024 * 1024;
 const MAX_TOTAL = 256 * 1024 * 1024;
 
-const inflate = (buf, budget = MAX_STREAM) => {
+const inflate = (buf, budget = MAX_STREAM, onCapped = null) => {
   const cap = Math.max(0, Math.min(MAX_STREAM, budget));
   try {
     return zlib.inflateSync(buf, { maxOutputLength: cap });
-  } catch {
+  } catch (e) {
+    /*
+     * A stream that decompresses to more than the budget is a different failure from a corrupt one,
+     * and they must not report the same way. Without this, a document whose only content stream was
+     * refused came back as "this is a scan — use the camera", which is false and sends somebody to
+     * photograph a page that is not there.
+     */
+    if (/maxOutputLength|buffer|ERR_BUFFER_TOO_LARGE/i.test(e?.message || '') || e?.code === 'ERR_BUFFER_TOO_LARGE') {
+      onCapped?.(cap);
+      return Buffer.alloc(0);
+    }
     /*
      * A truncated or slightly corrupt deflate stream still has usable text in front of the damage,
      * and a manual with one bad stream should lose one page rather than the document. `finishFlush`
@@ -414,6 +424,7 @@ class Doc {
     this.cache = new Map();     // object number → parsed object
     this.compressed = new Map();// object number → [container stream number]
     this.inflated = 0;          // bytes produced by decompression, against MAX_TOTAL
+    this.capped = 0;            // streams refused for decompressing to more than the budget
     this.scan();
     this.loadObjectStreams();
   }
@@ -504,7 +515,7 @@ class Doc {
       switch (name) {
         case 'FlateDecode':
         case 'Fl':
-          data = inflate(data, budget);
+          data = inflate(data, budget, () => { this.capped++; });
           break;
         case 'ASCII85Decode':
         case 'A85':
@@ -1187,6 +1198,8 @@ function readPages(file, opts = {}) {
   const doc = new Doc(buf);
   const pages = doc.pages();
   const only = opts.pages ? new Set(opts.pages) : null;
+  // A caller that wants to know WHY it got nothing passes a `seen` object to be filled in.
+  const seen = opts.seen || null;
 
   return pages.map((page, i) => {
     if (only && !only.has(i + 1)) return '';
@@ -1219,18 +1232,27 @@ function readPages(file, opts = {}) {
       return layout(glyphList);
     } catch {
       return ''; // one unreadable page is one page
+    } finally {
+      if (seen) seen.capped = doc.capped;
     }
   });
 }
 
-/** Can this file be read here at all? Never throws — it is asked in order to decide. */
+/**
+ * Can this file be read here at all? Never throws — it is asked in order to decide.
+ *
+ * `capped` is carried out because it changes the advice. A document with no text layer is a scan
+ * and the answer is a camera. A document whose streams were refused for decompressing to more than
+ * this reader will allocate is not a scan, and photographing it would find nothing.
+ */
 function canRead(file) {
   try {
-    const pages = readPages(file);
+    const seen = { capped: 0 };
+    const pages = readPages(file, { seen });
     const withText = pages.filter((p) => p.trim().length > 40).length;
-    return { ok: withText > 0, pages: pages.length, withText };
+    return { ok: withText > 0, pages: pages.length, withText, capped: seen.capped };
   } catch (e) {
-    return { ok: false, pages: 0, withText: 0, why: e.message };
+    return { ok: false, pages: 0, withText: 0, capped: 0, why: e.message };
   }
 }
 
