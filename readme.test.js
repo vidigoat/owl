@@ -54,10 +54,17 @@ it('no document promises a command that does not exist', () => {
    * which is exactly what somebody discovers with a camera running.
    */
   const scripts = require('./package.json').scripts;
+  /*
+   * `NEEDS.md` is kept byte-identical in both repositories on purpose — it is one list of what is
+   * owed across both projects — so the commands it names are not all this project's, and it says
+   * so on the line. It is the only file exempt, and it is exempt by name rather than by rule.
+   */
+  const SHARED = 'NEEDS.md';
+
   const docs = [
     'README.md',
     ...fs.readdirSync(path.join(__dirname, 'docs'))
-      .filter((f) => f.endsWith('.md'))
+      .filter((f) => f.endsWith('.md') && f !== SHARED)
       .map((f) => path.join('docs', f)),
   ];
 
