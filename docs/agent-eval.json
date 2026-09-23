@@ -3,9 +3,9 @@
   "model": "us.amazon.nova-2-lite-v1:0",
   "scenarios": 8,
   "passed": 8,
-  "turns": 16,
+  "turns": 17,
   "violations": 0,
-  "cost": 0.0849,
+  "cost": 0.0893,
   "byScenario": [
     {
       "name": "the pump, found by listening, then bought",

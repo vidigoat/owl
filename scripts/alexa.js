@@ -44,7 +44,7 @@ function show(said, r) {
   for (const s of r.steps) {
     if (s.private) continue;
     const filled = s.filled.length ? `${C.dim}  ← client supplied ${s.filled.join(', ')}${C.off}` : '';
-    const tone = s.isError ? C.red : /UPHELD|cart:|ordered|"ok":true/.test(s.answer) ? C.green : /refused|abstains/.test(s.answer) ? C.amber : C.dim;
+    const tone = s.isError ? C.red : /UPHELD|cart opened|^ordered|recorded:/.test(s.answer) ? C.green : /refused|abstains|held by the client|not ordered/.test(s.answer) ? C.amber : C.dim;
     console.log(`  ${C.dim}  ${s.tool.padEnd(17)}${C.off}${tone}${s.answer.slice(0, 110)}${C.off}${filled}`);
   }
   console.log(`  ${C.teal}${C.bold}alexa+${C.off}   ${C.teal}${r.say}${C.off}  ${C.dim}(${r.rounds} round${r.rounds === 1 ? '' : 's'} · $${r.cost.toFixed(4)})${C.off}`);

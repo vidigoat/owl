@@ -76,7 +76,9 @@ async function turn({ conversation, said } = {}, { make, creds } = {}) {
   }
 
   const shown = r.steps.filter((s) => !s.private);
-  const last = [...shown].reverse().find((s) => APP_TOOLS.has(s.tool) && s.result && typeof s.result === 'object');
+  // Never a card for the client's own answer: "tell them about the part first" is a note to the
+  // model, and recorded footage showed it on the screen as "No procedure on record".
+  const last = [...shown].reverse().find((s) => APP_TOOLS.has(s.tool) && s.result && typeof s.result === 'object' && s.result.answeredBy !== 'client');
   return {
     status: 200,
     body: {

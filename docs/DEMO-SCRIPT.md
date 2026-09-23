@@ -154,6 +154,11 @@ proof. Each turn costs about half a cent.
 | A5b | after A4, new conversation: *"My SHE3AR75UC is showing E24 again."* (tell it the pump was fitted and worked first, so the household has the record) | `hypotheses` + `repair_history`, read by the client; spoken first: *"This E24 is back — last time, on …: replaced the drain pump."* | **state across sessions**, said unprompted — an explicit Alexa+ criterion |
 | A6 | new conversation: *"My SHE3AR75UC dishwasher says E09."* | card: **NOT UPHELD — I'm not going to guess with your money.** Spoken: needs a technician. | the refusal, arriving from the model's own tool calls |
 
+**Raw footage already exists:** `docs/media/talk.webm` (1280×800, ~90 s, no sound) is a real run
+of A1–A4, the fitted-and-noted turn, and the fault coming back in a new conversation — made by
+`node scripts/record-talk.js`, which types the person's lines on screen and retakes nothing. Use it
+as B-roll under the voiceover, or re-run the script for a fresh take; each costs about three cents.
+
 Say one line over A2 or A3, and nothing more: *"Every rule you just watched it keep, it broke once on
 a live run. Each one is now enforced by the code around the model, not asked of it."* Then, if there
 is room, cut to the terminal for five seconds of `npm run agent:eval` — **8 of 8, 0 rule

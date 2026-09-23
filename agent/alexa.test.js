@@ -251,7 +251,7 @@ const withServer = async (fn) => {
       ]);
       let a = new Alexa({ url, converse });
       let r = await a.turn('Yes, order it.');
-      assert.match(r.steps.find((s) => s.tool === 'confirm_checkout').answer, /refused/);
+      assert.match(r.steps.find((s) => s.tool === 'confirm_checkout').answer, /held by the client/);
 
       // Read out WITHOUT the total, then a yes. Still refused: they never heard what it costs.
       ({ converse } = scripted([
@@ -276,8 +276,8 @@ const withServer = async (fn) => {
       await a.turn('Can I get the part?');
       r = await a.turn('Yes.');
       const c = r.steps.find((s) => s.tool === 'confirm_checkout');
-      assert.doesNotMatch(c.answer, /refused/, c.answer);
-      assert.match(c.answer, /"ok":true/);
+      assert.doesNotMatch(c.answer, /held by the client|not ordered/, c.answer);
+      assert.match(c.answer, /^ordered Drain pump · \$41\.78/);
     });
   });
 
@@ -312,7 +312,7 @@ const withServer = async (fn) => {
       assert.equal(guides.length, 2);
       assert.ok(guides.every((g) => /refused|part/i.test(g.answer)), 'a pump nobody has was guided into place');
       const r2 = await a.turn('I already have one.');
-      assert.doesNotMatch(r2.steps.find((s) => s.tool === 'guide').answer, /refused/, 'the person answered and was still refused');
+      assert.doesNotMatch(r2.steps.find((s) => s.tool === 'guide').answer, /held by the client/, 'the person answered and was still refused');
     });
   });
 
@@ -349,6 +349,20 @@ const withServer = async (fn) => {
       assert.match(r.say, /Can you hear the pump humming\?$/);
       assert.doesNotMatch(r.say, /filter clogged/);
       assert.match(JSON.stringify(shown[2].messages.at(-1)), /Call next_test first/);
+    });
+  });
+
+  await it('it does not say a repair worked that nothing saw work', async () => {
+    await withServer(async (url) => {
+      const { converse, shown } = scripted([
+        [{ tool: 'remember_repair', input: { model: 'SHE3AR75UC', code: 'E24', cause: 'Failed drain pump', action: 'Replaced the drain pump', confirmed: true } }],
+        [{ tool: 'speak', input: { text: 'Noted — the fault is cleared.' } }],
+        [{ tool: 'speak', input: { text: 'Noted, as you reported it.' } }],
+      ]);
+      const a = new Alexa({ url, converse });
+      const r = await a.turn('I fitted it and it drains now.');
+      assert.equal(r.say, 'Noted, as you reported it.');
+      assert.match(JSON.stringify(shown[2].messages.at(-1)), /do not say it is cleared/);
     });
   });
 

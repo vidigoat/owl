@@ -127,5 +127,17 @@ const scripted = (rounds) => () => {
     }
   });
 
+  await it('the client\'s own note to the model is never drawn as the card', async () => {
+    const make = scripted([
+      [{ tool: 'verify_diagnosis', input: { model: 'SHE3AR75UC', code: 'E24', causeId: 'pump', ruledOut: ['filter', 'hose'] } }],
+      [{ tool: 'guide', input: { model: 'SHE3AR75UC', code: 'E24', causeId: 'pump' } }],
+      [{ tool: 'speak', input: { text: 'It is the drain pump. Shall I order one?' } }],
+    ]);
+    const r = await live.turn({ said: "It's silent." }, { make });
+    // Recorded footage showed "No procedure on record" here: the held-back guide call, drawn.
+    assert.equal(r.body.card.tool, 'verify_diagnosis');
+    assert.equal(r.body.card.result.structuredContent.upheld, true);
+  });
+
   console.log(`\n${passed} passed`);
 })();
