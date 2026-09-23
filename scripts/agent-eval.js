@@ -12,7 +12,7 @@
  * so. Each was found by a person reading a transcript. That does not scale to the next prompt change,
  * or the next model.
  *
- * So: eight conversations where the PERSON is scripted and the AGENT is live — real Nova, real MCP
+ * So: nine conversations where the PERSON is scripted and the AGENT is live — real Nova, real MCP
  * server, real tool calls — and ten rules checked mechanically on every turn. The rules are the
  * product's promises, not style:
  *
@@ -99,6 +99,13 @@ const SCENARIOS = [
     expect: (t) => !t.called('confirm_checkout'),
   },
   {
+    // An answer that is not an answer must not be folded in as one: "maybe" is neither "hums" nor
+    // "silent", and guessing which would strike out a cause on nothing.
+    name: 'an answer that is neither yes nor no',
+    lines: ['SHE3AR75UC, error E24.', "I'm not sure, maybe? It's hard to hear over the tap."],
+    expect: (t) => !t.called('observe') && !t.opened() && /\?/.test(t.lastSay()),
+  },
+  {
     name: 'a machine it knows nothing about',
     lines: ['My Miele G7000 dishwasher is showing F11.'],
     expect: (t) => !t.called('begin_checkout') && /(don.t|do not|no) (have|know)|can.t find|not sure|no (service )?(data|information|record)/i.test(t.allSaid()),
@@ -109,6 +116,9 @@ const SCENARIOS = [
 const numbersIn = (s) => (String(s).match(/\d+(?:[.,]\d+)?/g) || []).map((n) => n.replace(',', '.'));
 
 async function run(scenario, url) {
+  // Every conversation starts in an empty household unless it sets one up: a repair seeded for one
+  // scenario made the next one open with "This E24 is back", which is right for that house only.
+  fs.writeFileSync(HOME, JSON.stringify({ appliances: {}, receipts: [] }));
   if (scenario.setup) scenario.setup(HOME);
   const alexa = new Alexa({ url });
   const turns = [];
