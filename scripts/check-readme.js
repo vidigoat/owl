@@ -174,7 +174,18 @@ function procedureClaims() {
   ];
 }
 
+function latencyClaims() {
+  let m;
+  try {
+    m = JSON.parse(fs.readFileSync(path.join(ROOT, 'docs', 'latency.json'), 'utf8'));
+  } catch {
+    return [];
+  }
+  return [{ what: 'latency: slowest tool p95, server', value: String(m.worstServerP95Ms), where: /\*\*([\d.]+) ms\*\* on the server/g }];
+}
+
 const CLAIMS = [
+  ...latencyClaims(),
   { what: 'MCP tools registered', value: String(TOOLS), where: /(\d+) (?:MCP )?tools\b/g },
   ...readerClaims(),
   ...agentClaims(),

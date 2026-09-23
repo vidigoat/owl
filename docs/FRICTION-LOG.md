@@ -79,6 +79,11 @@ measure our own server, which is not the thing being specified.
 **Severity:** medium — it is a stated requirement with no way to verify compliance.
 **Suggestion:** publish the measurement point, or provide an echo endpoint that reports the
 round-trip as the orchestrator sees it.
+**Update, 2026-09-23 — the part we own, measured.** Every `/mcp` answer now carries a
+`Server-Timing` header, and `npm run latency` calls each tool the agent uses twenty times against
+the deployed server. Slowest tool, p95: **1.8 ms** on the server. The round trip from India to the
+US host is ~250 ms at the median — nearly all of it distance, which says nothing about Alexa+ in
+region. Recorded in `docs/latency.json`, with where it was measured from.
 
 ---
 
