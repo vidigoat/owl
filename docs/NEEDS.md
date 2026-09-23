@@ -13,7 +13,13 @@ Nebius   freeze 20–22 Oct   29–31 build days left
 
 ## Tier 1 — blocking. These change what gets built.
 
-### 1. Click "Request beta access" on the Sandboxes page  ⏱ 30 seconds
+### 1. ~~Click "Request beta access" on the Sandboxes page~~ ✅ GRANTED 23 Sep, 13:13
+
+Live and used the same hour: `npm run preflight` passes 10 of 10 including a real package observed
+in a real microVM; `npm run real -- --nebius` runs real pairs there; `index-build --nebius` grows the
+index there, 40 at a time; and 300 of 300 re-observations matched the local ones on every channel.
+
+The original note, kept for the record:
 
 `tokenfactory.nebius.com/sandboxes/about` → the purple **Request beta access** button.
 
@@ -125,7 +131,7 @@ do and what it says instead.
 Both are live:
 
 - **<https://cassandra-nu.vercel.app>** — and it now serves the **published index** at
-  `/index.json`: 1,589 packages, 61 kB over the wire. A stranger can point `cli.js lock --index` at
+  `/index.json`: 6,231 packages, about 390 kB over the wire. A stranger can point `cli.js lock --index` at
   it and get their own tree answered without building anything, which is the part of the argument
   that used to be unverifiable.
 - **<https://second-set-of-hands.vercel.app>** — and `/review.html` now **reads a manual you drop
@@ -191,7 +197,7 @@ So you do not spend time on them:
 
 ```
 right now — 6 minutes, and one of them is 30 seconds
-  1   click "Request beta access" on the Sandboxes page        ← the one that matters
+  1   ✅ Sandboxes beta access — granted 23 Sep, live and in use
   1b  re-try the $25 promo code (your balance reads $0.85)
 
 done ✅  Tavily key · Vercel login · Builders Program · manual-download permission
