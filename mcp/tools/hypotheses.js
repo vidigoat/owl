@@ -9,7 +9,7 @@
  * `verify_diagnosis` decides when one survivor has earned the right to be spoken as fact.
  */
 
-const { lookup } = require('../../data/service-data');
+const { lookup, machine } = require('../../data/service-data');
 
 /**
  * Shannon entropy of the space, in bits — how much we still don't know.
@@ -54,7 +54,16 @@ function buildSpace({ model, code } = {}) {
     }))
   );
 
-  return { known: true, meaning: found.meaning, space, bits: entropy(space) };
+  /*
+   * The checks that narrow this space travel WITH it.
+   *
+   * They lived only in the web API's own start step, which attached them after the fact — so over
+   * MCP, `hypotheses` returned a space with nothing to narrow it with, and `next_test`, which needs
+   * both, could not be called by anything but this project's own front end. The elimination loop is
+   * the heart of this product, and an agent — which is what Alexa+ is — could not drive it at all.
+   */
+  const tests = machine(model)?.codes?.[code]?.tests || [];
+  return { known: true, meaning: found.meaning, space, tests, bits: entropy(space) };
 }
 
 /**
@@ -64,7 +73,39 @@ function buildSpace({ model, code } = {}) {
  * the return value rather than discarded silently — the interface shows them greying out, and that
  * moment is how a person understands what just happened.
  */
-function prune({ space, outcome } = {}) {
+function prune({ space, outcome, testId, value, tests, model, code } = {}) {
+  /*
+   * An outcome by name, for a caller that is a model.
+   *
+   * The outcome object carries `consistentWith` — the list of causes the answer leaves standing — and
+   * asking an agent to copy that list out of an earlier tool result, perfectly, every turn, is asking
+   * for the one mistake that silently keeps a ruled-out cause alive. So a check can be answered by
+   * naming it: `testId: "pump-hum", value: "silent"`, and the list is looked up here.
+   */
+  if ((!outcome || typeof outcome !== 'object') && testId && value) {
+    const list = Array.isArray(tests) ? tests : machine(model)?.codes?.[code]?.tests || [];
+    const test = list.find((t) => t.id === testId);
+    const found = test?.outcomes?.find((o) => o.value === value);
+    if (!found) {
+      return {
+        error: test
+          ? `"${value}" is not an answer to ${testId}. It has: ${test.outcomes.map((o) => o.value).join(', ')}.`
+          : `no check called ${testId} for this fault`,
+        space: Array.isArray(space) ? space : [],
+        eliminated: [],
+        contradiction: false,
+      };
+    }
+    outcome = { ...found, test: testId };
+  }
+  if (!Array.isArray(space) || !outcome || typeof outcome !== 'object') {
+    return {
+      error: 'needs `space` (the array `hypotheses` returned) and `outcome` (a check result, with the causes it rules out)',
+      space: Array.isArray(space) ? space : [],
+      eliminated: [],
+      contradiction: false,
+    };
+  }
   const keepIds = new Set(outcome.consistentWith);
   const survivors = space.filter((c) => keepIds.has(c.id));
   const eliminated = space.filter((c) => !keepIds.has(c.id));

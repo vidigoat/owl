@@ -47,13 +47,49 @@ function score(space, test) {
 }
 
 /**
+ * Whether this fault's own record has no checks — a symptom off a troubleshooting table, or a code
+ * learned from a manual. Not the same as a caller passing an empty list for a fault that has them:
+ * that is running out, and running out is stuck.
+ */
+function documentsNoChecks(model, code) {
+  if (!model || !code) return false;
+  const data = require('../../data/service-data');
+  if (!data.lookup(model, code).known) return false;
+  return !(data.machine(model)?.codes?.[code]?.tests?.length);
+}
+
+/**
  * Choose what to ask next.
  *
  * Returns null when there is nothing worth asking — either one cause is left, or no remaining test
  * would tell us anything. Both are real answers, and the caller must handle them: one means we are
  * done, the other means we are stuck and should refuse rather than guess.
  */
-function nextTest({ space, tests, performed = [] } = {}) {
+function nextTest({ space, tests, performed = [], model, code } = {}) {
+  /*
+   * An agent calling this may hand over the space and forget the checks, or hand over nothing
+   * usable at all. Both used to be `Cannot read properties of undefined` — a crash, from the one
+   * tool that decides what a person is asked to do next. Now: the checks are looked up from the
+   * machine when they were not passed, and anything still unusable is refused in words.
+   */
+  if (!Array.isArray(space)) {
+    return { test: null, error: 'needs `space` — the array `hypotheses` returns', stuck: true };
+  }
+  if (!Array.isArray(tests) && model && code) {
+    const data = require('../../data/service-data');
+    tests = data.machine(model)?.codes?.[code]?.tests;
+    // A fault whose record documents no checks has an empty list, not a missing one.
+    if (!Array.isArray(tests) && documentsNoChecks(model, code)) tests = [];
+  }
+  if (!Array.isArray(tests)) {
+    return {
+      test: null,
+      error: 'needs `tests` — the array `hypotheses` returns alongside the space — or `model` and `code` to look them up',
+      stuck: true,
+    };
+  }
+  if (!Array.isArray(performed)) performed = [];
+
   if (space.length <= 1) {
     return { test: null, reason: 'one cause left', done: true };
   }
@@ -84,6 +120,28 @@ function nextTest({ space, tests, performed = [] } = {}) {
       escalate: 'technician',
       // Said before any question is asked. If it cannot explain why it is not asking, it should ask.
       why: 'Narrowing this down would not change what you are allowed to do about it.',
+    };
+  }
+
+  /*
+   * No check was ever written for this fault — which is every symptom read off a manual's
+   * troubleshooting table: the manual lists causes in order and says nothing about how to tell
+   * them apart. That is not "stuck". Stuck is running out of questions; this never had any, and
+   * the honest move is the manual's own: try the first thing it lists, then the next.
+   *
+   * It came back as "no tests left to run", and an agent reasonably read that as failure and went
+   * looking for a photo instead.
+   */
+  if (tests.length === 0 && performed.length === 0 && documentsNoChecks(model, code)) {
+    const ordered = [...space].sort((a, b) => b.prior - a.prior);
+    return {
+      test: null,
+      noChecks: true,
+      stuck: false,
+      done: false,
+      reason: 'the manual documents no check that separates these causes',
+      order: ordered.map((c) => ({ id: c.id, label: c.label })),
+      why: 'The manual lists these in order, most common first. Try the first, then the next.',
     };
   }
 

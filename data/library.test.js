@@ -44,7 +44,9 @@ function library(admitted = []) {
   }
 
   const src = fs.readFileSync(path.join(__dirname, 'service-data.js'), 'utf8')
-    .replace("path.join(__dirname, 'admitted')", JSON.stringify(path.join(root, 'admitted')));
+    .replace("path.join(__dirname, 'admitted')", JSON.stringify(path.join(root, 'admitted')))
+    // The copy lives elsewhere, so its one relative require is pointed back at the real file.
+    .replace("require('../manual/faultgraph')", `require(${JSON.stringify(path.join(__dirname, '..', 'manual', 'faultgraph'))})`);
   const file = path.join(root, 'service-data.js');
   fs.writeFileSync(file, src);
   return require(file);
@@ -327,6 +329,80 @@ it('a refusal lists what the manual covers, minus the rows it could not read', (
 
   // And the count in the sentence is still the honest one: everything the manual lists.
   assert.match(r.reason, /lists 4 problems/);
+});
+
+it('a symptom found by description is diagnosed the way a code is — not dropped after the lookup', () => {
+  /*
+   * A live agent run found "Water is left in the appliance at the end of the program." on the
+   * SGE53C55UC, scored 1.0, and could go no further: every tool after the lookup was keyed by a
+   * code, and this machine prints none. The same loop has to run on the match's id.
+   */
+  const lib = require('./service-data');
+  const { buildSpace } = require('../mcp/tools/hypotheses');
+  const { nextTest } = require('../mcp/tools/next_test');
+  const { verify_diagnosis } = require('../mcp/tools/verify_diagnosis');
+  const { guide } = require('../mcp/tools/guide');
+
+  const found = lib.lookupSymptom('SGE53C55UC', 'it leaves water in the bottom at the end of the program');
+  assert.equal(found.known, true);
+  const id = found.matches[0].id;
+  assert.ok(id, 'a match came back with no key to carry on with');
+
+  const h = buildSpace({ model: 'SGE53C55UC', code: id });
+  assert.equal(h.known, true, h.reason);
+  assert.ok(h.space.length >= 2);
+
+  // The manual gives causes in order and no way to tell them apart. That is not "stuck".
+  const n = nextTest({ space: h.space, model: 'SGE53C55UC', code: id });
+  assert.equal(n.noChecks, true, JSON.stringify(n));
+  assert.equal(n.stuck, false);
+  assert.equal(n.order[0].id, h.space.sort((a, b) => b.prior - a.prior)[0].id);
+
+  const v = verify_diagnosis({ model: 'SGE53C55UC', code: id, causeId: n.order[0].id });
+  assert.equal(v.upheld, true, v.reason);
+  // No price was ever read for a symptom, so no money moves on one.
+  assert.equal(v.maySpend, false);
+  assert.equal(v.costKnown, false);
+
+  const g = guide({ model: 'SGE53C55UC', code: id, causeId: n.order[0].id });
+  assert.equal(g.known, true, g.reason);
+  assert.match(g.steps[0].say, /Clean the Filters/);
+  assert.ok(!g.steps.some((s) => s.detail.includes(id)), 'a slug was put in a sentence meant to be read aloud');
+});
+
+it('a symptom behind mains wiring is judged as mains, like any learned remedy', () => {
+  const lib = library([
+    machine({
+      model: 'TESTDW4',
+      symptoms: [
+        { id: 'no-power', symptom: 'The appliance does not switch on.', causes: [
+          { id: 'no-power-0', label: 'Control board failed.', likelihood: 0.8, remedies: ['Have the control board replaced by a technician.'], evidence: 'manual, page 9' },
+          { id: 'no-power-1', label: 'Fuse tripped.', likelihood: 0.2, remedies: ['Check the fuse box.'], evidence: 'manual, page 9' },
+        ] },
+      ],
+    }),
+  ]);
+  const r = lib.lookup('TESTDW4', 'no-power');
+  assert.equal(r.known, true);
+  assert.equal(r.keyedBy, 'symptom');
+  assert.equal(r.causes[0].mains, true, 'a control board was not treated as mains work');
+  assert.equal(r.causes[1].mains, false);
+  assert.equal(lib.lookup('TESTDW4', 'no-such-symptom').known, false);
+});
+
+it('a model said the way people say it is the model — and a near miss is not', () => {
+  // A live run passed "Bosch SGE53C55UC" and was told there was no service data for a reviewed machine.
+  const lib = require('./service-data');
+  for (const said of ['Bosch SGE53C55UC', 'sge53c55uc', ' SGE53C55UC ', 'SGE 53C55UC', 'bosch-sge53c55uc']) {
+    assert.equal(lib.resolveModel(said), 'SGE53C55UC', said);
+    assert.equal(lib.lookupSymptom(said, 'water is left at the end of the program').known, true, said);
+  }
+  // Not the same machine: another brand's name in front, a different digit, a variant suffix.
+  assert.equal(lib.resolveModel('Whirlpool SGE53C55UC'), 'Whirlpool SGE53C55UC');
+  assert.equal(lib.resolveModel('SGE53C56UC'), 'SGE53C56UC');
+  assert.equal(lib.resolveModel('SGE53C55UC/01'), 'SGE53C55UC/01');
+  assert.equal(lib.lookup('SGE53C56UC', 'E24').known, false);
+  assert.equal(lib.resolveModel(undefined), undefined);
 });
 
 console.log(`\n${passed} passed`);

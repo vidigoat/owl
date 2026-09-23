@@ -142,9 +142,27 @@ function readerClaims() {
   ];
 }
 
+/**
+ * The live agent eval, from its recording — it costs money and needs AWS, so it is not re-run here.
+ * `npm run agent:eval` rewrites docs/agent-eval.json; the documents are held to that file.
+ */
+function agentClaims() {
+  let m;
+  try {
+    m = JSON.parse(fs.readFileSync(path.join(ROOT, 'docs', 'agent-eval.json'), 'utf8'));
+  } catch {
+    return [];
+  }
+  return [
+    { what: 'agent eval: scenarios passed', value: `${m.passed} of ${m.scenarios}`, where: /\*\*(\d+ of \d+)\*\* agent scenarios/g },
+    { what: 'agent eval: rule violations', value: String(m.violations), where: /\*\*(\d+)\*\* rule violations/g },
+  ];
+}
+
 const CLAIMS = [
   { what: 'MCP tools registered', value: String(TOOLS), where: /(\d+) (?:MCP )?tools\b/g },
   ...readerClaims(),
+  ...agentClaims(),
   { what: 'questions asked, mean', value: from(questions, /([0-9.]+) questions on average/, 'mean') },
   { what: 'questions asked, worst case', value: from(questions, /worst case (\d+)/, 'worst case') },
   { what: 'mean effort', value: from(questions, /Mean effort ([0-9.]+)/, 'effort') },

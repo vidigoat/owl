@@ -52,7 +52,10 @@ function fromLearnedManual({ model, code, causeId } = {}) {
     return {
       n: i + 1,
       say: c.remedy,
-      detail: i === 0 ? `This is what the manual lists first for ${code}.` : 'If that did not do it, this is next.',
+      // A symptom's key is a slug of its sentence, and a slug read aloud is noise.
+      detail: i === 0
+        ? `This is what the manual lists first for ${found.keyedBy === 'symptom' ? 'this problem' : code}.`
+        : 'If that did not do it, this is next.',
       pace: PACE[effort] ?? PACE.easy,
       hands: 'both',
       source: c.source,

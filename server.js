@@ -238,8 +238,8 @@ function handler(req, res) {
              * for every machine reviewed at the bench. A quiet wrong answer beats a loud one only
              * for whoever wrote it.
              */
-            const fault = lib.machine(body.model)?.codes?.[body.code];
-            return send(res, 200, JSON.stringify({ ...built, tests: fault?.tests || [] }), 'application/json');
+            // `buildSpace` carries its own tests now, so the web and MCP doors cannot disagree.
+            return send(res, 200, JSON.stringify(built), 'application/json');
           }
 
           if (step === 'next') {

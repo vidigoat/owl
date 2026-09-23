@@ -8,6 +8,27 @@
  */
 
 const { execFileSync } = require('node:child_process');
+const nodeFs = require('node:fs');
+const nodeOs = require('node:os');
+const nodePath = require('node:path');
+
+/*
+ * Every suite gets a throwaway household and a throwaway spend ledger.
+ *
+ * `data/home.json` is a real household's memory — what it owns and what has been done to it — and
+ * the suite was writing into it: the checks that POST junk to /api/remember to prove it cannot
+ * crash the server did exactly that to the real file, and after one night it held two hundred
+ * "repairs" and not one of them was real. A test that leaves the thing it tested dirty is a test
+ * with a side effect nobody asked for. So the runner points every suite somewhere disposable,
+ * unless the caller chose a location deliberately.
+ */
+const SCRATCH = nodeFs.mkdtempSync(nodePath.join(nodeOs.tmpdir(), 'hands-suite-'));
+const SUITE_ENV = {
+  ...process.env,
+  HOME_STORE: process.env.HOME_STORE || nodePath.join(SCRATCH, 'home.json'),
+  HANDS_LEDGER: process.env.HANDS_LEDGER || nodePath.join(SCRATCH, 'spend.json'),
+};
+process.on('exit', () => nodeFs.rmSync(SCRATCH, { recursive: true, force: true }));
 const fs = require('node:fs');
 const path = require('node:path');
 
@@ -34,7 +55,7 @@ for (const suite of suites) {
   let ok = true;
 
   try {
-    output = execFileSync('node', [suite], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+    output = execFileSync('node', [suite], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], env: SUITE_ENV });
   } catch (e) {
     ok = false;
     output = `${e.stdout || ''}${e.stderr || ''}`;

@@ -43,7 +43,45 @@ function write(state) {
 }
 
 /** Record an appliance the household owns. */
+/*
+ * What may be written into somebody's house.
+ *
+ * This file persists, and what it persists is read back to the person on their own screen. After a
+ * night of fuzzing, the household here held two hundred "repairs" — every one of them junk: model
+ * numbers that were `'; DROP TABLE x --`, `{{7*7}}`, a right-to-left override character, and one that
+ * was ten thousand commas. Not one real receipt. Types had been coerced the night before, which
+ * stopped the crashes and let every string through.
+ *
+ * So a model number has to look like one — letters, digits and the few separators manufacturers
+ * use, at most forty characters — and free text is trimmed, stripped of control and bidirectional
+ * formatting characters, and bounded. Anything else is refused by name, never quietly stored.
+ */
+const MODEL_RE = /^[A-Za-z0-9][A-Za-z0-9 ._\/-]{0,39}$/;
+const CODE_RE = /^[A-Za-z0-9][A-Za-z0-9 :._-]{0,19}$/;
+// Control characters, and the Unicode bidi/format controls that can make a line read backwards.
+const INVISIBLE = /[\u0000-\u001f\u007f\u200b-\u200f\u202a-\u202e\u2066-\u2069\ufeff]/g;
+
+const clean = (v, max = 300) => {
+  if (v == null) return undefined;
+  const s = String(v).replace(INVISIBLE, ' ').replace(/\s+/g, ' ').trim();
+  return s ? s.slice(0, max) : undefined;
+};
+
+function refuseModel(model) {
+  if (typeof model !== 'string') return 'a model number is text, and this was not';
+  const m = clean(model, 80);
+  if (!m) return 'a model number is needed';
+  if (!MODEL_RE.test(m)) return `"${m.slice(0, 40)}" does not look like a model number`;
+  return null;
+}
+
 function remember({ model, brand, kind, nickname } = {}) {
+  const bad = refuseModel(model);
+  if (bad) return { remembered: false, reason: `Not remembered: ${bad}.` };
+  model = clean(model, 40);
+  brand = clean(brand, 40);
+  kind = clean(kind, 40);
+  nickname = clean(nickname, 60);
   const state = read();
   state.appliances[model] = {
     model,
@@ -73,13 +111,18 @@ function receipt({ model, code, cause, action, part, cost, confirmed, at } = {})
    * broke the household view for a household that had done nothing wrong. This file persists, and
    * anything that persists has to refuse bad input at the door rather than at every reader.
    */
-  const text = (v) => (typeof v === 'string' ? v : v == null ? undefined : String(v));
-  model = text(model);
-  code = text(code);
-  cause = text(cause);
-  action = text(action);
-  part = text(part);
-  cost = typeof cost === 'number' && Number.isFinite(cost) ? cost : undefined;
+  const bad = refuseModel(model);
+  if (bad) return { saved: false, reason: `Not saved: ${bad}.` };
+  model = clean(model, 40);
+  code = clean(code, 20);
+  // Maintenance has no fault code, and people write that as a dash. That is "no code", not a bad one.
+  if (code && /^[-–—\s]*$|^(none|n\/a)$/i.test(code)) code = undefined;
+  if (code && !CODE_RE.test(code)) return { saved: false, reason: `Not saved: "${code}" does not look like a fault code.` };
+  cause = clean(cause);
+  action = clean(action);
+  part = clean(part, 120);
+  cost = typeof cost === 'number' && Number.isFinite(cost) && cost >= 0 && cost < 100000 ? cost : undefined;
+  if (!action && !cause) return { saved: false, reason: 'Not saved: a repair needs at least what was wrong or what was done.' };
 
   /*
    * When it happened, not when it was typed in.

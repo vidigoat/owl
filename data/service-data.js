@@ -158,8 +158,43 @@ function loadAdmitted() {
   return out;
 }
 
+/*
+ * A model number as somebody says it is not the key it is filed under.
+ *
+ * A live agent was told "My Bosch SGE53C55UC dishwasher…", passed "Bosch SGE53C55UC" on to the
+ * tools, and was answered "No service data for model Bosch SGE53C55UC" — about a machine whose
+ * reviewed manual is in data/admitted/. It then told the person, twice, that it could not help.
+ * Exact matching turned a brand name and a space into "we know nothing about this", which is the
+ * unknown-read-as-absent mistake in its commonest form.
+ *
+ * So: case, spaces and punctuation do not distinguish models, and a brand said first is dropped
+ * when it is the brand that machine is filed under. Nothing looser — a variant suffix such as
+ * "/01" is kept, because it can mean different parts, and near-misses are not matched, because
+ * "SHE3AR75UC" and "SHE3AR76UC" are different machines and a guess between them is the worst answer.
+ */
+const canon = (s) => String(s ?? '').toUpperCase().replace(/[^A-Z0-9/]/g, '');
+
+function resolveModel(model) {
+  if (typeof model !== 'string') return model;
+  if (MODELS[model] || ADMITTED[model] || LEARNED[model]) return model;
+  const q = canon(model);
+  if (!q) return model;
+  for (const tier of [MODELS, ADMITTED, LEARNED]) {
+    for (const [key, rec] of Object.entries(tier)) {
+      const k = canon(key);
+      if (q === k) return key;
+      const brand = canon(rec?.brand);
+      if (brand && q === brand + k) return key;
+    }
+  }
+  return model;
+}
+
 /** Hand-written first, then human-checked, then this session's unchecked reading. */
-const find = (model) => MODELS[model] || ADMITTED[model] || LEARNED[model];
+const find = (model) => {
+  const key = resolveModel(model);
+  return MODELS[key] || ADMITTED[key] || LEARNED[key];
+};
 
 /** The admitted tier, live rather than captured at require time. */
 const admittedNow = () => ADMITTED;
@@ -317,6 +352,41 @@ function score(said, symptom, seen) {
   return total ? got / total : 0;
 }
 
+/*
+ * A documented symptom stands where a fault code would.
+ *
+ * describe_problem found "Water is left in the appliance at the end of the program." on a live run,
+ * scored 1.0, and then the conversation died: the agent had a match and no way to diagnose from it,
+ * because every tool after the lookup — hypotheses, verify_diagnosis, guide — is keyed by a code,
+ * and a machine that prints no codes has none. It passed the cause's id as a code, was told there
+ * was no record of it, and asked for a photo of a panel that has nothing on it to read.
+ *
+ * Most machines sold now are keyed this way, so this was the loop failing on most machines. The
+ * fix is not a second set of tools: a symptom's id is accepted as the key, and the same gate, the
+ * same guide and the same refusals run on it. Its causes carry `remedies`, read verbatim off the
+ * manual; they are joined into the one `remedy` line the guide reads out, and judged for mains work
+ * the same way a learned code's remedy is. No price is invented — `cost` stays null, so the gate
+ * never opens a cart on a symptom, which is right: the manual names no part and neither will we.
+ */
+function symptomById(m, id, model) {
+  const s = (m.symptoms || []).find((x) => x.id === id);
+  if (!s) return null;
+  const { isMains } = require('../manual/faultgraph');
+  return {
+    known: true,
+    brand: m.brand,
+    kind: m.kind,
+    keyedBy: 'symptom',
+    meaning: s.symptom,
+    causes: (s.causes || []).map((c) => {
+      const remedy = c.remedy ?? ((c.remedies || []).join(' ') || null);
+      const mains = c.mains ?? (remedy ? isMains(`${c.label} ${remedy}`) : null);
+      return { ...c, remedy, mains, ownerFixable: c.ownerFixable ?? (mains === null ? null : !mains) };
+    }),
+    provenance: provenance(model),
+  };
+}
+
 /**
  * @param {string} model
  * @param {string} said   what the owner described, in their words
@@ -414,7 +484,8 @@ function lookupSymptom(model, said) {
      * Every candidate, never one. A sentence is ambiguous where a code is not, and picking is a
      * guess dressed as an answer.
      */
-    matches: scored.map((s) => ({ symptom: s.symptom, match: s.match, causes: s.causes })),
+    // `id` is the key the rest of the loop takes where it would take a code — see symptomById.
+    matches: scored.map((s) => ({ id: s.id, symptom: s.symptom, match: s.match, causes: s.causes })),
   };
 }
 
@@ -422,7 +493,11 @@ function lookup(model, code) {
   const m = find(model);
   if (!m) return { known: false, reason: `No service data for model ${model}.` };
   const c = m.codes[code];
-  if (!c) return { known: false, reason: `No record of ${code} for ${model}.` };
+  if (!c) {
+    const s = symptomById(m, code, model);
+    if (s) return s;
+    return { known: false, reason: `No record of ${code} for ${model}.` };
+  }
   return {
     known: true,
     brand: m.brand,
@@ -434,7 +509,7 @@ function lookup(model, code) {
 }
 
 module.exports = {
-  MODELS, LEARNED, lookup, lookupSymptom, learn, known, machine, provenance, loadAdmitted, reload, overlap,
+  MODELS, LEARNED, lookup, lookupSymptom, learn, known, machine, provenance, loadAdmitted, reload, overlap, resolveModel,
   get ADMITTED() { return ADMITTED; },
   admittedNow,
 };

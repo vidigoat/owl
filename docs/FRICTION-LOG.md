@@ -348,3 +348,55 @@ endpoint that accepts a file format changes what the threat model is, and the ho
 the hour you add it. The fuzzing took twenty minutes and found this, a crash-to-client in the MCP
 envelope, an arbitrary-file-read in the vision tool, and a single malformed POST that permanently
 broke the household view.
+
+---
+
+### 2026-09-23 · Nova's reasoning arrives as ordinary text, next to the tool call
+
+**Task:** drive the MCP server from Amazon Nova 2 Lite over Bedrock Converse, with tools, as a
+simulated Alexa+.
+**Expected:** a tool call, and any text meant for the person, distinguishable from any text that is
+the model working things out.
+**Actual:** the first live turn came back with the model's chain of thought as a plain `text` block
+("Okay, let's see. The user has a Bosch dishwasher…") beside its `toolUse`. Converse has a
+`reasoningContent` block for exactly this, and it was not used, so a voice client has no field to
+tell thinking from speech. Ours read the whole thing aloud.
+**Severity:** high for anything that speaks. A kitchen hearing an assistant's internal monologue is
+the end of the demo, and a prompt telling the model not to think aloud is only a request.
+**Workaround:** speech became a tool. `toolChoice: { any: {} }` makes every response a tool call and
+`speak` is the only way to reach the person; any other text goes to the trace. Structural, and it has
+held on every run since.
+**Suggestion:** return Nova's reasoning in `reasoningContent`, as Converse already allows, or say
+in the Nova tool-use docs that text beside a tool call may be reasoning and should not be shown.
+
+Smaller, in the same session: a call's price is in neither the Converse response nor the model
+catalog. We read it from the Price List API (`AmazonBedrock` offer, us-east-1) so the ledger could
+record dollars rather than tokens. That works, but it is a second API to find and parse for a figure
+every caller needs.
+
+---
+
+### 2026-09-23 · An agent eval found five bugs the unit suite had not (our own)
+
+**Task:** check whether the agent obeys its own rules, mechanically, rather than by reading
+transcripts: `npm run agent:eval`, six conversations with the person scripted and everything else live.
+**Actual:** the first versions scored 6/6 and still showed, in the transcripts, things no rule caught.
+Tightening the checks until they caught them turned up:
+
+- **A known machine answered as unknown.** "My Bosch SGE53C55UC…" was passed on as
+  `"Bosch SGE53C55UC"`, model lookup was exact, and a reviewed manual came back as "no service data".
+  Now resolved once at the MCP boundary: case, spaces and the machine's own brand do not
+  distinguish models; a different digit or variant suffix still does.
+- **A perfect match with nowhere to go.** `describe_problem` scored the owner's sentence 1.0
+  against the manual — and every tool after it was keyed by a fault code, which symptom-keyed
+  machines (most sold now) do not have. A symptom's id now stands where a code would.
+- **Charged a total nobody said.** It quoted the part price, got "yes, order it", and opened and
+  confirmed the checkout in one turn: $41.78 agreed to as £38.42. An order now goes through only on
+  a later turn than the checkout, after the speech that ended that turn contained its total.
+- **A currency invented.** No tool named one, so it picked pounds. The figures now carry `USD`.
+- **Asked for a photo of a code it had just been told.** The tools that look were always offered,
+  so it looked first. They are now offered only when a photo exists.
+
+**Lesson worth keeping:** "the tool was called" is not an outcome. The first version of the
+no-fault-code scenario passed on exactly that while the agent told the person their problem was
+"not in our records". An eval scenario has to assert where the conversation ended up.

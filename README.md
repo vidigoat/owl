@@ -35,7 +35,8 @@ git clone <repo> && cd second-set-of-hands
 npm run demo          # the whole loop in a terminal, ~20 seconds
 npm run mcp:session   # a real MCP session — the Alexa+ deliverable, proven in one command
 npm start             # http://localhost:8792 — the device experience
-npm test              # 28 suites · 361 checks
+npm run alexa         # talk to it — Amazon Nova on Bedrock choosing the tools, over MCP
+npm test              # 30 suites · 386 checks
 ```
 
 Nothing to install. The MCP server has zero dependencies and no build step.
@@ -57,6 +58,31 @@ the program.                Program has not yet ended.
 
 So the way in is a sentence somebody says out loud. Which is also the better door: *"all the lights
 are flashing"* is what a person says; `E:22` is not.
+
+## An agent drives it, not a script
+
+`npm run alexa` is a simulated Alexa+: **Amazon Nova 2 Lite on Bedrock**, connected to the MCP server
+over Streamable HTTP, choosing every tool itself. No SDK — the SigV4 signing is 92 lines of code in
+`agent/sigv4.js`, checked against AWS's own test vectors. A whole repair costs about two cents.
+
+Its first live runs broke four of its own rules in two conversations: it read its chain of thought
+aloud, skipped the five-second check by calling a shortcut, recorded an ordered pump as a verified
+fix, and told somebody a repair needed "no tools" when no tool had said so. Each is now a
+**structure, not a request** in a prompt:
+
+| what went wrong on a live run | what holds it now |
+|---|---|
+| reasoning read out as speech | speaking is a tool call; nothing else reaches the room |
+| picked its question off a list | the checks stay client-side, so it has to ask `next_test` |
+| an ordered part recorded as fixed | `confirmed` is downgraded unless `confirm_fix` saw it clear |
+| charged a total nobody had said | an order goes through only on a later turn, after that total was spoken |
+| asked for a photo of a panel whose code it had just been told | the tools that look are not offered until there is a photo |
+| a 73-word turn to somebody with both hands in a machine | a line over forty words is sent back once |
+
+`npm run agent:eval` checks that against six conversations — the person scripted, everything else
+live — and eight rules on every turn. Last run: **6 of 6** agent scenarios, **0** rule violations,
+recorded in `docs/agent-eval.json`. It also found two bugs the unit suite had not: a model said as
+"Bosch SGE53C55UC" answered as unknown, and a symptom matched perfectly with nowhere to go next.
 
 ## What it refuses to do
 

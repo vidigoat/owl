@@ -26,7 +26,7 @@ const { confirm_fix } = require('./tools/confirm_fix');
 const { beginCheckout, confirmCheckout } = require('./tools/order_part');
 const { receipt, due, history } = require('./tools/home');
 const { replace_or_repair } = require('./tools/replace_or_repair');
-const { lookupSymptom } = require('../data/service-data');
+const { lookupSymptom, resolveModel } = require('../data/service-data');
 const { buildSpace, prune } = require('./tools/hypotheses');
 const { nextTest } = require('./tools/next_test');
 
@@ -235,7 +235,9 @@ const TOOLS = [
       'Find a machine\'s documented problem from what the owner said, for the machines whose manuals ' +
       'print no fault codes — which is most of the ones sold now. Returns every candidate ranked ' +
       'rather than picking one, because a sentence is ambiguous where a code is not. Says plainly ' +
-      'when the manual covers nothing like it, which is not the same as nothing being wrong.',
+      'when the manual covers nothing like it, which is not the same as nothing being wrong. ' +
+      'Each match has an `id`: pass it as `code` to hypotheses, next_test, verify_diagnosis and ' +
+      'guide — a documented symptom stands where a fault code would.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -290,25 +292,31 @@ const TOOLS = [
     inputSchema: {
       type: 'object',
       properties: {
-        space: { type: 'array', items: { type: 'object' } },
-        tests: { type: 'array', items: { type: 'object' } },
-        performed: { type: 'array', items: { type: 'string' } },
+        space: { type: 'array', items: { type: 'object' }, description: 'The space from hypotheses (or observe).' },
+        tests: { type: 'array', items: { type: 'object' }, description: 'The tests from hypotheses. May be omitted if model and code are given.' },
+        performed: { type: 'array', items: { type: 'string' }, description: 'Ids of checks already done.' },
+        model: { type: 'string' },
+        code: { type: 'string' },
       },
-      required: ['space', 'tests'],
+      required: ['space'],
     },
     handler: nextTest,
   },
   {
     name: 'observe',
     description:
-      'Fold the result of a check back in: keep the causes consistent with what was seen, and name the ones it ruled out.',
+      'Fold the result of a check back in: keep the causes consistent with what was seen, and name the ones it ruled out. Answer a check by naming it — testId and value — or pass the full outcome object.',
     inputSchema: {
       type: 'object',
       properties: {
-        space: { type: 'array', items: { type: 'object' } },
-        outcome: { type: 'object' },
+        space: { type: 'array', items: { type: 'object' }, description: 'The current space, from hypotheses or the last observe.' },
+        testId: { type: 'string', description: 'The id of the check that was just performed.' },
+        value: { type: 'string', description: "The person's answer, as one of that check's outcome values." },
+        model: { type: 'string' },
+        code: { type: 'string' },
+        outcome: { type: 'object', description: 'Alternatively, the full outcome object from the check.' },
       },
-      required: ['space', 'outcome'],
+      required: ['space'],
     },
     handler: prune,
   },
@@ -396,7 +404,11 @@ async function handle(msg) {
     if (!tool) return failure(id, -32602, `No tool named "${params?.name}".`);
 
     try {
-      const value = await tool.handler(params.arguments || {});
+      const args = { ...(params.arguments || {}) };
+      // Every tool keys on the model, so it is resolved once, here — "Bosch SGE53C55UC" is the
+      // SGE53C55UC. See resolveModel for what is and is not treated as the same machine.
+      if (typeof args.model === 'string') args.model = resolveModel(args.model);
+      const value = await tool.handler(args);
       return result(id, {
         content: [{ type: 'text', text: JSON.stringify(value, null, 2) }],
         structuredContent: value,

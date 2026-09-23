@@ -13,6 +13,7 @@ const CATALOGUE = {
   'SHE3AR75UC:pump': {
     name: 'Drain pump',
     price: 38.42,
+    currency: 'USD',
     eta: 'Tomorrow by 9pm',
     fitConfidence: 0.98,
     fitsModel: 'SHE3AR75UC',
@@ -20,7 +21,7 @@ const CATALOGUE = {
   },
 };
 
-const ALTERNATIVE = { label: 'Service call', price: 179, eta: '7+ day wait' };
+const ALTERNATIVE = { label: 'Service call', price: 179, currency: 'USD', eta: '7+ day wait' };
 
 function find_part({ model, causeId } = {}) {
   const part = CATALOGUE[`${model}:${causeId}`];

@@ -78,6 +78,28 @@ const it = async (name, fn) => {
     assert.equal(due().count, 0);
   });
 
+  await it('what may be written into a house is a model number, not whatever was sent', () => {
+    /*
+     * After one night of fuzzing, the household here held two hundred "repairs" and not one was
+     * real: model numbers of `'; DROP TABLE x --`, `{{7*7}}`, a right-to-left override, ten
+     * thousand commas. They were read back to the person on their own screen. Refused now, by name.
+     */
+    const junk = ["'; DROP TABLE x --", '{{7*7}}', '\u202e', 'x,'.repeat(5000), '', null, 42, '../../etc/passwd'];
+    for (const model of junk) {
+      const r = receipt({ model, code: 'E24', action: 'Fitted' });
+      assert.equal(r.saved, false, `stored a receipt for model ${JSON.stringify(String(model).slice(0, 30))}`);
+      assert.match(r.reason, /Not saved/);
+      assert.equal(remember({ model }).remembered, false);
+    }
+    // And free text is kept, but bounded and stripped of characters that make a line read backwards.
+    const ok = receipt({ model: 'SHE3AR75UC', code: 'E24', action: `Cleaned the filter\u202e${'x'.repeat(2000)}` });
+    assert.equal(ok.saved, true);
+    assert.ok(ok.entry.action.length <= 300);
+    assert.doesNotMatch(ok.entry.action, /\u202e/);
+    // A receipt that says nothing at all is not a receipt.
+    assert.equal(receipt({ model: 'SHE3AR75UC' }).saved, false);
+  });
+
   await it('raises a consumable once it is past its window', () => {
     receipt({ model: 'TEST-M3', code: '—', cause: 'Maintenance', action: 'Fitted', part: 'water filter' });
     const old = new Date(Date.now() + 200 * 86400000); // 200 days later

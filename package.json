@@ -25,7 +25,9 @@
     "mcp:session": "node scripts/mcp-session.js",
     "verify-against-pages": "node scripts/verify-against-pages.js",
     "admit-verified": "node scripts/admit-verified.js",
-    "pdf:compare": "node scripts/pdf-compare.js"
+    "pdf:compare": "node scripts/pdf-compare.js",
+    "alexa": "node scripts/alexa.js",
+    "agent:eval": "node scripts/agent-eval.js"
   },
   "keywords": [
     "alexa-plus",

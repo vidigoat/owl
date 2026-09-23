@@ -133,10 +133,18 @@ it('nothing outside see.js talks to Bedrock', () => {
   // found on first contact with real AWS were in that seam; a second copy of it would be a second
   // set of them.
   const callers = FILES.filter((f) => /bedrock-runtime/.test(f.text)).map((f) => f.rel).sort();
-  assert.deepEqual(callers, ['mcp/tools/read_manual.js', 'mcp/tools/see.js', 'scripts/preflight.js'],
+  assert.deepEqual(callers, ['agent/bedrock.js', 'mcp/tools/read_manual.js', 'mcp/tools/see.js', 'scripts/preflight.js'],
     `these call Bedrock: ${callers.join(', ')}`);
   // read_manual is transcription and see.js is reading a panel — different prompts, deliberately,
   // because a transcription task is much harder to hijack. preflight exists to prove the path.
+  //
+  // agent/bedrock.js is the fourth, and a different kind of caller: it is the CONVERSATION — the
+  // simulated Alexa+ deciding which tool to call next — not a reading of anything. What keeps the
+  // rule's point is the next assertion: it never carries a picture. Every image still reaches a
+  // model through see.js or read_manual.js and their one labeller, so the agent cannot become a
+  // second, unlabelled vision path.
+  const agent = find('agent/bedrock.js');
+  assert.doesNotMatch(agent, /\bimage\s*:|imageBase64|\bbytes\s*:/, 'the conversation layer sends images to a model');
 });
 
 it('every simulated answer goes through one labeller', () => {

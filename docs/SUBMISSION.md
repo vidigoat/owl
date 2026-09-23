@@ -16,7 +16,7 @@ Checklist against the stated requirements:
 | product feedback on every tool, API and SDK used | `docs/PRODUCT-FEEDBACK.md` |
 | which tracks and minis | Alexa+ · AWS Builder · Open Source |
 | what changed during the window | built in it |
-| **AWS Builder mini**: AWS services with documented integrations | Bedrock Nova Lite — live, measured, `npm run preflight` |
+| **AWS Builder mini**: AWS services with documented integrations | Bedrock: Nova 2 Lite **Converse with tool use** drives the agent (`npm run alexa`); Nova Lite reads panels and manual pages — live, measured, `npm run preflight` |
 | **Open Source mini**: a *new additional* OSS project or public contribution | **[github.com/vidigoat/faultgraph](https://github.com/vidigoat/faultgraph)** — MIT, public, built in the window |
 | friction log — **up to 10% judging bonus** | `docs/FRICTION-LOG.md` |
 | a place to see it without installing anything | **<https://second-set-of-hands.vercel.app>** — ask a real manual a question and get the manufacturer's sentence and its page number, or a refusal naming what that manual does cover. And at `/review.html`, **drop in a manual of your own** and watch it be read. |
@@ -174,6 +174,14 @@ space, and runs the identical loop — every cause citing the line of the manual
 `resources/list` and `resources/read` today. Alexa+ could drive this instead of a browser and
 nothing in the device code would know the difference — every cause, question and elimination on
 screen came back from a tool call.
+
+**An agent, not a script.** `npm run alexa` is a simulated Alexa+ — Amazon Nova 2 Lite on Bedrock
+Converse, connected to the MCP server over Streamable HTTP, choosing every tool itself. Its first
+live runs read its reasoning aloud, skipped the check, recorded an ordered part as a verified fix
+and, later, charged a total nobody had said. Each is now a structure in the client rather than a
+line in a prompt: speaking is a tool; the checks stay client-side so it must ask `next_test`; an
+order goes through only on a later turn, after its total was spoken. `npm run agent:eval` holds it
+to eight rules across six live conversations.
 
 **Bedrock Nova Lite** for vision: reading the panel, reading the rating plate, transcribing a manual
 page, and confirming afterwards whether the fault actually cleared.

@@ -24,6 +24,8 @@ const sessions = new Map();
 let counter = 0;
 
 const money = (n) => Number(n.toFixed(2));
+// As it is said: "$3.40", not "3.4"; whole dollars stay whole.
+const usd = (n) => `$${Number.isInteger(n) ? n : n.toFixed(2)}`;
 
 /**
  * Open a checkout. Returns what the person is about to agree to, in full, and a session id.
@@ -68,11 +70,12 @@ function beginCheckout({ model, code, causeId, ruledOut = [] } = {}) {
     sessionId: id,
     // Everything said out loud before the word "yes" means anything.
     lineItems: [{ title: found.part.name, fitsModel: found.part.fitsModel, price: money(subtotal) }],
-    totals: { subtotal: money(subtotal), tax, shipping: SHIPPING, total },
+    // The currency is stated, not implied: a live run read these figures out as pounds.
+    totals: { currency: 'USD', subtotal: money(subtotal), tax, shipping: SHIPPING, total },
     eta: found.part.eta,
     insteadOf: found.alternative,
     saving: money(found.alternative.price - total),
-    say: `${found.part.name} for your ${model}, ${money(subtotal)} plus ${tax} tax — ${total} in total, here ${found.part.eta.toLowerCase()}. A service call would be about ${found.alternative.price}. Order it?`,
+    say: `${found.part.name} for your ${model}, ${usd(subtotal)} plus ${usd(tax)} tax — ${usd(total)} in total, here ${found.part.eta.toLowerCase()}. A service call would be about ${usd(found.alternative.price)}. Order it?`,
   };
 }
 
