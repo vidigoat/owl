@@ -36,7 +36,7 @@ npm run demo          # the whole loop in a terminal, ~20 seconds
 npm run mcp:session   # a real MCP session — the Alexa+ deliverable, proven in one command
 npm start             # http://localhost:8792 — the device experience
 npm run alexa         # talk to it — Amazon Nova on Bedrock choosing the tools, over MCP
-npm test              # 34 suites · 425 checks
+npm test              # 34 suites · 426 checks
 ```
 
 Nothing to install. The MCP server has zero dependencies and no build step.
@@ -60,6 +60,11 @@ So the way in is a sentence somebody says out loud. Which is also the better doo
 are flashing"* is what a person says; `E:22` is not.
 
 ## An agent drives it, not a script
+
+**Use the real thing today at [`/connect.html`](https://second-set-of-hands.vercel.app/connect.html):**
+add `https://second-set-of-hands.vercel.app/mcp` to Claude as a custom connector (no sign-in), and
+talk a repair through with the same nineteen tools Alexa+ would call. The page asks the server for
+its tools live, so what it lists is what is there.
 
 **Talk to it at `/talk.html`** (`npm start`, with AWS credentials): say what the machine is doing,
 and the screen draws the real MCP App card for whichever tool the agent just called, with every

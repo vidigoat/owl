@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Use it yourself</title>
+<link rel="icon" href="/addon/icon.svg" type="image/svg+xml">
+<!--
+  The add-on is an MCP server, and Alexa+ is not the only thing that speaks MCP. This page is how
+  anybody uses the real one today: add it to Claude (or any MCP client) as a connector, and talk
+  a repair through with the same nineteen tools Alexa+ would call. The live check below asks the
+  deployed server for its tools from this page, so what it lists is what is actually there.
+-->
+<style>
+  :root { --paper: #e8e5dc; --ink: #191714; --ink-2: #4a453d; --faint: #7d766a; --rule: #c9c4b6; --card: #f1efe8; --amber: #b8761f; --done: #3f6b4e; --stop: #a8321f;
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; --mono: ui-monospace, "SF Mono", Menlo, monospace; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --paper: #17181b; --ink: #ecebe6; --ink-2: #c4c1b8; --faint: #8f8c84; --rule: #34363b; --card: #1f2024; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 17px/1.55 var(--sans); }
+  main { max-width: 760px; margin: 0 auto; padding: 44px 16px 72px; }
+  h1 { font-size: 30px; letter-spacing: -0.02em; margin: 0; line-height: 1.15; }
+  .lede { color: var(--ink-2); margin: 10px 0 0; }
+  h2 { font-size: 19px; margin: 36px 0 10px; }
+  ol { padding-left: 22px; margin: 8px 0 0; }
+  li { margin: 6px 0; }
+  code, pre { font-family: var(--mono); font-size: 14px; }
+  .url { display: flex; gap: 8px; margin-top: 14px; }
+  .url input { flex: 1; min-width: 0; font: 15px var(--mono); color: var(--ink); background: var(--card); border: 1px solid var(--rule); border-radius: 10px; padding: 12px 14px; }
+  button { font: inherit; font-size: 15px; color: var(--ink); background: transparent; border: 1px solid var(--rule); border-radius: 10px; padding: 10px 16px; min-height: 46px; cursor: pointer; }
+  button.primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  :is(button, input):focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+  pre { background: var(--card); border: 1px solid var(--rule); border-radius: 10px; padding: 14px 16px; overflow-x: auto; margin: 10px 0 0; }
+  .say { background: var(--card); border-left: 3px solid var(--amber); border-radius: 0 10px 10px 0; padding: 10px 14px; margin: 8px 0; }
+  .live { margin-top: 12px; border: 1px solid var(--rule); border-radius: 12px; padding: 14px 16px; min-height: 60px; }
+  .live small { color: var(--faint); font: 12px var(--mono); display: block; margin-bottom: 6px; }
+  .tools { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .tools span { font: 12px var(--mono); border: 1px solid var(--rule); border-radius: 999px; padding: 4px 9px; }
+  .ok { color: var(--done); } .err { color: var(--stop); }
+  .quiet { color: var(--faint); font-size: 15px; }
+  a { color: inherit; text-underline-offset: 3px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Use it yourself</h1>
+  <p class="lede">The add-on is an MCP server — the same one Alexa+ would call. Anything that speaks MCP can use it, so you can talk a real repair through today, in Claude, with the same nineteen tools.</p>
+
+  <div class="url">
+    <input id="url" readonly value="https://second-set-of-hands.vercel.app/mcp" aria-label="The MCP server URL">
+    <button id="copy" type="button">Copy</button>
+  </div>
+
+  <h2>Is it really there?</h2>
+  <p class="quiet">This asks the deployed server for its tools, from this page, over the same protocol a connector uses.</p>
+  <button class="primary" id="check" type="button">Ask the server</button>
+  <div class="live" id="live" aria-live="polite"><small>not asked yet</small></div>
+
+  <h2>In Claude</h2>
+  <ol>
+    <li>Open <b>Settings → Connectors</b> (on the web or in Claude Desktop).</li>
+    <li>Choose <b>Add custom connector</b>. Name it <code>Second Set of Hands</code> and paste the URL above. It needs no sign-in.</li>
+    <li>Start a new chat, and say what the machine is doing:</li>
+  </ol>
+  <div class="say">My Bosch dishwasher is showing E24 — the model is SHE3AR75UC. Talk me through it, one check at a time.</div>
+  <div class="say">My Bosch SGE53C55UC leaves water in the bottom at the end of the program. What does the manual say?</div>
+  <div class="say">My SHE3AR75UC says E09. Can I fix it myself?</div>
+  <p class="quiet">It will ask the one check that rules out the most, cite the manufacturer's page, refuse anything behind mains wiring, and only offer a part once the diagnosis is verified. Ordering is simulated — nothing is charged.</p>
+
+  <h2>In Cursor, VS Code, or any MCP client</h2>
+  <pre>{
+  "mcpServers": {
+    "second-set-of-hands": { "url": "https://second-set-of-hands.vercel.app/mcp" }
+  }
+}</pre>
+  <p class="quiet">Streamable HTTP, spec 2025-11-25, no auth. The tools that draw on a screen also point at an MCP App card, <code>ui://second-set-of-hands/card</code> — <a href="/app-host.html">see it drawn</a>.</p>
+
+</main>
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  $('copy').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText($('url').value); $('copy').textContent = 'Copied'; } catch { $('url').select(); }
+    setTimeout(() => { $('copy').textContent = 'Copy'; }, 1500);
+  });
+  $('check').addEventListener('click', async () => {
+    const live = $('live');
+    live.innerHTML = '<small>asking…</small>';
+    const t0 = performance.now();
+    try {
+      const post = async (body, sid) => {
+        const r = await fetch('/mcp', { method: 'POST', headers: { 'content-type': 'application/json', accept: 'application/json, text/event-stream', ...(sid ? { 'mcp-session-id': sid } : {}) }, body: JSON.stringify(body) });
+        return { r, j: r.status === 202 ? null : await r.json() };
+      };
+      const init = await post({ jsonrpc: '2.0', id: 1, method: 'initialize', params: { protocolVersion: '2025-11-25', capabilities: {}, clientInfo: { name: 'connect-page', version: '1' } } });
+      const sid = init.r.headers.get('mcp-session-id');
+      await post({ jsonrpc: '2.0', method: 'notifications/initialized' }, sid);
+      const list = await post({ jsonrpc: '2.0', id: 2, method: 'tools/list' }, sid);
+      const tools = list.j.result.tools;
+      const ms = Math.round(performance.now() - t0);
+      live.innerHTML = `<small>${init.j.result.serverInfo.name} · spec ${init.j.result.protocolVersion} · session ${sid ? sid.slice(0, 8) + '…' : 'none'} · ${ms} ms</small>`
+        + `<span class="ok">${tools.length} tools answered, ${tools.filter((t) => t._meta && t._meta.ui).length} of them with a card.</span>`
+        + `<div class="tools">${tools.map((t) => `<span>${t.name}</span>`).join('')}</div>`;
+    } catch (e) {
+      live.innerHTML = `<span class="err">The server did not answer: ${String(e.message).replace(/[<>&]/g, '')}</span>`;
+    }
+  });
+})();
+</script>
+</body>
+</html>

@@ -94,7 +94,8 @@ export default function App() {
                 which this deployment does not have, and the link says so rather than finding out.
               */}
               <p className="invite">
-                <a href="/app-host.html">See the card an Echo Show would draw</a> — the real MCP App,
+                <a href="/connect.html">Use it yourself</a> — add the real MCP server to Claude as a
+                connector and talk a repair through. <a href="/app-host.html">See the card an Echo Show would draw</a> — the real MCP App,
                 fed by real tool calls. And <a href="/talk.html">watch the agent talk a repair
                 through</a>: Amazon Nova choosing the tools itself, the card following along — a
                 recorded session here, live wherever there are AWS credentials.

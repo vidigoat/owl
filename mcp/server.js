@@ -32,6 +32,7 @@ const { nextTest } = require('./tools/next_test');
 
 const PORT = process.env.MCP_PORT || 8793;
 const PROTOCOL_VERSION = '2025-11-25';
+const SUPPORTED_VERSIONS = ['2025-11-25', '2025-06-18', '2025-03-26'];
 
 /* ── the tools Alexa+ can see ─────────────────────────────────────────── */
 
@@ -367,8 +368,15 @@ async function handle(msg) {
   }
 
   if (method === 'initialize') {
+    /*
+     * Agree on a version the client asked for, when it is one this server speaks. Connectors in the
+     * wild still open with 2025-06-18 or 2025-03-26, and answering every client with the newest
+     * version is a way to be dropped by the ones that do not speak it yet. Nothing in these tools
+     * changes between them.
+     */
+    const asked = params?.protocolVersion;
     return result(id, {
-      protocolVersion: PROTOCOL_VERSION,
+      protocolVersion: SUPPORTED_VERSIONS.includes(asked) ? asked : PROTOCOL_VERSION,
       capabilities: { tools: { listChanged: false }, resources: { listChanged: false, subscribe: false } },
       serverInfo: { name: 'second-set-of-hands', version: '0.1.0' },
     });

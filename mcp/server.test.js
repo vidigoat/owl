@@ -221,5 +221,15 @@ const call = (name, args = {}) => handle({ jsonrpc: '2.0', id: 1, method: 'tools
     assert.equal(r.error.code, -32601);
   });
 
+it('a client on an older protocol version gets that version back, and an unknown one gets ours', async () => {
+  const { handle } = require('./server');
+  for (const v of ['2025-06-18', '2025-03-26', '2025-11-25']) {
+    const r = await handle({ jsonrpc: '2.0', id: 1, method: 'initialize', params: { protocolVersion: v, capabilities: {}, clientInfo: { name: 't', version: '1' } } });
+    assert.equal(r.result.protocolVersion, v);
+  }
+  const r = await handle({ jsonrpc: '2.0', id: 1, method: 'initialize', params: { protocolVersion: '1999-01-01', capabilities: {}, clientInfo: { name: 't', version: '1' } } });
+  assert.equal(r.result.protocolVersion, '2025-11-25');
+});
+
   console.log(`\n${passed} passed`);
 })();
