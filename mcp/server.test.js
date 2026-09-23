@@ -61,6 +61,38 @@ const call = (name, args = {}) => handle({ jsonrpc: '2.0', id: 1, method: 'tools
     assert.equal(answered.id, 42);
   });
 
+  await it('arguments a tool cannot use are a tool error that names them — not a run on undefined', async () => {
+    // The fuzzer's finding: a string or null for `arguments` ran diagnose anyway, and it answered
+    // "No service data for model undefined". Since 2025-11-25 the spec wants input errors as tool
+    // errors, in words, so the model can correct itself.
+    for (const bad of ['x', null, [1, 2], 7]) {
+      const r = await handle({ jsonrpc: '2.0', id: 1, method: 'tools/call', params: { name: 'diagnose', arguments: bad } });
+      assert.equal(r.result?.isError, true, `${JSON.stringify(bad)} was run`);
+      assert.match(r.result.content[0].text, /takes its arguments as an object/);
+    }
+    const missing = await call('diagnose', { model: 'SHE3AR75UC' });
+    assert.equal(missing.result.isError, true);
+    assert.match(missing.result.content[0].text, /diagnose needs code/);
+    assert.doesNotMatch(missing.result.content[0].text, /undefined/);
+    const shape = await call('next_test', { space: 'not a list' });
+    assert.equal(shape.result.isError, true);
+    assert.match(shape.result.content[0].text, /space should be a list, not a string/);
+    // A model saying 24 where the schema says string meant "24"; that is not refused.
+    const lenient = await call('diagnose', { model: 'SHE3AR75UC', code: 24 });
+    assert.notEqual(lenient.result?.isError, true, JSON.stringify(lenient).slice(0, 200));
+  });
+
+  await it('a malformed call, an object id, and an empty batch each get the protocol error', async () => {
+    for (const params of [undefined, [1, 2], { name: { a: 1 } }, { arguments: {} }]) {
+      const r = await handle({ jsonrpc: '2.0', id: 3, method: 'tools/call', params });
+      assert.equal(r.error?.code, -32602, JSON.stringify(params));
+      assert.doesNotMatch(r.error.message, /\[object Object\]|undefined/);
+    }
+    const objectId = await handle({ jsonrpc: '2.0', id: { a: 1 }, method: 'tools/list' });
+    assert.equal(objectId.error?.code, -32600);
+    assert.equal(objectId.id, null);
+  });
+
   await it('GET /mcp refuses the way the spec asks, rather than answering 200 with prose', () => {
     /*
      * Streamable HTTP makes the server-initiated stream optional and says a server that does not

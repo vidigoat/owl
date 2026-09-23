@@ -331,6 +331,45 @@ const failure = (id, code, message) => ({ jsonrpc: '2.0', id, error: { code, mes
 /* Async, because tools are allowed to do real work — `see` calls Bedrock. Every tool before it
  * happened to be synchronous, which hid the fact that a Promise was being serialised straight into
  * the response. */
+/** Why these arguments cannot be given to this tool, or null. Only what the schema says for certain. */
+function invalidArguments(tool, args) {
+  if (args !== undefined && (args === null || typeof args !== 'object' || Array.isArray(args))) {
+    return `${tool.name} takes its arguments as an object — got ${args === null ? 'null' : Array.isArray(args) ? 'an array' : typeof args}.`;
+  }
+  const schema = tool.inputSchema || {};
+  const a = args || {};
+  const missing = (schema.required || []).filter((k) => a[k] === undefined || a[k] === null || a[k] === '');
+  if (missing.length) {
+    const what = missing.map((k) => `${k}${schema.properties?.[k]?.description ? ` (${schema.properties[k].description.split('.')[0]})` : ''}`);
+    return `${tool.name} needs ${what.join('; ')}.`;
+  }
+  for (const [k, v] of Object.entries(a)) {
+    const want = schema.properties?.[k]?.type;
+    if (!want || Array.isArray(want) || v === null || v === undefined) continue;
+    // Only shapes that cannot mean anything are refused. A model saying 12 where the schema says
+    // "string" meant "12", and coerce() below says it for it.
+    const is = Array.isArray(v) ? 'array' : typeof v;
+    const scalar = (t) => t === 'string' || t === 'number' || t === 'integer' || t === 'boolean';
+    const ok = want === is
+      || (scalar(want) && (is === 'string' || is === 'number' || is === 'boolean'))
+      || (want === 'integer' && is === 'number');
+    if (!ok) return `${tool.name}: ${k} should be ${want === 'array' ? 'a list' : want === 'object' ? 'an object' : `a ${want}`}, not ${is === 'array' ? 'a list' : is === 'object' ? 'an object' : `a ${is}`}.`;
+  }
+  return null;
+}
+
+/** Scalars in the type the schema names — "12" for a string, 12 for a number — where that is lossless. */
+function coerce(tool, args) {
+  const props = tool.inputSchema?.properties || {};
+  for (const [k, v] of Object.entries(args)) {
+    const want = props[k]?.type;
+    if (want === 'string' && (typeof v === 'number' || typeof v === 'boolean')) args[k] = String(v);
+    else if ((want === 'number' || want === 'integer') && typeof v === 'string' && v.trim() !== '' && Number.isFinite(Number(v))) args[k] = Number(v);
+    else if (want === 'boolean' && (v === 'true' || v === 'false')) args[k] = v === 'true';
+  }
+  return args;
+}
+
 async function handle(msg) {
   /*
    * Is this a request at all?
@@ -352,6 +391,11 @@ async function handle(msg) {
   }
 
   const { id, method, params } = msg;
+  // JSON-RPC ids are strings, numbers or null. An object id was accepted and echoed back — found by
+  // the fuzzer — which a strict client cannot match to anything it sent.
+  if ('id' in msg && id !== null && typeof id !== 'string' && typeof id !== 'number') {
+    return failure(null, -32600, 'Invalid Request: an id is a string, a number or null.');
+  }
 
   /*
    * A notification gets no reply at all.
@@ -414,11 +458,24 @@ async function handle(msg) {
   }
 
   if (method === 'tools/call') {
-    const tool = TOOLS.find((t) => t.name === params?.name);
-    if (!tool) return failure(id, -32602, `No tool named "${params?.name}".`);
+    if (!params || typeof params !== 'object' || Array.isArray(params) || typeof params.name !== 'string') {
+      return failure(id, -32602, 'tools/call takes params { name: string, arguments: object }.');
+    }
+    const tool = TOOLS.find((t) => t.name === params.name);
+    if (!tool) return failure(id, -32602, `No tool named "${params.name}".`);
+
+    /*
+     * Input the tool cannot use is answered as a tool error, in words, naming the argument — the
+     * spec's rule since 2025-11-25, so a model can correct itself. Before this, a string or null
+     * for `arguments` ran the tool anyway and it answered "No service data for model undefined".
+     */
+    const bad = invalidArguments(tool, params.arguments);
+    if (bad) {
+      return result(id, { content: [{ type: 'text', text: bad }], isError: true });
+    }
 
     try {
-      const args = { ...(params.arguments || {}) };
+      const args = coerce(tool, { ...(params.arguments || {}) });
       // Every tool keys on the model, so it is resolved once, here — "Bosch SGE53C55UC" is the
       // SGE53C55UC. See resolveModel for what is and is not treated as the same machine.
       if (typeof args.model === 'string') args.model = resolveModel(args.model);
@@ -562,8 +619,11 @@ async function serveMcp(req, res) {
 
   try {
     const began = process.hrtime.bigint();
+    // An empty batch is one Invalid Request, not silence (JSON-RPC 2.0, section 6).
     const response = Array.isArray(payload)
-      ? (await Promise.all(payload.map(handle))).filter((r) => r !== null)
+      ? payload.length
+        ? (await Promise.all(payload.map(handle))).filter((r) => r !== null)
+        : failure(null, -32600, 'Invalid Request: an empty batch.')
       : await handle(payload);
     /*
      * How long the tool itself took, on the server, as a standard header. Alexa+ asks for a round
