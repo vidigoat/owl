@@ -146,21 +146,32 @@ const call = (name, args = {}) => handle({ jsonrpc: '2.0', id: 1, method: 'tools
     });
   });
 
-  await it('the server is deployed, not only runnable: a hosted route serves the same transport', () => {
+  await it('the server is deployed, not only runnable: /mcp is served by the handler every request reaches', async () => {
     /*
-     * The Alexa+ deliverable ran only on localhost:8793 — the demo URL answered 404 at /mcp. A judge
-     * could not reach the one thing the track asks for.
+     * The Alexa+ deliverable ran only on localhost:8793 — the demo URL answered 404 at /mcp. The
+     * first fix was a separate `api/mcp.js`, and it passed every check here while the deployment
+     * built exactly ONE function and never built that file at all. So this drives the real site
+     * handler — the thing the host actually runs — and asks it for an MCP handshake.
      */
-    const route = require('../api/mcp.js');
-    assert.equal(typeof route, 'function');
-    const cfg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'vercel.json'), 'utf8'));
-    assert.ok(cfg.functions['api/mcp.js'], 'the MCP route has no function config');
-    assert.ok(
-      (cfg.rewrites || []).some((r) => r.source === '/mcp' && r.destination === '/api/mcp'),
-      '/mcp is not routed to the server'
-    );
-    assert.match(fs.readFileSync(path.join(__dirname, '..', 'api', 'mcp.js'), 'utf8'), /serveMcp/,
-      'the hosted route is not the shared transport');
+    const { handler } = require('../server');
+    await new Promise((resolve, reject) => {
+      const srv = http.createServer(handler);
+      srv.listen(0, '127.0.0.1', async () => {
+        try {
+          const base = `http://127.0.0.1:${srv.address().port}`;
+          for (const route of ['/mcp', '/api/mcp']) {
+            const r = await post(`${base}${route}`, { jsonrpc: '2.0', id: 1, method: 'initialize', params: { protocolVersion: '2025-11-25', capabilities: {}, clientInfo: { name: 't', version: '1' } } });
+            assert.equal(r.status, 200, `${route} answered ${r.status} through the site handler`);
+            assert.equal((await r.json()).result.protocolVersion, '2025-11-25');
+          }
+          resolve();
+        } catch (e) {
+          reject(e);
+        } finally {
+          srv.close();
+        }
+      });
+    });
   });
 
   await it('every registered tool has a description and a schema', async () => {

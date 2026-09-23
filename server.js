@@ -18,6 +18,7 @@ const pdf = require('./manual/pdf');
 const { see } = require('./mcp/tools/see');
 const { read_manual } = require('./mcp/tools/read_manual');
 const review = require('./manual/review');
+const { serveMcp } = require('./mcp/server');
 const { confirm_fix } = require('./mcp/tools/confirm_fix');
 const { beginCheckout, confirmCheckout } = require('./mcp/tools/order_part');
 const { remember: rememberAppliance, receipt: writeReceipt, due: dueNow } = require('./mcp/tools/home');
@@ -123,6 +124,17 @@ const send = (res, code, body, type) => {
  */
 function handler(req, res) {
     const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
+
+    /*
+     * The MCP server — the Alexa+ deliverable — on the same handler as everything else.
+     *
+     * It was first deployed as its own file, `api/mcp.js`, with a rewrite to it. The deployment
+     * built exactly one function, `index`: the host runs this whole app as a single Node backend
+     * through this handler, so a per-file route is never built at all, and `/mcp` fell through to
+     * "not found" here while every test passed. Routing it inside the one handler every request
+     * already reaches is the only version that does not depend on how the host bundles the app.
+     */
+    if (url.pathname === '/mcp' || url.pathname === '/api/mcp') return serveMcp(req, res);
 
     if (url.pathname === '/api/session') {
       return send(res, 200, JSON.stringify({
