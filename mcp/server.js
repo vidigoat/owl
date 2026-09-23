@@ -543,9 +543,17 @@ async function serveMcp(req, res) {
   else if (session) headers['mcp-session-id'] = session;
 
   try {
+    const began = process.hrtime.bigint();
     const response = Array.isArray(payload)
       ? (await Promise.all(payload.map(handle))).filter((r) => r !== null)
       : await handle(payload);
+    /*
+     * How long the tool itself took, on the server, as a standard header. Alexa+ asks for a round
+     * trip under 500 ms and entrants cannot measure that against the orchestrator (FRICTION-LOG);
+     * what can be measured honestly is the part this server owns, and `npm run latency` reports it
+     * apart from the network, which depends on where it is measured from.
+     */
+    headers['server-timing'] = `tool;dur=${(Number(process.hrtime.bigint() - began) / 1e6).toFixed(2)}`;
 
     // Nothing to say — a notification, or a batch of nothing but — is 202 with no body.
     if (response === null || (Array.isArray(response) && !response.length)) {

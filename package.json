@@ -28,7 +28,8 @@
     "pdf:compare": "node scripts/pdf-compare.js",
     "alexa": "node scripts/alexa.js",
     "agent:eval": "node scripts/agent-eval.js",
-    "procedures": "node scripts/read-procedures.js"
+    "procedures": "node scripts/read-procedures.js",
+    "latency": "node scripts/latency.js"
   },
   "keywords": [
     "alexa-plus",
