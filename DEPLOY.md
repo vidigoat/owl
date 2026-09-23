@@ -48,6 +48,13 @@ library — all of that is arithmetic over committed data and needs nothing but 
 
 ## Credentials
 
-Set nothing. With an `AWS_PROFILE`/`AWS_ACCESS_KEY_ID` pair the vision tools work, but they spend
-real money per call and the spend ceiling cannot persist on a serverless disk — so the deliberate
-choice is to leave them off and let the tools abstain, which is a behaviour worth showing anyway.
+Set nothing, and the tools abstain and the talk page plays its recording — a behaviour worth
+showing anyway.
+
+The live agent on `/talk.html` spends real money per turn, and the file ledger in `mcp/budget.js`
+cannot hold a ceiling on a serverless host: every instance has its own disk. So on a deployment the
+agent needs a **shared** ledger — `mcp/shared-budget.js`, one DynamoDB item every instance reserves
+against in a single conditional write — and refuses to talk with credentials but no
+`HANDS_LEDGER_TABLE`. `scripts/hosted-setup.sh` makes the table, a least-privilege IAM user and the
+Vercel variables in one confirmed step, and `--undo` removes them. The vision tools stay off on the
+host either way: they shell out to the AWS CLI, which a serverless function does not have.

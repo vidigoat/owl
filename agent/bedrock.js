@@ -60,14 +60,21 @@ async function converse(
   const price = PRICES[model] || PRICES['us.amazon.nova-pro-v1:0'];
   const couldIn = Math.ceil(body.length / 3);
   const could = (couldIn * price.in + maxTokens * price.out) / 1e6;
-  const { spent } = budget.read();
-  if (spent + could > budget.ceiling) {
-    const e = new Error(
-      `Budget stop: this turn could cost up to $${could.toFixed(5)} and $${spent.toFixed(4)} of the ` +
-        `$${budget.ceiling.toFixed(2)} ceiling is spent. Nothing was called.`
-    );
-    e.code = 'BUDGET';
-    throw e;
+  // A shared ledger (mcp/shared-budget.js) reserves the worst case in one conditional write; the
+  // file ledger is read and compared, which is enough where there is only one process.
+  const shared = typeof budget.reserve === 'function';
+  if (shared) {
+    await budget.reserve(could, { label: 'this turn' });
+  } else {
+    const { spent } = budget.read();
+    if (spent + could > budget.ceiling) {
+      const e = new Error(
+        `Budget stop: this turn could cost up to $${could.toFixed(5)} and $${spent.toFixed(4)} of the ` +
+          `$${budget.ceiling.toFixed(2)} ceiling is spent. Nothing was called.`
+      );
+      e.code = 'BUDGET';
+      throw e;
+    }
   }
 
   const url = `https://bedrock-runtime.${region}.amazonaws.com/model/${encodeURIComponent(model)}/converse`;
@@ -77,16 +84,20 @@ async function converse(
     { region, service: 'bedrock' }
   );
 
+  // No answer at all keeps the reservation: nobody can say that call was not billed.
   const res = await fetchImpl(url, { method: 'POST', headers, body });
   const text = await res.text();
   if (!res.ok) {
+    // AWS answered and refused, which it does not bill — give the reservation back.
+    if (shared) await budget.settle(could, 0).catch(() => {});
     const e = new Error(`bedrock ${res.status}: ${text.slice(0, 300)}`);
     e.status = res.status;
     throw e;
   }
   const out = JSON.parse(text);
   const cost = costOf(model, out.usage);
-  budget.record(cost ?? could, { tool: `agent:${model}` });
+  if (shared) await budget.settle(could, cost ?? could);
+  else budget.record(cost ?? could, { tool: `agent:${model}` });
 
   return { message: out.output?.message, stopReason: out.stopReason, usage: out.usage || {}, cost, model };
 }

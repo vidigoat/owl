@@ -8,8 +8,10 @@
  *
  * It spends money, so it is bounded three ways before anything is called:
  *   - it runs only where AWS credentials are, and says so plainly where they are not;
- *   - every Bedrock call goes through mcp/budget.js, whose ceiling refuses a call that COULD
- *     exceed it;
+ *   - every Bedrock call goes through a ledger whose ceiling refuses a call that COULD exceed it —
+ *     on a deployment, mcp/shared-budget.js, one ledger for every instance; a deployment with
+ *     credentials and no shared ledger refuses to talk, because a per-instance file ledger there is
+ *     a ceiling that multiplies with traffic;
  *   - a conversation is capped in turns, and the number of live conversations is capped.
  */
 
@@ -18,6 +20,7 @@ const { Alexa } = require('./alexa');
 const { McpClient, inProcess } = require('./mcp-client');
 const { credentials } = require('./sigv4');
 const { APP_TOOLS } = require('../mcp/cards');
+const { SharedBudget } = require('../mcp/shared-budget');
 
 const MAX_CONVERSATIONS = 40;
 const MAX_TURNS = 16;
@@ -25,10 +28,26 @@ const IDLE_MS = 30 * 60 * 1000;
 
 const conversations = new Map();
 
-function available(creds = credentials()) {
-  return creds
-    ? { available: true }
-    : { available: false, reason: 'The live agent runs where AWS credentials for Bedrock are. This deployment has none, so it will not pretend to talk.' };
+/**
+ * Where the ledger lives. On a deployment (VERCEL is set by the host) it must be shared:
+ * HANDS_LEDGER_TABLE names the DynamoDB table and HANDS_BUDGET_USD the ceiling for all of it.
+ */
+function ledger(creds, env = process.env) {
+  if (env.HANDS_LEDGER_TABLE) {
+    return new SharedBudget({
+      table: env.HANDS_LEDGER_TABLE,
+      ceiling: Number(env.HANDS_BUDGET_USD) || 5,
+      creds,
+      region: env.AWS_REGION || env.AWS_DEFAULT_REGION || 'us-east-1',
+    });
+  }
+  return env.VERCEL ? null : undefined; // undefined: agent/bedrock.js uses the file ledger
+}
+
+function available(creds = credentials(), env = process.env) {
+  if (!creds) return { available: false, reason: 'The live agent runs where AWS credentials for Bedrock are. This deployment has none, so it will not pretend to talk.' };
+  if (ledger(creds, env) === null) return { available: false, reason: 'This deployment has AWS credentials but no shared spend ledger, and a ceiling kept per instance is no ceiling. It will not talk until HANDS_LEDGER_TABLE is set.' };
+  return { available: true };
 }
 
 function sweep(now = Date.now()) {
@@ -55,7 +74,11 @@ async function turn({ conversation, said } = {}, { make, creds } = {}) {
       return { status: 429, body: { error: 'Too many conversations at once. Try again in a few minutes.' } };
     }
     id = crypto.randomUUID();
-    const alexa = make ? make() : new Alexa({ client: new McpClient('in-process://mcp', { fetchImpl: inProcess() }) });
+    const budget = make ? undefined : ledger(creds === undefined ? credentials() : creds);
+    const alexa = make ? make() : new Alexa({
+      client: new McpClient('in-process://mcp', { fetchImpl: inProcess() }),
+      ...(budget ? { converseOpts: { budget } } : {}),
+    });
     conversations.set(id, { alexa, turns: 0, last: Date.now() });
   }
 
@@ -95,4 +118,4 @@ async function turn({ conversation, said } = {}, { make, creds } = {}) {
   };
 }
 
-module.exports = { turn, available, conversations, MAX_TURNS, MAX_CONVERSATIONS };
+module.exports = { turn, available, ledger, conversations, MAX_TURNS, MAX_CONVERSATIONS };
