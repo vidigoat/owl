@@ -91,4 +91,19 @@ console.log(
     (broken.length ? `  —  \x1b[31m${broken.length} suite${broken.length === 1 ? '' : 's'} failing\x1b[0m\n` : '  —  all green\n')
 );
 
+/*
+ * The README quotes this tally, and a count typed by hand goes stale — the sibling project's did
+ * three times before its runner started checking. Only after an all-green run, so a stale README is
+ * never reported on top of a real failure.
+ */
+if (!broken.length) {
+  const want = `${results.length} suites · ${totalChecks} checks`;
+  const readme = require('node:fs').readFileSync(require('node:path').join(__dirname, '..', 'README.md'), 'utf8');
+  if (!readme.includes(want)) {
+    const quoted = /\d+ suites · \d+ checks/.exec(readme);
+    console.log(`  README is stale: it says "${quoted ? quoted[0] : 'nothing'}" and this run was "${want}". Fix the line under the test command.\n`);
+    process.exit(1);
+  }
+}
+
 process.exit(broken.length ? 1 : 0);
