@@ -251,11 +251,21 @@
     try {
       const a = await (await fetch('/api/alexa')).json();
       if (!a.available) {
+        /*
+         * Where it cannot talk, it shows a real session instead of a closed door.
+         *
+         * The hosted URL has no AWS credentials, so a visitor used to reach this page and find
+         * nothing to do. The recording is of this exact page, made by scripts/record-talk.js with
+         * nothing retaken — and it is labelled as a recording, because that is what it is.
+         */
         $('closed').hidden = false;
-        $('closed').textContent = a.reason;
+        $('closed').innerHTML = '<strong>This is a recording.</strong> The live agent needs AWS credentials for Bedrock, which this deployment does not have — so here is a real session on this page, made by <code>scripts/record-talk.js</code> with nothing retaken. Run <code>npm start</code> with credentials to talk to it yourself.';
         $('form').hidden = true;
         $('starts').hidden = true;
-        $('said').textContent = 'Not here — this deployment has no AWS credentials. Run it where they are: npm start.';
+        $('restart').hidden = true;
+        $('aloud').hidden = true;
+        document.querySelector('.show').innerHTML = '<video src="/media/talk.webm" autoplay muted loop playsinline controls aria-label="A recorded session: the agent asks the pump check, offers the part, reads the total, orders, and recognises the fault coming back" style="display:block;width:100%;border-radius:14px;background:#14161a"></video>';
+        document.querySelector('.stage').style.gridTemplateColumns = '1fr';
       }
     } catch { /* offered anyway; a turn will say what went wrong */ }
   })();

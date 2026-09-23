@@ -8,7 +8,7 @@
  * The person's lines are typed on screen so it is plain which half is scripted; everything Alexa+
  * says, every tool call listed under it, and the card on the screen are that turn's, live. Nothing
  * is retaken: a recording that keeps only the good takes is the thing this project argues against.
- * About three cents of Bedrock. Writes docs/media/talk.webm. Needs Playwright (not a dependency).
+ * About three cents of Bedrock. Writes public/media/talk.webm, which /talk.html plays where it cannot talk. Needs Playwright (not a dependency).
  */
 let chromium;
 try {
@@ -21,7 +21,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const BASE = process.argv[2] || 'http://localhost:8792';
-const OUT = path.join(__dirname, '..', 'docs', 'media');
+const OUT = path.join(__dirname, '..', 'public', 'media'); // served, so the hosted /talk.html can play it
 const CONVERSATIONS = [
   ['My Bosch dishwasher is showing E24. The model is SHE3AR75UC.', "No — it's completely silent.", 'Yes, order it.', 'Yes.', 'It arrived and I fitted it. It drains now.'],
   ['My SHE3AR75UC is showing E24 again.'],
