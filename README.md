@@ -37,6 +37,7 @@ npm run mcp:session   # a real MCP session — the Alexa+ deliverable, proven in
 npm start             # http://localhost:8792 — the device experience
 npm run alexa         # talk to it — Amazon Nova on Bedrock choosing the tools, over MCP
 npm test              # 35 suites · 435 checks
+npm run smoke:live    # every route of the deployed site and the MCP handshake, after a deploy
 ```
 
 Nothing to install. The MCP server has zero dependencies and no build step.
