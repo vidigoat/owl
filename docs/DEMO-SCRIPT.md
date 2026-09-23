@@ -156,7 +156,7 @@ proof. Each turn costs about half a cent.
 
 Say one line over A2 or A3, and nothing more: *"Every rule you just watched it keep, it broke once on
 a live run. Each one is now enforced by the code around the model, not asked of it."* Then, if there
-is room, cut to the terminal for five seconds of `npm run agent:eval` — **7 of 7, 0 rule
+is room, cut to the terminal for five seconds of `npm run agent:eval` — **8 of 8, 0 rule
 violations** — which is that sentence, measured.
 
 **What not to do on this page:** do not retake a turn until it says the right thing. If Nova

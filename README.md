@@ -87,8 +87,8 @@ fix, and told somebody a repair needed "no tools" when no tool had said so. Each
 | asked a check it made up rather than the one `next_test` chose | a question while a diagnosis is open is sent back until `next_test` has been asked |
 | started from scratch on a machine this house had repaired three weeks before | the machine's record is read when a diagnosis starts, and a fault that has come back is said first — *"This E24 is back — last time, on September 2: replaced the drain pump."* |
 
-`npm run agent:eval` checks that against seven conversations — the person scripted, everything else
-live — and ten rules on every turn. Last run: **7 of 7** agent scenarios, **0** rule violations,
+`npm run agent:eval` checks that against eight conversations — one of them an order smuggled in as a "system override" — the person scripted, everything else
+live — and ten rules on every turn. Last run: **8 of 8** agent scenarios, **0** rule violations,
 recorded in `docs/agent-eval.json`. It also found two bugs the unit suite had not: a model said as
 "Bosch SGE53C55UC" answered as unknown, and a symptom matched perfectly with nowhere to go next.
 
