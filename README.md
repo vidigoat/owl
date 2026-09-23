@@ -36,7 +36,7 @@ npm run demo          # the whole loop in a terminal, ~20 seconds
 npm run mcp:session   # a real MCP session — the Alexa+ deliverable, proven in one command
 npm start             # http://localhost:8792 — the device experience
 npm run alexa         # talk to it — Amazon Nova on Bedrock choosing the tools, over MCP
-npm test              # 34 suites · 421 checks
+npm test              # 34 suites · 423 checks
 ```
 
 Nothing to install. The MCP server has zero dependencies and no build step.
@@ -84,9 +84,11 @@ fix, and told somebody a repair needed "no tools" when no tool had said so. Each
 | asked for a photo of a panel whose code it had just been told | the tools that look are not offered until there is a photo |
 | a 73-word turn to somebody with both hands in a machine | a line over forty words is sent back once |
 | started walking somebody through fitting a pump they did not have | a repair that needs a part is not guided until the part was asked about, on an earlier turn |
+| asked a check it made up rather than the one `next_test` chose | a question while a diagnosis is open is sent back until `next_test` has been asked |
+| started from scratch on a machine this house had repaired three weeks before | the machine's record is read when a diagnosis starts, and a fault that has come back is said first — *"This E24 is back — last time, on September 2: replaced the drain pump."* |
 
-`npm run agent:eval` checks that against six conversations — the person scripted, everything else
-live — and nine rules on every turn. Last run: **6 of 6** agent scenarios, **0** rule violations,
+`npm run agent:eval` checks that against seven conversations — the person scripted, everything else
+live — and ten rules on every turn. Last run: **7 of 7** agent scenarios, **0** rule violations,
 recorded in `docs/agent-eval.json`. It also found two bugs the unit suite had not: a model said as
 "Bosch SGE53C55UC" answered as unknown, and a symptom matched perfectly with nowhere to go next.
 

@@ -42,6 +42,8 @@ Every fact comes from a tool. Never state what a fault code means, what caused i
 
 Getting started: you need the model and the fault. Take them from what the person says, or call see with usePhoto true when they have shown you the panel. Many machines print no fault code — then use describe_problem with the model and what they said. If it returns several matches, read the manual's wording of each back and ask which one it is; if one, use it. A match's id stands where a fault code would: pass it as code to hypotheses and everything after.
 
+If hypotheses comes back with sayFirst, begin what you say with it, in your own words — the fault has come back after a repair this household recorded. Then carry on as normal.
+
 Narrowing a fault code: ALWAYS call hypotheses first, then next_test — even when one cause looks likely, because the cheapest check often settles it in seconds. Ask the person to do that ONE check, in one short sentence, and STOP. Wait for them. Never ask two things at once, and never answer for them. When they answer, call observe with that check's testId and the outcome value that matches what they said, then next_test again. Repeat until one cause is left.
 
 If next_test says the manual documents no check, do not invent one: call verify_diagnosis with the first cause in its order.
@@ -312,13 +314,16 @@ class Alexa {
     if (name === 'begin_checkout' && value.ok && value.sessionId) {
       m.checkout = { sessionId: value.sessionId, total: value.totals?.total, turn: this.turnNo, heard: false };
     }
+    if (name === 'next_test') m.needsNextTest = false;
     if (name === 'hypotheses' && Array.isArray(value.space)) {
+      m.needsNextTest = true;
       m.space = value.space;
       m.tests = value.tests || [];
       m.performed = [];
       m.ruledOut = [];
     }
     if (name === 'observe' && Array.isArray(value.space) && !value.error) {
+      m.needsNextTest = true;
       m.space = value.space;
       if (args.testId) m.performed.push(args.testId);
       else if (args.outcome?.test) m.performed.push(args.outcome.test);
@@ -346,6 +351,7 @@ class Alexa {
     const steps = [];
     let say = '';
     let tooLongOnce = false;
+    let askedWithoutNext = false;
     let rounds = 0;
     let cost = 0;
 
@@ -385,6 +391,23 @@ class Alexa {
            * refusing the line is a structure. Once only — a second long line is said rather than
            * leaving the person in silence, and the eval counts it.
            */
+          /*
+           * A question only after next_test chose it.
+           *
+           * The checks are kept from the model so it has to ask next_test — and a live eval run
+           * simply made one up instead: "the filter check costs nothing and is often the cause. Is
+           * the filter clogged?" Plausible, and not the check that rules out the most. So while a
+           * diagnosis is open (several causes, checks available) and next_test has not been asked
+           * since the space last changed, a line that asks something is sent back once.
+           */
+          const m = this.memory;
+          const open = Array.isArray(m.space) && m.space.length > 1 && Array.isArray(m.tests) && m.tests.length > 0;
+          if (open && m.needsNextTest && /\?/.test(text) && !askedWithoutNext) {
+            askedWithoutNext = true;
+            steps.push({ tool: 'speak', asked: { text: text.slice(0, 80) }, filled: [], answer: 'refused: a question before next_test chose it', isError: true, private: true });
+            results.push({ toolResult: { toolUseId, content: [{ text: 'Not said. Call next_test first — it chooses which check to ask — then ask that one.' }], status: 'error' } });
+            continue;
+          }
           const long = wordCount(text) > MAX_SPOKEN_WORDS || sentenceCount(text) > 3;
           if (long && !tooLongOnce) {
             tooLongOnce = true;
@@ -428,6 +451,40 @@ class Alexa {
         this.absorb(name, args, value);
         // `result` is for a screen to draw from (the MCP App card); the model is shown forModel().
         steps.push({ tool: name, asked: redact(input), filled, answer: summarise(name, value), isError, result: value });
+
+        /*
+         * The household is consulted, not merely kept.
+         *
+         * remember_repair has always written what was done, and repair_history could read it back —
+         * but only if the model thought to ask, and nothing prompted it to: told "my SHE3AR75UC is
+         * showing E24 again", it would start the diagnosis from scratch weeks after the pump was
+         * replaced. The most useful sentence this product can say on a second visit — "this came
+         * back after the pump was replaced on the 2nd" — hung on a tool call nobody asked for. So
+         * when a diagnosis starts on a machine, the client reads that machine's record and hands it
+         * over with the causes. The call is in the trace like any other.
+         */
+        if (name === 'hypotheses' && !isError && value && value.known && args.model) {
+          let past = null;
+          try {
+            ({ value: past } = await this.client.call('repair_history', { model: args.model }));
+          } catch { /* no record is not a reason to stop a diagnosis */ }
+          const receipts = Array.isArray(past?.receipts) ? past.receipts.slice(-5) : [];
+          if (receipts.length) {
+            value = { ...value, thisHouse: receipts.map((r) => ({ when: String(r.at).slice(0, 10), code: r.code, cause: r.cause, done: r.action, confirmedFixed: r.confirmed === true })) };
+            // The same fault, fixed before: a sentence, built from the record, not left to be noticed.
+            // A live eval run was handed the record and never mentioned it.
+            const same = [...receipts].reverse().find((r) => r.code && r.code === args.code);
+            if (same) {
+              // The date the record carries, not this machine's clock: 2026-09-02T18:30Z is "September 2".
+              const when = new Date(same.at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', timeZone: 'UTC' });
+              const done = String(same.action || 'a repair').replace(/[.\s]+$/, '');
+              // One sentence: it is said ahead of the model's own line, which has two of its own.
+              value.sayFirst = `This ${args.code} is back — last time, on ${when}: ${done.charAt(0).toLowerCase()}${done.slice(1)}.`;
+              this.memory.sayFirst = value.sayFirst;
+            }
+            steps.push({ tool: 'repair_history', asked: { model: args.model }, filled: ['called by the client when the diagnosis began'], answer: `${receipts.length} earlier repair${receipts.length === 1 ? '' : 's'} on this machine`, isError: false });
+          }
+        }
         results.push({
           toolResult: {
             toolUseId,
@@ -445,6 +502,19 @@ class Alexa {
         this.waitingFor = spokeNow.waitingFor;
         break;
       }
+    }
+
+    /*
+     * A fault that has come back is said, whatever the model chose to say.
+     *
+     * Handed the household's record — and then a ready sentence built from it — Nova still opened
+     * with the pump check twice out of two, as though the machine were new to this house. What was
+     * done before is the one thing a second visit knows that a first cannot, so the client says it:
+     * one sentence, from the record, ahead of the model's line, once.
+     */
+    if (this.memory.sayFirst && say) {
+      if (!/\b(is back|came back|again|last time|before)\b/i.test(say)) say = `${this.memory.sayFirst} ${say}`;
+      this.memory.sayFirst = null;
     }
 
     if (rounds >= MAX_TOOL_ROUNDS && !say) {

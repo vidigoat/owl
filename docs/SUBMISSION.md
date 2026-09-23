@@ -181,7 +181,7 @@ live runs read its reasoning aloud, skipped the check, recorded an ordered part 
 and, later, charged a total nobody had said. Each is now a structure in the client rather than a
 line in a prompt: speaking is a tool; the checks stay client-side so it must ask `next_test`; an
 order goes through only on a later turn, after its total was spoken. `npm run agent:eval` holds it
-to nine rules across six live conversations. And `/talk.html` is the same agent in a page: say what the machine is doing and the screen draws the real MCP App card for the tool it just called.
+to ten rules across seven live conversations — one of them a fault that has come back, which it now opens by saying so. And `/talk.html` is the same agent in a page: say what the machine is doing and the screen draws the real MCP App card for the tool it just called.
 
 **Bedrock Nova Lite** for vision: reading the panel, reading the rating plate, transcribing a manual
 page, and confirming afterwards whether the fault actually cleared.

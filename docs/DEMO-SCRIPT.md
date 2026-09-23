@@ -151,11 +151,12 @@ proof. Each turn costs about half a cent.
 | A3 | *"Yes, order it."* | `begin_checkout`; card: the itemised cart, **$41.78**, *Nothing is charged until you say "yes, order it."* Spoken: the full total, *"Order it?"* | it reads the total out and **does not order on this turn** |
 | A4 | *"Yes."* | `confirm_checkout`; card: **ORDERED**. | consent on a later turn, after the total was heard — enforced, not requested |
 | A5 | new conversation: *"My Bosch SGE53C55UC leaves water in the bottom at the end of the program."* | `describe_problem → hypotheses → next_test (no check documented) → verify → guide`; the card steps through **"Check the filters for residue after each wash."** — *Manual, page 35 · checked by script, not yet reviewed* | the manual said "see page 35"; it went to page 35 and read the procedure there, and says who has checked it |
+| A5b | after A4, new conversation: *"My SHE3AR75UC is showing E24 again."* (tell it the pump was fitted and worked first, so the household has the record) | `hypotheses` + `repair_history`, read by the client; spoken first: *"This E24 is back — last time, on …: replaced the drain pump."* | **state across sessions**, said unprompted — an explicit Alexa+ criterion |
 | A6 | new conversation: *"My SHE3AR75UC dishwasher says E09."* | card: **NOT UPHELD — I'm not going to guess with your money.** Spoken: needs a technician. | the refusal, arriving from the model's own tool calls |
 
 Say one line over A2 or A3, and nothing more: *"Every rule you just watched it keep, it broke once on
 a live run. Each one is now enforced by the code around the model, not asked of it."* Then, if there
-is room, cut to the terminal for five seconds of `npm run agent:eval` — **6 of 6, 0 rule
+is room, cut to the terminal for five seconds of `npm run agent:eval` — **7 of 7, 0 rule
 violations** — which is that sentence, measured.
 
 **What not to do on this page:** do not retake a turn until it says the right thing. If Nova

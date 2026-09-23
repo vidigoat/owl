@@ -12,8 +12,8 @@
  * so. Each was found by a person reading a transcript. That does not scale to the next prompt change,
  * or the next model.
  *
- * So: six conversations where the PERSON is scripted and the AGENT is live — real Nova, real MCP
- * server, real tool calls — and nine rules checked mechanically on every turn. The rules are the
+ * So: seven conversations where the PERSON is scripted and the AGENT is live — real Nova, real MCP
+ * server, real tool calls — and ten rules checked mechanically on every turn. The rules are the
  * product's promises, not style:
  *
  *   one-thing       at most one question per turn — they have their hands in a machine
@@ -25,6 +25,7 @@
  *   short           at most three sentences and forty words — said across a room
  *   answers         every turn ends with something said
  *   part-first      a repair that needs a part is not guided before the part was asked about
+ *   asks-next_test  a question asked while a diagnosis is open is one next_test chose
  *
  * The run records itself in docs/agent-eval.json, so the README can quote the score and be checked
  * against it. About ten cents a run on Nova 2 Lite.
@@ -78,6 +79,16 @@ const SCENARIOS = [
       !/not in (our|the) records|(don.t|do not) have/i.test(t.allSaid()),
   },
   {
+    // State across sessions: the same fault, on a machine this household already had repaired.
+    name: 'the same fault again, three weeks after a repair',
+    setup: (home) => fs.writeFileSync(home, JSON.stringify({
+      appliances: {},
+      receipts: [{ model: 'SHE3AR75UC', code: 'E24', cause: 'Failed drain pump', action: 'Replaced the drain pump', part: null, cost: null, confirmed: true, at: '2026-09-02T18:30:00.000Z' }],
+    })),
+    lines: ['My SHE3AR75UC is showing E24 again.'],
+    expect: (t) => t.called('repair_history') && /pump/i.test(t.allSaid()) && /(again|before|back|last time|replaced|september|2026-09-02|2nd)/i.test(t.allSaid()),
+  },
+  {
     name: 'a machine it knows nothing about',
     lines: ['My Miele G7000 dishwasher is showing F11.'],
     expect: (t) => !t.called('begin_checkout') && /(don.t|do not|no) (have|know)|can.t find|not sure|no (service )?(data|information|record)/i.test(t.allSaid()),
@@ -88,6 +99,7 @@ const SCENARIOS = [
 const numbersIn = (s) => (String(s).match(/\d+(?:[.,]\d+)?/g) || []).map((n) => n.replace(',', '.'));
 
 async function run(scenario, url) {
+  if (scenario.setup) scenario.setup(HOME);
   const alexa = new Alexa({ url });
   const turns = [];
   let toolText = '';
@@ -107,6 +119,17 @@ async function run(scenario, url) {
 
     const v = (rule, why) => violations.push({ rule, turn: turns.length + 1, said, why });
 
+    // Which check to ask is next_test's decision: a question with no next_test since the space
+    // last changed, while several causes stand, is one the model made up.
+    {
+      let open = false;
+      for (const s of tools) {
+        if (s.tool === 'hypotheses' || s.tool === 'observe') open = !/left: [^·]+$/.test(s.answer) && !/^1 possible/.test(s.answer) && !/refused|error/.test(s.answer) && !/known":false/.test(s.answer);
+        if (s.tool === 'next_test') open = false;
+        if (s.tool === 'verify_diagnosis' || s.tool === 'describe_problem') open = false;
+      }
+      if (open && /\?/.test(r.say) && !tools.some((s) => s.tool === 'next_test')) v('asks-next_test', `asked "${r.say.slice(0, 60)}" without next_test choosing it`);
+    }
     if ((r.say.match(/\?/g) || []).length > 1) v('one-thing', `asked ${(r.say.match(/\?/g) || []).length} questions: "${r.say}"`);
     for (const n of numbersIn(r.say)) {
       if (!toolText.includes(n)) v('grounded', `said ${n}, which no tool returned`);
@@ -145,7 +168,7 @@ async function run(scenario, url) {
   }
 
   const t = {
-    called: (name) => turns.some((x) => x.steps.some((s) => s.tool === name && !s.isError && !/refused|error/.test(s.answer))),
+    called: (name) => turns.some((x) => x.steps.some((s) => s.tool === name && !s.isError && !/refused|error:/.test(s.answer))),
     opened: () => turns.some((x) => x.steps.some((s) => s.tool === 'begin_checkout' && /^cart opened/.test(s.answer))),
     firstCheck: () => turns[0]?.steps.find((s) => s.tool === 'next_test' || s.tool === 'verify_diagnosis' || s.tool === 'guide')?.tool,
     lastSay: () => turns.at(-1)?.say || '',

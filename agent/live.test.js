@@ -14,7 +14,9 @@ const http = require('node:http');
 const os = require('node:os');
 const path = require('node:path');
 
-process.env.HOME_STORE = process.env.HOME_STORE || path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'live-')), 'home.json');
+// Its own household, always: another suite's recorded repair would make this conversation open
+// with "This E24 is back", which is right for that house and not the one under test here.
+process.env.HOME_STORE = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'live-')), 'home.json');
 
 const live = require('./live');
 const { Alexa } = require('./alexa');

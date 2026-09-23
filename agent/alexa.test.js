@@ -136,6 +136,7 @@ const withServer = async (fn) => {
     await withServer(async (url) => {
       const { converse } = scripted([
         [{ tool: 'hypotheses', input: { model: 'SHE3AR75UC', code: 'E24' } }],
+        [{ tool: 'next_test', input: {} }],
         [{ tool: 'speak', input: { text: 'Can you hear it?' } }],
         [{ tool: 'observe', input: { testId: 'pump-hum', value: 'silent' } }],
         [{ tool: 'verify_diagnosis', input: { causeId: 'pump' } }],
@@ -312,6 +313,42 @@ const withServer = async (fn) => {
       assert.ok(guides.every((g) => /refused|part/i.test(g.answer)), 'a pump nobody has was guided into place');
       const r2 = await a.turn('I already have one.');
       assert.doesNotMatch(r2.steps.find((s) => s.tool === 'guide').answer, /refused/, 'the person answered and was still refused');
+    });
+  });
+
+  await it('when a diagnosis starts, the household\'s record of that machine goes to the model with it', async () => {
+    await withServer(async (url) => {
+      const { receipt } = require('../mcp/tools/home');
+      receipt({ model: 'SHE3AR75UC', code: 'E24', cause: 'Failed drain pump', action: 'Replaced the drain pump', confirmed: true });
+      const { converse, shown } = scripted([
+        [{ tool: 'hypotheses', input: { model: 'SHE3AR75UC', code: 'E24' } }],
+        [{ tool: 'speak', input: { text: 'Start a drain cycle. Can you hear the pump?' } }],
+      ]);
+      const a = new Alexa({ url, converse });
+      const r = await a.turn('My SHE3AR75UC is showing E24 again.');
+      assert.ok(r.steps.some((s) => s.tool === 'repair_history'), 'the record was not read');
+      const seen = JSON.stringify(shown[1].messages.at(-1));
+      assert.match(seen, /thisHouse/);
+      assert.match(seen, /Replaced the drain pump/);
+      // Said, not merely offered: the model's line was about the pump, the client's is about the past.
+      assert.match(r.say, /^This E24 is back — last time, on \w+ \d+: replaced the drain pump\./);
+    });
+  });
+
+  await it('a question the model made up, instead of the one next_test chose, is sent back', async () => {
+    await withServer(async (url) => {
+      const { converse, shown } = scripted([
+        [{ tool: 'hypotheses', input: { model: 'SHE3AR75UC', code: 'E24' } }],
+        [{ tool: 'speak', input: { text: 'Is the filter clogged?' } }],
+        [{ tool: 'next_test', input: {} }],
+        [{ tool: 'speak', input: { text: 'Can you hear the pump humming?' } }],
+      ]);
+      const a = new Alexa({ url, converse });
+      const r = await a.turn('SHE3AR75UC, E24.');
+      // (Earlier tests in this file recorded a pump repair, so the line may open with "This E24 is back".)
+      assert.match(r.say, /Can you hear the pump humming\?$/);
+      assert.doesNotMatch(r.say, /filter clogged/);
+      assert.match(JSON.stringify(shown[2].messages.at(-1)), /Call next_test first/);
     });
   });
 

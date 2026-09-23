@@ -384,7 +384,7 @@ every caller needs.
 ### 2026-09-23 · An agent eval found five bugs the unit suite had not (our own)
 
 **Task:** check whether the agent obeys its own rules, mechanically, rather than by reading
-transcripts: `npm run agent:eval`, six conversations with the person scripted and everything else live.
+transcripts: `npm run agent:eval`, six conversations (seven since) with the person scripted and everything else live.
 **Actual:** the first versions scored 6/6 and still showed, in the transcripts, things no rule caught.
 Tightening the checks until they caught them turned up:
 
