@@ -340,8 +340,12 @@ function invalidArguments(tool, args) {
   const a = args || {};
   const missing = (schema.required || []).filter((k) => a[k] === undefined || a[k] === null || a[k] === '');
   if (missing.length) {
-    const what = missing.map((k) => `${k}${schema.properties?.[k]?.description ? ` (${schema.properties[k].description.split('.')[0]})` : ''}`);
-    return `${tool.name} needs ${what.join('; ')}.`;
+    // The schema's own description, whole — cutting at the first full stop turned "e.g." into "e".
+    const what = missing.map((k) => {
+      const d = String(schema.properties?.[k]?.description || '').trim().replace(/\.$/, '');
+      return d ? `${k} — ${d.length > 110 ? `${d.slice(0, 107)}…` : d}` : k;
+    });
+    return `${tool.name} needs ${what.join('; and ')}.`;
   }
   for (const [k, v] of Object.entries(a)) {
     const want = schema.properties?.[k]?.type;
