@@ -103,6 +103,21 @@ const withServer = async (fn) => {
     });
   });
 
+  await it('a call the server refuses as malformed comes back to the model in words, and the turn goes on', async () => {
+    await withServer(async (url) => {
+      const { converse, shown } = scripted([
+        [{ tool: 'diagnose', input: { model: 'SHE3AR75UC' } }],
+        [{ tool: 'speak', input: { text: 'What code is on the panel?' } }],
+      ]);
+      const a = new Alexa({ url, converse });
+      const r = await a.turn('My SHE3AR75UC is showing a code.');
+      assert.equal(r.say, 'What code is on the panel?');
+      const toolResult = JSON.stringify(shown[1].messages);
+      assert.match(toolResult, /diagnose needs code/, 'the model was not told what was missing');
+      assert.ok(r.steps.find((x) => x.tool === 'diagnose').isError, 'the step was not marked as an error');
+    });
+  });
+
   await it('it is given the tools its job needs — and not the shortcut past the check', async () => {
     const names = TOOLS.filter((t) => AGENT_TOOLS.has(t.name)).map((t) => t.name);
     assert.ok(names.includes('next_test') && names.includes('hypotheses'));
