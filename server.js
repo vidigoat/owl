@@ -152,14 +152,18 @@ function handler(req, res) {
       if (!origin || !originAllowed(req)) {
         return send(res, 403, JSON.stringify({ error: 'Only this site\'s own pages may talk to the live agent.' }), 'application/json');
       }
-      return readBody(req)
+      // One spoken line is a few hundred bytes; the MCP limit is sized for photographs.
+      return readBody(req, 8 * 1024)
         .then((raw) => {
           let body;
           try { body = JSON.parse(raw || '{}'); } catch { return { status: 400, body: { error: 'Malformed JSON.' } }; }
           return live.turn(body && typeof body === 'object' ? body : {});
         })
         .then((r) => send(res, r.status, JSON.stringify(r.body), 'application/json'))
-        .catch((e) => send(res, e.status || 500, JSON.stringify({ error: e.status === 413 ? 'Too long.' : 'Internal error.' }), 'application/json'));
+        .catch((e) => {
+          if (e.status === 413) res.setHeader('connection', 'close');
+          send(res, e.status || 500, JSON.stringify({ error: e.status === 413 ? 'Too long — one line at a time.' : 'Internal error.' }), 'application/json');
+        });
     }
 
     if (url.pathname === '/api/session') {

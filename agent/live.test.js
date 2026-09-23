@@ -113,6 +113,13 @@ const scripted = (rounds) => () => {
       assert.equal((await post({ origin: 'https://elsewhere.example' })).status, 403, 'another site could spend on this one');
       const bad = await fetch(`${base}/api/alexa`, { method: 'POST', headers: { 'content-type': 'application/json', origin: base }, body: '{nope' });
       assert.equal(bad.status, 400);
+      // Too long is answered in words — it used to be a reset connection, which a page reads as
+      // "the network is down" rather than "say less".
+      const big = await fetch(`${base}/api/alexa`, { method: 'POST', headers: { 'content-type': 'application/json', origin: base }, body: JSON.stringify({ said: 'x'.repeat(50_000) }) });
+      assert.equal(big.status, 413);
+      assert.match((await big.json()).error, /Too long/);
+      const mcp = await fetch(`${base}/mcp`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: 'x'.repeat(1_200_000) });
+      assert.equal(mcp.status, 413);
     } finally {
       srv.close();
     }

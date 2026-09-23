@@ -451,18 +451,28 @@ async function handle(msg) {
  */
 const MAX_BODY = 1024 * 1024;
 
-async function readBody(req) {
+async function readBody(req, max = MAX_BODY) {
   // A host may already have parsed the body. Use it rather than wait on a stream that is spent.
   if (req.body !== undefined && req.body !== null) {
-    return typeof req.body === 'string' || Buffer.isBuffer(req.body) ? String(req.body) : JSON.stringify(req.body);
+    const b = typeof req.body === 'string' || Buffer.isBuffer(req.body) ? String(req.body) : JSON.stringify(req.body);
+    if (b.length > max) throw Object.assign(new Error('Request body too large.'), { status: 413 });
+    return b;
   }
   return new Promise((resolve, reject) => {
     let body = '';
+    let over = false;
     req.on('data', (c) => {
+      if (over) return; // the rest is read and dropped, so the 413 can still be written
       body += c;
-      if (body.length > MAX_BODY) {
+      if (body.length > max) {
+        /*
+         * Refused in words, not by hanging up. This destroyed the request on the spot, which also
+         * destroyed the socket the answer had to go out on: a too-large body got a connection reset
+         * instead of the 413 the caller was about to be sent. Found fuzzing /api/alexa.
+         */
+        over = true;
+        body = '';
         reject(Object.assign(new Error('Request body too large.'), { status: 413 }));
-        req.destroy();
       }
     });
     req.on('end', () => resolve(body));
@@ -524,7 +534,7 @@ async function serveMcp(req, res) {
   try {
     body = await readBody(req);
   } catch (e) {
-    res.writeHead(e.status || 400, { 'content-type': 'application/json' });
+    res.writeHead(e.status || 400, { 'content-type': 'application/json', ...(e.status === 413 ? { connection: 'close' } : {}) });
     return res.end(JSON.stringify(failure(null, -32600, e.message)));
   }
 
