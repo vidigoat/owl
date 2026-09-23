@@ -337,8 +337,16 @@ the real usage Bedrock reports, so the ledger stays true to the bill.
 npm run eval    13 vision calls · $0.0016 · 7/9 fault codes, 1/1 model numbers
 ```
 
+Then the same ceiling had to survive being hosted, and a file cannot: every serverless instance
+has its own disk, so ten warm instances would each have believed they held the whole budget.
+`mcp/shared-budget.js` keeps it as one DynamoDB item in the account being billed, and a turn
+*reserves* its worst case against it in a single conditional write before Bedrock is called — two
+instances racing for the last cent cannot both get it — then settles to what Bedrock reports. A
+ledger it cannot reach stops the call; a deployment with keys and no shared ledger refuses to talk.
+Signed by the same 92-line SigV4, so still nothing installed.
+
 A product built around not guessing with somebody's money should be able to say what it has spent
-of its own. Now it can.
+of its own. Now it can, from every instance at once.
 
 **The review bench.** A vision model reading a fault table is right *most of the time*, which is
 exactly the standard that produces a library nobody can trust. So nothing enters this one until a
