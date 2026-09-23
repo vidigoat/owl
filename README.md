@@ -69,7 +69,9 @@ its tools live, so what it lists is what is there.
 **Talk to it at `/talk.html`** (`npm start`, with AWS credentials): say what the machine is doing,
 and the screen draws the real MCP App card for whichever tool the agent just called, with every
 call listed under its reply. Where there are no credentials — the hosted URL, today — the page says
-so rather than pretending.
+so, and plays a recording of a real session (`docs/media/talk.webm`) rather than pretending. Hosting
+it live is one confirmed step, `scripts/hosted-setup.sh`, behind a spend ceiling every instance
+shares (`mcp/shared-budget.js`): a deployment with keys and no shared ledger refuses to talk.
 
 `npm run alexa` is the same simulated Alexa+ in a terminal: **Amazon Nova 2 Lite on Bedrock**, connected to the MCP server
 over Streamable HTTP, choosing every tool itself. No SDK — the SigV4 signing is 92 lines of code in
