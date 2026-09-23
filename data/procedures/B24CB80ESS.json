@@ -1,0 +1,36 @@
+{
+  "model": "B24CB80ESS",
+  "source": "B24CB80ESS.pdf",
+  "readWith": "poppler",
+  "readBy": "manual/procedures.js",
+  "checkedBy": "script — every step re-found in poppler's own reading of the page",
+  "reviewed": false,
+  "readAt": "2026-09-23",
+  "procedures": {
+    "15:switch applianc": {
+      "reference": "Switch on the appliance, Page 15",
+      "heading": "Switching on the appliance",
+      "pages": [
+        15
+      ],
+      "steps": [
+        {
+          "n": 1,
+          "text": "Connect the appliance to the electricity supply.",
+          "see": 11,
+          "page": 15
+        },
+        {
+          "n": 2,
+          "text": "Switch off the warning tone using alarm. \"alarm\" goes out as soon as the set temperature has been reached.",
+          "page": 15
+        },
+        {
+          "n": 3,
+          "text": "Set the desired temperature.",
+          "page": 15
+        }
+      ]
+    }
+  }
+}

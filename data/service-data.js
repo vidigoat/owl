@@ -138,6 +138,43 @@ function reload() {
   return ADMITTED;
 }
 
+/*
+ * Procedures the troubleshooting tables point at, followed and checked by script.
+ *
+ * NOT the reviewed library. `scripts/read-procedures.js` read each one off the page a remedy cites
+ * and re-found every step in poppler's own reading of that page; no person has reviewed them, and
+ * every step handed out from here says so. See manual/procedures.js.
+ */
+function loadProcedures() {
+  const dir = path.join(__dirname, 'procedures');
+  const out = {};
+  let files = [];
+  try {
+    files = fs.readdirSync(dir).filter((f) => f.endsWith('.json'));
+  } catch {
+    return out;
+  }
+  for (const f of files) {
+    try {
+      const rec = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
+      if (rec && rec.model && rec.procedures) out[rec.model] = rec;
+    } catch { /* an unreadable file is no procedures, not a crash */ }
+  }
+  return out;
+}
+const PROCEDURES = loadProcedures();
+
+/** The checked procedure a remedy like "Clean the Filters, Page 35." points at, or null. */
+function procedureFor(model, remedy) {
+  const rec = PROCEDURES[resolveModel(model)];
+  if (!rec) return null;
+  const P = require('../manual/procedures');
+  const ref = P.reference(remedy);
+  if (!ref) return null;
+  const found = rec.procedures[`${ref.page}:${P.words(ref.title).join(' ')}`];
+  return found ? { ...found, reviewed: false, checkedBy: rec.checkedBy, source: rec.source } : null;
+}
+
 function loadAdmitted() {
   const dir = path.join(__dirname, 'admitted');
   const out = {};
@@ -509,7 +546,7 @@ function lookup(model, code) {
 }
 
 module.exports = {
-  MODELS, LEARNED, lookup, lookupSymptom, learn, known, machine, provenance, loadAdmitted, reload, overlap, resolveModel,
+  MODELS, LEARNED, lookup, lookupSymptom, learn, known, machine, provenance, loadAdmitted, reload, overlap, resolveModel, procedureFor,
   get ADMITTED() { return ADMITTED; },
   admittedNow,
 };

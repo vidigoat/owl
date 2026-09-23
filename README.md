@@ -36,7 +36,7 @@ npm run demo          # the whole loop in a terminal, ~20 seconds
 npm run mcp:session   # a real MCP session — the Alexa+ deliverable, proven in one command
 npm start             # http://localhost:8792 — the device experience
 npm run alexa         # talk to it — Amazon Nova on Bedrock choosing the tools, over MCP
-npm test              # 31 suites · 397 checks
+npm test              # 32 suites · 409 checks
 ```
 
 Nothing to install. The MCP server has zero dependencies and no build step.
@@ -123,6 +123,14 @@ and the 11 that were not are refused by name.
 
 Nothing reaches the library without that check, and the bench above is where a person makes the one
 a machine cannot: whether a cause belongs to the symptom it was filed under.
+
+**It follows the manual's own "see page 35".** A troubleshooting table points rather than
+explains — *"Clean the Filters, Page 35"* — and a live agent handed only that filled the gap with
+plausible steps page 35 does not contain. `npm run procedures` follows every such pointer: of
+**73** page references, **10** procedures (83 steps) come back, each step re-found word for word
+in poppler's own reading of the page, the first on the page cited, the list not carrying on past
+the last. The rest are refused by reason and stay the pointer the manual printed. These are marked
+**checked by script, not reviewed** wherever they appear, because they are.
 
 **Try it with your own machine's manual.** The bench has a drop target: give it a manufacturer's
 PDF and the fault table comes back in a few hundred milliseconds, every cause citing the page it is

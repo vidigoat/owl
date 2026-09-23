@@ -1,0 +1,84 @@
+{
+  "model": "SHE2ADF6N",
+  "source": "SHE2ADF6N.pdf",
+  "readWith": "poppler",
+  "readBy": "manual/procedures.js",
+  "checkedBy": "script — every step re-found in poppler's own reading of the page",
+  "reviewed": false,
+  "readAt": "2026-09-23",
+  "procedures": {
+    "41:clean drain pump": {
+      "reference": "Clean the Drain pump, Page 41",
+      "heading": "Clean drain pump",
+      "pages": [
+        41
+      ],
+      "steps": [
+        {
+          "n": 1,
+          "text": "Disconnect the appliance from the power supply.",
+          "page": 41
+        },
+        {
+          "n": 2,
+          "text": "Remove the upper and lower rack.",
+          "page": 41
+        },
+        {
+          "n": 3,
+          "text": "Remove the filter system.",
+          "page": 41
+        },
+        {
+          "n": 4,
+          "text": "Scoop out any water.",
+          "notes": [
+            "Use a sponge if necessary."
+          ],
+          "page": 41
+        },
+        {
+          "n": 5,
+          "text": "Pry the pump cover off using a spoon and grip it by the crosspiece.",
+          "page": 41
+        },
+        {
+          "n": 6,
+          "text": "Lift the pump cover diagonally inward and take it out.",
+          "notes": [
+            "Now you can reach the impeller with your hand."
+          ],
+          "page": 41
+        },
+        {
+          "n": 7,
+          "text": "Remove any food remnants or foreign objects in the area of the impeller.",
+          "page": 41
+        },
+        {
+          "n": 8,
+          "text": "Insert the pump cover and press down.",
+          "notes": [
+            "The pump cover clicks into position."
+          ],
+          "page": 41
+        },
+        {
+          "n": 9,
+          "text": "Install the filter system.",
+          "page": 41
+        },
+        {
+          "n": 10,
+          "text": "Insert the upper and lower rack.",
+          "page": 41
+        },
+        {
+          "n": 11,
+          "text": "Connect the appliance to the power supply.",
+          "page": 41
+        }
+      ]
+    }
+  }
+}

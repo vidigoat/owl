@@ -27,7 +27,8 @@
     "admit-verified": "node scripts/admit-verified.js",
     "pdf:compare": "node scripts/pdf-compare.js",
     "alexa": "node scripts/alexa.js",
-    "agent:eval": "node scripts/agent-eval.js"
+    "agent:eval": "node scripts/agent-eval.js",
+    "procedures": "node scripts/read-procedures.js"
   },
   "keywords": [
     "alexa-plus",

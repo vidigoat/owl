@@ -1,0 +1,68 @@
+{
+  "model": "SGE53C55UC",
+  "source": "SGE53C55UC.pdf",
+  "readWith": "poppler",
+  "readBy": "manual/procedures.js",
+  "checkedBy": "script — every step re-found in poppler's own reading of the page",
+  "reviewed": false,
+  "readAt": "2026-09-23",
+  "procedures": {
+    "35:clean filter": {
+      "reference": "Clean the Filters, Page 35",
+      "heading": "Cleaning filters",
+      "pages": [
+        35,
+        36
+      ],
+      "steps": [
+        {
+          "n": 1,
+          "text": "Check the filters for residue after each wash.",
+          "page": 35
+        },
+        {
+          "n": 2,
+          "text": "Turn the coarse filter counterclockwise and remove the filter system.",
+          "notes": [
+            "Ensure that foreign objects do not fall into the sump."
+          ],
+          "page": 35
+        },
+        {
+          "n": 3,
+          "text": "Pull down the micro filter to remove.",
+          "page": 35
+        },
+        {
+          "n": 4,
+          "text": "Press the locking catches together and lift the coarse filter out.",
+          "page": 36
+        },
+        {
+          "n": 5,
+          "text": "Clean the filter elements under running water.",
+          "notes": [
+            "Carefully remove the rim of debris between the coarse filter and the fine filter."
+          ],
+          "page": 36
+        },
+        {
+          "n": 6,
+          "text": "Put the filter system back together.",
+          "notes": [
+            "Ensure that the locking catches on the coarse filter click into position."
+          ],
+          "page": 36
+        },
+        {
+          "n": 7,
+          "text": "Insert the filter system into the appliance and turn the coarse filter clockwise.",
+          "notes": [
+            "Ensure that the arrow markings match up."
+          ],
+          "page": 36
+        }
+      ]
+    }
+  }
+}

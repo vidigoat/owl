@@ -159,10 +159,26 @@ function agentClaims() {
   ];
 }
 
+/** The procedures `npm run procedures` followed and kept, from its recording in docs/procedures.json. */
+function procedureClaims() {
+  let m;
+  try {
+    m = JSON.parse(fs.readFileSync(path.join(ROOT, 'docs', 'procedures.json'), 'utf8'));
+  } catch {
+    return [];
+  }
+  return [
+    { what: 'procedures: page references', value: String(m.references), where: /of\s+\*\*(\d+)\*\* page references/g },
+    { what: 'procedures: kept', value: String(m.checked), where: /\*\*(\d+)\*\* procedures \(\d+ steps\)/g },
+    { what: 'procedures: steps', value: String(m.steps), where: /\*\*\d+\*\* procedures \((\d+) steps\)/g },
+  ];
+}
+
 const CLAIMS = [
   { what: 'MCP tools registered', value: String(TOOLS), where: /(\d+) (?:MCP )?tools\b/g },
   ...readerClaims(),
   ...agentClaims(),
+  ...procedureClaims(),
   { what: 'questions asked, mean', value: from(questions, /([0-9.]+) questions on average/, 'mean') },
   { what: 'questions asked, worst case', value: from(questions, /worst case (\d+)/, 'worst case') },
   { what: 'mean effort', value: from(questions, /Mean effort ([0-9.]+)/, 'effort') },

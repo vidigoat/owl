@@ -1,0 +1,46 @@
+{
+  "model": "BI710C1B1B",
+  "source": "BI710C1B1B.pdf",
+  "readWith": "poppler",
+  "readBy": "manual/procedures.js",
+  "checkedBy": "script — every step re-found in poppler's own reading of the page",
+  "reviewed": false,
+  "readAt": "2026-09-23",
+  "procedures": {
+    "21:adjust front panel": {
+      "reference": "Adjust the front panel, Page 21",
+      "heading": "Adjusting the front panel",
+      "pages": [
+        21
+      ],
+      "steps": [
+        {
+          "n": 1,
+          "text": "Open the appliance.",
+          "page": 21
+        },
+        {
+          "n": 2,
+          "text": "Only loosen the screws on the side of the front panel – do not unscrew them completely.",
+          "page": 21
+        },
+        {
+          "n": 3,
+          "text": "Align the front panel upwards or downwards.",
+          "notes": [
+            "A maximum alignment of -3 to +3 mm is possible."
+          ],
+          "page": 21
+        },
+        {
+          "n": 4,
+          "text": "Tighten the screws.",
+          "notes": [
+            "If the screws do not tighten when screwed in tightly, loosen the screws fully, move the furniture panel upwards and downwards until the thread is visible."
+          ],
+          "page": 21
+        }
+      ]
+    }
+  }
+}

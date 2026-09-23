@@ -214,7 +214,8 @@
       const n = Math.min(state.step, v.steps.length - 1);
       const s = v.steps[n];
       const bars = v.steps.map((_, i) => `<i class="${i < n ? 'past' : i === n ? 'on' : ''}"></i>`).join('');
-      const page = s.source && s.source.page ? `<p class="dim">Manual, page ${esc(s.source.page)}</p>` : '';
+      const page = s.source && s.source.page
+        ? `<p class="dim">Manual, page ${esc(s.source.page)}${s.reviewed === false ? ' · checked by script, not yet reviewed' : ''}</p>` : '';
       return block(kicker(`<b>STEP ${n + 1} OF ${v.steps.length}</b>`, s.pace && !s.paceEstimated ? `<span>about ${esc(s.pace)}s</span>` : ''),
         esc(s.say),
         `${s.detail ? `<p class="dim">${esc(s.detail)}</p>` : ''}${page}<div class="steps">${bars}</div>

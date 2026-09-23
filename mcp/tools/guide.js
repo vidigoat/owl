@@ -24,7 +24,7 @@ const STEPS = {
   ],
 };
 
-const { lookup } = require('../../data/service-data');
+const { lookup, procedureFor } = require('../../data/service-data');
 const { effortOf } = require('../../manual/faultgraph');
 
 /** How long a step plausibly takes, from what it asks the person to do. */
@@ -57,8 +57,43 @@ function fromLearnedManual({ model, code, causeId } = {}) {
     return list.filter(Boolean).map((remedy, k) => ({ c, remedy, sameCause: k > 0 }));
   });
 
-  const steps = pairs.map(({ c, remedy, sameCause }, i) => {
+  /*
+   * A remedy that only points — "Clean the Filters, Page 35." — becomes the procedure on that page,
+   * when one was followed and checked (data/procedures/). Its steps are the manual's sentences,
+   * each carrying its page, and each saying plainly that a script checked it and a person has not.
+   * Where nothing checked out, the pointer is read as it is: better "see page 48" than a guess.
+   */
+  const expanded = pairs.flatMap((pair) => {
+    const proc = procedureFor(model, pair.remedy);
+    if (!proc) return [pair];
+    return proc.steps.map((st, k) => ({
+      ...pair,
+      remedy: st.text,
+      sameCause: k > 0 || pair.sameCause,
+      procedure: proc,
+      procStep: st,
+      first: k === 0,
+    }));
+  });
+
+  const steps = expanded.map(({ c, remedy, sameCause, procedure, procStep, first }, i) => {
     const effort = effortOf(remedy);
+    if (procedure) {
+      return {
+        n: i + 1,
+        say: remedy,
+        detail: [
+          first ? `From "${procedure.heading}", page ${procedure.pages[0]} of the manual.` : '',
+          ...(procStep.notes || []),
+        ].filter(Boolean).join(' ') || `Step ${procStep.n} of "${procedure.heading}".`,
+        pace: PACE[effort] ?? PACE.easy,
+        paceEstimated: true,
+        hands: 'both',
+        source: { manual: c.source?.manual || 'manual', page: procStep.page },
+        reviewed: false,
+        checkedBy: 'script',
+      };
+    }
     return {
       n: i + 1,
       say: remedy,
@@ -79,9 +114,13 @@ function fromLearnedManual({ model, code, causeId } = {}) {
     };
   });
 
+  const followed = [...new Set(expanded.filter((x) => x.procedure).map((x) => x.procedure))];
   return {
     known: true,
     generated: true,
+    ...(followed.length ? {
+      procedures: followed.map((p) => ({ reference: p.reference, heading: p.heading, pages: p.pages, reviewed: false, checkedBy: p.checkedBy })),
+    } : {}),
     steps,
     totalSeconds: steps.reduce((n, s) => n + s.pace, 0),
     handsFree: true,

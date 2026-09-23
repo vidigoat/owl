@@ -400,3 +400,24 @@ Tightening the checks until they caught them turned up:
 **Lesson worth keeping:** "the tool was called" is not an outcome. The first version of the
 no-fault-code scenario passed on exactly that while the agent told the person their problem was
 "not in our records". An eval scenario has to assert where the conversation ended up.
+
+---
+
+### 2026-09-23 · Every word was on the page, and the procedure was still wrong (our own)
+
+**Task:** follow the manuals' own cross-references — "Clean the Filters, Page 35" — so the guide
+reads the procedure printed there instead of a pointer an agent will fill with guesses.
+**Expected:** the hard part to be reading two-column pages.
+**Actual:** the first version held every step to a strict check — re-found word for word in
+poppler's own reading of the page — and 21 procedures passed it. Reading all 21 by eye found five
+wrong: "Switch on ice cube production" came back as the defrosting steps from the next page,
+"Align the appliance" as instructions for a power adapter, one filter procedure with one of its
+seven steps, and two with the next chapter's heading filed as a safety note.
+**Severity:** high had it shipped. A wrong procedure read aloud gets followed, by somebody with
+their hands inside the machine.
+**Fix:** verbatim proves the words exist, not that they belong. Three more checks: the first step
+must be on the page the manual cited, it must follow its heading in the independent reading, and
+the manual's numbering must not carry on past the last step kept. The next heading ends a
+procedure. **10** survive, and the rest stay the pointer the manual printed.
+**Lesson worth keeping:** the check was right and insufficient, and only reading the output showed
+it. Anything that will be read aloud as an instruction gets read by a person before it ships.

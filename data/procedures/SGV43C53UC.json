@@ -1,0 +1,85 @@
+{
+  "model": "SGV43C53UC",
+  "source": "SGV43C53UC.pdf",
+  "readWith": "poppler",
+  "readBy": "manual/procedures.js",
+  "checkedBy": "script — every step re-found in poppler's own reading of the page",
+  "reviewed": false,
+  "readAt": "2026-09-23",
+  "procedures": {
+    "48:clean drain pump": {
+      "reference": "Clean the Drain pump, Page 48",
+      "heading": "Clean drain pump",
+      "pages": [
+        48,
+        49
+      ],
+      "steps": [
+        {
+          "n": 1,
+          "text": "Disconnect the appliance from the power supply.",
+          "page": 48
+        },
+        {
+          "n": 2,
+          "text": "Remove the upper and lower rack.",
+          "page": 48
+        },
+        {
+          "n": 3,
+          "text": "Remove the filter system.",
+          "page": 48
+        },
+        {
+          "n": 4,
+          "text": "Scoop out any water.",
+          "notes": [
+            "Use a sponge if necessary."
+          ],
+          "page": 48
+        },
+        {
+          "n": 5,
+          "text": "Pry the pump cover off using a spoon and grip it by the crosspiece.",
+          "page": 49
+        },
+        {
+          "n": 6,
+          "text": "Lift the pump cover diagonally inward and take it out.",
+          "notes": [
+            "Now you can reach the impeller with your hand."
+          ],
+          "page": 49
+        },
+        {
+          "n": 7,
+          "text": "Remove any food remnants or foreign objects in the area of the impeller.",
+          "page": 49
+        },
+        {
+          "n": 8,
+          "text": "Insert the pump cover and press down.",
+          "notes": [
+            "The pump cover clicks into position."
+          ],
+          "page": 49
+        },
+        {
+          "n": 9,
+          "text": "Install the filter system.",
+          "page": 49
+        },
+        {
+          "n": 10,
+          "text": "Insert the upper and lower rack.",
+          "page": 49
+        },
+        {
+          "n": 11,
+          "text": "Connect the appliance to the power supply.",
+          "page": 49
+        }
+      ]
+    }
+  }
+}

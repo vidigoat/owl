@@ -366,10 +366,19 @@ it('a symptom found by description is diagnosed the way a code is — not droppe
 
   const g = guide({ model: 'SGE53C55UC', code: id, causeId: n.order[0].id });
   assert.equal(g.known, true, g.reason);
-  assert.match(g.steps[0].say, /Clean the Filters/);
-  // Two remedies under one cause are two steps, not one breath.
-  assert.doesNotMatch(g.steps[0].say, /Drain pump/);
-  assert.match(g.steps[1].say, /Drain pump/);
+  /*
+   * "Clean the Filters, Page 35." is followed to page 35: the manual's own seven steps, each with
+   * its page and each saying a script checked it and no person has. The drain pump's page did not
+   * check out (a figure breaks step 8), so that one stays the pointer the manual printed.
+   */
+  const fromPage = g.steps.filter((s) => s.reviewed === false);
+  assert.equal(fromPage.length, 7, JSON.stringify(g.steps.map((s) => s.say)));
+  assert.equal(fromPage[0].say, 'Check the filters for residue after each wash.');
+  assert.ok(fromPage.every((s) => s.checkedBy === 'script' && [35, 36].includes(s.source.page)));
+  assert.match(fromPage[1].detail, /foreign objects do not fall into the sump/);
+  assert.deepEqual(g.procedures.map((p) => p.reviewed), [false]);
+  assert.ok(g.steps.some((s) => /Clean the Drain pump Page 48/.test(s.say)), 'the unchecked pointer was dropped instead of read as printed');
+  assert.ok(!g.steps.some((s) => /Clean the Filters Page 35/.test(s.say)), 'the pointer was read out as well as the procedure it points to');
   // No manual states a duration; the pace is marked as a guess so nothing presents it as one.
   assert.ok(g.steps.every((s) => s.paceEstimated === true));
   assert.ok(!g.steps.some((s) => s.detail.includes(id)), 'a slug was put in a sentence meant to be read aloud');
