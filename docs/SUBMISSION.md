@@ -72,11 +72,14 @@ browser already has as `DecompressionStream` — and that is the next thing, not
 
 ## Open Source mini — `faultgraph`
 
-**https://github.com/vidigoat/faultgraph** · MIT · zero dependencies · 88 checks
+**https://github.com/vidigoat/faultgraph** · MIT · zero dependencies · 100 checks
 
 It reads both kinds of table: `parse()` for fault codes, and `readSymptoms()` for the symptom-keyed
 troubleshooting tables that current manuals print instead — which is the finding that reshaped this
-project, generalised into a library anybody can use.
+project, generalised into a library anybody can use. And `procedures` follows a remedy's *"see Page
+35"* to the numbered procedure printed there, held to an independent second reading of the page —
+with the three rules a real library taught it, after five wrong procedures had every word on the
+page.
 
 A new, additional open-source library, written during the window and published under MIT. It is the
 manual-reading half of this project, extracted and generalised until nothing in it knows what a
