@@ -12,6 +12,17 @@
       "memory": 512,
       "maxDuration": 30,
       "includeFiles": "{public,data/admitted}/**"
+    },
+    "api/mcp.js": {
+      "memory": 512,
+      "maxDuration": 60,
+      "includeFiles": "{public,data/admitted,manual}/**"
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/mcp",
+      "destination": "/api/mcp"
+    }
+  ]
 }

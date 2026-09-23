@@ -12,6 +12,7 @@
  */
 
 const http = require('http');
+const crypto = require('node:crypto');
 const { diagnose } = require('./tools/diagnose');
 const { verify_diagnosis } = require('./tools/verify_diagnosis');
 const { guide } = require('./tools/guide');
@@ -343,6 +344,20 @@ async function handle(msg) {
 
   const { id, method, params } = msg;
 
+  /*
+   * A notification gets no reply at all.
+   *
+   * JSON-RPC defines a message without an `id` as a notification, and a notification is never
+   * answered — the transport acknowledges it with 202 and no body. `notifications/initialized`, the
+   * second step of every MCP handshake, used to fall through to "Unsupported method" and be answered
+   * with an error carrying no id, which is a malformed response to a message that wanted none. Our
+   * own session script never noticed because it discards whatever comes back from a notification;
+   * a strict client — which is what an Alexa+ connector is — has every right not to.
+   */
+  if (!('id' in msg) || id === undefined) {
+    return null;
+  }
+
   if (method === 'initialize') {
     return result(id, {
       protocolVersion: PROTOCOL_VERSION,
@@ -399,57 +414,145 @@ async function handle(msg) {
 
 /* ── transport ───────────────────────────────────────────────────────── */
 
-const server = http.createServer((req, res) => {
-  if (req.method === 'GET' && req.url.startsWith('/mcp')) {
+/**
+ * The Streamable HTTP transport, as one function both hosts share.
+ *
+ * `npm run mcp` serves it from a local port and the deployment serves it from a route, and they are
+ * the same code for the reason every other entry point here is: a hosted copy that behaves
+ * differently from the repository is worse than no hosted copy. It used to live inside
+ * `http.createServer` and match on `req.url.startsWith('/mcp')`, which is exactly the kind of detail
+ * a host rewrites — so the deliverable of the Alexa+ track, the MCP server itself, was never
+ * reachable at the demo URL at all.
+ *
+ * What the spec (2025-11-25, Streamable HTTP) asks for, and where it is done:
+ *
+ *   POST, JSON-RPC in the body        → the response, or 202 with no body if nothing needed one
+ *   GET                               → 405: no server-initiated stream is offered
+ *   Origin on a browser request       → checked against the host, against DNS-rebinding
+ *   MCP-Session-Id on initialize      → issued, and echoed back on every later response
+ */
+const MAX_BODY = 1024 * 1024;
+
+async function readBody(req) {
+  // A host may already have parsed the body. Use it rather than wait on a stream that is spent.
+  if (req.body !== undefined && req.body !== null) {
+    return typeof req.body === 'string' || Buffer.isBuffer(req.body) ? String(req.body) : JSON.stringify(req.body);
+  }
+  return new Promise((resolve, reject) => {
+    let body = '';
+    req.on('data', (c) => {
+      body += c;
+      if (body.length > MAX_BODY) {
+        reject(Object.assign(new Error('Request body too large.'), { status: 413 }));
+        req.destroy();
+      }
+    });
+    req.on('end', () => resolve(body));
+    req.on('error', reject);
+  });
+}
+
+/**
+ * Is this a browser request from a page on another site?
+ *
+ * The spec says servers MUST validate Origin, because a local MCP server can otherwise be driven by
+ * any web page through DNS rebinding. A request with no Origin is not a browser page — it is a
+ * client like the one an Alexa+ connector runs — and is allowed. One with an Origin must match the
+ * host it was sent to, or be named in MCP_ALLOWED_ORIGINS.
+ */
+function originAllowed(req) {
+  const origin = req.headers.origin;
+  if (!origin) return true;
+  const allowed = (process.env.MCP_ALLOWED_ORIGINS || '').split(',').map((s) => s.trim()).filter(Boolean);
+  if (allowed.includes(origin)) return true;
+  try {
+    return new URL(origin).host === req.headers.host;
+  } catch {
+    return false;
+  }
+}
+
+async function serveMcp(req, res) {
+  if (!originAllowed(req)) {
+    res.writeHead(403, { 'content-type': 'application/json' });
+    return res.end(JSON.stringify(failure(null, -32600, 'Origin not allowed.')));
+  }
+
+  if (req.method === 'GET') {
     /*
-     * No server-initiated stream here, said the way the spec asks it to be said.
-     *
-     * Streamable HTTP makes the GET stream optional: a server that does not offer one **should**
-     * answer 405. This answered 200 with `text/plain`, which is worse than not offering it — a
-     * client that opened the stream got a successful response that is not a stream, and has to
-     * work out from the content type that it was refused. 405 is unambiguous, and the sentence
-     * says what to do instead.
-     *
-     * Nothing in this server pushes: every tool answers the call that asked for it. When something
-     * does — a repair step advancing on its own pace is the obvious candidate — this is where it
-     * goes, and it will be a stream rather than a note about one.
+     * No server-initiated stream here, said the way the spec asks it to be said: a server that does
+     * not offer one should answer 405. Nothing in this server pushes — every tool answers the call
+     * that asked for it. When something does, this is where the stream goes.
      */
     res.writeHead(405, { 'content-type': 'text/plain; charset=utf-8', allow: 'POST' });
     return res.end(
       `second-set-of-hands MCP server, spec ${PROTOCOL_VERSION}.\n` +
-        'No server-initiated SSE stream is offered on GET. POST JSON-RPC to /mcp.\n'
+        'No server-initiated SSE stream is offered on GET. POST JSON-RPC to this URL.\n'
     );
   }
 
-  if (req.method !== 'POST' || !req.url.startsWith('/mcp')) {
+  if (req.method === 'DELETE') {
+    // A client ending its session. Nothing is held per session, so there is nothing to tear down.
+    res.writeHead(204);
+    return res.end();
+  }
+
+  if (req.method !== 'POST') {
+    res.writeHead(405, { 'content-type': 'text/plain; charset=utf-8', allow: 'POST, GET, DELETE' });
+    return res.end('POST JSON-RPC to this URL.');
+  }
+
+  let body;
+  try {
+    body = await readBody(req);
+  } catch (e) {
+    res.writeHead(e.status || 400, { 'content-type': 'application/json' });
+    return res.end(JSON.stringify(failure(null, -32600, e.message)));
+  }
+
+  let payload;
+  try {
+    payload = JSON.parse(body);
+  } catch {
+    res.writeHead(400, { 'content-type': 'application/json' });
+    return res.end(JSON.stringify(failure(null, -32700, 'Malformed JSON.')));
+  }
+
+  const headers = { 'content-type': 'application/json' };
+  const session = req.headers['mcp-session-id'];
+  const initializing = !Array.isArray(payload) && payload?.method === 'initialize';
+  if (initializing) headers['mcp-session-id'] = crypto.randomUUID();
+  else if (session) headers['mcp-session-id'] = session;
+
+  try {
+    const response = Array.isArray(payload)
+      ? (await Promise.all(payload.map(handle))).filter((r) => r !== null)
+      : await handle(payload);
+
+    // Nothing to say — a notification, or a batch of nothing but — is 202 with no body.
+    if (response === null || (Array.isArray(response) && !response.length)) {
+      res.writeHead(202, headers);
+      return res.end();
+    }
+    res.writeHead(200, headers);
+    res.end(JSON.stringify(response));
+  } catch (e) {
+    res.writeHead(500, headers);
+    res.end(JSON.stringify(failure(payload?.id ?? null, -32603, 'Internal error.')));
+  }
+}
+
+const server = http.createServer((req, res) => {
+  const path = (req.url || '').split('?')[0];
+  if (path !== '/mcp' && path !== '/mcp/') {
     res.writeHead(404, { 'content-type': 'text/plain' });
     return res.end('POST /mcp');
   }
-
-  let body = '';
-  req.on('data', (c) => (body += c));
-  req.on('end', async () => {
-    let payload;
-    try {
-      payload = JSON.parse(body);
-    } catch {
-      res.writeHead(400, { 'content-type': 'application/json' });
-      return res.end(JSON.stringify(failure(null, -32700, 'Malformed JSON.')));
-    }
-
-    try {
-      const response = Array.isArray(payload) ? await Promise.all(payload.map(handle)) : await handle(payload);
-      res.writeHead(200, { 'content-type': 'application/json' });
-      res.end(JSON.stringify(response));
-    } catch (e) {
-      res.writeHead(500, { 'content-type': 'application/json' });
-      res.end(JSON.stringify(failure(payload?.id ?? null, -32603, e.message)));
-    }
-  });
+  return serveMcp(req, res);
 });
 
 if (require.main === module) {
   server.listen(PORT, () => console.log(`mcp  http://localhost:${PORT}/mcp  (spec ${PROTOCOL_VERSION})`));
 }
 
-module.exports = { handle, TOOLS, PROTOCOL_VERSION };
+module.exports = { handle, serveMcp, TOOLS, PROTOCOL_VERSION };
