@@ -1,0 +1,52 @@
+{
+  "manifestVersion": "1.0",
+  "storeListing": {
+    "distributionCountries": ["US"],
+    "locales": {
+      "en-US": {
+        "default": "DEFAULT",
+        "name": { "value": "Second Set of Hands" },
+        "shortDescription": "Talks you through an appliance repair from its own manual, and won't sell you a part until the diagnosis is verified.",
+        "fullDescription": "Your dishwasher shows a fault code, or leaves water in the bottom, and your hands are busy. Second Set of Hands reads that machine's own service manual — the manufacturer's words, cited to the page — and asks you the one quick check that rules out the most, such as listening for the drain pump. Then it talks you through the fix one step at a time, hands-free, at the pace you work.\n\nIt will not guess with your money. A part is offered only when one cause is left, every cheaper cause has been ruled out, and the repair is not behind mains wiring — and it reads you the full total before anything is ordered. When it does not know, it says so and names what the manual does cover.\n\nIt remembers your household's machines and past repairs, so the next conversation is shorter. No account, no tracking.",
+        "examplePhrases": [
+          "Ask Second Set of Hands why my dishwasher is showing E24",
+          "Tell Second Set of Hands my dishwasher leaves water in the bottom",
+          "Ask Second Set of Hands what needs doing in my house"
+        ],
+        "privacyAndCompliance": {
+          "privacyPolicyUrl": "https://second-set-of-hands.vercel.app/privacy.html",
+          "termsOfUseUrl": "https://second-set-of-hands.vercel.app/terms.html"
+        },
+        "mediaAssets": {
+          "icons": {
+            "light": [
+              { "size": "72x72", "uri": "https://second-set-of-hands.vercel.app/addon/icon-72x72.png" },
+              { "size": "64x64", "uri": "https://second-set-of-hands.vercel.app/addon/icon-64x64.png" },
+              { "size": "88x88", "uri": "https://second-set-of-hands.vercel.app/addon/icon-88x88.png" },
+              { "size": "126x126", "uri": "https://second-set-of-hands.vercel.app/addon/icon-126x126.png" },
+              { "size": "180x180", "uri": "https://second-set-of-hands.vercel.app/addon/icon-180x180.png" },
+              { "size": "241x241", "uri": "https://second-set-of-hands.vercel.app/addon/icon-241x241.png" }
+            ],
+            "dark": []
+          },
+          "carouselImages": [
+            { "uri": "https://second-set-of-hands.vercel.app/addon/carousel-1.png", "altText": "The one check it asks first: start a drain cycle and listen for the pump humming.", "size": "600x900" },
+            { "uri": "https://second-set-of-hands.vercel.app/addon/carousel-2.png", "altText": "An itemised drain pump order, $41.78 in total, next to the $179 service call it replaces, charged only after you say yes.", "size": "600x900" },
+            { "uri": "https://second-set-of-hands.vercel.app/addon/carousel-3.png", "altText": "A refusal: the fault sits behind mains wiring, so no part is sold and a technician is recommended.", "size": "600x900" }
+          ],
+          "bannerImages": []
+        }
+      }
+    }
+  },
+  "integrations": [
+    {
+      "type": "MCP",
+      "config": {
+        "endpoints": {
+          "default": { "type": "HTTPS", "uri": "https://second-set-of-hands.vercel.app/mcp" }
+        }
+      }
+    }
+  ]
+}

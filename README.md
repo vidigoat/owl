@@ -36,7 +36,7 @@ npm run demo          # the whole loop in a terminal, ~20 seconds
 npm run mcp:session   # a real MCP session — the Alexa+ deliverable, proven in one command
 npm start             # http://localhost:8792 — the device experience
 npm run alexa         # talk to it — Amazon Nova on Bedrock choosing the tools, over MCP
-npm test              # 33 suites · 415 checks
+npm test              # 34 suites · 421 checks
 ```
 
 Nothing to install. The MCP server has zero dependencies and no build step.
@@ -99,6 +99,10 @@ whatever the tool returned: the causes still standing, the one check, the verdic
 time, the itemised cart. It computes nothing and loads nothing from anywhere, so it needs no CSP
 allowance. `/app-host.html` runs it in a reference host we wrote — the real resource, real tool
 calls — and `mcp/apps/card.test.js` runs its script as a host would, fed real tool results.
+
+**Ready to onboard.** `addon.json` is the package the Alexa AI CLI uploads — the deployed `/mcp`
+endpoint, the store listing, icons and carousel images rendered from the real card, and the privacy
+and terms pages — checked against every limit Amazon publishes by `addon.test.js`.
 
 ## What it refuses to do
 

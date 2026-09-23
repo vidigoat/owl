@@ -37,9 +37,26 @@
   button.primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
   button:focus-visible, select:focus-visible { outline: 2px solid #b8761f; outline-offset: 2px; }
   @media (max-width: 760px) { .stage { grid-template-columns: 1fr; } }
+  /* ?bare — the card alone, filling the window: how the store's carousel images are taken. */
+  body.bare .wrap { max-width: none; padding: 0; }
+  body.bare h1, body.bare .note, body.bare .side { display: none; }
+  body.bare .stage { display: block; margin: 0; }
+  body.bare .device { border-radius: 0; padding: 0; box-shadow: none; }
+  body.bare .device iframe { border-radius: 0; }
+  body.bare { background: #14161a; }
+  .caption { display: none; }
+  body.bare .caption { display: block; position: fixed; left: 0; right: 0; bottom: 0; padding: 0 28px 40px; color: #f2f0ea; }
+  body.bare .caption svg { width: 44px; height: 44px; display: block; margin-bottom: 18px; }
+  body.bare .caption p { margin: 0; font-size: 30px; line-height: 1.18; letter-spacing: -0.02em; font-weight: 650; max-width: 18ch; }
+  body.bare .caption small { display: block; margin-top: 12px; color: #98a0aa; font-size: 15px; }
 </style>
 </head>
 <body>
+<div class="caption" id="caption" aria-hidden="true">
+  <svg viewBox="0 0 240 240"><circle cx="98" cy="120" r="50" fill="none" stroke="#f2f0ea" stroke-width="16"/><circle cx="142" cy="120" r="50" fill="none" stroke="#e0a34a" stroke-width="16"/></svg>
+  <p id="caption-text"></p>
+  <small>Second Set of Hands · the card, as Alexa+ would draw it</small>
+</div>
 <div class="wrap">
   <h1>The repair card, in an MCP Apps host</h1>
   <p class="note">A host we wrote, not Alexa+ — but the card is the real <code>ui://</code> resource from this server's <code>/mcp</code>, and every step below is a real tool call.</p>
@@ -109,7 +126,7 @@
     } else if (m.method === 'ui/notifications/initialized') {
       markReady();
     } else if (m.method === 'ui/notifications/size-changed') {
-      frame.style.height = `${Math.max(320, Math.min(900, m.params.height))}px`;
+      frame.style.height = `${Math.max(document.body.classList.contains('bare') ? 200 : 320, Math.min(900, m.params.height))}px`;
     } else if (m.method === 'tools/call' && m.id != null) {
       try { toView({ id: m.id, result: await rpc('tools/call', m.params) }); }
       catch (err) { toView({ id: m.id, error: { code: -32603, message: err.message } }); }
@@ -177,6 +194,10 @@
     $('next').disabled = at >= steps.length;
   }
 
+  if (new URLSearchParams(location.search).has('bare')) {
+    document.body.classList.add('bare');
+    $('caption-text').textContent = new URLSearchParams(location.search).get('caption') || '';
+  }
   $('next').addEventListener('click', next);
   $('restart').addEventListener('click', restart);
   $('scenario').addEventListener('change', restart);
