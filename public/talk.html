@@ -26,6 +26,8 @@
     :root:not([data-theme="light"]) { --paper: #17181b; --paper-2: #1f2024; --ink: #ecebe6; --ink-2: #c4c1b8; --faint: #8f8c84; --rule: #34363b; }
   }
   * { box-sizing: border-box; }
+  /* `hidden` has to win over the flex and grid rules below, or hidden controls stay on screen. */
+  [hidden] { display: none !important; }
   body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.45 var(--sans); }
   .wrap { max-width: 1180px; margin: 0 auto; padding: 28px 16px 56px; }
   header h1 { margin: 0; font-size: 24px; letter-spacing: -0.015em; }
@@ -266,6 +268,7 @@
         $('aloud').hidden = true;
         document.querySelector('.show').innerHTML = '<video src="/media/talk.webm" autoplay muted loop playsinline controls aria-label="A recorded session: the agent asks the pump check, offers the part, reads the total, orders, and recognises the fault coming back" style="display:block;width:100%;border-radius:14px;background:#14161a"></video>';
         document.querySelector('.stage').style.gridTemplateColumns = '1fr';
+        document.querySelector('header p').textContent = 'A simulated Alexa+: Amazon Nova on Bedrock, choosing this project\'s MCP tools itself. Below is a recording of a real session — the person\'s lines are typed on screen; everything Alexa+ says, every tool it calls, and the card are what it actually did.';
       }
     } catch { /* offered anyway; a turn will say what went wrong */ }
   })();
