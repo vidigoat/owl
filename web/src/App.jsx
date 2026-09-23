@@ -95,8 +95,9 @@ export default function App() {
               */}
               <p className="invite">
                 <a href="/app-host.html">See the card an Echo Show would draw</a> — the real MCP App,
-                fed by real tool calls. And with AWS credentials, <a href="/talk.html">talk to the
-                agent</a>: Amazon Nova choosing the tools itself, the card following along.
+                fed by real tool calls. And <a href="/talk.html">watch the agent talk a repair
+                through</a>: Amazon Nova choosing the tools itself, the card following along — a
+                recorded session here, live wherever there are AWS credentials.
               </p>
             </section>
           </div>
