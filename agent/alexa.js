@@ -237,6 +237,26 @@ class Alexa {
   }
 
   /*
+   * A repair that needs a part is not guided before anybody has asked about the part.
+   *
+   * A live run heard "it's completely silent", upheld the pump, and in the same breath began "switch
+   * the machine off at the wall… lift off the white pump cover" — walking somebody through fitting a
+   * pump they do not have. So the first guide call for a cause that needs a part is answered here:
+   * say what the part is, and ask whether to order it or whether they already have one. The call
+   * after that goes through — by then the person has been asked, and whatever they said is theirs.
+   */
+  partFirst(args) {
+    const m = this.memory;
+    if (!m.partNeeded || m.ordered) return null;
+    if (args.causeId && m.partNeeded !== true && m.partNeeded !== args.causeId) return null;
+    // Asked on an EARLIER turn: the person has had the chance to answer. Refused-then-retried in
+    // the same turn is the model answering for them.
+    if (m.partAskedTurn && this.turnNo > m.partAskedTurn) return null;
+    m.partAskedTurn = m.partAskedTurn || this.turnNo;
+    return 'This repair needs a part they may not have yet. Before guiding, tell them what the part is and ask whether to order it — or whether they already have one. Nothing was guided.';
+  }
+
+  /*
    * Money moves only on a yes to a total they HEARD.
    *
    * A live eval run quoted the bare part price off find_part — "£38.42", in a currency no tool had
@@ -287,6 +307,8 @@ class Alexa {
       if (value.code) m.code = value.code;
     }
     if (name === 'confirm_fix' && value.confirmed === true) m.fixSeen = true;
+    if (name === 'verify_diagnosis' && value.upheld && value.maySpend) m.partNeeded = value.cause?.id || args.causeId || true;
+    if (name === 'confirm_checkout' && value.ok) m.ordered = true;
     if (name === 'begin_checkout' && value.ok && value.sessionId) {
       m.checkout = { sessionId: value.sessionId, total: value.totals?.total, turn: this.turnNo, heard: false };
     }
@@ -386,7 +408,10 @@ class Alexa {
          */
         const blind = PHOTO_TOOLS.has(name) && !args.imageBase64 && !args.imagePath;
         const unheard = name === 'confirm_checkout' ? this.unheardCheckout(args) : null;
-        if (unheard) {
+        const partFirst = name === 'guide' ? this.partFirst(args) : null;
+        if (partFirst) {
+          value = { known: false, refused: true, reason: partFirst, answeredBy: 'client' };
+        } else if (unheard) {
           value = { ok: false, refused: true, reason: unheard, answeredBy: 'client' };
         } else if (blind) {
           value = {
@@ -401,7 +426,8 @@ class Alexa {
           isError = true;
         }
         this.absorb(name, args, value);
-        steps.push({ tool: name, asked: redact(input), filled, answer: summarise(name, value), isError });
+        // `result` is for a screen to draw from (the MCP App card); the model is shown forModel().
+        steps.push({ tool: name, asked: redact(input), filled, answer: summarise(name, value), isError, result: value });
         results.push({
           toolResult: {
             toolUseId,

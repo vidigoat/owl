@@ -36,7 +36,7 @@ npm run demo          # the whole loop in a terminal, ~20 seconds
 npm run mcp:session   # a real MCP session — the Alexa+ deliverable, proven in one command
 npm start             # http://localhost:8792 — the device experience
 npm run alexa         # talk to it — Amazon Nova on Bedrock choosing the tools, over MCP
-npm test              # 32 suites · 409 checks
+npm test              # 33 suites · 415 checks
 ```
 
 Nothing to install. The MCP server has zero dependencies and no build step.
@@ -61,7 +61,12 @@ are flashing"* is what a person says; `E:22` is not.
 
 ## An agent drives it, not a script
 
-`npm run alexa` is a simulated Alexa+: **Amazon Nova 2 Lite on Bedrock**, connected to the MCP server
+**Talk to it at `/talk.html`** (`npm start`, with AWS credentials): say what the machine is doing,
+and the screen draws the real MCP App card for whichever tool the agent just called, with every
+call listed under its reply. Where there are no credentials — the hosted URL, today — the page says
+so rather than pretending.
+
+`npm run alexa` is the same simulated Alexa+ in a terminal: **Amazon Nova 2 Lite on Bedrock**, connected to the MCP server
 over Streamable HTTP, choosing every tool itself. No SDK — the SigV4 signing is 92 lines of code in
 `agent/sigv4.js`, checked against AWS's own test vectors. A whole repair costs about two cents.
 
@@ -78,9 +83,10 @@ fix, and told somebody a repair needed "no tools" when no tool had said so. Each
 | charged a total nobody had said | an order goes through only on a later turn, after that total was spoken |
 | asked for a photo of a panel whose code it had just been told | the tools that look are not offered until there is a photo |
 | a 73-word turn to somebody with both hands in a machine | a line over forty words is sent back once |
+| started walking somebody through fitting a pump they did not have | a repair that needs a part is not guided until the part was asked about, on an earlier turn |
 
 `npm run agent:eval` checks that against six conversations — the person scripted, everything else
-live — and eight rules on every turn. Last run: **6 of 6** agent scenarios, **0** rule violations,
+live — and nine rules on every turn. Last run: **6 of 6** agent scenarios, **0** rule violations,
 recorded in `docs/agent-eval.json`. It also found two bugs the unit suite had not: a model said as
 "Bosch SGE53C55UC" answered as unknown, and a symptom matched perfectly with nowhere to go next.
 

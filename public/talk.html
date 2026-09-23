@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talk to it</title>
+<link rel="icon" href="data:,">
+<!--
+  The simulated Alexa+, live: you say what the machine is doing, Amazon Nova on Bedrock chooses
+  the MCP tools itself, and the screen draws the real MCP App card for the tool it just called.
+
+  Nothing on this page is scripted. The person is you; the words, the tool calls and the card are
+  what the agent actually did on this turn — the calls are listed under each reply so that can be
+  checked. It is a simulation of Alexa+, and says so, because entrants cannot run an add-on against
+  Alexa+ itself.
+-->
+<style>
+  :root {
+    --paper: #e8e5dc; --paper-2: #e1ddd2; --ink: #191714; --ink-2: #4a453d; --faint: #7d766a; --rule: #c9c4b6;
+    --amber: #b8761f; --stop: #a8321f; --done: #3f6b4e;
+    --screen: #14161a; --screen-ink: #f2f0ea; --screen-dim: #98a0aa;
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --paper: #17181b; --paper-2: #1f2024; --ink: #ecebe6; --ink-2: #c4c1b8; --faint: #8f8c84; --rule: #34363b; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.45 var(--sans); }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 28px 16px 56px; }
+  header h1 { margin: 0; font-size: 24px; letter-spacing: -0.015em; }
+  header p { margin: 6px 0 0; color: var(--faint); max-width: 72ch; }
+  .stage { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 28px; margin-top: 24px; align-items: start; }
+
+  .show { background: #0b0c0e; border-radius: 26px; padding: 16px; box-shadow: 0 34px 70px -34px rgba(0,0,0,.65); position: sticky; top: 16px; }
+  .show iframe { display: block; width: 100%; height: 360px; border: 0; border-radius: 14px; background: var(--screen); transition: height 220ms ease; }
+  .voice { margin-top: 12px; padding: 16px 18px 18px; border-radius: 14px; background: var(--screen); color: var(--screen-ink); min-height: 96px; }
+  .voice small { display: flex; align-items: center; gap: 8px; font: 12px var(--mono); color: var(--screen-dim); }
+  .ring { width: 10px; height: 10px; border-radius: 50%; background: #3a8fd6; opacity: .35; }
+  .thinking .ring { opacity: 1; animation: pulse 1.1s ease-in-out infinite; }
+  @keyframes pulse { 50% { transform: scale(1.6); opacity: .4; } }
+  @media (prefers-reduced-motion: reduce) { .thinking .ring { animation: none; } }
+  .voice p { margin: 8px 0 0; font-size: 22px; line-height: 1.3; letter-spacing: -0.01em; }
+
+  .talk { display: grid; gap: 14px; }
+  .log { display: grid; gap: 14px; max-height: 58vh; overflow: auto; padding-right: 4px; }
+  .turn .you { font-weight: 600; }
+  .turn .you::before { content: 'You  '; color: var(--faint); font-weight: 400; font: 12px var(--mono); }
+  .turn .her { margin-top: 4px; }
+  .turn .her::before { content: 'Alexa+  '; color: var(--amber); font: 12px var(--mono); }
+  .calls { margin: 6px 0 0; padding: 0; list-style: none; font: 12px/1.5 var(--mono); color: var(--faint); }
+  .calls li { overflow-wrap: anywhere; }
+  .calls b { color: var(--ink-2); font-weight: 500; }
+  .calls .err { color: var(--stop); }
+  .form { display: flex; gap: 8px; }
+  .form input { flex: 1; font: inherit; color: var(--ink); background: transparent; border: 1px solid var(--rule); border-radius: 10px; padding: 12px 14px; min-height: 48px; }
+  button { font: inherit; color: var(--ink); background: transparent; border: 1px solid var(--rule); border-radius: 10px; padding: 10px 16px; min-height: 48px; cursor: pointer; }
+  button.primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  button[aria-pressed="true"] { border-color: var(--amber); color: var(--amber); }
+  button:disabled { opacity: .45; cursor: default; }
+  :is(button, input):focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+  .starts { display: flex; flex-wrap: wrap; gap: 8px; }
+  .starts button { min-height: 40px; padding: 8px 12px; font-size: 14px; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .meta { font: 12px var(--mono); color: var(--faint); }
+  .closed { padding: 16px; border: 1px solid var(--rule); border-radius: 12px; }
+  @media (max-width: 860px) { .stage { grid-template-columns: 1fr; } .show { position: static; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Talk to it</h1>
+    <p>A simulated Alexa+: Amazon Nova on Bedrock, choosing this project's MCP tools itself. Say what your machine is doing. What it says, every tool it calls, and the card on the screen are this turn's — nothing here is scripted.</p>
+  </header>
+
+  <div class="stage">
+    <div class="show">
+      <iframe id="card" title="What the screen shows" sandbox="allow-scripts"></iframe>
+      <div class="voice" id="voice" aria-live="polite">
+        <small><span class="ring" aria-hidden="true"></span><span id="state">Alexa+ · ready</span></small>
+        <p id="said">Tell me what the machine is doing.</p>
+      </div>
+    </div>
+
+    <div class="talk">
+      <div id="closed" class="closed" hidden></div>
+      <div class="starts" id="starts" aria-label="Ways to start">
+        <button data-say="My Bosch dishwasher is showing E24. The model is SHE3AR75UC.">E24 on a SHE3AR75UC</button>
+        <button data-say="My Bosch SGE53C55UC leaves water in the bottom at the end of the program.">Water left in an SGE53C55UC</button>
+        <button data-say="My SHE3AR75UC dishwasher says E09.">E09</button>
+      </div>
+      <div class="log" id="log" aria-label="Conversation"></div>
+      <form class="form" id="form" autocomplete="off">
+        <input id="input" name="said" placeholder="Say what it is doing…" aria-label="What you say" maxlength="500">
+        <button type="button" id="mic" aria-pressed="false" hidden>Hold to talk</button>
+        <button class="primary" id="send">Say it</button>
+      </form>
+      <div class="row">
+        <button type="button" id="aloud" aria-pressed="false">Read replies aloud</button>
+        <button type="button" id="restart">New conversation</button>
+        <span class="meta" id="meta"></span>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(() => {
+  'use strict';
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  let conversation = null;
+  let aloud = false;
+  let busy = false;
+
+  // ── the MCP App card, hosted the way a screen-bearing Alexa+ device would ─
+  const frame = $('card');
+  let html = null;
+  let markReady = () => {};
+  let currentTool = null;
+  const toView = (msg) => frame.contentWindow && frame.contentWindow.postMessage({ jsonrpc: '2.0', ...msg }, '*');
+  window.addEventListener('message', (e) => {
+    if (e.source !== frame.contentWindow) return;
+    const m = e.data;
+    if (!m || m.jsonrpc !== '2.0') return;
+    if (m.method === 'ui/initialize') {
+      const theme = 'dark'; // an Echo Show's screen, whatever the room
+      toView({ id: m.id, result: { protocolVersion: '2026-01-26', hostInfo: { name: 'talk.html', version: '1' }, hostCapabilities: {},
+        hostContext: { theme, displayMode: 'inline', platform: 'web', toolInfo: currentTool ? { tool: { name: currentTool } } : undefined } } });
+    } else if (m.method === 'ui/notifications/initialized') {
+      markReady();
+    } else if (m.method === 'ui/notifications/size-changed') {
+      frame.style.height = `${Math.max(300, Math.min(720, m.params.height))}px`;
+    } else if (m.id != null) {
+      // The card is drawn from results; it has no business calling tools on this page's behalf.
+      toView({ id: m.id, error: { code: -32601, message: 'Not offered by this host.' } });
+    }
+  });
+  async function draw(card) {
+    if (!html) return;
+    currentTool = card.tool;
+    const ready = new Promise((r) => { markReady = r; });
+    frame.srcdoc = html;
+    await ready;
+    toView({ method: 'ui/notifications/tool-result', params: card.result });
+  }
+  async function loadCard() {
+    const post = async (body, session) => {
+      const res = await fetch('/mcp', { method: 'POST', headers: { 'content-type': 'application/json', accept: 'application/json, text/event-stream', ...(session ? { 'mcp-session-id': session } : {}) }, body: JSON.stringify(body) });
+      return { res, json: res.status === 202 ? null : await res.json() };
+    };
+    const init = await post({ jsonrpc: '2.0', id: 1, method: 'initialize', params: { protocolVersion: '2025-11-25', capabilities: {}, clientInfo: { name: 'talk', version: '1' } } });
+    const sid = init.res.headers.get('mcp-session-id');
+    const read = await post({ jsonrpc: '2.0', id: 2, method: 'resources/read', params: { uri: 'ui://second-set-of-hands/card' } }, sid);
+    html = read.json.result.contents[0].text;
+    frame.srcdoc = html; // the card's own idle state until there is something to draw
+  }
+
+  // ── talking ────────────────────────────────────────────────────────────
+  function speak(line) {
+    if (!aloud || typeof speechSynthesis === 'undefined' || !line) return;
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(line);
+    u.rate = 0.97;
+    speechSynthesis.speak(u);
+  }
+
+  function addTurn(said, r) {
+    const el = document.createElement('div');
+    el.className = 'turn';
+    const calls = (r.steps || []).map((s) => {
+      const filled = s.filled && s.filled.length ? ` <span title="supplied by the client">+ ${esc(s.filled.join(', '))}</span>` : '';
+      return `<li class="${s.isError ? 'err' : ''}"><b>${esc(s.tool)}</b> → ${esc(String(s.answer).slice(0, 140))}${filled}</li>`;
+    }).join('');
+    el.innerHTML = `<div class="you">${esc(said)}</div><div class="her">${esc(r.say || r.error || '')}</div>${calls ? `<ul class="calls">${calls}</ul>` : ''}`;
+    $('log').appendChild(el);
+    $('log').scrollTop = $('log').scrollHeight;
+  }
+
+  async function say(text) {
+    const said = String(text || '').trim();
+    if (!said || busy) return;
+    busy = true;
+    $('send').disabled = true;
+    $('starts').hidden = true;
+    $('voice').classList.add('thinking');
+    $('state').textContent = 'Alexa+ · choosing tools…';
+    try {
+      const res = await fetch('/api/alexa', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conversation, said }) });
+      const r = await res.json();
+      if (r.conversation) conversation = r.conversation;
+      addTurn(said, r);
+      $('said').textContent = r.say || r.error || '—';
+      if (r.card) draw(r.card);
+      if (typeof r.total === 'number') $('meta').textContent = `${r.model} · turn ${r.turn} · this turn $${r.cost.toFixed(4)} · conversation $${r.total.toFixed(4)}`;
+      speak(r.say);
+    } catch (e) {
+      $('said').textContent = 'That did not reach the agent. Nothing was spent.';
+    } finally {
+      busy = false;
+      $('send').disabled = false;
+      $('voice').classList.remove('thinking');
+      $('state').textContent = 'Alexa+ · ready';
+      $('input').value = '';
+      $('input').focus();
+    }
+  }
+
+  $('form').addEventListener('submit', (e) => { e.preventDefault(); say($('input').value); });
+  $('starts').addEventListener('click', (e) => { const b = e.target.closest('button[data-say]'); if (b) say(b.dataset.say); });
+  $('aloud').addEventListener('click', () => {
+    aloud = !aloud;
+    $('aloud').setAttribute('aria-pressed', String(aloud));
+    if (!aloud && typeof speechSynthesis !== 'undefined') speechSynthesis.cancel();
+  });
+  $('restart').addEventListener('click', () => {
+    conversation = null;
+    $('log').innerHTML = '';
+    $('starts').hidden = false;
+    $('said').textContent = 'Tell me what the machine is doing.';
+    $('meta').textContent = '';
+    if (html) frame.srcdoc = html;
+  });
+
+  // Push to talk, where the browser can hear. Never listening unless the button is held.
+  const Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (Rec) {
+    const mic = $('mic');
+    mic.hidden = false;
+    let rec = null;
+    const start = () => {
+      if (busy || rec) return;
+      rec = new Rec();
+      rec.lang = 'en-US';
+      rec.interimResults = true;
+      rec.onresult = (e) => { $('input').value = Array.from(e.results).map((x) => x[0].transcript).join(' '); };
+      rec.onend = () => { mic.setAttribute('aria-pressed', 'false'); rec = null; if ($('input').value.trim()) say($('input').value); };
+      mic.setAttribute('aria-pressed', 'true');
+      rec.start();
+    };
+    const stop = () => rec && rec.stop();
+    mic.addEventListener('pointerdown', start);
+    mic.addEventListener('pointerup', stop);
+    mic.addEventListener('pointerleave', stop);
+    mic.addEventListener('keydown', (e) => { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) { e.preventDefault(); start(); } });
+    mic.addEventListener('keyup', (e) => { if (e.key === ' ' || e.key === 'Enter') stop(); });
+  }
+
+  (async () => {
+    try { await loadCard(); } catch { /* the words still work without the screen */ }
+    try {
+      const a = await (await fetch('/api/alexa')).json();
+      if (!a.available) {
+        $('closed').hidden = false;
+        $('closed').textContent = a.reason;
+        $('form').hidden = true;
+        $('starts').hidden = true;
+        $('said').textContent = 'Not here — this deployment has no AWS credentials. Run it where they are: npm start.';
+      }
+    } catch { /* offered anyway; a turn will say what went wrong */ }
+  })();
+})();
+</script>
+</body>
+</html>

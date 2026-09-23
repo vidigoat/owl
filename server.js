@@ -18,7 +18,7 @@ const pdf = require('./manual/pdf');
 const { see } = require('./mcp/tools/see');
 const { read_manual } = require('./mcp/tools/read_manual');
 const review = require('./manual/review');
-const { serveMcp } = require('./mcp/server');
+const { serveMcp, readBody, originAllowed } = require('./mcp/server');
 const { confirm_fix } = require('./mcp/tools/confirm_fix');
 const { beginCheckout, confirmCheckout } = require('./mcp/tools/order_part');
 const { remember: rememberAppliance, receipt: writeReceipt, due: dueNow } = require('./mcp/tools/home');
@@ -135,6 +135,32 @@ function handler(req, res) {
      * already reaches is the only version that does not depend on how the host bundles the app.
      */
     if (url.pathname === '/mcp' || url.pathname === '/api/mcp') return serveMcp(req, res);
+
+    /*
+     * The live agent — Nova on Bedrock choosing the MCP tools — for the page at /talk.html.
+     *
+     * GET says whether it can run here, so the page never offers a conversation it cannot have.
+     * POST is one turn. It spends money, so it takes requests only from this site's own pages (a
+     * page elsewhere cannot make a visitor's browser run up the bill) and every call is metered
+     * against the budget ceiling before it is made — see agent/live.js.
+     */
+    if (url.pathname === '/api/alexa') {
+      const live = require('./agent/live');
+      if (req.method === 'GET') return send(res, 200, JSON.stringify(live.available()), 'application/json');
+      if (req.method !== 'POST') return send(res, 405, JSON.stringify({ error: 'GET or POST' }), 'application/json');
+      const origin = req.headers.origin;
+      if (!origin || !originAllowed(req)) {
+        return send(res, 403, JSON.stringify({ error: 'Only this site\'s own pages may talk to the live agent.' }), 'application/json');
+      }
+      return readBody(req)
+        .then((raw) => {
+          let body;
+          try { body = JSON.parse(raw || '{}'); } catch { return { status: 400, body: { error: 'Malformed JSON.' } }; }
+          return live.turn(body && typeof body === 'object' ? body : {});
+        })
+        .then((r) => send(res, r.status, JSON.stringify(r.body), 'application/json'))
+        .catch((e) => send(res, e.status || 500, JSON.stringify({ error: e.status === 413 ? 'Too long.' : 'Internal error.' }), 'application/json'));
+    }
 
     if (url.pathname === '/api/session') {
       return send(res, 200, JSON.stringify({

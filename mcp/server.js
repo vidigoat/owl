@@ -581,4 +581,4 @@ if (require.main === module) {
   server.listen(PORT, () => console.log(`mcp  http://localhost:${PORT}/mcp  (spec ${PROTOCOL_VERSION})`));
 }
 
-module.exports = { handle, serveMcp, TOOLS, PROTOCOL_VERSION };
+module.exports = { handle, serveMcp, readBody, originAllowed, TOOLS, PROTOCOL_VERSION };

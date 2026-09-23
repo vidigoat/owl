@@ -92,4 +92,25 @@ class McpClient {
   }
 }
 
-module.exports = { McpClient, PROTOCOL };
+/**
+ * The same protocol, without the network: a `fetch` that hands each JSON-RPC message to this
+ * project's own MCP handler in-process.
+ *
+ * For the live agent behind /api/alexa. The alternative was the server making HTTP calls to its
+ * own public URL — a round trip across the internet to reach code in the same process, and on a
+ * host with more than one instance, possibly a different process. Everything above the transport
+ * is identical: the handshake, the session id, tools/list, every tools/call, spoken as JSON-RPC.
+ */
+function inProcess() {
+  const { handle } = require('../mcp/server');
+  let session = null;
+  return async (_url, init) => {
+    const msg = JSON.parse(init.body);
+    const out = await handle(msg);
+    if (msg.method === 'initialize') session = require('node:crypto').randomUUID();
+    const headers = new Headers({ 'content-type': 'application/json', ...(session ? { 'mcp-session-id': session } : {}) });
+    return out === null ? new Response(null, { status: 202, headers }) : new Response(JSON.stringify(out), { status: 200, headers });
+  };
+}
+
+module.exports = { McpClient, PROTOCOL, inProcess };

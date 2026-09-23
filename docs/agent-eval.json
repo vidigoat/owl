@@ -5,7 +5,7 @@
   "passed": 6,
   "turns": 13,
   "violations": 0,
-  "cost": 0.0712,
+  "cost": 0.0731,
   "byScenario": [
     {
       "name": "the pump, found by listening, then bought",

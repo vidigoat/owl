@@ -294,5 +294,26 @@ const withServer = async (fn) => {
     });
   });
 
+  await it('a repair that needs a part is not guided until somebody has asked about the part', async () => {
+    await withServer(async (url) => {
+      const { converse } = scripted([
+        [{ tool: 'verify_diagnosis', input: { model: 'SHE3AR75UC', code: 'E24', causeId: 'pump', ruledOut: ['filter', 'hose'] } }],
+        [{ tool: 'guide', input: { model: 'SHE3AR75UC', code: 'E24', causeId: 'pump' } }],
+        // Refused, and tried again at once: still refused — the person has not been asked yet.
+        [{ tool: 'guide', input: { model: 'SHE3AR75UC', code: 'E24', causeId: 'pump' } }],
+        [{ tool: 'speak', input: { text: 'It is the drain pump. Shall I order one, or do you have it?' } }],
+        [{ tool: 'guide', input: { model: 'SHE3AR75UC', code: 'E24', causeId: 'pump' } }],
+        [{ tool: 'speak', input: { text: 'Switch it off at the wall first.' } }],
+      ]);
+      const a = new Alexa({ url, converse });
+      const r1 = await a.turn('It is silent.');
+      const guides = r1.steps.filter((s) => s.tool === 'guide');
+      assert.equal(guides.length, 2);
+      assert.ok(guides.every((g) => /refused|part/i.test(g.answer)), 'a pump nobody has was guided into place');
+      const r2 = await a.turn('I already have one.');
+      assert.doesNotMatch(r2.steps.find((s) => s.tool === 'guide').answer, /refused/, 'the person answered and was still refused');
+    });
+  });
+
   console.log(`\n${passed} passed`);
 })();
