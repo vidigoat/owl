@@ -426,3 +426,24 @@ the manual's numbering must not carry on past the last step kept. The next headi
 procedure. **10** survive, and the rest stay the pointer the manual printed.
 **Lesson worth keeping:** the check was right and insufficient, and only reading the output showed
 it. Anything that will be read aloud as an instruction gets read by a person before it ships.
+
+---
+
+### 2026-09-23 · The spend ceiling we wrote does not survive being hosted
+
+**Task:** let a judge talk to the live agent on the demo URL instead of watching a recording.
+**Expected:** the 20 September ceiling (`mcp/budget.js`) to carry over.
+**Actual:** it is a file, and a serverless host gives every instance its own disk. Ten warm
+instances would each have believed they held the whole budget — a ceiling that multiplies with
+traffic. Bedrock still has no cap of its own to fall back on, so the hosted agent stayed off.
+**Severity:** high — the only thing between a public URL and the owner's production bill.
+**Fix:** `mcp/shared-budget.js`. The ledger is one DynamoDB item in the account being billed; a turn
+reserves its worst case in a single `UpdateItem` whose `ConditionExpression` refuses it past the
+ceiling, then settles to what Bedrock reports. The check and the add are one write, so two
+instances racing for the last cent cannot both win (tested); an unreachable ledger stops the call;
+a deployment with keys and no ledger refuses to talk. The first live probe of it also showed that
+DynamoDB's `AccessDenied` names the account and IAM user — which would have gone straight to a
+visitor's screen in the budget-stop message. The page now gets words; the log gets AWS's.
+**Suggestion:** the same one as on the 20th, sharper for it: a hard per-principal cap on Bedrock
+would have made this whole file unnecessary. Every team that hosts a Bedrock demo on serverless
+has to rediscover that a local spend guard is not a global one.
