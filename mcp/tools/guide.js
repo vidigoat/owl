@@ -47,16 +47,33 @@ function fromLearnedManual({ model, code, causeId } = {}) {
   // Everything the manual lists for this fault, with the chosen cause's remedy first.
   const ordered = [cause, ...found.causes.filter((c) => c.id !== causeId && c.remedy)];
 
-  const steps = ordered.map((c, i) => {
-    const effort = effortOf(c.remedy);
+  /*
+   * One remedy per step. A troubleshooting table can list several remedies under one cause —
+   * "Clean the Filters, Page 35." then "Clean the Drain pump, Page 48." — and joined into one line
+   * they became one step with two jobs in it, read out in one breath.
+   */
+  const pairs = ordered.flatMap((c) => {
+    const list = Array.isArray(c.remedies) && c.remedies.length ? c.remedies : [c.remedy];
+    return list.filter(Boolean).map((remedy, k) => ({ c, remedy, sameCause: k > 0 }));
+  });
+
+  const steps = pairs.map(({ c, remedy, sameCause }, i) => {
+    const effort = effortOf(remedy);
     return {
       n: i + 1,
-      say: c.remedy,
+      say: remedy,
       // A symptom's key is a slug of its sentence, and a slug read aloud is noise.
       detail: i === 0
         ? `This is what the manual lists first for ${found.keyedBy === 'symptom' ? 'this problem' : code}.`
-        : 'If that did not do it, this is next.',
+        : sameCause ? 'The manual lists this next for the same cause.' : 'If that did not do it, this is next.',
+      /*
+       * Pacing, not a promise. The manual states no durations; this is guessed from the kind of
+       * work the remedy describes, so the device can wait a sensible while before prompting. It is
+       * marked as such, and nothing reads it out: a live run told somebody cleaning the filters
+       * "usually takes about 25 seconds", which no manual said.
+       */
       pace: PACE[effort] ?? PACE.easy,
+      paceEstimated: true,
       hands: 'both',
       source: c.source,
     };

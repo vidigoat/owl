@@ -36,7 +36,7 @@ npm run demo          # the whole loop in a terminal, ~20 seconds
 npm run mcp:session   # a real MCP session — the Alexa+ deliverable, proven in one command
 npm start             # http://localhost:8792 — the device experience
 npm run alexa         # talk to it — Amazon Nova on Bedrock choosing the tools, over MCP
-npm test              # 30 suites · 386 checks
+npm test              # 31 suites · 397 checks
 ```
 
 Nothing to install. The MCP server has zero dependencies and no build step.
@@ -83,6 +83,16 @@ fix, and told somebody a repair needed "no tools" when no tool had said so. Each
 live — and eight rules on every turn. Last run: **6 of 6** agent scenarios, **0** rule violations,
 recorded in `docs/agent-eval.json`. It also found two bugs the unit suite had not: a model said as
 "Bosch SGE53C55UC" answered as unknown, and a symptom matched perfectly with nowhere to go next.
+
+## What the screen shows — an MCP App
+
+On an Echo Show, Alexa+ draws a tool's UI through the MCP Apps extension. Eight of the tools name
+`ui://second-set-of-hands/card` in `_meta.ui.resourceUri`; the card is one self-contained page
+served as `text/html;profile=mcp-app` that speaks the host protocol over postMessage and draws
+whatever the tool returned: the causes still standing, the one check, the verdict, one step at a
+time, the itemised cart. It computes nothing and loads nothing from anywhere, so it needs no CSP
+allowance. `/app-host.html` runs it in a reference host we wrote — the real resource, real tool
+calls — and `mcp/apps/card.test.js` runs its script as a host would, fed real tool results.
 
 ## What it refuses to do
 

@@ -21,7 +21,7 @@ const { see } = require('./tools/see');
 const { read_error } = require('./tools/read_error');
 const { identify_appliance } = require('./tools/identify_appliance');
 const { read_manual } = require('./tools/read_manual');
-const { RESOURCES, spaceCard, stepCard, refusalCard, checkoutCard } = require('./cards');
+const { RESOURCES, APP_URI, APP_TOOLS, spaceCard, stepCard, refusalCard, checkoutCard } = require('./cards');
 const { confirm_fix } = require('./tools/confirm_fix');
 const { beginCheckout, confirmCheckout } = require('./tools/order_part');
 const { receipt, due, history } = require('./tools/home');
@@ -378,7 +378,7 @@ async function handle(msg) {
   // because nothing appears only on a screen — see mcp/cards.js for why that rule is not negotiable.
   if (method === 'resources/list') {
     return result(id, {
-      resources: RESOURCES.map(({ uri, name, description, mimeType }) => ({ uri, name, description, mimeType })),
+      resources: RESOURCES.map(({ uri, name, description, mimeType, _meta }) => ({ uri, name, description, mimeType, ...(_meta ? { _meta } : {}) })),
     });
   }
 
@@ -389,13 +389,19 @@ async function handle(msg) {
       return failure(id, -32602, `No such resource: ${uri}`);
     }
     return result(id, {
-      contents: [{ uri: found.uri, mimeType: found.mimeType, text: found.read() }],
+      contents: [{ uri: found.uri, mimeType: found.mimeType, text: found.read(), ...(found._meta ? { _meta: found._meta } : {}) }],
     });
   }
 
   if (method === 'tools/list') {
     return result(id, {
-      tools: TOOLS.map(({ name, description, inputSchema }) => ({ name, description, inputSchema })),
+      // A tool the card can draw names it, so a host with a screen renders the card with the result.
+      tools: TOOLS.map(({ name, description, inputSchema }) => ({
+        name,
+        description,
+        inputSchema,
+        ...(APP_TOOLS.has(name) ? { _meta: { ui: { resourceUri: APP_URI } } } : {}),
+      })),
     });
   }
 

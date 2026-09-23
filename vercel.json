@@ -6,12 +6,12 @@
     "api/index.js": {
       "memory": 512,
       "maxDuration": 30,
-      "includeFiles": "{public,data/admitted,manual}/**"
+      "includeFiles": "{public,data/admitted,manual,mcp/apps}/**"
     },
     "api/[...path].js": {
       "memory": 512,
       "maxDuration": 30,
-      "includeFiles": "{public,data/admitted,manual}/**"
+      "includeFiles": "{public,data/admitted,manual,mcp/apps}/**"
     }
   }
 }

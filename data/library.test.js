@@ -367,6 +367,11 @@ it('a symptom found by description is diagnosed the way a code is — not droppe
   const g = guide({ model: 'SGE53C55UC', code: id, causeId: n.order[0].id });
   assert.equal(g.known, true, g.reason);
   assert.match(g.steps[0].say, /Clean the Filters/);
+  // Two remedies under one cause are two steps, not one breath.
+  assert.doesNotMatch(g.steps[0].say, /Drain pump/);
+  assert.match(g.steps[1].say, /Drain pump/);
+  // No manual states a duration; the pace is marked as a guess so nothing presents it as one.
+  assert.ok(g.steps.every((s) => s.paceEstimated === true));
   assert.ok(!g.steps.some((s) => s.detail.includes(id)), 'a slug was put in a sentence meant to be read aloud');
 });
 

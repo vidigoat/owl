@@ -90,7 +90,32 @@ function checkoutCard({ part, price, tax, total, alternative }) {
  * The static resources a host can list. Live cards are returned alongside tool results; these are
  * the ones that make sense to fetch on their own.
  */
+/*
+ * The MCP App — the card an Echo Show actually draws.
+ *
+ * Alexa+ renders tool UIs through the MCP Apps extension: a tool names a `ui://` resource in
+ * `_meta.ui.resourceUri`, the resource is HTML served as `text/html;profile=mcp-app`, and the host
+ * runs it in a sandbox and hands it the tool's result over postMessage. The Markdown cards below
+ * are for hosts that only read text; this is for the one the person is looking at.
+ */
+const APP_URI = 'ui://second-set-of-hands/card';
+const APP_MIME = 'text/html;profile=mcp-app';
+const APP_FILE = require('node:path').join(__dirname, 'apps', 'card.html');
+/** The tools whose results the card knows how to draw. */
+const APP_TOOLS = new Set([
+  'hypotheses', 'observe', 'next_test', 'verify_diagnosis', 'guide', 'begin_checkout', 'confirm_checkout', 'describe_problem',
+]);
+
 const RESOURCES = [
+  {
+    uri: APP_URI,
+    name: 'Repair card',
+    description: 'What the screen shows while it talks: the causes still standing, the one check, the verdict, the step you are on, the itemised cart.',
+    mimeType: APP_MIME,
+    // Self-contained: no fonts, scripts or images from anywhere, so no CSP domains are requested.
+    _meta: { ui: { prefersBorder: false } },
+    read: () => require('node:fs').readFileSync(APP_FILE, 'utf8'),
+  },
   {
     uri: 'card://second-set-of-hands/how-it-decides',
     name: 'How it decides what to ask',
@@ -131,4 +156,4 @@ const RESOURCES = [
   },
 ];
 
-module.exports = { RESOURCES, spaceCard, stepCard, refusalCard, checkoutCard, bar };
+module.exports = { RESOURCES, APP_URI, APP_MIME, APP_TOOLS, spaceCard, stepCard, refusalCard, checkoutCard, bar };

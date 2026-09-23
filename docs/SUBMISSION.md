@@ -192,7 +192,10 @@ the counter.
 
 **Household memory** so the second conversation about a machine is short.
 
-**Rich cards as MCP resources**, under one rule that is easy to break while making a screen nicer:
+**An MCP App for the screen**: eight tools name `ui://second-set-of-hands/card` in
+`_meta.ui.resourceUri`, the way Alexa+ draws a tool's UI on an Echo Show — one self-contained page,
+`text/html;profile=mcp-app`, that draws what the tool returned and computes nothing. Plus Markdown
+**cards as MCP resources** for hosts that only read text. Both under one rule that is easy to break while making a screen nicer:
 **nothing appears only on a card.** The person is kneeling in front of a machine with their hands
 inside it and their eyes nowhere near a display, so anything they must know has to survive being
 *heard*.

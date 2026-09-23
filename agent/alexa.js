@@ -441,6 +441,11 @@ class Alexa {
  */
 function forModel(name, value) {
   let v = value;
+  // An estimated pace is for the device to wait by, not a fact to say — see guide.js.
+  if (name === 'guide' && v && Array.isArray(v.steps) && v.steps.some((s) => s.paceEstimated)) {
+    const { totalSeconds, ...rest } = v;
+    v = { ...rest, steps: v.steps.map(({ pace, paceEstimated, ...s }) => (paceEstimated ? s : { pace, ...s })) };
+  }
   if (name === 'hypotheses' && v && typeof v === 'object' && Array.isArray(v.tests)) {
     const { tests, ...rest } = v;
     v = { ...rest, checks: `${tests.length} available — call next_test to choose which one to ask` };

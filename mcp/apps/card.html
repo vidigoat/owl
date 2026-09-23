@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Second Set of Hands</title>
+<!--
+  The MCP App: what an Echo Show draws while Alexa+ talks a repair through.
+
+  One view for every diagnosis tool. It renders whatever the tool returned — the causes still
+  standing, the one check worth asking, the gate's verdict, the step you are on, the itemised cart —
+  from the tool result the host hands it, and it computes nothing: no probability, no eligibility,
+  no price. Every figure on it is a field of a tool result.
+
+  Self-contained on purpose. It loads no fonts, scripts or images from anywhere, so it needs no CSP
+  allowance and renders the same in a sandbox with the network switched off.
+
+  Nothing here is the only place a fact appears. The person is kneeling with their hands inside a
+  machine; anything they must know is said aloud. The card is for what eyes do better: a bar, a
+  struck-through cause, an itemised total.
+-->
+<style>
+  :root {
+    --bg: #14161a; --bg-2: #1c1f25; --ink: #f2f0ea; --dim: #98a0aa; --rule: #2b2f37;
+    --amber: #e0a34a; --stop: #e0674f; --done: #6fae84;
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  :root[data-theme="light"] {
+    --bg: #f1efe8; --bg-2: #e8e5dc; --ink: #191714; --dim: #6b655a; --rule: #d6d2c5;
+    --amber: #9a6114; --stop: #a8321f; --done: #3f6b4e;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); }
+  body { padding: 22px 24px 24px; font-size: 17px; line-height: 1.4; -webkit-font-smoothing: antialiased; }
+  .kicker { font-family: var(--mono); font-size: 13px; color: var(--dim); display: flex; gap: 10px; flex-wrap: wrap; }
+  .kicker b { color: var(--amber); font-weight: 500; }
+  h1 { font-size: 30px; line-height: 1.12; letter-spacing: -0.02em; margin: 10px 0 0; font-weight: 650; }
+  h1.huge { font-size: 38px; }
+  p { margin: 12px 0 0; }
+  .dim { color: var(--dim); }
+  .causes { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 12px; }
+  .causes li { display: grid; grid-template-columns: 1fr auto; gap: 4px 14px; align-items: baseline; }
+  .causes .bar { grid-column: 1 / -1; height: 8px; border-radius: 4px; background: var(--rule); overflow: hidden; }
+  .causes .bar i { display: block; height: 100%; background: var(--amber); border-radius: 4px; transition: width 360ms ease; }
+  .causes .pct { font-family: var(--mono); font-size: 15px; }
+  .causes li.out { color: var(--dim); }
+  .causes li.out .name { text-decoration: line-through; text-decoration-thickness: 2px; }
+  .causes li.out .bar i { width: 0 !important; }
+  .verdict { margin-top: 2px; font-family: var(--mono); font-size: 14px; letter-spacing: 0.02em; }
+  .verdict.ok { color: var(--done); } .verdict.no { color: var(--stop); }
+  blockquote { margin: 16px 0 0; padding: 12px 14px; border-left: 3px solid var(--amber); background: var(--bg-2); border-radius: 0 8px 8px 0; font-size: 15px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 18px; font-size: 17px; }
+  td { padding: 9px 0; border-bottom: 1px solid var(--rule); }
+  td:last-child { text-align: right; font-family: var(--mono); }
+  tr.total td { border-bottom: 0; font-weight: 650; font-size: 22px; padding-top: 14px; }
+  .versus { margin-top: 14px; font-size: 15px; color: var(--dim); }
+  .versus b { color: var(--done); font-weight: 600; }
+  .say { margin-top: 20px; padding: 12px 14px; border: 1px solid var(--rule); border-radius: 10px; font-size: 16px; }
+  .say b { color: var(--amber); font-weight: 600; }
+  .steps { display: flex; gap: 6px; margin-top: 18px; }
+  .steps i { flex: 1; height: 5px; border-radius: 3px; background: var(--rule); }
+  .steps i.on { background: var(--amber); } .steps i.past { background: var(--dim); }
+  .nav { display: flex; gap: 10px; margin-top: 20px; }
+  button { font: inherit; font-size: 16px; color: var(--ink); background: var(--bg-2); border: 1px solid var(--rule); border-radius: 10px; padding: 11px 18px; min-height: 48px; cursor: pointer; }
+  button:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+  button[disabled] { opacity: 0.4; cursor: default; }
+  .matches { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 14px; }
+  .matches li { padding: 12px 14px; background: var(--bg-2); border-radius: 10px; }
+  .matches .cite { font-family: var(--mono); font-size: 13px; color: var(--dim); margin-top: 6px; }
+  .waiting h1 { color: var(--dim); }
+  @media (prefers-reduced-motion: reduce) { .causes .bar i { transition: none; } }
+</style>
+</head>
+<body>
+<main id="card" aria-live="polite"><div class="waiting"><div class="kicker">Second Set of Hands</div><h1>Listening.</h1></div></main>
+<script>
+(() => {
+  'use strict';
+  const PROTOCOL = '2026-01-26';
+  const root = document.getElementById('card');
+  const state = { tool: null, input: {}, step: 0 };
+
+  // ── the host connection: JSON-RPC 2.0 over postMessage ─────────────────────
+  let nextId = 1;
+  const pending = new Map();
+  const send = (msg) => window.parent.postMessage({ jsonrpc: '2.0', ...msg }, '*');
+  const request = (method, params) => new Promise((resolve, reject) => {
+    const id = nextId++;
+    pending.set(id, { resolve, reject });
+    send({ id, method, params });
+  });
+  const notify = (method, params) => send({ method, params });
+
+  window.addEventListener('message', (e) => {
+    if (e.source !== window.parent) return; // only the host that embedded us
+    const m = e.data;
+    if (!m || m.jsonrpc !== '2.0') return;
+    if (m.id != null && pending.has(m.id) && !m.method) {
+      const p = pending.get(m.id); pending.delete(m.id);
+      m.error ? p.reject(m.error) : p.resolve(m.result);
+      return;
+    }
+    const params = m.params || {};
+    if (m.method === 'ui/notifications/tool-input') { state.input = params.arguments || {}; waiting(); }
+    else if (m.method === 'ui/notifications/tool-result') { show(params); }
+    else if (m.method === 'ui/notifications/tool-cancelled') { root.innerHTML = block('', 'Stopped.', ''); }
+    else if (m.method === 'ui/notifications/host-context-changed') { applyContext(params); }
+    else if (m.method === 'ui/resource-teardown' && m.id != null) { send({ id: m.id, result: {} }); }
+    else if (m.method === 'ping' && m.id != null) { send({ id: m.id, result: {} }); }
+  });
+
+  function applyContext(ctx) {
+    if (ctx && ctx.theme) document.documentElement.dataset.theme = ctx.theme;
+    const tool = ctx && ctx.toolInfo && ctx.toolInfo.tool && ctx.toolInfo.tool.name;
+    if (tool) state.tool = tool;
+  }
+
+  // Report our height so a host with flexible sizing can fit the frame to the card.
+  new ResizeObserver(() => {
+    const r = document.documentElement.getBoundingClientRect();
+    notify('ui/notifications/size-changed', { width: Math.ceil(r.width), height: Math.ceil(r.height) });
+  }).observe(document.documentElement);
+
+  request('ui/initialize', {
+    appCapabilities: { availableDisplayModes: ['inline'] },
+    clientInfo: { name: 'second-set-of-hands-card', version: '1.0.0' },
+    protocolVersion: PROTOCOL,
+  }).then((r) => {
+    applyContext((r && r.hostContext) || {});
+    notify('ui/notifications/initialized', {});
+  }).catch(() => { /* a host that will not talk still gets a static card */ });
+
+  // ── rendering: fields of a tool result, never a figure of our own ─────────
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const pct = (p) => `${Math.round(p * 100)}%`;
+  const usd = (n) => (typeof n === 'number' ? `$${Number.isInteger(n) ? n : n.toFixed(2)}` : '—');
+  const kicker = (...bits) => `<div class="kicker">${bits.filter(Boolean).join('')}</div>`;
+  const block = (k, title, body, cls = '') => `${k}<h1 class="${cls}">${title}</h1>${body || ''}`;
+  const where = () => kicker(state.input.model ? `<span>${esc(state.input.model)}</span>` : '', state.input.code && !/-/.test(state.input.code) ? `<b>${esc(state.input.code)}</b>` : '');
+
+  function waiting() {
+    root.innerHTML = `<div class="waiting">${where()}<h1>Checking the manual…</h1></div>`;
+  }
+
+  function show(result) {
+    const v = (result && result.structuredContent) || parseText(result);
+    if (!v || typeof v !== 'object') return;
+    const tool = state.tool || guessTool(v);
+    state.step = 0;
+    const render = VIEWS[tool] || VIEWS.fallback;
+    root.innerHTML = render(v);
+    wire(v);
+  }
+
+  function parseText(result) {
+    const t = result && result.content && result.content.find((c) => c.type === 'text');
+    try { return t ? JSON.parse(t.text) : null; } catch { return null; }
+  }
+
+  // A host that does not say which tool this is: tell by the shape of what came back.
+  function guessTool(v) {
+    if (v.lineItems) return 'begin_checkout';
+    if (v.order) return 'confirm_checkout';
+    if (Array.isArray(v.steps)) return 'guide';
+    if ('upheld' in v || 'abstain' in v && 'escalate' in v) return 'verify_diagnosis';
+    if ('test' in v || v.noChecks) return 'next_test';
+    if (Array.isArray(v.matches) || Array.isArray(v.available)) return 'describe_problem';
+    if (Array.isArray(v.space)) return 'hypotheses';
+    return 'fallback';
+  }
+
+  function causes(space = [], eliminated = []) {
+    // A lone survivor is "the only one left", never "100%": the share is a renormalised prior, and
+    // the gate — not this bar — decides whether it is enough to say so.
+    const share = (c) => (space.length === 1 ? 'the only one left' : pct(c.prior));
+    const rows = space.map((c) => `<li><span class="name">${esc(c.label)}</span><span class="pct">${share(c)}</span><span class="bar"><i style="width:${space.length === 1 ? '100%' : pct(c.prior)}"></i></span></li>`);
+    const out = eliminated.map((c) => `<li class="out"><span class="name">${esc(c.label || c)}</span><span class="pct">ruled out</span><span class="bar"><i></i></span></li>`);
+    return `<ul class="causes">${rows.concat(out).join('')}</ul>`;
+  }
+
+  function refusal(reason, extra = '') {
+    return block(kicker('<b>NOT UPHELD</b>', '<span>no part sold</span>'), 'I’m not going to guess with your money.', `<p>${esc(reason)}</p>${extra}`);
+  }
+
+  const VIEWS = {
+    hypotheses(v) {
+      if (!v.known) return block(where(), 'Nothing on record for this.', `<p class="dim">${esc(v.reason)}</p>`);
+      const bits = typeof v.bits === 'number' ? `<p class="dim">${v.bits > 0.01 ? `${v.bits.toFixed(2)} bits still unknown` : 'Nothing left unknown.'}</p>` : '';
+      return block(where(), esc(v.meaning || 'What it could be'), causes(v.space, v.eliminated) + bits);
+    },
+    observe(v) {
+      if (v.error) return block(where(), 'That answer did not fit.', `<p class="dim">${esc(v.error)}</p>`);
+      if (v.contradiction) return block(where(), 'Something else is going on.', `<p>${esc(v.reason)}</p>`);
+      return block(where(), v.space.length === 1 ? 'One cause left' : 'Narrowing it down', causes(v.space, v.eliminated));
+    },
+    next_test(v) {
+      if (v.test) return block(kicker('<b>ONE CHECK</b>', v.effort ? `<span>${esc(v.effort)}</span>` : ''), esc(v.test.question), `<p class="dim">${esc(v.why)}</p>`, 'huge');
+      if (v.noChecks) {
+        const list = (v.order || []).map((c, i) => `<li><span class="name">${i + 1}. ${esc(c.label)}</span><span></span></li>`).join('');
+        return block(where(), 'Try these in the manual’s order', `<ul class="causes">${list}</ul><p class="dim">${esc(v.why)}</p>`);
+      }
+      if (v.settled) return refusal(v.why || v.reason);
+      if (v.done) return block(where(), 'One cause left.', '<p class="dim">Checking whether that is enough to say so.</p>');
+      return block(where(), 'Nothing left to ask.', `<p class="dim">${esc(v.reason || v.error)}</p>`);
+    },
+    verify_diagnosis(v) {
+      if (!v.upheld) return refusal(v.reason);
+      const money = v.maySpend ? 'A part may be ordered for this.' : v.costKnown ? 'This fix costs nothing.' : 'No price is known for this fix.';
+      return block(kicker('<b class="verdict ok">UPHELD</b>'), esc(v.cause && v.cause.label), `${v.citation ? `<blockquote>${esc(v.citation)}</blockquote>` : ''}<p class="dim">${money}</p>`);
+    },
+    guide(v) {
+      if (!v.known || !v.steps.length) return block(where(), 'No procedure on record.', `<p class="dim">${esc(v.reason)}</p>`);
+      const n = Math.min(state.step, v.steps.length - 1);
+      const s = v.steps[n];
+      const bars = v.steps.map((_, i) => `<i class="${i < n ? 'past' : i === n ? 'on' : ''}"></i>`).join('');
+      const page = s.source && s.source.page ? `<p class="dim">Manual, page ${esc(s.source.page)}</p>` : '';
+      return block(kicker(`<b>STEP ${n + 1} OF ${v.steps.length}</b>`, s.pace && !s.paceEstimated ? `<span>about ${esc(s.pace)}s</span>` : ''),
+        esc(s.say),
+        `${s.detail ? `<p class="dim">${esc(s.detail)}</p>` : ''}${page}<div class="steps">${bars}</div>
+         <div class="nav"><button data-go="-1" ${n === 0 ? 'disabled' : ''}>Back</button><button data-go="1" ${n === v.steps.length - 1 ? 'disabled' : ''}>Next step</button></div>`, 'huge');
+    },
+    begin_checkout(v) {
+      if (!v.ok) return refusal(v.reason, v.alternative ? `<p class="versus">A service call for this is about ${usd(v.alternative.price)}.</p>` : '');
+      const t = v.totals || {};
+      const items = (v.lineItems || []).map((l) => `<tr><td>${esc(l.title)}</td><td>${usd(l.price)}</td></tr>`).join('');
+      return block(kicker('<b>THE PART</b>', `<span>fits ${esc((v.lineItems[0] || {}).fitsModel)}</span>`), 'Ready to order',
+        `<table>${items}<tr><td>Tax</td><td>${usd(t.tax)}</td></tr><tr><td>Shipping</td><td>${t.shipping === 0 ? 'Free' : usd(t.shipping)}</td></tr><tr class="total"><td>Total</td><td>${usd(t.total)}</td></tr></table>
+         ${v.insteadOf ? `<p class="versus">Instead of a ${esc(v.insteadOf.label.toLowerCase())} at about ${usd(v.insteadOf.price)}, ${esc(String(v.insteadOf.eta))} — <b>${usd(v.saving)} less</b>. Arrives ${esc(String(v.eta).toLowerCase())}.</p>` : ''}
+         <div class="say">Nothing is charged until you say <b>“yes, order it.”</b></div>`);
+    },
+    confirm_checkout(v) {
+      if (!v.ok) return block(where(), 'Not ordered.', `<p class="dim">${esc(v.reason)}</p>`);
+      const o = v.order;
+      return block(kicker('<b class="verdict ok">ORDERED</b>', `<span>${esc(o.orderId)}</span>`), esc(o.part), `<p>Arriving ${esc(String(o.eta).toLowerCase())}. ${usd(o.total)} charged.</p>`);
+    },
+    describe_problem(v) {
+      if (!v.known) {
+        const list = (v.available || []).slice(0, 6).map((a) => `<li>${esc(a)}</li>`).join('');
+        return block(where(), 'Not in this manual.', `<p class="dim">${esc(v.reason)}</p>${list ? `<ul class="matches">${list}</ul>` : ''}`);
+      }
+      const list = v.matches.map((m) => {
+        const c = (m.causes || [])[0];
+        const page = c && c.source && c.source.page ? ` · page ${esc(c.source.page)}` : '';
+        return `<li><strong>${esc(m.symptom)}</strong>${c ? `<div class="dim">Most often: ${esc(c.label)}</div>` : ''}<div class="cite">${esc(c && c.source ? c.source.manual : v.brand)}${page}</div></li>`;
+      }).join('');
+      return block(kicker(`<span>${esc(v.brand || '')} ${esc(v.kind || '')}</span>`), v.matches.length === 1 ? 'In the manufacturer’s words' : 'Which of these is it?', `<ul class="matches">${list}</ul>`);
+    },
+    fallback(v) {
+      return block(where(), esc(v.say || v.reason || 'Done.'), '');
+    },
+  };
+
+  // Local only: moving through the steps changes what is shown, and calls nothing.
+  function wire(v) {
+    root.querySelectorAll('button[data-go]').forEach((b) => b.addEventListener('click', () => {
+      state.step = Math.max(0, state.step + Number(b.dataset.go));
+      root.innerHTML = VIEWS.guide(v);
+      wire(v);
+    }));
+  }
+})();
+</script>
+</body>
+</html>

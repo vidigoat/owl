@@ -110,7 +110,8 @@ it('nothing appears only on a card', () => {
 
 it('every listed resource can actually be read, and says something', () => {
   assert.ok(RESOURCES.length > 0);
-  RESOURCES.forEach((r) => {
+  // The Markdown cards; the MCP App (ui://) is a page, not a card, and has its own tests.
+  RESOURCES.filter((r) => !r.uri.startsWith('ui://')).forEach((r) => {
     assert.match(r.uri, /^card:\/\//);
     assert.equal(r.mimeType, 'text/markdown');
     assert.ok(r.name && r.description, `${r.uri} is listed without saying what it is`);
