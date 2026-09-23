@@ -86,6 +86,18 @@ export default function App() {
               >
                 <Device session={ses} />
               </motion.div>
+
+              {/*
+                Where the screen above comes from on an Echo Show: the MCP App the tools name. The
+                host page is ours, the card is the real ui:// resource and every step is a real
+                tool call — so it works on this URL. Talking to the agent needs AWS credentials,
+                which this deployment does not have, and the link says so rather than finding out.
+              */}
+              <p className="invite">
+                <a href="/app-host.html">See the card an Echo Show would draw</a> — the real MCP App,
+                fed by real tool calls. And with AWS credentials, <a href="/talk.html">talk to the
+                agent</a>: Amazon Nova choosing the tools itself, the card following along.
+              </p>
             </section>
           </div>
         )}
