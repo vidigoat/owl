@@ -465,7 +465,7 @@ done had claimed a save it never made.
 **Fix:** every caller-chosen key is read as a table's own entry, and built-in names can never be
 stored as a machine (a test sweeps all nineteen tools with them). A write now says whether it is
 durable; where it is not, the household is held for the conversation and every answer says so —
-"kept for this conversation only" — and the agent says "noted for this conversation", never
+"not kept … it may already be gone by the next question" — and the agent says "not kept", never
 "recorded".
 **Lesson worth keeping:** a local test suite runs on a writable disk. The deployed function does not,
 and the only way to learn what it says is to ask it.

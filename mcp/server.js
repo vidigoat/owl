@@ -30,7 +30,7 @@ const { HouseholdStore } = require('./household-store');
 /*
  * The household across sessions, on a deployment that has somewhere to keep it: the same table as
  * the spend ledger (HANDS_LEDGER_TABLE), a second item. Without it the house is a file locally and
- * a conversation's worth of memory on the hosted server — and every answer says which.
+ * not kept at all on the hosted server — one process's memory at most — and every answer says which.
  */
 const HOUSEHOLD_TOOLS = new Set(['remember_repair', 'repair_history', 'whats_due']);
 function householdStore(env = process.env) {

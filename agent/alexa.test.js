@@ -118,8 +118,8 @@ const withServer = async (fn) => {
     });
   });
 
-  await it('the prompt tells it not to call a repair saved when it was only kept for this conversation', () => {
-    assert.match(SYSTEM, /kept for this conversation only, say exactly that/);
+  await it('the prompt tells it not to call a repair saved when it was not kept', () => {
+    assert.match(SYSTEM, /says it was not kept, say exactly that/);
   });
 
   await it('it is given the tools its job needs — and not the shortcut past the check', async () => {

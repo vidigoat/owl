@@ -78,7 +78,7 @@ async function hydrate(store) {
   }
 }
 
-/** Save what a tool wrote. False means it is held for this conversation only. */
+/** Save what a tool wrote. False means it is not kept — held in this process's memory at most. */
 async function persist() {
   const store = shared;
   shared = null;
@@ -92,7 +92,7 @@ async function persist() {
   }
 }
 
-const SESSION_ONLY = 'Kept for this conversation only: this host has nowhere durable to keep a household\'s history, so it goes when the conversation does.';
+const SESSION_ONLY = 'Not kept: this host has nowhere durable to keep a household\'s history. It is held in this server\'s memory only, so it may already be gone by the next question.';
 
 /** Record an appliance the household owns. */
 /*
@@ -214,7 +214,7 @@ function receipt({ model, code, cause, action, part, cost, confirmed, at } = {})
   // Has this exact fault happened before on this machine? That changes the advice next time.
   const repeats = state.receipts.filter((r) => r.model === model && r.code === code).length;
   return {
-    // Saved means it will be there next time. Held for this conversation only is said as that.
+    // Saved means it will be there next time. Anything less is said as not kept.
     saved: kept === 'durable',
     ...(kept === 'durable' ? {} : { kept, keptFor: SESSION_ONLY }),
     entry,

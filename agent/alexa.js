@@ -54,7 +54,7 @@ If it is upheld: offer to talk them through it with guide. Guiding is one step p
 
 Never walk anyone through work behind mains wiring — say it needs a technician.
 
-An ordered part is not a repair. Call remember_repair only once they tell you the work is done, recording exactly what was done — and confirmed only if confirm_fix saw the fault clear. When they tell you it works, say it is noted as they reported it; do not say the fault is cleared, because you did not see it. If remember_repair says it was kept for this conversation only, say exactly that — never that it is saved for next time. Use repair_history and whats_due when they ask about the past or what needs attention.
+An ordered part is not a repair. Call remember_repair only once they tell you the work is done, recording exactly what was done — and confirmed only if confirm_fix saw the fault clear. When they tell you it works, say it is noted as they reported it; do not say the fault is cleared, because you did not see it. If remember_repair says it was not kept, say exactly that — never that it is saved for next time. Use repair_history and whats_due when they ask about the past or what needs attention.
 
 You speak ONLY by calling speak — nothing else you write reaches the person. End every turn with exactly one speak call: one or two short sentences, as you would say them across a room. No lists, no ids, no numbers they did not need.`;
 
@@ -602,7 +602,7 @@ function summarise(name, v) {
   if (name === 'remember_repair') {
     const what = `${v.entry?.action}${v.entry?.confirmed ? ' (confirmed)' : ' (as reported, not seen to clear)'}`;
     if (v.saved) return `recorded: ${what}`;
-    if (v.kept === 'session') return `noted for this conversation only — not kept for next time: ${what}`.slice(0, 160);
+    if (v.kept === 'session') return `noted, but not kept — this server has nowhere to keep it: ${what}`.slice(0, 160);
     return `not recorded: ${v.reason || v.error || ''}`.slice(0, 160);
   }
   if (name === 'repair_history') return `${(v.receipts || []).length} earlier repair${(v.receipts || []).length === 1 ? '' : 's'}`;

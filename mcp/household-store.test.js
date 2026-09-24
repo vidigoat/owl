@@ -88,7 +88,7 @@ const repair = { model: 'SHE3AR75UC', code: 'E24', cause: 'Blocked filter', acti
     assert.deepEqual(stored.receipts.map((r) => r.action).sort(), ['Checked the drain hose', 'Cleaned the filter'], 'a concurrent repair was lost');
   });
 
-  await it('a table that refuses the save leaves the answer saying "this conversation only", never "saved"', async () => {
+  await it('a table that refuses the save leaves the answer saying "not kept", never "saved"', async () => {
     const t = fakeTable({ failWrites: true });
     const err = console.error; console.error = () => {};
     try {
@@ -96,7 +96,7 @@ const repair = { model: 'SHE3AR75UC', code: 'E24', cause: 'Blocked filter', acti
       const r = await call('remember_repair', repair);
       assert.equal(r.saved, false);
       assert.equal(r.kept, 'session');
-      assert.match(r.keptFor, /this conversation only/);
+      assert.match(r.keptFor, /^Not kept/);
     } finally { console.error = err; setHouseholdStore(undefined); }
   });
 

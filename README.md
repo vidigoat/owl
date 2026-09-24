@@ -74,7 +74,7 @@ so, and plays a recording of a real session (`docs/media/talk.webm`) rather than
 it live is one confirmed step, `scripts/hosted-setup.sh`, behind a spend ceiling every instance
 shares (`mcp/shared-budget.js`): a deployment with keys and no shared ledger refuses to talk. The
 same table then keeps the household — machines and their repairs — across sessions
-(`mcp/household-store.js`); until then the hosted house lasts one conversation, and says so.
+(`mcp/household-store.js`); until then the hosted house is not kept — one server's memory at most — and says so.
 
 `npm run alexa` is the same simulated Alexa+ in a terminal: **Amazon Nova 2 Lite on Bedrock**, connected to the MCP server
 over Streamable HTTP, choosing every tool itself. No SDK — the SigV4 signing is 92 lines of code in

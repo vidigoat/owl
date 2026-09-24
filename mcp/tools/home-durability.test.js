@@ -19,15 +19,15 @@ const it = (name, fn) => {
 
 console.log('household durability');
 
-it('a repair that cannot be written durably is not "saved" — it is kept for this conversation, and says so', () => {
+it('a repair that cannot be written durably is not "saved" — it says it is not kept', () => {
   const r = receipt({ model: 'SHE3AR75UC', code: 'E24', cause: 'Blocked filter', action: 'Cleaned the filter' });
   assert.equal(r.saved, false);
   assert.equal(r.kept, 'session');
-  assert.match(r.keptFor, /this conversation only/);
+  assert.match(r.keptFor, /^Not kept/);
   assert.equal(r.entry.action, 'Cleaned the filter');
 });
 
-it('within the conversation it is still there to be read back', () => {
+it('in this process it can still be read back', () => {
   const h = history({ model: 'SHE3AR75UC' });
   assert.equal(h.receipts.length, 1);
   assert.equal(h.receipts[0].cause, 'Blocked filter');
@@ -35,16 +35,16 @@ it('within the conversation it is still there to be read back', () => {
   assert.equal(again.repeat, true, 'the second time was not recognised as a repeat');
 });
 
-it('an appliance remembered on a read-only host says it is kept for the conversation only', () => {
+it('an appliance remembered on a read-only host says it is not kept', () => {
   const r = remember({ model: 'SHE3AR75UC', brand: 'Bosch' });
   assert.equal(r.remembered, true);
   assert.equal(r.kept, 'session');
 });
 
-it('the agent says "noted for this conversation", never "recorded", for a repair that will not last', () => {
+it('the agent says "not kept", never "recorded", for a repair that will not last', () => {
   const { summariseForTest } = require('../../agent/alexa');
   const line = summariseForTest('remember_repair', { saved: false, kept: 'session', entry: { action: 'Cleaned the filter', confirmed: false } });
-  assert.match(line, /noted for this conversation only/);
+  assert.match(line, /not kept/);
   assert.doesNotMatch(line, /^recorded/);
 });
 
