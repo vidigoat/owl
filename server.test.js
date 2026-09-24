@@ -274,6 +274,21 @@ function buildPdf(stream, compressed) {
     assert.equal(big.status, 413);
   });
 
+  await it('a pasted table with a header is read by its header — a DIY column is never a cause', async () => {
+    // The shape real error-code pages use. Read by position, "Pro" became a cause and a row whose
+    // fix began "turn off the water supply" was dropped as having no remedy.
+    const text = [
+      'Error Code\tMeaning\tCommon Cause\tFix\tDIY?',
+      'E15\tLeak sensor activated\tWater in the base from a hose leak\tTurn off the water supply and tilt the machine to drain the base\tInspect First',
+      'E09\tHeating element fault\tElement failure\tProfessional element testing required\tPro',
+    ].join('\n');
+    const out = await (await fetch(`${BASE}/api/read-text`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ text }) })).json();
+    assert.deepEqual(out.codes.map((c) => c.code), ['E15']);
+    assert.equal(out.codes[0].causes[0].label, 'Water in the base from a hose leak');
+    assert.match(out.codes[0].causes[0].remedy, /^Turn off the water supply/);
+    assert.ok(!JSON.stringify(out.codes).includes('Pro"'), 'the DIY column leaked in');
+  });
+
   await it('a manual can be read by somebody who has only the URL', async () => {
     /*
      * Until this route existed, the hosted review bench was permanently empty: reading a manual
