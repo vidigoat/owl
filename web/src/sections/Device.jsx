@@ -119,7 +119,7 @@ export default function Device({ session }) {
           from the diagnosis, and the second one is the reason the first is worth four minutes on a
           kitchen floor.
         */}
-        <aside className="device__why">
+        <div className="device__why">
           {likely && (
             <div>
               <p className="device__why-head">testing</p>
@@ -141,7 +141,7 @@ export default function Device({ session }) {
               </p>
             </div>
           )}
-        </aside>
+        </div>
       </div>
 
       <div className="device__foot">

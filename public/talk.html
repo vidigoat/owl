@@ -16,7 +16,7 @@
 -->
 <style>
   :root {
-    --paper: #e8e5dc; --paper-2: #e1ddd2; --ink: #191714; --ink-2: #4a453d; --faint: #7d766a; --rule: #c9c4b6;
+    --paper: #e8e5dc; --paper-2: #e1ddd2; --ink: #191714; --ink-2: #4a453d; --faint: #6a6358; --rule: #c9c4b6;
     --amber: #b8761f; --stop: #a8321f; --done: #3f6b4e;
     --screen: #14161a; --screen-ink: #f2f0ea; --screen-dim: #98a0aa;
     --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -70,7 +70,7 @@
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap" role="main">
   <header>
     <h1>Talk to it</h1>
     <p>A simulated Alexa+: Amazon Nova on Bedrock, choosing this project's MCP tools itself. Say what your machine is doing. What it says, every tool it calls, and the card on the screen are this turn's — nothing here is scripted.</p>
@@ -92,7 +92,7 @@
         <button data-say="My Bosch SGE53C55UC leaves water in the bottom at the end of the program.">Water left in an SGE53C55UC</button>
         <button data-say="My SHE3AR75UC dishwasher says E09.">E09</button>
       </div>
-      <div class="log" id="log" aria-label="Conversation"></div>
+      <div class="log" id="log" role="log" aria-label="Conversation"></div>
       <form class="form" id="form" autocomplete="off">
         <input id="input" name="said" placeholder="Say what it is doing…" aria-label="What you say" maxlength="500">
         <button type="button" id="mic" aria-pressed="false" hidden>Hold to talk</button>
