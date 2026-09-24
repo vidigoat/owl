@@ -41,6 +41,8 @@ function householdStore(env = process.env) {
 }
 let householdOverride; // tests
 const setHouseholdStore = (s) => { householdOverride = s; };
+/** The store in use: a test's, or the deployment's, or none. */
+const activeHouseholdStore = () => (householdOverride !== undefined ? householdOverride : householdStore());
 
 /*
  * One household call at a time in this process. The house between load and save is module state,
@@ -422,7 +424,7 @@ async function callTool(id, params) {
 
   let store = null;
   try {
-    store = HOUSEHOLD_TOOLS.has(tool.name) ? (householdOverride !== undefined ? householdOverride : householdStore()) : null;
+    store = HOUSEHOLD_TOOLS.has(tool.name) ? activeHouseholdStore() : null;
     if (store) await hydrate(store);
     const args = coerce(tool, { ...(params.arguments || {}) });
     // Every tool keys on the model, so it is resolved once, here — "Bosch SGE53C55UC" is the
@@ -716,4 +718,4 @@ if (require.main === module) {
   server.listen(PORT, () => console.log(`mcp  http://localhost:${PORT}/mcp  (spec ${PROTOCOL_VERSION})`));
 }
 
-module.exports = { handle, serveMcp, readBody, originAllowed, TOOLS, PROTOCOL_VERSION, setHouseholdStore };
+module.exports = { handle, serveMcp, readBody, originAllowed, TOOLS, PROTOCOL_VERSION, setHouseholdStore, householdStore, activeHouseholdStore };

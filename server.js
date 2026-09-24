@@ -528,18 +528,28 @@ function handler(req, res) {
      * The arithmetic is done live either way: what is overdue and what has come back are computed
      * from the receipts by `home.js`, not stored.
      */
-    if (url.pathname === '/api/household') {
+    if (url.pathname === '/api/household') return (async () => {
       const home = require('./mcp/tools/home');
       let state = null;
       let demo = false;
 
-      try {
-        state = JSON.parse(fs.readFileSync(home.STORE, 'utf8'));
-      } catch {
-        state = null;
+      // The shared store first, where a deployment has one — the same house the tools read and
+      // write — then the file, then the demo household.
+      const store = require('./mcp/server').activeHouseholdStore();
+      if (store) {
+        try { state = await store.load(); } catch { state = null; }
+      }
+      if (!state) {
+        try {
+          state = JSON.parse(fs.readFileSync(home.STORE, 'utf8'));
+        } catch {
+          state = null;
+        }
       }
 
-      if (!state || !Object.keys(state.appliances || {}).length) {
+      // The demo only when there is nothing at all: a house with repairs and no appliance recorded
+      // is still a real house (remember_repair records the repair, not the machine).
+      if (!state || (!Object.keys(state.appliances || {}).length && !(state.receipts || []).length)) {
         try {
           state = JSON.parse(fs.readFileSync(path.join(PUBLIC, 'home-demo.json'), 'utf8'));
           demo = true;
@@ -562,7 +572,7 @@ function handler(req, res) {
         due: attention.due,
         recurring: attention.recurring,
       }), 'application/json');
-    }
+    })();
 
     if (url.pathname === '/api/library') {
       const lib = require('./data/service-data');

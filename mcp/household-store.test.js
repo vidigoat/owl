@@ -88,6 +88,20 @@ const repair = { model: 'SHE3AR75UC', code: 'E24', cause: 'Blocked filter', acti
     assert.deepEqual(stored.receipts.map((r) => r.action).sort(), ['Checked the drain hose', 'Cleaned the filter'], 'a concurrent repair was lost');
   });
 
+  await it('the device page\'s household is the one in the table', async () => {
+    const t = fakeTable();
+    setHouseholdStore(new HouseholdStore({ table: 't', creds: CREDS, fetchImpl: t.fetchImpl }));
+    await call('remember_repair', { ...repair, action: 'Replaced the door seal' });
+    const http = require('node:http');
+    const srv = http.createServer(require('../server'));
+    await new Promise((r) => srv.listen(0, '127.0.0.1', r));
+    try {
+      const j = await (await fetch(`http://127.0.0.1:${srv.address().port}/api/household`)).json();
+      assert.equal(j.demo, false, 'the page showed the demo household while the table held a real one');
+      assert.ok(j.receipts.some((r) => r.action === 'Replaced the door seal'));
+    } finally { srv.close(); setHouseholdStore(undefined); }
+  });
+
   await it('a table that refuses the save leaves the answer saying "not kept", never "saved"', async () => {
     const t = fakeTable({ failWrites: true });
     const err = console.error; console.error = () => {};
