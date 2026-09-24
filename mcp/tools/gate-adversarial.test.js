@@ -154,5 +154,19 @@ const REAL = { model: 'SHE3AR75UC', code: 'E24', causeId: 'pump' };
     }
   });
 
+  await it('ruledOut that is not a list is read as one or as none — never an internal error', async () => {
+    // The fuzzer's finding on POST /api/checkout/begin: a bare string answered
+    // "ruledOut.filter is not a function".
+    const { verify_diagnosis } = require('./verify_diagnosis');
+    for (const ruledOut of ['filter', 'filter,pump', { $ne: 1 }, 7, null]) {
+      const r = verify_diagnosis({ model: 'SHE3AR75UC', code: 'E24', ruledOut });
+      assert.equal(typeof r, 'object', JSON.stringify(ruledOut));
+      assert.doesNotMatch(JSON.stringify(r), /is not a function/);
+    }
+    const asString = verify_diagnosis({ model: 'SHE3AR75UC', code: 'E24', ruledOut: 'filter' });
+    const asList = verify_diagnosis({ model: 'SHE3AR75UC', code: 'E24', ruledOut: ['filter'] });
+    assert.deepEqual(asString, asList, 'a comma-separated string is not the list it names');
+  });
+
   console.log(`\n${passed} passed`);
 })();

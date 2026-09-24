@@ -17,7 +17,12 @@ const { lookup } = require('../../data/service-data');
 
 const SEPARATION = 0.15; // the top cause must lead the runner-up by this much
 
-function verify_diagnosis({ model, code, causeId, ruledOut = [] } = {}) {
+function verify_diagnosis({ model, code, causeId, ruledOut: given = [] } = {}) {
+  // A list of cause ids. A comma-separated string is read as one; anything else as none — a bare
+  // string used to reach .filter() and answer "ruledOut.filter is not a function" (fuzzer).
+  const ruledOut = Array.isArray(given) ? given.map(String)
+    : typeof given === 'string' ? given.split(',').map((s) => s.trim()).filter(Boolean)
+      : [];
   const found = lookup(model, code);
 
   if (!found.known) {
