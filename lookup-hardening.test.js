@@ -63,5 +63,16 @@ const RESERVED = ['__proto__', 'constructor', 'prototype', 'toString', 'hasOwnPr
     } finally { srv.close(); }
   });
 
+  await it('a host without the AWS CLI says so, not "spawn aws ENOENT"', async () => {
+    // The CLI is taken off PATH for this call, so it is ENOENT everywhere — and so a machine with
+    // the CLI and credentials can never be charged for a test.
+    const saved = process.env.PATH;
+    process.env.PATH = '/nonexistent';
+    const { see } = require('./mcp/tools/see');
+    let r;
+    try { r = await see({ imageBase64: 'iVBORw0KGgo'.repeat(20) }); } finally { process.env.PATH = saved; }
+    assert.doesNotMatch(String(r.reason), /ENOENT|spawn/, r.reason);
+  });
+
   console.log(`\n${passed} passed`);
 })();

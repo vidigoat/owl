@@ -205,7 +205,8 @@ function invokeBedrock(base64, format) {
  */
 /** Why it could not look, as a fact about this host — "spawn aws ENOENT" is an internal, not a reason. */
 function unavailable(e) {
-  if (e && e.code === 'ENOENT') return 'Vision is not set up on this host: it reads photographs through the AWS CLI, which is not installed here.';
+  // The code is lost when invokeBedrock re-wraps the error, so the message is read too.
+  if (e && (e.code === 'ENOENT' || /spawn aws ENOENT|aws: (command )?not found/i.test(String(e.message)))) return 'Vision is not set up on this host: it reads photographs through the AWS CLI, which is not installed here.';
   return e && e.message ? e.message : 'The photograph could not be read.';
 }
 
