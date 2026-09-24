@@ -24,7 +24,17 @@ function ordinal(n) {
 /** Consumables that come due on a schedule, in days. */
 const DUE_AFTER = { 'water filter': 180, 'fridge filter': 180, 'lint filter': 30, 'dishwasher filter': 90 };
 
+/*
+ * Where there is nowhere durable to write — the hosted server's bundle is read-only — the house is
+ * kept in this process for the conversation, and every answer says so. It used to answer
+ * `saved: true` for a write that had failed, and the agent then told the person their repair was
+ * recorded; the next question about the machine's history came back empty. Found by asking the
+ * deployed server to remember a repair, 24 September.
+ */
+let sessionState = null;
+
 function read() {
+  if (sessionState) return JSON.parse(JSON.stringify(sessionState));
   try {
     return JSON.parse(fs.readFileSync(STORE, 'utf8'));
   } catch {
@@ -32,15 +42,21 @@ function read() {
   }
 }
 
+/** 'durable' when it will outlast this conversation, 'session' when only this process holds it. */
 function write(state) {
   try {
     fs.mkdirSync(path.dirname(STORE), { recursive: true });
     fs.writeFileSync(STORE, JSON.stringify(state, null, 2));
-    return true;
+    sessionState = null;
+    return 'durable';
   } catch {
-    return false; // a memory that cannot be written is not an error worth crashing a repair over
+    // Not worth crashing a repair over — but not worth pretending about either.
+    sessionState = JSON.parse(JSON.stringify(state));
+    return 'session';
   }
 }
+
+const SESSION_ONLY = 'Kept for this conversation only: this host has nowhere durable to keep a household\'s history, so it goes when the conversation does.';
 
 /** Record an appliance the household owns. */
 /*
@@ -96,8 +112,8 @@ function remember({ model, brand, kind, nickname } = {}) {
     nickname: nickname || ownAppliance(state, model)?.nickname,
     firstSeen: ownAppliance(state, model)?.firstSeen || new Date().toISOString(),
   };
-  write(state);
-  return { remembered: true, model };
+  const kept = write(state);
+  return kept === 'durable' ? { remembered: true, model } : { remembered: true, model, kept, keptFor: SESSION_ONLY };
 }
 
 /**
@@ -157,12 +173,14 @@ function receipt({ model, code, cause, action, part, cost, confirmed, at } = {})
     at: stamped.toISOString(),
   };
   state.receipts.push(entry);
-  write(state);
+  const kept = write(state);
 
   // Has this exact fault happened before on this machine? That changes the advice next time.
   const repeats = state.receipts.filter((r) => r.model === model && r.code === code).length;
   return {
-    saved: true,
+    // Saved means it will be there next time. Held for this conversation only is said as that.
+    saved: kept === 'durable',
+    ...(kept === 'durable' ? {} : { kept, keptFor: SESSION_ONLY }),
     entry,
     repeat: repeats > 1,
     note: repeats > 1 ? `This is the ${ordinal(repeats)} time ${code} has happened on this machine.` : null,

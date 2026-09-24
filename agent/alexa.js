@@ -599,7 +599,12 @@ function summarise(name, v) {
   if (name === 'guide') return v.known ? `${v.steps.length} steps${v.procedures ? `, from the manual's "${v.procedures[0].heading}"` : ''} · first: ${v.steps[0]?.say || ''}`.slice(0, 160) : `no procedure: ${v.reason || ''}`.slice(0, 160);
   if (name === 'find_part') return v.found ? `${v.part.name} $${v.part.price} · ${v.part.eta} · fits ${v.part.fitsModel}` : `no part: ${v.reason || ''}`.slice(0, 160);
   if (name === 'confirm_checkout') return v.ok ? `ordered ${v.order.part} · $${v.order.total} · ${v.order.orderId}` : `not ordered: ${v.reason || ''}`;
-  if (name === 'remember_repair') return v.saved ? `recorded: ${v.entry.action}${v.entry.confirmed ? ' (confirmed)' : ' (as reported, not seen to clear)'}` : `not recorded: ${v.reason || v.error || ''}`.slice(0, 160);
+  if (name === 'remember_repair') {
+    const what = `${v.entry?.action}${v.entry?.confirmed ? ' (confirmed)' : ' (as reported, not seen to clear)'}`;
+    if (v.saved) return `recorded: ${what}`;
+    if (v.kept === 'session') return `noted for this conversation only — not kept for next time: ${what}`.slice(0, 160);
+    return `not recorded: ${v.reason || v.error || ''}`.slice(0, 160);
+  }
   if (name === 'repair_history') return `${(v.receipts || []).length} earlier repair${(v.receipts || []).length === 1 ? '' : 's'}`;
   const s = JSON.stringify(v);
   return s.length > 160 ? `${s.slice(0, 157)}…` : s;
@@ -612,4 +617,4 @@ function redact(input) {
   return out;
 }
 
-module.exports = { Alexa, SYSTEM, SPEAK, AGENT_TOOLS, toBedrockTool, spoken, PHOTO_TOOLS };
+module.exports = { Alexa, SYSTEM, SPEAK, AGENT_TOOLS, toBedrockTool, spoken, PHOTO_TOOLS, summariseForTest: summarise };
