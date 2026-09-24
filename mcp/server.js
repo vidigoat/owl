@@ -518,6 +518,10 @@ async function handle(msg) {
     }
   }
 
+  // Part of the resources capability this server declares; clients that ask on connect get an
+  // honest empty list rather than an error. There are no parameterised resources here.
+  if (method === 'resources/templates/list') return result(id, { resourceTemplates: [] });
+
   if (method === 'ping') return result(id, {});
 
   return failure(id, -32601, `Unsupported method "${method}".`);

@@ -93,6 +93,11 @@ const call = (name, args = {}) => handle({ jsonrpc: '2.0', id: 1, method: 'tools
     assert.equal(objectId.id, null);
   });
 
+  await it('resources/templates/list answers an empty list, as part of the resources capability it declares', async () => {
+    const r = await handle({ jsonrpc: '2.0', id: 9, method: 'resources/templates/list' });
+    assert.deepEqual(r.result, { resourceTemplates: [] });
+  });
+
   await it('GET /mcp refuses the way the spec asks, rather than answering 200 with prose', () => {
     /*
      * Streamable HTTP makes the server-initiated stream optional and says a server that does not
