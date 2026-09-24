@@ -30,6 +30,8 @@ const CHECKS = [
   ['POST', '/mcp', 200, (t) => J(t).result.tools.length === 19, { jsonrpc: '2.0', id: 2, method: 'tools/list' }],
   ['POST', '/mcp', 200, (t) => J(t).result.isError === true && /needs code/.test(J(t).result.content[0].text), { jsonrpc: '2.0', id: 3, method: 'tools/call', params: { name: 'diagnose', arguments: { model: 'SHE3AR75UC' } } }],
   ['POST', '/mcp', 200, (t) => J(t).result.contents[0].mimeType === 'text/html;profile=mcp-app', { jsonrpc: '2.0', id: 4, method: 'resources/read', params: { uri: 'ui://second-set-of-hands/card' } }],
+  // Saved durably, or said to be not kept — never a silent "saved" on a host that cannot keep it.
+  ['POST', '/mcp', 200, (t) => { const v = J(t).result.structuredContent; return v.saved === true ? !v.kept : v.kept === 'session' && /^Not kept/.test(v.keptFor); }, { jsonrpc: '2.0', id: 5, method: 'tools/call', params: { name: 'remember_repair', arguments: { model: 'SHE3AR75UC', code: 'E24', cause: 'Blocked filter', action: 'Smoke check: cleaned the filter' } } }],
   ['POST', '/api/alexa', 503, (t) => J(t).available === false, { said: 'my dishwasher shows E24' }, { origin: BASE }],
 ];
 
