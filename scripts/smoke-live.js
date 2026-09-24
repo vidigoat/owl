@@ -34,6 +34,7 @@ const CHECKS = [
   // Only with --write: with the shared store on, it would add a receipt to the demo household.
   ...(process.argv.includes('--write') ? [] : [null]).filter(Boolean),
   ...(!process.argv.includes('--write') ? [] : [['POST', '/mcp', 200, (t) => { const v = J(t).result.structuredContent; return v.saved === true ? !v.kept : v.kept === 'session' && /^Not kept/.test(v.keptFor); }, { jsonrpc: '2.0', id: 5, method: 'tools/call', params: { name: 'remember_repair', arguments: { model: 'SHE3AR75UC', code: 'E24', cause: 'Blocked filter', action: 'Smoke check: cleaned the filter' } } }]]),
+  ['POST', '/api/read-text', 200, (t) => J(t).codes[0].code === 'E24' && J(t).codes[0].causes.length === 2, { text: 'E24\tWater cannot drain\tCheck the drain filter; straighten the drain hose' }],
   ['POST', '/api/alexa', 503, (t) => J(t).available === false, { said: 'my dishwasher shows E24' }, { origin: BASE }],
 ];
 
