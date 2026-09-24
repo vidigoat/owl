@@ -102,6 +102,23 @@ const repair = { model: 'SHE3AR75UC', code: 'E24', cause: 'Blocked filter', acti
     } finally { srv.close(); setHouseholdStore(undefined); }
   });
 
+  await it('the device page\'s /api/remember writes to the same table the tools do', async () => {
+    const t = fakeTable();
+    setHouseholdStore(new HouseholdStore({ table: 't', creds: CREDS, fetchImpl: t.fetchImpl }));
+    const http = require('node:http');
+    const srv = http.createServer(require('../server'));
+    await new Promise((r) => srv.listen(0, '127.0.0.1', r));
+    try {
+      const res = await fetch(`http://127.0.0.1:${srv.address().port}/api/remember`, { method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ model: 'SHE3AR75UC', brand: 'Bosch', code: 'E24', cause: 'Blocked filter', action: 'Cleaned the sump filter' }) });
+      const j = await res.json();
+      assert.equal(j.saved, true, JSON.stringify(j).slice(0, 200));
+      const stored = JSON.parse(t.item.state);
+      assert.ok(stored.receipts.some((r) => r.action === 'Cleaned the sump filter'), 'the page wrote around the store');
+      assert.ok(stored.appliances.SHE3AR75UC, 'the appliance was not kept');
+    } finally { srv.close(); setHouseholdStore(undefined); }
+  });
+
   await it('a table that refuses the save leaves the answer saying "not kept", never "saved"', async () => {
     const t = fakeTable({ failWrites: true });
     const err = console.error; console.error = () => {};

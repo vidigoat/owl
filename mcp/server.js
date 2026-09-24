@@ -55,6 +55,29 @@ function oneAtATime(fn) {
   householdChain = run.catch(() => {});
   return run;
 }
+
+/**
+ * Anything that writes the house outside a tool call — the device page's /api/remember — goes the
+ * same way the tools do: queued, loaded from the shared store, saved to it, and told plainly if the
+ * save did not take. `fn` returns the answer; a `saved: true` that did not persist is corrected.
+ */
+function withHousehold(fn) {
+  return oneAtATime(async () => {
+    const store = activeHouseholdStore();
+    if (store) await hydrate(store);
+    let value;
+    try {
+      value = await fn();
+    } catch (e) {
+      if (store) await persist().catch(() => {});
+      throw e;
+    }
+    if (store && !(await persist()) && value && value.saved === true) {
+      value = { ...value, saved: false, kept: 'session', keptFor: SESSION_ONLY };
+    }
+    return value;
+  });
+}
 const { replace_or_repair } = require('./tools/replace_or_repair');
 const { lookupSymptom, resolveModel } = require('../data/service-data');
 const { buildSpace, prune } = require('./tools/hypotheses');
@@ -718,4 +741,4 @@ if (require.main === module) {
   server.listen(PORT, () => console.log(`mcp  http://localhost:${PORT}/mcp  (spec ${PROTOCOL_VERSION})`));
 }
 
-module.exports = { handle, serveMcp, readBody, originAllowed, TOOLS, PROTOCOL_VERSION, setHouseholdStore, householdStore, activeHouseholdStore };
+module.exports = { handle, serveMcp, readBody, originAllowed, TOOLS, PROTOCOL_VERSION, setHouseholdStore, householdStore, activeHouseholdStore, withHousehold };

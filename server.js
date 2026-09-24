@@ -221,11 +221,11 @@ function handler(req, res) {
 
     if (req.method === 'POST' && url.pathname === '/api/remember') {
       return readJson(req)
-        .then((body) => {
+        .then((body) => require('./mcp/server').withHousehold(() => {
           rememberAppliance({ model: body.model, brand: body.brand, kind: body.kind });
-          const saved = writeReceipt(body);
-          return send(res, 200, JSON.stringify({ ...saved, due: dueNow().due }), 'application/json');
-        })
+          return { ...writeReceipt(body), due: dueNow().due };
+        }))
+        .then((answer) => send(res, 200, JSON.stringify(answer), 'application/json'))
         .catch((e) => send(res, e.status || 500, JSON.stringify({ error: e.status ? e.message : 'The server could not finish that request.' }), 'application/json'));
     }
 
