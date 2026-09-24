@@ -109,7 +109,12 @@ behind the same interface and the UI says "local". `npm run preflight` reports b
 
 Checkout itself is live and tested (`begin_checkout` refuses outright on a diagnosis that was not
 upheld, `confirm_checkout` completes exactly once); Amazon Wallet behind it is the sandbox stub.
-Household memory is live and file-backed behind the same interface AgentCore will sit behind.
+Household memory is live: a file on a laptop; on a deployment, a second item in the spend
+ledger's DynamoDB table (`mcp/household-store.js`), loaded before `remember_repair` /
+`repair_history` / `whats_due` and saved after with a version check, so two instances saving at
+once are merged, not overwritten (`mcp/household-store.test.js`). Where neither is available — the
+hosted demo today — every answer says the repair is kept for this conversation only, rather than
+claiming a save it did not make (`mcp/tools/home-durability.test.js`).
 
 ### The two runs worth doing yourself
 

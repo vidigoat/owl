@@ -56,5 +56,7 @@ cannot hold a ceiling on a serverless host: every instance has its own disk. So 
 agent needs a **shared** ledger — `mcp/shared-budget.js`, one DynamoDB item every instance reserves
 against in a single conditional write — and refuses to talk with credentials but no
 `HANDS_LEDGER_TABLE`. `scripts/hosted-setup.sh` makes the table, a least-privilege IAM user and the
-Vercel variables in one confirmed step, and `--undo` removes them. The vision tools stay off on the
+Vercel variables in one confirmed step, and `--undo` removes them. The same table then keeps the
+household across sessions (`mcp/household-store.js`) — without it, the hosted house lasts one
+conversation, and says so. The vision tools stay off on the
 host either way: they shell out to the AWS CLI, which a serverless function does not have.

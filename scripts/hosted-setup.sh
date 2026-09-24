@@ -47,6 +47,7 @@ This will, in AWS account $ACCOUNT:
   - give Vercel production its key, HANDS_LEDGER_TABLE=$TABLE, HANDS_BUDGET_USD=$CEILING
   - deploy
 The most the hosted agent can ever spend, across every instance, is \$$CEILING.
+The same table keeps the household (appliances and repairs) across sessions.
 EOF
 read -r -p "Go ahead? [y/N] " ok
 [[ "$ok" == "y" || "$ok" == "Y" ]] || { echo "Nothing changed."; exit 1; }
