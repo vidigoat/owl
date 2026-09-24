@@ -32,6 +32,10 @@ const DUE_AFTER = { 'water filter': 180, 'fridge filter': 180, 'lint filter': 30
  * deployed server to remember a repair, 24 September.
  */
 let sessionState = null;
+// A shared store (mcp/household-store.js), attached by the MCP server around a household tool on
+// a deployment that has one. While attached, a write is held here and saved by persist().
+let shared = null;
+let dirty = false;
 
 function read() {
   if (sessionState) return JSON.parse(JSON.stringify(sessionState));
@@ -44,6 +48,11 @@ function read() {
 
 /** 'durable' when it will outlast this conversation, 'session' when only this process holds it. */
 function write(state) {
+  if (shared) {
+    sessionState = JSON.parse(JSON.stringify(state));
+    dirty = true;
+    return 'durable'; // provisionally — persist() confirms it, or the server says otherwise
+  }
   try {
     fs.mkdirSync(path.dirname(STORE), { recursive: true });
     fs.writeFileSync(STORE, JSON.stringify(state, null, 2));
@@ -53,6 +62,33 @@ function write(state) {
     // Not worth crashing a repair over — but not worth pretending about either.
     sessionState = JSON.parse(JSON.stringify(state));
     return 'session';
+  }
+}
+
+/** Load the house from a shared store before a household tool runs. False: carry on with what this process holds. */
+async function hydrate(store) {
+  try {
+    sessionState = await store.load();
+    shared = store;
+    dirty = false;
+    return true;
+  } catch {
+    shared = null;
+    return false;
+  }
+}
+
+/** Save what a tool wrote. False means it is held for this conversation only. */
+async function persist() {
+  const store = shared;
+  shared = null;
+  if (!store || !dirty) return true;
+  dirty = false;
+  try {
+    sessionState = await store.save(sessionState);
+    return true;
+  } catch {
+    return false;
   }
 }
 
@@ -307,4 +343,4 @@ function due({ today = new Date(), state = read() } = {}) {
   return { due: out, count: out.length, recurring: repeats, attention: out.length + repeats.length };
 }
 
-module.exports = { name: 'home', remember, receipt, history, due, recurring, ordinal, STORE, DUE_AFTER, RECURRENCE_WINDOW_DAYS };
+module.exports = { name: 'home', remember, receipt, history, due, recurring, ordinal, hydrate, persist, SESSION_ONLY, STORE, DUE_AFTER, RECURRENCE_WINDOW_DAYS };

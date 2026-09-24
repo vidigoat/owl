@@ -24,7 +24,23 @@ const { read_manual } = require('./tools/read_manual');
 const { RESOURCES, APP_URI, APP_TOOLS, spaceCard, stepCard, refusalCard, checkoutCard } = require('./cards');
 const { confirm_fix } = require('./tools/confirm_fix');
 const { beginCheckout, confirmCheckout } = require('./tools/order_part');
-const { receipt, due, history } = require('./tools/home');
+const { receipt, due, history, hydrate, persist, SESSION_ONLY } = require('./tools/home');
+const { HouseholdStore } = require('./household-store');
+
+/*
+ * The household across sessions, on a deployment that has somewhere to keep it: the same table as
+ * the spend ledger (HANDS_LEDGER_TABLE), a second item. Without it the house is a file locally and
+ * a conversation's worth of memory on the hosted server — and every answer says which.
+ */
+const HOUSEHOLD_TOOLS = new Set(['remember_repair', 'repair_history', 'whats_due']);
+function householdStore(env = process.env) {
+  if (!env.HANDS_LEDGER_TABLE) return null;
+  const creds = require('../agent/sigv4').credentials();
+  if (!creds) return null;
+  return new HouseholdStore({ table: env.HANDS_LEDGER_TABLE, creds, region: env.AWS_REGION || env.AWS_DEFAULT_REGION || 'us-east-1' });
+}
+let householdOverride; // tests
+const setHouseholdStore = (s) => { householdOverride = s; };
 const { replace_or_repair } = require('./tools/replace_or_repair');
 const { lookupSymptom, resolveModel } = require('../data/service-data');
 const { buildSpace, prune } = require('./tools/hypotheses');
@@ -478,18 +494,26 @@ async function handle(msg) {
       return result(id, { content: [{ type: 'text', text: bad }], isError: true });
     }
 
+    let store = null;
     try {
+      store = HOUSEHOLD_TOOLS.has(tool.name) ? (householdOverride !== undefined ? householdOverride : householdStore()) : null;
+      if (store) await hydrate(store);
       const args = coerce(tool, { ...(params.arguments || {}) });
       // Every tool keys on the model, so it is resolved once, here — "Bosch SGE53C55UC" is the
       // SGE53C55UC. See resolveModel for what is and is not treated as the same machine.
       if (typeof args.model === 'string') args.model = resolveModel(args.model);
-      const value = await tool.handler(args);
+      let value = await tool.handler(args);
+      if (store && !(await persist()) && value && value.saved === true) {
+        // The shared store refused the save: this conversation holds it, and the answer says so.
+        value = { ...value, saved: false, kept: 'session', keptFor: SESSION_ONLY };
+      }
       return result(id, {
         content: [{ type: 'text', text: JSON.stringify(value, null, 2) }],
         structuredContent: value,
         isError: false,
       });
     } catch (e) {
+      if (store) await persist().catch(() => {}); // never leave the shared store attached after a throw
       return failure(id, -32603, e.message);
     }
   }
@@ -663,4 +687,4 @@ if (require.main === module) {
   server.listen(PORT, () => console.log(`mcp  http://localhost:${PORT}/mcp  (spec ${PROTOCOL_VERSION})`));
 }
 
-module.exports = { handle, serveMcp, readBody, originAllowed, TOOLS, PROTOCOL_VERSION };
+module.exports = { handle, serveMcp, readBody, originAllowed, TOOLS, PROTOCOL_VERSION, setHouseholdStore };
