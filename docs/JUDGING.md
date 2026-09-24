@@ -12,7 +12,9 @@ of it on the right, and nothing reaching the library until somebody ticks a row.
 **Take it a manual of your own.** The bench has a drop target: give it any manufacturer's PDF — any
 brand, nothing here is coded for yours — and the fault table comes back in under a second with the
 page each cause is printed on. Nothing is uploaded anywhere, and **nothing is admitted**: a
-machine-read table is a candidate, which is the whole reason the bench exists.
+machine-read table is a candidate, which is the whole reason the bench exists. No PDF to hand? Open
+**Or paste a fault table** and paste one copied from a manufacturer's error-code web page: columns
+copied out of a browser arrive as tabs, and each cause comes back citing the line it was read from.
 
 That works on the hosted URL because reading a PDF here needs nothing installed. It used to shell
 out to `pdftotext` — poppler, a binary the host does not have — so until this week the live bench
