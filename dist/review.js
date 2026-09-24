@@ -645,6 +645,9 @@ loadLibrary();
         list.appendChild(li);
       }
       if (data.codes.length) pasteOut.appendChild(list);
+      if (data.seen?.length) {
+        pasteOut.appendChild(el('p', 'try-note', `Also on the page, with no step an owner can take: ${data.seen.join(', ')}. Usually that row says to call a technician.`));
+      }
     });
   }
 
