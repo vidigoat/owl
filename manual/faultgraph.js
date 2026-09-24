@@ -323,6 +323,7 @@ function parse({ model, text, sourceName = 'manual' }) {
   // different problems needing opposite things from somebody holding a manual, and they were
   // sharing one sentence — which this product then reads out loud.
   let orphanCodes = 0;
+  const orphans = [];
 
   lines.forEach((line, i) => {
     const m = matchCodeLine(line);
@@ -450,7 +451,7 @@ function parse({ model, text, sourceName = 'manual' }) {
       source: { line: atLine[k], codeLine: onPage(i), manual: sourceName },
     }));
 
-    if (causes.length === 0) { orphanCodes++; return; }
+    if (causes.length === 0) { orphanCodes++; orphans.push(code); return; }
     found++;
 
     // A remedy check tests exactly one cause, so a table of them is irreducibly linear: a "no"
@@ -532,6 +533,8 @@ function parse({ model, text, sourceName = 'manual' }) {
     // and the product should admit it rather than imply it read the whole thing.
     coverage: coverageOf(found, orphanCodes),
     orphanCodes,
+    // Which codes those were: a reader told "2 recovered" of a table with 3 rows asks which one went.
+    orphans,
   };
 }
 

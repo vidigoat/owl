@@ -284,6 +284,7 @@ function buildPdf(stream, compressed) {
     ].join('\n');
     const out = await (await fetch(`${BASE}/api/read-text`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ text }) })).json();
     assert.deepEqual(out.codes.map((c) => c.code), ['E15']);
+    assert.deepEqual(out.seen, ['E09'], 'the technician-only row vanished without a word');
     assert.equal(out.codes[0].causes[0].label, 'Water in the base from a hose leak');
     assert.match(out.codes[0].causes[0].remedy, /^Turn off the water supply/);
     assert.ok(!JSON.stringify(out.codes).includes('Pro"'), 'the DIY column leaked in');

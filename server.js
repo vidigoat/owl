@@ -386,6 +386,8 @@ function handler(req, res) {
             ok: true,
             coverage: graph.coverage,
             codes,
+            // Codes on the page with nothing an owner can do beneath them — usually "call a technician".
+            seen: (graph.orphans || []).slice(0, 40),
             ms: Date.now() - started,
             note: 'Read here and thrown away; nothing was added to the library.',
           }), 'application/json');
