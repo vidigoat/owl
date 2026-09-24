@@ -436,7 +436,10 @@ async function callTool(id, params) {
     return result(id, {
       content: [{ type: 'text', text: JSON.stringify(value, null, 2) }],
       structuredContent: value,
-      isError: false,
+      // A tool that answers with an error — "\"no\" is not an answer to pump-hum. It has: hums,
+      // silent." — refused what it was given, and says so in words; the flag tells the client too.
+      // It used to go out as isError: false, which a model is free to read as a normal answer.
+      isError: Boolean(value && typeof value === 'object' && !Array.isArray(value) && typeof value.error === 'string'),
     });
   } catch (e) {
     if (store) await persist().catch(() => {}); // never leave the shared store attached after a throw

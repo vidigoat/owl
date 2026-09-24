@@ -93,6 +93,16 @@ const call = (name, args = {}) => handle({ jsonrpc: '2.0', id: 1, method: 'tools
     assert.equal(objectId.id, null);
   });
 
+  await it('a tool that refuses its input is flagged isError, with its words intact', async () => {
+    const h = (await call('hypotheses', { model: 'SHE3AR75UC', code: 'E24' })).result.structuredContent;
+    const t = (await call('next_test', { space: h.space, model: 'SHE3AR75UC', code: 'E24' })).result.structuredContent;
+    const r = await call('observe', { space: h.space, testId: t.test.id, value: 'no', model: 'SHE3AR75UC', code: 'E24' });
+    assert.equal(r.result.isError, true, 'a refused answer went out as a normal result');
+    assert.match(r.result.structuredContent.error, /is not an answer to/);
+    const ok = await call('diagnose', { model: 'SHE3AR75UC', code: 'E24' });
+    assert.equal(ok.result.isError, false);
+  });
+
   await it('resources/templates/list answers an empty list, as part of the resources capability it declares', async () => {
     const r = await handle({ jsonrpc: '2.0', id: 9, method: 'resources/templates/list' });
     assert.deepEqual(r.result, { resourceTemplates: [] });
