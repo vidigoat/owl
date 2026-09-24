@@ -8,6 +8,10 @@
  * (mcp/shared-budget.js), as a second item, written with the same signed UpdateItem the setup script
  * already permits. Nothing new to provision.
  *
+ * One house for the whole deployment: this server has no accounts to tell visitors apart, so on the
+ * public demo everyone shares it, and the privacy page says so. Per-customer households need the
+ * identity Alexa+ supplies; the item id is the one place that would change.
+ *
  * Two instances can both hold the house. A save carries the version it was loaded at, and DynamoDB
  * refuses it if another instance saved in between; then the other side is loaded, the two are
  * merged — receipts are append-only, so a merge is a union — and the save is tried again.
