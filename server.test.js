@@ -255,6 +255,25 @@ function buildPdf(stream, compressed) {
 
   /* ── reading a manual over the wire, which is the whole reason the reader exists ── */
 
+  await it('a fault table pasted as text is read, each cause citing its line, and nothing is admitted', async () => {
+    // A table copied out of a manufacturer's web page arrives as tab-separated rows.
+    const res = await fetch(`${BASE}/api/read-text`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ text: 'Code\tMeaning\tRemedy\nE24\tWater cannot drain\tCheck the drain filter; straighten the drain hose' }),
+    });
+    assert.equal(res.status, 200);
+    const out = await res.json();
+    assert.equal(out.ok, true);
+    assert.equal(out.codes[0].code, 'E24');
+    assert.deepEqual(out.codes[0].causes.map((c) => c.line), [2, 2]);
+    assert.match(out.note, /nothing was added to the library/);
+    const empty = await fetch(`${BASE}/api/read-text`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}' });
+    assert.equal(empty.status, 400);
+    const big = await fetch(`${BASE}/api/read-text`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ text: 'x'.repeat(70 * 1024) }) });
+    assert.equal(big.status, 413);
+  });
+
   await it('a manual can be read by somebody who has only the URL', async () => {
     /*
      * Until this route existed, the hosted review bench was permanently empty: reading a manual

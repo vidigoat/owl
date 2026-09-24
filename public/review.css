@@ -424,7 +424,8 @@
 .try-sym { font: 500 15px/1.35 var(--display); margin: 0; }
 .try-cause { margin: 6px 0 0 0; padding-left: 12px; border-left: 2px solid var(--amber); }
 .try-cause-label { margin: 0; font-size: 14px; }
-.try-cite { margin: 3px 0 0; font: 400 11px/1.5 var(--mono); color: var(--amber); }
+/* A deeper amber than --amber: at 11px the citation needs 4.5:1 on the paper, and #b06f18 gave 3.5. */
+.try-cite { margin: 3px 0 0; font: 400 11px/1.5 var(--mono); color: #85500f; }
 .try-remedy { margin: 4px 0 0 14px; font-size: 13px; color: var(--graphite); }
 
 .try-note {
@@ -452,3 +453,12 @@
 
 /* A cause the manual never named. It is a real answer, and it must not read like a label. */
 .try-cause-none { color: var(--graphite); font-style: italic; }
+
+/* The paste path, under the drop: the same bench, text instead of a file. */
+.paste { margin-top: 14px; }
+.paste > summary { cursor: pointer; color: var(--ink-2, inherit); padding: 8px 0; }
+.paste > summary:focus-visible, .paste-go:focus-visible, .paste-text:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+.paste-label { display: block; font-size: 14px; margin: 6px 0; opacity: 0.85; }
+.paste-text { width: 100%; box-sizing: border-box; font: 13px/1.5 ui-monospace, 'SF Mono', Menlo, monospace; padding: 10px 12px; border-radius: 8px; border: 1px solid currentColor; background: transparent; color: inherit; resize: vertical; }
+.paste-go { margin-top: 8px; font: inherit; padding: 8px 16px; min-height: 40px; border-radius: 8px; border: 1px solid currentColor; background: transparent; color: inherit; cursor: pointer; }
+.paste-out { margin-top: 10px; }

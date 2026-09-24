@@ -357,6 +357,42 @@ function handler(req, res) {
       }), 'application/json');
     }
 
+    /*
+     * Read a fault table that was pasted rather than dropped as a PDF.
+     *
+     * Manufacturers publish their error-code tables as web pages too, and a table copied out of a
+     * browser arrives as tab-separated rows — which the reader now understands. Same rule as the
+     * PDF path: it is read, shown, and thrown away. Nothing reaches the library from here.
+     */
+    if (req.method === 'POST' && url.pathname === '/api/read-text') {
+      return readJson(req)
+        .then((body) => {
+          const text = typeof body?.text === 'string' ? body.text : '';
+          if (!text.trim()) return send(res, 400, JSON.stringify({ error: 'Paste the fault table as text — nothing was sent.' }), 'application/json');
+          if (text.length > 64 * 1024) return send(res, 413, JSON.stringify({ error: `That is ${Math.round(text.length / 1024)} kB of text; paste one fault table, up to 64 kB.` }), 'application/json');
+          const started = Date.now();
+          const graph = parseManual({ model: 'unknown', text, sourceName: 'what you pasted' });
+          const codes = Object.entries(graph.codes || {}).slice(0, 40).map(([code, c]) => ({
+            code,
+            meaning: c.meaning || '',
+            causes: (c.causes || []).slice(0, 8).map((x) => ({
+              label: x.label,
+              remedy: x.remedy,
+              line: x.source?.line ?? null,
+              mains: Boolean(x.mains),
+            })),
+          }));
+          return send(res, 200, JSON.stringify({
+            ok: true,
+            coverage: graph.coverage,
+            codes,
+            ms: Date.now() - started,
+            note: 'Read here and thrown away; nothing was added to the library.',
+          }), 'application/json');
+        })
+        .catch((e) => send(res, e.status || 400, JSON.stringify({ error: e.status ? e.message : 'That request could not be handled.' }), 'application/json'));
+    }
+
     if (req.method === 'POST' && url.pathname === '/api/read-manual') {
       return readBytes(req)
         .then((buf) => {

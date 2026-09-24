@@ -610,6 +610,44 @@ loadLibrary();
     note.textContent = parts.join(' ');
   }
 
+  /*
+   * A pasted table: the same reader, the same rule — read, shown, thrown away. Each cause names the
+   * line of the paste it came from, as the PDF path names the page.
+   */
+  const pasteGo = document.getElementById('pasteGo');
+  const pasteText = document.getElementById('pasteText');
+  const pasteOut = document.getElementById('pasteOut');
+  if (pasteGo) {
+    pasteGo.addEventListener('click', async () => {
+      pasteOut.replaceChildren(el('p', 'try-note', 'Reading…'));
+      let data;
+      try {
+        const res = await fetch('/api/read-text', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ text: pasteText.value }) });
+        data = await res.json();
+      } catch (e) {
+        pasteOut.replaceChildren(el('p', 'try-note', `The request failed: ${e.message}`));
+        return;
+      }
+      pasteOut.replaceChildren();
+      if (data.error) { pasteOut.appendChild(el('p', 'try-note', data.error)); return; }
+      pasteOut.appendChild(el('p', 'try-note', `${data.coverage} · ${data.ms} ms · ${data.note}`));
+      const list = el('ul', 'try-rows', '');
+      for (const c of data.codes) {
+        const li = document.createElement('li');
+        li.appendChild(el('p', 'try-sym', c.meaning ? `${c.code} — ${c.meaning}` : c.code));
+        for (const x of c.causes) {
+          const box = el('div', 'try-cause');
+          box.appendChild(el('p', 'try-cause-label', x.mains ? `${x.label} (behind mains — a technician's job)` : x.label));
+          box.appendChild(el('p', 'try-cite', x.line ? `read from line ${x.line} of what you pasted` : 'read from what you pasted'));
+          if (x.remedy) box.appendChild(el('p', 'try-remedy', `→ ${x.remedy}`));
+          li.appendChild(box);
+        }
+        list.appendChild(li);
+      }
+      if (data.codes.length) pasteOut.appendChild(list);
+    });
+  }
+
   file.addEventListener('change', () => read(file.files[0]));
 
   for (const type of ['dragenter', 'dragover']) {
