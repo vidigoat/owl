@@ -193,7 +193,14 @@ page, and confirming afterwards whether the fault actually cleared.
 *cheapest per bit*, because three easy checks beat one that means pulling the machine out from under
 the counter.
 
-**Household memory** so the second conversation about a machine is short.
+**Household memory** so the second conversation about a machine is short — and across sessions,
+not just within one: on a laptop it is a file; on a deployment it is a second item in the spend
+ledger's DynamoDB table (`mcp/household-store.js`), loaded before `remember_repair`,
+`repair_history` and `whats_due` and saved after them with a version check, so two instances saving
+at once are merged rather than overwritten. Where there is nowhere durable to keep it — the hosted
+demo until `scripts/hosted-setup.sh` is run — every answer says the repair is kept for this
+conversation only. It used to say `saved: true` there, for a write that had failed; the agent then
+told people their repair was recorded (FRICTION-LOG, 24 September).
 
 **An MCP App for the screen**: eight tools name `ui://second-set-of-hands/card` in
 `_meta.ui.resourceUri`, the way Alexa+ draws a tool's UI on an Echo Show — one self-contained page,
