@@ -377,4 +377,12 @@ it('two codes that agree are not enough to refuse a reading', () => {
   assert.equal(g.refused, undefined, 'a two-code manual was refused');
 });
 
+it('a fault table in columns — pipes, tabs or markdown — is read, citing the row', () => {
+  const pipe = parse({ text: 'Code | Meaning | Remedy\nE24 | Water cannot drain | Check the drain filter. Straighten the drain hose.', sourceName: 't' });
+  assert.equal(pipe.codes.E24.causes.length, 2);
+  assert.ok(pipe.codes.E24.causes.every((c) => c.source.line === 2));
+  const md = parse({ text: '| Code | Meaning | Remedy |\n|---|---|---|\n| E24 | Water cannot drain | Check the drain filter. |', sourceName: 't' });
+  assert.equal(Object.keys(md.codes).length, 1, 'a header or divider row was read as a code');
+});
+
 console.log(`\n${passed} passed`);
