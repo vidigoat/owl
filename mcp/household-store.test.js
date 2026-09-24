@@ -76,6 +76,18 @@ const repair = { model: 'SHE3AR75UC', code: 'E24', cause: 'Blocked filter', acti
     assert.equal(merge(final, final).receipts.length, 2, 'a merge with itself duplicated receipts');
   });
 
+  await it('two repairs remembered at the same moment in one instance both survive', async () => {
+    const t = fakeTable();
+    setHouseholdStore(new HouseholdStore({ table: 't', creds: CREDS, fetchImpl: t.fetchImpl }));
+    const [a, b] = await Promise.all([
+      call('remember_repair', { ...repair, action: 'Cleaned the filter' }),
+      call('remember_repair', { ...repair, action: 'Checked the drain hose' }),
+    ]);
+    assert.equal(a.saved && b.saved, true);
+    const stored = JSON.parse(t.item.state);
+    assert.deepEqual(stored.receipts.map((r) => r.action).sort(), ['Checked the drain hose', 'Cleaned the filter'], 'a concurrent repair was lost');
+  });
+
   await it('a table that refuses the save leaves the answer saying "this conversation only", never "saved"', async () => {
     const t = fakeTable({ failWrites: true });
     const err = console.error; console.error = () => {};

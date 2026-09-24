@@ -41,6 +41,18 @@ function householdStore(env = process.env) {
 }
 let householdOverride; // tests
 const setHouseholdStore = (s) => { householdOverride = s; };
+
+/*
+ * One household call at a time in this process. The house between load and save is module state,
+ * and a deployment answers concurrent requests in one instance — two calls interleaving there could
+ * each save the other's half-finished house and lose a repair. Other tools are not queued.
+ */
+let householdChain = Promise.resolve();
+function oneAtATime(fn) {
+  const run = householdChain.then(fn, fn);
+  householdChain = run.catch(() => {});
+  return run;
+}
 const { replace_or_repair } = require('./tools/replace_or_repair');
 const { lookupSymptom, resolveModel } = require('../data/service-data');
 const { buildSpace, prune } = require('./tools/hypotheses');
@@ -390,6 +402,48 @@ function coerce(tool, args) {
   return args;
 }
 
+/** One tools/call, from validation to answer. */
+async function callTool(id, params) {
+  if (!params || typeof params !== 'object' || Array.isArray(params) || typeof params.name !== 'string') {
+    return failure(id, -32602, 'tools/call takes params { name: string, arguments: object }.');
+  }
+  const tool = TOOLS.find((t) => t.name === params.name);
+  if (!tool) return failure(id, -32602, `No tool named "${params.name}".`);
+
+  /*
+   * Input the tool cannot use is answered as a tool error, in words, naming the argument — the
+   * spec's rule since 2025-11-25, so a model can correct itself. Before this, a string or null
+   * for `arguments` ran the tool anyway and it answered "No service data for model undefined".
+   */
+  const bad = invalidArguments(tool, params.arguments);
+  if (bad) {
+    return result(id, { content: [{ type: 'text', text: bad }], isError: true });
+  }
+
+  let store = null;
+  try {
+    store = HOUSEHOLD_TOOLS.has(tool.name) ? (householdOverride !== undefined ? householdOverride : householdStore()) : null;
+    if (store) await hydrate(store);
+    const args = coerce(tool, { ...(params.arguments || {}) });
+    // Every tool keys on the model, so it is resolved once, here — "Bosch SGE53C55UC" is the
+    // SGE53C55UC. See resolveModel for what is and is not treated as the same machine.
+    if (typeof args.model === 'string') args.model = resolveModel(args.model);
+    let value = await tool.handler(args);
+    if (store && !(await persist()) && value && value.saved === true) {
+      // The shared store refused the save: this conversation holds it, and the answer says so.
+      value = { ...value, saved: false, kept: 'session', keptFor: SESSION_ONLY };
+    }
+    return result(id, {
+      content: [{ type: 'text', text: JSON.stringify(value, null, 2) }],
+      structuredContent: value,
+      isError: false,
+    });
+  } catch (e) {
+    if (store) await persist().catch(() => {}); // never leave the shared store attached after a throw
+    return failure(id, -32603, e.message);
+  }
+}
+
 async function handle(msg) {
   /*
    * Is this a request at all?
@@ -477,46 +531,11 @@ async function handle(msg) {
     });
   }
 
-  if (method === 'tools/call') {
-    if (!params || typeof params !== 'object' || Array.isArray(params) || typeof params.name !== 'string') {
-      return failure(id, -32602, 'tools/call takes params { name: string, arguments: object }.');
-    }
-    const tool = TOOLS.find((t) => t.name === params.name);
-    if (!tool) return failure(id, -32602, `No tool named "${params.name}".`);
-
-    /*
-     * Input the tool cannot use is answered as a tool error, in words, naming the argument — the
-     * spec's rule since 2025-11-25, so a model can correct itself. Before this, a string or null
-     * for `arguments` ran the tool anyway and it answered "No service data for model undefined".
-     */
-    const bad = invalidArguments(tool, params.arguments);
-    if (bad) {
-      return result(id, { content: [{ type: 'text', text: bad }], isError: true });
-    }
-
-    let store = null;
-    try {
-      store = HOUSEHOLD_TOOLS.has(tool.name) ? (householdOverride !== undefined ? householdOverride : householdStore()) : null;
-      if (store) await hydrate(store);
-      const args = coerce(tool, { ...(params.arguments || {}) });
-      // Every tool keys on the model, so it is resolved once, here — "Bosch SGE53C55UC" is the
-      // SGE53C55UC. See resolveModel for what is and is not treated as the same machine.
-      if (typeof args.model === 'string') args.model = resolveModel(args.model);
-      let value = await tool.handler(args);
-      if (store && !(await persist()) && value && value.saved === true) {
-        // The shared store refused the save: this conversation holds it, and the answer says so.
-        value = { ...value, saved: false, kept: 'session', keptFor: SESSION_ONLY };
-      }
-      return result(id, {
-        content: [{ type: 'text', text: JSON.stringify(value, null, 2) }],
-        structuredContent: value,
-        isError: false,
-      });
-    } catch (e) {
-      if (store) await persist().catch(() => {}); // never leave the shared store attached after a throw
-      return failure(id, -32603, e.message);
-    }
+  if (method === 'tools/call' && HOUSEHOLD_TOOLS.has(params?.name)) {
+    return oneAtATime(() => callTool(id, params));
   }
+  if (method === 'tools/call') return callTool(id, params);
+
 
   // Part of the resources capability this server declares; clients that ask on connect get an
   // honest empty list rather than an error. There are no parameterised resources here.
