@@ -202,13 +202,13 @@ function handler(req, res) {
     if (req.method === 'POST' && url.pathname === '/api/checkout/begin') {
       return readJson(req)
         .then((body) => send(res, 200, JSON.stringify(beginCheckout(body)), 'application/json'))
-        .catch((e) => send(res, 400, JSON.stringify({ error: e.message }), 'application/json'));
+        .catch((e) => send(res, e.status || 400, JSON.stringify({ error: e.status ? e.message : 'That request could not be handled.' }), 'application/json'));
     }
 
     if (req.method === 'POST' && url.pathname === '/api/checkout/confirm') {
       return readJson(req)
         .then((body) => send(res, 200, JSON.stringify(confirmCheckout(body)), 'application/json'))
-        .catch((e) => send(res, 400, JSON.stringify({ error: e.message }), 'application/json'));
+        .catch((e) => send(res, e.status || 400, JSON.stringify({ error: e.status ? e.message : 'That request could not be handled.' }), 'application/json'));
     }
 
     // Did the repair actually work, and write down what happened.
@@ -252,7 +252,7 @@ function handler(req, res) {
           });
           return send(res, 200, JSON.stringify({ ...result, coverage: graph.coverage, found: graph.found }), 'application/json');
         })
-        .catch((e) => send(res, 400, JSON.stringify({ error: e.message }), 'application/json'));
+        .catch((e) => send(res, e.status || 400, JSON.stringify({ error: e.status ? e.message : 'That request could not be handled.' }), 'application/json'));
     }
 
     // ── the diagnosis loop: the device holds the state, the server holds the reasoning ──
@@ -283,7 +283,7 @@ function handler(req, res) {
 
           return send(res, 404, JSON.stringify({ error: `no diagnosis step "${step}"` }), 'application/json');
         })
-        .catch((e) => send(res, 400, JSON.stringify({ error: e.message }), 'application/json'));
+        .catch((e) => send(res, e.status || 400, JSON.stringify({ error: e.status ? e.message : 'That request could not be handled.' }), 'application/json'));
     }
 
     if (url.pathname === '/api/guide') {
@@ -477,7 +477,7 @@ function handler(req, res) {
               + 'the review bench is where a person turns one into a fact.',
           }), 'application/json');
         })
-        .catch((e) => send(res, 400, JSON.stringify({ error: e.message }), 'application/json'));
+        .catch((e) => send(res, e.status || 400, JSON.stringify({ error: e.status ? e.message : 'That request could not be handled.' }), 'application/json'));
     }
 
     /* ── the review queue: nothing reaches the library without a person saying so ── */
@@ -632,7 +632,7 @@ function handler(req, res) {
           if (result.admitted) require('./data/service-data').reload();
           return send(res, result.admitted ? 200 : 400, JSON.stringify(result), 'application/json');
         })
-        .catch((e) => send(res, 400, JSON.stringify({ error: e.message }), 'application/json'));
+        .catch((e) => send(res, e.status || 400, JSON.stringify({ error: e.status ? e.message : 'That request could not be handled.' }), 'application/json'));
     }
 
     const rel = url.pathname === '/' ? 'index.html' : decodeURIComponent(url.pathname.slice(1));
