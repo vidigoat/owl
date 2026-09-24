@@ -72,8 +72,14 @@ function refuseModel(model) {
   const m = clean(model, 80);
   if (!m) return 'a model number is needed';
   if (!MODEL_RE.test(m)) return `"${m.slice(0, 40)}" does not look like a model number`;
+  // A plain object's built-in names are never a machine: "constructor" passed the pattern above,
+  // and reading it back before it was ever remembered returned JavaScript's Object function.
+  if (['constructor', 'prototype', '__proto__', 'hasOwnProperty', 'toString', 'valueOf'].includes(m)) return `"${m}" is not a model number`;
   return null;
 }
+
+/** The household's own record for a model, never something inherited from Object. */
+const ownAppliance = (state, model) => (Object.prototype.hasOwnProperty.call(state.appliances, model) ? state.appliances[model] : undefined);
 
 function remember({ model, brand, kind, nickname } = {}) {
   const bad = refuseModel(model);
@@ -85,10 +91,10 @@ function remember({ model, brand, kind, nickname } = {}) {
   const state = read();
   state.appliances[model] = {
     model,
-    brand: brand || state.appliances[model]?.brand,
-    kind: kind || state.appliances[model]?.kind,
-    nickname: nickname || state.appliances[model]?.nickname,
-    firstSeen: state.appliances[model]?.firstSeen || new Date().toISOString(),
+    brand: brand || ownAppliance(state, model)?.brand,
+    kind: kind || ownAppliance(state, model)?.kind,
+    nickname: nickname || ownAppliance(state, model)?.nickname,
+    firstSeen: ownAppliance(state, model)?.firstSeen || new Date().toISOString(),
   };
   write(state);
   return { remembered: true, model };
@@ -167,7 +173,7 @@ function receipt({ model, code, cause, action, part, cost, confirmed, at } = {})
 function history({ model } = {}) {
   const state = read();
   return {
-    appliance: state.appliances[model] || null,
+    appliance: ownAppliance(state, model) || null,
     receipts: state.receipts.filter((r) => r.model === model),
   };
 }

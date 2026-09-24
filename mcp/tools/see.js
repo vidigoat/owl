@@ -203,6 +203,12 @@ function invokeBedrock(base64, format) {
  * precisely how a canned reading ends up presented as a real one. One helper, one shape, no way to
  * leave the label off.
  */
+/** Why it could not look, as a fact about this host — "spawn aws ENOENT" is an internal, not a reason. */
+function unavailable(e) {
+  if (e && e.code === 'ENOENT') return 'Vision is not set up on this host: it reads photographs through the AWS CLI, which is not installed here.';
+  return e && e.message ? e.message : 'The photograph could not be read.';
+}
+
 function simulatedRead(reason, expect = {}) {
   return {
     ok: false,
@@ -257,7 +263,7 @@ async function see({ imagePath, imageBase64, imageFormat, expect = {} }) {
     try {
       base64 = fs.readFileSync(at.path).toString('base64');
     } catch (e) {
-      return simulatedRead(e.message);
+      return simulatedRead(unavailable(e));
     }
   }
 
@@ -284,7 +290,7 @@ async function see({ imagePath, imageBase64, imageFormat, expect = {} }) {
     };
   } catch (e) {
     // No credentials, no Bedrock access, no network. Say so rather than pretending.
-    return simulatedRead(e.message, expect);
+    return simulatedRead(unavailable(e), expect);
   }
 }
 

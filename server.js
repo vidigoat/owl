@@ -44,7 +44,7 @@ const readJson = (req) =>
       body += c;
       // Refuse early rather than buffering an unbounded upload into memory.
       if (body.length > MAX_BODY) {
-        reject(new Error('Body too large'));
+        reject(Object.assign(new Error('Body too large'), { status: 413 }));
         req.destroy();
       }
     });
@@ -62,8 +62,9 @@ const readJson = (req) =>
          * a refusal, and every one of them now gets something it can refuse.
          */
         resolve(parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {});
-      } catch (e) {
-        reject(e);
+      } catch {
+        // Not JSON is the caller's mistake: a 400 in words, never the parser's message as a 500.
+        reject(Object.assign(new Error('That is not JSON.'), { status: 400 }));
       }
     });
   });
@@ -194,7 +195,7 @@ function handler(req, res) {
       return readJson(req)
         .then((body) => see(body))
         .then((r) => send(res, 200, JSON.stringify(r), 'application/json'))
-        .catch((e) => send(res, 500, JSON.stringify({ error: e.message }), 'application/json'));
+        .catch((e) => send(res, e.status || 500, JSON.stringify({ error: e.status ? e.message : 'The server could not finish that request.' }), 'application/json'));
     }
 
     // Checkout. The refusal lives here too: a cart cannot be opened for a cause the gate refused.
@@ -215,7 +216,7 @@ function handler(req, res) {
       return readJson(req)
         .then((body) => confirm_fix(body))
         .then((r) => send(res, 200, JSON.stringify(r), 'application/json'))
-        .catch((e) => send(res, 500, JSON.stringify({ error: e.message }), 'application/json'));
+        .catch((e) => send(res, e.status || 500, JSON.stringify({ error: e.status ? e.message : 'The server could not finish that request.' }), 'application/json'));
     }
 
     if (req.method === 'POST' && url.pathname === '/api/remember') {
@@ -225,7 +226,7 @@ function handler(req, res) {
           const saved = writeReceipt(body);
           return send(res, 200, JSON.stringify({ ...saved, due: dueNow().due }), 'application/json');
         })
-        .catch((e) => send(res, 500, JSON.stringify({ error: e.message }), 'application/json'));
+        .catch((e) => send(res, e.status || 500, JSON.stringify({ error: e.status ? e.message : 'The server could not finish that request.' }), 'application/json'));
     }
 
     // Teach it a machine it has never seen, from that machine's own service manual.
@@ -235,7 +236,7 @@ function handler(req, res) {
       return readJson(req)
         .then((body) => read_manual(body))
         .then((r) => send(res, 200, JSON.stringify(r), 'application/json'))
-        .catch((e) => send(res, 500, JSON.stringify({ error: e.message }), 'application/json'));
+        .catch((e) => send(res, e.status || 500, JSON.stringify({ error: e.status ? e.message : 'The server could not finish that request.' }), 'application/json'));
     }
 
     if (req.method === 'POST' && url.pathname === '/api/learn') {

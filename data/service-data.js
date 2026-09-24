@@ -102,8 +102,19 @@ const MODELS = {
  */
 const LEARNED = {};
 
+/*
+ * A table's OWN entry, or nothing. These tables are plain objects keyed by whatever a caller sends,
+ * and `MODELS['__proto__']` is Object.prototype — truthy — so a fuzzer asking for model "__proto__",
+ * code "constructor" crashed the hosted function (FUNCTION_INVOCATION_FAILED) instead of answering
+ * "no service data". Every read of a caller-chosen key goes through here.
+ */
+const own = (table, key) => (table && (typeof key === 'string' || typeof key === 'number') && Object.prototype.hasOwnProperty.call(table, key) ? table[key] : undefined);
+/** Names that are never a machine, and must never become a key. */
+const RESERVED = new Set(['__proto__', 'constructor', 'prototype']);
+
 function learn({ model, brand = 'Unknown', kind = 'Appliance', codes, source }) {
-  if (MODELS[model]) return { learned: false, reason: `${model} already has verified service data.` };
+  if (typeof model !== 'string' || !model || RESERVED.has(model)) return { learned: false, reason: 'That is not a model number.' };
+  if (own(MODELS, model)) return { learned: false, reason: `${model} already has verified service data.` };
   if (!codes || Object.keys(codes).length === 0) return { learned: false, reason: 'Nothing usable was recovered from that manual.' };
   LEARNED[model] = { brand, kind, codes, source, generated: true };
   return { learned: true, model, codes: Object.keys(codes).length };
@@ -213,7 +224,7 @@ const canon = (s) => String(s ?? '').toUpperCase().replace(/[^A-Z0-9/]/g, '');
 
 function resolveModel(model) {
   if (typeof model !== 'string') return model;
-  if (MODELS[model] || ADMITTED[model] || LEARNED[model]) return model;
+  if (own(MODELS, model) || own(ADMITTED, model) || own(LEARNED, model)) return model;
   const q = canon(model);
   if (!q) return model;
   for (const tier of [MODELS, ADMITTED, LEARNED]) {
@@ -230,7 +241,7 @@ function resolveModel(model) {
 /** Hand-written first, then human-checked, then this session's unchecked reading. */
 const find = (model) => {
   const key = resolveModel(model);
-  return MODELS[key] || ADMITTED[key] || LEARNED[key];
+  return own(MODELS, key) || own(ADMITTED, key) || own(LEARNED, key);
 };
 
 /** The admitted tier, live rather than captured at require time. */
@@ -248,12 +259,12 @@ const machine = (model) => find(model) || null;
 
 /** How a machine's data got here, for anything that needs to say so out loud. */
 function provenance(model) {
-  if (MODELS[model]) return 'written by hand from the manual';
-  if (ADMITTED[model]) {
-    const r = ADMITTED[model];
+  if (own(MODELS, model)) return 'written by hand from the manual';
+  if (own(ADMITTED, model)) {
+    const r = own(ADMITTED, model);
     return `read from ${r.source || 'a manual'} and checked by ${r.reviewedBy || 'a reviewer'}`;
   }
-  if (LEARNED[model]) return 'read from a manual this session and checked by nobody';
+  if (own(LEARNED, model)) return 'read from a manual this session and checked by nobody';
   return null;
 }
 
@@ -528,8 +539,8 @@ function lookupSymptom(model, said) {
 
 function lookup(model, code) {
   const m = find(model);
-  if (!m) return { known: false, reason: `No service data for model ${model}.` };
-  const c = m.codes[code];
+  if (!m) return { known: false, reason: model ? `No service data for model ${model}.` : 'Which model? It is on the plate inside the door.' };
+  const c = own(m.codes, code);
   if (!c) {
     const s = symptomById(m, code, model);
     if (s) return s;
