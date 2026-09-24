@@ -186,6 +186,19 @@ const call = (name, args = {}) => handle({ jsonrpc: '2.0', id: 1, method: 'tools
   });
 
   await it('a failure inside a tool is -32603 without leaking the JavaScript error', async () => {
+    const tool = TOOLS.find((t) => t.name === 'diagnose');
+    const real = tool.handler;
+    tool.handler = () => { throw new TypeError("Cannot read properties of undefined (reading 'codes')"); };
+    const err = console.error; console.error = () => {};
+    try {
+      const r = await call('diagnose', { model: 'SHE3AR75UC', code: 'E24' });
+      assert.equal(r.error.code, -32603);
+      assert.doesNotMatch(r.error.message, /Cannot read|undefined|TypeError/);
+      assert.match(r.error.message, /diagnose could not finish/);
+    } finally { tool.handler = real; console.error = err; }
+  });
+
+  await it('malformed JSON on the wire is -32700', async () => {
     await withServer(async (url) => {
       const r = await post(url, '{not json');
       assert.equal(r.status, 400);

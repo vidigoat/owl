@@ -430,7 +430,7 @@ async function callTool(id, params) {
     if (typeof args.model === 'string') args.model = resolveModel(args.model);
     let value = await tool.handler(args);
     if (store && !(await persist()) && value && value.saved === true) {
-      // The shared store refused the save: this conversation holds it, and the answer says so.
+      // The shared store refused the save: it is not kept, and the answer says so.
       value = { ...value, saved: false, kept: 'session', keptFor: SESSION_ONLY };
     }
     return result(id, {
@@ -443,7 +443,10 @@ async function callTool(id, params) {
     });
   } catch (e) {
     if (store) await persist().catch(() => {}); // never leave the shared store attached after a throw
-    return failure(id, -32603, e.message);
+    // A crash inside a tool is ours, not the caller's: the log gets the JavaScript, the client gets
+    // a sentence. It used to send e.message — "Cannot read properties of undefined…" — to whoever asked.
+    console.error(`tool ${tool.name} threw:`, e && e.stack ? e.stack.split('\n').slice(0, 3).join(' | ') : e);
+    return failure(id, -32603, `${tool.name} could not finish that request.`);
   }
 }
 
