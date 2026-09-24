@@ -447,3 +447,25 @@ visitor's screen in the budget-stop message. The page now gets words; the log ge
 **Suggestion:** the same one as on the 20th, sharper for it: a hard per-principal cap on Bedrock
 would have made this whole file unnecessary. Every team that hosts a Bedrock demo on serverless
 has to rediscover that a local spend guard is not a global one.
+
+---
+
+### 2026-09-24 · The deployed server said it saved a repair it could not save (our own)
+
+**Task:** fuzz the hosted routes the way a judge's client might, and ask the deployed MCP server to
+remember a repair.
+**Expected:** a crash-free server, and a household that remembers.
+**Actual:** two things, both only on the deployed bundle. `model=__proto__&code=constructor` ended in
+`FUNCTION_INVOCATION_FAILED`: the service tables are plain objects, and `MODELS['__proto__']` is
+`Object.prototype` — truthy, so it was taken for a machine. And `remember_repair` answered
+`saved: true` while its write had failed against the read-only bundle; the agent then told the
+person their repair was recorded, and `repair_history` came back empty.
+**Severity:** high for the second. A product whose whole premise is not claiming what it has not
+done had claimed a save it never made.
+**Fix:** every caller-chosen key is read as a table's own entry, and built-in names can never be
+stored as a machine (a test sweeps all nineteen tools with them). A write now says whether it is
+durable; where it is not, the household is held for the conversation and every answer says so —
+"kept for this conversation only" — and the agent says "noted for this conversation", never
+"recorded".
+**Lesson worth keeping:** a local test suite runs on a writable disk. The deployed function does not,
+and the only way to learn what it says is to ask it.
