@@ -31,7 +31,8 @@
     "procedures": "node scripts/read-procedures.js",
     "latency": "node scripts/latency.js",
     "smoke:live": "node scripts/smoke-live.js",
-    "watch:measure": "node scripts/watch-measure.js"
+    "watch:measure": "node scripts/watch-measure.js",
+    "watch:probe": "node scripts/watch-probe.js"
   },
   "keywords": [
     "alexa-plus",

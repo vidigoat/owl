@@ -32,6 +32,8 @@ const FILTER = { text: 'Turn the coarse filter counterclockwise and remove the f
 const POWER = { text: 'Disconnect the appliance from the power supply.' };
 const ELEMENT = { text: 'Replace the heating element.' };
 const PIXEL = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==';
+/** A different frame: identical frames never reach a model (see "nothing changed, nothing done"). */
+const OTHER = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gAAAABJRU5ErkJggg==';
 /** Bedrock's envelope around a text answer. */
 const answer = (obj) => async () => JSON.stringify({ output: { message: { content: [{ text: JSON.stringify(obj) }] } }, usage: {} });
 
@@ -57,25 +59,36 @@ const answer = (obj) => async () => JSON.stringify({ output: { message: { conten
   });
 
   await it('"done" needs something seen AND 70% — below that it asks again rather than waving the person on', () => {
-    const shaky = decide({ verdict: 'done', seen: 'filter out', confidence: DONE_AT - 0.01 }, FILTER);
+    const shaky = decide({ scene: 'appliance', verdict: 'done', seen: 'filter out', confidence: DONE_AT - 0.01 }, FILTER);
     assert.equal(shaky.verdict, 'cant-see');
     assert.equal(shaky.downgradedFrom, 'done');
-    const blind = decide({ verdict: 'done', seen: null, confidence: 0.95 }, FILTER);
+    const blind = decide({ scene: 'appliance', verdict: 'done', seen: null, confidence: 0.95 }, FILTER);
     assert.equal(blind.verdict, 'cant-see', 'a confident "done" that names nothing it saw passed');
-    const sure = decide({ verdict: 'done', seen: 'the filter is out of the sump', confidence: 0.9 }, FILTER);
+    const sure = decide({ scene: 'appliance', verdict: 'done', seen: 'the filter is out of the sump', confidence: 0.9 }, FILTER);
     assert.equal(sure.verdict, 'done');
     assert.match(sure.say, /filter is out/);
   });
 
+  await it('only a real machine can be "done": a screen or a page showing the step is not the step (both models fell for it)', () => {
+    for (const scene of ['screen', 'paper', 'other', null]) {
+      const r = decide({ scene, verdict: 'done', seen: 'filter removed from machine', confidence: 0.95 }, FILTER);
+      assert.equal(r.verdict, 'cant-see', `a "${scene}" was accepted as a finished repair`);
+      assert.equal(r.downgradedFrom, 'done');
+    }
+    assert.match(decide({ scene: 'screen', verdict: 'done', seen: 'x', confidence: 0.95 }, FILTER).say, /screen or a page/);
+    assert.equal(parseWatch('{"scene":"Television","verdict":"done","seen":"x","confidence":1}').scene, null, 'an unknown scene was trusted');
+    assert.match(prompt(FILTER), /Words, drawings and diagrams are never evidence/);
+  });
+
   await it('a camera never signs off the power: a power step or mains work waits for the person to say it', () => {
     for (const step of [POWER, ELEMENT, { text: 'Switch the machine off at the wall before you start.' }]) {
-      const held = decide({ verdict: 'done', seen: 'the plug is out of the socket', confidence: 0.99 }, step);
+      const held = decide({ scene: 'appliance', verdict: 'done', seen: 'the plug is out of the socket', confidence: 0.99 }, step);
       assert.equal(held.verdict, 'not-yet', `"${step.text}" was signed off by a picture`);
       assert.equal(held.heldBack, 'mains');
       assert.match(held.say, /Tell me it's off at the wall/);
-      assert.equal(decide({ verdict: 'done', seen: 'the plug is out of the socket', confidence: 0.99 }, step, { powerConfirmed: true }).verdict, 'done');
+      assert.equal(decide({ scene: 'appliance', verdict: 'done', seen: 'the plug is out of the socket', confidence: 0.99 }, step, { powerConfirmed: true }).verdict, 'done');
     }
-    assert.equal(decide({ verdict: 'done', seen: 'filter out', confidence: 0.9 }, FILTER).heldBack, undefined, 'an ordinary step was held back');
+    assert.equal(decide({ scene: 'appliance', verdict: 'done', seen: 'filter out', confidence: 0.9 }, FILTER).heldBack, undefined, 'an ordinary step was held back');
   });
 
   await it('a hazard is passed through at 40% — a false "stop" costs seconds, a missed one costs a hand', () => {
@@ -106,8 +119,8 @@ const answer = (obj) => async () => JSON.stringify({ output: { message: { conten
 
   await it('two frames through Bedrock: the start of the step and now, one prompt, one answer', async () => {
     let got;
-    const invoke = async (req) => { got = req; return answer({ verdict: 'done', seen: 'the coarse filter is out', part: 'coarse filter', hazard: null, confidence: 0.86 })(); };
-    const r = await watchStep({ step: FILTER, before: `data:image/png;base64,${PIXEL}`, now: PIXEL, invoke });
+    const invoke = async (req) => { got = req; return answer({ scene: 'appliance', verdict: 'done', seen: 'the coarse filter is out', part: 'coarse filter', hazard: null, confidence: 0.86 })(); };
+    const r = await watchStep({ step: FILTER, before: `data:image/png;base64,${PIXEL}`, now: OTHER, invoke });
     assert.equal(r.ok, true);
     assert.equal(r.verdict, 'done');
     assert.equal(got.images.length, 2);
@@ -124,23 +137,40 @@ const answer = (obj) => async () => JSON.stringify({ output: { message: { conten
       async () => JSON.stringify({ output: { message: { content: [{ text: 'I think it looks fine' }] } } }),
     ];
     for (const invoke of cases) {
-      const r = await watchStep({ step: FILTER, before: PIXEL, now: PIXEL, invoke });
+      const r = await watchStep({ step: FILTER, before: PIXEL, now: OTHER, invoke });
       assert.equal(r.verdict, 'unavailable');
       assert.equal(r.ok, false);
       assert.match(r.say, /tell me when it's done/, 'the repair did not fall back to the voice');
     }
-    const budget = await watchStep({ step: FILTER, before: PIXEL, now: PIXEL, invoke: cases[1] });
+    const budget = await watchStep({ step: FILTER, before: PIXEL, now: OTHER, invoke: cases[1] });
     assert.match(budget.reason, /spending ceiling/);
   });
 
   await it('bad input is refused before anything is sent: no step, one frame, a frame that is not an image', async () => {
     let calls = 0;
-    const invoke = async () => { calls++; return answer({ verdict: 'done', seen: 'x', confidence: 1 })(); };
+    const invoke = async () => { calls++; return answer({ scene: 'appliance', verdict: 'done', seen: 'x', confidence: 1 })(); };
     assert.equal((await watchStep({ before: PIXEL, now: PIXEL, invoke })).verdict, 'unavailable');
     assert.equal((await watchStep({ step: FILTER, now: PIXEL, invoke })).verdict, 'unavailable');
     assert.equal((await watchStep({ step: FILTER, before: PIXEL, now: '<script>alert(1)</script>', invoke })).verdict, 'unavailable');
     assert.equal((await watchStep({ step: FILTER, before: PIXEL, now: 'A'.repeat(6 * 1024 * 1024), invoke })).verdict, 'unavailable');
     assert.equal(calls, 0, 'something was sent to Bedrock that should have been refused first');
+  });
+
+  await it('nothing changed, nothing done — whatever the model says (Nova 2 Lite said "done" on identical frames)', async () => {
+    let calls = 0;
+    const liar = async () => { calls++; return answer({ scene: 'appliance', verdict: 'done', seen: 'coarse filter turned and removed', confidence: 1 })(); };
+    const same = await watchStep({ step: FILTER, before: PIXEL, now: PIXEL, invoke: liar });
+    assert.equal(same.verdict, 'not-yet');
+    assert.equal(calls, 0, 'identical frames were sent to a model at all');
+    const stillScene = await watchStep({ step: FILTER, before: PIXEL, now: OTHER, sceneChange: 0.8, invoke: liar });
+    assert.equal(stillScene.verdict, 'not-yet', 'a page that measured no change was overruled by a model');
+    assert.equal(stillScene.downgradedFrom, 'done');
+    const moved = await watchStep({ step: FILTER, before: PIXEL, now: OTHER, sceneChange: 14, invoke: liar });
+    assert.equal(moved.verdict, 'done');
+    for (const unmeasured of [null, undefined, '0', 'none']) {
+      const r = await watchStep({ step: FILTER, before: PIXEL, now: OTHER, sceneChange: unmeasured, invoke: liar });
+      assert.equal(r.verdict, 'done', `sceneChange ${JSON.stringify(unmeasured)} (not measured) was read as "no change"`);
+    }
   });
 
   const CREDS = { accessKeyId: 'AKIDEXAMPLE', secretAccessKey: 'wJalrXUtnFEMI/K7MDENG+bPxRfiCYEXAMPLEKEY' };
@@ -167,7 +197,7 @@ const answer = (obj) => async () => JSON.stringify({ output: { message: { conten
     await assert.rejects(viaConverse(req, { creds: null, fetchImpl }), (e) => e.code === 'NO_CREDENTIALS');
     await assert.rejects(viaConverse(req, { creds: CREDS, env: { VERCEL: '1' }, fetchImpl }), (e) => e.code === 'NO_LEDGER');
     assert.equal(calls, 0, 'a call went out with no ceiling that holds across instances');
-    const r = await watchStep({ step: FILTER, before: PIXEL, now: PIXEL, invoke: (q) => viaConverse(q, { creds: CREDS, env: { VERCEL: '1' }, fetchImpl }) });
+    const r = await watchStep({ step: FILTER, before: PIXEL, now: OTHER, invoke: (q) => viaConverse(q, { creds: CREDS, env: { VERCEL: '1' }, fetchImpl }) });
     assert.match(r.reason, /no shared spend ledger/);
   });
 

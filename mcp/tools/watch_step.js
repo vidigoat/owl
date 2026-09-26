@@ -49,7 +49,14 @@ const { deploymentLedger } = require('../shared-budget');
  * by the same ledger rule: a shared DynamoDB ledger on a deployment, and on a deployment without
  * one, no look at all.
  */
-const WATCH_MODEL = process.env.HANDS_WATCH_MODEL || 'us.amazon.nova-lite-v1:0';
+/*
+ * Nova 2 Lite, chosen by measurement (scripts/watch-probe.js, docs/watch-probe.json). With the rules
+ * in this file applied, on the six probes: Nova Lite 3 unsafe of 6 — it called a manual's drawing
+ * and an app screenshot "appliance" and said "done" — Nova Pro 2 of 6, Nova 2 Lite 0 of 6 in four
+ * runs out of four. It is the slower (about 4 s a look) and dearer (about $0.0004) of the two Lites;
+ * a watcher that is fast and wrong about "done" is worse than none.
+ */
+const WATCH_MODEL = process.env.HANDS_WATCH_MODEL || 'us.amazon.nova-2-lite-v1:0';
 
 async function viaConverse({ images, prompt: text, maxTokens, timeoutMs }, { creds = credentials(), env = process.env, fetchImpl = globalThis.fetch, budget: given } = {}) {
   if (!creds) {
@@ -120,9 +127,15 @@ ${notes ? `The manual's notes on it:\n${notes}\n` : ''}
 The FIRST image was taken when they started this step. The SECOND is now.
 
 Return ONLY minified JSON, no prose, in exactly this shape:
-{"verdict":"done|not-yet|wrong-part|cant-see|danger","seen":"<what changed, 12 words max>","part":"<the part their hands are on, 6 words max, or null>","hazard":"<the hazard, 12 words max, or null>","confidence":<0..1>}
+{"scene":"appliance|screen|paper|other","verdict":"done|not-yet|wrong-part|cant-see|danger","seen":"<what changed, 12 words max>","part":"<the part their hands are on, 6 words max, or null>","hazard":"<the hazard, 12 words max, or null>","confidence":<0..1>}
+
+First, "scene": what the SECOND image physically shows. "appliance" only if it is a photograph of a
+real machine or its parts. "screen" if it shows a phone, tablet, computer or TV screen, or an app.
+"paper" if it shows a printed page, a manual, a drawing or a diagram. "other" for anything else.
 
 Rules:
+- Words, drawings and diagrams are never evidence that a step was done. If the image shows text or a
+  picture ABOUT the step, that is "screen" or "paper", not the step being done.
 - "done" only if the SECOND image shows the result the step asks for, and it differs from the first.
   If you cannot see the result, it is not done.
 - "wrong-part" if their hands are clearly on a different part from the one the step names.
@@ -164,7 +177,9 @@ function parseWatch(text) {
     return s.split(' ').slice(0, n).join(' ').replace(/[.;:]+$/, '').slice(0, 120);
   };
   const confidence = Number(j.confidence);
+  const scene = ['appliance', 'screen', 'paper', 'other'].includes(String(j.scene || '').toLowerCase().trim()) ? String(j.scene).toLowerCase().trim() : null;
   return {
+    scene,
     verdict,
     seen: describeOnly(words(j.seen, 12)),
     part: describeOnly(words(j.part, 6)),
@@ -179,7 +194,7 @@ function parseWatch(text) {
  */
 function decide(read, step, { powerConfirmed = false } = {}) {
   const mains = Boolean(step.mains) || isMains(String(step.text || '')) || POWER_STEP.test(String(step.text || ''));
-  const out = { verdict: read.verdict, seen: read.seen, part: read.part, hazard: read.hazard, confidence: read.confidence, mains };
+  const out = { scene: read.scene ?? null, verdict: read.verdict, seen: read.seen, part: read.part, hazard: read.hazard, confidence: read.confidence, mains };
 
   if (read.verdict === 'danger') {
     if (read.confidence >= DANGER_AT) return { ...out, say: `Stop. ${sentence(read.hazard) || 'Something in view looks unsafe'} — take your hands out until it's safe.` };
@@ -187,6 +202,15 @@ function decide(read, step, { powerConfirmed = false } = {}) {
     return { ...out, verdict: 'cant-see', downgradedFrom: 'danger', say: 'Hold on — I can\'t tell if that\'s safe. Is the machine off?' };
   }
   if (read.verdict === 'done') {
+    /*
+     * Only a real machine can be done. Measured, not imagined: shown two of this app's own screens
+     * (which carry the step's words), Nova Lite said "filter removed from machine" and Nova 2 Lite
+     * "door open, bottom rack pulled out" — both reading the text as if it were the repair. A
+     * camera pointed at the manual, or at this screen, is not a repair.
+     */
+    if (read.scene !== 'appliance') {
+      return { ...out, verdict: 'cant-see', downgradedFrom: 'done', notAppliance: read.scene, say: read.scene === 'screen' || read.scene === 'paper' ? 'That looks like a screen or a page, not the machine. Point the camera at the machine.' : 'I can\'t see the machine. Point the camera at it.' };
+    }
     if (!read.seen || read.confidence < DONE_AT) {
       return { ...out, verdict: 'cant-see', downgradedFrom: 'done', say: 'I can\'t quite see it. Hold it up to the camera, or tell me when it\'s done.' };
     }
@@ -226,7 +250,13 @@ const frame = (f) => {
  * Watch one step. Always resolves: a failure to see is an answer ("unavailable"), never a crash,
  * because the person on the floor does not care why the camera is not helping.
  */
-async function watchStep({ step, before, now, powerConfirmed = false, invoke = viaConverse } = {}) {
+/*
+ * Below this much change between the two thumbnails (mean grey difference, 0–255, measured by the
+ * page), nothing visible happened, and "done" is not an answer a model is allowed to give.
+ */
+const NO_CHANGE = 2;
+
+async function watchStep({ step, before, now, powerConfirmed = false, sceneChange = null, invoke = viaConverse } = {}) {
   if (!step || !step.text) return unavailableAnswer('No step to watch: pass the step the person is on, in the manual\'s words.');
   const a = frame(before);
   const b = frame(now);
@@ -235,6 +265,21 @@ async function watchStep({ step, before, now, powerConfirmed = false, invoke = v
     if (f.base64.length > MAX_FRAME) return unavailableAnswer('A frame was too large to send (over 5 MB).');
     if (!/^[A-Za-z0-9+/=]+$/.test(f.base64)) return unavailableAnswer('A frame did not decode as an image.');
   }
+  /*
+   * Nothing changed, so nothing is done — decided here, before any model is asked.
+   *
+   * Measured, not assumed: given the same manual illustration twice and the step "remove the
+   * filter system", Nova 2 Lite answered "done", 100% sure. Nova Lite did not. A rule that depends
+   * on which model is behind it is not a rule, so identical frames are answered without a call,
+   * and a page that measured no change keeps any model from saying otherwise.
+   */
+  if (a.base64 === b.base64) {
+    return { ok: true, verdict: 'not-yet', unchanged: true, ms: 0, costUsd: 0, say: 'Nothing has changed yet. Take your time.', mains: false };
+  }
+  // Not measured is not "no change": Number(null) is 0, and read that way every look from a client
+  // that does not measure would have been refused.
+  const measured = typeof sceneChange === 'number' && Number.isFinite(sceneChange);
+  const still = measured && sceneChange < NO_CHANGE;
   const started = Date.now();
   let raw;
   try {
@@ -254,7 +299,11 @@ async function watchStep({ step, before, now, powerConfirmed = false, invoke = v
   if (!read) return unavailableAnswer('The model did not answer in a shape that can be trusted.', { ms: Date.now() - started });
   // What it cost and which model looked travel with every answer — "a watched repair costs under a
   // cent" is a number read off real calls, not an estimate.
-  return { ok: true, ms: Date.now() - started, ...(spent || {}), ...decide(read, step, { powerConfirmed }) };
+  const decided = decide(read, step, { powerConfirmed });
+  if (still && decided.verdict === 'done') {
+    return { ok: true, ms: Date.now() - started, ...(spent || {}), ...decided, verdict: 'not-yet', downgradedFrom: 'done', unchanged: true, say: 'It doesn\'t look like anything has moved yet. Tell me when it\'s done.' };
+  }
+  return { ok: true, ms: Date.now() - started, ...(spent || {}), ...decided };
 }
 
-module.exports = { name: 'watch_step', watchStep, viaConverse, parseWatch, decide, prompt, POWER_STEP, WATCH_MODEL, DONE_AT, DANGER_AT, TIMEOUT_MS };
+module.exports = { name: 'watch_step', NO_CHANGE, watchStep, viaConverse, parseWatch, decide, prompt, POWER_STEP, WATCH_MODEL, DONE_AT, DANGER_AT, TIMEOUT_MS };

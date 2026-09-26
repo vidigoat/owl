@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { createSettle, grey, THUMB_W, THUMB_H } from '../lib/settle.js';
+import { createSettle, grey, difference, THUMB_W, THUMB_H } from '../lib/settle.js';
 
 /**
  * Watching the step being done.
@@ -23,6 +23,8 @@ export default function Watch({ step, stepKey, aloud }) {
   const thumbs = useRef(null);
   const loop = useRef(null);
   const before = useRef(null);
+  const beforeThumb = useRef(null);
+  const lastThumb = useRef(null);
   const settle = useRef(createSettle());
   const busy = useRef(false);
   const [on, setOn] = useState(false);
@@ -63,7 +65,9 @@ export default function Watch({ step, stepKey, aloud }) {
       const res = await fetch('/api/watch', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ step: { text: step.say, notes: step.detail ? [step.detail] : [] }, before: before.current, now, powerConfirmed }),
+        // How much the picture changed, from the thumbnails this page already keeps: the server
+        // will not accept "done" about a scene that did not move.
+        body: JSON.stringify({ step: { text: step.say, notes: step.detail ? [step.detail] : [] }, before: before.current, now, powerConfirmed, sceneChange: Number.isFinite(difference(beforeThumb.current, lastThumb.current)) ? Math.round(difference(beforeThumb.current, lastThumb.current) * 10) / 10 : null }),
       });
       const r = await res.json();
       setAnswer(r);
@@ -89,6 +93,8 @@ export default function Watch({ step, stepKey, aloud }) {
     const ctx = thumbs.current.getContext('2d', { willReadFrequently: true });
     ctx.drawImage(el, 0, 0, THUMB_W, THUMB_H);
     const g = grey(ctx.getImageData(0, 0, THUMB_W, THUMB_H).data);
+    lastThumb.current = g;
+    if (before.current && !beforeThumb.current) beforeThumb.current = g;
     // No "before" yet (the first moments of watching): nothing to compare with, so nothing to spend.
     if (!before.current) return;
     if (settle.current.feed(g, performance.now()) === 'look') look();
@@ -105,7 +111,7 @@ export default function Watch({ step, stepKey, aloud }) {
       setOn(true);
       // The step's "before" is the picture when watching begins — the camera needs a moment to
       // settle its exposure first, or "before" is a dark frame and every later one looks changed.
-      setTimeout(() => { before.current = frame(); }, 700);
+      setTimeout(() => { before.current = frame(); beforeThumb.current = null; }, 700);
       loop.current = setInterval(tick, 250);
     } catch (e) {
       setWhy(e.name === 'NotAllowedError' ? 'The browser did not give this page the camera. Nothing was captured.' : `No camera available here — ${e.message}`);
@@ -118,6 +124,7 @@ export default function Watch({ step, stepKey, aloud }) {
     stream.current?.getTracks().forEach((t) => t.stop());
     stream.current = null;
     before.current = null;
+    beforeThumb.current = null;
     setOn(false);
   }
 
@@ -127,7 +134,7 @@ export default function Watch({ step, stepKey, aloud }) {
     setLeft(settle.current.left);
     setAnswer(null);
     setPower(false);
-    if (stream.current) before.current = frame();
+    if (stream.current) { before.current = frame(); beforeThumb.current = lastThumb.current; }
   }, [stepKey]);
 
   useEffect(() => () => close(), []);

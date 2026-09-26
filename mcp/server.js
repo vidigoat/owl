@@ -179,6 +179,7 @@ const TOOLS = [
         before: { type: 'string', description: 'A frame from when the step began (base64 JPEG or a data: URL).' },
         now: { type: 'string', description: 'A frame from now.' },
         powerConfirmed: { type: 'boolean', description: 'The person has said the power is off at the wall.' },
+        sceneChange: { type: 'number', description: 'How much the picture changed between the two frames (mean grey difference, 0-255), if the client measured it. Below 2, "done" is refused.' },
       },
       required: ['step', 'before', 'now'],
     },

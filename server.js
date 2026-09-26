@@ -234,7 +234,7 @@ function handler(req, res) {
       watchLooks.set(who, Date.now());
       if (watchLooks.size > 5000) watchLooks.clear();
       return readJson(req)
-        .then((body) => watchStep({ step: body.step, before: body.before, now: body.now, powerConfirmed: Boolean(body.powerConfirmed) }))
+        .then((body) => watchStep({ step: body.step, before: body.before, now: body.now, powerConfirmed: Boolean(body.powerConfirmed), sceneChange: body.sceneChange }))
         .then((r) => {
           measureLook(r);
           return send(res, 200, JSON.stringify(r), 'application/json');
