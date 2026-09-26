@@ -136,11 +136,11 @@ The refusals are the product. Each one exists in code and has a test proving it 
 
 ## The library, and how it came to know things
 
-Eighty-three manuals read — **1305 symptoms, 2362 causes**, every one citing its page — which with
-the hand-written ones puts **80 machines in the library**, across five manufacturers and ten kinds of
-appliance. Then **every quotation is re-read off the page it cites** by script: 2,243 of 2,272
-found, and the 29 that were not are refused by name. A machine also answers for the other model
-numbers its manufacturer lists the same manual for — 32 more, exactly those, never a near one
+117 manuals read — **1444 symptoms, 2654 causes**, every one citing its page — which with the
+hand-written ones puts **110 machines in the library**, across five manufacturers and eleven kinds of
+appliance. Then **every quotation is re-read off the page it cites** by script: 2,491 of 2,522
+found, and the 31 that were not are refused by name. A machine also answers for the other model
+numbers its manufacturer lists the same manual for — 52 more, exactly those, never a near one
 (`scripts/cover-families.js`). How much of what Bosch and Siemens sell that reaches, per kind, is
 `npm run coverage` (`docs/coverage.json`).
 

@@ -1,0 +1,114 @@
+{
+  "model": "DWP64BC50B",
+  "brand": "Bosch",
+  "kind": "Oven",
+  "source": "DWP64BC50B.pdf",
+  "pages": "6–8",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "the-appliance-is-not-working",
+      "symptom": "The appliance is not working.",
+      "causes": [
+        {
+          "id": "the-appliance-is-not-working-0",
+          "label": "The mains plug of the power cord is not plugged in.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Connect the appliance to the power supply."
+          ],
+          "evidence": "Bosch manual, page 8: \"The mains plug of the power cord is not plugged in.\"",
+          "source": {
+            "line": 5,
+            "manual": "Bosch manual",
+            "page": 8
+          }
+        },
+        {
+          "id": "the-appliance-is-not-working-1",
+          "label": "The circuit breaker in the fuse box has tripped.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the circuit breaker in the fuse box."
+          ],
+          "evidence": "Bosch manual, page 8: \"The circuit breaker in the fuse box has tripped.\"",
+          "source": {
+            "line": 7,
+            "manual": "Bosch manual",
+            "page": 8
+          }
+        },
+        {
+          "id": "the-appliance-is-not-working-2",
+          "label": "There has been a power cut.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Check whether the lighting in your room or other appliances are working."
+          ],
+          "evidence": "Bosch manual, page 8: \"There has been a power cut.\"",
+          "source": {
+            "line": 9,
+            "manual": "Bosch manual",
+            "page": 8
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-led-lighting-does-not-work",
+      "symptom": "The LED lighting does not work.",
+      "causes": [
+        {
+          "id": "the-led-lighting-does-not-work-0",
+          "label": "Different causes are possible.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Defective LED lights may be replaced by the manufacturer, their customer service or a qualified technician (electrician) only.",
+            "Call ."
+          ],
+          "evidence": "Bosch manual, page 8: \"Different causes are possible.\"",
+          "source": {
+            "line": 11,
+            "manual": "Bosch manual",
+            "page": 8
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-button-illumination-does-not-work",
+      "symptom": "The button illumination does not work.",
+      "causes": [
+        {
+          "id": "the-button-illumination-does-not-work-0",
+          "label": "The control unit is faulty.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "If this fault recurs, call the after-sales service."
+          ],
+          "evidence": "Bosch manual, page 8: \"The control unit is faulty.\"",
+          "source": {
+            "line": 16,
+            "manual": "Bosch manual",
+            "page": 8
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-09-26T14:55:29.029Z",
+  "learnedAt": "2026-09-26T14:51:57.095Z",
+  "alsoCovers": [
+    "DWP74BC50B",
+    "DWP94BC50B"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "model": "DWK65DK60B",
+  "brand": "Bosch",
+  "kind": "Oven",
+  "source": "DWK65DK60B.pdf",
+  "pages": "8–8",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "the-appliance-is-not-working",
+      "symptom": "The appliance is not working.",
+      "causes": [
+        {
+          "id": "the-appliance-is-not-working-0",
+          "label": "The mains plug of the power cord is not plugged in.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Connect the appliance to the power supply."
+          ],
+          "evidence": "Bosch manual, page 8: \"The mains plug of the power cord is not plugged in.\"",
+          "source": {
+            "line": 52,
+            "manual": "Bosch manual",
+            "page": 8
+          }
+        },
+        {
+          "id": "the-appliance-is-not-working-1",
+          "label": "The circuit breaker in the fuse box has tripped.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the circuit breaker in the fuse box."
+          ],
+          "evidence": "Bosch manual, page 8: \"The circuit breaker in the fuse box has tripped.\"",
+          "source": {
+            "line": 54,
+            "manual": "Bosch manual",
+            "page": 8
+          }
+        },
+        {
+          "id": "the-appliance-is-not-working-2",
+          "label": "There has been a power cut.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Check whether the lighting in your room or other appliances are working."
+          ],
+          "evidence": "Bosch manual, page 8: \"There has been a power cut.\"",
+          "source": {
+            "line": 56,
+            "manual": "Bosch manual",
+            "page": 8
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-09-26T14:55:28.962Z",
+  "learnedAt": "2026-09-26T14:51:56.575Z",
+  "alsoCovers": [
+    "DWK85DK60B"
+  ]
+}

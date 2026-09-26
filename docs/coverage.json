@@ -1,12 +1,12 @@
 {
-  "measured": "2026-09-26T13:58:13.434Z",
+  "measured": "2026-09-26T14:55:40.950Z",
   "what": "Per brand and kind: product pages the manufacturer lists, visited, with an English manual, distinct manuals, and models the library answers for (scripts/coverage.js).",
   "total": {
     "listed": 496,
-    "visited": 262,
-    "english": 177,
-    "manuals": 121,
-    "answers": 107
+    "visited": 496,
+    "english": 296,
+    "manuals": 172,
+    "answers": 157
   },
   "rows": [
     {
@@ -49,36 +49,36 @@
       "brand": "bosch-uk",
       "kind": "cooking",
       "listed": 113,
-      "visited": 0,
-      "english": 0,
-      "manuals": 0,
-      "answers": 0
+      "visited": 113,
+      "english": 42,
+      "manuals": 27,
+      "answers": 39
     },
     {
       "brand": "bosch-uk",
       "kind": "fridges-freezers",
       "listed": 61,
-      "visited": 0,
-      "english": 0,
-      "manuals": 0,
-      "answers": 0
+      "visited": 61,
+      "english": 35,
+      "manuals": 17,
+      "answers": 11
     },
     {
       "brand": "bosch-uk",
       "kind": "laundry",
       "listed": 31,
-      "visited": 0,
-      "english": 0,
-      "manuals": 0,
+      "visited": 31,
+      "english": 13,
+      "manuals": 5,
       "answers": 0
     },
     {
       "brand": "bosch-uk",
       "kind": "dishwashers",
       "listed": 29,
-      "visited": 0,
-      "english": 0,
-      "manuals": 0,
+      "visited": 29,
+      "english": 29,
+      "manuals": 2,
       "answers": 0
     },
     {

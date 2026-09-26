@@ -1,0 +1,164 @@
+{
+  "model": "GTV15NWEBG",
+  "brand": "Bosch",
+  "kind": "Fridge freezer",
+  "source": "GTV15NWEBG.pdf",
+  "pages": "15–17",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "the-refrigeration-unit-is-switching-on-m",
+      "symptom": "The refrigeration unit is switching on more frequently and for longer.",
+      "causes": [
+        {
+          "id": "the-refrigeration-unit-is-switching-on-m-0",
+          "label": "The appliance has been opened frequently.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Do not open appliance door unnecessarily."
+          ],
+          "evidence": "Bosch manual, page 16: \"The appliance has been opened frequently.\"",
+          "source": {
+            "line": 6,
+            "manual": "Bosch manual",
+            "page": 16
+          }
+        },
+        {
+          "id": "the-refrigeration-unit-is-switching-on-m-1",
+          "label": "The exterior ventilation grilles are blocked.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Remove any obstructions from in front of the exterior ventilation grilles."
+          ],
+          "evidence": "Bosch manual, page 16: \"The exterior ventilation grilles are blocked.\"",
+          "source": {
+            "line": 8,
+            "manual": "Bosch manual",
+            "page": 16
+          }
+        },
+        {
+          "id": "the-refrigeration-unit-is-switching-on-m-2",
+          "label": "Not a fault. Modern refrigeration machines switch on more frequently and have different power levels to cool more efficiently.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Remove any obstructions from in front of the exterior ventilation grilles.",
+            "Install the appliance as far away as possible from heating elements, cookers and other heat sources.",
+            "Avoid prolonged exposure of the appliance to direct sunlight.",
+            "Regularly defrost the freezer compartment.",
+            "Page 14 Only open the appliance door as briefly as necessary.",
+            "Allow hot food and drinks to cool down first before storing in the appliance."
+          ],
+          "evidence": "Bosch manual, page 16: \"Not a fault. Modern refrigeration machines switch on more frequently and have different power levels to cool more efficiently.\"",
+          "source": {
+            "line": 11,
+            "manual": "Bosch manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-temperature-differs-greatly-from-the",
+      "symptom": "The temperature differs greatly from the setting.",
+      "causes": [
+        {
+          "id": "the-temperature-differs-greatly-from-the-0",
+          "label": "Different causes are possible.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Switch off the appliance. Page 12",
+            "Switch the appliance back on after five minutes.",
+            "Page 11 If the temperature is too warm, check the temperature again after a couple of hours.",
+            "If the temperature is too cold, check the temperature again on the following day."
+          ],
+          "evidence": "Bosch manual, page 16: \"Different causes are possible.\"",
+          "source": {
+            "line": 30,
+            "manual": "Bosch manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-appliance-hums-bubbles-buzzes-gargle",
+      "symptom": "The appliance hums, bubbles, buzzes, gargles or clicks.",
+      "causes": [
+        {
+          "id": "the-appliance-hums-bubbles-buzzes-gargle-0",
+          "label": "Not a fault. A motor is running, e.g. refrigerating unit, fan. Refrigerant flows through the pipes. The motor, switches or solenoid valves are switching on or off. No action required.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [],
+          "evidence": "Bosch manual, page 16: \"Not a fault. A motor is running, e.g. refrigerating unit, fan. Refrigerant flows through the pipes. The motor, switches or solenoid valves are switching on or off. No action required.\"",
+          "source": {
+            "line": 38,
+            "manual": "Bosch manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-appliance-makes-noises",
+      "symptom": "The appliance makes noises.",
+      "causes": [
+        {
+          "id": "the-appliance-makes-noises-0",
+          "label": "Fittings wobble or stick.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check the removable fittings and, if required, replace these."
+          ],
+          "evidence": "Bosch manual, page 17: \"Fittings wobble or stick.\"",
+          "source": {
+            "line": 3,
+            "manual": "Bosch manual",
+            "page": 17
+          }
+        },
+        {
+          "id": "the-appliance-makes-noises-1",
+          "label": "Containers are touching.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Move the containers apart."
+          ],
+          "evidence": "Bosch manual, page 17: \"Containers are touching.\"",
+          "source": {
+            "line": 6,
+            "manual": "Bosch manual",
+            "page": 17
+          }
+        },
+        {
+          "id": "the-appliance-makes-noises-2",
+          "label": "Super freezing is switched on. No action required.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [],
+          "evidence": "Bosch manual, page 17: \"Super freezing is switched on. No action required.\"",
+          "source": {
+            "line": 8,
+            "manual": "Bosch manual",
+            "page": 17
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-09-26T14:55:29.322Z",
+  "learnedAt": "2026-09-26T14:46:57.282Z"
+}

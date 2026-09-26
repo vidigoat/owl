@@ -1,0 +1,241 @@
+{
+  "model": "BFL553MB0B",
+  "brand": "Bosch",
+  "kind": "Microwave",
+  "source": "BFL553MB0B.pdf",
+  "pages": "13–14",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "the-appliance-is-not-working",
+      "symptom": "The appliance is not working.",
+      "causes": [
+        {
+          "id": "the-appliance-is-not-working-0",
+          "label": "The mains plug of the power cord is not plugged in.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Connect the appliance to the power supply."
+          ],
+          "evidence": "Bosch manual, page 14: \"The mains plug of the power cord is not plugged in.\"",
+          "source": {
+            "line": 5,
+            "manual": "Bosch manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "the-appliance-is-not-working-1",
+          "label": "The circuit breaker in the fuse box has tripped.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the circuit breaker in the fuse box."
+          ],
+          "evidence": "Bosch manual, page 14: \"The circuit breaker in the fuse box has tripped.\"",
+          "source": {
+            "line": 7,
+            "manual": "Bosch manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "the-appliance-is-not-working-2",
+          "label": "There has been a power cut.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Check whether the lighting in your room or other appliances are working."
+          ],
+          "evidence": "Bosch manual, page 14: \"There has been a power cut.\"",
+          "source": {
+            "line": 9,
+            "manual": "Bosch manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "the-appliance-is-not-working-3",
+          "label": "Malfunction",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Switch off the fuse in the fuse box.",
+            "Switch the fuse back on after approx. 10 seconds.",
+            "If the fault was a one-off, the message disappears.",
+            "If the message appears again, call the after-sales service. Please specify the",
+            "exact error message when calling."
+          ],
+          "evidence": "Bosch manual, page 14: \"Malfunction\"",
+          "source": {
+            "line": 11,
+            "manual": "Bosch manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "the-appliance-is-not-working-4",
+          "label": "Door is not fully closed.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Check whether food remains or foreign material are trapped in the door."
+          ],
+          "evidence": "Bosch manual, page 14: \"Door is not fully closed.\"",
+          "source": {
+            "line": 18,
+            "manual": "Bosch manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-takes-longer-than-usual-to-heat-up",
+      "symptom": "Food takes longer than usual to heat up.",
+      "causes": [
+        {
+          "id": "food-takes-longer-than-usual-to-heat-up-0",
+          "label": "The microwave power setting is set too low.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Set a higher microwave power setting. Page 9"
+          ],
+          "evidence": "Bosch manual, page 14: \"The microwave power setting is set too low.\"",
+          "source": {
+            "line": 20,
+            "manual": "Bosch manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "food-takes-longer-than-usual-to-heat-up-1",
+          "label": "A larger amount than usual has been placed in the appliance.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Set a longer cooking time."
+          ],
+          "evidence": "Bosch manual, page 14: \"A larger amount than usual has been placed in the appliance.\"",
+          "source": {
+            "line": 22,
+            "manual": "Bosch manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "food-takes-longer-than-usual-to-heat-up-2",
+          "label": "You need double the time when you have double the amount. The food is colder than usual.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Turn or stir the food from time to time during cooking."
+          ],
+          "evidence": "Bosch manual, page 14: \"You need double the time when you have double the amount. The food is colder than usual.\"",
+          "source": {
+            "line": 24,
+            "manual": "Bosch manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "turntable-grates-or-grinds",
+      "symptom": "Turntable grates or grinds.",
+      "causes": [
+        {
+          "id": "turntable-grates-or-grinds-0",
+          "label": "There is dirt or foreign objects in the area of the turntable drive.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Clean the roller ring and recess in the cooking compartment."
+          ],
+          "evidence": "Bosch manual, page 14: \"There is dirt or foreign objects in the area of the turntable drive.\"",
+          "source": {
+            "line": 27,
+            "manual": "Bosch manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "microwave-mode-is-cancelled",
+      "symptom": "Microwave mode is cancelled.",
+      "causes": [
+        {
+          "id": "microwave-mode-is-cancelled-0",
+          "label": "Appliance has a fault.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "If this fault recurs, call the after-sales service."
+          ],
+          "evidence": "Bosch manual, page 14: \"Appliance has a fault.\"",
+          "source": {
+            "line": 29,
+            "manual": "Bosch manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-appliance-is-not-in-operation-a-cook",
+      "symptom": "The appliance is not in operation. A cooking time is shown in the display.",
+      "causes": [
+        {
+          "id": "the-appliance-is-not-in-operation-a-cook-0",
+          "label": "The settings area has been activated accidentally.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Press      .",
+            "was not pressed after the setting was implemented.",
+            "Press        or delete the setting by pressing      ."
+          ],
+          "evidence": "Bosch manual, page 14: \"The settings area has been activated accidentally.\"",
+          "source": {
+            "line": 31,
+            "manual": "Bosch manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "an-is-shown-on-the-display",
+      "symptom": "An is shown on the display.",
+      "causes": [
+        {
+          "id": "an-is-shown-on-the-display-0",
+          "label": "Demo mode is activated.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Deactivate the demo mode."
+          ],
+          "evidence": "Bosch manual, page 14: \"Demo mode is activated.\"",
+          "source": {
+            "line": 38,
+            "manual": "Bosch manual",
+            "page": 14
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-09-26T14:55:25.295Z",
+  "learnedAt": "2026-09-26T14:46:24.630Z",
+  "alsoCovers": [
+    "BFL553MS0B"
+  ]
+}

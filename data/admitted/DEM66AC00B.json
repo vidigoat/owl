@@ -1,0 +1,86 @@
+{
+  "model": "DEM66AC00B",
+  "brand": "Bosch",
+  "kind": "Oven",
+  "source": "DEM66AC00B.pdf",
+  "pages": "6–8",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "the-appliance-is-not-working",
+      "symptom": "The appliance is not working.",
+      "causes": [
+        {
+          "id": "the-appliance-is-not-working-0",
+          "label": "The mains plug of the power cord is not plugged in.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Connect the appliance to the power supply."
+          ],
+          "evidence": "Bosch manual, page 8: \"The mains plug of the power cord is not plugged in.\"",
+          "source": {
+            "line": 8,
+            "manual": "Bosch manual",
+            "page": 8
+          }
+        },
+        {
+          "id": "the-appliance-is-not-working-1",
+          "label": "The circuit breaker is faulty.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the circuit breaker in the fuse box."
+          ],
+          "evidence": "Bosch manual, page 8: \"The circuit breaker is faulty.\"",
+          "source": {
+            "line": 10,
+            "manual": "Bosch manual",
+            "page": 8
+          }
+        },
+        {
+          "id": "the-appliance-is-not-working-2",
+          "label": "There has been a power cut.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Check whether the lighting in your room or other appliances are working."
+          ],
+          "evidence": "Bosch manual, page 8: \"There has been a power cut.\"",
+          "source": {
+            "line": 12,
+            "manual": "Bosch manual",
+            "page": 8
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-led-lighting-does-not-work",
+      "symptom": "The LED lighting does not work.",
+      "causes": [
+        {
+          "id": "the-led-lighting-does-not-work-0",
+          "label": "The LED lamp is defective.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [],
+          "evidence": "Bosch manual, page 8: \"The LED lamp is defective.\"",
+          "source": {
+            "line": 14,
+            "manual": "Bosch manual",
+            "page": 8
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-09-26T14:55:26.330Z",
+  "learnedAt": "2026-09-26T14:47:43.133Z"
+}

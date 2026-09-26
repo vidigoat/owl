@@ -1,0 +1,249 @@
+{
+  "model": "BFL7221B1B",
+  "brand": "Bosch",
+  "kind": "Microwave",
+  "source": "BFL7221B1B.pdf",
+  "pages": "15–16",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "the-appliance-is-not-working",
+      "symptom": "The appliance is not working.",
+      "causes": [
+        {
+          "id": "the-appliance-is-not-working-0",
+          "label": "The mains plug of the power cord is not plugged in.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Connect the appliance to the power supply."
+          ],
+          "evidence": "Bosch manual, page 16: \"The mains plug of the power cord is not plugged in.\"",
+          "source": {
+            "line": 5,
+            "manual": "Bosch manual",
+            "page": 16
+          }
+        },
+        {
+          "id": "the-appliance-is-not-working-1",
+          "label": "The circuit breaker in the fuse box has tripped.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the circuit breaker in the fuse box."
+          ],
+          "evidence": "Bosch manual, page 16: \"The circuit breaker in the fuse box has tripped.\"",
+          "source": {
+            "line": 7,
+            "manual": "Bosch manual",
+            "page": 16
+          }
+        },
+        {
+          "id": "the-appliance-is-not-working-2",
+          "label": "There has been a power cut.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Check whether the lighting in your room or other appliances are working."
+          ],
+          "evidence": "Bosch manual, page 16: \"There has been a power cut.\"",
+          "source": {
+            "line": 9,
+            "manual": "Bosch manual",
+            "page": 16
+          }
+        },
+        {
+          "id": "the-appliance-is-not-working-3",
+          "label": "Malfunction",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Switch off the fuse in the fuse box.",
+            "Switch the fuse back on after approx. 10 seconds.",
+            "If the fault was a one-off, the message disappears.",
+            "If the message appears again, call the after-sales service. Please specify the",
+            "exact error message when calling."
+          ],
+          "evidence": "Bosch manual, page 16: \"Malfunction\"",
+          "source": {
+            "line": 11,
+            "manual": "Bosch manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "microwave-not-working",
+      "symptom": "Microwave not working.",
+      "causes": [
+        {
+          "id": "microwave-not-working-0",
+          "label": "Door is not fully closed.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check whether food remains or foreign material are trapped in the door."
+          ],
+          "evidence": "Bosch manual, page 16: \"Door is not fully closed.\"",
+          "source": {
+            "line": 18,
+            "manual": "Bosch manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-does-not-heat-up",
+      "symptom": "Food does not heat up.",
+      "causes": [
+        {
+          "id": "food-does-not-heat-up-0",
+          "label": "Demo mode is activated in the basic settings.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Disconnect the appliance from power supply by briefly switching off the circuit",
+            "breaker in the fuse box.",
+            "Go to the basic settings and deactivate Demo mode within the next 5 minutes.",
+            "Page 13"
+          ],
+          "evidence": "Bosch manual, page 16: \"Demo mode is activated in the basic settings.\"",
+          "source": {
+            "line": 20,
+            "manual": "Bosch manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-interior-lighting-is-not-working",
+      "symptom": "The interior lighting is not working.",
+      "causes": [
+        {
+          "id": "the-interior-lighting-is-not-working-0",
+          "label": "Different causes are possible.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Call ."
+          ],
+          "evidence": "Bosch manual, page 16: \"Different causes are possible.\"",
+          "source": {
+            "line": 25,
+            "manual": "Bosch manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "microwave-mode-is-cancelled",
+      "symptom": "Microwave mode is cancelled.",
+      "causes": [
+        {
+          "id": "microwave-mode-is-cancelled-0",
+          "label": "Malfunction",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "reset the appliance",
+            "Press and hold      button for at least 10 seconds.",
+            "Or switch off the fuse in the fuse box. Switch the fuse back on after approx.",
+            "10 seconds.",
+            "If the fault was a one-off, the message disappears.",
+            "If the message appears again, call the after-sales service. Please specify the",
+            "exact error message when calling."
+          ],
+          "evidence": "Bosch manual, page 16: \"Malfunction\"",
+          "source": {
+            "line": 28,
+            "manual": "Bosch manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-takes-longer-than-usual-to-heat-up",
+      "symptom": "Food takes longer than usual to heat up.",
+      "causes": [
+        {
+          "id": "food-takes-longer-than-usual-to-heat-up-0",
+          "label": "The microwave power setting is set too low.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Set a higher microwave power setting."
+          ],
+          "evidence": "Bosch manual, page 16: \"The microwave power setting is set too low.\"",
+          "source": {
+            "line": 37,
+            "manual": "Bosch manual",
+            "page": 16
+          }
+        },
+        {
+          "id": "food-takes-longer-than-usual-to-heat-up-1",
+          "label": "A larger amount than usual has been placed in the appliance.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Set a longer cooking time."
+          ],
+          "evidence": "Bosch manual, page 16: \"A larger amount than usual has been placed in the appliance.\"",
+          "source": {
+            "line": 39,
+            "manual": "Bosch manual",
+            "page": 16
+          }
+        },
+        {
+          "id": "food-takes-longer-than-usual-to-heat-up-2",
+          "label": "You need double the time when you have double the amount. The food is colder than usual.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Turn or stir the food from time to time during cooking."
+          ],
+          "evidence": "Bosch manual, page 16: \"You need double the time when you have double the amount. The food is colder than usual.\"",
+          "source": {
+            "line": 41,
+            "manual": "Bosch manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "time-not-displayed-when-appliance-switch",
+      "symptom": "Time not displayed when appliance switched off",
+      "causes": [
+        {
+          "id": "time-not-displayed-when-appliance-switch-0",
+          "label": "Display switches itself off after a short time. No action required.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [],
+          "evidence": "Bosch manual, page 16: \"Display switches itself off after a short time. No action required.\"",
+          "source": {
+            "line": 44,
+            "manual": "Bosch manual",
+            "page": 16
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-09-26T14:55:25.367Z",
+  "learnedAt": "2026-09-26T14:46:25.621Z"
+}

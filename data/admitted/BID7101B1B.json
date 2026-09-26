@@ -1,0 +1,234 @@
+{
+  "model": "BID7101B1B",
+  "brand": "Bosch",
+  "kind": "Oven",
+  "source": "BID7101B1B.pdf",
+  "pages": "12–14",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "the-appliance-is-not-working",
+      "symptom": "The appliance is not working.",
+      "causes": [
+        {
+          "id": "the-appliance-is-not-working-0",
+          "label": "The circuit breaker in the fuse box has tripped.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check the circuit breaker in the fuse box."
+          ],
+          "evidence": "Bosch manual, page 13: \"The circuit breaker in the fuse box has tripped.\"",
+          "source": {
+            "line": 53,
+            "manual": "Bosch manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "the-appliance-is-not-working-1",
+          "label": "There has been a power cut.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check whether the lighting in your room or other appliances are working.",
+            "Open the appliance. Following a power cut, the touch fields light up in ascending order from left to right. The display goes out after approx. 30 seconds and the appliance is ready for operation.",
+            "Start the required operating mode."
+          ],
+          "evidence": "Bosch manual, page 13: \"There has been a power cut.\"",
+          "source": {
+            "line": 55,
+            "manual": "Bosch manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-appliance-is-switched-on-the-operati",
+      "symptom": "The appliance is switched on. The operation indicator does not light up.",
+      "causes": [
+        {
+          "id": "the-appliance-is-switched-on-the-operati-0",
+          "label": "The operation indicator is defective.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Call Customer Service Page 15."
+          ],
+          "evidence": "Bosch manual, page 13: \"The operation indicator is defective.\"",
+          "source": {
+            "line": 63,
+            "manual": "Bosch manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-operation-indicator-flashes",
+      "symptom": "The operation indicator flashes.",
+      "causes": [
+        {
+          "id": "the-operation-indicator-flashes-0",
+          "label": "The appliance heats up.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wait until the appliance has finished heating up."
+          ],
+          "evidence": "Bosch manual, page 14: \"The appliance heats up.\"",
+          "source": {
+            "line": 4,
+            "manual": "Bosch manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-cookware-or-food-does-not-get-warm-e",
+      "symptom": "The cookware or food does not get warm enough.",
+      "causes": [
+        {
+          "id": "the-cookware-or-food-does-not-get-warm-e-0",
+          "label": "There has been a power cut.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check whether the lighting in your room or other appliances are working."
+          ],
+          "evidence": "Bosch manual, page 14: \"There has been a power cut.\"",
+          "source": {
+            "line": 21,
+            "manual": "Bosch manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "the-cookware-or-food-does-not-get-warm-e-1",
+          "label": "The cookware or food has not been heated for long enough.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Heat the cookware or the food for a longer period of time."
+          ],
+          "evidence": "Bosch manual, page 14: \"The cookware or food has not been heated for long enough.\"",
+          "source": {
+            "line": 23,
+            "manual": "Bosch manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "the-cookware-or-food-does-not-get-warm-e-2",
+          "label": "The appliance is not completely closed.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Close the appliance."
+          ],
+          "evidence": "Bosch manual, page 14: \"The appliance is not completely closed.\"",
+          "source": {
+            "line": 25,
+            "manual": "Bosch manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-appliance-switches-off-and-light-up",
+      "symptom": "The appliance switches off. and light up.",
+      "causes": [
+        {
+          "id": "the-appliance-switches-off-and-light-up-0",
+          "label": "The appliance has overheated.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wait until the appliance has cooled down.",
+            "Ensure that the ventilation slots on the rear panel of the appliance are not",
+            "covered.",
+            "Check whether an oven integrated above is in pyrolytic self-cleaning mode."
+          ],
+          "evidence": "Bosch manual, page 14: \"The appliance has overheated.\"",
+          "source": {
+            "line": 27,
+            "manual": "Bosch manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-appliance-switches-off-all-displays-",
+      "symptom": "The appliance switches off. All displays are off.",
+      "causes": [
+        {
+          "id": "the-appliance-switches-off-all-displays--0",
+          "label": "The safety shut-off has switched the appliance off.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Switch the appliance back on."
+          ],
+          "evidence": "Bosch manual, page 14: \"The safety shut-off has switched the appliance off.\"",
+          "source": {
+            "line": 44,
+            "manual": "Bosch manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-indicators-light-up-the-appliance-is",
+      "symptom": "The indicators light up. The appliance is not heating up.",
+      "causes": [
+        {
+          "id": "the-indicators-light-up-the-appliance-is-0",
+          "label": "Demo mode is activated.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Deactivate demo mode. Page 14"
+          ],
+          "evidence": "Bosch manual, page 14: \"Demo mode is activated.\"",
+          "source": {
+            "line": 46,
+            "manual": "Bosch manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-front-panel-is-not-aligned",
+      "symptom": "The front panel is not aligned.",
+      "causes": [
+        {
+          "id": "the-front-panel-is-not-aligned-0",
+          "label": "The front panel was not aligned during installation.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Adjust the front panel. Page 21"
+          ],
+          "evidence": "Bosch manual, page 14: \"The front panel was not aligned during installation.\"",
+          "source": {
+            "line": 54,
+            "manual": "Bosch manual",
+            "page": 14
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-09-26T14:55:25.658Z",
+  "learnedAt": "2026-09-26T14:47:29.621Z"
+}

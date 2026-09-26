@@ -854,6 +854,17 @@ across dishwashers, a dryer, refrigerators and two Siemens ovens: the same parse
 kinds of appliance from two manufacturers. With the hand-written ones that is **23 machines in the library** —
 406 symptoms and 774 causes, and 28 rows rejected rather than admitted quietly.
 
+**26 September — the whole catalogue.** Every major-appliance product page Bosch US, Bosch UK and
+Siemens UK publish was visited: 496 models, 296 with an English manual, behind only 172 distinct
+documents, because one book covers a line (one wall-oven manual is listed on 22 model pages). Read,
+verified quote by quote, admitted: **110 machines**, and through the manufacturer's own listings
+(`alsoCovers`) answers for **157 models**. What it cost to get there: 56 downloads not made
+because the manual was already here, three reader bugs (a heading the rules did not know, a
+threshold that discarded two-row tables, and three re-sorts that each undid the header-first
+order), and one data bug in re-admission, caught before commit and pinned by a test. What it does
+not yet read: washer fault tables set in the symptom-table layout (20 models), and sub-codes such as
+E:30-10 and E:30-20, which still share one key.
+
 ### Every quotation, re-read off the page it cites
 
 `node scripts/verify-against-pages.js` re-extracts the cited page from the manufacturer's own PDF

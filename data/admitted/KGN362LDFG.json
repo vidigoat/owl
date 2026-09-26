@@ -1,0 +1,335 @@
+{
+  "model": "KGN362LDFG",
+  "brand": "Bosch",
+  "kind": "Fridge freezer",
+  "source": "KGN362LDFG.pdf",
+  "pages": "21–24",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "the-appliance-is-not-cooling-the-display",
+      "symptom": "The appliance is not cooling, the displays and lighting are lit.",
+      "causes": [
+        {
+          "id": "the-appliance-is-not-cooling-the-display-0",
+          "label": "Showroom mode is switched on.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Switch off the appliance. Page 14",
+            "Wait 2 minutes.",
+            "Switch the appliance back on. Page 13",
+            "Wait 1 minute and then press and hold super cool",
+            "until 4 audible signals have sounded.",
+            "After a short time, check whether your appliance is",
+            "cooling."
+          ],
+          "evidence": "Bosch manual, page 21: \"Showroom mode is switched on.\"",
+          "source": {
+            "line": 12,
+            "manual": "Bosch manual",
+            "page": 21
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-refrigeration-unit-is-switching-on-m",
+      "symptom": "The refrigeration unit is switching on more frequently and for longer.",
+      "causes": [
+        {
+          "id": "the-refrigeration-unit-is-switching-on-m-0",
+          "label": "The appliance has been opened frequently.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Do not open appliance door unnecessarily."
+          ],
+          "evidence": "Bosch manual, page 21: \"The appliance has been opened frequently.\"",
+          "source": {
+            "line": 24,
+            "manual": "Bosch manual",
+            "page": 21
+          }
+        },
+        {
+          "id": "the-refrigeration-unit-is-switching-on-m-1",
+          "label": "External ventilation openings are covered up.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Remove any obstructions from in front of the external ventilation openings."
+          ],
+          "evidence": "Bosch manual, page 21: \"External ventilation openings are covered up.\"",
+          "source": {
+            "line": 26,
+            "manual": "Bosch manual",
+            "page": 21
+          }
+        },
+        {
+          "id": "the-refrigeration-unit-is-switching-on-m-2",
+          "label": "Not a fault. Modern refrigeration machines switch on more frequently and have different power levels to cool more efficiently.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Remove any obstructions from in front of the external ventilation openings.",
+            "Install the appliance as far away as possible from heating elements, cookers and other heat sources.",
+            "Avoid prolonged exposure of the appliance to direct sunlight.",
+            "Only open the appliance door as briefly as necessary.",
+            "Allow hot food and drinks to cool down first before storing in the appliance."
+          ],
+          "evidence": "Bosch manual, page 21: \"Not a fault. Modern refrigeration machines switch on more frequently and have different power levels to cool more efficiently.\"",
+          "source": {
+            "line": 29,
+            "manual": "Bosch manual",
+            "page": 21
+          }
+        }
+      ]
+    },
+    {
+      "id": "a-layer-of-frost-forms-on-the-back-wall-",
+      "symptom": "A layer of frost forms on the back wall of the refrigerator compartment.",
+      "causes": [
+        {
+          "id": "a-layer-of-frost-forms-on-the-back-wall--0",
+          "label": "Not a fault. Modern refrigeration machines ensure a more even temperature in the refrigerator compartment. The back wall of the refrigerator compartment is defrosted automatically at regular intervals.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Only open the appliance door as briefly as necessary.",
+            "Pack the food airtight or cover it.",
+            "Allow hot food and drinks to cool down first before storing in the appliance.",
+            "Always leave some space between the food and the interior walls."
+          ],
+          "evidence": "Bosch manual, page 22: \"Not a fault. Modern refrigeration machines ensure a more even temperature in the refrigerator compartment. The back wall of the refrigerator compartment is defrosted automatically at regular intervals.\"",
+          "source": {
+            "line": 3,
+            "manual": "Bosch manual",
+            "page": 22
+          }
+        }
+      ]
+    },
+    {
+      "id": "all-temperature-displays-and-alarm-off",
+      "symptom": "All temperature displays and \"alarm off\"",
+      "causes": [
+        {
+          "id": "all-temperature-displays-and-alarm-off-0",
+          "label": "A sensor is defective.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Call customer service."
+          ],
+          "evidence": "Bosch manual, page 22: \"A sensor is defective.\"",
+          "source": {
+            "line": 27,
+            "manual": "Bosch manual",
+            "page": 22
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-set-temperature-is-not-reached",
+      "symptom": "The set temperature is not reached.",
+      "causes": [
+        {
+          "id": "the-set-temperature-is-not-reached-0",
+          "label": "The freezer compartment door was open for a long time. The evaporator (refrigeration unit) in the noFrost",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [],
+          "evidence": "Bosch manual, page 23: \"The freezer compartment door was open for a long time. The evaporator (refrigeration unit) in the noFrost\"",
+          "source": {
+            "line": 3,
+            "manual": "Bosch manual",
+            "page": 23
+          }
+        }
+      ]
+    },
+    {
+      "id": "fully-automatic-defrosting-no-longer-wor",
+      "symptom": "Fully automatic defrosting no longer works.",
+      "causes": [
+        {
+          "id": "fully-automatic-defrosting-no-longer-wor-0",
+          "label": "system is heavily iced up. Requirement: Store the frozen food well insulated in a cool place.",
+          "suspect": true,
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Switch off the appliance. Page 14",
+            "Disconnect the appliance from the mains. Unplug the appliance from the mains or switch off the circuit breaker in the fuse box.",
+            "Call customer service. The customer service number can be found in the enclosed customer service directory."
+          ],
+          "evidence": "Bosch manual, page 23: \"system is heavily iced up. Requirement: Store the frozen food well insulated in a cool place.\"",
+          "source": {
+            "line": 5,
+            "manual": "Bosch manual",
+            "page": 23
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-temperature-differs-greatly-from-the",
+      "symptom": "The temperature differs greatly from the setting.",
+      "causes": [
+        {
+          "id": "the-temperature-differs-greatly-from-the-0",
+          "label": "Different causes are possible.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Switch off the appliance. Page 14",
+            "Switch the appliance back on after five minutes.",
+            "Page 13 If the temperature is too warm, check the temperature again after a couple of hours.",
+            "If the temperature is too cold, check the temperature again on the following day."
+          ],
+          "evidence": "Bosch manual, page 23: \"Different causes are possible.\"",
+          "source": {
+            "line": 15,
+            "manual": "Bosch manual",
+            "page": 23
+          }
+        }
+      ]
+    },
+    {
+      "id": "condensation-accumulates-on-the-sur",
+      "symptom": "Condensation accumulates on the sur-",
+      "causes": [
+        {
+          "id": "condensation-accumulates-on-the-sur-0",
+          "label": "The water contained in warm and humid air condenses on the colder surfaces of the appliance.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [],
+          "evidence": "Bosch manual, page 23: \"The water contained in warm and humid air condenses on the colder surfaces of the appliance.\"",
+          "source": {
+            "line": 23,
+            "manual": "Bosch manual",
+            "page": 23
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-appliance-hums-bubbles-buzzes-gargle",
+      "symptom": "The appliance hums, bubbles, buzzes, gargles, clicks or crackles.",
+      "causes": [
+        {
+          "id": "the-appliance-hums-bubbles-buzzes-gargle-0",
+          "label": "switches or solenoid valves are switching on or off. Automatic defrosting is running. No action required.",
+          "suspect": true,
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [],
+          "evidence": "Bosch manual, page 24: \"switches or solenoid valves are switching on or off. Automatic defrosting is running. No action required.\"",
+          "source": {
+            "line": 3,
+            "manual": "Bosch manual",
+            "page": 24
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-appliance-makes-noises",
+      "symptom": "The appliance makes noises.",
+      "causes": [
+        {
+          "id": "the-appliance-makes-noises-0",
+          "label": "The appliance is not level.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Align the appliance using a spirit level and the screw feet."
+          ],
+          "evidence": "Bosch manual, page 24: \"The appliance is not level.\"",
+          "source": {
+            "line": 7,
+            "manual": "Bosch manual",
+            "page": 24
+          }
+        },
+        {
+          "id": "the-appliance-makes-noises-1",
+          "label": "The appliance is not free-standing.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Observe the minimum clearances for the appliance."
+          ],
+          "evidence": "Bosch manual, page 24: \"The appliance is not free-standing.\"",
+          "source": {
+            "line": 10,
+            "manual": "Bosch manual",
+            "page": 24
+          }
+        },
+        {
+          "id": "the-appliance-makes-noises-2",
+          "label": "Fittings wobble or stick.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Check the removable fittings and, if required, replace these."
+          ],
+          "evidence": "Bosch manual, page 24: \"Fittings wobble or stick.\"",
+          "source": {
+            "line": 12,
+            "manual": "Bosch manual",
+            "page": 24
+          }
+        },
+        {
+          "id": "the-appliance-makes-noises-3",
+          "label": "Bottles or containers are touching.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Move the bottles or containers away from each other."
+          ],
+          "evidence": "Bosch manual, page 24: \"Bottles or containers are touching.\"",
+          "source": {
+            "line": 15,
+            "manual": "Bosch manual",
+            "page": 24
+          }
+        },
+        {
+          "id": "the-appliance-makes-noises-4",
+          "label": "Super freezing is switched on. No action required.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [],
+          "evidence": "Bosch manual, page 24: \"Super freezing is switched on. No action required.\"",
+          "source": {
+            "line": 18,
+            "manual": "Bosch manual",
+            "page": 24
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "a-large-volume-of"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-09-26T14:55:32.665Z",
+  "learnedAt": "2026-09-26T14:47:03.098Z",
+  "alsoCovers": [
+    "KGN362WDFG",
+    "KGN392LDFG",
+    "KGN492LDFG"
+  ]
+}

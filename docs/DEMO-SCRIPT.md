@@ -122,9 +122,11 @@ above will not be where you look for them.**
 
 **Two things that are true now and were not when the storyboard was written.**
 
-The library is **23 machines across five manufacturers and five kinds of appliance** — dishwashers,
-a dryer, refrigerators, ovens, washers — with 406 symptoms and 774 causes, and **790 quotations
-re-read off the manufacturer's own pages** by `npm run verify-against-pages`. That number is worth
+The library is **110 machines across five manufacturers and eleven kinds of appliance** —
+dishwashers, washers, a dryer, refrigerators and fridge freezers, ovens, ranges, cooktops,
+microwaves, range hoods — and it answers for **157 of the 496 major appliances Bosch US, Bosch UK
+and Siemens UK list** (`npm run coverage`), with **2,491 quotations re-read off the manufacturer's
+own pages** before anything was admitted. That number is worth
 saying out loud; it is the difference between a demo and a library.
 
 And **the model reads a table off a page that has none**, which is in the friction log and is a

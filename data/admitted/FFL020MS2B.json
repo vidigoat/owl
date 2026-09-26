@@ -1,0 +1,207 @@
+{
+  "model": "FFL020MS2B",
+  "brand": "Bosch",
+  "kind": "Microwave",
+  "source": "FFL020MS2B.pdf",
+  "pages": "10–11",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "the-appliance-is-not-working",
+      "symptom": "The appliance is not working.",
+      "causes": [
+        {
+          "id": "the-appliance-is-not-working-0",
+          "label": "The mains plug of the power cord is not plugged in.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Connect the appliance to the power supply."
+          ],
+          "evidence": "Bosch manual, page 11: \"The mains plug of the power cord is not plugged in.\"",
+          "source": {
+            "line": 40,
+            "manual": "Bosch manual",
+            "page": 11
+          }
+        },
+        {
+          "id": "the-appliance-is-not-working-1",
+          "label": "The circuit breaker in the fuse box has tripped.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the circuit breaker in the fuse box."
+          ],
+          "evidence": "Bosch manual, page 11: \"The circuit breaker in the fuse box has tripped.\"",
+          "source": {
+            "line": 42,
+            "manual": "Bosch manual",
+            "page": 11
+          }
+        },
+        {
+          "id": "the-appliance-is-not-working-2",
+          "label": "There has been a power cut.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Check whether the lighting in your room or other appliances are working."
+          ],
+          "evidence": "Bosch manual, page 11: \"There has been a power cut.\"",
+          "source": {
+            "line": 44,
+            "manual": "Bosch manual",
+            "page": 11
+          }
+        },
+        {
+          "id": "the-appliance-is-not-working-3",
+          "label": "Malfunction",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Switch off the fuse in the fuse box.",
+            "Switch the fuse on after appox. 10 seconds.",
+            "If the malfunction occurs again, call customer service."
+          ],
+          "evidence": "Bosch manual, page 11: \"Malfunction\"",
+          "source": {
+            "line": 46,
+            "manual": "Bosch manual",
+            "page": 11
+          }
+        },
+        {
+          "id": "the-appliance-is-not-working-4",
+          "label": "Door is not fully closed.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Check whether food remains or foreign material are trapped in the door."
+          ],
+          "evidence": "Bosch manual, page 11: \"Door is not fully closed.\"",
+          "source": {
+            "line": 50,
+            "manual": "Bosch manual",
+            "page": 11
+          }
+        },
+        {
+          "id": "the-appliance-is-not-working-5",
+          "label": "The time selector is not set.",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "Set the time selector."
+          ],
+          "evidence": "Bosch manual, page 11: \"The time selector is not set.\"",
+          "source": {
+            "line": 52,
+            "manual": "Bosch manual",
+            "page": 11
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-takes-longer-than-usual-to-heat-up",
+      "symptom": "Food takes longer than usual to heat up.",
+      "causes": [
+        {
+          "id": "food-takes-longer-than-usual-to-heat-up-0",
+          "label": "The microwave power setting is set too low.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Set a higher microwave power setting."
+          ],
+          "evidence": "Bosch manual, page 11: \"The microwave power setting is set too low.\"",
+          "source": {
+            "line": 54,
+            "manual": "Bosch manual",
+            "page": 11
+          }
+        },
+        {
+          "id": "food-takes-longer-than-usual-to-heat-up-1",
+          "label": "A larger amount than usual has been placed in the appliance.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Set a longer cooking time."
+          ],
+          "evidence": "Bosch manual, page 11: \"A larger amount than usual has been placed in the appliance.\"",
+          "source": {
+            "line": 56,
+            "manual": "Bosch manual",
+            "page": 11
+          }
+        },
+        {
+          "id": "food-takes-longer-than-usual-to-heat-up-2",
+          "label": "You need double the time when you have double the amount. The food is colder than usual.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Turn or stir the food from time to time during cooking."
+          ],
+          "evidence": "Bosch manual, page 11: \"You need double the time when you have double the amount. The food is colder than usual.\"",
+          "source": {
+            "line": 58,
+            "manual": "Bosch manual",
+            "page": 11
+          }
+        }
+      ]
+    },
+    {
+      "id": "turntable-grates-or-grinds",
+      "symptom": "Turntable grates or grinds.",
+      "causes": [
+        {
+          "id": "turntable-grates-or-grinds-0",
+          "label": "There is dirt or foreign objects in the area of the turntable drive.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Clean the roller ring and recess in the cooking compartment."
+          ],
+          "evidence": "Bosch manual, page 11: \"There is dirt or foreign objects in the area of the turntable drive.\"",
+          "source": {
+            "line": 61,
+            "manual": "Bosch manual",
+            "page": 11
+          }
+        }
+      ]
+    },
+    {
+      "id": "microwave-mode-is-cancelled",
+      "symptom": "Microwave mode is cancelled.",
+      "causes": [
+        {
+          "id": "microwave-mode-is-cancelled-0",
+          "label": "Appliance has a fault.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "If this fault recurs, call the after-sales service."
+          ],
+          "evidence": "Bosch manual, page 11: \"Appliance has a fault.\"",
+          "source": {
+            "line": 63,
+            "manual": "Bosch manual",
+            "page": 11
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-09-26T14:55:29.223Z",
+  "learnedAt": "2026-09-26T14:50:51.856Z"
+}

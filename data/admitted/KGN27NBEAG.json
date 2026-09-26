@@ -1,0 +1,183 @@
+{
+  "model": "KGN27NBEAG",
+  "brand": "Bosch",
+  "kind": "Fridge freezer",
+  "source": "KGN27NBEAG.pdf",
+  "pages": "17–19",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "the-refrigeration-unit-is-switching-on-m",
+      "symptom": "The refrigeration unit is switching on more frequently and for longer. A layer of frost forms on the back wall of the refrigerator compartment.",
+      "causes": [
+        {
+          "id": "the-refrigeration-unit-is-switching-on-m-0",
+          "label": "The appliance has been opened frequently.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Do not open appliance door unnecessarily."
+          ],
+          "evidence": "Bosch manual, page 18: \"The appliance has been opened frequently.\"",
+          "source": {
+            "line": 16,
+            "manual": "Bosch manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "the-refrigeration-unit-is-switching-on-m-1",
+          "label": "External ventilation openings are covered up.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Remove any obstructions from in front of the external ventilation openings."
+          ],
+          "evidence": "Bosch manual, page 18: \"External ventilation openings are covered up.\"",
+          "source": {
+            "line": 18,
+            "manual": "Bosch manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "the-refrigeration-unit-is-switching-on-m-2",
+          "label": "Not a fault. Modern refrigeration machines switch on more frequently and have different power levels to cool more efficiently.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Remove any obstructions from in front of the external ventilation openings.",
+            "Install the appliance as far away as possible from heating elements, cookers and other heat sources.",
+            "Avoid prolonged exposure of the appliance to direct sunlight.",
+            "Only open the appliance door as briefly as necessary.",
+            "Allow hot food and drinks to cool down first before storing in the appliance.",
+            "Not a fault. Modern refrigeration machines ensure a more even temperature in the refrigerator compartment. The back wall of the refrigerator compartment is defrosted automatically at regular intervals."
+          ],
+          "evidence": "Bosch manual, page 18: \"Not a fault. Modern refrigeration machines switch on more frequently and have different power levels to cool more efficiently.\"",
+          "source": {
+            "line": 21,
+            "manual": "Bosch manual",
+            "page": 18
+          }
+        }
+      ]
+    },
+    {
+      "id": "side-panels-of-the-appliance-are-warm",
+      "symptom": "Side panels of the appliance are warm.",
+      "causes": [
+        {
+          "id": "side-panels-of-the-appliance-are-warm-0",
+          "label": "Not a fault. The side panels contain pipes which heat up during the cooling process. Units touching the appliance will not be damaged by the heat. No action required.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [],
+          "evidence": "Bosch manual, page 19: \"Not a fault. The side panels contain pipes which heat up during the cooling process. Units touching the appliance will not be damaged by the heat. No action required.\"",
+          "source": {
+            "line": 10,
+            "manual": "Bosch manual",
+            "page": 19
+          }
+        }
+      ]
+    },
+    {
+      "id": "condensation-accumulates-on-the-sur",
+      "symptom": "Condensation accumulates on the sur-",
+      "causes": [
+        {
+          "id": "condensation-accumulates-on-the-sur-0",
+          "label": "The water contained in warm and humid air condenses on the colder surfaces of the appliance.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [],
+          "evidence": "Bosch manual, page 19: \"The water contained in warm and humid air condenses on the colder surfaces of the appliance.\"",
+          "source": {
+            "line": 14,
+            "manual": "Bosch manual",
+            "page": 19
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-appliance-makes-noises",
+      "symptom": "The appliance makes noises.",
+      "causes": [
+        {
+          "id": "the-appliance-makes-noises-0",
+          "label": "The appliance is not level.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Align the appliance using a spirit level and the screw feet."
+          ],
+          "evidence": "Bosch manual, page 19: \"The appliance is not level.\"",
+          "source": {
+            "line": 25,
+            "manual": "Bosch manual",
+            "page": 19
+          }
+        },
+        {
+          "id": "the-appliance-makes-noises-1",
+          "label": "The appliance is not free-standing.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Observe the minimum clearances for the appliance."
+          ],
+          "evidence": "Bosch manual, page 19: \"The appliance is not free-standing.\"",
+          "source": {
+            "line": 28,
+            "manual": "Bosch manual",
+            "page": 19
+          }
+        },
+        {
+          "id": "the-appliance-makes-noises-2",
+          "label": "Fittings wobble or stick.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Check the removable fittings and, if required, replace these."
+          ],
+          "evidence": "Bosch manual, page 19: \"Fittings wobble or stick.\"",
+          "source": {
+            "line": 30,
+            "manual": "Bosch manual",
+            "page": 19
+          }
+        },
+        {
+          "id": "the-appliance-makes-noises-3",
+          "label": "Bottles or containers are touching.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Move the bottles or containers away from each other."
+          ],
+          "evidence": "Bosch manual, page 19: \"Bottles or containers are touching.\"",
+          "source": {
+            "line": 33,
+            "manual": "Bosch manual",
+            "page": 19
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "a-layer-of-frost-forms-on-the-back-wall-",
+    "the-appliance-hums-bubbles-buzzes-gargle"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-09-26T14:55:32.600Z",
+  "learnedAt": "2026-09-26T14:47:01.548Z",
+  "alsoCovers": [
+    "KGN27NLEAG",
+    "KGN27NWEAG"
+  ]
+}

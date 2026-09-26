@@ -1,0 +1,292 @@
+{
+  "model": "KIN96NSE0G",
+  "brand": "Bosch",
+  "kind": "Fridge freezer",
+  "source": "KIN96NSE0G.pdf",
+  "pages": "21–23",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "the-appliance-is-not-cooling-the-display",
+      "symptom": "The appliance is not cooling, the displays and lighting are lit.",
+      "causes": [
+        {
+          "id": "the-appliance-is-not-cooling-the-display-0",
+          "label": "Showroom mode is switched on.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Switch off the appliance. Page 14",
+            "Wait 2 minutes.",
+            "Switch the appliance back on. Page 13",
+            "Wait 1 minute and then press and hold super cool",
+            "until 4 audible signals have sounded.",
+            "After a short time, check whether your appliance is",
+            "cooling."
+          ],
+          "evidence": "Bosch manual, page 21: \"Showroom mode is switched on.\"",
+          "source": {
+            "line": 12,
+            "manual": "Bosch manual",
+            "page": 21
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-refrigeration-unit-is-switching-on-m",
+      "symptom": "The refrigeration unit is switching on more frequently and for longer.",
+      "causes": [
+        {
+          "id": "the-refrigeration-unit-is-switching-on-m-0",
+          "label": "The appliance has been opened frequently.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Do not open appliance door unnecessarily."
+          ],
+          "evidence": "Bosch manual, page 21: \"The appliance has been opened frequently.\"",
+          "source": {
+            "line": 24,
+            "manual": "Bosch manual",
+            "page": 21
+          }
+        },
+        {
+          "id": "the-refrigeration-unit-is-switching-on-m-1",
+          "label": "External ventilation openings are covered up.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Remove any obstructions from in front of the external ventilation openings."
+          ],
+          "evidence": "Bosch manual, page 21: \"External ventilation openings are covered up.\"",
+          "source": {
+            "line": 26,
+            "manual": "Bosch manual",
+            "page": 21
+          }
+        },
+        {
+          "id": "the-refrigeration-unit-is-switching-on-m-2",
+          "label": "Not a fault. Modern refrigeration machines switch on more frequently and have different power levels to cool more efficiently.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Remove any obstructions from in front of the external ventilation openings.",
+            "Install the appliance as far away as possible from heating elements, cookers and other heat sources.",
+            "Avoid prolonged exposure of the appliance to direct sunlight.",
+            "Only open the appliance door as briefly as necessary.",
+            "Allow hot food and drinks to cool down first before storing in the appliance."
+          ],
+          "evidence": "Bosch manual, page 21: \"Not a fault. Modern refrigeration machines switch on more frequently and have different power levels to cool more efficiently.\"",
+          "source": {
+            "line": 29,
+            "manual": "Bosch manual",
+            "page": 21
+          }
+        }
+      ]
+    },
+    {
+      "id": "a-layer-of-frost-forms-on-the-back-wall-",
+      "symptom": "A layer of frost forms on the back wall of the refrigerator compartment.",
+      "causes": [
+        {
+          "id": "a-layer-of-frost-forms-on-the-back-wall--0",
+          "label": "Not a fault. Modern refrigeration machines ensure a more even temperature in the refrigerator compartment. The back wall of the refrigerator compartment is defrosted automatically at regular intervals.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Only open the appliance door as briefly as necessary.",
+            "Pack the food airtight or cover it.",
+            "Allow hot food and drinks to cool down first before storing in the appliance.",
+            "Always leave some space between the food and the interior walls."
+          ],
+          "evidence": "Bosch manual, page 22: \"Not a fault. Modern refrigeration machines ensure a more even temperature in the refrigerator compartment. The back wall of the refrigerator compartment is defrosted automatically at regular intervals.\"",
+          "source": {
+            "line": 3,
+            "manual": "Bosch manual",
+            "page": 22
+          }
+        }
+      ]
+    },
+    {
+      "id": "a-warning-signal-sounds-and-alarm-off-li",
+      "symptom": "A warning signal sounds and \"alarm off\" lights up.",
+      "causes": [
+        {
+          "id": "a-warning-signal-sounds-and-alarm-off-li-0",
+          "label": "Different causes are possible.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Press alarm off.",
+            "The alarm is switched off."
+          ],
+          "evidence": "Bosch manual, page 22: \"Different causes are possible.\"",
+          "source": {
+            "line": 18,
+            "manual": "Bosch manual",
+            "page": 22
+          }
+        },
+        {
+          "id": "a-warning-signal-sounds-and-alarm-off-li-1",
+          "label": "The appliance door is open.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Close the appliance door."
+          ],
+          "evidence": "Bosch manual, page 22: \"The appliance door is open.\"",
+          "source": {
+            "line": 21,
+            "manual": "Bosch manual",
+            "page": 22
+          }
+        }
+      ]
+    },
+    {
+      "id": "a-warning-tone-sounds-and-the-set-temper",
+      "symptom": "A warning tone sounds and the set temperature (refrigerator compartment) and \"alarm off\" flash.",
+      "causes": [
+        {
+          "id": "a-warning-tone-sounds-and-the-set-temper-0",
+          "label": "The refrigerator compartment door is open.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Close the refrigerator compartment door."
+          ],
+          "evidence": "Bosch manual, page 22: \"The refrigerator compartment door is open.\"",
+          "source": {
+            "line": 23,
+            "manual": "Bosch manual",
+            "page": 22
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-temperature-differs-greatly-from-the",
+      "symptom": "The temperature differs greatly from the setting.",
+      "causes": [
+        {
+          "id": "the-temperature-differs-greatly-from-the-0",
+          "label": "Different causes are possible.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Switch off the appliance. Page 14",
+            "Switch the appliance back on after five minutes.",
+            "Page 13 If the temperature is too warm, check the temperature again after a couple of hours."
+          ],
+          "evidence": "Bosch manual, page 22: \"Different causes are possible.\"",
+          "source": {
+            "line": 39,
+            "manual": "Bosch manual",
+            "page": 22
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-base-of-the-refrigerator-compartment",
+      "symptom": "The base of the refrigerator compartment is wet.",
+      "causes": [
+        {
+          "id": "the-base-of-the-refrigerator-compartment-0",
+          "label": "The condensation channel or drainage hole are blocked.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Clean the condensation channel and the drainage hole. Page 19"
+          ],
+          "evidence": "Bosch manual, page 23: \"The condensation channel or drainage hole are blocked.\"",
+          "source": {
+            "line": 6,
+            "manual": "Bosch manual",
+            "page": 23
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-appliance-hums-bubbles-buzzes-gargle",
+      "symptom": "The appliance hums, bubbles, buzzes, gargles, clicks or crackles.",
+      "causes": [
+        {
+          "id": "the-appliance-hums-bubbles-buzzes-gargle-0",
+          "label": "Not a fault. A motor is running, e.g. refrigerating unit, fan. Refrigerant flows through the pipes. The motor, switches or solenoid valves are switching on or off. Automatic defrosting is running. No action required.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [],
+          "evidence": "Bosch manual, page 23: \"Not a fault. A motor is running, e.g. refrigerating unit, fan. Refrigerant flows through the pipes. The motor, switches or solenoid valves are switching on or off. Automatic defrosting is running. No action required.\"",
+          "source": {
+            "line": 14,
+            "manual": "Bosch manual",
+            "page": 23
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-appliance-makes-noises",
+      "symptom": "The appliance makes noises.",
+      "causes": [
+        {
+          "id": "the-appliance-makes-noises-0",
+          "label": "Fittings wobble or stick.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check the removable fittings and, if required, replace these."
+          ],
+          "evidence": "Bosch manual, page 23: \"Fittings wobble or stick.\"",
+          "source": {
+            "line": 19,
+            "manual": "Bosch manual",
+            "page": 23
+          }
+        },
+        {
+          "id": "the-appliance-makes-noises-1",
+          "label": "Bottles or containers are touching.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Move the bottles or containers away from each other."
+          ],
+          "evidence": "Bosch manual, page 23: \"Bottles or containers are touching.\"",
+          "source": {
+            "line": 22,
+            "manual": "Bosch manual",
+            "page": 23
+          }
+        },
+        {
+          "id": "the-appliance-makes-noises-2",
+          "label": "Super freezing is switched on. No action required.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [],
+          "evidence": "Bosch manual, page 23: \"Super freezing is switched on. No action required.\"",
+          "source": {
+            "line": 25,
+            "manual": "Bosch manual",
+            "page": 23
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-09-26T14:55:32.782Z",
+  "learnedAt": "2026-09-26T14:47:08.673Z"
+}
