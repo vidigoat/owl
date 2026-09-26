@@ -57,7 +57,10 @@ async function rpc(method, params) {
 
   const text = await res.text();
   // Streamable HTTP may answer as an SSE frame or as plain JSON. Accept either.
-  const payload = text.includes('data: ') ? text.split('data: ').pop().trim() : text;
+  // A frame is a line that STARTS with "data: " — the substring can appear inside JSON (a tool
+  // description mentioning "a data: URL" split the tool list in half).
+  const events = text.split(/\r?\n/).filter((l) => l.startsWith('data: '));
+  const payload = events.length ? events.pop().slice(6).trim() : text;
 
   let out;
   try {

@@ -53,7 +53,11 @@ class McpClient {
 
     const text = await res.text();
     if (!res.ok) throw new Error(`${method}: HTTP ${res.status} ${text.slice(0, 160)}`);
-    const payload = text.includes('data: ') ? text.split(/\n/).filter((l) => l.startsWith('data: ')).pop().slice(6) : text;
+    // An event stream is lines that START with "data: ". Testing for the substring anywhere broke
+    // the whole client the day a tool's description mentioned "a data: URL" — the tool list is
+    // JSON, and JSON may say anything.
+    const events = text.split(/\r?\n/).filter((l) => l.startsWith('data: '));
+    const payload = events.length ? events.pop().slice(6) : text;
     let out;
     try {
       out = JSON.parse(payload);
