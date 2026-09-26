@@ -329,7 +329,9 @@ function scorePage(text) {
  * It is the one unambiguous sign that the page in front of you is a continuation of the table
  * behind it — a page that merely mentions troubleshooting does not reprint the header.
  */
-const TABLE_HEADER = /^(\s*)(?:Fault|Problem|Symptom)\s{2,}(?:Cause and troubleshooting|Cause and remedy|Cause\b.*)$/im;
+// "Issue" and "Malfunction" as in manual/symptoms.js — two copies of this rule drifted once
+// (symptoms.js learned "Issue", this did not, and every range hood came back empty).
+const TABLE_HEADER = /^(\s*)(?:Fault|Problem|Symptom|Issue|Malfunction)\s{2,}(?:Cause and troubleshooting|Cause and remedy|Cause\b.*)$/im;
 
   /*
    * ── A page that carries the header outranks one that merely looks like a table ──
@@ -348,9 +350,12 @@ const TABLE_HEADER = /^(\s*)(?:Fault|Problem|Symptom)\s{2,}(?:Cause and troubles
    */
 function rank(pageTexts, { min = 0 } = {}) {
   return pageTexts
-    .map((text, i) => ({ page: i + 1, text, ...scorePage(text) }))
-    .filter((p) => p.score >= min)
-    .sort((a, b) => Number(b.heading) - Number(a.heading) || b.score - a.score);
+    .map((text, i) => ({ page: i + 1, text, ...scorePage(text), introduced: TABLE_HEADER.test(text) }))
+    // A page that introduces itself as the table is a candidate whatever its score: a range hood's
+    // whole troubleshooting table is two rows, scores under the threshold, and was filtered out
+    // before the sort that was meant to put it first.
+    .filter((p) => p.introduced || p.score >= min)
+    .sort((a, b) => Number(b.introduced) - Number(a.introduced) || Number(b.heading) - Number(a.heading) || b.score - a.score);
 }
 
 function faultTablePages(file, { take = 4, min = 18 } = {}) {
@@ -390,7 +395,9 @@ function faultTablePages(file, { take = 4, min = 18 } = {}) {
 
   return {
     total: all.length,
-    candidates: [...grown.values()].sort((a, b) => b.score - a.score),
+    // The same order rank() gave: a page that introduces itself as the table first. Re-sorting on
+    // score alone here undid it, and a hood's two-row table lost to a settings page again.
+    candidates: [...grown.values()].sort((a, b) => Number(Boolean(b.introduced ?? TABLE_HEADER.test(b.text))) - Number(Boolean(a.introduced ?? TABLE_HEADER.test(a.text))) || b.score - a.score),
   };
 }
 
@@ -418,11 +425,14 @@ function joinAdjacent(candidates) {
        */
       last.text += `\n\f${c.text}`;
       last.score += c.score;
+      last.introduced = last.introduced || TABLE_HEADER.test(c.text);
     } else {
-      runs.push({ from: c.page, to: c.page, text: c.text, score: c.score });
+      runs.push({ from: c.page, to: c.page, text: c.text, score: c.score, introduced: TABLE_HEADER.test(c.text) });
     }
   }
-  return runs.sort((a, b) => b.score - a.score);
+  // A run that introduces itself as the table comes first — the third place this order has to hold
+  // (rank, faultTablePages, here); each one alone re-sorting by score undid the other two.
+  return runs.sort((a, b) => Number(b.introduced) - Number(a.introduced) || b.score - a.score);
 }
 
 /**

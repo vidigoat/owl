@@ -139,7 +139,20 @@ it('pages that are not adjacent stay apart', () => {
 
 it('a single candidate is a run of one', () => {
   const joined = pdf.joinAdjacent([{ page: 7, text: 'x', score: 19 }]);
-  assert.deepEqual(joined, [{ from: 7, to: 7, text: 'x', score: 19 }]);
+  assert.deepEqual(joined, [{ from: 7, to: 7, text: 'x', score: 19, introduced: false }]);
+});
+
+it('a small table that introduces itself beats a bigger page that only looks like one — every range hood', () => {
+  // DUH30253UC: the whole table is two rows on page 11 ("Issue · Cause and troubleshooting"),
+  // scored 24; a settings page scored 35. The threshold filtered page 11 out, then two re-sorts by
+  // score put page 4 first again. Seventeen hood manuals came back empty.
+  const header = 'Issue                               Cause and troubleshooting\nNoise during operation.             Some noise is normal.';
+  const pages = ['x', 'y', 'z', 'Setting  Default  Range\n' + 'Fan  2  1-4\n'.repeat(20)];
+  pages.push(...Array(6).fill('prose'), header);
+  const ranked = pdf.rank(pages, { min: 30 });
+  assert.equal(ranked[0].page, 11, 'the page carrying the header was filtered or out-ranked');
+  const runs = pdf.joinAdjacent([{ page: 4, text: pages[3], score: 35 }, { page: 11, text: header, score: 24 }]);
+  assert.equal(runs[0].from, 11);
 });
 
 /* ── honesty about the tool ──────────────────────────────────────────────── */

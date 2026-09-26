@@ -37,8 +37,14 @@
  * part of reading rather than a tidy-up afterwards.
  */
 
-/** The two headings these tables use. The capture is what fixes the column boundary. */
-const HEADER = /^(\s*)(?:Fault|Problem|Symptom)\s{2,}(Cause and troubleshooting|Cause and remedy|Cause\b.*)$/im;
+/**
+ * The headings these tables use. The capture is what fixes the column boundary.
+ *
+ * "Issue" arrived with Bosch's 2024+ manuals (SHX4AEF5N's "Issue · Cause and troubleshooting"): the
+ * table was perfectly regular and read as "no column header on this page" because the word on the
+ * left was not one of three. "Malfunction" is the same table in older Siemens and Gaggenau books.
+ */
+const HEADER = /^(\s*)(?:Fault|Problem|Symptom|Issue|Malfunction)\s{2,}(Cause and troubleshooting|Cause and remedy|Cause\b.*)$/im;
 
 /** `21.1 Disposal of your old appliance` — the manual has moved on to another section. */
 const SECTION_HEADING = /^\s*\d{1,2}\.\d{1,2}\s+[A-Z]/;

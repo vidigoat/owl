@@ -539,6 +539,18 @@ it('a row whose causes could not be read is dropped and counted', () => {
   assert.match(r.coverage, /nothing readable/);
 });
 
+it('a 2024 manual heads the table "Issue", and the table is read', () => {
+  // SHX4AEF5N: a perfectly regular table read as "no column header on this page".
+  const text = [
+    'Issue                                Cause and troubleshooting',
+    'Tea residue or lipstick marks on     Dishwashing temperature is too low.',
+    'dishware.                            ▶ Select a program with a higher dishwashing temperature.',
+  ].join('\n');
+  const r = readSymptoms({ text, page: 29 });
+  assert.equal(r.found, 1, r.coverage);
+  assert.equal(r.symptoms[0].causes[0].label, 'Dishwashing temperature is too low.');
+});
+
 it('empty input is empty, not a crash', () => {
   for (const t of ['', null, undefined]) {
     assert.equal(readSymptoms({ text: t }).found, 0);
