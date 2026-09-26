@@ -110,8 +110,15 @@ it('no machine is filed as something its own manual says it is not', () => {
     Washer: /\bwash cycle\b|spin cycle|detergent drawer/i,
   };
 
+  // Kinds as the product pages name them, grouped into the families the tells above distinguish:
+  // a wall oven, a range and a cooktop all talk about cookware, and that is not a contradiction.
+  const FAMILY = {
+    'Wall oven': 'Oven', Range: 'Oven', Cooktop: 'Oven', Microwave: 'Oven', 'Warming drawer': 'Oven', 'Range hood': 'Oven',
+    'Fridge freezer': 'Refrigerator', 'Washing machine': 'Washer',
+  };
   for (const [model, d] of machines) {
     if (!d.kind) continue; // a machine whose kind nobody recorded claims nothing
+    const family = FAMILY[d.kind] || d.kind;
     const words = wordsOf(d);
     const suggests = Object.entries(TELLS)
       .filter(([, re]) => re.test(words))
@@ -119,7 +126,7 @@ it('no machine is filed as something its own manual says it is not', () => {
 
     if (!suggests.length) continue;
     assert.ok(
-      suggests.includes(d.kind),
+      suggests.includes(family),
       `${model} is filed as a ${d.kind}, and its own manual talks about a ${suggests.join(' or ')}`
     );
   }

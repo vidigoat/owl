@@ -135,6 +135,24 @@ it('accepting some codes admits exactly those', () => {
   assert.ok(!('E18' in record.codes), 'a rejected code was admitted anyway');
 });
 
+it('re-admitting forgets nothing: a known kind, the reviewed brand, the families, and when it was reviewed', () => {
+  // A whole-queue re-run rewrote eighteen machines from candidates learned without a kind (all lost
+  // "Dishwasher"), turned three Siemens ovens into Bosch, and dropped every family attached since.
+  const { root, mod } = bench();
+  write(root, candidate({ kind: 'Dishwasher' }));
+  mod.admit('SMS46KI01E', ['E07', 'E12', 'E14'], 'a reviewer');
+  const file = path.join(root, 'data', 'admitted', 'SMS46KI01E.json');
+  const first = JSON.parse(fs.readFileSync(file, 'utf8'));
+  fs.writeFileSync(file, JSON.stringify({ ...first, brand: 'Siemens', alsoCovers: ['SMS46KI02E'], reviewedAt: '2026-09-22T00:00:00.000Z' }));
+  write(root, candidate({ kind: null, brand: 'Bosch' }));
+  mod.admit('SMS46KI01E', ['E07', 'E12', 'E14'], 'a script');
+  const again = JSON.parse(fs.readFileSync(file, 'utf8'));
+  assert.equal(again.kind, 'Dishwasher', 'a known kind was forgotten');
+  assert.equal(again.brand, 'Siemens', 'the reviewed brand was replaced by the default one');
+  assert.deepEqual(again.alsoCovers, ['SMS46KI02E'], 'the families were dropped');
+  assert.equal(again.reviewedAt, '2026-09-22T00:00:00.000Z', 'an unchanged record was re-dated');
+});
+
 it('a rejection is written down, not deleted', () => {
   // A reading the parser keeps getting wrong is a bug report about faultgraph. Throwing it away
   // means finding it again on the next manual from the same manufacturer.

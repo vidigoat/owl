@@ -178,12 +178,23 @@ function admit(model, accept, by = 'unattributed') {
   rejected.push(...dropped);
 
   fs.mkdirSync(ADMITTED, { recursive: true });
+  /*
+   * A re-admission keeps what the new reading does not know. Admitting a whole queue again after a
+   * batch of new manuals rewrote eighteen machines from candidates learned without a kind, and every
+   * one of them lost "Dishwasher"; the families scripts/cover-families.js had attached went the same
+   * way. Unknown in the new reading is not a reason to forget what was known.
+   */
+  let before = null;
+  try { before = JSON.parse(fs.readFileSync(path.join(ADMITTED, `${model}.json`), 'utf8')); } catch { /* first admission */ }
   const record = {
     model: entry.model,
-    brand: entry.brand,
+    // The reviewed record's brand wins: three Siemens ovens were re-admitted from candidates learned
+    // under the default brand, and became Bosch.
+    brand: before?.brand || entry.brand,
     // Kept as-is, null included. A machine whose kind nobody recorded is not "an Appliance"; the
     // library says the brand and stays quiet about the rest.
-    kind: entry.kind || null,
+    kind: entry.kind || before?.kind || null,
+    ...(before?.alsoCovers ? { alsoCovers: before.alsoCovers } : {}),
     source: entry.source,
     pages: entry.pages,
     readWith: entry.readWith,
@@ -195,6 +206,12 @@ function admit(model, accept, by = 'unattributed') {
     reviewedAt: new Date().toISOString(),
     learnedAt: entry.learnedAt,
   };
+  // Nothing changed, nothing re-dated: a record checked on the 22nd and re-checked identical today
+  // was checked on the 22nd, and a queue re-run must not make every machine look newly reviewed.
+  if (before && ['codes', 'symptoms', 'rejected', 'source', 'pages'].every((k) => JSON.stringify(before[k]) === JSON.stringify(record[k]))) {
+    record.reviewedAt = before.reviewedAt;
+    record.reviewedBy = before.reviewedBy;
+  }
   fs.writeFileSync(path.join(ADMITTED, `${model}.json`), JSON.stringify(record, null, 2));
 
   // The candidate stays, marked, so the queue can show what was decided rather than going silent.
