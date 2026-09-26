@@ -38,6 +38,21 @@ const MAX_BODY = 28 * 1024 * 1024;
  */
 const UPLOAD_LIMIT = 4 * 1024 * 1024;
 
+/**
+ * On this machine (never on a deployment), each look is written down — how long it took, what it
+ * cost, which model, what it answered — so a real kitchen session produces the latency and cost
+ * figures instead of an estimate of them. No frame is ever written: only these few fields.
+ */
+function measureLook(r) {
+  if (process.env.VERCEL) return;
+  try {
+    const dir = path.join(__dirname, 'local');
+    fs.mkdirSync(dir, { recursive: true });
+    const line = { at: new Date().toISOString(), verdict: r.verdict, ms: r.ms ?? null, costUsd: r.costUsd ?? null, model: r.model ?? null, confidence: r.confidence ?? null, downgradedFrom: r.downgradedFrom || null, heldBack: r.heldBack || null, reason: r.ok ? null : r.reason || null };
+    fs.appendFileSync(path.join(dir, 'watch-measure.jsonl'), `${JSON.stringify(line)}\n`);
+  } catch { /* a measurement that cannot be written must never break the look */ }
+}
+
 /** When each client last asked for a look — see /api/watch. */
 const watchLooks = new Map();
 const WATCH_EVERY_MS = 2000;
@@ -220,7 +235,10 @@ function handler(req, res) {
       if (watchLooks.size > 5000) watchLooks.clear();
       return readJson(req)
         .then((body) => watchStep({ step: body.step, before: body.before, now: body.now, powerConfirmed: Boolean(body.powerConfirmed) }))
-        .then((r) => send(res, 200, JSON.stringify(r), 'application/json'))
+        .then((r) => {
+          measureLook(r);
+          return send(res, 200, JSON.stringify(r), 'application/json');
+        })
         .catch((e) => send(res, e.status || 400, JSON.stringify({ ok: false, verdict: 'unavailable', reason: e.status ? e.message : 'That request could not be handled.', say: 'I can\'t see right now — tell me when it\'s done.' }), 'application/json'));
     }
 

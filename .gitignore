@@ -29,3 +29,7 @@ manuals/
 
 # web/ is the website's own package. The MCP server still installs nothing.
 web/node_modules/
+
+# What watching measured on this machine: timings, costs and verdicts of each look (never a
+# frame). Read by scripts/watch-measure.js; somebody's kitchen session is not repository history.
+local/

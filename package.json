@@ -30,7 +30,8 @@
     "agent:eval": "node scripts/agent-eval.js",
     "procedures": "node scripts/read-procedures.js",
     "latency": "node scripts/latency.js",
-    "smoke:live": "node scripts/smoke-live.js"
+    "smoke:live": "node scripts/smoke-live.js",
+    "watch:measure": "node scripts/watch-measure.js"
   },
   "keywords": [
     "alexa-plus",
