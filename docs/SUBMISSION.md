@@ -8,7 +8,7 @@ Checklist against the stated requirements:
 
 | required | state |
 |---|---|
-| self-hosted MCP server, spec 2025-11-25+, Streamable HTTP | `mcp/server.js` — 19 tools, `tools/call` + `resources/read` |
+| self-hosted MCP server, spec 2025-11-25+, Streamable HTTP | `mcp/server.js` — 20 tools, `tools/call` + `resources/read` |
 | the repo actually *calls* the track technology in code | yes — not a README mention |
 | repo public **or** private + shared with `testing@devpost.com` and the six Amazon DevRel GitHub accounts (chris-trag, knmeiss, giolaq, anishamalde, mosesroth, emersonsklar) — invitations expire after 7 days, so send them in the last week | **stays private; share at submission** |
 | text description of what it does and how | below |
@@ -173,7 +173,7 @@ space, and runs the identical loop — every cause citing the line of the manual
 
 ## How we built it
 
-**19 MCP tools** over Streamable HTTP (spec `2025-11-25`), answering `tools/list`, `tools/call`,
+**20 MCP tools** over Streamable HTTP (spec `2025-11-25`), answering `tools/list`, `tools/call`,
 `resources/list` and `resources/read` today. Alexa+ could drive this instead of a browser and
 nothing in the device code would know the difference — every cause, question and elimination on
 screen came back from a tool call.

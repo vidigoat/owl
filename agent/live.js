@@ -20,7 +20,7 @@ const { Alexa } = require('./alexa');
 const { McpClient, inProcess } = require('./mcp-client');
 const { credentials } = require('./sigv4');
 const { APP_TOOLS } = require('../mcp/cards');
-const { SharedBudget } = require('../mcp/shared-budget');
+const { deploymentLedger } = require('../mcp/shared-budget');
 
 const MAX_CONVERSATIONS = 40;
 const MAX_TURNS = 16;
@@ -28,21 +28,8 @@ const IDLE_MS = 30 * 60 * 1000;
 
 const conversations = new Map();
 
-/**
- * Where the ledger lives. On a deployment (VERCEL is set by the host) it must be shared:
- * HANDS_LEDGER_TABLE names the DynamoDB table and HANDS_BUDGET_USD the ceiling for all of it.
- */
-function ledger(creds, env = process.env) {
-  if (env.HANDS_LEDGER_TABLE) {
-    return new SharedBudget({
-      table: env.HANDS_LEDGER_TABLE,
-      ceiling: Number(env.HANDS_BUDGET_USD) || 5,
-      creds,
-      region: env.AWS_REGION || env.AWS_DEFAULT_REGION || 'us-east-1',
-    });
-  }
-  return env.VERCEL ? null : undefined; // undefined: agent/bedrock.js uses the file ledger
-}
+// Where the ledger lives: mcp/shared-budget.js, so the tools can apply the same rule.
+const ledger = deploymentLedger;
 
 function available(creds = credentials(), env = process.env) {
   if (!creds) return { available: false, reason: 'The live agent runs where AWS credentials for Bedrock are. This deployment has none, so it will not pretend to talk.' };

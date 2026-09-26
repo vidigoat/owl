@@ -27,7 +27,7 @@ const CHECKS = [
   ['GET', '/api/verify?model=SHE3AR75UC&code=E24', 200, (t) => typeof J(t) === 'object'],
   ['GET', '/api/review/queue', 200, (t) => Array.isArray(J(t).pending)],
   ['POST', '/mcp', 200, (t) => J(t).result.protocolVersion === '2025-11-25', { jsonrpc: '2.0', id: 1, method: 'initialize', params: { protocolVersion: '2025-11-25', capabilities: {}, clientInfo: { name: 'smoke', version: '1' } } }],
-  ['POST', '/mcp', 200, (t) => J(t).result.tools.length === 19, { jsonrpc: '2.0', id: 2, method: 'tools/list' }],
+  ['POST', '/mcp', 200, (t) => J(t).result.tools.length === 20, { jsonrpc: '2.0', id: 2, method: 'tools/list' }],
   ['POST', '/mcp', 200, (t) => J(t).result.isError === true && /needs code/.test(J(t).result.content[0].text), { jsonrpc: '2.0', id: 3, method: 'tools/call', params: { name: 'diagnose', arguments: { model: 'SHE3AR75UC' } } }],
   ['POST', '/mcp', 200, (t) => J(t).result.contents[0].mimeType === 'text/html;profile=mcp-app', { jsonrpc: '2.0', id: 4, method: 'resources/read', params: { uri: 'ui://second-set-of-hands/card' } }],
   // Saved durably, or said to be not kept — never a silent "saved" on a host that cannot keep it.

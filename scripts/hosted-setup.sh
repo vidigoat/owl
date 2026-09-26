@@ -7,8 +7,9 @@
 # What it makes, and nothing else:
 #   - a DynamoDB table `sosh-spend`, provisioned at 1 read / 1 write — inside the always-free tier —
 #     holding ONE item: what the hosted agent has spent, across every instance (mcp/shared-budget.js)
-#   - an IAM user `sosh-hosted` that can call Nova 2 Lite through Converse and read/update that one
-#     table. Not the laptop's user: revoking the hosted agent never breaks local runs.
+#   - an IAM user `sosh-hosted` that can call Nova 2 Lite (the agent) and Nova Lite (watching a
+#     step through the camera) through Converse, and read/update that one table. Not the laptop's
+#     user: revoking the hosted agent never breaks local runs.
 #   - its access key, piped straight into `vercel env add` for production — never printed, never on disk
 #   - HANDS_LEDGER_TABLE, HANDS_BUDGET_USD (default 5) and AWS_REGION on Vercel, then a production deploy
 #
@@ -43,7 +44,7 @@ fi
 cat <<EOF
 This will, in AWS account $ACCOUNT:
   - create DynamoDB table $TABLE ($REGION, 1 RCU / 1 WCU — free tier)
-  - create IAM user $USER_NAME: Converse on Nova 2 Lite, GetItem/UpdateItem on $TABLE, nothing else
+  - create IAM user $USER_NAME: Converse on Nova 2 Lite and Nova Lite, GetItem/UpdateItem on $TABLE, nothing else
   - give Vercel production its key, HANDS_LEDGER_TABLE=$TABLE, HANDS_BUDGET_USD=$CEILING
   - deploy
 The most the hosted agent can ever spend, across every instance, is \$$CEILING.
@@ -67,7 +68,9 @@ aws iam put-user-policy --user-name "$USER_NAME" --policy-name sosh-hosted --pol
     { "Effect": "Allow", "Action": "bedrock:InvokeModel",
       "Resource": [
         "arn:aws:bedrock:*:$ACCOUNT:inference-profile/us.amazon.nova-2-lite-v1:0",
-        "arn:aws:bedrock:*::foundation-model/amazon.nova-2-lite-v1:0"
+        "arn:aws:bedrock:*::foundation-model/amazon.nova-2-lite-v1:0",
+        "arn:aws:bedrock:*:$ACCOUNT:inference-profile/us.amazon.nova-lite-v1:0",
+        "arn:aws:bedrock:*::foundation-model/amazon.nova-lite-v1:0"
       ] },
     { "Effect": "Allow", "Action": ["dynamodb:GetItem", "dynamodb:UpdateItem"],
       "Resource": "arn:aws:dynamodb:$REGION:$ACCOUNT:table/$TABLE" }

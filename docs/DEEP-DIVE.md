@@ -401,7 +401,7 @@ it upholds the part.
 
 | | Status |
 |---|---|
-| The MCP server and all 19 tools, over Streamable HTTP | **Real**, tested |
+| The MCP server and all 20 tools, over Streamable HTTP | **Real**, tested |
 | The trust gate — the only thing that can authorise spending | **Real**, tested. It refuses on mains voltage, on a cheaper cause not yet ruled out, on too little separation, and on no evidence at all |
 | Test selection by information gain per unit of owner effort | **Real**, tested |
 | Learning a machine from its manual at runtime | **Real**, tested against Bosch, Whirlpool, LG and Samsung code schemes |

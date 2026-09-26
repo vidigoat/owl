@@ -120,4 +120,24 @@ function unreachable(why) {
   return e;
 }
 
-module.exports = { SharedBudget };
+/**
+ * Where the ledger lives. On a deployment (VERCEL is set by the host) it must be shared:
+ * HANDS_LEDGER_TABLE names the DynamoDB table and HANDS_BUDGET_USD the ceiling for all of it.
+ *
+ * Returns a SharedBudget, `null` for "a deployment with no shared ledger — refuse", or undefined
+ * for "one process on one machine — the file ledger in mcp/budget.js is enough". Here rather than
+ * in agent/live.js so that the tools can use the same rule without importing the agent.
+ */
+function deploymentLedger(creds, env = process.env) {
+  if (env.HANDS_LEDGER_TABLE) {
+    return new SharedBudget({
+      table: env.HANDS_LEDGER_TABLE,
+      ceiling: Number(env.HANDS_BUDGET_USD) || 5,
+      creds,
+      region: env.AWS_REGION || env.AWS_DEFAULT_REGION || 'us-east-1',
+    });
+  }
+  return env.VERCEL ? null : undefined;
+}
+
+module.exports = { SharedBudget, deploymentLedger };

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
+import Watch from '../components/Watch.jsx';
 
 /**
  * The Echo Show, on the counter, while you are on the floor.
@@ -109,6 +110,9 @@ export default function Device({ session }) {
           {/* What it needs from you, because it cannot see whether you have a hand free. */}
           <span>needs {step.hands}</span>
         </div>
+
+        {/* The camera, if the person asks for it: what it sees arrives under the step, not over it. */}
+        <Watch step={step} stepKey={`${session.fault.code}:${step.n}`} aloud={aloud} />
         </div>
 
         {/*

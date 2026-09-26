@@ -16,6 +16,7 @@ const { parse: parseManual } = require('./manual/faultgraph');
 const { readSymptoms } = require('./manual/symptoms');
 const pdf = require('./manual/pdf');
 const { see } = require('./mcp/tools/see');
+const { watchStep } = require('./mcp/tools/watch_step');
 const { read_manual } = require('./mcp/tools/read_manual');
 const review = require('./manual/review');
 const { serveMcp, readBody, originAllowed } = require('./mcp/server');
@@ -36,6 +37,10 @@ const MAX_BODY = 28 * 1024 * 1024;
  * to the page so the page can say so before spending somebody's upload.
  */
 const UPLOAD_LIMIT = 4 * 1024 * 1024;
+
+/** When each client last asked for a look — see /api/watch. */
+const watchLooks = new Map();
+const WATCH_EVERY_MS = 2000;
 
 const readJson = (req) =>
   new Promise((resolve, reject) => {
@@ -196,6 +201,27 @@ function handler(req, res) {
         .then((body) => see(body))
         .then((r) => send(res, 200, JSON.stringify(r), 'application/json'))
         .catch((e) => send(res, e.status || 500, JSON.stringify({ error: e.status ? e.message : 'The server could not finish that request.' }), 'application/json'));
+    }
+
+    /*
+     * Watch a repair step: two frames and the manual's words for the step.
+     *
+     * One look every two seconds per client, whatever the page does. The page already sends a
+     * frame only when the scene has settled, but a page is not the only thing that can call a URL,
+     * and every look is a Bedrock call against a shared ceiling.
+     */
+    if (req.method === 'POST' && url.pathname === '/api/watch') {
+      const who = String(req.headers['x-forwarded-for'] || req.socket?.remoteAddress || 'local').split(',')[0].trim();
+      const last = watchLooks.get(who) || 0;
+      if (Date.now() - last < WATCH_EVERY_MS) {
+        return send(res, 429, JSON.stringify({ ok: false, verdict: 'unavailable', reason: 'One look at a time — the last one was under two seconds ago.', say: 'One moment.' }), 'application/json');
+      }
+      watchLooks.set(who, Date.now());
+      if (watchLooks.size > 5000) watchLooks.clear();
+      return readJson(req)
+        .then((body) => watchStep({ step: body.step, before: body.before, now: body.now, powerConfirmed: Boolean(body.powerConfirmed) }))
+        .then((r) => send(res, 200, JSON.stringify(r), 'application/json'))
+        .catch((e) => send(res, e.status || 400, JSON.stringify({ ok: false, verdict: 'unavailable', reason: e.status ? e.message : 'That request could not be handled.', say: 'I can\'t see right now — tell me when it\'s done.' }), 'application/json'));
     }
 
     // Checkout. The refusal lives here too: a cart cannot be opened for a cause the gate refused.

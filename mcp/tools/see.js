@@ -70,15 +70,16 @@ More rules:
 
 const FORMATS = { '.jpg': 'jpeg', '.jpeg': 'jpeg', '.png': 'png', '.webp': 'webp', '.gif': 'gif' };
 
-function bodyFor(base64, format) {
+/** One request: any number of images, then the words. Temperature 0 — a reading, not a story. */
+function bodyFor(images, prompt = PROMPT, maxTokens = 300) {
   return {
     messages: [
       {
         role: 'user',
-        content: [{ image: { format, source: { bytes: base64 } } }, { text: PROMPT }],
+        content: [...images.map(({ base64, format }) => ({ image: { format, source: { bytes: base64 } } })), { text: prompt }],
       },
     ],
-    inferenceConfig: { maxTokens: 300, temperature: 0 },
+    inferenceConfig: { maxTokens, temperature: 0 },
   };
 }
 
@@ -123,6 +124,18 @@ function parseReading(text) {
  * The request body also goes to a file. An image is megabytes of base64 and argv is not.
  */
 function invokeBedrock(base64, format) {
+  return invokeVision({ images: [{ base64, format }] });
+}
+
+/**
+ * The general form: several images and a prompt of the caller's, under the same ceiling. Watching a
+ * repair step sends two frames — the start of the step and now — because "the filter is out" is a
+ * difference, and one photograph cannot show a difference.
+ *
+ * `timeoutMs` kills the CLI rather than letting a person wait on it: someone holding a pump cover
+ * is better told "I can't see right now" than left in silence.
+ */
+function invokeVision({ images, prompt = PROMPT, maxTokens = 300, timeoutMs = 0, tool = 'see' }) {
   return new Promise((resolve, reject) => {
     const stamp = `${process.pid}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
     const bodyFile = path.join(os.tmpdir(), `ssoh-req-${stamp}.json`);
@@ -130,7 +143,7 @@ function invokeBedrock(base64, format) {
     const clean = () => { fs.rmSync(bodyFile, { force: true }); fs.rmSync(outFile, { force: true }); };
 
     try {
-      fs.writeFileSync(bodyFile, JSON.stringify(bodyFor(base64, format)));
+      fs.writeFileSync(bodyFile, JSON.stringify(bodyFor(images, prompt, maxTokens)));
     } catch (e) {
       return reject(e);
     }
@@ -144,7 +157,7 @@ function invokeBedrock(base64, format) {
      * money without being sure should not spend its owner's without a limit.
      */
     try {
-      budget().check({ label: 'a Bedrock vision call', images: 1 });
+      budget().check({ label: 'a Bedrock vision call', images: images.length, promptChars: prompt.length, maxTokens });
     } catch (e) {
       clean();
       return reject(e);
@@ -162,10 +175,17 @@ function invokeBedrock(base64, format) {
     ];
     if (PROFILE) args.push('--profile', PROFILE);
 
-    execFile('aws', args, { maxBuffer: 8 * 1024 * 1024 }, (err, _stdout, stderr) => {
+    execFile('aws', args, { maxBuffer: 8 * 1024 * 1024, ...(timeoutMs ? { timeout: timeoutMs, killSignal: 'SIGKILL' } : {}) }, (err, _stdout, stderr) => {
       if (err) {
         clean();
-        return reject(new Error((stderr || err.message).trim().split('\n').pop()));
+        if (err.killed && timeoutMs) {
+          const t = new Error(`Bedrock took longer than ${Math.round(timeoutMs / 1000)} s`);
+          t.code = 'TIMEOUT';
+          return reject(t);
+        }
+        const e = new Error((stderr || err.message).trim().split('\n').pop());
+        if (err.code === 'ENOENT') e.code = 'ENOENT';
+        return reject(e);
       }
       let out;
       try {
@@ -186,7 +206,7 @@ function invokeBedrock(base64, format) {
        */
       try {
         const usage = JSON.parse(out)?.usage;
-        if (usage) budget().record(budget().costOf(usage), { tool: 'see' });
+        if (usage) budget().record(budget().costOf(usage), { tool });
       } catch {
         /* the caller is about to fail on this same body; do not mask that with a ledger error */
       }
@@ -295,4 +315,4 @@ async function see({ imagePath, imageBase64, imageFormat, expect = {} }) {
   }
 }
 
-module.exports = { name: 'see', see, parseReading, simulatedRead, PROMPT, MODEL_ID };
+module.exports = { name: 'see', see, parseReading, simulatedRead, invokeVision, bodyFor, unavailable, PROMPT, MODEL_ID };

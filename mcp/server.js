@@ -18,6 +18,7 @@ const { verify_diagnosis } = require('./tools/verify_diagnosis');
 const { guide } = require('./tools/guide');
 const { find_part } = require('./tools/find_part');
 const { see } = require('./tools/see');
+const { watchStep } = require('./tools/watch_step');
 const { read_error } = require('./tools/read_error');
 const { identify_appliance } = require('./tools/identify_appliance');
 const { read_manual } = require('./tools/read_manual');
@@ -166,6 +167,22 @@ const TOOLS = [
       },
     },
     handler: see,
+  },
+  {
+    name: 'watch_step',
+    description:
+      "Watch the person do a repair step: two camera frames (the start of the step, and now) and the manual's words for the step. Answers done, not-yet, wrong-part, cant-see, danger, or unavailable, with one line to say aloud. Never signs off mains or power steps without the person's word, and never passes on an instruction the manual does not contain.",
+    inputSchema: {
+      type: 'object',
+      properties: {
+        step: { type: 'object', description: "The step the person is on: { text, notes? } in the manual's words." },
+        before: { type: 'string', description: 'A frame from when the step began (base64 JPEG or a data: URL).' },
+        now: { type: 'string', description: 'A frame from now.' },
+        powerConfirmed: { type: 'boolean', description: 'The person has said the power is off at the wall.' },
+      },
+      required: ['step', 'before', 'now'],
+    },
+    handler: watchStep,
   },
   {
     name: 'read_error',
