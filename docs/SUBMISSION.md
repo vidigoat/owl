@@ -22,7 +22,7 @@ Checklist against the stated requirements:
 | a place to see it without installing anything | **<https://second-set-of-hands.vercel.app>** — ask a real manual a question and get the manufacturer's sentence and its page number, or a refusal naming what that manual does cover. And at `/review.html`, **drop in a manual of your own** and watch it be read. |
 
 Note: the repo does **not** have to be public for this hackathon. Sharing it privately with
-`testing@devpost.com` and the six Amazon DevRel GitHub accounts (chris-trag, knmeiss, giolaq, anishamalde, mosesroth, emersonsklar) — invitations expire after 7 days, so send them in the last week satisfies the rule.
+`testing@devpost.com` and the six Amazon DevRel GitHub accounts (chris-trag, knmeiss, giolaq, anishamalde, mosesroth, emersonsklar) satisfies the rule. Their invitations expire after 7 days, so send them in the last week.
 
 
 
