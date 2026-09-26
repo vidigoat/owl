@@ -10,7 +10,7 @@ Checklist against the stated requirements:
 |---|---|
 | self-hosted MCP server, spec 2025-11-25+, Streamable HTTP | `mcp/server.js` — 19 tools, `tools/call` + `resources/read` |
 | the repo actually *calls* the track technology in code | yes — not a README mention |
-| repo public **or** private + shared with `testing@devpost.com` and `@AmazonAppDev` | **stays private; share at submission** |
+| repo public **or** private + shared with `testing@devpost.com` and the six Amazon DevRel GitHub accounts (chris-trag, knmeiss, giolaq, anishamalde, mosesroth, emersonsklar) — invitations expire after 7 days, so send them in the last week | **stays private; share at submission** |
 | text description of what it does and how | below |
 | 3-min public YouTube video showing the MCP server in action | `docs/DEMO-SCRIPT.md` |
 | product feedback on every tool, API and SDK used | `docs/PRODUCT-FEEDBACK.md` |
@@ -22,7 +22,7 @@ Checklist against the stated requirements:
 | a place to see it without installing anything | **<https://second-set-of-hands.vercel.app>** — ask a real manual a question and get the manufacturer's sentence and its page number, or a refusal naming what that manual does cover. And at `/review.html`, **drop in a manual of your own** and watch it be read. |
 
 Note: the repo does **not** have to be public for this hackathon. Sharing it privately with
-`testing@devpost.com` and `@AmazonAppDev` satisfies the rule.
+`testing@devpost.com` and the six Amazon DevRel GitHub accounts (chris-trag, knmeiss, giolaq, anishamalde, mosesroth, emersonsklar) — invitations expire after 7 days, so send them in the last week satisfies the rule.
 
 
 
