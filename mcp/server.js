@@ -25,7 +25,7 @@ const { read_manual } = require('./tools/read_manual');
 const { RESOURCES, APP_URI, APP_TOOLS, spaceCard, stepCard, refusalCard, checkoutCard } = require('./cards');
 const { confirm_fix } = require('./tools/confirm_fix');
 const { beginCheckout, confirmCheckout } = require('./tools/order_part');
-const { receipt, due, history, hydrate, persist, SESSION_ONLY } = require('./tools/home');
+const { receipt, due, history, pauseRepair, resumeRepair, hydrate, persist, SESSION_ONLY } = require('./tools/home');
 const { HouseholdStore } = require('./household-store');
 
 /*
@@ -33,7 +33,7 @@ const { HouseholdStore } = require('./household-store');
  * the spend ledger (HANDS_LEDGER_TABLE), a second item. Without it the house is a file locally and
  * not kept at all on the hosted server — one process's memory at most — and every answer says which.
  */
-const HOUSEHOLD_TOOLS = new Set(['remember_repair', 'repair_history', 'whats_due']);
+const HOUSEHOLD_TOOLS = new Set(['remember_repair', 'repair_history', 'whats_due', 'pause_repair', 'resume_repair']);
 function householdStore(env = process.env) {
   if (!env.HANDS_LEDGER_TABLE) return null;
   const creds = require('../agent/sigv4').credentials();
@@ -345,6 +345,39 @@ const TOOLS = [
     description: 'Everything this machine has been through before.',
     inputSchema: { type: 'object', properties: { model: { type: 'string' } }, required: ['model'] },
     handler: history,
+  },
+  {
+    name: 'pause_repair',
+    description:
+      'Save a repair that is not finished — most often because a part is on order — with the step ' +
+      'reached and what it is waiting for, so the next conversation resumes instead of starting over. ' +
+      'Keyed on model and code: pausing the same fault again updates it. Never claims a part has ' +
+      'arrived; expectedBy only marks when it is due.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        model: { type: 'string' },
+        code: { type: 'string' },
+        causeId: { type: 'string' },
+        cause: { type: 'string', description: 'What is wrong, in plain words.' },
+        atStep: { type: 'integer', description: 'The step number they had reached.' },
+        ofSteps: { type: 'integer', description: 'How many steps the guide has in total.' },
+        waitingFor: { type: 'string', description: 'The part or thing being waited on, e.g. "drain pump".' },
+        expectedBy: { type: 'string', description: 'When the part is expected, as a date — not a phrase. Omit if unknown.' },
+      },
+      required: ['model'],
+    },
+    handler: pauseRepair,
+  },
+  {
+    name: 'resume_repair',
+    description:
+      'The unfinished repairs waiting in this house — for one machine, or all of them — each with ' +
+      'the step to pick up from and one line to say. Ones whose part was due by now come first, so ' +
+      'the assistant can lead with "your pump should be here — want to finish?". It asks whether the ' +
+      'part arrived; it never assumes it did.',
+    inputSchema: { type: 'object', properties: { model: { type: 'string' } } },
+    handler: resumeRepair,
   },
   {
     name: 'hypotheses',

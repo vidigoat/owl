@@ -46,6 +46,16 @@ function read() {
   }
 }
 
+/*
+ * The store gained a third list after the first two shipped. A file written before it exists has no
+ * `open`, and every reader that touches it would otherwise have to remember to default it. Doing it
+ * once, here, means the rest of the file can treat `state.open` as always an array.
+ */
+function withOpen(state) {
+  if (!Array.isArray(state.open)) state.open = [];
+  return state;
+}
+
 /** 'durable' when it will outlast this conversation, 'session' when only this process holds it. */
 function write(state) {
   if (shared) {
@@ -209,6 +219,9 @@ function receipt({ model, code, cause, action, part, cost, confirmed, at } = {})
     at: stamped.toISOString(),
   };
   state.receipts.push(entry);
+  // A finished repair closes the open one it finishes: the receipt is the record of what was done,
+  // and leaving the "waiting for a part" note behind would have it offered again after it was done.
+  const closed = closeOpen(withOpen(state), model, code);
   const kept = write(state);
 
   // Has this exact fault happened before on this machine? That changes the advice next time.
@@ -219,6 +232,7 @@ function receipt({ model, code, cause, action, part, cost, confirmed, at } = {})
     ...(kept === 'durable' ? {} : { kept, keptFor: SESSION_ONLY }),
     entry,
     repeat: repeats > 1,
+    ...(closed ? { closedOpenRepair: true } : {}),
     note: repeats > 1 ? `This is the ${ordinal(repeats)} time ${code} has happened on this machine.` : null,
   };
 }
@@ -340,7 +354,126 @@ function due({ today = new Date(), state = read() } = {}) {
   });
 
   const repeats = recurring({ today, state });
-  return { due: out, count: out.length, recurring: repeats, attention: out.length + repeats.length };
+  // Unfinished repairs whose part was due by now: the house should hear about these first — an
+  // ordered part arriving is the moment to speak, not a breakdown. "Ready" is "due by now", never
+  // "delivered": the person confirms arrival, resumeRepair's line asks rather than asserts.
+  const ready = withOpen(state).open
+    .filter((o) => o.expectedBy && new Date(o.expectedBy) <= today)
+    .map((o) => ({ ...o, say: sayResume(o, today) }));
+  return { due: out, count: out.length, recurring: repeats, resumable: ready, attention: out.length + repeats.length + ready.length };
 }
 
-module.exports = { name: 'home', remember, receipt, history, due, recurring, ordinal, hydrate, persist, SESSION_ONLY, STORE, DUE_AFTER, RECURRENCE_WINDOW_DAYS };
+/*
+ * ── A repair that is not finished yet ────────────────────────────────────────
+ *
+ * The receipt above is for a repair that is DONE. This is for one that is not: the commonest reason
+ * a repair stops half-way is a part on order, and between ordering it and its arriving there is a
+ * gap of days and, on a device, a different conversation entirely. Without somewhere to write "we
+ * were on step 3, waiting for the drain pump", the second conversation starts from nothing and the
+ * person redoes the diagnosis they already did.
+ *
+ * So an open repair records where they got to and what they are waiting for. It is keyed on
+ * model + code, because the same fault is the same repair — pausing twice updates, it does not
+ * fork. It carries no claim the part has ARRIVED: a delivery estimate is not a delivery, and this
+ * project does not assert what it cannot see. `expectedBy` (an ISO date, when the caller has one)
+ * only ever moves an open repair from "on order" to "due by now — has it arrived?", which is a
+ * question, not a statement.
+ */
+const openKey = (model, code) => `${model}\u0000${code || ''}`;
+
+function pauseRepair({ model, code, causeId, cause, atStep, ofSteps, waitingFor, expectedBy } = {}) {
+  const bad = refuseModel(model);
+  if (bad) return { paused: false, reason: `Not saved: ${bad}.` };
+  model = clean(model, 40);
+  code = clean(code, 20);
+  if (code && /^[-–—\s]*$|^(none|n\/a)$/i.test(code)) code = undefined;
+  if (code && !CODE_RE.test(code)) return { paused: false, reason: `Not saved: "${code}" does not look like a fault code.` };
+  causeId = clean(causeId, 60);
+  cause = clean(cause);
+  waitingFor = clean(waitingFor, 120);
+  // A step number that is read back to a person has to be a real one. A step "3 of 2", or a
+  // fractional or negative step, is worse than no step — it would send them to a step that is not
+  // there. Kept only when it is a whole number that fits inside the total, when a total is given.
+  const total = Number.isInteger(ofSteps) && ofSteps > 0 && ofSteps <= 100 ? ofSteps : null;
+  let step = Number.isInteger(atStep) && atStep >= 1 && atStep <= 100 ? atStep : null;
+  if (step && total && step > total) step = null;
+  // A delivery estimate, kept only if it is a real date; a phrase like "tomorrow by 9pm" is not one
+  // and is not stored as one. An unparseable date is dropped, never written as Invalid Date.
+  let expected = null;
+  if (expectedBy != null) {
+    const d = new Date(expectedBy);
+    if (!Number.isNaN(d.getTime())) expected = d.toISOString();
+  }
+  if (!waitingFor && step == null) {
+    return { paused: false, reason: 'Not saved: a paused repair needs at least a step reached or what it is waiting for.' };
+  }
+
+  const state = withOpen(read());
+  const key = openKey(model, code);
+  const existing = state.open.find((o) => openKey(o.model, o.code) === key);
+  const entry = {
+    model,
+    code: code || null,
+    causeId: causeId || existing?.causeId || null,
+    cause: cause || existing?.cause || null,
+    atStep: step ?? existing?.atStep ?? null,
+    ofSteps: total ?? existing?.ofSteps ?? null,
+    waitingFor: waitingFor || existing?.waitingFor || null,
+    expectedBy: expected || existing?.expectedBy || null,
+    startedAt: existing?.startedAt || new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+  if (existing) state.open[state.open.indexOf(existing)] = entry;
+  else state.open.push(entry);
+  const kept = write(state);
+  return {
+    paused: kept === 'durable',
+    ...(kept === 'durable' ? {} : { kept, keptFor: SESSION_ONLY }),
+    open: entry,
+    say: sayResume(entry),
+  };
+}
+
+/** How an open repair is offered back, in one spoken line. Never claims the part is here. */
+function sayResume(o, today = new Date()) {
+  const where = o.atStep && o.ofSteps ? ` We stopped at step ${o.atStep} of ${o.ofSteps}.`
+    : o.atStep ? ` We stopped at step ${o.atStep}.` : '';
+  if (!o.waitingFor) return `Your ${o.model} repair is unfinished.${where} Pick it up?`;
+  const due = o.expectedBy && new Date(o.expectedBy) <= today;
+  const part = due
+    ? `The ${o.waitingFor} for your ${o.model} was due by now`
+    : `You have a ${o.waitingFor} on order for your ${o.model}`;
+  return `${part}.${where} ${due ? 'Has it arrived? Want to finish?' : 'Want to carry on when it comes?'}`;
+}
+
+/**
+ * The unfinished repairs, most recently touched first — for one machine, or the whole house. `ready`
+ * marks the ones whose part was due by now, so the assistant can lead with those without claiming
+ * anything has been delivered.
+ */
+function resumeRepair({ model, today = new Date() } = {}) {
+  const state = withOpen(read());
+  let open = state.open;
+  if (model != null) {
+    const m = clean(model, 40);
+    open = open.filter((o) => o.model === m);
+  }
+  const enriched = open
+    .map((o) => ({ ...o, ready: Boolean(o.expectedBy && new Date(o.expectedBy) <= today), say: sayResume(o, today) }))
+    .sort((a, b) => Number(b.ready) - Number(a.ready) || new Date(b.updatedAt) - new Date(a.updatedAt));
+  return { open: enriched, count: enriched.length };
+}
+
+/**
+ * A repair is finished, so it is no longer open. Called when a receipt is written for the same
+ * machine and fault: the record of what was done replaces the note of what was left to do. Returns
+ * whether anything was cleared, so a caller can say "that closes the one you had open".
+ */
+function closeOpen(state, model, code) {
+  const key = openKey(model, code);
+  const before = state.open.length;
+  state.open = state.open.filter((o) => openKey(o.model, o.code) !== key);
+  return before - state.open.length;
+}
+
+module.exports = { name: 'home', remember, receipt, history, due, recurring, pauseRepair, resumeRepair, sayResume, ordinal, hydrate, persist, SESSION_ONLY, STORE, DUE_AFTER, RECURRENCE_WINDOW_DAYS };

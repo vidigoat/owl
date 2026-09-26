@@ -282,7 +282,7 @@ $0.50**, including reading 27 manuals and escalating a dozen pages to vision.
 
 | required | state |
 |---|---|
-| self-hosted MCP server, spec 2025-11-25+, Streamable HTTP | 20 tools + resources, verified |
+| self-hosted MCP server, spec 2025-11-25+, Streamable HTTP | 22 tools + resources, verified |
 | the repo genuinely *calls* the track technology in code | yes — Bedrock live, not a README mention |
 | public repo **or** private + shared with reviewers | private is allowed; share at submission |
 | text description | `docs/SUBMISSION.md` |
