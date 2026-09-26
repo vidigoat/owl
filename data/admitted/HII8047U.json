@@ -1,0 +1,308 @@
+{
+  "model": "HII8047U",
+  "brand": "Bosch",
+  "kind": "Range",
+  "alsoCovers": [
+    "HII8057U",
+    "HIIP057U"
+  ],
+  "source": "HII8047U.pdf",
+  "pages": "44–45",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "oven-door-is-locked-and-will-not-open-ev",
+      "symptom": "Oven door is locked and will not open, even after cooling",
+      "causes": [
+        {
+          "id": "oven-door-is-locked-and-will-not-open-ev-0",
+          "label": "The door lock is engaged",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Turn the oven off at the circuit breaker and wait five minutes.",
+            "Turn breaker back on. a The oven should reset itself and will be operable."
+          ],
+          "evidence": "Bosch manual, page 44: \"The door lock is engaged\"",
+          "source": {
+            "line": 30,
+            "manual": "Bosch manual",
+            "page": 44
+          }
+        }
+      ]
+    },
+    {
+      "id": "oven-is-not-heating",
+      "symptom": "Oven is not heating",
+      "causes": [
+        {
+          "id": "oven-is-not-heating-0",
+          "label": "There is no power supply to the appliance",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check circuit breaker or fuse box to your house.",
+            "Make sure there is proper electrical power to the appliance. There is no cooking temperature set",
+            "Set a heating mode temperature."
+          ],
+          "evidence": "Bosch manual, page 44: \"There is no power supply to the appliance\"",
+          "source": {
+            "line": 34,
+            "manual": "Bosch manual",
+            "page": 44
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-is-overcooked",
+      "symptom": "Food is overcooked",
+      "causes": [
+        {
+          "id": "food-is-overcooked-0",
+          "label": "The oven temperature needs to be recalibrated Note: The oven is carefully calibrated to provide accurate results.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "If food is consistently too brown or too light the temperature can be offset.",
+            "→ \"Oven temperature offset\", Page 24"
+          ],
+          "evidence": "Bosch manual, page 44: \"The oven temperature needs to be recalibrated Note: The oven is carefully calibrated to provide accurate results.\"",
+          "source": {
+            "line": 45,
+            "manual": "Bosch manual",
+            "page": 44
+          }
+        }
+      ]
+    },
+    {
+      "id": "oven-light-is-not-working-properly",
+      "symptom": "Oven light is not working properly",
+      "causes": [
+        {
+          "id": "oven-light-is-not-working-properly-0",
+          "label": "The oven light bulb is loose or burnt out",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace or reinsert the light bulb.",
+            "→ \"Replacing an oven light bulb\", Page 41 Tip: Touching the bulb with fingers may cause the bulb to burn out."
+          ],
+          "evidence": "Bosch manual, page 44: \"The oven light bulb is loose or burnt out\"",
+          "source": {
+            "line": 49,
+            "manual": "Bosch manual",
+            "page": 44
+          }
+        }
+      ]
+    },
+    {
+      "id": "oven-light-does-not-turn-off",
+      "symptom": "Oven light does not turn off",
+      "causes": [
+        {
+          "id": "oven-light-does-not-turn-off-0",
+          "label": "The oven door does not close properly",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check the appliance door for obstructions.",
+            "Check to see if the hinge is bent. The oven light is turned on ▶ Press the oven light button to turn the oven light off."
+          ],
+          "evidence": "Bosch manual, page 44: \"The oven door does not close properly\"",
+          "source": {
+            "line": 53,
+            "manual": "Bosch manual",
+            "page": 44
+          }
+        }
+      ]
+    },
+    {
+      "id": "cannot-remove-lens-cover-on-light",
+      "symptom": "Cannot remove lens cover on light",
+      "causes": [
+        {
+          "id": "cannot-remove-lens-cover-on-light-0",
+          "label": "There is soil build-up around the lens cover",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Let the oven cavity cool off.",
+            "Wipe the lens cover area with a clean, dry towel, then try to remove the lens",
+            "cover."
+          ],
+          "evidence": "Bosch manual, page 44: \"There is soil build-up around the lens cover\"",
+          "source": {
+            "line": 58,
+            "manual": "Bosch manual",
+            "page": 44
+          }
+        }
+      ]
+    },
+    {
+      "id": "oven-is-not-self-cleaning-properly",
+      "symptom": "Oven is not self-cleaning properly",
+      "causes": [
+        {
+          "id": "oven-is-not-self-cleaning-properly-0",
+          "label": "The oven is too hot to start self clean",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Allow the oven to cool before running self clean.",
+            "Always wipe out loose soils or heavy spillovers before running self clean.",
+            "If the oven is heavily soiled, set the maximum self clean time."
+          ],
+          "evidence": "Bosch manual, page 45: \"The oven is too hot to start self clean\"",
+          "source": {
+            "line": 3,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "clock-and-timer-are-not-working-properly",
+      "symptom": "Clock and timer are not working properly",
+      "causes": [
+        {
+          "id": "clock-and-timer-are-not-working-properly-0",
+          "label": "There is no power supply to the appliance",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check circuit breaker or fuse box to your house.",
+            "Make sure there is proper electrical power to the appliance."
+          ],
+          "evidence": "Bosch manual, page 45: \"There is no power supply to the appliance\"",
+          "source": {
+            "line": 7,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "e-and-a-number-appears-in-display-and-co",
+      "symptom": "\"E\" and a number appears in display and control beeps",
+      "causes": [
+        {
+          "id": "e-and-a-number-appears-in-display-and-co-0",
+          "label": "An electronics fault has occured",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Press any button or turn any knob to stop the beeping.",
+            "Reset the oven if necessary.",
+            "Call an authorized service provider."
+          ],
+          "evidence": "Bosch manual, page 45: \"An electronics fault has occured\"",
+          "source": {
+            "line": 10,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "with-a-new-oven-there-is-a-strong-odor-w",
+      "symptom": "With a new oven there is a strong odor when oven is turned on Control does not react when a key is touched",
+      "causes": [
+        {
+          "id": "with-a-new-oven-there-is-a-strong-odor-w-0",
+          "label": "This is normal with a new oven and will disappear after a few uses",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Operate the self clean mode to burn-off the smell more quickly."
+          ],
+          "evidence": "Bosch manual, page 45: \"This is normal with a new oven and will disappear after a few uses\"",
+          "source": {
+            "line": 14,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        },
+        {
+          "id": "with-a-new-oven-there-is-a-strong-odor-w-1",
+          "label": "The control is wet or soiled",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Clean the control panel an wipe it dry."
+          ],
+          "evidence": "Bosch manual, page 45: \"The control is wet or soiled\"",
+          "source": {
+            "line": 16,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        },
+        {
+          "id": "with-a-new-oven-there-is-a-strong-odor-w-2",
+          "label": "The touch keys are not pressed correctly",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Press the center of the button.",
+            "Use the flat part of your finger."
+          ],
+          "evidence": "Bosch manual, page 45: \"The touch keys are not pressed correctly\"",
+          "source": {
+            "line": 18,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "warm-air-or-steam-escapes-from-oven-vent",
+      "symptom": "Warm air or steam escapes from oven vent",
+      "causes": [
+        {
+          "id": "warm-air-or-steam-escapes-from-oven-vent-0",
+          "label": "It is normal to see or feel steam or warm air escaping from the oven vent",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "CAUTION"
+          ],
+          "evidence": "Bosch manual, page 45: \"It is normal to see or feel steam or warm air escaping from the oven vent\"",
+          "source": {
+            "line": 21,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        },
+        {
+          "id": "warm-air-or-steam-escapes-from-oven-vent-1",
+          "label": "The oven vents are important for air circulation. Covering the oven vents will cause",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [],
+          "evidence": "Bosch manual, page 45: \"The oven vents are important for air circulation. Covering the oven vents will cause\"",
+          "source": {
+            "line": 24,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-09-26T13:58:04.173Z",
+  "learnedAt": "2026-09-26T13:51:12.173Z"
+}

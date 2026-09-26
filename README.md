@@ -36,7 +36,7 @@ npm run demo          # the whole loop in a terminal, ~20 seconds
 npm run mcp:session   # a real MCP session — the Alexa+ deliverable, proven in one command
 npm start             # http://localhost:8792 — the device experience
 npm run alexa         # talk to it — Amazon Nova on Bedrock choosing the tools, over MCP
-npm test              # 40 suites · 479 checks
+npm test              # 41 suites · 485 checks
 npm run smoke:live    # every route of the deployed site and the MCP handshake, after a deploy
 ```
 
@@ -136,10 +136,13 @@ The refusals are the product. Each one exists in code and has a test proving it 
 
 ## The library, and how it came to know things
 
-Nineteen manuals read — **433 symptoms, 795 causes**, every one citing its page — which with the
-hand-written ones puts **23 machines in the library**, across five manufacturers and five kinds of
-appliance. Then **every quotation is re-read off the page it cites** by script: 779 of 790 found,
-and the 11 that were not are refused by name.
+Eighty-three manuals read — **1305 symptoms, 2362 causes**, every one citing its page — which with
+the hand-written ones puts **80 machines in the library**, across five manufacturers and ten kinds of
+appliance. Then **every quotation is re-read off the page it cites** by script: 2,243 of 2,272
+found, and the 29 that were not are refused by name. A machine also answers for the other model
+numbers its manufacturer lists the same manual for — 32 more, exactly those, never a near one
+(`scripts/cover-families.js`). How much of what Bosch and Siemens sell that reaches, per kind, is
+`npm run coverage` (`docs/coverage.json`).
 
 <img src="docs/media/bench.jpg" alt="The review bench: the manufacturer's rendered page on the left, the parse on the right, every cause citing its page" width="100%">
 

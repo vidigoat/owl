@@ -1,0 +1,288 @@
+{
+  "model": "HIS8055U",
+  "brand": "Bosch",
+  "kind": "Range",
+  "source": "HIS8055U.pdf",
+  "pages": "38–39",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "the-oven-door-feels-hotter-than-before-a",
+      "symptom": "The oven door feels hotter than before, after the oven door glass has been removed for cleaning.",
+      "causes": [
+        {
+          "id": "the-oven-door-feels-hotter-than-before-a-0",
+          "label": "The oven door glass is not inserted the right way round.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check if the oven door glass is inserted the right way round (low-E symbol can be read)."
+          ],
+          "evidence": "Bosch manual, page 38: \"The oven door glass is not inserted the right way round.\"",
+          "source": {
+            "line": 25,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-oven-door-is-not-balanced",
+      "symptom": "The oven door is not balanced.",
+      "causes": [
+        {
+          "id": "the-oven-door-is-not-balanced-0",
+          "label": "The inner door glass is missing or has not been inserted during reassembly.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check if the inner door glass is present or has been inserted during reassembly."
+          ],
+          "evidence": "Bosch manual, page 38: \"The inner door glass is missing or has not been inserted during reassembly.\"",
+          "source": {
+            "line": 28,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-cookware-produces-a-crackling-noise",
+      "symptom": "The cookware produces a crackling noise.",
+      "causes": [
+        {
+          "id": "the-cookware-produces-a-crackling-noise-0",
+          "label": "The cookware is made from different multilayered materials",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Refer to the section on Cooking with Induction to learn more about suitable cookware. → Page 19"
+          ],
+          "evidence": "Bosch manual, page 38: \"The cookware is made from different multilayered materials\"",
+          "source": {
+            "line": 31,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        },
+        {
+          "id": "the-cookware-produces-a-crackling-noise-1",
+          "label": "You are using cookware of different sizes and different materials.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Refer to the section on Cooking with Induction to learn more about suitable cookware. → Page 19"
+          ],
+          "evidence": "Bosch manual, page 38: \"You are using cookware of different sizes and different materials.\"",
+          "source": {
+            "line": 34,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-cooktop-speedboost-function-cannot-b",
+      "symptom": "The cooktop SpeedBoost® function cannot be activated or turns off before 10 minutes have elapsed.",
+      "causes": [
+        {
+          "id": "the-cooktop-speedboost-function-cannot-b-0",
+          "label": "The cooking zone is too hot.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Let the cooking zone cool down.",
+            "Set the SpeedBoost® function again."
+          ],
+          "evidence": "Bosch manual, page 38: \"The cooking zone is too hot.\"",
+          "source": {
+            "line": 37,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-display-is-frozen-or-does-not-respon",
+      "symptom": "The display is frozen or does not respond.",
+      "causes": [
+        {
+          "id": "the-display-is-frozen-or-does-not-respon-0",
+          "label": "Various causes are possible.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check if the panel lock function is active.",
+            "‒ Deactivate the panel lock.",
+            "→ \"Deactivating the panel lock\", Page 22 If the panel lock function is not active:",
+            "‒ Disconnect the appliance from the power supply, using the corresponding switch on the domestic switch board.",
+            "‒ Wait a couple of seconds and reconnect the appliance to the power supply."
+          ],
+          "evidence": "Bosch manual, page 38: \"Various causes are possible.\"",
+          "source": {
+            "line": 41,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        }
+      ]
+    },
+    {
+      "id": "no-display-information",
+      "symptom": "No display information",
+      "causes": [
+        {
+          "id": "no-display-information-0",
+          "label": "The power supply has been disconnected.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check whether the lighting in your kitchen or other appliances in the room are working."
+          ],
+          "evidence": "Bosch manual, page 38: \"The power supply has been disconnected.\"",
+          "source": {
+            "line": 52,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        },
+        {
+          "id": "no-display-information-1",
+          "label": "The appliance has not been connected as shown in the circuit diagram.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Disconnect the appliance from the power supply.",
+            "Make sure the appliance has been connected as shown in the circuit diagram. There is an electronics fault ▶ If the fault cannot be eliminated, call Customer Service."
+          ],
+          "evidence": "Bosch manual, page 38: \"The appliance has not been connected as shown in the circuit diagram.\"",
+          "source": {
+            "line": 55,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-power-level-in-one-of-the-cooking-zo",
+      "symptom": "The power level in one of the cooking zones is blinking.",
+      "causes": [
+        {
+          "id": "the-power-level-in-one-of-the-cooking-zo-0",
+          "label": "The maximum available power of the cooktop has been exceeded.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Turn the control knob to a lower power level within 3 seconds.",
+            "If you do not set a different power level, the power level of the affected cooking",
+            "zone will be reduced automatically.",
+            "→ \"Power management\", Page 19"
+          ],
+          "evidence": "Bosch manual, page 38: \"The maximum available power of the cooktop has been exceeded.\"",
+          "source": {
+            "line": 61,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        }
+      ]
+    },
+    {
+      "id": "and-cooking-zones-not-heating",
+      "symptom": "+ / and cooking zones not heating",
+      "causes": [
+        {
+          "id": "and-cooking-zones-not-heating-0",
+          "label": "The cooking zone has been operating continuously for an extended period of time without interaction. The automatic time limitation has been triggered.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Touch any control element."
+          ],
+          "evidence": "Bosch manual, page 39: \"The cooking zone has been operating continuously for an extended period of time without interaction. The automatic time limitation has been triggered.\"",
+          "source": {
+            "line": 3,
+            "manual": "Bosch manual",
+            "page": 39
+          }
+        },
+        {
+          "id": "and-cooking-zones-not-heating-1",
+          "label": "a You can set the cooking zone and continue to cook. The supply voltage is incorrect. It is outside the normal operating range.",
+          "suspect": true,
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Contact your electrical utility provider."
+          ],
+          "evidence": "Bosch manual, page 39: \"a You can set the cooking zone and continue to cook. The supply voltage is incorrect. It is outside the normal operating range.\"",
+          "source": {
+            "line": 6,
+            "manual": "Bosch manual",
+            "page": 39
+          }
+        },
+        {
+          "id": "and-cooking-zones-not-heating-2",
+          "label": "The cooking zone is unable to detect cookware.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Place cookware on the cooking zone within 30 seconds after setting a power",
+            "level.",
+            "If cookware is present on the cooking zone, check if the cookware is suitable for",
+            "induction cooking.",
+            "→ \"Induction cooking\", Page 19"
+          ],
+          "evidence": "Bosch manual, page 39: \"The cooking zone is unable to detect cookware.\"",
+          "source": {
+            "line": 10,
+            "manual": "Bosch manual",
+            "page": 39
+          }
+        },
+        {
+          "id": "and-cooking-zones-not-heating-3",
+          "label": "The set power level can not be executed.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Turn the control knob to 0 and then set a power level again."
+          ],
+          "evidence": "Bosch manual, page 39: \"The set power level can not be executed.\"",
+          "source": {
+            "line": 16,
+            "manual": "Bosch manual",
+            "page": 39
+          }
+        },
+        {
+          "id": "and-cooking-zones-not-heating-4",
+          "label": "The control knob has been pushed in for more than 30 seconds.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Make sure the control knob is released after setting the power level."
+          ],
+          "evidence": "Bosch manual, page 39: \"The control knob has been pushed in for more than 30 seconds.\"",
+          "source": {
+            "line": 19,
+            "manual": "Bosch manual",
+            "page": 39
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-09-26T13:58:04.633Z",
+  "learnedAt": "2026-09-26T13:54:13.149Z"
+}

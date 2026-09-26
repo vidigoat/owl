@@ -58,8 +58,15 @@ const { execFileSync } = require('node:child_process');
 const UA = 'second-set-of-hands/0.1 (appliance fault-table research; contact via repo)';
 const POLITE_MS = 1000;
 
+/*
+ * Thermador and Gaggenau (BSH too) were tried on 26 Sep and are not here: their sitemaps list only
+ * accessories and spare parts, never a model page, and the route that would find models is the
+ * `/*ajax/` search their robots.txt disallows. Bosch UK sells European model numbers — different
+ * machines from Bosch US, with English manuals — on the same platform.
+ */
 const SITEMAPS = {
   bosch: 'https://www.bosch-home.com/us/sitemap.xml',
+  'bosch-uk': 'https://www.bosch-home.co.uk/sitemap.xml',
   siemens: 'https://www.siemens-home.bsh-group.com/uk/sitemap.xml',
 };
 
@@ -198,7 +205,10 @@ const modelFrom = (url) => url.split('/').filter(Boolean).pop().toUpperCase();
   const outDir = path.resolve(flags.out || path.join(__dirname, '..', 'manuals'));
   const limit = Number(flags.limit) || 20;
   const maxMb = Number(flags['max-mb']) || 60;
-  const budgetMb = Number(flags['budget-mb']) || 250;
+  // Never a gigabyte in one run, whatever is asked: the permission these downloads run under says
+  // "under 100 MB each, never GB-sized", and a flag is not a way around it.
+  const budgetMb = Math.min(Number(flags['budget-mb']) || 250, 950);
+  if (maxMb > 100) { console.error('\n  --max-mb cannot exceed 100: no single manual over 100 MB is fetched.\n'); process.exit(3); }
   const listOnly = Boolean(flags.list);
 
   console.log(`\n  ${C.bold}sourcing ${brand} manuals${C.off}`);
@@ -224,6 +234,20 @@ const modelFrom = (url) => url.split('/').filter(Boolean).pop().toUpperCase();
   // 2. Walk them, collecting documents.
   const manifestFile = path.join(outDir, 'manifest.json');
   const manifest = fs.existsSync(manifestFile) ? JSON.parse(fs.readFileSync(manifestFile, 'utf8')) : {};
+  /*
+   * One manual, many models. Bosch lists the same user manual on the product page of every model
+   * in a family — a dishwasher line is often a dozen model numbers and one book — and fetching it
+   * once per model is ten downloads of the same file from somebody else's server. So a document
+   * already fetched for one model is linked to the next (`sameDocumentAs`), and a document already
+   * found not to be English is never fetched again. `documents.json` is what was learned per URL.
+   */
+  const docsFile = path.join(outDir, 'documents.json');
+  const known = fs.existsSync(docsFile) ? JSON.parse(fs.readFileSync(docsFile, 'utf8')) : {};
+  for (const [m, rec] of Object.entries(manifest)) {
+    if (rec.took?.url && rec.file && !known[rec.took.url]) known[rec.took.url] = { english: true, model: m, file: rec.file };
+  }
+  const saveDocs = () => fs.writeFileSync(docsFile, JSON.stringify(known, null, 2));
+  let linked = 0;
   let downloaded = 0;
   let bytes = 0;
 
@@ -262,6 +286,18 @@ const modelFrom = (url) => url.split('/').filter(Boolean).pop().toUpperCase();
       continue;
     }
 
+    // Already have this model's manual under another model number: link it, fetch nothing.
+    const have = ordered.find((d) => known[d.url]?.english && fs.existsSync(path.join(outDir, known[d.url].file)));
+    if (have) {
+      const k = known[have.url];
+      manifest[model] = { page, documents: docs, took: { ...have }, file: k.file, sameDocumentAs: k.model, linkedAt: new Date().toISOString() };
+      linked++;
+      console.log(`  ${C.dim}same  ${model}  the manual already fetched for ${k.model}${C.off}`);
+      fs.writeFileSync(manifestFile, JSON.stringify(manifest, null, 2));
+      await sleep(POLITE_MS);
+      continue;
+    }
+
     if (bytes / 1e6 > budgetMb) {
       console.log(`\n  ${C.amber}stopping: ${Math.round(bytes / 1e6)} MB downloaded, budget is ${budgetMb} MB${C.off}`);
       break;
@@ -278,6 +314,7 @@ const modelFrom = (url) => url.split('/').filter(Boolean).pop().toUpperCase();
     let took = null;
     let rejected = 0;
     for (const doc of ordered) {
+      if (known[doc.url]?.english === false) { rejected++; continue; } // read once, not English
       let status;
       try {
         status = get(doc.url, { binary: true, out: file });
@@ -307,6 +344,8 @@ const modelFrom = (url) => url.split('/').filter(Boolean).pop().toUpperCase();
       // null means "could not tell", which is not a reason to reject a document.
       if (isEnglish(file) === false) {
         rejected++;
+        known[doc.url] = { english: false, checkedAt: new Date().toISOString() };
+        saveDocs();
         fs.rmSync(file, { force: true });
         await sleep(POLITE_MS);
         continue;
@@ -329,6 +368,8 @@ const modelFrom = (url) => url.split('/').filter(Boolean).pop().toUpperCase();
         page, documents: docs, took, file: path.basename(file),
         bytes: took.bytes, fetchedAt: new Date().toISOString(),
       };
+      known[took.url] = { english: true, model, file: path.basename(file) };
+      saveDocs();
     }
 
     fs.writeFileSync(manifestFile, JSON.stringify(manifest, null, 2));
@@ -336,6 +377,7 @@ const modelFrom = (url) => url.split('/').filter(Boolean).pop().toUpperCase();
   }
 
   fs.writeFileSync(manifestFile, JSON.stringify(manifest, null, 2));
-  console.log(`\n  ${C.green}${downloaded} manuals${C.off}, ${(bytes / 1e6).toFixed(1)} MB → ${path.relative(process.cwd(), outDir)}`);
+  saveDocs();
+  console.log(`\n  ${C.green}${downloaded} manuals${C.off}, ${(bytes / 1e6).toFixed(1)} MB → ${path.relative(process.cwd(), outDir)}${linked ? ` · ${linked} more model${linked === 1 ? '' : 's'} covered by a manual already here` : ''}`);
   console.log(`  ${C.dim}Next: node scripts/learn-manual.js ${path.relative(process.cwd(), outDir)}/*.pdf --brand Bosch --kind Dishwasher${C.off}\n`);
 })();

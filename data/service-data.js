@@ -235,7 +235,29 @@ function resolveModel(model) {
       if (brand && q === brand + k) return key;
     }
   }
+  /*
+   * A model whose manufacturer lists the SAME manual on its own product page. Bosch publishes one
+   * user manual for a whole dishwasher line — a dozen model numbers, one book — and says so on
+   * each model's page; `alsoCovers` records exactly those models (scripts/cover-families.js). It
+   * is still an exact match on a model number the manufacturer tied to that document: nothing
+   * near, nothing guessed.
+   */
+  for (const [key, rec] of Object.entries(ADMITTED)) {
+    const brand = canon(rec?.brand);
+    for (const other of rec?.alsoCovers || []) {
+      const k = canon(other);
+      if (q === k || (brand && q === brand + k)) return key;
+    }
+  }
   return model;
+}
+
+/** When `model` is answered by another model's manual, the model whose manual it is. */
+function sameManualAs(model) {
+  const key = resolveModel(model);
+  if (typeof model !== 'string' || key === model || canon(key) === canon(model)) return null;
+  const rec = own(ADMITTED, key);
+  return rec && (rec.alsoCovers || []).some((m) => canon(m) === canon(model) || canon(rec.brand) + canon(m) === canon(model)) ? key : null;
 }
 
 /** Hand-written first, then human-checked, then this session's unchecked reading. */
@@ -259,6 +281,12 @@ const machine = (model) => find(model) || null;
 
 /** How a machine's data got here, for anything that needs to say so out loud. */
 function provenance(model) {
+  const via = sameManualAs(model);
+  if (via) {
+    const r = own(ADMITTED, via);
+    return `read from ${r.source || 'a manual'} — the manual ${r.brand || 'the manufacturer'} lists for both ${model} and ${via} — and checked by ${r.reviewedBy || 'a reviewer'}`;
+  }
+  model = resolveModel(model);
   if (own(MODELS, model)) return 'written by hand from the manual';
   if (own(ADMITTED, model)) {
     const r = own(ADMITTED, model);
@@ -557,7 +585,7 @@ function lookup(model, code) {
 }
 
 module.exports = {
-  MODELS, LEARNED, lookup, lookupSymptom, learn, known, machine, provenance, loadAdmitted, reload, overlap, resolveModel, procedureFor,
+  MODELS, LEARNED, lookup, lookupSymptom, learn, known, machine, provenance, loadAdmitted, reload, overlap, resolveModel, sameManualAs, procedureFor,
   get ADMITTED() { return ADMITTED; },
   admittedNow,
 };

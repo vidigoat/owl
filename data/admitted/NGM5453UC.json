@@ -1,0 +1,243 @@
+{
+  "model": "NGM5453UC",
+  "brand": "Bosch",
+  "kind": "Cooktop",
+  "source": "NGM5453UC.pdf",
+  "pages": "18–19",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "the-general-electrical-system-of-the-app",
+      "symptom": "The general electrical system of the appliance is not working.",
+      "causes": [
+        {
+          "id": "the-general-electrical-system-of-the-app-0",
+          "label": "The circuit breaker in the circuit breaker panel has tripped.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check circuit breaker or fuse box to your house.",
+            "Make sure there is proper electrical power to the appliance. The circuit breaker has tripped.",
+            "Check circuit breaker or fuse box to your house.",
+            "Make sure there is proper electrical power to the appliance. The plug for the power cord is not plugged in. ▶ Connect the appliance to the power supply. There has been a power failure.",
+            "Check whether the lighting in your kitchen or other appliances in the room are working."
+          ],
+          "evidence": "Bosch manual, page 18: \"The circuit breaker in the circuit breaker panel has tripped.\"",
+          "source": {
+            "line": 26,
+            "manual": "Bosch manual",
+            "page": 18
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-automatic-ignition-is-not-working",
+      "symptom": "The automatic ignition is not working.",
+      "causes": [
+        {
+          "id": "the-automatic-ignition-is-not-working-0",
+          "label": "Food remnants, dirt, or cleaning products are located between the igniters and the burners.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Clean the space between the igniter and the burner."
+          ],
+          "evidence": "Bosch manual, page 18: \"Food remnants, dirt, or cleaning products are located between the igniters and the burners.\"",
+          "source": {
+            "line": 37,
+            "manual": "Bosch manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "the-automatic-ignition-is-not-working-1",
+          "label": "Burner parts are wet.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Carefully dry the burner parts."
+          ],
+          "evidence": "Bosch manual, page 18: \"Burner parts are wet.\"",
+          "source": {
+            "line": 40,
+            "manual": "Bosch manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "the-automatic-ignition-is-not-working-2",
+          "label": "The burner parts are not positioned correctly.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Position the burner parts correctly."
+          ],
+          "evidence": "Bosch manual, page 18: \"The burner parts are not positioned correctly.\"",
+          "source": {
+            "line": 42,
+            "manual": "Bosch manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "the-automatic-ignition-is-not-working-3",
+          "label": "The appliance is not connected properly to the power supply.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Contact a qualified electrician."
+          ],
+          "evidence": "Bosch manual, page 18: \"The appliance is not connected properly to the power supply.\"",
+          "source": {
+            "line": 44,
+            "manual": "Bosch manual",
+            "page": 18
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-burner-flame-is-not-uniform",
+      "symptom": "The burner flame is not uniform.",
+      "causes": [
+        {
+          "id": "the-burner-flame-is-not-uniform-0",
+          "label": "The burner parts are not positioned correctly.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Position the burner parts correctly."
+          ],
+          "evidence": "Bosch manual, page 18: \"The burner parts are not positioned correctly.\"",
+          "source": {
+            "line": 46,
+            "manual": "Bosch manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "the-burner-flame-is-not-uniform-1",
+          "label": "The grooves on the burner are dirty.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Clean the grooves on the burner."
+          ],
+          "evidence": "Bosch manual, page 18: \"The grooves on the burner are dirty.\"",
+          "source": {
+            "line": 48,
+            "manual": "Bosch manual",
+            "page": 18
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-gas-flow-is-not-normal-or-there-is-n",
+      "symptom": "The gas flow is not normal or there is no gas.",
+      "causes": [
+        {
+          "id": "the-gas-flow-is-not-normal-or-there-is-n-1",
+          "label": "The gas cylinder is empty.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Replace the gas cylinder."
+          ],
+          "evidence": "Bosch manual, page 18: \"The gas cylinder is empty.\"",
+          "source": {
+            "line": 52,
+            "manual": "Bosch manual",
+            "page": 18
+          }
+        }
+      ]
+    },
+    {
+      "id": "there-is-a-smell-of-gas-in-the-kitchen",
+      "symptom": "There is a smell of gas in the kitchen.",
+      "causes": [
+        {
+          "id": "there-is-a-smell-of-gas-in-the-kitchen-0",
+          "label": "A gas valve has been left on.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Turn off the gas taps."
+          ],
+          "evidence": "Bosch manual, page 18: \"A gas valve has been left on.\"",
+          "source": {
+            "line": 54,
+            "manual": "Bosch manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "there-is-a-smell-of-gas-in-the-kitchen-1",
+          "label": "Incorrect coupling of gas cylinder.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the proper connection to the gas cylinder."
+          ],
+          "evidence": "Bosch manual, page 18: \"Incorrect coupling of gas cylinder.\"",
+          "source": {
+            "line": 56,
+            "manual": "Bosch manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "there-is-a-smell-of-gas-in-the-kitchen-2",
+          "label": "The gas pipe to the appliance is leaking.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Shut off the gas supply at the main gas valve.",
+            "Ventilate the premises.",
+            "Immediately notify an authorised installation technician to check and certify the",
+            "installation."
+          ],
+          "evidence": "Bosch manual, page 18: \"The gas pipe to the appliance is leaking.\"",
+          "source": {
+            "line": 58,
+            "manual": "Bosch manual",
+            "page": 18
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-burner-switches-off-immediately-afte",
+      "symptom": "The burner switches off immediately after releasing the control knob.",
+      "causes": [
+        {
+          "id": "the-burner-switches-off-immediately-afte-0",
+          "label": "The control knob has not been pressed down long enough.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Keep the control knob pressed in for a few seconds after ignition.",
+            "Push the control knob in firmly. The grooves on the burner are dirty.",
+            "Clean the grooves on the burner."
+          ],
+          "evidence": "Bosch manual, page 19: \"The control knob has not been pressed down long enough.\"",
+          "source": {
+            "line": 5,
+            "manual": "Bosch manual",
+            "page": 19
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "the-gas-flow-is-not-normal-or-there-is-n-0"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-09-26T13:58:05.476Z",
+  "learnedAt": "2026-09-26T13:51:17.097Z"
+}

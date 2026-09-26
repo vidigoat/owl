@@ -1,0 +1,215 @@
+{
+  "model": "NIT8661UC",
+  "brand": "Bosch",
+  "kind": "Cooktop",
+  "source": "NIT8661UC.pdf",
+  "pages": "19–20",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "displays-do-not-light-up",
+      "symptom": "Displays do not light up.",
+      "causes": [
+        {
+          "id": "displays-do-not-light-up-0",
+          "label": "The power supply has been disconnected.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use other electrical appliances to check whether there has been a power failure."
+          ],
+          "evidence": "Bosch manual, page 19: \"The power supply has been disconnected.\"",
+          "source": {
+            "line": 62,
+            "manual": "Bosch manual",
+            "page": 19
+          }
+        },
+        {
+          "id": "displays-do-not-light-up-1",
+          "label": "The appliance has not been connected as shown in the circuit diagram.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Connect the appliance in accordance with the circuit diagram."
+          ],
+          "evidence": "Bosch manual, page 19: \"The appliance has not been connected as shown in the circuit diagram.\"",
+          "source": {
+            "line": 65,
+            "manual": "Bosch manual",
+            "page": 19
+          }
+        },
+        {
+          "id": "displays-do-not-light-up-2",
+          "label": "Electronics fault",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "If you are unable to rectify the fault, inform technical customer service."
+          ],
+          "evidence": "Bosch manual, page 19: \"Electronics fault\"",
+          "source": {
+            "line": 67,
+            "manual": "Bosch manual",
+            "page": 19
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-displays-flash",
+      "symptom": "The displays flash.",
+      "causes": [
+        {
+          "id": "the-displays-flash-0",
+          "label": "The control panel is damp or an object is covering it.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Dry the control panel or remove the object."
+          ],
+          "evidence": "Bosch manual, page 19: \"The control panel is damp or an object is covering it.\"",
+          "source": {
+            "line": 69,
+            "manual": "Bosch manual",
+            "page": 19
+          }
+        }
+      ]
+    },
+    {
+      "id": "symptom",
+      "symptom": ", , ,",
+      "causes": [
+        {
+          "id": "symptom-0",
+          "label": "The electronics have overheated, and one or all of the cooking zones have been switched off.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wait until the electronics have cooled down sufficiently. Then touch any button on the control panel."
+          ],
+          "evidence": "Bosch manual, page 20: \"The electronics have overheated, and one or all of the cooking zones have been switched off.\"",
+          "source": {
+            "line": 4,
+            "manual": "Bosch manual",
+            "page": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "power-level-and-signal-tone",
+      "symptom": "+ power level and signal tone",
+      "causes": [
+        {
+          "id": "power-level-and-signal-tone-0",
+          "label": "There is hot cookware in the vicinity of the control panel. This may cause the electronics to overheat.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Remove the cookware. The error display goes out shortly afterwards. You can continue cooking."
+          ],
+          "evidence": "Bosch manual, page 20: \"There is hot cookware in the vicinity of the control panel. This may cause the electronics to overheat.\"",
+          "source": {
+            "line": 8,
+            "manual": "Bosch manual",
+            "page": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "and-signal-tone",
+      "symptom": "and signal tone",
+      "suspect": true,
+      "causes": [
+        {
+          "id": "and-signal-tone-0",
+          "label": "There is hot cookware in the vicinity of the control panel. The cooking zone has been switched off to protect the electronics.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Remove the cookware. Wait a few seconds. Press any button. When the error display goes out, you can continue cooking."
+          ],
+          "evidence": "Bosch manual, page 20: \"There is hot cookware in the vicinity of the control panel. The cooking zone has been switched off to protect the electronics.\"",
+          "source": {
+            "line": 12,
+            "manual": "Bosch manual",
+            "page": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "home-connect-is-not-working-properly",
+      "symptom": "Home Connect® is not working properly.",
+      "causes": [
+        {
+          "id": "home-connect-is-not-working-properly-0",
+          "label": "Various causes are possible.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Go to www.home-connect.com."
+          ],
+          "evidence": "Bosch manual, page 20: \"Various causes are possible.\"",
+          "source": {
+            "line": 30,
+            "manual": "Bosch manual",
+            "page": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-hood-control-is-not-working-properly",
+      "symptom": "The hood control is not working properly.",
+      "causes": [
+        {
+          "id": "the-hood-control-is-not-working-properly-0",
+          "label": "The hood control functions do not switch on.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Resetting and re-pairing the settings of the Wi-Fi home network"
+          ],
+          "evidence": "Bosch manual, page 20: \"The hood control functions do not switch on.\"",
+          "source": {
+            "line": 32,
+            "manual": "Bosch manual",
+            "page": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "animations-on-the",
+      "symptom": "Animations on the",
+      "causes": [
+        {
+          "id": "animations-on-the-0",
+          "label": "In certain circumstances, the cooktop can perform self-maintenance tasks, e.g. a firmware update, optimization, or troubleshooting.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wait until the process is complete and only then switch the cooktop on."
+          ],
+          "evidence": "Bosch manual, page 20: \"In certain circumstances, the cooktop can perform self-maintenance tasks, e.g. a firmware update, optimization, or troubleshooting.\"",
+          "source": {
+            "line": 34,
+            "manual": "Bosch manual",
+            "page": 20
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-09-26T13:58:06.410Z",
+  "learnedAt": "2026-09-26T13:51:20.695Z"
+}

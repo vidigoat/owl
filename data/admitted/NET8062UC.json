@@ -1,0 +1,223 @@
+{
+  "model": "NET8062UC",
+  "brand": "Bosch",
+  "kind": "Cooktop",
+  "source": "NET8062UC.pdf",
+  "pages": "14–16",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "no-display-information",
+      "symptom": "No display information",
+      "causes": [
+        {
+          "id": "no-display-information-0",
+          "label": "The power supply has been disconnected.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check whether the lighting in your kitchen or other appliances in the room are working."
+          ],
+          "evidence": "Bosch manual, page 15: \"The power supply has been disconnected.\"",
+          "source": {
+            "line": 24,
+            "manual": "Bosch manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "no-display-information-1",
+          "label": "The appliance has not been connected as shown in the circuit diagram.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Disconnect the appliance from the power supply.",
+            "Make sure the appliance has been connected as shown in the circuit diagram."
+          ],
+          "evidence": "Bosch manual, page 15: \"The appliance has not been connected as shown in the circuit diagram.\"",
+          "source": {
+            "line": 27,
+            "manual": "Bosch manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "no-display-information-2",
+          "label": "There is an electronics fault",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "If the fault cannot be eliminated, call Customer Service."
+          ],
+          "evidence": "Bosch manual, page 15: \"There is an electronics fault\"",
+          "source": {
+            "line": 30,
+            "manual": "Bosch manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "all-indicators-are-flashing",
+      "symptom": "All indicators are flashing",
+      "causes": [
+        {
+          "id": "all-indicators-are-flashing-0",
+          "label": "The control panel is wet or an object is covering it.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Dry the control panel or remove the object."
+          ],
+          "evidence": "Bosch manual, page 15: \"The control panel is wet or an object is covering it.\"",
+          "source": {
+            "line": 32,
+            "manual": "Bosch manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "all-indicators-are-flashing-1",
+          "label": "The electronics have overheated. The corresponding cooking zone has been switched off.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Wait until the electronics have cooled down sufficiently.",
+            "Touch any control element.",
+            "When error message disappears, the electronics have cooled down sufficiently.",
+            "You can continue to cook."
+          ],
+          "evidence": "Bosch manual, page 15: \"The electronics have overheated. The corresponding cooking zone has been switched off.\"",
+          "source": {
+            "line": 34,
+            "manual": "Bosch manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "all-indicators-are-flashing-2",
+          "label": "The electronics have overheated. All cooking zones have switched off.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Wait until the electronics have cooled down sufficiently.",
+            "Touch any control element.",
+            "When error message disappears, the electronics have cooled down sufficiently.",
+            "You can continue to cook."
+          ],
+          "evidence": "Bosch manual, page 15: \"The electronics have overheated. All cooking zones have switched off.\"",
+          "source": {
+            "line": 40,
+            "manual": "Bosch manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "heat-level-and-signal-tone",
+      "symptom": "+ heat level and signal tone",
+      "causes": [
+        {
+          "id": "heat-level-and-signal-tone-0",
+          "label": "There is hot cookware near the control panel. The electronics are at risk of overheating.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Remove the cookware from the control panel.",
+            "You can continue to cook."
+          ],
+          "evidence": "Bosch manual, page 15: \"There is hot cookware near the control panel. The electronics are at risk of overheating.\"",
+          "source": {
+            "line": 45,
+            "manual": "Bosch manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "and-signal-tone",
+      "symptom": "and signal tone",
+      "suspect": true,
+      "causes": [
+        {
+          "id": "and-signal-tone-0",
+          "label": "There is hot cookware near the control panel. The cooking zone has switched off to protect the electronics.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Remove the cookware from the control panel.",
+            "Wait a few seconds.",
+            "Touch any control element.",
+            "When error message disappears, the electronics have cooled down sufficiently.",
+            "You can continue to cook."
+          ],
+          "evidence": "Bosch manual, page 15: \"There is hot cookware near the control panel. The cooking zone has switched off to protect the electronics.\"",
+          "source": {
+            "line": 49,
+            "manual": "Bosch manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "and-cooking-zones-do-not-heat-up",
+      "symptom": "and cooking zones do not heat up",
+      "suspect": true,
+      "causes": [
+        {
+          "id": "and-cooking-zones-do-not-heat-up-0",
+          "label": "Demo mode is activated.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Disconnect the appliance from the power supply for 30 seconds by switching",
+            "off the circuit breaker or fuse in the electrical panel.",
+            "Touch any touch field within the next 3 minutes."
+          ],
+          "evidence": "Bosch manual, page 15: \"Demo mode is activated.\"",
+          "source": {
+            "line": 60,
+            "manual": "Bosch manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "a-message-with-d-or-e-appears-on-the-dis",
+      "symptom": "A message with \"D\" or \"E\" appears on the display.",
+      "causes": [
+        {
+          "id": "a-message-with-d-or-e-appears-on-the-dis-0",
+          "label": "Operational fault",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Switch the appliance off and on again.",
+            "If the fault was a one-off occurrence, the message disappears.",
+            "If the message appears again, call Customer Service. Please specify the exact",
+            "error message when calling."
+          ],
+          "evidence": "Bosch manual, page 16: \"Operational fault\"",
+          "source": {
+            "line": 4,
+            "manual": "Bosch manual",
+            "page": 16
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "and-cooking-zones-not-heating"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-09-26T13:58:05.079Z",
+  "learnedAt": "2026-09-26T13:51:15.542Z"
+}

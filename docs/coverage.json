@@ -1,0 +1,121 @@
+{
+  "measured": "2026-09-26T13:58:13.434Z",
+  "what": "Per brand and kind: product pages the manufacturer lists, visited, with an English manual, distinct manuals, and models the library answers for (scripts/coverage.js).",
+  "total": {
+    "listed": 496,
+    "visited": 262,
+    "english": 177,
+    "manuals": 121,
+    "answers": 107
+  },
+  "rows": [
+    {
+      "brand": "bosch",
+      "kind": "cooking-baking",
+      "listed": 115,
+      "visited": 115,
+      "english": 102,
+      "manuals": 60,
+      "answers": 69
+    },
+    {
+      "brand": "bosch",
+      "kind": "dishwashers",
+      "listed": 57,
+      "visited": 57,
+      "english": 37,
+      "manuals": 37,
+      "answers": 25
+    },
+    {
+      "brand": "bosch",
+      "kind": "refrigerators",
+      "listed": 29,
+      "visited": 29,
+      "english": 9,
+      "manuals": 8,
+      "answers": 7
+    },
+    {
+      "brand": "bosch",
+      "kind": "washers-and-dryers",
+      "listed": 6,
+      "visited": 6,
+      "english": 4,
+      "manuals": 4,
+      "answers": 2
+    },
+    {
+      "brand": "bosch-uk",
+      "kind": "cooking",
+      "listed": 113,
+      "visited": 0,
+      "english": 0,
+      "manuals": 0,
+      "answers": 0
+    },
+    {
+      "brand": "bosch-uk",
+      "kind": "fridges-freezers",
+      "listed": 61,
+      "visited": 0,
+      "english": 0,
+      "manuals": 0,
+      "answers": 0
+    },
+    {
+      "brand": "bosch-uk",
+      "kind": "laundry",
+      "listed": 31,
+      "visited": 0,
+      "english": 0,
+      "manuals": 0,
+      "answers": 0
+    },
+    {
+      "brand": "bosch-uk",
+      "kind": "dishwashers",
+      "listed": 29,
+      "visited": 0,
+      "english": 0,
+      "manuals": 0,
+      "answers": 0
+    },
+    {
+      "brand": "siemens",
+      "kind": "cooking-and-baking",
+      "listed": 23,
+      "visited": 23,
+      "english": 3,
+      "manuals": 3,
+      "answers": 3
+    },
+    {
+      "brand": "siemens",
+      "kind": "cooling",
+      "listed": 13,
+      "visited": 13,
+      "english": 8,
+      "manuals": 5,
+      "answers": 1
+    },
+    {
+      "brand": "siemens",
+      "kind": "laundry-care",
+      "listed": 12,
+      "visited": 12,
+      "english": 7,
+      "manuals": 3,
+      "answers": 0
+    },
+    {
+      "brand": "siemens",
+      "kind": "dishwashers",
+      "listed": 7,
+      "visited": 7,
+      "english": 7,
+      "manuals": 1,
+      "answers": 0
+    }
+  ]
+}

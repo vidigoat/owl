@@ -80,7 +80,7 @@ function withHousehold(fn) {
   });
 }
 const { replace_or_repair } = require('./tools/replace_or_repair');
-const { lookupSymptom, resolveModel } = require('../data/service-data');
+const { lookupSymptom, resolveModel, sameManualAs, provenance } = require('../data/service-data');
 const { buildSpace, prune } = require('./tools/hypotheses');
 const { nextTest } = require('./tools/next_test');
 
@@ -470,8 +470,16 @@ async function callTool(id, params) {
     const args = coerce(tool, { ...(params.arguments || {}) });
     // Every tool keys on the model, so it is resolved once, here — "Bosch SGE53C55UC" is the
     // SGE53C55UC. See resolveModel for what is and is not treated as the same machine.
-    if (typeof args.model === 'string') args.model = resolveModel(args.model);
+    const asked = typeof args.model === 'string' ? args.model : null;
+    if (asked) args.model = resolveModel(asked);
     let value = await tool.handler(args);
+    // Answered from another model's manual because the manufacturer lists it for both: the answer
+    // says so, about the model that was asked — resolving the name first had turned HBL8454UC into
+    // HBL5351UC, and the provenance talked about a machine nobody had mentioned.
+    const via = asked ? sameManualAs(asked) : null;
+    if (via && value && typeof value === 'object' && !Array.isArray(value)) {
+      value = { ...value, askedFor: asked, sameManualAs: via, ...(value.provenance ? { provenance: provenance(asked) } : {}) };
+    }
     if (store && !(await persist()) && value && value.saved === true) {
       // The shared store refused the save: it is not kept, and the answer says so.
       value = { ...value, saved: false, kept: 'session', keptFor: SESSION_ONLY };

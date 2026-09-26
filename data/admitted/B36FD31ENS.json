@@ -1,0 +1,421 @@
+{
+  "model": "B36FD31ENS",
+  "brand": "Bosch",
+  "kind": "Refrigerator",
+  "source": "B36FD31ENS.pdf",
+  "pages": "24–25",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "the-appliance-is-not-cooling-the-display",
+      "symptom": "The appliance is not cooling, the displays and lighting are lit.",
+      "causes": [
+        {
+          "id": "the-appliance-is-not-cooling-the-display-0",
+          "label": "Showroom mode is switched on.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Disconnect the appliance from the power supply.",
+            "Unplug the power plug or switch off the circuit breaker in the fuse box.",
+            "Reconnect the appliance after 5 minutes.",
+            "Wait at least 30 seconds and then press super (Refrigerator compartment) for",
+            "15 seconds."
+          ],
+          "evidence": "Bosch manual, page 24: \"Showroom mode is switched on.\"",
+          "source": {
+            "line": 26,
+            "manual": "Bosch manual",
+            "page": 24
+          }
+        },
+        {
+          "id": "the-appliance-is-not-cooling-the-display-1",
+          "label": "a     appears briefly on the control panel.",
+          "suspect": true,
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "After a short time, check whether your appliance is cooling."
+          ],
+          "evidence": "Bosch manual, page 24: \"a     appears briefly on the control panel.\"",
+          "source": {
+            "line": 32,
+            "manual": "Bosch manual",
+            "page": 24
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-led-lighting-does-not-work",
+      "symptom": "The LED lighting does not work.",
+      "causes": [
+        {
+          "id": "the-led-lighting-does-not-work-0",
+          "label": "Various causes are possible.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Call customer service.",
+            "→ \"Customer Service\", Page 28"
+          ],
+          "evidence": "Bosch manual, page 24: \"Various causes are possible.\"",
+          "source": {
+            "line": 34,
+            "manual": "Bosch manual",
+            "page": 24
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-refrigeration-unit-is-switching-on-m",
+      "symptom": "The refrigeration unit is switching on more frequently and for longer.",
+      "causes": [
+        {
+          "id": "the-refrigeration-unit-is-switching-on-m-0",
+          "label": "The appliance has been opened frequently.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Do not open appliance door unnecessarily."
+          ],
+          "evidence": "Bosch manual, page 24: \"The appliance has been opened frequently.\"",
+          "source": {
+            "line": 37,
+            "manual": "Bosch manual",
+            "page": 24
+          }
+        },
+        {
+          "id": "the-refrigeration-unit-is-switching-on-m-1",
+          "label": "External ventilation openings are covered up.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Remove any obstructions from in front of the external ventilation openings."
+          ],
+          "evidence": "Bosch manual, page 24: \"External ventilation openings are covered up.\"",
+          "source": {
+            "line": 39,
+            "manual": "Bosch manual",
+            "page": 24
+          }
+        },
+        {
+          "id": "the-refrigeration-unit-is-switching-on-m-2",
+          "label": "Not a fault. Modern refrigeration machines switch on more frequently and have different power levels to cool more efficiently.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Remove any obstructions from in front of the external ventilation openings.",
+            "Install the appliance as far away as possible from heating elements, cookers and other heat sources. Avoid prolonged exposure of the appliance to direct sunlight.",
+            "Only open the appliance door as briefly as necessary.",
+            "Allow hot food and drinks to cool down first before storing in the appliance."
+          ],
+          "evidence": "Bosch manual, page 24: \"Not a fault. Modern refrigeration machines switch on more frequently and have different power levels to cool more efficiently.\"",
+          "source": {
+            "line": 41,
+            "manual": "Bosch manual",
+            "page": 24
+          }
+        }
+      ]
+    },
+    {
+      "id": "a-layer-of-frost-forms-on-the-back-wall-",
+      "symptom": "A layer of frost forms on the back wall of the refrigerator compartment.",
+      "causes": [
+        {
+          "id": "a-layer-of-frost-forms-on-the-back-wall--0",
+          "label": "Not a fault. Modern refrigeration machines ensure a more even temperature in the refrigerator compartment. The back wall of the refrigerator compartment is defrosted automatically at regular intervals.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Only open the appliance door as briefly as necessary.",
+            "Pack the food airtight or cover it.",
+            "Allow hot food and drinks to cool down first before storing in the appliance.",
+            "Always leave some space between the food and the interior walls."
+          ],
+          "evidence": "Bosch manual, page 24: \"Not a fault. Modern refrigeration machines ensure a more even temperature in the refrigerator compartment. The back wall of the refrigerator compartment is defrosted automatically at regular intervals.\"",
+          "source": {
+            "line": 48,
+            "manual": "Bosch manual",
+            "page": 24
+          }
+        }
+      ]
+    },
+    {
+      "id": "home-connect-is-not-working-properly",
+      "symptom": "Home Connect® is not working properly.",
+      "causes": [
+        {
+          "id": "home-connect-is-not-working-properly-0",
+          "label": "Various causes are possible.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Go to www.home-connect.com."
+          ],
+          "evidence": "Bosch manual, page 24: \"Various causes are possible.\"",
+          "source": {
+            "line": 55,
+            "manual": "Bosch manual",
+            "page": 24
+          }
+        }
+      ]
+    },
+    {
+      "id": "e-or-d-appears-on-the-temperature-displa",
+      "symptom": "\"E\" or \"d\" appears on the temperature display.",
+      "causes": [
+        {
+          "id": "e-or-d-appears-on-the-temperature-displa-0",
+          "label": "The electronics have detected a fault.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Switch off the appliance. → Page 12",
+            "Disconnect the appliance from the power supply.",
+            "Unplug the power plug or switch off the circuit breaker in the fuse box.",
+            "Reconnect the appliance after 5 minutes.",
+            "If the message still appears on the display, call Customer Service.",
+            "→ \"Customer Service\", Page 28"
+          ],
+          "evidence": "Bosch manual, page 24: \"The electronics have detected a fault.\"",
+          "source": {
+            "line": 57,
+            "manual": "Bosch manual",
+            "page": 24
+          }
+        }
+      ]
+    },
+    {
+      "id": "a-warning-signal-sounds-and-alarm-flashe",
+      "symptom": "A warning signal sounds and \"alarm\" flashes.",
+      "causes": [
+        {
+          "id": "a-warning-signal-sounds-and-alarm-flashe-0",
+          "label": "The appliance door is open.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Close the appliance door."
+          ],
+          "evidence": "Bosch manual, page 25: \"The appliance door is open.\"",
+          "source": {
+            "line": 3,
+            "manual": "Bosch manual",
+            "page": 25
+          }
+        }
+      ]
+    },
+    {
+      "id": "on",
+      "symptom": "on.",
+      "suspect": true,
+      "causes": [
+        {
+          "id": "on-0",
+          "label": "been reached again. External ventilation openings are covered up.",
+          "suspect": true,
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Remove any obstructions from in front of the external ventilation openings."
+          ],
+          "evidence": "Bosch manual, page 25: \"been reached again. External ventilation openings are covered up.\"",
+          "source": {
+            "line": 10,
+            "manual": "Bosch manual",
+            "page": 25
+          }
+        },
+        {
+          "id": "on-1",
+          "label": "Large quantities of fresh food have been placed inside.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Switch on Super freezing before placing a larger amount of food in the appliance.",
+            "→ \"Switching on Super freezing\", Page 13"
+          ],
+          "evidence": "Bosch manual, page 25: \"Large quantities of fresh food have been placed inside.\"",
+          "source": {
+            "line": 13,
+            "manual": "Bosch manual",
+            "page": 25
+          }
+        }
+      ]
+    },
+    {
+      "id": "all-temperature-displays-and-alarm-light",
+      "symptom": "All temperature displays and \"alarm\" light up.",
+      "causes": [
+        {
+          "id": "all-temperature-displays-and-alarm-light-0",
+          "label": "A sensor is defective.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Call customer service.",
+            "→ \"Customer Service\", Page 28"
+          ],
+          "evidence": "Bosch manual, page 25: \"A sensor is defective.\"",
+          "source": {
+            "line": 16,
+            "manual": "Bosch manual",
+            "page": 25
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-temperature-differs-greatly-from-the",
+      "symptom": "The temperature differs greatly from the setting.",
+      "causes": [
+        {
+          "id": "the-temperature-differs-greatly-from-the-0",
+          "label": "Various causes are possible.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Switch off the appliance. → Page 12",
+            "Switch the appliance back on after approximately 5 minutes. → Page 12",
+            "‒ If the temperature is too warm, check the temperature again after a couple of hours.",
+            "‒ If the temperature is too cold, check the temperature again on the following day."
+          ],
+          "evidence": "Bosch manual, page 25: \"Various causes are possible.\"",
+          "source": {
+            "line": 19,
+            "manual": "Bosch manual",
+            "page": 25
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-is-leaking-out-of-the-appliance",
+      "symptom": "Water is leaking out of the appliance.",
+      "causes": [
+        {
+          "id": "water-is-leaking-out-of-the-appliance-0",
+          "label": "The water connection or water hose is not leak-tight.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check if the water connections are fastened firmly and the water hose is undamaged.",
+            "If necessary, replace the water hose."
+          ],
+          "evidence": "Bosch manual, page 25: \"The water connection or water hose is not leak-tight.\"",
+          "source": {
+            "line": 26,
+            "manual": "Bosch manual",
+            "page": 25
+          }
+        },
+        {
+          "id": "water-is-leaking-out-of-the-appliance-1",
+          "label": "The drip tray is overflowing.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Clean the drip tray. → Page 20"
+          ],
+          "evidence": "Bosch manual, page 25: \"The drip tray is overflowing.\"",
+          "source": {
+            "line": 30,
+            "manual": "Bosch manual",
+            "page": 25
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-output-is-reduced",
+      "symptom": "Water output is reduced.",
+      "causes": [
+        {
+          "id": "water-output-is-reduced-0",
+          "label": "Low water pressure.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check the pressure of the water supply system or the external water filter system, e.g. reverse osmosis system.",
+            "Connect the appliance only to a water connection with sufficient water pressure.",
+            "→ Page 7"
+          ],
+          "evidence": "Bosch manual, page 25: \"Low water pressure.\"",
+          "source": {
+            "line": 33,
+            "manual": "Bosch manual",
+            "page": 25
+          }
+        },
+        {
+          "id": "water-output-is-reduced-1",
+          "label": "The water filter is blocked.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Change the water filter. → Page 17"
+          ],
+          "evidence": "Bosch manual, page 25: \"The water filter is blocked.\"",
+          "source": {
+            "line": 38,
+            "manual": "Bosch manual",
+            "page": 25
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-is-dripping-from-the-ice-and-water",
+      "symptom": "Water is dripping from the ice and water dispenser.",
+      "causes": [
+        {
+          "id": "water-is-dripping-from-the-ice-and-water-0",
+          "label": "Air is in the water system.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Keep dispensing water until it contains no more air."
+          ],
+          "evidence": "Bosch manual, page 25: \"Air is in the water system.\"",
+          "source": {
+            "line": 41,
+            "manual": "Bosch manual",
+            "page": 25
+          }
+        },
+        {
+          "id": "water-is-dripping-from-the-ice-and-water-1",
+          "label": "Ice residue is melting in the ice chute.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Remove the ice residue from the ice chute, for example using a wooden spoon."
+          ],
+          "evidence": "Bosch manual, page 25: \"Ice residue is melting in the ice chute.\"",
+          "source": {
+            "line": 43,
+            "manual": "Bosch manual",
+            "page": 25
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-09-26T13:57:58.289Z",
+  "learnedAt": "2026-09-26T13:50:58.393Z"
+}

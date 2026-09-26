@@ -1,0 +1,142 @@
+{
+  "model": "DUHP0853UC",
+  "brand": "Bosch",
+  "kind": "Range hood",
+  "source": "DUHP0853UC.pdf",
+  "pages": "13–13",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "noise-during-operation",
+      "symptom": "Noise during operation.",
+      "causes": [
+        {
+          "id": "noise-during-operation-0",
+          "label": "Some noise is normal due to vibration and air movement.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal. There is no action required."
+          ],
+          "evidence": "Bosch manual, page 13: \"Some noise is normal due to vibration and air movement.\"",
+          "source": {
+            "line": 26,
+            "manual": "Bosch manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "noise-during-operation-1",
+          "label": "Excessive noise can indicate an issue with installation.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Excessive noise could indicate one of the following issues:",
+            "Ductwork is too small / undersized Ductwork is too large / oversized Ductwork is loose Transition is too small or is loose Wood screws are not fully tightened Loose screws in trim parts, etc.",
+            "Check the Installation Instructions to verify that the ductwork is the proper size.",
+            "Tighten screws."
+          ],
+          "evidence": "Bosch manual, page 13: \"Excessive noise can indicate an issue with installation.\"",
+          "source": {
+            "line": 28,
+            "manual": "Bosch manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-hood-causes-the-breaker-to-trip",
+      "symptom": "The hood causes the breaker to trip.",
+      "causes": [
+        {
+          "id": "the-hood-causes-the-breaker-to-trip-0",
+          "label": "The electric wiring is incorrectly connected.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See the Installation Instructions for more information."
+          ],
+          "evidence": "Bosch manual, page 13: \"The electric wiring is incorrectly connected.\"",
+          "source": {
+            "line": 45,
+            "manual": "Bosch manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "the-hood-causes-the-breaker-to-trip-1",
+          "label": "The circuit is not sufficient.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See the Installation Instructions for more information."
+          ],
+          "evidence": "Bosch manual, page 13: \"The circuit is not sufficient.\"",
+          "source": {
+            "line": 47,
+            "manual": "Bosch manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-hood-is-not-venting-properly",
+      "symptom": "The hood is not venting properly.",
+      "causes": [
+        {
+          "id": "the-hood-is-not-venting-properly-0",
+          "label": "The hood might be too high from the cooktop. The hood may not be centered above the cooktop. The make up air is not sufficient. The wind from opened windows or opened doors in the surrounding area is affecting the ventilation of the hood.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Close all the windows and doors to eliminate the outside air flow."
+          ],
+          "evidence": "Bosch manual, page 13: \"The hood might be too high from the cooktop. The hood may not be centered above the cooktop. The make up air is not sufficient. The wind from opened windows or opened doors in the surrounding area is affecting the ventilation of the hood.\"",
+          "source": {
+            "line": 49,
+            "manual": "Bosch manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "the-hood-is-not-venting-properly-1",
+          "label": "There is a blockage in the duct opening or ductwork.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Remove all blockage from the ductwork or duct opening."
+          ],
+          "evidence": "Bosch manual, page 13: \"There is a blockage in the duct opening or ductwork.\"",
+          "source": {
+            "line": 55,
+            "manual": "Bosch manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "the-hood-is-not-venting-properly-2",
+          "label": "Duct length might be too long, too many elbows, “back to back” elbows, or too small roof.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "See the Installation Instructions for more information."
+          ],
+          "evidence": "Bosch manual, page 13: \"Duct length might be too long, too many elbows, “back to back” elbows, or too small roof.\"",
+          "source": {
+            "line": 57,
+            "manual": "Bosch manual",
+            "page": 13
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-09-26T13:58:01.231Z",
+  "learnedAt": "2026-09-26T13:54:09.913Z"
+}

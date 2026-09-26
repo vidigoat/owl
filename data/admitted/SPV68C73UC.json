@@ -1,0 +1,1429 @@
+{
+  "model": "SPV68C73UC",
+  "brand": "Bosch",
+  "kind": "Dishwasher",
+  "source": "SPV68C73UC.pdf",
+  "pages": "37–48",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "e-20-60-lights-up-alternately",
+      "symptom": "E:20-60 lights up alternately.",
+      "causes": [
+        {
+          "id": "e-20-60-lights-up-alternately-0",
+          "label": "Appliance has detected that the heating element is calcified.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Descale the appliance.",
+            "Operate the appliance with the Water softening",
+            "system. 1"
+          ],
+          "evidence": "Bosch manual, page 38: \"Appliance has detected that the heating element is calcified.\"",
+          "source": {
+            "line": 3,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        }
+      ]
+    },
+    {
+      "id": "e-21-30-lights-up-alternately",
+      "symptom": "E:21-30 lights up alternately.",
+      "causes": [
+        {
+          "id": "e-21-30-lights-up-alternately-0",
+          "label": "Intake opening of Zeolite container is covered by items of dishware.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Rearrange the dishware in the appliance so the Intake opening of the Zeolite container Page 11 is no longer obstructed."
+          ],
+          "evidence": "Bosch manual, page 38: \"Intake opening of Zeolite container is covered by items of dishware.\"",
+          "source": {
+            "line": 8,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        }
+      ]
+    },
+    {
+      "id": "e-30-00-lights-up-alternately",
+      "symptom": "E:30-00 lights up alternately.",
+      "causes": [
+        {
+          "id": "e-30-00-lights-up-alternately-0",
+          "label": "Water protection system is activated.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Close the water supply valve.",
+            "Contact customer service Page 50."
+          ],
+          "evidence": "Bosch manual, page 38: \"Water protection system is activated.\"",
+          "source": {
+            "line": 13,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        }
+      ]
+    },
+    {
+      "id": "e-31-00-lights-up-alternately",
+      "symptom": "E:31-00 lights up alternately.",
+      "causes": [
+        {
+          "id": "e-31-00-lights-up-alternately-0",
+          "label": "Water protection system is activated.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Close the water supply valve.",
+            "Contact customer service Page 50."
+          ],
+          "evidence": "Bosch manual, page 38: \"Water protection system is activated.\"",
+          "source": {
+            "line": 16,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        }
+      ]
+    },
+    {
+      "id": "e-32-00-lights-up-alter",
+      "symptom": "E:32-00 lights up alter-",
+      "causes": [
+        {
+          "id": "e-32-00-lights-up-alter-0",
+          "label": "Water supply valve is closed.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [],
+          "evidence": "Bosch manual, page 38: \"Water supply valve is closed.\"",
+          "source": {
+            "line": 19,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        }
+      ]
+    },
+    {
+      "id": "e-34-00-lights-up-alternately",
+      "symptom": "E:34-00 lights up alternately.",
+      "causes": [
+        {
+          "id": "e-34-00-lights-up-alternately-0",
+          "label": "Water is continuously running into the appliance.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Close the water supply valve.",
+            "Contact customer service Page 50."
+          ],
+          "evidence": "Bosch manual, page 38: \"Water is continuously running into the appliance.\"",
+          "source": {
+            "line": 39,
+            "manual": "Bosch manual",
+            "page": 38
+          }
+        }
+      ]
+    },
+    {
+      "id": "e-61-02-lights-up-alternately",
+      "symptom": "E:61-02 lights up alternately.",
+      "causes": [
+        {
+          "id": "e-61-02-lights-up-alternately-0",
+          "label": "Not an appliance error. The drain pump cover is loose or a foreign object is blocking the pump.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Secure the cover of the drain pump so it clicks into place or clean the drain pump."
+          ],
+          "evidence": "Bosch manual, page 39: \"Not an appliance error. The drain pump cover is loose or a foreign object is blocking the pump.\"",
+          "source": {
+            "line": 3,
+            "manual": "Bosch manual",
+            "page": 39
+          }
+        }
+      ]
+    },
+    {
+      "id": "e-90-01-lights-up-alternately",
+      "symptom": "E:90-01 lights up alternately.",
+      "causes": [
+        {
+          "id": "e-90-01-lights-up-alternately-0",
+          "label": "Power voltage is too low. There is no problem with the appliance.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Call an electrician.",
+            "Have the power voltage and electrical installation",
+            "checked by an electrician."
+          ],
+          "evidence": "Bosch manual, page 39: \"Power voltage is too low. There is no problem with the appliance.\"",
+          "source": {
+            "line": 31,
+            "manual": "Bosch manual",
+            "page": 39
+          }
+        }
+      ]
+    },
+    {
+      "id": "e-92-40-lights-up-alternately",
+      "symptom": "E:92-40 lights up alternately.",
+      "causes": [
+        {
+          "id": "e-92-40-lights-up-alternately-0",
+          "label": "Filters are soiled or blocked.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Clean the filters."
+          ],
+          "evidence": "Bosch manual, page 39: \"Filters are soiled or blocked.\"",
+          "source": {
+            "line": 36,
+            "manual": "Bosch manual",
+            "page": 39
+          }
+        }
+      ]
+    },
+    {
+      "id": "a-different-error-code-appears-in-the-di",
+      "symptom": "A different error code appears in the display window.",
+      "causes": [
+        {
+          "id": "a-different-error-code-appears-in-the-di-0",
+          "label": "There is a technical issue.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Press          .",
+            "Pull out the power cord plug of the appliance or"
+          ],
+          "evidence": "Bosch manual, page 40: \"There is a technical issue.\"",
+          "source": {
+            "line": 3,
+            "manual": "Bosch manual",
+            "page": 40
+          }
+        }
+      ]
+    },
+    {
+      "id": "e-01-00-to",
+      "symptom": "E:01-00 to",
+      "causes": [
+        {
+          "id": "e-01-00-to-0",
+          "label": "E:90-10           switch off the breaker.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wait at least 2 minutes.",
+            "Insert the power cord plug of the appliance in a",
+            "power outlet or switch on the breaker.",
+            "Switch the appliance on.",
+            "If the problem occurs again:",
+            "Press          .",
+            "Turn off the water faucet.",
+            "Pull out the power cord plug.",
+            "Contact customer service Page 50 and give the error code."
+          ],
+          "evidence": "Bosch manual, page 40: \"E:90-10           switch off the breaker.\"",
+          "source": {
+            "line": 6,
+            "manual": "Bosch manual",
+            "page": 40
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishware-is-not-dry",
+      "symptom": "Dishware is not dry.",
+      "causes": [
+        {
+          "id": "dishware-is-not-dry-0",
+          "label": "No rinse aid used or dosage set too low.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Add Rinse aid Page 22.",
+            "Set the amount of rinse aid to be dispensed. Cycle or cycle option has no drying phase, or drying"
+          ],
+          "evidence": "Bosch manual, page 40: \"No rinse aid used or dosage set too low.\"",
+          "source": {
+            "line": 17,
+            "manual": "Bosch manual",
+            "page": 40
+          }
+        },
+        {
+          "id": "dishware-is-not-dry-1",
+          "label": "phase is too short.",
+          "suspect": true,
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Select a wash cycle with drying. Page 14"
+          ],
+          "evidence": "Bosch manual, page 40: \"phase is too short.\"",
+          "source": {
+            "line": 22,
+            "manual": "Bosch manual",
+            "page": 40
+          }
+        },
+        {
+          "id": "dishware-is-not-dry-2",
+          "label": "Some option buttons decrease the drying result. Water collects in recesses of dishware or silverware.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Position dishware at an angle where possible."
+          ],
+          "evidence": "Bosch manual, page 40: \"Some option buttons decrease the drying result. Water collects in recesses of dishware or silverware.\"",
+          "source": {
+            "line": 24,
+            "manual": "Bosch manual",
+            "page": 40
+          }
+        },
+        {
+          "id": "dishware-is-not-dry-3",
+          "label": "The combined detergent used has a poor drying performance.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Use rinse aid to improve drying performance.",
+            "Use a different combined detergent with a better dry-",
+            "ing performance."
+          ],
+          "evidence": "Bosch manual, page 40: \"The combined detergent used has a poor drying performance.\"",
+          "source": {
+            "line": 31,
+            "manual": "Bosch manual",
+            "page": 40
+          }
+        },
+        {
+          "id": "dishware-is-not-dry-4",
+          "label": "Extra Dry/intensive drying not activated to improve drying performance.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Activate Extra Dry/intensive drying."
+          ],
+          "evidence": "Bosch manual, page 40: \"Extra Dry/intensive drying not activated to improve drying performance.\"",
+          "source": {
+            "line": 36,
+            "manual": "Bosch manual",
+            "page": 40
+          }
+        },
+        {
+          "id": "dishware-is-not-dry-5",
+          "label": "Dishware removed too early or drying process not yet ended.",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "Wait until the program ends."
+          ],
+          "evidence": "Bosch manual, page 40: \"Dishware removed too early or drying process not yet ended.\"",
+          "source": {
+            "line": 39,
+            "manual": "Bosch manual",
+            "page": 40
+          }
+        }
+      ]
+    },
+    {
+      "id": "silverware-is-not-dry",
+      "symptom": "Silverware is not dry.",
+      "causes": [
+        {
+          "id": "silverware-is-not-dry-0",
+          "label": "Silverware not arranged properly in the silverware basket or silverware drawer. Droplets can form on the contact points of silverware.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Arrange silverware individually where possible.",
+            "Page 26 Avoid points of contact."
+          ],
+          "evidence": "Bosch manual, page 41: \"Silverware not arranged properly in the silverware basket or silverware drawer. Droplets can form on the contact points of silverware.\"",
+          "source": {
+            "line": 8,
+            "manual": "Bosch manual",
+            "page": 41
+          }
+        }
+      ]
+    },
+    {
+      "id": "appliance-interior-still-wet-after-wash-",
+      "symptom": "Appliance interior still wet after wash cycle.",
+      "causes": [
+        {
+          "id": "appliance-interior-still-wet-after-wash--0",
+          "label": "Not an error. Condensation drying creates water droplets in the tub. This is normal. Moisture in the air condenses on the inside walls of the appliance, runs off, and is pumped out. No action required.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [],
+          "evidence": "Bosch manual, page 41: \"Not an error. Condensation drying creates water droplets in the tub. This is normal. Moisture in the air condenses on the inside walls of the appliance, runs off, and is pumped out. No action required.\"",
+          "source": {
+            "line": 14,
+            "manual": "Bosch manual",
+            "page": 41
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-remnants-on-dishware",
+      "symptom": "Food remnants on dishware.",
+      "causes": [
+        {
+          "id": "food-remnants-on-dishware-0",
+          "label": "Dishware was placed too close together or rack is overfilled.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Arrange dishware with sufficient space in between. The spray jets must reach the surfaces of the dishware.",
+            "Avoid points of contact."
+          ],
+          "evidence": "Bosch manual, page 41: \"Dishware was placed too close together or rack is overfilled.\"",
+          "source": {
+            "line": 19,
+            "manual": "Bosch manual",
+            "page": 41
+          }
+        },
+        {
+          "id": "food-remnants-on-dishware-1",
+          "label": "Spray arm rotation is blocked.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Arrange dishware so it does not obstruct spray arm rotation."
+          ],
+          "evidence": "Bosch manual, page 41: \"Spray arm rotation is blocked.\"",
+          "source": {
+            "line": 24,
+            "manual": "Bosch manual",
+            "page": 41
+          }
+        },
+        {
+          "id": "food-remnants-on-dishware-2",
+          "label": "Spray arm nozzles are blocked.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Clean the spray arms."
+          ],
+          "evidence": "Bosch manual, page 41: \"Spray arm nozzles are blocked.\"",
+          "source": {
+            "line": 27,
+            "manual": "Bosch manual",
+            "page": 41
+          }
+        },
+        {
+          "id": "food-remnants-on-dishware-3",
+          "label": "Filters are dirty.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Clean the filters."
+          ],
+          "evidence": "Bosch manual, page 41: \"Filters are dirty.\"",
+          "source": {
+            "line": 30,
+            "manual": "Bosch manual",
+            "page": 41
+          }
+        },
+        {
+          "id": "food-remnants-on-dishware-4",
+          "label": "Filters are inserted incorrectly and/or not engaged.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Insert the filters properly.",
+            "Twist filters into place."
+          ],
+          "evidence": "Bosch manual, page 41: \"Filters are inserted incorrectly and/or not engaged.\"",
+          "source": {
+            "line": 37,
+            "manual": "Bosch manual",
+            "page": 41
+          }
+        },
+        {
+          "id": "food-remnants-on-dishware-5",
+          "label": "Selected wash cycle is too light.",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "Select a more intensive wash program."
+          ],
+          "evidence": "Bosch manual, page 41: \"Selected wash cycle is too light.\"",
+          "source": {
+            "line": 41,
+            "manual": "Bosch manual",
+            "page": 41
+          }
+        }
+      ]
+    },
+    {
+      "id": "detergent-residue-in-the-appliance",
+      "symptom": "Detergent residue in the appliance",
+      "causes": [
+        {
+          "id": "detergent-residue-in-the-appliance-0",
+          "label": "Lid of the detergent dispenser is blocked by items of dishware and will not open.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Arrange dishware in the upper rack so the tab col-",
+            "lecting tray is not obstructed by dishware."
+          ],
+          "evidence": "Bosch manual, page 42: \"Lid of the detergent dispenser is blocked by items of dishware and will not open.\"",
+          "source": {
+            "line": 16,
+            "manual": "Bosch manual",
+            "page": 42
+          }
+        },
+        {
+          "id": "detergent-residue-in-the-appliance-1",
+          "label": "Items of dishware are blocking the dispenser lid.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Do not place dishware or fragrance dispensers in",
+            "the tab collecting tray."
+          ],
+          "evidence": "Bosch manual, page 42: \"Items of dishware are blocking the dispenser lid.\"",
+          "source": {
+            "line": 21,
+            "manual": "Bosch manual",
+            "page": 42
+          }
+        },
+        {
+          "id": "detergent-residue-in-the-appliance-2",
+          "label": "The lid of the detergent dispenser is blocked by the tab and will not open.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Position the tab in the detergent dispenser crosswise, not vertically."
+          ],
+          "evidence": "Bosch manual, page 42: \"The lid of the detergent dispenser is blocked by the tab and will not open.\"",
+          "source": {
+            "line": 24,
+            "manual": "Bosch manual",
+            "page": 42
+          }
+        },
+        {
+          "id": "detergent-residue-in-the-appliance-3",
+          "label": "Tabs are used in the quick or short cycle. There is not enough time for the tab to dissolve.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Select a more intensive Wash cycle or use Powder detergent."
+          ],
+          "evidence": "Bosch manual, page 42: \"Tabs are used in the quick or short cycle. There is not enough time for the tab to dissolve.\"",
+          "source": {
+            "line": 28,
+            "manual": "Bosch manual",
+            "page": 42
+          }
+        },
+        {
+          "id": "detergent-residue-in-the-appliance-4",
+          "label": "Detergent may lose its cleaning or dissolving ability after being stored a long time, or the detergent is clumped together.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Change your Detergent."
+          ],
+          "evidence": "Bosch manual, page 42: \"Detergent may lose its cleaning or dissolving ability after being stored a long time, or the detergent is clumped together.\"",
+          "source": {
+            "line": 32,
+            "manual": "Bosch manual",
+            "page": 42
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-spots-on-plastic-parts",
+      "symptom": "Water spots on plastic parts.",
+      "causes": [
+        {
+          "id": "water-spots-on-plastic-parts-0",
+          "label": "Droplet formation on plastic surfaces is unavoidable due to the laws of physics. Water spots are visible after drying.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Select a more intensive program.",
+            "Position dishware at an angle.",
+            "Use rinse aid."
+          ],
+          "evidence": "Bosch manual, page 42: \"Droplet formation on plastic surfaces is unavoidable due to the laws of physics. Water spots are visible after drying.\"",
+          "source": {
+            "line": 36,
+            "manual": "Bosch manual",
+            "page": 42
+          }
+        }
+      ]
+    },
+    {
+      "id": "wipeable-or-water-soluble-coatings-insid",
+      "symptom": "Wipeable or water-soluble coatings inside the appliance or on the door.",
+      "causes": [
+        {
+          "id": "wipeable-or-water-soluble-coatings-insid-0",
+          "label": "There is detergent residue. These coatings cannot generally be removed with chemicals.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Change your Detergent.",
+            "Scrub the appliance by hand."
+          ],
+          "evidence": "Bosch manual, page 43: \"There is detergent residue. These coatings cannot generally be removed with chemicals.\"",
+          "source": {
+            "line": 3,
+            "manual": "Bosch manual",
+            "page": 43
+          }
+        }
+      ]
+    },
+    {
+      "id": "there-are-stubborn-white-coatings-on-the",
+      "symptom": "There are stubborn white coatings on the dishware, inside the appliance or on the door.",
+      "causes": [
+        {
+          "id": "there-are-stubborn-white-coatings-on-the-0",
+          "label": "There is detergent residue. These coatings cannot generally be removed with chemicals.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Change your Detergent.",
+            "Scrub the appliance by hand."
+          ],
+          "evidence": "Bosch manual, page 43: \"There is detergent residue. These coatings cannot generally be removed with chemicals.\"",
+          "source": {
+            "line": 7,
+            "manual": "Bosch manual",
+            "page": 43
+          }
+        },
+        {
+          "id": "there-are-stubborn-white-coatings-on-the-1",
+          "label": "Too little detergent is being used.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Increase the amount of detergent used or change Detergent ."
+          ],
+          "evidence": "Bosch manual, page 43: \"Too little detergent is being used.\"",
+          "source": {
+            "line": 11,
+            "manual": "Bosch manual",
+            "page": 43
+          }
+        },
+        {
+          "id": "there-are-stubborn-white-coatings-on-the-2",
+          "label": "Selected wash cycle is too light.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Select a more intensive wash program."
+          ],
+          "evidence": "Bosch manual, page 43: \"Selected wash cycle is too light.\"",
+          "source": {
+            "line": 14,
+            "manual": "Bosch manual",
+            "page": 43
+          }
+        }
+      ]
+    },
+    {
+      "id": "tea-residue-or-lipstick-marks-on-dishwar",
+      "symptom": "Tea residue or lipstick marks on dishware.",
+      "causes": [
+        {
+          "id": "tea-residue-or-lipstick-marks-on-dishwar-0",
+          "label": "Dishwashing temperature is too low.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Select a program with a higher dishwashing temperature."
+          ],
+          "evidence": "Bosch manual, page 43: \"Dishwashing temperature is too low.\"",
+          "source": {
+            "line": 16,
+            "manual": "Bosch manual",
+            "page": 43
+          }
+        },
+        {
+          "id": "tea-residue-or-lipstick-marks-on-dishwar-1",
+          "label": "Too little detergent is being used or is unsuitable.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Use a suitable Detergent and follow the manufacturer's instructions for the amount to be used."
+          ],
+          "evidence": "Bosch manual, page 43: \"Too little detergent is being used or is unsuitable.\"",
+          "source": {
+            "line": 19,
+            "manual": "Bosch manual",
+            "page": 43
+          }
+        },
+        {
+          "id": "tea-residue-or-lipstick-marks-on-dishwar-2",
+          "label": "Dishware has been precleaned too intensively. Then the sensors choose a lighter cycle. Stubborn remnants cannot be entirely removed.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Only remove large remnants of food and do not prerinse dishware."
+          ],
+          "evidence": "Bosch manual, page 43: \"Dishware has been precleaned too intensively. Then the sensors choose a lighter cycle. Stubborn remnants cannot be entirely removed.\"",
+          "source": {
+            "line": 22,
+            "manual": "Bosch manual",
+            "page": 43
+          }
+        }
+      ]
+    },
+    {
+      "id": "there-are-colored-coatings-blue-yellow-b",
+      "symptom": "There are colored coatings (blue, yellow, brown) inside the ap- or pliance or on stainless steel dishware that are",
+      "causes": [
+        {
+          "id": "there-are-colored-coatings-blue-yellow-b-0",
+          "label": "The formation of films is due to substances contained in vegetables (cabbage, celery, potatoes, noodles, etc.)",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "tap water (manganese).",
+            "Clean the appliance."
+          ],
+          "evidence": "Bosch manual, page 43: \"The formation of films is due to substances contained in vegetables (cabbage, celery, potatoes, noodles, etc.)\"",
+          "source": {
+            "line": 27,
+            "manual": "Bosch manual",
+            "page": 43
+          }
+        },
+        {
+          "id": "there-are-colored-coatings-blue-yellow-b-1",
+          "label": "You can remove coatings with Mechanical cleaning or",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [],
+          "evidence": "Bosch manual, page 43: \"You can remove coatings with Mechanical cleaning or\"",
+          "source": {
+            "line": 31,
+            "manual": "Bosch manual",
+            "page": 43
+          }
+        }
+      ]
+    },
+    {
+      "id": "plastic-parts-are-discolored",
+      "symptom": "Plastic parts are discolored.",
+      "causes": [
+        {
+          "id": "plastic-parts-are-discolored-0",
+          "label": "Dishwashing temperature is too low.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Select a program with a higher dishwashing temperature."
+          ],
+          "evidence": "Bosch manual, page 44: \"Dishwashing temperature is too low.\"",
+          "source": {
+            "line": 7,
+            "manual": "Bosch manual",
+            "page": 44
+          }
+        },
+        {
+          "id": "plastic-parts-are-discolored-1",
+          "label": "Dishware has been precleaned too intensively. Then the sensors choose a lighter cycle. Stubborn remnants cannot be entirely removed.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Only remove large remnants of food and do not prerinse dishware."
+          ],
+          "evidence": "Bosch manual, page 44: \"Dishware has been precleaned too intensively. Then the sensors choose a lighter cycle. Stubborn remnants cannot be entirely removed.\"",
+          "source": {
+            "line": 10,
+            "manual": "Bosch manual",
+            "page": 44
+          }
+        }
+      ]
+    },
+    {
+      "id": "irreversible-clouding-of-glassware",
+      "symptom": "Irreversible clouding of glassware.",
+      "causes": [
+        {
+          "id": "irreversible-clouding-of-glassware-0",
+          "label": "Glasses are not dishwasher-proof, only suitable for dishwashers.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use dishwasher-proof glasses."
+          ],
+          "evidence": "Bosch manual, page 44: \"Glasses are not dishwasher-proof, only suitable for dishwashers.\"",
+          "source": {
+            "line": 35,
+            "manual": "Bosch manual",
+            "page": 44
+          }
+        },
+        {
+          "id": "irreversible-clouding-of-glassware-1",
+          "label": "Glasses are usually only suitable for cleaning in a dishwasher, i.e. long-term wear or long-term changes must be expected.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Avoid a lengthy steam phase (standing time after wash cycle ends).",
+            "Use a program with a lower temperature.",
+            "Use detergent with a glass protection component."
+          ],
+          "evidence": "Bosch manual, page 44: \"Glasses are usually only suitable for cleaning in a dishwasher, i.e. long-term wear or long-term changes must be expected.\"",
+          "source": {
+            "line": 38,
+            "manual": "Bosch manual",
+            "page": 44
+          }
+        }
+      ]
+    },
+    {
+      "id": "detergent-residue-is-present-in-the-dete",
+      "symptom": "Detergent residue is present in the detergent dispenser or the tab collecting tray.",
+      "causes": [
+        {
+          "id": "detergent-residue-is-present-in-the-dete-0",
+          "label": "Spray arms were blocked by dishware so detergent was not rinsed out.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check that the spray arms are not blocked and can rotate freely."
+          ],
+          "evidence": "Bosch manual, page 45: \"Spray arms were blocked by dishware so detergent was not rinsed out.\"",
+          "source": {
+            "line": 3,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        },
+        {
+          "id": "detergent-residue-is-present-in-the-dete-1",
+          "label": "Detergent dispenser was damp when detergent was added.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Only add detergent to the detergent dispenser when dry."
+          ],
+          "evidence": "Bosch manual, page 45: \"Detergent dispenser was damp when detergent was added.\"",
+          "source": {
+            "line": 7,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "excessive-formation-of-foam-occurs",
+      "symptom": "Excessive formation of foam occurs.",
+      "causes": [
+        {
+          "id": "excessive-formation-of-foam-occurs-0",
+          "label": "Hand soap got in the rinse aid dispenser.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Immediately add rinse aid to the dispenser."
+          ],
+          "evidence": "Bosch manual, page 45: \"Hand soap got in the rinse aid dispenser.\"",
+          "source": {
+            "line": 11,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        },
+        {
+          "id": "excessive-formation-of-foam-occurs-1",
+          "label": "Rinse aid has been spilled.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Remove the rinse aid with a cloth."
+          ],
+          "evidence": "Bosch manual, page 45: \"Rinse aid has been spilled.\"",
+          "source": {
+            "line": 14,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        },
+        {
+          "id": "excessive-formation-of-foam-occurs-2",
+          "label": "Detergent or machine care product used causes excessive foaming.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Change the brand of detergent."
+          ],
+          "evidence": "Bosch manual, page 45: \"Detergent or machine care product used causes excessive foaming.\"",
+          "source": {
+            "line": 16,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "connection-to-home-network-is-not-establ",
+      "symptom": "Connection to home network is not established.",
+      "causes": [
+        {
+          "id": "connection-to-home-network-is-not-establ-0",
+          "label": "WLAN on router is not active.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check the wireless network connection of your router."
+          ],
+          "evidence": "Bosch manual, page 45: \"WLAN on router is not active.\"",
+          "source": {
+            "line": 19,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "wlan-display-is-flashing",
+      "symptom": "WLAN display is flashing.",
+      "causes": [
+        {
+          "id": "wlan-display-is-flashing-0",
+          "label": "Connection to home network is not available.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Activate the wireless network connection on your router."
+          ],
+          "evidence": "Bosch manual, page 45: \"Connection to home network is not available.\"",
+          "source": {
+            "line": 22,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "refill-indicator-for-rinse-aid-lights-up",
+      "symptom": "Refill indicator for rinse aid lights up.",
+      "causes": [
+        {
+          "id": "refill-indicator-for-rinse-aid-lights-up-0",
+          "label": "No rinse aid.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Add Rinse aid Page 22.",
+            "Set the amount of rinse aid to be dispensed."
+          ],
+          "evidence": "Bosch manual, page 45: \"No rinse aid.\"",
+          "source": {
+            "line": 31,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "refill-indicator-for-rinse-aid-does-not-",
+      "symptom": "Refill indicator for rinse aid does not light up.",
+      "causes": [
+        {
+          "id": "refill-indicator-for-rinse-aid-does-not--0",
+          "label": "Rinse aid system is switched off.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Set the amount of rinse aid."
+          ],
+          "evidence": "Bosch manual, page 45: \"Rinse aid system is switched off.\"",
+          "source": {
+            "line": 35,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "display-flashes",
+      "symptom": "Display flashes.",
+      "causes": [
+        {
+          "id": "display-flashes-0",
+          "label": "Appliance door is not closed properly.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Close the appliance door.",
+            "Arrange the dishware so that no parts project beyond the rack and prevent the appliance door from closing properly."
+          ],
+          "evidence": "Bosch manual, page 45: \"Appliance door is not closed properly.\"",
+          "source": {
+            "line": 38,
+            "manual": "Bosch manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "all-leds-light-up-or-flash",
+      "symptom": "All LEDs light up or flash.",
+      "causes": [
+        {
+          "id": "all-leds-light-up-or-flash-0",
+          "label": "A software update is possibly installing.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wait until the software update has been installed. This process can take approx. 30 minutes.",
+            "If the appliance is not ready to use after 30 minutes,",
+            "perform a reset.",
+            "Press the main switch button for approx. 4 seconds.",
+            "Your appliance is resetting."
+          ],
+          "evidence": "Bosch manual, page 46: \"A software update is possibly installing.\"",
+          "source": {
+            "line": 3,
+            "manual": "Bosch manual",
+            "page": 46
+          }
+        },
+        {
+          "id": "all-leds-light-up-or-flash-1",
+          "label": "Electronics have detected a fault.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Press the main switch button for approx. 4 seconds. The appliance is reset and restarted.",
+            "If the problem occurs again:",
+            "Switch off the appliance.",
+            "Unplug the power plug or switch off the circuit breaker in the fuse box.",
+            "Wait at least 2 minutes.",
+            "Switch on the circuit breaker in the fuse box or plug in the power plug.",
+            "Switch on the appliance.",
+            "If the problem occurs again:",
+            "Contact customer service."
+          ],
+          "evidence": "Bosch manual, page 46: \"Electronics have detected a fault.\"",
+          "source": {
+            "line": 10,
+            "manual": "Bosch manual",
+            "page": 46
+          }
+        }
+      ]
+    },
+    {
+      "id": "up-appears-on-the-display",
+      "symptom": "UP appears on the display.",
+      "causes": [
+        {
+          "id": "up-appears-on-the-display-0",
+          "label": "A software update is available.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Press the remote start button to install the software update.",
+            "After a successful software update, \"Suc\" appears on the display for a few seconds."
+          ],
+          "evidence": "Bosch manual, page 46: \"A software update is available.\"",
+          "source": {
+            "line": 26,
+            "manual": "Bosch manual",
+            "page": 46
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-is-left-in-the-appliance-at-the-en",
+      "symptom": "Water is left in the appliance at the end of the program.",
+      "causes": [
+        {
+          "id": "water-is-left-in-the-appliance-at-the-en-0",
+          "label": "Filter system or area under the filters is blocked.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Clean the Filters Page 36.",
+            "Clean the Drain pump Page 48."
+          ],
+          "evidence": "Bosch manual, page 46: \"Filter system or area under the filters is blocked.\"",
+          "source": {
+            "line": 31,
+            "manual": "Bosch manual",
+            "page": 46
+          }
+        },
+        {
+          "id": "water-is-left-in-the-appliance-at-the-en-1",
+          "label": "Program has not yet ended.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Wait until the program ends or terminate the program with Reset."
+          ],
+          "evidence": "Bosch manual, page 46: \"Program has not yet ended.\"",
+          "source": {
+            "line": 34,
+            "manual": "Bosch manual",
+            "page": 46
+          }
+        }
+      ]
+    },
+    {
+      "id": "appliance-does-not-start",
+      "symptom": "Appliance does not start.",
+      "causes": [
+        {
+          "id": "appliance-does-not-start-0",
+          "label": "The breaker has tripped.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check the relevant breaker."
+          ],
+          "evidence": "Bosch manual, page 47: \"The breaker has tripped.\"",
+          "source": {
+            "line": 3,
+            "manual": "Bosch manual",
+            "page": 47
+          }
+        },
+        {
+          "id": "appliance-does-not-start-1",
+          "label": "Power cord is not inserted.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check whether the power outlet is working.",
+            "Check whether the power cord plug is properly in-",
+            "serted in the power outlet and on the rear of the appliance."
+          ],
+          "evidence": "Bosch manual, page 47: \"Power cord is not inserted.\"",
+          "source": {
+            "line": 5,
+            "manual": "Bosch manual",
+            "page": 47
+          }
+        },
+        {
+          "id": "appliance-does-not-start-2",
+          "label": "Appliance door is not closed properly.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Close the appliance door."
+          ],
+          "evidence": "Bosch manual, page 47: \"Appliance door is not closed properly.\"",
+          "source": {
+            "line": 10,
+            "manual": "Bosch manual",
+            "page": 47
+          }
+        }
+      ]
+    },
+    {
+      "id": "wash-cycle-starts-up-automatically",
+      "symptom": "Wash cycle starts up automatically.",
+      "causes": [
+        {
+          "id": "wash-cycle-starts-up-automatically-0",
+          "label": "You did not wait until the cycle ended.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [],
+          "evidence": "Bosch manual, page 47: \"You did not wait until the cycle ended.\"",
+          "source": {
+            "line": 12,
+            "manual": "Bosch manual",
+            "page": 47
+          }
+        }
+      ]
+    },
+    {
+      "id": "appliance-stops-during-the-cycle-or-cuts",
+      "symptom": "Appliance stops during the cycle or cuts out.",
+      "causes": [
+        {
+          "id": "appliance-stops-during-the-cycle-or-cuts-0",
+          "label": "Appliance door is not closed properly.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Close the appliance door."
+          ],
+          "evidence": "Bosch manual, page 47: \"Appliance door is not closed properly.\"",
+          "source": {
+            "line": 14,
+            "manual": "Bosch manual",
+            "page": 47
+          }
+        },
+        {
+          "id": "appliance-stops-during-the-cycle-or-cuts-1",
+          "label": "Power and/or water supply has been interrupted.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the power supply.",
+            "Check the water supply. Upper rack is pressing against inner door and prevent-"
+          ],
+          "evidence": "Bosch manual, page 47: \"Power and/or water supply has been interrupted.\"",
+          "source": {
+            "line": 16,
+            "manual": "Bosch manual",
+            "page": 47
+          }
+        },
+        {
+          "id": "appliance-stops-during-the-cycle-or-cuts-2",
+          "label": "ing appliance door from being closed securely.",
+          "suspect": true,
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Check whether the rear panel of the appliance is being pressed in by a power outlet or a hose holder that has not been removed.",
+            "Arrange the dishware so that no parts project beyond the rack and prevent the appliance door from closing properly."
+          ],
+          "evidence": "Bosch manual, page 47: \"ing appliance door from being closed securely.\"",
+          "source": {
+            "line": 20,
+            "manual": "Bosch manual",
+            "page": 47
+          }
+        }
+      ]
+    },
+    {
+      "id": "appliance-door-cannot-be-closed",
+      "symptom": "Appliance door cannot be closed.",
+      "causes": [
+        {
+          "id": "appliance-door-cannot-be-closed-0",
+          "label": "Door lock has been activated.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Close the appliance door with greater force.",
+            "If the installation conditions prevent quick realign-",
+            "ment of the closing system, you can move the door lock back to the home position using a spoon."
+          ],
+          "evidence": "Bosch manual, page 47: \"Door lock has been activated.\"",
+          "source": {
+            "line": 27,
+            "manual": "Bosch manual",
+            "page": 47
+          }
+        },
+        {
+          "id": "appliance-door-cannot-be-closed-1",
+          "label": "See the animation for how to move the door lock to the home position. Door cannot be closed due to installation method.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check whether the appliance has been installed properly."
+          ],
+          "evidence": "Bosch manual, page 47: \"See the animation for how to move the door lock to the home position. Door cannot be closed due to installation method.\"",
+          "source": {
+            "line": 32,
+            "manual": "Bosch manual",
+            "page": 47
+          }
+        },
+        {
+          "id": "appliance-door-cannot-be-closed-2",
+          "label": "When closed, the appliance door, its decor or attached parts should not knock against adjacent cabinets or the worktop.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [],
+          "evidence": "Bosch manual, page 47: \"When closed, the appliance door, its decor or attached parts should not knock against adjacent cabinets or the worktop.\"",
+          "source": {
+            "line": 41,
+            "manual": "Bosch manual",
+            "page": 47
+          }
+        }
+      ]
+    },
+    {
+      "id": "lid-on-the-detergent-dispenser-cannot-be",
+      "symptom": "Lid on the detergent dispenser cannot be closed.",
+      "causes": [
+        {
+          "id": "lid-on-the-detergent-dispenser-cannot-be-0",
+          "label": "Detergent dispenser or lid are blocked by sticky detergent residue.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Remove detergent residue."
+          ],
+          "evidence": "Bosch manual, page 48: \"Detergent dispenser or lid are blocked by sticky detergent residue.\"",
+          "source": {
+            "line": 3,
+            "manual": "Bosch manual",
+            "page": 48
+          }
+        }
+      ]
+    },
+    {
+      "id": "filling-valves-making-knocking-noises",
+      "symptom": "Filling valves making knocking noises.",
+      "causes": [
+        {
+          "id": "filling-valves-making-knocking-noises-0",
+          "label": "Caused by the domestic installation. No fault present in the appliance. Does not affect functioning of the appliance.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Can only be remedied in the home installation."
+          ],
+          "evidence": "Bosch manual, page 48: \"Caused by the domestic installation. No fault present in the appliance. Does not affect functioning of the appliance.\"",
+          "source": {
+            "line": 6,
+            "manual": "Bosch manual",
+            "page": 48
+          }
+        }
+      ]
+    },
+    {
+      "id": "noise-level-varies",
+      "symptom": "Noise level varies",
+      "causes": [
+        {
+          "id": "noise-level-varies-0",
+          "label": "The noise level can vary, depending on what kind of dishes are loaded and where they are placed.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure the dishware is loaded in the most secure way, resting on the tines and not hitting each other."
+          ],
+          "evidence": "Bosch manual, page 48: \"The noise level can vary, depending on what kind of dishes are loaded and where they are placed.\"",
+          "source": {
+            "line": 10,
+            "manual": "Bosch manual",
+            "page": 48
+          }
+        },
+        {
+          "id": "noise-level-varies-1",
+          "label": "Spray arm is striking dishes.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Arrange dishware so the spray arms do not strike dishware."
+          ],
+          "evidence": "Bosch manual, page 48: \"Spray arm is striking dishes.\"",
+          "source": {
+            "line": 16,
+            "manual": "Bosch manual",
+            "page": 48
+          }
+        },
+        {
+          "id": "noise-level-varies-2",
+          "label": "With a small load the water jets directly strike against the tub.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Distribute the dishware evenly.",
+            "Load the appliance with more dishware."
+          ],
+          "evidence": "Bosch manual, page 48: \"With a small load the water jets directly strike against the tub.\"",
+          "source": {
+            "line": 19,
+            "manual": "Bosch manual",
+            "page": 48
+          }
+        },
+        {
+          "id": "noise-level-varies-3",
+          "label": "Light items of dishware move about during the wash cycle.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Position light items of dishware securely."
+          ],
+          "evidence": "Bosch manual, page 48: \"Light items of dishware move about during the wash cycle.\"",
+          "source": {
+            "line": 23,
+            "manual": "Bosch manual",
+            "page": 48
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "plastic-parts-inside-the"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-09-26T13:58:13.131Z",
+  "learnedAt": "2026-09-26T13:45:23.105Z"
+}

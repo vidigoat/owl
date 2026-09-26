@@ -1,0 +1,319 @@
+{
+  "model": "HDS5657U",
+  "brand": "Bosch",
+  "kind": "Range",
+  "source": "HDS5657U.pdf",
+  "pages": "35–36",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "burner-s-do-not-light-or-igniters-do-not",
+      "symptom": "Burner(s) do not light or igniters do not spark.",
+      "causes": [
+        {
+          "id": "burner-s-do-not-light-or-igniters-do-not-0",
+          "label": "The gas shut-off valve is not in the “ON” position or the gas supply to the house is shut off.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Ensure that the gas shut-off valve is in the “ON” position and the gas supply to the house is not shut off."
+          ],
+          "evidence": "Bosch manual, page 35: \"The gas shut-off valve is not in the “ON” position or the gas supply to the house is shut off.\"",
+          "source": {
+            "line": 51,
+            "manual": "Bosch manual",
+            "page": 35
+          }
+        },
+        {
+          "id": "burner-s-do-not-light-or-igniters-do-not-1",
+          "label": "The burner caps, burner bases or burner ports are clogged.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Ensure that the burner caps and burner bases and the burner ports are not",
+            "clogged.",
+            "Clear ports with a wire or straightened paper clip if clogged."
+          ],
+          "evidence": "Bosch manual, page 35: \"The burner caps, burner bases or burner ports are clogged.\"",
+          "source": {
+            "line": 55,
+            "manual": "Bosch manual",
+            "page": 35
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-burner-flame-goes-out-unexpectedly",
+      "symptom": "The burner flame goes out unexpectedly.",
+      "causes": [
+        {
+          "id": "the-burner-flame-goes-out-unexpectedly-0",
+          "label": "There is a draft in the room.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Ensure that there is no draft in the room."
+          ],
+          "evidence": "Bosch manual, page 36: \"There is a draft in the room.\"",
+          "source": {
+            "line": 13,
+            "manual": "Bosch manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "cooktop-burner-s-does-not-start-correctl",
+      "symptom": "Cooktop burner(s) does not start correctly or flame extinguishes at burner as soon as knob is released.",
+      "causes": [
+        {
+          "id": "cooktop-burner-s-does-not-start-correctl-0",
+          "label": "The pushing time was too short or the pushing was too soft.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use the recommended lighting position .",
+            "Push the knob completely.",
+            "Keep it fully pushed during the whole lighting procedure.",
+            "Release the knob after min. 3-5 seconds."
+          ],
+          "evidence": "Bosch manual, page 36: \"The pushing time was too short or the pushing was too soft.\"",
+          "source": {
+            "line": 15,
+            "manual": "Bosch manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "cooktop-burner-s-does-not-start-correctl-1",
+          "label": "The burner cap not well positioned.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the correct placement of the burner caps."
+          ],
+          "evidence": "Bosch manual, page 36: \"The burner cap not well positioned.\"",
+          "source": {
+            "line": 20,
+            "manual": "Bosch manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "cooktop-burner-s-does-not-start-correctl-2",
+          "label": "Dirt or moisture on burner, spark plug or thermocouple.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Clean and dry these parts."
+          ],
+          "evidence": "Bosch manual, page 36: \"Dirt or moisture on burner, spark plug or thermocouple.\"",
+          "source": {
+            "line": 23,
+            "manual": "Bosch manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "cooktop-burner-s-does-not-start-correctl-3",
+          "label": "Not enough gas in pipe.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Check main gas valves and pressure regulator and make sure that pipes are purged from air."
+          ],
+          "evidence": "Bosch manual, page 36: \"Not enough gas in pipe.\"",
+          "source": {
+            "line": 25,
+            "manual": "Bosch manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-small-burner-or-the-dualflame-burner",
+      "symptom": "The small burner or the dualflame burner does not light properly or is not stable or extinguishes.",
+      "causes": [
+        {
+          "id": "the-small-burner-or-the-dualflame-burner-0",
+          "label": "The small burner caps are swapped.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check the correct placement of the burner caps.",
+            "The burner cap with the smallest diameter must always be placed in the middle of the dual-flame burner.",
+            "If one of your burner caps is marked with \"DUAL\", it has to be placed in the middle of the dual-flame burner."
+          ],
+          "evidence": "Bosch manual, page 36: \"The small burner caps are swapped.\"",
+          "source": {
+            "line": 28,
+            "manual": "Bosch manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "sparks-appear-on-the-wrong-burner",
+      "symptom": "Sparks appear on the wrong burner.",
+      "causes": [
+        {
+          "id": "sparks-appear-on-the-wrong-burner-0",
+          "label": "No fault: On starting one burner on all burners sparks will be generated.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [],
+          "evidence": "Bosch manual, page 36: \"No fault: On starting one burner on all burners sparks will be generated.\"",
+          "source": {
+            "line": 35,
+            "manual": "Bosch manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-igniters-spark-even-though-the-knobs",
+      "symptom": "The igniters spark even though the knobs are in the off position.",
+      "causes": [
+        {
+          "id": "the-igniters-spark-even-though-the-knobs-0",
+          "label": "The electrical power connection has been activated at the first power-up or reconnected after an outage.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "The igniters may spark once or twice, even though all burner knobs are in the “OFF” position. This is normal."
+          ],
+          "evidence": "Bosch manual, page 36: \"The electrical power connection has been activated at the first power-up or reconnected after an outage.\"",
+          "source": {
+            "line": 37,
+            "manual": "Bosch manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "cooking-results-are-not-as-expected",
+      "symptom": "Cooking results are not as expected.",
+      "causes": [
+        {
+          "id": "cooking-results-are-not-as-expected-0",
+          "label": "The cooktop burner is not properly levelled.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check the level of the cooktop burner during installation."
+          ],
+          "evidence": "Bosch manual, page 36: \"The cooktop burner is not properly levelled.\"",
+          "source": {
+            "line": 41,
+            "manual": "Bosch manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "cooking-results-are-not-as-expected-1",
+          "label": "The cookware does not fit on the surface being used.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Choose a different surface or a different piece of cookware."
+          ],
+          "evidence": "Bosch manual, page 36: \"The cookware does not fit on the surface being used.\"",
+          "source": {
+            "line": 43,
+            "manual": "Bosch manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "cooking-results-are-not-as-expected-2",
+          "label": "The cookware is not the recommended type or size.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "See \"Notes regarding cookware\" and \"Baking pans and dishes\"."
+          ],
+          "evidence": "Bosch manual, page 36: \"The cookware is not the recommended type or size.\"",
+          "source": {
+            "line": 45,
+            "manual": "Bosch manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-oven-door-feels-hotter-than-before-a",
+      "symptom": "The oven door feels hotter than before, after the oven door glass has been removed for cleaning.",
+      "causes": [
+        {
+          "id": "the-oven-door-feels-hotter-than-before-a-0",
+          "label": "The oven door glass is not inserted the right way round.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check if the oven door glass is inserted the right way round (low-E symbol can be read)."
+          ],
+          "evidence": "Bosch manual, page 36: \"The oven door glass is not inserted the right way round.\"",
+          "source": {
+            "line": 47,
+            "manual": "Bosch manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "the-oven-door-is-not-balanced",
+      "symptom": "The oven door is not balanced.",
+      "causes": [
+        {
+          "id": "the-oven-door-is-not-balanced-0",
+          "label": "The inner door glass is missing or has not been inserted during reassembly.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check if the inner door glass is present or has been inserted during reassembly."
+          ],
+          "evidence": "Bosch manual, page 36: \"The inner door glass is missing or has not been inserted during reassembly.\"",
+          "source": {
+            "line": 50,
+            "manual": "Bosch manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "cooling-fan-continues-to-run-when-the-ov",
+      "symptom": "Cooling fan continues to run when the oven is switched off.",
+      "causes": [
+        {
+          "id": "cooling-fan-continues-to-run-when-the-ov-0",
+          "label": "No fault: The cooling fan will cool down until the oven temperature has reached the temperature chosen in the settings.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [],
+          "evidence": "Bosch manual, page 36: \"No fault: The cooling fan will cool down until the oven temperature has reached the temperature chosen in the settings.\"",
+          "source": {
+            "line": 53,
+            "manual": "Bosch manual",
+            "page": 36
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-09-26T13:58:02.257Z",
+  "learnedAt": "2026-09-26T13:51:05.491Z"
+}
