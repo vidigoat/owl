@@ -1,0 +1,11 @@
+{
+  "measured": "2026-09-27T07:13:43.965Z",
+  "machines": 110,
+  "causesSwept": 2502,
+  "purchaseCapable": 4,
+  "cartsOpenedWithNothingRuledOut": 0,
+  "badBuys": 0,
+  "badBuyDetail": [],
+  "legitimateOpensAfterRulingOut": 1,
+  "note": "A bad buy = a cart opened while a cheaper or comparably-likely cause was un-ruled-out, or for a mains cause. Checked independently of the gate."
+}

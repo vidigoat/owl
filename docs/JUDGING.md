@@ -158,6 +158,15 @@ function allowed to authorise spending, it will not name a cause behind mains vo
 confident the ranking, and it will not sell a part while a free check is still standing. That gate is
 the product, and it is the thing under test.
 
+**Two numbers that measure the claim (`npm run no-bad-buy`, `npm run eval`).** Swept across every
+cause of every machine in the library — 2,502 causes on 110 machines — the gate opened a cart for an
+unestablished or mains fault **0 times**, checked independently of the gate by re-deriving whether a
+cheaper or comparably-likely cause was still live; and it still opens a legitimate cart once the
+cheaper causes are ruled out, so "zero" is not "refuses everything" (`docs/no-bad-buy.json`). On the
+reader, against rendered panels: fault code **7/9**, model **1/1** — and the two misses are the
+deliberately-degraded shots, where it returned *no code* rather than a wrong one. The one number that
+still needs the user is real-kitchen photos; the harness is built and says so plainly until they land.
+
 ## Mini challenge and bonus
 
 - **AWS Builder:** Bedrock vision for the fault code and model plate, AgentCore Memory for the

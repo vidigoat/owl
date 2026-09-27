@@ -2,7 +2,7 @@
   "name": "second-set-of-hands",
   "version": "0.1.0",
   "private": true,
-  "description": "An Alexa+ add-on that sees what's broken and fixes it with you — hands-free, down to the part on your doorstep.",
+  "description": "An Alexa+ add-on that sees what's broken and fixes it with you \u2014 hands-free, down to the part on your doorstep.",
   "license": "MIT",
   "type": "commonjs",
   "engines": {
@@ -33,7 +33,8 @@
     "smoke:live": "node scripts/smoke-live.js",
     "watch:measure": "node scripts/watch-measure.js",
     "watch:probe": "node scripts/watch-probe.js",
-    "coverage": "node scripts/coverage.js"
+    "coverage": "node scripts/coverage.js",
+    "no-bad-buy": "node scripts/no-bad-buy.js"
   },
   "keywords": [
     "alexa-plus",
