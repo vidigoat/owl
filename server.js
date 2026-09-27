@@ -17,6 +17,7 @@ const { readSymptoms } = require('./manual/symptoms');
 const pdf = require('./manual/pdf');
 const { see } = require('./mcp/tools/see');
 const { watchStep } = require('./mcp/tools/watch_step');
+const { record: recordOutcome, summary: outcomeSummary } = require('./mcp/tools/outcome');
 const { read_manual } = require('./mcp/tools/read_manual');
 const review = require('./manual/review');
 const { serveMcp, readBody, originAllowed } = require('./mcp/server');
@@ -261,6 +262,17 @@ function handler(req, res) {
         .then((body) => confirm_fix(body))
         .then((r) => send(res, 200, JSON.stringify(r), 'application/json'))
         .catch((e) => send(res, e.status || 500, JSON.stringify({ error: e.status ? e.message : 'The server could not finish that request.' }), 'application/json'));
+    }
+
+    // The repair kit (public/fix.html) records one PII-free outcome at the end of a session — only
+    // with the person's consent, and honest about whether this host could keep it. See outcome.js.
+    if (req.method === 'POST' && url.pathname === '/api/outcome') {
+      return readJson(req)
+        .then((body) => send(res, 200, JSON.stringify(recordOutcome(body)), 'application/json'))
+        .catch((e) => send(res, e.status || 400, JSON.stringify({ error: e.status ? e.message : 'That request could not be handled.' }), 'application/json'));
+    }
+    if (req.method === 'GET' && url.pathname === '/api/outcomes') {
+      return send(res, 200, JSON.stringify(outcomeSummary()), 'application/json');
     }
 
     if (req.method === 'POST' && url.pathname === '/api/remember') {

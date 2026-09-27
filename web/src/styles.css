@@ -897,3 +897,7 @@ footer {
   font: 400 var(--t-mono)/1.5 var(--mono);
   color: var(--faint);
 }
+
+/* The one link that takes a person from "reading about it" to actually fixing their machine. */
+.hero__cta { color: var(--amber); font-weight: 500; text-decoration: none; border-bottom: 1px solid currentColor; }
+.hero__cta:hover { color: var(--ink); }

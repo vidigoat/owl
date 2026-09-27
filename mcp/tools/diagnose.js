@@ -31,6 +31,9 @@ function diagnose({ model, code } = {}) {
     meaning: found.meaning,
     causes,
     tryFirst: causes.find((c) => c.cost === 0 && c.ownerFixable) || null,
+    // How this fact got here — hand-written, read-and-checked, or read this session. The kit and
+    // the agent both show it, because "cites the manual" is only true if it says which one.
+    provenance: found.provenance || null,
   };
 }
 

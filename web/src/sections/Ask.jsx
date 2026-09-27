@@ -89,6 +89,9 @@ export default function Ask({ machines }) {
             Not a summary of a manual. The sentence out of the manual, the cause listed beside it,
             and the remedy printed under that — or a straight answer that this one is not in there.
           </p>
+          <p className="hero__sub">
+            <a className="hero__cta" href="/fix.html">Something broken right now? Fix it on your phone →</a>
+          </p>
         </div>
 
         <TitleBlock machine={readable.find((m) => m.model === model)} />
