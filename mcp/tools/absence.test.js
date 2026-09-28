@@ -93,6 +93,16 @@ const isUnknown = (r) =>
     assert.notEqual(ok.reason, r.reason, 'a normal code was wrongly refused as not-a-code');
   });
 
+  await it('an implausibly long "model" is refused, not read out loud in full', async () => {
+    const r = await identify_appliance({ model: 'W'.repeat(50000) });
+    assert.equal(r.abstain, true, 'a 50k-character model was accepted');
+    assert.ok((r.reason || '').length < 200, `the spoken reason carried the giant model (${(r.reason || '').length} chars)`);
+    assert.doesNotMatch(JSON.stringify(r), /W{100}/, 'the giant model was echoed back somewhere');
+    // A real model, including a longer one, is unaffected.
+    const ok = await identify_appliance({ model: 'WF45T6000AW' });
+    assert.equal(ok.model, 'WF45T6000AW', 'a real model was wrongly refused');
+  });
+
   await it('a repair is confirmed only on a read good enough to rely on', () => {
     assert.ok(CONFIRM_FLOOR >= 0.4, 'the floor under confirming a fix is too low to mean anything');
   });

@@ -70,6 +70,21 @@ async function identify_appliance({ imagePath, imageBase64, model } = {}) {
 }
 
 function describe(model, { read, confidence, code = null }) {
+  // The model is read out loud in the lines below, on a device. A real model number is a dozen or so
+  // characters; anything wildly longer is not one, and interpolating it into a spoken line would have
+  // the skill try to say all of it. Refuse it as not-a-model rather than repeating it back.
+  if (typeof model !== 'string' || !model || model.length > 40) {
+    return {
+      abstain: true,
+      model: null,
+      code,
+      confidence,
+      readFromPhotograph: read,
+      haveServiceData: false,
+      reason: 'That does not look like a model number. It is usually on a sticker inside the door or on the back.',
+    };
+  }
+
   // Every tier, through one door. Reaching into MODELS and LEARNED directly skipped ADMITTED, so a
   // machine reviewed at the bench passed `known()` and then crashed on an undefined record.
   const record = machine(model);
