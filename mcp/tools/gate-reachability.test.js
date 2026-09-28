@@ -30,6 +30,7 @@
 const assert = require('node:assert');
 const { verify_diagnosis, SEPARATION } = require('./verify_diagnosis');
 const { MODELS, LEARNED, learn } = require('../../data/service-data');
+const { parse } = require('../../manual/faultgraph');
 
 let passed = 0;
 const it = (name, fn) => {
@@ -173,6 +174,39 @@ it('the evidence ground is defence-in-depth, and is honest about that', () => {
   assert.equal(v.abstain, true, 'a cause citing nothing was upheld');
   assert.match(v.reason, /No evidence recorded/);
   delete LEARNED['TEST-NO-EVIDENCE'];
+});
+
+it('a machine learned from its manual can be upheld, but never authorises a spend', () => {
+  /*
+   * The whole differentiator, and the walk above cannot reach it — that walk covers MODELS, the
+   * reviewed data, where every cost is a real number. A machine read off a photographed manual page
+   * goes into LEARNED instead, and its causes are built with cost: null, on purpose: a service
+   * manual lists remedies, never prices. So the gate may uphold the manual's top cause and read the
+   * remedy aloud, but `maySpend` must stay false, because a price we never had cannot become one we
+   * authorise. This pins that the "helped, but not billed" path is real and stays real.
+   */
+  const model = 'LEARNED-DRAIN-1';
+  const graph = parse({
+    model,
+    sourceName: 'ACME service manual',
+    text: [
+      'E21  The machine will not drain.',
+      'Clean the drain filter at the front lower panel.',
+      'Check the drain hose for a kink behind the machine.',
+    ].join('\n'),
+  });
+  learn({ model, brand: 'ACME', kind: 'Dishwasher', codes: graph.codes, source: 'ACME service manual' });
+  try {
+    const v = verify_diagnosis({ model, code: 'E21' });
+    assert.equal(v.abstain, false, 'the manual gave two clear non-mains remedies; the gate should uphold the top one');
+    assert.equal(v.upheld, true);
+    assert.equal(v.costKnown, false, 'a price was invented for a machine learned from a manual');
+    assert.equal(v.maySpend, false, 'the gate authorised spending on a cost it never had');
+    assert.ok(Number.isFinite(v.confidence), 'a learned cause reached the gate without a numeric likelihood');
+    assert.match(v.citation, /ACME service manual/, 'the upheld cause must cite the manual line it came from');
+  } finally {
+    delete LEARNED[model];
+  }
 });
 
 it('the separation threshold is the one the gate advertises', () => {
