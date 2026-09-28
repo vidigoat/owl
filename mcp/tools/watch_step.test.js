@@ -150,6 +150,8 @@ const answer = (obj) => async () => JSON.stringify({ output: { message: { conten
     let calls = 0;
     const invoke = async () => { calls++; return answer({ scene: 'appliance', verdict: 'done', seen: 'x', confidence: 1 })(); };
     assert.equal((await watchStep({ before: PIXEL, now: PIXEL, invoke })).verdict, 'unavailable');
+    assert.equal((await watchStep({ step: { text: 123 }, before: PIXEL, now: PIXEL, invoke })).verdict, 'unavailable', 'a non-string step text produced a verdict');
+    assert.equal((await watchStep({ step: { text: '   ' }, before: PIXEL, now: PIXEL, invoke })).verdict, 'unavailable');
     assert.equal((await watchStep({ step: FILTER, now: PIXEL, invoke })).verdict, 'unavailable');
     assert.equal((await watchStep({ step: FILTER, before: PIXEL, now: '<script>alert(1)</script>', invoke })).verdict, 'unavailable');
     assert.equal((await watchStep({ step: FILTER, before: PIXEL, now: 'A'.repeat(6 * 1024 * 1024), invoke })).verdict, 'unavailable');

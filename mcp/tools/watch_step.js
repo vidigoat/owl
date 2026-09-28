@@ -257,7 +257,7 @@ const frame = (f) => {
 const NO_CHANGE = 2;
 
 async function watchStep({ step, before, now, powerConfirmed = false, sceneChange = null, invoke = viaConverse } = {}) {
-  if (!step || !step.text) return unavailableAnswer('No step to watch: pass the step the person is on, in the manual\'s words.');
+  if (!step || typeof step.text !== 'string' || !step.text.trim()) return unavailableAnswer('No step to watch: pass the step the person is on, in the manual\'s words.');
   const a = frame(before);
   const b = frame(now);
   for (const f of [a, b]) {

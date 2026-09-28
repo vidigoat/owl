@@ -36,7 +36,10 @@ const OUTCOMES = new Set(['fixed', 'not-fixed', 'gave-up', 'escalated']);
 
 const clean = (v, max = 80) => {
   if (v == null) return undefined;
-  const s = String(v).replace(INVISIBLE, ' ').replace(/\s+/g, ' ').trim();
+  // A value whose own toString throws (a hostile object) must not take the whole call down.
+  let s;
+  try { s = String(v); } catch { return undefined; }
+  s = s.replace(INVISIBLE, ' ').replace(/\s+/g, ' ').trim();
   return s ? s.slice(0, max) : undefined;
 };
 
@@ -44,7 +47,8 @@ const clean = (v, max = 80) => {
  * Record one repair outcome. Returns { recorded, kept } — recorded is whether it was accepted,
  * kept is whether it will outlast this process.
  */
-function record({ model, code, causeId, outcome, stepsCompleted, ofSteps, consent } = {}, { store = STORE, log = console } = {}) {
+function record(input, { store = STORE, log = console } = {}) {
+  const { model, code, causeId, outcome, stepsCompleted, ofSteps, consent } = (input && typeof input === 'object') ? input : {};
   if (consent !== true) return { recorded: false, reason: 'Not recorded: this is only kept when the person has agreed to it.' };
 
   const m = clean(model, 60);

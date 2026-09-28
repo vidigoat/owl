@@ -74,4 +74,13 @@ it('the summary counts what was finished, per outcome, and how many machines', (
   assert.equal(sum.models, 2);
 });
 
+it('hostile input does not crash it: null, a non-object, a throwing toString', () => {
+  const s = store();
+  for (const bad of [null, undefined, 42, 'str', []]) assert.equal(record(bad, { store: s }).recorded, false, `accepted ${JSON.stringify(bad)}`);
+  // a causeId whose toString throws must not take the call down — it is dropped, the outcome stands.
+  const r = record({ model: 'OK-1', causeId: { toString() { throw new Error('boom'); } }, outcome: 'fixed', consent: true }, { store: s });
+  assert.equal(r.recorded, true);
+  assert.equal(r.entry.causeId, null, 'a hostile causeId was stored anyway');
+});
+
 console.log(`\n${passed} passed`);
