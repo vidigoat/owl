@@ -10,6 +10,7 @@
 
 const assert = require('node:assert');
 const { beginCheckout, confirmCheckout, cancelCheckout } = require('./order_part');
+const { CATALOGUE } = require('./find_part');
 
 let passed = 0;
 const it = (name, fn) => {
@@ -110,6 +111,29 @@ it('an unknown cost is never reported as a free repair', () => {
   causes.forEach((c) =>
     assert.notEqual(c.cost, 0, `"${c.label}" was given a cost of 0, which claims the repair is free`)
   );
+});
+
+it('refuses to quote a total it cannot compute — never speaks a "$NaN"', () => {
+  // The gate upholds this cause and there is a part for it, but if the part ever carries no
+  // trustworthy price, money(price) becomes NaN and the cart would say "$NaN in total". A fabricated
+  // figure in the money path is the same lie as calling an unknown cost free — so it must refuse.
+  const key = `${UPHELD.model}:${UPHELD.causeId}`;
+  const real = CATALOGUE[key];
+  try {
+    for (const badPrice of [undefined, NaN, '38.42', 0, -5]) {
+      CATALOGUE[key] = { ...real, price: badPrice };
+      const r = beginCheckout(UPHELD);
+      assert.equal(r.ok, false, `a ${JSON.stringify(badPrice)} price opened a cart`);
+      assert.equal(r.refused, true);
+      assert.doesNotMatch(JSON.stringify(r), /NaN|\$undefined/, 'a garbage figure reached the response');
+    }
+  } finally {
+    CATALOGUE[key] = real;
+  }
+  // And with the real price restored, the cart still opens and its total is finite.
+  const ok = beginCheckout(UPHELD);
+  assert.equal(ok.ok, true);
+  assert.ok(Number.isFinite(ok.totals.total));
 });
 
 console.log(`\n${passed} passed`);

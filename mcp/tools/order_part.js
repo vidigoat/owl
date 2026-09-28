@@ -58,6 +58,18 @@ function beginCheckout({ model, code, causeId, ruledOut = [] } = {}) {
     return { ok: false, refused: true, reason: found.reason, alternative: found.alternative };
   }
 
+  // This file owns the money, so it refuses to quote a number it cannot compute. A catalogue entry
+  // with a missing or non-numeric price would otherwise flow through money() into a spoken "$NaN" —
+  // a fabricated figure, which is the same lie as reporting an unknown cost as free. Refuse instead.
+  if (typeof found.part.price !== 'number' || !Number.isFinite(found.part.price) || found.part.price <= 0) {
+    return {
+      ok: false,
+      refused: true,
+      reason: `I have the part for this (${found.part.name || 'the fix'}) but no trustworthy price for it, so I will not put a number on your order. Order it through the part's own page instead.`,
+      alternative: found.alternative,
+    };
+  }
+
   const subtotal = found.part.price;
   const tax = money(subtotal * TAX_RATE);
   const total = money(subtotal + tax + SHIPPING);
