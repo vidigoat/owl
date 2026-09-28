@@ -385,4 +385,27 @@ it('a fault table in columns — pipes, tabs or markdown — is read, citing the
   assert.equal(Object.keys(md.codes).length, 1, 'a header or divider row was read as a code');
 });
 
+it('a "Cause: … Remedy: …" line is still paired into one cause after the DoS guard', () => {
+  const g = parse({ text: 'E24 Water cannot drain\nCause: blocked filter. Remedy: clean the filter.', sourceName: 't' });
+  const causes = g.codes.E24?.causes || [];
+  assert.equal(causes.length, 1, 'the stated cause and its remedy should pair into a single cause');
+  assert.match(causes[0].label.toLowerCase(), /blocked filter/, 'the manufacturer\'s stated cause was lost');
+  assert.match((causes[0].remedy || '').toLowerCase(), /clean the filter/, 'the remedy on the same line was lost');
+});
+
+it('a pathological single line does not hang the parser — the paste path takes untrusted text', () => {
+  // Real manual lines are short; a million-character line is a payload for the backtracking in the
+  // cause/remedy split. Before the per-line cap and keyword gate this took ~14s at 200k chars and
+  // grew quadratically. A generous ceiling proves the quadratic is gone without being flaky.
+  for (const text of [
+    'reason:' + ' '.repeat(1_000_000),
+    'cause: ' + 'x '.repeat(500_000) + ' remedy: y',
+    Array.from({ length: 200 }, () => 'possible cause : ' + 'a'.repeat(3000)).join('\n'),
+  ]) {
+    const s = Date.now();
+    parse({ model: 'X', text, sourceName: 'm' });
+    assert.ok(Date.now() - s < 2000, `parsing a hostile ${text.length}-char input took ${Date.now() - s}ms — the quadratic is back`);
+  }
+});
+
 console.log(`\n${passed} passed`);
