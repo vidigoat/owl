@@ -74,5 +74,18 @@ const RESERVED = ['__proto__', 'constructor', 'prototype', 'toString', 'hasOwnPr
     assert.doesNotMatch(String(r.reason), /ENOENT|spawn/, r.reason);
   });
 
+  await it('a wildly long model or code is bounded in the not-found reason, not echoed in full', () => {
+    // The reason is read out loud on a device. A caller sending a 50k-character model must not turn
+    // into the reason carrying all of it. The tool entry points refuse it; this is the backstop on
+    // the shared lookup door, so every tool that looks up a caller key is covered.
+    const byModel = lookup('W'.repeat(50000), 'E24');
+    assert.equal(byModel.known, false);
+    assert.ok(byModel.reason.length < 100, `the giant model was echoed whole (${byModel.reason.length} chars)`);
+    const byCode = lookup('SHE3AR75UC', 'Z'.repeat(50000));
+    assert.ok(byCode.reason.length < 100, `the giant code was echoed whole (${byCode.reason.length} chars)`);
+    // A real short model still reads back verbatim, so the message stays useful.
+    assert.match(lookup('NOPE', 'E1').reason, /No service data for model NOPE\./);
+  });
+
   console.log(`\n${passed} passed`);
 })();

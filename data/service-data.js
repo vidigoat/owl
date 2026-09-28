@@ -266,6 +266,12 @@ const find = (model) => {
   return own(MODELS, key) || own(ADMITTED, key) || own(LEARNED, key);
 };
 
+// A model number or fault code, bounded for a line that gets read out loud. A caller can pass a
+// 50,000-character "model", and echoing it verbatim into a spoken not-found reason would have a
+// voice device try to say all of it. Real ones are short, so a wildly long value is cut with an
+// ellipsis — the tool entry points refuse it outright; this is the backstop on the shared door.
+const spoken = (s, max = 40) => { const t = String(s == null ? '' : s); return t.length > max ? `${t.slice(0, max)}…` : t; };
+
 /** The admitted tier, live rather than captured at require time. */
 const admittedNow = () => ADMITTED;
 
@@ -470,7 +476,7 @@ function symptomById(m, id, model) {
  */
 function lookupSymptom(model, said) {
   const m = find(model);
-  if (!m) return { known: false, reason: `No service data for model ${model}.` };
+  if (!m) return { known: false, reason: `No service data for model ${spoken(model)}.` };
 
   const list = m.symptoms || [];
   if (!list.length) {
@@ -480,7 +486,7 @@ function lookupSymptom(model, said) {
      */
     return {
       known: false,
-      reason: `${model} is recorded by fault code, not by description. Read the code off the panel and ask again.`,
+      reason: `${spoken(model)} is recorded by fault code, not by description. Read the code off the panel and ask again.`,
     };
   }
 
@@ -567,12 +573,12 @@ function lookupSymptom(model, said) {
 
 function lookup(model, code) {
   const m = find(model);
-  if (!m) return { known: false, reason: model ? `No service data for model ${model}.` : 'Which model? It is on the plate inside the door.' };
+  if (!m) return { known: false, reason: model ? `No service data for model ${spoken(model)}.` : 'Which model? It is on the plate inside the door.' };
   const c = own(m.codes, code);
   if (!c) {
     const s = symptomById(m, code, model);
     if (s) return s;
-    return { known: false, reason: `No record of ${code} for ${model}.` };
+    return { known: false, reason: `No record of ${spoken(code)} for ${spoken(model)}.` };
   }
   return {
     known: true,
