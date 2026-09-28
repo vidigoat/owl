@@ -19,6 +19,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { STORE } = require('./home');
 const { replace_or_repair, DEFAULT_RULE } = require('./replace_or_repair');
+const { CATALOGUE } = require('./find_part');
 
 let passed = 0;
 const it = (name, fn) => {
@@ -187,6 +188,23 @@ it('a different code on the same machine is a different question', () => {
     { model: 'M', code: 'E24', at: day(40) },
   ]);
   assert.equal(replace_or_repair({ model: 'M', code: 'E15' }).pattern, null);
+});
+
+it('a part with no usable price becomes a missing number, never a NaN ratio', () => {
+  // repairCost != null let a NaN price through (NaN != null is true) and printed "at NaN" / share NaN.
+  // A price we cannot stand behind is a missing number, the same as no part at all.
+  const key = 'SHE3AR75UC:pump';
+  const real = CATALOGUE[key];
+  try {
+    for (const badPrice of [NaN, undefined, '210', 0, -1]) {
+      CATALOGUE[key] = { ...real, price: badPrice };
+      const r = replace_or_repair({ model: 'SHE3AR75UC', causeId: 'pump', machineValue: 400 });
+      assert.doesNotMatch(JSON.stringify(r), /NaN|at undefined/, `a ${JSON.stringify(badPrice)} price leaked a bad figure`);
+      assert.ok((r.missing || []).some((m) => /what the repair costs/i.test(m)), 'a missing price should be named as missing');
+    }
+  } finally {
+    CATALOGUE[key] = real;
+  }
 });
 
 console.log(`\n${passed} passed`);

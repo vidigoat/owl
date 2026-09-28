@@ -82,11 +82,19 @@ function replace_or_repair({ model, code, causeId, machineValue, threshold } = {
   let repairIs = null;
   if (causeId) {
     const part = find_part({ model, causeId });
-    if (part.found) {
+    // A part with no trustworthy price is a missing number, not a known one — treating it as known
+    // would put a NaN through the share ratio below (NaN != null is true) and print "at NaN". The
+    // same rule the checkout path holds: never a figure we cannot stand behind.
+    if (part.found && typeof part.part.price === 'number' && Number.isFinite(part.part.price) && part.part.price > 0) {
       repairCost = part.part.price;
       repairIs = `${part.part.name}, ${part.part.price}`;
       known.push(`The part for that cause is ${part.part.name} at ${part.part.price}.`);
       known.push(`A service call instead would be ${part.alternative.price}.`);
+    } else if (part.found) {
+      missing.push(
+        `What the repair costs. The part for that cause (${part.part.name}) is catalogued without a ` +
+        'usable price, so this will not put a number on it.'
+      );
     } else {
       missing.push(
         'What the repair costs. No part is verified against this exact model for that cause, and a ' +
