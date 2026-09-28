@@ -80,6 +80,19 @@ const isUnknown = (r) =>
     assert.notEqual(unreadable.observedBy, 'the person', 'nobody looked; do not say they did');
   });
 
+  await it('an implausibly long "code" is refused, not read out loud in full', async () => {
+    // The code is interpolated into a spoken line, and this runs on a device. A caller that sends a
+    // 50,000-character code must not turn into the skill trying to say all of it — a real code is a
+    // handful of characters, so anything wildly longer is refused as not-a-code.
+    const r = await read_error({ model: 'SHE3AR75UC', code: 'E'.repeat(50000) });
+    assert.equal(r.abstain, true, 'a 50k-character code was accepted as a real one');
+    assert.ok((r.reason || '').length < 200, `the spoken reason carried the giant code (${(r.reason || '').length} chars)`);
+    assert.doesNotMatch(JSON.stringify(r), /E{100}/, 'the giant code was echoed back somewhere in the response');
+    // A real short code is unaffected: still interpreted, not refused as too long.
+    const ok = await read_error({ model: 'SHE3AR75UC', code: 'E24' });
+    assert.notEqual(ok.reason, r.reason, 'a normal code was wrongly refused as not-a-code');
+  });
+
   await it('a repair is confirmed only on a read good enough to rely on', () => {
     assert.ok(CONFIRM_FLOOR >= 0.4, 'the floor under confirming a fix is too low to mean anything');
   });

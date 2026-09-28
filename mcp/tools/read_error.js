@@ -84,6 +84,18 @@ async function read_error({ imagePath, imageBase64, model, code, noCodeShown } =
 
   code = String(code).toUpperCase().replace(/\s/g, '');
 
+  // A fault code is a handful of characters (E24, F21, 4C, OE). Anything wildly longer is not a code,
+  // and this string gets read out loud on a device — interpolating a 50k-character "code" into a
+  // spoken line would have the skill try to say all of it. Refuse it as not-a-code instead.
+  if (!code || code.length > 12) {
+    return {
+      abstain: true,
+      code: null,
+      reason: 'That does not look like a fault code — they are usually two to four characters, like E24 or 4C.',
+      nextStep: 'Read the short code shown on the display, or photograph it.',
+    };
+  }
+
   if (!model) {
     return {
       abstain: true,
