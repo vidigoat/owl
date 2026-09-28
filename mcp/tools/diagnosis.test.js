@@ -143,6 +143,25 @@ it('reads a learned procedure out of the manual, verbatim', () => {
   assert.ok(proc.citation.includes('test manual'));
 });
 
+it('does not read out a fallback remedy for a cause the owner already ruled out', () => {
+  // The learned guide lists the manual's other remedies as "if that did not do it" fallbacks. A
+  // ruled-out cause is disproven, not untested, so offering "replace the drain pump if it does not
+  // turn" to someone who just confirmed it turns is the guessing this whole product refuses.
+  const built = buildSpace({ model: 'TEST-LEARN', code: 'OE' });
+  const [chosen, ...rest] = built.space;
+  const ruledOut = rest.map((c) => c.id);
+  const proc = guide({ model: 'TEST-LEARN', code: 'OE', causeId: chosen.id, ruledOut });
+  assert.equal(proc.known, true);
+  // Only the chosen cause's remedy survives; nothing from a ruled-out cause is spoken.
+  const spoken = proc.steps.map((s) => s.say).join(' | ');
+  for (const c of rest) {
+    if (c.remedy) assert.ok(!spoken.includes(c.remedy), `a ruled-out cause's remedy was still read out: "${c.remedy}"`);
+  }
+  // And without ruledOut, the fallbacks are still offered, so the exclusion is what changed.
+  const full = guide({ model: 'TEST-LEARN', code: 'OE', causeId: chosen.id });
+  assert.ok(full.steps.length > proc.steps.length, 'ruling causes out should remove fallback steps');
+});
+
 it('still prefers a hand-written procedure over a generated one', () => {
   const proc = guide({ model: 'SHE3AR75UC', code: 'E24', causeId: 'filter' });
   assert.equal(proc.known, true);

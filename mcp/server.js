@@ -135,6 +135,11 @@ const TOOLS = [
         model: { type: 'string' },
         code: { type: 'string' },
         causeId: { type: 'string' },
+        ruledOut: {
+          type: 'array',
+          items: { type: 'string' },
+          description: 'Causes already eliminated, so their remedies are not offered as fallback steps.',
+        },
       },
       required: ['model', 'code', 'causeId'],
     },

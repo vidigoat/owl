@@ -127,7 +127,7 @@ console.log(
 if (verdict.citation) console.log(dim(`     cites: ${verdict.citation}`));
 
 /* 5 — the repair */
-const proc = guide({ model: MANUAL.model, code: MANUAL.code, causeId: cause.id });
+const proc = guide({ model: MANUAL.model, code: MANUAL.code, causeId: cause.id, ruledOut });
 console.log(`\n  ${b('5. talks you through it')}   ${proc.known ? `${proc.steps.length} steps, ~${proc.totalSeconds}s, hands free` : 'refused — no verified procedure'}`);
 if (proc.known) proc.steps.forEach((s) => console.log(`     ${s.n}. ${s.say}  ${dim(`(${s.pace}s)`)}`));
 

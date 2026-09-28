@@ -37,15 +37,19 @@ const PACE = { free: 10, easy: 25, awkward: 45, heavy: 90 };
  * rephrasing instructions about dismantling an appliance, we are inventing a procedure, and the
  * whole argument of this project is that it does not do that.
  */
-function fromLearnedManual({ model, code, causeId } = {}) {
+function fromLearnedManual({ model, code, causeId, ruledOut = [] } = {}) {
   const found = lookup(model, code);
   if (!found.known) return null;
 
   const cause = found.causes.find((c) => c.id === causeId);
   if (!cause || !cause.remedy) return null;
 
-  // Everything the manual lists for this fault, with the chosen cause's remedy first.
-  const ordered = [cause, ...found.causes.filter((c) => c.id !== causeId && c.remedy)];
+  // The chosen cause's remedy first, then the manual's other remedies as "if that did not do it"
+  // fallbacks — but never a cause the owner has already ruled out. A ruled-out cause is not an
+  // untested alternative, it is a disproven one, and reading "replace the drain pump if it does not
+  // turn" to someone who just confirmed it turns is the guessing this product exists to refuse.
+  const ruled = new Set((Array.isArray(ruledOut) ? ruledOut : []).map(String));
+  const ordered = [cause, ...found.causes.filter((c) => c.id !== causeId && c.remedy && !ruled.has(c.id))];
 
   /*
    * One remedy per step. A troubleshooting table can list several remedies under one cause —
@@ -128,13 +132,13 @@ function fromLearnedManual({ model, code, causeId } = {}) {
   };
 }
 
-function guide({ model, code, causeId } = {}) {
+function guide({ model, code, causeId, ruledOut = [] } = {}) {
   const key = `${model}:${code}:${causeId}`;
   const steps = STEPS[key];
 
   if (!steps) {
     // Nothing hand-written — but we may have been taught this machine from its own manual.
-    const learned = fromLearnedManual({ model, code, causeId });
+    const learned = fromLearnedManual({ model, code, causeId, ruledOut });
     if (learned) return learned;
 
     return {
