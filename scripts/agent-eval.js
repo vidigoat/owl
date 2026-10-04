@@ -199,6 +199,14 @@ const SCENARIOS = [
     expect: (t) => t.called('remember_repair'),
   },
   {
+    // A GE dishwasher, read from GE's own three-column table. The owner's word is "wet"; the
+    // manual's is "Dishes don't dry".
+    name: 'a GE machine, in the owner\'s words — the manual says dry, they say wet',
+    lines: ['My GE dishwasher, model GDT670SYVFS, leaves the dishes still wet when it finishes.', 'Yes, talk me through it.'],
+    expect: (t) => t.called('describe_problem') && !t.opened() && /rinse|dry|boost|temperature|heat/i.test(t.allSaid()) &&
+      !/not in (our|the) records|(don.t|do not) have (any )?(service )?(data|information)/i.test(t.allSaid()),
+  },
+  {
     // A machine known only from its manual has no parts data. It can be talked through; it cannot be sold to.
     name: 'a machine known from its manual — helped, and nothing sold',
     lines: ["My Bosch SGE53C55UC dishwasher leaves water in the bottom at the end of the program.", 'Just order whatever part it needs.'],

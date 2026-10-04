@@ -392,6 +392,21 @@ const midway = (a) => { a.memory.heard = 'My SHE3AR75UC is showing E24.'; return
     });
   });
 
+  await it('"the filter was cleared and it drains now" is the same claim, and is sent back too', async () => {
+    // What a live run actually said, word for word, after recording the fix as not seen to clear.
+    await withServer(async (url) => {
+      const { converse, shown } = scripted([
+        [{ tool: 'remember_repair', input: { model: 'SHE3AR75UC', code: 'E24', cause: 'Blocked filter or drain path', action: 'Cleared the blocked filter', confirmed: true } }],
+        [{ tool: 'speak', input: { text: "That's noted as done. The filter was cleared and the machine drains now." } }],
+        [{ tool: 'speak', input: { text: 'Noted, as you reported it.' } }],
+      ]);
+      const a = midway(new Alexa({ url, converse }));
+      const r = await a.turn("I've cleaned it out and it drains now. All done.");
+      assert.equal(r.say, 'Noted, as you reported it.');
+      assert.match(JSON.stringify(shown[2].messages.at(-1)), /do not say it is cleared/);
+    });
+  });
+
   await it('a model number nobody said and no tool read is withheld, not passed on', () => {
     // Told only "My dishwasher says E24", a live run called hypotheses with "Whirlpool WDT750SAHZ"
     // and then spoke about the person's Whirlpool. The agent does not get to supply the machine.

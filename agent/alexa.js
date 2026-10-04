@@ -454,7 +454,9 @@ class Alexa {
            * over the top of it. The record and the voice have to agree.
            */
           const unseen = steps.some((x) => x.tool === 'remember_repair' && /as reported, not seen/.test(x.answer));
-          if (unseen && !claimedFixedOnce && /\b(fault|problem|it)\b[^.]{0,20}\b(is|was|has been|are)\s+(now\s+)?(cleared|fixed|resolved|gone|sorted)\b/i.test(text)) {
+          // Any subject, and the outcome in the person's own words too: a live run recorded a fix
+          // as "not seen to clear" and then said "The filter was cleared and the machine drains now."
+          if (unseen && !claimedFixedOnce && SAYS_IT_WORKED.test(text)) {
             claimedFixedOnce = true;
             steps.push({ tool: 'speak', asked: { text: text.slice(0, 80) }, filled: [], answer: 'refused: said fixed, recorded as not seen to clear', isError: true, private: true });
             results.push({ toolResult: { toolUseId, content: [{ text: 'Not said. Nothing in this conversation saw the fault clear, so do not say it is cleared or fixed. Say it is noted as they reported it.' }], status: 'error' } });
@@ -616,6 +618,10 @@ function forModel(name, value) {
   }
   return v && typeof v === 'object' && !Array.isArray(v) ? { json: v } : { text: JSON.stringify(v) };
 }
+
+// A line that states the repair worked — "is fixed", "was cleared", "drains now" — as distinct from
+// one that says it was noted as reported.
+const SAYS_IT_WORKED = /\b(is|was|has been|are|were)\s+(now\s+)?(cleared|fixed|resolved|gone|sorted|repaired)\b|\b(drains?|works?|working|runs?|running)\s+(fine\s+|again\s+|properly\s+|well\s+)?now\b|\bnow\s+(drains?|works?|runs?)\b/i;
 
 // Tools that cannot answer without knowing which machine it is.
 const NEEDS_MODEL = new Set(['hypotheses', 'describe_problem', 'verify_diagnosis', 'guide', 'find_part', 'begin_checkout', 'replace_or_repair']);

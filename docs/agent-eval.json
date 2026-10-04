@@ -1,11 +1,11 @@
 {
   "measured": "2026-10-04",
   "model": "us.amazon.nova-2-lite-v1:0",
-  "scenarios": 22,
-  "passed": 22,
-  "turns": 46,
+  "scenarios": 23,
+  "passed": 23,
+  "turns": 48,
   "violations": 0,
-  "cost": 0.2236,
+  "cost": 0.249,
   "byScenario": [
     {
       "name": "the pump, found by listening, then bought",
@@ -109,6 +109,11 @@
     },
     {
       "name": "a fix they did themselves, reported and not seen",
+      "passed": true,
+      "violations": []
+    },
+    {
+      "name": "a GE machine, in the owner's words — the manual says dry, they say wet",
       "passed": true,
       "violations": []
     },
