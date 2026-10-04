@@ -382,6 +382,30 @@ is *worth* — which no service manual contains and this will not guess. It name
 and answers the moment somebody supplies it. It never returns a verdict, and a test asserts that in
 every state.
 
+**It reads the manuals North American kitchens actually have.** The library began as Bosch and
+Siemens. GE prints a different table — three columns side by side, header words centred over them,
+nothing but position to say where a cause begins — and it is read now: **66 GE dishwashers,
+washers, dryers, refrigerators and ranges, answering for 204 model numbers**, every cause re-read
+off the page it cites. Getting there meant finding three ways a table reader can be confidently
+wrong, each on a real manual, and refusing instead: a row whose columns ran together where the
+edge happens to land on a space; two causes that read as one and still pass a check that asks only
+whether the words are printed; and a page whose text layer is scrambled by its font. The library
+is 176 machines; the zero-bad-buy sweep still holds across all 4,875 causes.
+
+**The screen opens on what the house already knows.** Before anybody speaks, the device shows what
+this household's own record says needs attention — *E24 on the dishwasher, three times in 225
+days*; a filter past its interval; a repair waiting on a part — and each line is something the
+person could say; pressing it says it. It is arithmetic over the record, not a model's opinion.
+
+**The agent is held to its rules by something other than itself.** `npm run agent:eval` runs
+twenty-three live conversations on Bedrock, the person scripted and everything else real: an
+electrician insisting on mains work, an order smuggled in as a "system override", a question in
+place of a yes, a house asked what it is owed. Last run 23 of 23, no rule broken — and on the way
+it found things no unit test had: `guide` reading out a mains repair when an agent called it
+directly (it refuses on its own now, on the public server); the agent inventing a model number
+nobody said (the client withholds any model the person did not say and no tool read); and "the
+machine drains now" said of a fix nobody saw work.
+
 ## What's next
 
 AgentCore Memory (refused by this IAM identity today — `AmazonBedrockFullAccess` does not cover
