@@ -3,6 +3,7 @@
   "brand": "GE",
   "kind": "Refrigerator",
   "alsoCovers": [
+    "PSI23NGRCV",
     "PSS26NGSBB"
   ],
   "source": "PSC23NHSWW.pdf",

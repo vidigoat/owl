@@ -1,0 +1,1121 @@
+{
+  "model": "GHWS3600FWW",
+  "brand": "GE",
+  "kind": "Washer",
+  "source": "GHWS3600FWW.pdf",
+  "pages": "26–29",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "not-draining-not-spinning-not-agitating",
+      "symptom": "Not draining Not spinning Not agitating",
+      "causes": [
+        {
+          "id": "not-draining-not-spinning-not-agitating-0",
+          "label": "Load is out of balance",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "R \u0003edistribute clothes and run drain & spin or rinse & spin.",
+            "I\u0003ncrease load size if washing small load containing heavy and light items."
+          ],
+          "evidence": "GE manual, page 26: \"Load is out of balance\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "not-draining-not-spinning-not-agitating-1",
+          "label": "Pump clogged",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "S \u0003ee page 13 on how to clean the Pump Filter."
+          ],
+          "evidence": "GE manual, page 26: \"Pump clogged\"",
+          "source": {
+            "line": 10,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "not-draining-not-spinning-not-agitating-2",
+          "label": "Drain hose is kinked or improperly connected",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "S \u0003traighten drain hose and make sure washer is not sitting on it."
+          ],
+          "evidence": "GE manual, page 26: \"Drain hose is kinked or improperly connected\"",
+          "source": {
+            "line": 12,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "not-draining-not-spinning-not-agitating-3",
+          "label": "Household drain may be clogged",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "C \u0003heck household plumbing.",
+            "You may need to call a plumber."
+          ],
+          "evidence": "GE manual, page 26: \"Household drain may be clogged\"",
+          "source": {
+            "line": 15,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "not-draining-not-spinning-not-agitating-4",
+          "label": "Drain hose siphoning; drain hose pushed too far down the drain",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "E \u0003nsure there is an air gap between hose and drain."
+          ],
+          "evidence": "GE manual, page 26: \"Drain hose siphoning; drain hose pushed too far down the drain\"",
+          "source": {
+            "line": 18,
+            "manual": "GE manual",
+            "page": 26
+          }
+        }
+      ]
+    },
+    {
+      "id": "leaking-water",
+      "symptom": "Leaking water",
+      "causes": [
+        {
+          "id": "leaking-water-0",
+          "label": "Door gasket is damaged",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "C \u0003heck to see if gasket is seated and not torn.",
+            "Objects left in pockets may cause damage to the washer (nails, screws, pens, pencils) •W \u0003ater may drip from the door when the door is opened.",
+            "This is a normal operation. •C \u0003arefully wipe off rubber door seal.",
+            "Sometimes dirt or clothing is left in this seal and can cause a small leak"
+          ],
+          "evidence": "GE manual, page 26: \"Door gasket is damaged\"",
+          "source": {
+            "line": 22,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "leaking-water-1",
+          "label": "Check back left of washer for water",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "If \u0003this area is wet, you have oversudsing condition.",
+            "Use less detergent."
+          ],
+          "evidence": "GE manual, page 26: \"Check back left of washer for water\"",
+          "source": {
+            "line": 32,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "leaking-water-2",
+          "label": "Fill hoses or drain hose is improperly connected",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "M \u0003ake sure hose connections are tight at washer and faucets and make sure end of drain hose is correctly inserted in and secured to drain facility."
+          ],
+          "evidence": "GE manual, page 26: \"Fill hoses or drain hose is improperly connected\"",
+          "source": {
+            "line": 35,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "leaking-water-3",
+          "label": "Household drain may be clogged",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "C \u0003heck household plumbing.",
+            "You may need to call a plumber."
+          ],
+          "evidence": "GE manual, page 26: \"Household drain may be clogged\"",
+          "source": {
+            "line": 39,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "leaking-water-4",
+          "label": "Dispenser clogged",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "P \u0003owder soap may cause clogs inside the dispenser and cause water to leak out the front of the dispenser.",
+            "Remove drawer and clean both drawer and inside of dispenser box.",
+            "Please refer to Cleaning the Washer section."
+          ],
+          "evidence": "GE manual, page 26: \"Dispenser clogged\"",
+          "source": {
+            "line": 42,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "leaking-water-5",
+          "label": "Incorrect use of detergent",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "U \u0003se only HE and correct amount of detergent."
+          ],
+          "evidence": "GE manual, page 26: \"Incorrect use of detergent\"",
+          "source": {
+            "line": 47,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "leaking-water-6",
+          "label": "Dispenser box cracked",
+          "likelihood": 0.132,
+          "cost": null,
+          "remedies": [
+            "If \u0003new installation, check for crack on inside of dispenser box."
+          ],
+          "evidence": "GE manual, page 26: \"Dispenser box cracked\"",
+          "source": {
+            "line": 49,
+            "manual": "GE manual",
+            "page": 26
+          }
+        }
+      ]
+    },
+    {
+      "id": "clothes-too-wet",
+      "symptom": "Clothes too wet",
+      "causes": [
+        {
+          "id": "clothes-too-wet-0",
+          "label": "Load is out of balance",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "R \u0003edistribute clothes and run drain & spin or rinse & spin.",
+            "I\u0003ncrease load size if washing small load containing heavy and light items.",
+            "T\u0003 he machine will slow the spin speed down to 410 rpm if it has a hard time balancing the load.",
+            "This speed is normal."
+          ],
+          "evidence": "GE manual, page 26: \"Load is out of balance\"",
+          "source": {
+            "line": 51,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "clothes-too-wet-1",
+          "label": "Pump clogged",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "S \u0003ee page 13 on how to clean the Pump Filter."
+          ],
+          "evidence": "GE manual, page 26: \"Pump clogged\"",
+          "source": {
+            "line": 56,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "clothes-too-wet-2",
+          "label": "Overloading",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "T\u0003 he dry weight of the load should be less then 16 lbs."
+          ],
+          "evidence": "GE manual, page 26: \"Overloading\"",
+          "source": {
+            "line": 58,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "clothes-too-wet-3",
+          "label": "Drain hose is kinked or improperly connected",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "S \u0003traighten drain hose and make sure washer is not sitting on it."
+          ],
+          "evidence": "GE manual, page 26: \"Drain hose is kinked or improperly connected\"",
+          "source": {
+            "line": 60,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "clothes-too-wet-4",
+          "label": "Household drain may be clogged",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "C \u0003heck household plumbing.",
+            "You may need to call a plumber."
+          ],
+          "evidence": "GE manual, page 26: \"Household drain may be clogged\"",
+          "source": {
+            "line": 63,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "clothes-too-wet-5",
+          "label": "Drain hose siphoning; drain hose pushed too far down the drain",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "E \u0003nsure there is an air gap between hose and drain."
+          ],
+          "evidence": "GE manual, page 26: \"Drain hose siphoning; drain hose pushed too far down the drain\"",
+          "source": {
+            "line": 66,
+            "manual": "GE manual",
+            "page": 26
+          }
+        }
+      ]
+    },
+    {
+      "id": "incomplete-cycle-or-timer-not-advancing",
+      "symptom": "Incomplete cycle or timer not advancing",
+      "causes": [
+        {
+          "id": "incomplete-cycle-or-timer-not-advancing-0",
+          "label": "Automatic load redistribution",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "T\u0003imer adds 3 minutes to cycle for each rebalance. 11 or 15 rebalances may be done.",
+            "This is normal operation.",
+            "Do nothing; the machine will finish the wash cycle."
+          ],
+          "evidence": "GE manual, page 27: \"Automatic load redistribution\"",
+          "source": {
+            "line": 4,
+            "manual": "GE manual",
+            "page": 27
+          }
+        },
+        {
+          "id": "incomplete-cycle-or-timer-not-advancing-1",
+          "label": "Pump clogged",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "S \u0003ee page 13 on how to clean the Pump Filter."
+          ],
+          "evidence": "GE manual, page 27: \"Pump clogged\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 27
+          }
+        },
+        {
+          "id": "incomplete-cycle-or-timer-not-advancing-2",
+          "label": "Drain hose is kinked or improperly connected",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "S \u0003traighten drain hose and make sure washer is not sitting on it."
+          ],
+          "evidence": "GE manual, page 27: \"Drain hose is kinked or improperly connected\"",
+          "source": {
+            "line": 9,
+            "manual": "GE manual",
+            "page": 27
+          }
+        },
+        {
+          "id": "incomplete-cycle-or-timer-not-advancing-3",
+          "label": "Household drain may be clogged",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "C \u0003heck household plumbing.",
+            "You may need to call a plumber."
+          ],
+          "evidence": "GE manual, page 27: \"Household drain may be clogged\"",
+          "source": {
+            "line": 12,
+            "manual": "GE manual",
+            "page": 27
+          }
+        },
+        {
+          "id": "incomplete-cycle-or-timer-not-advancing-4",
+          "label": "Drain hose siphoning; drain hose pushed too far down the drain",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "E \u0003nsure there is an air gap between hose and drain."
+          ],
+          "evidence": "GE manual, page 27: \"Drain hose siphoning; drain hose pushed too far down the drain\"",
+          "source": {
+            "line": 15,
+            "manual": "GE manual",
+            "page": 27
+          }
+        }
+      ]
+    },
+    {
+      "id": "loud-or-unusual-noise-vibration-or-shaki",
+      "symptom": "Loud or unusual noise; vibration or shaking",
+      "causes": [
+        {
+          "id": "loud-or-unusual-noise-vibration-or-shaki-0",
+          "label": "Cabinet moving",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "W \u0003asher is designed to move 1/4” to reduce forces transmitted to the floor.",
+            "This movement is normal."
+          ],
+          "evidence": "GE manual, page 27: \"Cabinet moving\"",
+          "source": {
+            "line": 19,
+            "manual": "GE manual",
+            "page": 27
+          }
+        },
+        {
+          "id": "loud-or-unusual-noise-vibration-or-shaki-1",
+          "label": "All rubber leveling legs are not firmly touching the floor",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "P \u0003ush and pull on the back right and then back left of your washer to check if it is level.",
+            "If the washer is uneven, adjust the rubber leveling legs so they are all firmly touching the floor and locked in place.",
+            "Your installer should correct this problem."
+          ],
+          "evidence": "GE manual, page 27: \"All rubber leveling legs are not firmly touching the floor\"",
+          "source": {
+            "line": 23,
+            "manual": "GE manual",
+            "page": 27
+          }
+        },
+        {
+          "id": "loud-or-unusual-noise-vibration-or-shaki-2",
+          "label": "Unbalanced load",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "P \u0003ause unit, open door and manually redistribute load.",
+            "To check machine, run rinse and spin with no load.",
+            "If normal, unbalance was caused by load."
+          ],
+          "evidence": "GE manual, page 27: \"Unbalanced load\"",
+          "source": {
+            "line": 28,
+            "manual": "GE manual",
+            "page": 27
+          }
+        },
+        {
+          "id": "loud-or-unusual-noise-vibration-or-shaki-3",
+          "label": "Pump clogged",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "S \u0003ee page 13 on how to clean the Pump Filter."
+          ],
+          "evidence": "GE manual, page 27: \"Pump clogged\"",
+          "source": {
+            "line": 32,
+            "manual": "GE manual",
+            "page": 27
+          }
+        }
+      ]
+    },
+    {
+      "id": "no-power-washer-not-working-or-dead",
+      "symptom": "No power/ washer not working or dead",
+      "causes": [
+        {
+          "id": "no-power-washer-not-working-or-dead-0",
+          "label": "Washer is unplugged",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "M \u0003ake sure cord is plugged securely into a working outlet."
+          ],
+          "evidence": "GE manual, page 27: \"Washer is unplugged\"",
+          "source": {
+            "line": 34,
+            "manual": "GE manual",
+            "page": 27
+          }
+        },
+        {
+          "id": "no-power-washer-not-working-or-dead-1",
+          "label": "Water supply is turned off",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "T\u0003 urn both hot and cold faucets fully on."
+          ],
+          "evidence": "GE manual, page 27: \"Water supply is turned off\"",
+          "source": {
+            "line": 37,
+            "manual": "GE manual",
+            "page": 27
+          }
+        },
+        {
+          "id": "no-power-washer-not-working-or-dead-2",
+          "label": "Circuit breaker/fuse is tripped/ blown",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "C \u0003heck house circuit breakers/fuses.",
+            "Replace fuses or reset breaker.",
+            "Washer should have separate outlet."
+          ],
+          "evidence": "GE manual, page 27: \"Circuit breaker/fuse is tripped/ blown\"",
+          "source": {
+            "line": 39,
+            "manual": "GE manual",
+            "page": 27
+          }
+        },
+        {
+          "id": "no-power-washer-not-working-or-dead-3",
+          "label": "Automatic self system checks",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "F\u0003irst time the washer is plugged in, automatic checks occur.",
+            "It may take up to 20 seconds before you can use your washer.",
+            "This is normal operation."
+          ],
+          "evidence": "GE manual, page 27: \"Automatic self system checks\"",
+          "source": {
+            "line": 42,
+            "manual": "GE manual",
+            "page": 27
+          }
+        }
+      ]
+    },
+    {
+      "id": "snags-holes-tears-rips-or-excessive-wear",
+      "symptom": "Snags, holes, tears, rips or excessive wear",
+      "causes": [
+        {
+          "id": "snags-holes-tears-rips-or-excessive-wear-0",
+          "label": "Overloaded",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "D \u0003o not exceed maximum recommended load sizes.",
+            "See recommended maximum load sizes on page 12."
+          ],
+          "evidence": "GE manual, page 27: \"Overloaded\"",
+          "source": {
+            "line": 45,
+            "manual": "GE manual",
+            "page": 27
+          }
+        },
+        {
+          "id": "snags-holes-tears-rips-or-excessive-wear-1",
+          "label": "Pens, pencils, nails, screws or other objects left in pockets",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "R \u0003emove loose items from pockets."
+          ],
+          "evidence": "GE manual, page 27: \"Pens, pencils, nails, screws or other objects left in pockets\"",
+          "source": {
+            "line": 49,
+            "manual": "GE manual",
+            "page": 27
+          }
+        },
+        {
+          "id": "snags-holes-tears-rips-or-excessive-wear-2",
+          "label": "Pins, snaps, hooks, sharp buttons, belt buckles, zippers and sharp objects left in pockets",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "F\u0003 asten snaps, hooks, buttons and zippers."
+          ],
+          "evidence": "GE manual, page 27: \"Pins, snaps, hooks, sharp buttons, belt buckles, zippers and sharp objects left in pockets\"",
+          "source": {
+            "line": 52,
+            "manual": "GE manual",
+            "page": 27
+          }
+        }
+      ]
+    },
+    {
+      "id": "control-time-wrong-or-changes",
+      "symptom": "Control time wrong or changes",
+      "causes": [
+        {
+          "id": "control-time-wrong-or-changes-0",
+          "label": "This is normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "D \u0003uring spin the washer may need to rebalance the load sometimes to reduce vibrations.",
+            "When this happens, the estimated time is increased causing time left to increase or jump."
+          ],
+          "evidence": "GE manual, page 27: \"This is normal\"",
+          "source": {
+            "line": 57,
+            "manual": "GE manual",
+            "page": 27
+          }
+        }
+      ]
+    },
+    {
+      "id": "not-enough-water",
+      "symptom": "Not enough water",
+      "causes": [
+        {
+          "id": "not-enough-water-0",
+          "label": "This is normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "H \u0003orizontal washers do not require the tub to fill with water like topload washers."
+          ],
+          "evidence": "GE manual, page 27: \"This is normal\"",
+          "source": {
+            "line": 61,
+            "manual": "GE manual",
+            "page": 27
+          }
+        }
+      ]
+    },
+    {
+      "id": "washer-pauses-or-has-to-be-restarted-or-",
+      "symptom": "Washer pauses or has to be restarted, or washer door is locked and will not open",
+      "causes": [
+        {
+          "id": "washer-pauses-or-has-to-be-restarted-or--0",
+          "label": "Pump clogged",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "S \u0003ee page 13 on how to clean the Pump Filter."
+          ],
+          "evidence": "GE manual, page 27: \"Pump clogged\"",
+          "source": {
+            "line": 64,
+            "manual": "GE manual",
+            "page": 27
+          }
+        }
+      ]
+    },
+    {
+      "id": "door-unlocks-or-press-start-and-machine-",
+      "symptom": "Door unlocks or press Start and machine doesn’t operate",
+      "causes": [
+        {
+          "id": "door-unlocks-or-press-start-and-machine--0",
+          "label": "This is normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "F\u0003ront-load washers start up differently than top-load washers, and it takes 30 seconds to check the system.",
+            "The door will lock and unlock."
+          ],
+          "evidence": "GE manual, page 27: \"This is normal\"",
+          "source": {
+            "line": 71,
+            "manual": "GE manual",
+            "page": 27
+          }
+        },
+        {
+          "id": "door-unlocks-or-press-start-and-machine--1",
+          "label": "Incorrect operation",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "S \u0003imply open and close the door firmly; then press Start."
+          ],
+          "evidence": "GE manual, page 27: \"Incorrect operation\"",
+          "source": {
+            "line": 74,
+            "manual": "GE manual",
+            "page": 27
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-does-not-enter-washer-or-enters-sl",
+      "symptom": "Water does not enter washer or enters slowly",
+      "causes": [
+        {
+          "id": "water-does-not-enter-washer-or-enters-sl-0",
+          "label": "Automatic self system checks",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "A \u0003fter Start is pressed, the washer does several system checks.",
+            "Water will flow 60 seconds after Start is pressed."
+          ],
+          "evidence": "GE manual, page 28: \"Automatic self system checks\"",
+          "source": {
+            "line": 2,
+            "manual": "GE manual",
+            "page": 28
+          }
+        },
+        {
+          "id": "water-does-not-enter-washer-or-enters-sl-1",
+          "label": "Water supply is turned off",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "T\u0003 urn on both hot and cold faucets fully."
+          ],
+          "evidence": "GE manual, page 28: \"Water supply is turned off\"",
+          "source": {
+            "line": 6,
+            "manual": "GE manual",
+            "page": 28
+          }
+        },
+        {
+          "id": "water-does-not-enter-washer-or-enters-sl-2",
+          "label": "Water valve screens are stopped up",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "T\u0003urn off the water source and remove the water connection hoses from the upper back of the washer.",
+            "Use a brush or toothpick to clean the screens in the machine.",
+            "Reconnect the hoses and turn the water back on."
+          ],
+          "evidence": "GE manual, page 28: \"Water valve screens are stopped up\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 28
+          }
+        }
+      ]
+    },
+    {
+      "id": "wrinkling",
+      "symptom": "Wrinkling",
+      "causes": [
+        {
+          "id": "wrinkling-0",
+          "label": "Improper sorting",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "A \u0003void mixing heavy items (like work clothes) with light items (like blouses)."
+          ],
+          "evidence": "GE manual, page 28: \"Improper sorting\"",
+          "source": {
+            "line": 12,
+            "manual": "GE manual",
+            "page": 28
+          }
+        },
+        {
+          "id": "wrinkling-1",
+          "label": "Overloading",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "L\u0003 oad your washer so clothes have enough room to move freely."
+          ],
+          "evidence": "GE manual, page 28: \"Overloading\"",
+          "source": {
+            "line": 15,
+            "manual": "GE manual",
+            "page": 28
+          }
+        },
+        {
+          "id": "wrinkling-2",
+          "label": "Incorrect wash cycle",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "M \u0003atch cycle selection to the type of fabric you arewashing (especially for easy care loads)."
+          ],
+          "evidence": "GE manual, page 28: \"Incorrect wash cycle\"",
+          "source": {
+            "line": 18,
+            "manual": "GE manual",
+            "page": 28
+          }
+        },
+        {
+          "id": "wrinkling-3",
+          "label": "Repeated washing in water that is too hot",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "W \u0003ash in warm or cold water."
+          ],
+          "evidence": "GE manual, page 28: \"Repeated washing in water that is too hot\"",
+          "source": {
+            "line": 21,
+            "manual": "GE manual",
+            "page": 28
+          }
+        }
+      ]
+    },
+    {
+      "id": "grayed-or-yellowed-clothes",
+      "symptom": "Grayed or yellowed clothes",
+      "causes": [
+        {
+          "id": "grayed-or-yellowed-clothes-0",
+          "label": "Not enough detergent",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "U \u0003se correct amount of detergent."
+          ],
+          "evidence": "GE manual, page 28: \"Not enough detergent\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 28
+          }
+        },
+        {
+          "id": "grayed-or-yellowed-clothes-1",
+          "label": "Not using HE (high efficiency) detergent",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "U \u0003se only HE detergent."
+          ],
+          "evidence": "GE manual, page 28: \"Not using HE (high efficiency) detergent\"",
+          "source": {
+            "line": 27,
+            "manual": "GE manual",
+            "page": 28
+          }
+        },
+        {
+          "id": "grayed-or-yellowed-clothes-2",
+          "label": "Hard water",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "U \u0003se hottest water safe for fabric. •U \u0003se a water conditioner like Calgon brand or install a water softener."
+          ],
+          "evidence": "GE manual, page 28: \"Hard water\"",
+          "source": {
+            "line": 30,
+            "manual": "GE manual",
+            "page": 28
+          }
+        },
+        {
+          "id": "grayed-or-yellowed-clothes-3",
+          "label": "Water is not hot enough",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "M \u0003ake sure water heater is delivering water at 120°–140°F (48°–60°C)."
+          ],
+          "evidence": "GE manual, page 28: \"Water is not hot enough\"",
+          "source": {
+            "line": 34,
+            "manual": "GE manual",
+            "page": 28
+          }
+        },
+        {
+          "id": "grayed-or-yellowed-clothes-4",
+          "label": "Detergent is not dissolving",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "T\u0003 ry a liquid HE detergent."
+          ],
+          "evidence": "GE manual, page 28: \"Detergent is not dissolving\"",
+          "source": {
+            "line": 37,
+            "manual": "GE manual",
+            "page": 28
+          }
+        },
+        {
+          "id": "grayed-or-yellowed-clothes-5",
+          "label": "Dye transfer",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "S \u0003ort clothes by color.",
+            "If fabric label states wash separately, unstable dyes may be indicated."
+          ],
+          "evidence": "GE manual, page 28: \"Dye transfer\"",
+          "source": {
+            "line": 39,
+            "manual": "GE manual",
+            "page": 28
+          }
+        }
+      ]
+    },
+    {
+      "id": "colored-spots",
+      "symptom": "Colored spots",
+      "causes": [
+        {
+          "id": "colored-spots-0",
+          "label": "Incorrect use of fabric softener",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "C \u0003heck fabric softener package for instructions and follow directions for using dispenser."
+          ],
+          "evidence": "GE manual, page 28: \"Incorrect use of fabric softener\"",
+          "source": {
+            "line": 42,
+            "manual": "GE manual",
+            "page": 28
+          }
+        },
+        {
+          "id": "colored-spots-1",
+          "label": "Dye transfer",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "S \u0003ort whites or lightly colored items from dark colors. •P \u0003romptly remove wash load from washer."
+          ],
+          "evidence": "GE manual, page 28: \"Dye transfer\"",
+          "source": {
+            "line": 45,
+            "manual": "GE manual",
+            "page": 28
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-temperature-is-incorrect",
+      "symptom": "Water temperature is incorrect",
+      "causes": [
+        {
+          "id": "water-temperature-is-incorrect-0",
+          "label": "Water supply is improperly connected",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "M \u0003ake sure hoses are connected to correct faucets."
+          ],
+          "evidence": "GE manual, page 28: \"Water supply is improperly connected\"",
+          "source": {
+            "line": 49,
+            "manual": "GE manual",
+            "page": 28
+          }
+        },
+        {
+          "id": "water-temperature-is-incorrect-1",
+          "label": "House water heater is not set properly",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "M \u0003ake sure house water heater is delivering water at 120°–140°F (48°–60°C)."
+          ],
+          "evidence": "GE manual, page 28: \"House water heater is not set properly\"",
+          "source": {
+            "line": 53,
+            "manual": "GE manual",
+            "page": 28
+          }
+        }
+      ]
+    },
+    {
+      "id": "detergent-leak",
+      "symptom": "Detergent leak",
+      "causes": [
+        {
+          "id": "detergent-leak-0",
+          "label": "Incorrect placement of detergent insert",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "M \u0003ake sure detergent insert is properly located and fully seated.",
+            "Never put detergent above max line."
+          ],
+          "evidence": "GE manual, page 29: \"Incorrect placement of detergent insert\"",
+          "source": {
+            "line": 4,
+            "manual": "GE manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "detergent-leak-1",
+          "label": "This is normal",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "It \u0003is normal operation to see detergent leak on door gasket about 20 seconds after filling the dispenser."
+          ],
+          "evidence": "GE manual, page 29: \"This is normal\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 29
+          }
+        }
+      ]
+    },
+    {
+      "id": "improper-dispensing-of-softener-or-bleac",
+      "symptom": "Improper dispensing of softener or bleach",
+      "causes": [
+        {
+          "id": "improper-dispensing-of-softener-or-bleac-0",
+          "label": "Dispenser clogged",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "M \u0003onthly clean the dispenser drawer to remove buildup of chemicals."
+          ],
+          "evidence": "GE manual, page 29: \"Dispenser clogged\"",
+          "source": {
+            "line": 11,
+            "manual": "GE manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "improper-dispensing-of-softener-or-bleac-1",
+          "label": "Softener or bleach is filled above the max line",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "M \u0003ake sure to have the correct amount of softener or bleach."
+          ],
+          "evidence": "GE manual, page 29: \"Softener or bleach is filled above the max line\"",
+          "source": {
+            "line": 14,
+            "manual": "GE manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "improper-dispensing-of-softener-or-bleac-2",
+          "label": "Softener or bleach cap issue",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "M \u0003ake sure softener and bleach cap for dispenser are seated or they will not work."
+          ],
+          "evidence": "GE manual, page 29: \"Softener or bleach cap issue\"",
+          "source": {
+            "line": 18,
+            "manual": "GE manual",
+            "page": 29
+          }
+        }
+      ]
+    },
+    {
+      "id": "dispenser-drawer-not-dispensing-properly",
+      "symptom": "Dispenser drawer not dispensing properly",
+      "causes": [
+        {
+          "id": "dispenser-drawer-not-dispensing-properly-0",
+          "label": "Laundry detergent packet placed in dispenser drawer",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "L\u0003aundry detergent packets should not be used in the dispenser.",
+            "They should only be added directly to the wash basket following the manufacturer's directions."
+          ],
+          "evidence": "GE manual, page 29: \"Laundry detergent packet placed in dispenser drawer\"",
+          "source": {
+            "line": 21,
+            "manual": "GE manual",
+            "page": 29
+          }
+        }
+      ]
+    },
+    {
+      "id": "pump-running-while-washer-is-not-in-use",
+      "symptom": "Pump running while washer is not in use",
+      "causes": [
+        {
+          "id": "pump-running-while-washer-is-not-in-use-0",
+          "label": "Clog in sump drain",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "T\u0003 his is normal.",
+            "Drain sump is detecting an undesired water fill level from a potential open faucet.",
+            "Shut off water valve and inspect water valve for blockage."
+          ],
+          "evidence": "GE manual, page 29: \"Clog in sump drain\"",
+          "source": {
+            "line": 25,
+            "manual": "GE manual",
+            "page": 29
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-04T15:20:04.371Z",
+  "learnedAt": "2026-10-04T15:18:37.549Z",
+  "alsoCovers": [
+    "GHWS3605FMC",
+    "GHWS3605FRR"
+  ]
+}

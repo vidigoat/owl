@@ -3,9 +3,13 @@
   "brand": "GE",
   "kind": "Dishwasher",
   "alsoCovers": [
+    "EDW5100NBB",
     "EDW6100NBB",
     "EDW6160NSS",
     "GHDA676NSS",
+    "GLD4400NBB",
+    "GLD4500NWW",
+    "GLD4550NCS",
     "GLD4560NSS",
     "GLD4600NBB",
     "GLD4660NSS",
@@ -13,6 +17,7 @@
     "GLD5700NBB",
     "GLD5700NCC",
     "GLD5700NWW",
+    "GLD5760NSS",
     "GLD6700NBB"
   ],
   "source": "GHDA480NWW.pdf",

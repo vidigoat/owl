@@ -3,9 +3,17 @@
   "brand": "GE",
   "kind": "Dryer",
   "alsoCovers": [
+    "DBB5000EFGG",
     "DBB5000GFGG",
+    "DHDSR48EFWW",
+    "DTSR495EFGG",
     "DTSR495GFGG",
-    "EED6500DWW"
+    "DWSR405EBCC",
+    "DWXR485EBCC",
+    "DWXR485EBWW",
+    "DWXR485GBWW",
+    "EED6500DWW",
+    "EGD6500DWW"
   ],
   "source": "DWXR485GBCC.pdf",
   "pages": "11–12",

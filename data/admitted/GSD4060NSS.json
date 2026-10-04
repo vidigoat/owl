@@ -4,6 +4,9 @@
   "kind": "Dishwasher",
   "alsoCovers": [
     "ADW1100NWW",
+    "GSD2100NCC",
+    "GSD2101NWW",
+    "GSD3160NSS",
     "GSD4000NCC"
   ],
   "source": "GSD4060NSS.pdf",

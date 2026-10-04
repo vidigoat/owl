@@ -3,6 +3,7 @@
   "brand": "GE",
   "kind": "Dishwasher",
   "alsoCovers": [
+    "EDW4000GCC",
     "EDW5000LBB",
     "EDW6000LCC"
   ],

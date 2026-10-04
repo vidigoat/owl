@@ -909,6 +909,26 @@ function readThreeColumns(lines, firstPage) {
     k.remedies = k.remedies.flatMap((x) => x.text.split(/\s*[•▪■●]\s+/).flatMap((b) => b.split(/(?<=[.?!])\s+(?=[A-Z"“(])/))
       .map((t) => ({ text: t.replace(/^[•▪■●]\s*/, '').trim(), line: x.line })).filter((x2) => x2.text));
   }
+  /*
+   * One remedy cell, printed beside several causes.
+   *
+   * Older GE tables list five causes of "Spots and filming" down the middle column and ONE cell
+   * beside them all: a sentence, then "To remove stubborn spots…: 1 Remove all metal utensils.
+   * 2 Do not add detergent. 3 Select the longest cycle." Read row by row, step 1 lands on the
+   * second cause and steps 2 and 3 on the third — "Overloading the dishwasher → Do not add
+   * detergent" — which is a pairing the manual never made. A remedy that opens at step two or
+   * later is the tell: the procedure began beside a different cause. Every cause of that problem
+   * is then in doubt, because there is no saying which of them the cell belongs to.
+   *
+   * And a cause whose words stop on "or the" lost its ending to a collision below it.
+   */
+  for (const s of symptoms) {
+    const shared = s.causes.some((k) => /^(?:[2-9]|1\d)[.)]?\s+\S/.test(k.remedies[0]?.text || ''));
+    for (const k of s.causes) {
+      if (shared) k.unsure = true;
+      if (k.label && UNFINISHED.test(k.label)) k.unsure = true;
+    }
+  }
   return { symptoms, collided };
 }
 

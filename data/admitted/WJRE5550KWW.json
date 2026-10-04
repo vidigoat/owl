@@ -3,7 +3,9 @@
   "brand": "GE",
   "kind": "Washer",
   "alsoCovers": [
-    "EWA5600KWW"
+    "EWA5600KWW",
+    "WCRE6270KWW",
+    "WHRE5550KWW"
   ],
   "source": "WJRE5550KWW.pdf",
   "pages": "7–10",

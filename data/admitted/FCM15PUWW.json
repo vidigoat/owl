@@ -1,0 +1,688 @@
+{
+  "model": "FCM15PUWW",
+  "brand": "GE",
+  "kind": "Refrigerator",
+  "source": "FCM15PUWW.pdf",
+  "pages": "14–16",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "freezer-does-not-operate-or-power-on",
+      "symptom": "Freezer does not operate or Power-On",
+      "causes": [
+        {
+          "id": "freezer-does-not-operate-or-power-on-0",
+          "label": "Temperature control in OFF position.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Move the control to a temperature setting."
+          ],
+          "evidence": "GE manual, page 14: \"Temperature control in OFF position.\"",
+          "source": {
+            "line": 30,
+            "manual": "GE manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "light-is-not-on",
+      "symptom": "Light is not on",
+      "causes": [
+        {
+          "id": "light-is-not-on-0",
+          "label": "Freezer is unplugged.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Push the plug completely into the outlet."
+          ],
+          "evidence": "GE manual, page 14: \"Freezer is unplugged.\"",
+          "source": {
+            "line": 32,
+            "manual": "GE manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "light-is-not-on-1",
+          "label": "The fuse is blown/circuit breaker is tripped.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Replace fuse or reset the breaker."
+          ],
+          "evidence": "GE manual, page 14: \"The fuse is blown/circuit breaker is tripped.\"",
+          "source": {
+            "line": 35,
+            "manual": "GE manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "freezer-starts-stops-too-frequently",
+      "symptom": "Freezer starts/stops too frequently",
+      "causes": [
+        {
+          "id": "freezer-starts-stops-too-frequently-0",
+          "label": "Door/lid left open.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check to see if package is holding door/lid open."
+          ],
+          "evidence": "GE manual, page 14: \"Door/lid left open.\"",
+          "source": {
+            "line": 38,
+            "manual": "GE manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "freezer-starts-stops-too-frequently-1",
+          "label": "Too frequent or too long door/lid openings.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [],
+          "evidence": "GE manual, page 14: \"Too frequent or too long door/lid openings.\"",
+          "source": {
+            "line": 40,
+            "manual": "GE manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "freezer-starts-stops-too-frequently-2",
+          "label": "Temperature control set too cold.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "See About the operation of your freezer."
+          ],
+          "evidence": "GE manual, page 14: \"Temperature control set too cold.\"",
+          "source": {
+            "line": 47,
+            "manual": "GE manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "freezer-operates-too-long",
+      "symptom": "Freezer operates too long",
+      "causes": [
+        {
+          "id": "freezer-operates-too-long-0",
+          "label": "Door/lid left open.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check to see if package is holding door/lid open."
+          ],
+          "evidence": "GE manual, page 14: \"Door/lid left open.\"",
+          "source": {
+            "line": 50,
+            "manual": "GE manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "freezer-operates-too-long-1",
+          "label": "Too frequent or too long door/lid openings.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [],
+          "evidence": "GE manual, page 14: \"Too frequent or too long door/lid openings.\"",
+          "source": {
+            "line": 52,
+            "manual": "GE manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "freezer-operates-too-long-2",
+          "label": "Temperature control set too cold.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "See About the operation of your freezer."
+          ],
+          "evidence": "GE manual, page 14: \"Temperature control set too cold.\"",
+          "source": {
+            "line": 54,
+            "manual": "GE manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "freezer-operates-too-long-3",
+          "label": "Inadequate air circulation space around cabinet.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "See Preparing to install the freezer."
+          ],
+          "evidence": "GE manual, page 14: \"Inadequate air circulation space around cabinet.\"",
+          "source": {
+            "line": 56,
+            "manual": "GE manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "freezer-operates-too-long-4",
+          "label": "Room or outside weather is hot.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "It’s normal for the freezer to work harder under these conditions."
+          ],
+          "evidence": "GE manual, page 14: \"Room or outside weather is hot.\"",
+          "source": {
+            "line": 59,
+            "manual": "GE manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "freezer-operates-too-long-5",
+          "label": "Freezer has been disconnected recently for a period of time.",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "It takes 4 hours for the freezer to cool down completely."
+          ],
+          "evidence": "GE manual, page 14: \"Freezer has been disconnected recently for a period of time.\"",
+          "source": {
+            "line": 66,
+            "manual": "GE manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "freezer-operates-too-long-6",
+          "label": "Large amounts of warm or hot food have been stored recently.",
+          "likelihood": 0.132,
+          "cost": null,
+          "remedies": [
+            "Warm food will cause the freezer to run more until the desired temperature is reached."
+          ],
+          "evidence": "GE manual, page 14: \"Large amounts of warm or hot food have been stored recently.\"",
+          "source": {
+            "line": 69,
+            "manual": "GE manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "noisy-operation-or-cabinet-vibrates",
+      "symptom": "Noisy operation or cabinet vibrates",
+      "causes": [
+        {
+          "id": "noisy-operation-or-cabinet-vibrates-0",
+          "label": "Floor may be weak, causing freezer to vibrate when compressor is on.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Placing 2 X 4’s (51 mm X 102 mm) under the length of the freezer will help support it and may reduce vibration."
+          ],
+          "evidence": "GE manual, page 15: \"Floor may be weak, causing freezer to vibrate when compressor is on.\"",
+          "source": {
+            "line": 5,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "noisy-operation-or-cabinet-vibrates-1",
+          "label": "Cabinet is not positioned solidly on floor.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Adjust legs (on Upright models).",
+            "See Preparing to install the freezer.",
+            "Or use shims for uneven floor."
+          ],
+          "evidence": "GE manual, page 15: \"Cabinet is not positioned solidly on floor.\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "noisy-operation-or-cabinet-vibrates-2",
+          "label": "Freezer is touching the wall.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Level freezer or move slightly.",
+            "See Level Freezers."
+          ],
+          "evidence": "GE manual, page 15: \"Freezer is touching the wall.\"",
+          "source": {
+            "line": 11,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "freezer-temperature-too-warm",
+      "symptom": "Freezer temperature too warm",
+      "causes": [
+        {
+          "id": "freezer-temperature-too-warm-0",
+          "label": "Door/lid left open.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check to see if package is holding door/lid open."
+          ],
+          "evidence": "GE manual, page 15: \"Door/lid left open.\"",
+          "source": {
+            "line": 17,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "freezer-temperature-too-warm-1",
+          "label": "Too frequent or too long door/lid openings.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [],
+          "evidence": "GE manual, page 15: \"Too frequent or too long door/lid openings.\"",
+          "source": {
+            "line": 19,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "freezer-temperature-too-warm-2",
+          "label": "Temperature control is set too warm.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Turn control to a colder setting.",
+            "Allow several hours for the temperature to stabilize."
+          ],
+          "evidence": "GE manual, page 15: \"Temperature control is set too warm.\"",
+          "source": {
+            "line": 22,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "foods-defrosting",
+      "symptom": "Foods defrosting",
+      "causes": [
+        {
+          "id": "foods-defrosting-0",
+          "label": "Temperature control in OFF position.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Move the control to a temperature setting."
+          ],
+          "evidence": "GE manual, page 15: \"Temperature control in OFF position.\"",
+          "source": {
+            "line": 31,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "foods-defrosting-1",
+          "label": "Freezer is unplugged.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Push the plug completely into the outlet."
+          ],
+          "evidence": "GE manual, page 15: \"Freezer is unplugged.\"",
+          "source": {
+            "line": 35,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "foods-defrosting-2",
+          "label": "The fuse is blown/circuit breaker is tripped.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Replace fuse or reset the breaker."
+          ],
+          "evidence": "GE manual, page 15: \"The fuse is blown/circuit breaker is tripped.\"",
+          "source": {
+            "line": 36,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "foods-defrosting-3",
+          "label": "Door/lid left open.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Check to see if package is holding door/lid open."
+          ],
+          "evidence": "GE manual, page 15: \"Door/lid left open.\"",
+          "source": {
+            "line": 38,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "foods-defrosting-4",
+          "label": "Too frequent or too long door/lid openings.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [],
+          "evidence": "GE manual, page 15: \"Too frequent or too long door/lid openings.\"",
+          "source": {
+            "line": 40,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "freezer-temperature-too-cold",
+      "symptom": "Freezer temperature too cold",
+      "causes": [
+        {
+          "id": "freezer-temperature-too-cold-0",
+          "label": "Temperature control set too cold.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See About the operation of your freezer."
+          ],
+          "evidence": "GE manual, page 15: \"Temperature control set too cold.\"",
+          "source": {
+            "line": 43,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "moisture-forms-on-outside-of-cabinet",
+      "symptom": "Moisture forms on outside of cabinet",
+      "causes": [
+        {
+          "id": "moisture-forms-on-outside-of-cabinet-0",
+          "label": "Not unusual during periods of high humidity.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wipe surface dry."
+          ],
+          "evidence": "GE manual, page 15: \"Not unusual during periods of high humidity.\"",
+          "source": {
+            "line": 50,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "interior-light-does-not-work-on-some-mod",
+      "symptom": "Interior light does not work (on some models)",
+      "causes": [
+        {
+          "id": "interior-light-does-not-work-on-some-mod-0",
+          "label": "No power at outlet.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace fuse or reset the breaker."
+          ],
+          "evidence": "GE manual, page 15: \"No power at outlet.\"",
+          "source": {
+            "line": 58,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "interior-light-does-not-work-on-some-mod-1",
+          "label": "Freezer is unplugged.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Push the plug completely into the outlet."
+          ],
+          "evidence": "GE manual, page 15: \"Freezer is unplugged.\"",
+          "source": {
+            "line": 60,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "interior-light-does-not-work-on-some-mod-2",
+          "label": "Light bulb burned out.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Replace bulb."
+          ],
+          "evidence": "GE manual, page 15: \"Light bulb burned out.\"",
+          "source": {
+            "line": 62,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "door-lid-won-t-fully-close-by-itself",
+      "symptom": "Door/lid won’t fully close by itself",
+      "causes": [
+        {
+          "id": "door-lid-won-t-fully-close-by-itself-0",
+          "label": "Legs need adjusting.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See Preparing to install the freezer."
+          ],
+          "evidence": "GE manual, page 15: \"Legs need adjusting.\"",
+          "source": {
+            "line": 64,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "door-lid-won-t-fully-close-by-itself-1",
+          "label": "Package holding door/lid open.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [],
+          "evidence": "GE manual, page 15: \"Package holding door/lid open.\"",
+          "source": {
+            "line": 71,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "slow-starting-time-after-being-off",
+      "symptom": "Slow starting time after being off",
+      "causes": [
+        {
+          "id": "slow-starting-time-after-being-off-0",
+          "label": "Built-in overload protection.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [],
+          "evidence": "GE manual, page 15: \"Built-in overload protection.\"",
+          "source": {
+            "line": 73,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "excessive-frost-buildup",
+      "symptom": "Excessive frost buildup",
+      "causes": [
+        {
+          "id": "excessive-frost-buildup-0",
+          "label": "Door/lid left open.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check to see if package is holding door/lid open."
+          ],
+          "evidence": "GE manual, page 15: \"Door/lid left open.\"",
+          "source": {
+            "line": 76,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "excessive-frost-buildup-1",
+          "label": "Too frequent or too long door/lid openings.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [],
+          "evidence": "GE manual, page 15: \"Too frequent or too long door/lid openings.\"",
+          "source": {
+            "line": 78,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "excessive-frost-buildup-2",
+          "label": "Not unusual during periods of high humidity.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "15"
+          ],
+          "evidence": "GE manual, page 15: \"Not unusual during periods of high humidity.\"",
+          "source": {
+            "line": 80,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "freezer-external-surface-temperature-is-",
+      "symptom": "Freezer external surface temperature is warm",
+      "causes": [
+        {
+          "id": "freezer-external-surface-temperature-is--0",
+          "label": "The external freezer walls can be as much as 30°F warmer than room temperature.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal while the compressor works to transfer heat from inside the freezer cabinet."
+          ],
+          "evidence": "GE manual, page 16: \"The external freezer walls can be as much as 30°F warmer than room temperature.\"",
+          "source": {
+            "line": 3,
+            "manual": "GE manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "longer-sound-levels-when-compressor-come",
+      "symptom": "Longer sound levels when compressor comes on",
+      "causes": [
+        {
+          "id": "longer-sound-levels-when-compressor-come-0",
+          "label": "Freezer operates at higher pressures during the start of the ON cycle.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal.",
+            "Sound will level off or disappear as freezer continues to run."
+          ],
+          "evidence": "GE manual, page 16: \"Freezer operates at higher pressures during the start of the ON cycle.\"",
+          "source": {
+            "line": 16,
+            "manual": "GE manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "odors-in-freezer",
+      "symptom": "Odors in freezer",
+      "causes": [
+        {
+          "id": "odors-in-freezer-0",
+          "label": "Interior needs to be cleaned.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Clean interior with sponge, warm water and baking soda."
+          ],
+          "evidence": "GE manual, page 16: \"Interior needs to be cleaned.\"",
+          "source": {
+            "line": 36,
+            "manual": "GE manual",
+            "page": 16
+          }
+        },
+        {
+          "id": "odors-in-freezer-1",
+          "label": "Foods with strong odors are in the freezer.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Cover the food tightly."
+          ],
+          "evidence": "GE manual, page 16: \"Foods with strong odors are in the freezer.\"",
+          "source": {
+            "line": 39,
+            "manual": "GE manual",
+            "page": 16
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-04T15:19:47.189Z",
+  "learnedAt": "2026-10-04T15:17:58.869Z"
+}

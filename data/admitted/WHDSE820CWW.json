@@ -3,7 +3,13 @@
   "brand": "GE",
   "kind": "Washer",
   "alsoCovers": [
-    "S4200BWW"
+    "S4200BWW",
+    "WBSE3120BCC",
+    "WCSE4160BCC",
+    "WCSE4160BWW",
+    "WLE4000BWW",
+    "WSSE5210BWW",
+    "WWSE5200BCC"
   ],
   "source": "WHDSE820CWW.pdf",
   "pages": "12–15",

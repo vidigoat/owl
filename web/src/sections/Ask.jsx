@@ -65,6 +65,12 @@ export default function Ask({ machines }) {
   }, []);
 
   const readable = machines?.filter((m) => m.symptoms > 0) ?? [];
+  const groups = [...readable.reduce((map, m) => {
+    const label = `${m.brand || 'Other'} · ${m.kind || 'appliance'}`;
+    if (!map.has(label)) map.set(label, []);
+    map.get(label).push(m);
+    return map;
+  }, new Map())].sort(([a], [b]) => a.localeCompare(b)).map(([label, list]) => [`${label} (${list.length})`, list.sort((x, y) => x.model.localeCompare(y.model))]);
 
   return (
     <section className="hero wrap" id="ask">
@@ -126,10 +132,15 @@ export default function Ask({ machines }) {
             }}
             aria-label="which machine"
           >
-            {readable.map((m) => (
-              <option key={m.model} value={m.model}>
-                {m.brand} {m.model} — {m.kind}
-              </option>
+            {/* Grouped by maker and kind: a flat list of 170 model numbers is a list nobody finds theirs in. */}
+            {groups.map(([label, list]) => (
+              <optgroup key={label} label={label}>
+                {list.map((m) => (
+                  <option key={m.model} value={m.model}>
+                    {m.brand} {m.model} — {m.kind}
+                  </option>
+                ))}
+              </optgroup>
             ))}
           </select>
           {readable.length > 0 && <span>{readable.length} machines have been read</span>}

@@ -3,9 +3,16 @@
   "brand": "GE",
   "kind": "Washer",
   "alsoCovers": [
+    "GFW480SPKDG",
+    "GFW480SPKRR",
+    "GFW480SSKWW",
     "GFW490RPKDG",
+    "GFW490RPKRR",
     "GFW490RSKWW",
+    "GFWR2700HWW",
     "GFWR4800FWW",
+    "GFWR4805FMC",
+    "GFWR4805FRR",
     "GFWS2600FWW"
   ],
   "source": "GFWR2705HMC.pdf",

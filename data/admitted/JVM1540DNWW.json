@@ -1,0 +1,189 @@
+{
+  "model": "JVM1540DNWW",
+  "brand": "GE",
+  "kind": "Range",
+  "source": "JVM1540DNWW.pdf",
+  "pages": "36–36",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "oven-will-not-start",
+      "symptom": "Oven will not start",
+      "causes": [
+        {
+          "id": "oven-will-not-start-0",
+          "label": "A fuse in your home may be blown or the circuit breaker tripped.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace fuse or reset circuit breaker."
+          ],
+          "evidence": "GE manual, page 36: \"A fuse in your home may be blown or the circuit breaker tripped.\"",
+          "source": {
+            "line": 5,
+            "manual": "GE manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "oven-will-not-start-1",
+          "label": "Power surge.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Unplug the microwave oven, then plug it back in."
+          ],
+          "evidence": "GE manual, page 36: \"Power surge.\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "oven-will-not-start-2",
+          "label": "Plug not fully inserted into wall outlet.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Make sure the 3-prong plug on the oven is fully inserted into wall outlet."
+          ],
+          "evidence": "GE manual, page 36: \"Plug not fully inserted into wall outlet.\"",
+          "source": {
+            "line": 10,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "floor-of-the-oven-is-warm-even-when-the-",
+      "symptom": "Floor of the oven is warm, even when the oven has not been used",
+      "causes": [
+        {
+          "id": "floor-of-the-oven-is-warm-even-when-the--0",
+          "label": "The cooktop light is located below the oven floor. When the light is on, the heat it produces may make the oven floor get warm.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 36: \"The cooktop light is located below the oven floor. When the light is on, the heat it produces may make the oven floor get warm.\"",
+          "source": {
+            "line": 13,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "loc-appears-on-display",
+      "symptom": "“LOC” appears on display",
+      "causes": [
+        {
+          "id": "loc-appears-on-display-0",
+          "label": "The control has been locked.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Press and hold CLEAR/OFF for about 3 seconds to unlock the control."
+          ],
+          "evidence": "GE manual, page 36: \"The control has been locked.\"",
+          "source": {
+            "line": 20,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "vent-fan-will-not-turn-off",
+      "symptom": "Vent fan will not turn off",
+      "causes": [
+        {
+          "id": "vent-fan-will-not-turn-off-0",
+          "label": "The vent fan automatically turns on to cool internal parts while the microwave is on.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "The vent fan cannot be turned off while the microwave is operating.",
+            "This is normal.",
+            "Wait for the microwave to turn off and the fan will either go off automatically or you will need to turn it off by pressing the Vent Fan pad after the microwave is off."
+          ],
+          "evidence": "GE manual, page 36: \"The vent fan automatically turns on to cool internal parts while the microwave is on.\"",
+          "source": {
+            "line": 23,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "please-insert-probe-appears-on-display",
+      "symptom": "“PLEASE INSERT PROBE“ appears on display",
+      "causes": [
+        {
+          "id": "please-insert-probe-appears-on-display-0",
+          "label": "Probe has been forgotten or not inserted properly.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Insert the probe properly into the oven wall outlet."
+          ],
+          "evidence": "GE manual, page 36: \"Probe has been forgotten or not inserted properly.\"",
+          "source": {
+            "line": 35,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "sensor-error-appears-on-display",
+      "symptom": "“SENSOR ERROR” appears on display",
+      "causes": [
+        {
+          "id": "sensor-error-appears-on-display-0",
+          "label": "When using a Sensor feature, the door was opened before steam could be detected.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Do not open door until steam is sensed and time is shown counting down on display."
+          ],
+          "evidence": "GE manual, page 36: \"When using a Sensor feature, the door was opened before steam could be detected.\"",
+          "source": {
+            "line": 38,
+            "manual": "GE manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "sensor-error-appears-on-display-1",
+          "label": "Steam was not detected in maximum amount of time.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Use Time Cook to heat for more time."
+          ],
+          "evidence": "GE manual, page 36: \"Steam was not detected in maximum amount of time.\"",
+          "source": {
+            "line": 42,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-04T15:20:21.735Z",
+  "learnedAt": "2026-10-04T15:19:11.144Z"
+}

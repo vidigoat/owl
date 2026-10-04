@@ -1,0 +1,740 @@
+{
+  "model": "JBP70WKWW",
+  "brand": "GE",
+  "kind": "Range",
+  "source": "JBP70WKWW.pdf",
+  "pages": "26–29",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "surface-units-will-not-maintain-a-rollin",
+      "symptom": "Surface units will not maintain a rolling boil or cooking is not fast enough",
+      "causes": [
+        {
+          "id": "surface-units-will-not-maintain-a-rollin-0",
+          "label": "Improper cookware being used.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use pans which are flat and match the diameter of the surface unit selected."
+          ],
+          "evidence": "GE manual, page 26: \"Improper cookware being used.\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 26
+          }
+        }
+      ]
+    },
+    {
+      "id": "surface-units-do-not-work-properly-surfa",
+      "symptom": "Surface units do not work properly Surface unit stops glowing when turned to a lower setting",
+      "causes": [
+        {
+          "id": "surface-units-do-not-work-properly-surfa-0",
+          "label": "A fuse in your home may be blown or the circuit breaker tripped.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace the fuse or reset the circuit breaker."
+          ],
+          "evidence": "GE manual, page 26: \"A fuse in your home may be blown or the circuit breaker tripped.\"",
+          "source": {
+            "line": 18,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "surface-units-do-not-work-properly-surfa-1",
+          "label": "Cooktop controls improperly set.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check to see the correct control is set for the surface unit you are using.",
+            "This is normal.",
+            "The unit is still on and hot."
+          ],
+          "evidence": "GE manual, page 26: \"Cooktop controls improperly set.\"",
+          "source": {
+            "line": 21,
+            "manual": "GE manual",
+            "page": 26
+          }
+        }
+      ]
+    },
+    {
+      "id": "scratches-may-appear-as-cracks-on-cookto",
+      "symptom": "Scratches (may appear as cracks) on cooktop glass surface",
+      "causes": [
+        {
+          "id": "scratches-may-appear-as-cracks-on-cookto-0",
+          "label": "Incorrect cleaning methods being used.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Scratches are not removable.",
+            "Tiny scratches will become less visible in time as a result of cleaning."
+          ],
+          "evidence": "GE manual, page 26: \"Incorrect cleaning methods being used.\"",
+          "source": {
+            "line": 28,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "scratches-may-appear-as-cracks-on-cookto-1",
+          "label": "Cookware with rough bottoms being used or coarse particles (salt or sand) were between the cookware and the surface of the cooktop.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "To avoid scratches, use the recommended cleaning procedures.",
+            "Make sure bottoms of cookware are clean before use, and use cookware with smooth bottoms."
+          ],
+          "evidence": "GE manual, page 26: \"Cookware with rough bottoms being used or coarse particles (salt or sand) were between the cookware and the surface of the cooktop.\"",
+          "source": {
+            "line": 35,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "scratches-may-appear-as-cracks-on-cookto-2",
+          "label": "Cookware has been slid across the cooktop surface.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [],
+          "evidence": "GE manual, page 26: \"Cookware has been slid across the cooktop surface.\"",
+          "source": {
+            "line": 40,
+            "manual": "GE manual",
+            "page": 26
+          }
+        }
+      ]
+    },
+    {
+      "id": "areas-of-discoloration-on-the-cooktop",
+      "symptom": "Areas of discoloration on the cooktop",
+      "causes": [
+        {
+          "id": "areas-of-discoloration-on-the-cooktop-0",
+          "label": "Food spillovers not cleaned before next use.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See the Cleaning the glass cooktop section."
+          ],
+          "evidence": "GE manual, page 26: \"Food spillovers not cleaned before next use.\"",
+          "source": {
+            "line": 43,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "areas-of-discoloration-on-the-cooktop-1",
+          "label": "Hot surface on a model with a light-colored glass cooktop.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "This is normal.",
+            "The surface may appear discolored when it is hot.",
+            "This is temporary and will disappear as the glass cools."
+          ],
+          "evidence": "GE manual, page 26: \"Hot surface on a model with a light-colored glass cooktop.\"",
+          "source": {
+            "line": 50,
+            "manual": "GE manual",
+            "page": 26
+          }
+        }
+      ]
+    },
+    {
+      "id": "plastic-melted-to-the-surface",
+      "symptom": "Plastic melted to the surface",
+      "causes": [
+        {
+          "id": "plastic-melted-to-the-surface-0",
+          "label": "Hot cooktop came into contact with plastic placed on the hot cooktop.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See the Glass surface—potential for permanent damage section in the Cleaning the glass cooktop section."
+          ],
+          "evidence": "GE manual, page 26: \"Hot cooktop came into contact with plastic placed on the hot cooktop.\"",
+          "source": {
+            "line": 54,
+            "manual": "GE manual",
+            "page": 26
+          }
+        }
+      ]
+    },
+    {
+      "id": "pitting-or-indentation-of-the-cooktop",
+      "symptom": "Pitting (or indentation) of the cooktop",
+      "causes": [
+        {
+          "id": "pitting-or-indentation-of-the-cooktop-0",
+          "label": "Hot sugar mixture spilled on the cooktop.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Call a qualified technician for replacement."
+          ],
+          "evidence": "GE manual, page 26: \"Hot sugar mixture spilled on the cooktop.\"",
+          "source": {
+            "line": 58,
+            "manual": "GE manual",
+            "page": 26
+          }
+        }
+      ]
+    },
+    {
+      "id": "frequent-cycling-off-and-on-of-surface-u",
+      "symptom": "Frequent cycling off and on of surface units",
+      "causes": [
+        {
+          "id": "frequent-cycling-off-and-on-of-surface-u-0",
+          "label": "Improper cookware being used.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use only flat cookware to minimize cycling."
+          ],
+          "evidence": "GE manual, page 26: \"Improper cookware being used.\"",
+          "source": {
+            "line": 61,
+            "manual": "GE manual",
+            "page": 26
+          }
+        }
+      ]
+    },
+    {
+      "id": "control-signals-after-entering-cooking-t",
+      "symptom": "Control signals after entering cooking time or delay start",
+      "causes": [
+        {
+          "id": "control-signals-after-entering-cooking-t-0",
+          "label": "You forgot to enter a bake temperature or cleaning time.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Press the BAKE pad and desired temperature or the SELF CLEAN pad and desired clean time."
+          ],
+          "evidence": "GE manual, page 26: \"You forgot to enter a bake temperature or cleaning time.\"",
+          "source": {
+            "line": 69,
+            "manual": "GE manual",
+            "page": 26
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-does-not-bake-or-roast-properly",
+      "symptom": "Food does not bake or roast properly",
+      "causes": [
+        {
+          "id": "food-does-not-bake-or-roast-properly-0",
+          "label": "Oven controls improperly set.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See the Using the oven section."
+          ],
+          "evidence": "GE manual, page 27: \"Oven controls improperly set.\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 27
+          }
+        },
+        {
+          "id": "food-does-not-bake-or-roast-properly-1",
+          "label": "Shelf position is incorrect or the shelf is not level.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See the Using the oven section."
+          ],
+          "evidence": "GE manual, page 27: \"Shelf position is incorrect or the shelf is not level.\"",
+          "source": {
+            "line": 9,
+            "manual": "GE manual",
+            "page": 27
+          }
+        },
+        {
+          "id": "food-does-not-bake-or-roast-properly-2",
+          "label": "Incorrect cookware or cookware of improper size being used.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "See the Using the oven section."
+          ],
+          "evidence": "GE manual, page 27: \"Incorrect cookware or cookware of improper size being used.\"",
+          "source": {
+            "line": 16,
+            "manual": "GE manual",
+            "page": 27
+          }
+        },
+        {
+          "id": "food-does-not-bake-or-roast-properly-3",
+          "label": "Oven thermostat needs adjustment.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "See the Adjust the oven thermostat—Do it yourself! section."
+          ],
+          "evidence": "GE manual, page 27: \"Oven thermostat needs adjustment.\"",
+          "source": {
+            "line": 19,
+            "manual": "GE manual",
+            "page": 27
+          }
+        }
+      ]
+    },
+    {
+      "id": "oven-temperature-too-hot-or-too-cold",
+      "symptom": "Oven temperature too hot or too cold",
+      "causes": [
+        {
+          "id": "oven-temperature-too-hot-or-too-cold-0",
+          "label": "Oven thermostat needs adjustment.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See the Adjust the oven thermostat—Do it yourself! section."
+          ],
+          "evidence": "GE manual, page 27: \"Oven thermostat needs adjustment.\"",
+          "source": {
+            "line": 56,
+            "manual": "GE manual",
+            "page": 27
+          }
+        }
+      ]
+    },
+    {
+      "id": "oven-will-not-work",
+      "symptom": "Oven will not work",
+      "causes": [
+        {
+          "id": "oven-will-not-work-0",
+          "label": "Plug on range is not completely inserted in the electrical outlet.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure electrical plug is plugged into a live, properly grounded outlet."
+          ],
+          "evidence": "GE manual, page 28: \"Plug on range is not completely inserted in the electrical outlet.\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 28
+          }
+        },
+        {
+          "id": "oven-will-not-work-1",
+          "label": "A fuse in your home may be blown or the circuit breaker tripped.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Replace the fuse or reset the circuit breaker."
+          ],
+          "evidence": "GE manual, page 28: \"A fuse in your home may be blown or the circuit breaker tripped.\"",
+          "source": {
+            "line": 16,
+            "manual": "GE manual",
+            "page": 28
+          }
+        },
+        {
+          "id": "oven-will-not-work-2",
+          "label": "Oven controls improperly set.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "See the Using the oven section."
+          ],
+          "evidence": "GE manual, page 28: \"Oven controls improperly set.\"",
+          "source": {
+            "line": 19,
+            "manual": "GE manual",
+            "page": 28
+          }
+        },
+        {
+          "id": "oven-will-not-work-3",
+          "label": "Door left in the locked position.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "If necessary, allow the oven to cool; then unlock the door."
+          ],
+          "evidence": "GE manual, page 28: \"Door left in the locked position.\"",
+          "source": {
+            "line": 20,
+            "manual": "GE manual",
+            "page": 28
+          }
+        }
+      ]
+    },
+    {
+      "id": "storage-drawer-is-crooked",
+      "symptom": "Storage drawer is crooked",
+      "causes": [
+        {
+          "id": "storage-drawer-is-crooked-0",
+          "label": "Rear drawer support is on top of the guide rail.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Reposition the drawer.",
+            "See the Storage Drawer Removal instructions in the Care and cleaning of your range section."
+          ],
+          "evidence": "GE manual, page 28: \"Rear drawer support is on top of the guide rail.\"",
+          "source": {
+            "line": 23,
+            "manual": "GE manual",
+            "page": 28
+          }
+        }
+      ]
+    },
+    {
+      "id": "storage-drawer-won-t-close",
+      "symptom": "Storage drawer won’t close",
+      "causes": [
+        {
+          "id": "storage-drawer-won-t-close-0",
+          "label": "Power cord may be obstructing drawer in the lower back of the range.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Reposition the drawer and power cord.",
+            "See the Storage Drawer Removal instructions in the Care and cleaning of your range section."
+          ],
+          "evidence": "GE manual, page 28: \"Power cord may be obstructing drawer in the lower back of the range.\"",
+          "source": {
+            "line": 27,
+            "manual": "GE manual",
+            "page": 28
+          }
+        },
+        {
+          "id": "storage-drawer-won-t-close-1",
+          "label": "Rear drawer support is on top of the guide rail.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Reposition the drawer.",
+            "See the Storage Drawer Removal instructions in the Care and cleaning of your range section."
+          ],
+          "evidence": "GE manual, page 28: \"Rear drawer support is on top of the guide rail.\"",
+          "source": {
+            "line": 36,
+            "manual": "GE manual",
+            "page": 28
+          }
+        }
+      ]
+    },
+    {
+      "id": "oven-will-not-self-clean",
+      "symptom": "Oven will not self-clean",
+      "causes": [
+        {
+          "id": "oven-will-not-self-clean-0",
+          "label": "The oven temperature is too high to set a self-clean operation.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Allow the oven to cool to room temperature and reset the controls."
+          ],
+          "evidence": "GE manual, page 28: \"The oven temperature is too high to set a self-clean operation.\"",
+          "source": {
+            "line": 40,
+            "manual": "GE manual",
+            "page": 28
+          }
+        }
+      ]
+    },
+    {
+      "id": "crackling-or-popping-sound",
+      "symptom": "“Crackling” or “popping” sound",
+      "causes": [
+        {
+          "id": "crackling-or-popping-sound-0",
+          "label": "This is the sound of the metal heating and cooling during both the cooking and cleaning functions.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 28: \"This is the sound of the metal heating and cooling during both the cooking and cleaning functions.\"",
+          "source": {
+            "line": 52,
+            "manual": "GE manual",
+            "page": 28
+          }
+        }
+      ]
+    },
+    {
+      "id": "excessive-smoking-during-a-clean-cycle",
+      "symptom": "Excessive smoking during a clean cycle",
+      "causes": [
+        {
+          "id": "excessive-smoking-during-a-clean-cycle-0",
+          "label": "Excessive soil.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Press the CLEAR/OFF pad.",
+            "Open the windows to rid the room of smoke.",
+            "Wait until the light on the SELF CLEAN pad goes off.",
+            "Wipe up the excess soil and reset the clean cycle."
+          ],
+          "evidence": "GE manual, page 28: \"Excessive soil.\"",
+          "source": {
+            "line": 57,
+            "manual": "GE manual",
+            "page": 28
+          }
+        }
+      ]
+    },
+    {
+      "id": "oven-door-will-not-unlock",
+      "symptom": "Oven door will not unlock",
+      "causes": [
+        {
+          "id": "oven-door-will-not-unlock-0",
+          "label": "Oven too hot.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Allow the oven to cool below locking temperature."
+          ],
+          "evidence": "GE manual, page 28: \"Oven too hot.\"",
+          "source": {
+            "line": 62,
+            "manual": "GE manual",
+            "page": 28
+          }
+        }
+      ]
+    },
+    {
+      "id": "f-and-a-number-or-letter-flash-in-the-di",
+      "symptom": "“F – and a number or letter” flash in the display",
+      "causes": [
+        {
+          "id": "f-and-a-number-or-letter-flash-in-the-di-0",
+          "label": "You have a function error code.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Disconnect all power to the range for at least 30 seconds and then reconnect power.",
+            "If the function error code repeats, call for service.",
+            "On self-cleaning models, if a function error code appears during the self-cleaning cycle, check the oven door latch.",
+            "The latch may have been moved, if only slightly, from the locked position.",
+            "Make sure the latch is moved to the right as far as it will go.",
+            "Press the CLEAR/OFF pad.",
+            "Allow the oven to cool for one hour.",
+            "Put the oven back into operation."
+          ],
+          "evidence": "GE manual, page 29: \"You have a function error code.\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 29
+          }
+        }
+      ]
+    },
+    {
+      "id": "display-flashes-bad-then-line-with-a-lou",
+      "symptom": "Display flashes “bAd” then “linE” with a loud tone",
+      "causes": [
+        {
+          "id": "display-flashes-bad-then-line-with-a-lou-0",
+          "label": "The installed connection from the house to the unit is miswired.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Contact installer or electrician to correct miswire."
+          ],
+          "evidence": "GE manual, page 29: \"The installed connection from the house to the unit is miswired.\"",
+          "source": {
+            "line": 23,
+            "manual": "GE manual",
+            "page": 29
+          }
+        }
+      ]
+    },
+    {
+      "id": "display-goes-blank",
+      "symptom": "Display goes blank",
+      "causes": [
+        {
+          "id": "display-goes-blank-0",
+          "label": "A fuse in your home may be blown or the circuit breaker tripped.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace the fuse or reset the circuit breaker."
+          ],
+          "evidence": "GE manual, page 29: \"A fuse in your home may be blown or the circuit breaker tripped.\"",
+          "source": {
+            "line": 27,
+            "manual": "GE manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "display-goes-blank-1",
+          "label": "The clock is turned off from showing in the display.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See the Using the clock and timer section."
+          ],
+          "evidence": "GE manual, page 29: \"The clock is turned off from showing in the display.\"",
+          "source": {
+            "line": 35,
+            "manual": "GE manual",
+            "page": 29
+          }
+        }
+      ]
+    },
+    {
+      "id": "display-flashes",
+      "symptom": "Display flashes",
+      "causes": [
+        {
+          "id": "display-flashes-0",
+          "label": "Power failure.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Reset the clock."
+          ],
+          "evidence": "GE manual, page 29: \"Power failure.\"",
+          "source": {
+            "line": 38,
+            "manual": "GE manual",
+            "page": 29
+          }
+        }
+      ]
+    },
+    {
+      "id": "unable-to-get-the-display-to-show-sf",
+      "symptom": "Unable to get the display to show “SF”",
+      "causes": [
+        {
+          "id": "unable-to-get-the-display-to-show-sf-0",
+          "label": "Oven control pads were not pressed properly.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "The BAKE and BROIL HI/LO pads must be pressed at the same time and held for 3 seconds."
+          ],
+          "evidence": "GE manual, page 29: \"Oven control pads were not pressed properly.\"",
+          "source": {
+            "line": 40,
+            "manual": "GE manual",
+            "page": 29
+          }
+        }
+      ]
+    },
+    {
+      "id": "power-outage-clock-flashes",
+      "symptom": "Power outage, clock flashes",
+      "causes": [
+        {
+          "id": "power-outage-clock-flashes-0",
+          "label": "Power outage or surge.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Reset the clock.",
+            "If the oven was in use, you must reset it by pressing the CLEAR/OFF pad, setting the clock and resetting any cooking function."
+          ],
+          "evidence": "GE manual, page 29: \"Power outage or surge.\"",
+          "source": {
+            "line": 43,
+            "manual": "GE manual",
+            "page": 29
+          }
+        }
+      ]
+    },
+    {
+      "id": "burning-or-oily-odor-emitting-from-the-v",
+      "symptom": "“Burning” or “oily” odor emitting from the vent",
+      "causes": [
+        {
+          "id": "burning-or-oily-odor-emitting-from-the-v-0",
+          "label": "This is normal in a new oven and will disappear in time.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "To speed the process, set a self-clean cycle for a minimum of 3 hours.",
+            "See the Using the self-cleaning oven section."
+          ],
+          "evidence": "GE manual, page 29: \"This is normal in a new oven and will disappear in time.\"",
+          "source": {
+            "line": 51,
+            "manual": "GE manual",
+            "page": 29
+          }
+        }
+      ]
+    },
+    {
+      "id": "strong-odor",
+      "symptom": "Strong odor",
+      "causes": [
+        {
+          "id": "strong-odor-0",
+          "label": "An odor from the insulation around the inside of the oven is normal for the first few times the oven is used.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is temporary."
+          ],
+          "evidence": "GE manual, page 29: \"An odor from the insulation around the inside of the oven is normal for the first few times the oven is used.\"",
+          "source": {
+            "line": 55,
+            "manual": "GE manual",
+            "page": 29
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-04T15:20:20.484Z",
+  "learnedAt": "2026-10-04T15:19:15.572Z"
+}

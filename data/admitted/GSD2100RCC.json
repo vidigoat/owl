@@ -3,9 +3,12 @@
   "brand": "GE",
   "kind": "Dishwasher",
   "alsoCovers": [
+    "GSD2300RWW",
     "GSD2340RSA",
     "GSD3300VWW",
-    "GSD4060RSS"
+    "GSD4000VWW",
+    "GSD4060RSS",
+    "GSD4060VSS"
   ],
   "source": "GSD2100RCC.pdf",
   "pages": "15–16",

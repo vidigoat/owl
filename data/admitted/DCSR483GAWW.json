@@ -3,6 +3,11 @@
   "brand": "GE",
   "kind": "Dryer",
   "alsoCovers": [
+    "DCSR483EAAA",
+    "DCSR483EAWW",
+    "DCSR483GAAA",
+    "DCXR463EAAA",
+    "DCXR463EAWW",
     "DCXR463GAAA"
   ],
   "source": "DCSR483GAWW.pdf",

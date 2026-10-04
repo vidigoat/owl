@@ -1,0 +1,404 @@
+{
+  "model": "WPSE4270AWW",
+  "brand": "GE",
+  "kind": "Washer",
+  "source": "WPSE4270AWW.pdf",
+  "pages": "11–13",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "washer-pauses-in-cycle",
+      "symptom": "Washer pauses in cycle",
+      "causes": [
+        {
+          "id": "washer-pauses-in-cycle-0",
+          "label": "The DELICATES cycle was chosen",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal.",
+            "The DELICATES cycle has a short soak period."
+          ],
+          "evidence": "GE manual, page 12: \"The DELICATES cycle was chosen\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "washer-won-t-operate",
+      "symptom": "Washer won’t operate",
+      "causes": [
+        {
+          "id": "washer-won-t-operate-0",
+          "label": "Washer is unplugged",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure cord is plugged securely into a working outlet."
+          ],
+          "evidence": "GE manual, page 12: \"Washer is unplugged\"",
+          "source": {
+            "line": 9,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "washer-won-t-operate-1",
+          "label": "Water supply is turned off",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Turn both hot and cold faucets fully on."
+          ],
+          "evidence": "GE manual, page 12: \"Water supply is turned off\"",
+          "source": {
+            "line": 10,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "washer-won-t-operate-2",
+          "label": "Controls are not set properly",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Check controls."
+          ],
+          "evidence": "GE manual, page 12: \"Controls are not set properly\"",
+          "source": {
+            "line": 11,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "washer-won-t-operate-3",
+          "label": "Lid is open",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Close lid."
+          ],
+          "evidence": "GE manual, page 12: \"Lid is open\"",
+          "source": {
+            "line": 12,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "washer-won-t-operate-4",
+          "label": "Circuit breaker/fuse is tripped/blown",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Check house circuit breakers/fuses.",
+            "Replace fuses or reset breaker.",
+            "Washer should have separate outlet."
+          ],
+          "evidence": "GE manual, page 12: \"Circuit breaker/fuse is tripped/blown\"",
+          "source": {
+            "line": 13,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "washer-won-t-operate-5",
+          "label": "Electronics need to be reset",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "Unplug washer, wait 2 minutes, plug back in, and press START."
+          ],
+          "evidence": "GE manual, page 12: \"Electronics need to be reset\"",
+          "source": {
+            "line": 15,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "washer-won-t-operate-6",
+          "label": "START was not pressed",
+          "likelihood": 0.132,
+          "cost": null,
+          "remedies": [
+            "Press START."
+          ],
+          "evidence": "GE manual, page 12: \"START was not pressed\"",
+          "source": {
+            "line": 22,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "washer-won-t-operate-9",
+          "label": "Dye transfer",
+          "likelihood": 0.094,
+          "cost": null,
+          "remedies": [
+            "Sort whites or lightly colored items from dark colors."
+          ],
+          "evidence": "GE manual, page 12: \"Dye transfer\"",
+          "source": {
+            "line": 33,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "washer-won-t-operate-11",
+          "label": "Hard water",
+          "likelihood": 0.079,
+          "cost": null,
+          "remedies": [
+            "Use a water conditioner like Calgon brand or install a water softener."
+          ],
+          "evidence": "GE manual, page 12: \"Hard water\"",
+          "source": {
+            "line": 42,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "washer-won-t-operate-12",
+          "label": "Water is not hot enough",
+          "likelihood": 0.074,
+          "cost": null,
+          "remedies": [
+            "Make sure water heater is delivering water at 120°F.–140°F.",
+            "(48°C.–60°C.)."
+          ],
+          "evidence": "GE manual, page 12: \"Water is not hot enough\"",
+          "source": {
+            "line": 44,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "washer-won-t-operate-13",
+          "label": "Washer is overloaded",
+          "likelihood": 0.068,
+          "cost": null,
+          "remedies": [
+            "Select load size to match clothes load."
+          ],
+          "evidence": "GE manual, page 12: \"Washer is overloaded\"",
+          "source": {
+            "line": 46,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "washer-won-t-operate-14",
+          "label": "Detergent is not dissolving",
+          "likelihood": 0.064,
+          "cost": null,
+          "remedies": [
+            "Add detergent as wash basket fills with water before you load clothes."
+          ],
+          "evidence": "GE manual, page 12: \"Detergent is not dissolving\"",
+          "source": {
+            "line": 47,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "washer-won-t-operate-15",
+          "label": "Dye transfer",
+          "likelihood": 0.06,
+          "cost": null,
+          "remedies": [
+            "Sort clothes by color.",
+            "If fabric label states wash separately, unstable dyes may be indicated."
+          ],
+          "evidence": "GE manual, page 12: \"Dye transfer\"",
+          "source": {
+            "line": 49,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "washer-won-t-operate-17",
+          "label": "Incorrect sorting",
+          "likelihood": 0.054,
+          "cost": null,
+          "remedies": [
+            "Separate lint producers from lint collectors."
+          ],
+          "evidence": "GE manual, page 12: \"Incorrect sorting\"",
+          "source": {
+            "line": 54,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "washer-won-t-operate-18",
+          "label": "Washing too long",
+          "likelihood": 0.051,
+          "cost": null,
+          "remedies": [
+            "Wash small loads for a shorter time than larger loads."
+          ],
+          "evidence": "GE manual, page 12: \"Washing too long\"",
+          "source": {
+            "line": 55,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "washer-won-t-operate-19",
+          "label": "Detergent not dissolving",
+          "likelihood": 0.049,
+          "cost": null,
+          "remedies": [
+            "Add detergent as wash basket fills with water, before you load clothes.",
+            "Try a liquid detergent.",
+            "Use warmer water temperature."
+          ],
+          "evidence": "GE manual, page 12: \"Detergent not dissolving\"",
+          "source": {
+            "line": 56,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "washer-won-t-operate-20",
+          "label": "Overloading",
+          "likelihood": 0.046,
+          "cost": null,
+          "remedies": [
+            "Load clothes no higher than the top row of holes in the washer tub.",
+            "Make sure load size selector matches clothes load size."
+          ],
+          "evidence": "GE manual, page 12: \"Overloading\"",
+          "source": {
+            "line": 65,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "washer-won-t-operate-21",
+          "label": "Incorrect use of fabric softener",
+          "likelihood": 0.044,
+          "cost": null,
+          "remedies": [
+            "Check fabric softener package for instructions and follow directions for using dispenser."
+          ],
+          "evidence": "GE manual, page 12: \"Incorrect use of fabric softener\"",
+          "source": {
+            "line": 68,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "washer-is-noisy",
+      "symptom": "Washer is noisy",
+      "causes": [
+        {
+          "id": "washer-is-noisy-0",
+          "label": "Washer is uneven",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "To level the front of the washer, adjust the front leveling legs by rotating the individual leg in the proper direction for up or down.",
+            "To level back of washer, lift back of machine 4″ (11 cm) and set down."
+          ],
+          "evidence": "GE manual, page 13: \"Washer is uneven\"",
+          "source": {
+            "line": 41,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "washer-is-noisy-1",
+          "label": "Washer load is unbalanced",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Press PAUSE to stop the washer, open the lid and redistribute the load evenly.",
+            "Close the lid and press START."
+          ],
+          "evidence": "GE manual, page 13: \"Washer load is unbalanced\"",
+          "source": {
+            "line": 45,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "washer-is-noisy-2",
+          "label": "Shipping rod is still assembled in unit",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "To remove shipping rod from washer, pull yellow tag and attached rod from the bottom right hand side of washer."
+          ],
+          "evidence": "GE manual, page 13: \"Shipping rod is still assembled in unit\"",
+          "source": {
+            "line": 48,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "washer-is-noisy-3",
+          "label": "Washer is sitting too close to wall (causes knocking during cycle)",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Pull washer away from the wall; about 4″ (11 cm) is needed."
+          ],
+          "evidence": "GE manual, page 13: \"Washer is sitting too close to wall (causes knocking during cycle)\"",
+          "source": {
+            "line": 50,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "washer-won-t-operate-7",
+    "washer-won-t-operate-8",
+    "washer-won-t-operate-10",
+    "washer-won-t-operate-16"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-04T15:20:37.826Z",
+  "learnedAt": "2026-10-04T15:18:30.731Z",
+  "alsoCovers": [
+    "WASE4220AAA",
+    "WASE4220AWW",
+    "WPSE4200AAA",
+    "WPSE4200ACC",
+    "WPSE4200AWW",
+    "WPSE4270AAA",
+    "WSSE4220AAA",
+    "WSSE4220AWW"
+  ]
+}

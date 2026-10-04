@@ -1,0 +1,455 @@
+{
+  "model": "GSM1860JSS",
+  "brand": "GE",
+  "kind": "Dishwasher",
+  "source": "GSM1860JSS.pdf",
+  "pages": "10–13",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "noise",
+      "symptom": "Noise",
+      "causes": [
+        {
+          "id": "noise-0",
+          "label": "Some of the sounds you’ll hear are normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Detergent cup opening.",
+            "The motor starting during the drying period.",
+            "Water draining out of the tub immediately after you start the dishwasher."
+          ],
+          "evidence": "GE manual, page 12: \"Some of the sounds you’ll hear are normal\"",
+          "source": {
+            "line": 11,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "noise-1",
+          "label": "Utensils are not secure in the rack or something small has dropped into the rack",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Make sure everything is secured in dishwasher."
+          ],
+          "evidence": "GE manual, page 12: \"Utensils are not secure in the rack or something small has dropped into the rack\"",
+          "source": {
+            "line": 16,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "noise-2",
+          "label": "Motor hums",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Dishwasher has not been used on a regular basis.",
+            "If you do not use your dishwasher often, set it to fill and pump out once every week.",
+            "This will help keep the seal moist.",
+            "Dishwasher control was not advanced properly to the start of the desired cycle.",
+            "Advance the control to the start of the desired cycle."
+          ],
+          "evidence": "GE manual, page 12: \"Motor hums\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "detergent-left-in-dispenser-cups",
+      "symptom": "Detergent left in dispenser cups",
+      "causes": [
+        {
+          "id": "detergent-left-in-dispenser-cups-0",
+          "label": "Dishes are blocking the detergent cups",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Reposition the dishes."
+          ],
+          "evidence": "GE manual, page 12: \"Dishes are blocking the detergent cups\"",
+          "source": {
+            "line": 30,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-won-t-pump-out-of-the-tub",
+      "symptom": "Water won’t pump out of the tub",
+      "causes": [
+        {
+          "id": "water-won-t-pump-out-of-the-tub-0",
+          "label": "Drain is clogged",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "If you have an air gap, clean it.",
+            "Check to see if your kitchen sink is draining well.",
+            "If not, you may need a plumber.",
+            "If the dishwasher drains into a disposer, run disposer clear."
+          ],
+          "evidence": "GE manual, page 12: \"Drain is clogged\"",
+          "source": {
+            "line": 32,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "suds-in-the-tub",
+      "symptom": "Suds in the tub",
+      "causes": [
+        {
+          "id": "suds-in-the-tub-0",
+          "label": "Correct detergent wasn’t used",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use only automatic dishwasher detergents to avoid sudsing.",
+            "Cascade® and Electrasol® Dishwashing Detergents have been approved for use in all GE dishwashers.",
+            "To remove suds from the tub, open the dishwasher and let suds evaporate.",
+            "Add 1 gallon of cold water to the tub.",
+            "Close and latch the dishwasher.",
+            "Pump out water by slowly turning the dial until a drain period is reached.",
+            "Repeat if necessary."
+          ],
+          "evidence": "GE manual, page 12: \"Correct detergent wasn’t used\"",
+          "source": {
+            "line": 37,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "suds-in-the-tub-1",
+          "label": "Rinse agent was spilled",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Always wipe up rinse agent spills immediately."
+          ],
+          "evidence": "GE manual, page 12: \"Rinse agent was spilled\"",
+          "source": {
+            "line": 50,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "stained-dishwasher-parts",
+      "symptom": "Stained dishwasher parts",
+      "causes": [
+        {
+          "id": "stained-dishwasher-parts-0",
+          "label": "Detergent with colorant was used",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Some detergents contain colorant (pigment or dyes) that will discolor the tub interior with extended use.",
+            "Check the detergent cup for signs of any discoloration.",
+            "If cup is discolored, change to detergent without any colorant.",
+            "Cascade® and Electrasol® Dishwashing Detergents have been approved for use in all GE dishwashers."
+          ],
+          "evidence": "GE manual, page 12: \"Detergent with colorant was used\"",
+          "source": {
+            "line": 51,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "stained-dishwasher-parts-1",
+          "label": "Some tomato-based foods can stain",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Use of the RINSE ONLY cycle after adding the dish to the load can decrease the level of staining."
+          ],
+          "evidence": "GE manual, page 12: \"Some tomato-based foods can stain\"",
+          "source": {
+            "line": 57,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishes-and-flatware-not-clean",
+      "symptom": "Dishes and flatware not clean",
+      "causes": [
+        {
+          "id": "dishes-and-flatware-not-clean-0",
+          "label": "Low inlet water temperature",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure inlet water temperature is correct (see page 7)."
+          ],
+          "evidence": "GE manual, page 12: \"Low inlet water temperature\"",
+          "source": {
+            "line": 64,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "dishes-and-flatware-not-clean-1",
+          "label": "Water pressure is temporarily low",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Turn on a faucet.",
+            "Is water coming out more slowly than usual?",
+            "If so, wait until pressure is normal before using your dishwasher."
+          ],
+          "evidence": "GE manual, page 12: \"Water pressure is temporarily low\"",
+          "source": {
+            "line": 66,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "dishes-and-flatware-not-clean-2",
+          "label": "Air gap is clogged",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Clean the air gap."
+          ],
+          "evidence": "GE manual, page 12: \"Air gap is clogged\"",
+          "source": {
+            "line": 68,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "dishes-and-flatware-not-clean-3",
+          "label": "Improper rack loading",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Make sure large dishware does not block the detergent dispenser or the wash arms."
+          ],
+          "evidence": "GE manual, page 12: \"Improper rack loading\"",
+          "source": {
+            "line": 69,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloudiness-on-glassware",
+      "symptom": "Cloudiness on glassware",
+      "causes": [
+        {
+          "id": "cloudiness-on-glassware-0",
+          "label": "Combination of soft water and too much detergent",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is called etching and is permanent.",
+            "To prevent this from happening, use less detergent if you have soft water.",
+            "Wash glassware in the shortest cycle that will get them clean."
+          ],
+          "evidence": "GE manual, page 13: \"Combination of soft water and too much detergent\"",
+          "source": {
+            "line": 27,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "cloudiness-on-glassware-1",
+          "label": "Water temperature entering the dishwasher exceeds 150°F",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Lower the water heater temperature."
+          ],
+          "evidence": "GE manual, page 13: \"Water temperature entering the dishwasher exceeds 150°F\"",
+          "source": {
+            "line": 30,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "black-or-gray-marks-on-dishes",
+      "symptom": "Black or gray marks on dishes",
+      "causes": [
+        {
+          "id": "black-or-gray-marks-on-dishes-0",
+          "label": "Aluminum utensils have rubbed against dishes",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Remove marks with a mild, abrasive cleaner."
+          ],
+          "evidence": "GE manual, page 13: \"Aluminum utensils have rubbed against dishes\"",
+          "source": {
+            "line": 32,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "yellow-or-brown-film-on-inside-surfaces",
+      "symptom": "Yellow or brown film on inside surfaces",
+      "causes": [
+        {
+          "id": "yellow-or-brown-film-on-inside-surfaces-0",
+          "label": "Tea or coffee stains",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Remove the stain by hand, using a solution of 1/2 cup bleach and 3 cups warm water.",
+            "CAUTION Before cleaning interior wait at least 20 minutes after a cycle for the heating element to cool down.",
+            "Failure to do so can result in burns."
+          ],
+          "evidence": "GE manual, page 13: \"Tea or coffee stains\"",
+          "source": {
+            "line": 34,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "white-film-on-inside-surfaces",
+      "symptom": "White film on inside surfaces",
+      "causes": [
+        {
+          "id": "white-film-on-inside-surfaces-0",
+          "label": "Hard water minerals",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "To clean the interior, apply dishwasher detergent to a damp sponge.",
+            "Wear rubber gloves.",
+            "Do not use any type of cleanser other than dishwasher detergent because it may cause foaming or sudsing.",
+            "Cascade® and Electrasol® Automatic Dishwashing Detergents have been approved for use in all GE dishwashers."
+          ],
+          "evidence": "GE manual, page 13: \"Hard water minerals\"",
+          "source": {
+            "line": 47,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishes-don-t-dry",
+      "symptom": "Dishes don’t dry",
+      "causes": [
+        {
+          "id": "dishes-don-t-dry-0",
+          "label": "Low inlet water temperature",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure inlet water temperature is correct (see page 7).",
+            "Select HEATED DRY."
+          ],
+          "evidence": "GE manual, page 13: \"Low inlet water temperature\"",
+          "source": {
+            "line": 52,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "dishes-don-t-dry-1",
+          "label": "Rinse agent dispenser is empty",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the rinse agent dispenser."
+          ],
+          "evidence": "GE manual, page 13: \"Rinse agent dispenser is empty\"",
+          "source": {
+            "line": 54,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishwasher-won-t-run",
+      "symptom": "Dishwasher won’t run",
+      "causes": [
+        {
+          "id": "dishwasher-won-t-run-0",
+          "label": "Fuse is blown, or the circuit breaker tripped",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace fuse or reset circuit breaker.",
+            "Remove any other appliances from the circuit."
+          ],
+          "evidence": "GE manual, page 13: \"Fuse is blown, or the circuit breaker tripped\"",
+          "source": {
+            "line": 55,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "steam",
+      "symptom": "Steam",
+      "causes": [
+        {
+          "id": "steam-0",
+          "label": "This is normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Steam comes through the vent during washing, drying and when water is being pumped out."
+          ],
+          "evidence": "GE manual, page 13: \"This is normal\"",
+          "source": {
+            "line": 57,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "spots-and-filming-on-glasses-and-flatwar"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-04T15:20:11.031Z",
+  "learnedAt": "2026-10-04T15:17:32.212Z"
+}

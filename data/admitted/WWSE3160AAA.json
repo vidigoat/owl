@@ -1,0 +1,96 @@
+{
+  "model": "WWSE3160AAA",
+  "brand": "GE",
+  "kind": "Washer",
+  "source": "WWSE3160AAA.pdf",
+  "pages": "10–12",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "washer-is-noisy",
+      "symptom": "Washer is noisy",
+      "causes": [
+        {
+          "id": "washer-is-noisy-0",
+          "label": "Washer is uneven",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "To level the front of the washer, adjust the front leveling legs by rotating the individual leg in the proper direction for up or down.",
+            "To level back of washer, lift back of machine 4″ (11 cm) and set down."
+          ],
+          "evidence": "GE manual, page 12: \"Washer is uneven\"",
+          "source": {
+            "line": 45,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "washer-is-noisy-1",
+          "label": "Washer load is unbalanced",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Press PAUSE to stop the washer, open the lid and redistribute the load evenly.",
+            "Close the lid and press START."
+          ],
+          "evidence": "GE manual, page 12: \"Washer load is unbalanced\"",
+          "source": {
+            "line": 49,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "washer-is-noisy-2",
+          "label": "Shipping rod is still assembled in unit",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "To remove shipping rod from washer, pull yellow tag and attached rod from the bottom right hand side of washer."
+          ],
+          "evidence": "GE manual, page 12: \"Shipping rod is still assembled in unit\"",
+          "source": {
+            "line": 52,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "washer-is-noisy-3",
+          "label": "Washer is sitting too close to wall (causes knocking during cycle)",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Pull washer away from the wall; about 4″ (11 cm) is needed."
+          ],
+          "evidence": "GE manual, page 12: \"Washer is sitting too close to wall (causes knocking during cycle)\"",
+          "source": {
+            "line": 54,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-04T15:20:38.884Z",
+  "learnedAt": "2026-10-04T15:18:40.700Z",
+  "alsoCovers": [
+    "WBSE2090AWW",
+    "WBXE2070AAA",
+    "WBXE2070AWW",
+    "WCSE3100AAA",
+    "WCSE3100AWW",
+    "WCSE4230AWW",
+    "WJSE3110AAA",
+    "WJSE3110ACC",
+    "WJSE3110AWW",
+    "WWSE3160AWW"
+  ]
+}

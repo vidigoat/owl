@@ -3,6 +3,8 @@
   "brand": "GE",
   "kind": "Dishwasher",
   "alsoCovers": [
+    "GSD2100VCC",
+    "GSD3300KBB",
     "GSD3360KSS",
     "GSD3361KSS"
   ],

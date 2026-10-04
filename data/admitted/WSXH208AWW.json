@@ -1,0 +1,618 @@
+{
+  "model": "WSXH208AWW",
+  "brand": "GE",
+  "kind": "Washer",
+  "source": "WSXH208AWW.pdf",
+  "pages": "17–18",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "water-leaks",
+      "symptom": "Water leaks",
+      "causes": [
+        {
+          "id": "water-leaks-0",
+          "label": "Fill hoses or drain hose is improperly connected",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure hose connections are tight at washer and faucets and make sure end of drain hose is correctly inserted in and secured to drain facility."
+          ],
+          "evidence": "GE manual, page 17: \"Fill hoses or drain hose is improperly connected\"",
+          "source": {
+            "line": 11,
+            "manual": "GE manual",
+            "page": 17
+          }
+        },
+        {
+          "id": "water-leaks-1",
+          "label": "Household drain may be clogged",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check household plumbing.",
+            "You may need to call a plumber."
+          ],
+          "evidence": "GE manual, page 17: \"Household drain may be clogged\"",
+          "source": {
+            "line": 19,
+            "manual": "GE manual",
+            "page": 17
+          }
+        },
+        {
+          "id": "water-leaks-2",
+          "label": "Constant water pressure to the fill hoses at the water source",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Tighten hoses at the faucets and turn the water off after each use.",
+            "Check condition of the fill hoses; they should be replaced every 5 years."
+          ],
+          "evidence": "GE manual, page 17: \"Constant water pressure to the fill hoses at the water source\"",
+          "source": {
+            "line": 21,
+            "manual": "GE manual",
+            "page": 17
+          }
+        },
+        {
+          "id": "water-leaks-3",
+          "label": "Oversudsing",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Use less detergent or low sudsing detergent."
+          ],
+          "evidence": "GE manual, page 17: \"Oversudsing\"",
+          "source": {
+            "line": 26,
+            "manual": "GE manual",
+            "page": 17
+          }
+        }
+      ]
+    },
+    {
+      "id": "too-many-suds",
+      "symptom": "Too many suds",
+      "causes": [
+        {
+          "id": "too-many-suds-0",
+          "label": "Type of detergent",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Switch to a low-sudsing detergent and follow instructions on package."
+          ],
+          "evidence": "GE manual, page 17: \"Type of detergent\"",
+          "source": {
+            "line": 28,
+            "manual": "GE manual",
+            "page": 17
+          }
+        },
+        {
+          "id": "too-many-suds-1",
+          "label": "Very soft water",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Try less detergent."
+          ],
+          "evidence": "GE manual, page 17: \"Very soft water\"",
+          "source": {
+            "line": 30,
+            "manual": "GE manual",
+            "page": 17
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-won-t-drain",
+      "symptom": "Water won’t drain",
+      "causes": [
+        {
+          "id": "water-won-t-drain-0",
+          "label": "Drain hose is kinked or improperly connected",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Straighten drain hose and make sure washer is not sitting on it.",
+            "Top of drain outlet should be less than 8 ft.",
+            "(2.5 m) above floor."
+          ],
+          "evidence": "GE manual, page 17: \"Drain hose is kinked or improperly connected\"",
+          "source": {
+            "line": 36,
+            "manual": "GE manual",
+            "page": 17
+          }
+        },
+        {
+          "id": "water-won-t-drain-1",
+          "label": "Household drain may be clogged",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check household plumbing.",
+            "You may need to call a plumber."
+          ],
+          "evidence": "GE manual, page 17: \"Household drain may be clogged\"",
+          "source": {
+            "line": 40,
+            "manual": "GE manual",
+            "page": 17
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-temperature-is-incorrect",
+      "symptom": "Water temperature is incorrect",
+      "causes": [
+        {
+          "id": "water-temperature-is-incorrect-0",
+          "label": "Control is not set properly",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check water temperature control and adjust."
+          ],
+          "evidence": "GE manual, page 17: \"Control is not set properly\"",
+          "source": {
+            "line": 43,
+            "manual": "GE manual",
+            "page": 17
+          }
+        },
+        {
+          "id": "water-temperature-is-incorrect-1",
+          "label": "Water supply is improperly connected",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Make sure hoses are connected to correct faucets."
+          ],
+          "evidence": "GE manual, page 17: \"Water supply is improperly connected\"",
+          "source": {
+            "line": 45,
+            "manual": "GE manual",
+            "page": 17
+          }
+        },
+        {
+          "id": "water-temperature-is-incorrect-2",
+          "label": "Water valve screens are stopped up",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Turn off the water source and remove the water connection hoses from the upper back of the washer.",
+            "Use a brush or toothpick to clean the screens in the machine.",
+            "Reconnect the hoses and turn the water back on."
+          ],
+          "evidence": "GE manual, page 17: \"Water valve screens are stopped up\"",
+          "source": {
+            "line": 52,
+            "manual": "GE manual",
+            "page": 17
+          }
+        },
+        {
+          "id": "water-temperature-is-incorrect-3",
+          "label": "House water heater is not set properly",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Make sure house water heater is delivering water at 120°–140°F (48°–60°C)."
+          ],
+          "evidence": "GE manual, page 17: \"House water heater is not set properly\"",
+          "source": {
+            "line": 56,
+            "manual": "GE manual",
+            "page": 17
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-does-not-enter-washer-or-enters-sl",
+      "symptom": "Water does not enter washer or enters slowly",
+      "causes": [
+        {
+          "id": "water-does-not-enter-washer-or-enters-sl-0",
+          "label": "Water supply is turned off",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Turn on both hot and cold faucets fully."
+          ],
+          "evidence": "GE manual, page 17: \"Water supply is turned off\"",
+          "source": {
+            "line": 59,
+            "manual": "GE manual",
+            "page": 17
+          }
+        }
+      ]
+    },
+    {
+      "id": "washer-pauses-in-cycle",
+      "symptom": "Washer pauses in cycle",
+      "causes": [
+        {
+          "id": "washer-pauses-in-cycle-0",
+          "label": "The washer normally pauses between washing steps",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [],
+          "evidence": "GE manual, page 18: \"The washer normally pauses between washing steps\"",
+          "source": {
+            "line": 6,
+            "manual": "GE manual",
+            "page": 18
+          }
+        }
+      ]
+    },
+    {
+      "id": "washer-won-t-operate",
+      "symptom": "Washer won’t operate",
+      "causes": [
+        {
+          "id": "washer-won-t-operate-0",
+          "label": "Washer is unplugged",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure cord is plugged securely into a working outlet."
+          ],
+          "evidence": "GE manual, page 18: \"Washer is unplugged\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "washer-won-t-operate-1",
+          "label": "Water supply is turned off",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Turn both hot and cold faucets fully on."
+          ],
+          "evidence": "GE manual, page 18: \"Water supply is turned off\"",
+          "source": {
+            "line": 9,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "washer-won-t-operate-2",
+          "label": "Circuit breaker/fuse is tripped/blown",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Check house circuit breakers/fuses.",
+            "Replace fuses or reset breaker.",
+            "Washer should have separate outlet."
+          ],
+          "evidence": "GE manual, page 18: \"Circuit breaker/fuse is tripped/blown\"",
+          "source": {
+            "line": 10,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "washer-won-t-operate-3",
+          "label": "Controls are not set properly",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Check controls and make sure Cycle knob is pulled out."
+          ],
+          "evidence": "GE manual, page 18: \"Controls are not set properly\"",
+          "source": {
+            "line": 17,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "washer-won-t-operate-4",
+          "label": "Door is open",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Close door and pull Cycle knob out."
+          ],
+          "evidence": "GE manual, page 18: \"Door is open\"",
+          "source": {
+            "line": 19,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "washer-won-t-operate-5",
+          "label": "Dispenser drawer is open",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "Close drawer."
+          ],
+          "evidence": "GE manual, page 18: \"Dispenser drawer is open\"",
+          "source": {
+            "line": 20,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "washer-won-t-operate-6",
+          "label": "Motor is overheated",
+          "likelihood": 0.132,
+          "cost": null,
+          "remedies": [
+            "Washer motor will stop if it becomes overheated.",
+            "It will automatically restart after a cool down period of up to 30 minutes (if washer has not been manually turned off)."
+          ],
+          "evidence": "GE manual, page 18: \"Motor is overheated\"",
+          "source": {
+            "line": 21,
+            "manual": "GE manual",
+            "page": 18
+          }
+        }
+      ]
+    },
+    {
+      "id": "washer-won-t-spin",
+      "symptom": "Washer won’t spin",
+      "causes": [
+        {
+          "id": "washer-won-t-spin-0",
+          "label": "Washer door open",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure door is closed."
+          ],
+          "evidence": "GE manual, page 18: \"Washer door open\"",
+          "source": {
+            "line": 25,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "washer-won-t-spin-1",
+          "label": "Dispenser drawer open",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Close drawer."
+          ],
+          "evidence": "GE manual, page 18: \"Dispenser drawer open\"",
+          "source": {
+            "line": 26,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "washer-won-t-spin-2",
+          "label": "Load is too small",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Add one or two similar items to help balance the load."
+          ],
+          "evidence": "GE manual, page 18: \"Load is too small\"",
+          "source": {
+            "line": 32,
+            "manual": "GE manual",
+            "page": 18
+          }
+        }
+      ]
+    },
+    {
+      "id": "washer-is-noisy",
+      "symptom": "Washer is noisy",
+      "causes": [
+        {
+          "id": "washer-is-noisy-0",
+          "label": "Washer is uneven",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure washer is level and rests firmly on the floor."
+          ],
+          "evidence": "GE manual, page 18: \"Washer is uneven\"",
+          "source": {
+            "line": 38,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "washer-is-noisy-1",
+          "label": "Washer load is unbalanced",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Push the Cycle knob in to stop the washer, open the door and redistribute the load evenly.",
+            "Close the door and restart."
+          ],
+          "evidence": "GE manual, page 18: \"Washer load is unbalanced\"",
+          "source": {
+            "line": 39,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "washer-is-noisy-2",
+          "label": "High pitch jet engine sound",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "This is normal during the spin cycle."
+          ],
+          "evidence": "GE manual, page 18: \"High pitch jet engine sound\"",
+          "source": {
+            "line": 42,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "washer-is-noisy-3",
+          "label": "Squealing sound or hot rubber odor",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Washer is overloaded.",
+            "Stop washer and reduce load."
+          ],
+          "evidence": "GE manual, page 18: \"Squealing sound or hot rubber odor\"",
+          "source": {
+            "line": 43,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "washer-is-noisy-4",
+          "label": "Shipping bolts and foam block have not been removed",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "See Installation Instructions for directions to remove shipping bolts and foam block."
+          ],
+          "evidence": "GE manual, page 18: \"Shipping bolts and foam block have not been removed\"",
+          "source": {
+            "line": 50,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "washer-is-noisy-5",
+          "label": "Rattling and clanking caused by foreign objects in tub or pump or metal fasteners hitting tub",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "Check drum for foreign objects.",
+            "Turn items with metal fasteners inside out.",
+            "Call authorized servicer to inspect pump."
+          ],
+          "evidence": "GE manual, page 18: \"Rattling and clanking caused by foreign objects in tub or pump or metal fasteners hitting tub\"",
+          "source": {
+            "line": 52,
+            "manual": "GE manual",
+            "page": 18
+          }
+        }
+      ]
+    },
+    {
+      "id": "lint-or-residue-on-clothes",
+      "symptom": "Lint or residue on clothes",
+      "causes": [
+        {
+          "id": "lint-or-residue-on-clothes-0",
+          "label": "Incorrect sorting",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Separate lint producers from lint collectors."
+          ],
+          "evidence": "GE manual, page 18: \"Incorrect sorting\"",
+          "source": {
+            "line": 60,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "lint-or-residue-on-clothes-1",
+          "label": "Washing too long",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Excess wash time may create lint."
+          ],
+          "evidence": "GE manual, page 18: \"Washing too long\"",
+          "source": {
+            "line": 62,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "lint-or-residue-on-clothes-2",
+          "label": "Detergent not dissolving",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Try a liquid detergent.",
+            "Use warmer water temperature."
+          ],
+          "evidence": "GE manual, page 18: \"Detergent not dissolving\"",
+          "source": {
+            "line": 68,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "lint-or-residue-on-clothes-3",
+          "label": "Overloading",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Wash drum may be fully loaded with loosely added items."
+          ],
+          "evidence": "GE manual, page 18: \"Overloading\"",
+          "source": {
+            "line": 70,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "lint-or-residue-on-clothes-4",
+          "label": "Incorrect use of fabric softener",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Check fabric softener package for instructions and follow directions for using dispenser."
+          ],
+          "evidence": "GE manual, page 18: \"Incorrect use of fabric softener\"",
+          "source": {
+            "line": 71,
+            "manual": "GE manual",
+            "page": 18
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-04T15:20:38.656Z",
+  "learnedAt": "2026-10-04T15:18:25.121Z",
+  "alsoCovers": [
+    "WPXH214ACC",
+    "WPXH214AWW"
+  ]
+}

@@ -851,4 +851,29 @@ it('a page whose text layer is font-scrambled in places is refused whole, and sa
   assert.match(r.coverage, /font-scrambled/);
 });
 
+it('one numbered procedure printed beside several causes puts every one of them in doubt', () => {
+  // Shaped as GE's GSD4800 prints "Spots and filming": the steps run on past the cause they began beside.
+  const page = [
+    'Problem                 Possible Causes                 What To Do',
+    'Spots and filming       Extremely hard water            • Use a rinse agent to remove spots.',
+    'on glasses              Low inlet water temperature     • To remove stubborn spots from glassware:',
+    '                        Overloading the dishwasher      1 Remove all metal utensils from the dishwasher.',
+    '                        Improper loading                2 Do not add detergent.',
+    '                        Old or damp powder detergent    3 Select the longest cycle.',
+    'Steam                   This is normal                  • Steam comes through the vent during drying.',
+  ].join('\n');
+  const r = readSymptoms({ text: page });
+  const spots = r.symptoms.find((s) => /Spots/.test(s.symptom));
+  assert.ok(spots.causes.length >= 3);
+  assert.ok(spots.causes.every((c) => c.unsure), 'a step of a shared procedure was filed under one cause as its remedy');
+  // The next problem is its own row and is not in doubt.
+  assert.ok(!r.symptoms.find((s) => s.symptom === 'Steam').causes[0].unsure);
+});
+
+it('a cause whose words stop mid-phrase is in doubt', () => {
+  const page = ['Problem                 Possible Causes                 What To Do',
+    'Start status            The door was opened or the      Press the Start button once and close the door.'].join('\n');
+  assert.ok(readSymptoms({ text: page }).symptoms[0].causes[0].unsure);
+});
+
 console.log(`\n${passed} passed`);

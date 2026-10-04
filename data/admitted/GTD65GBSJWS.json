@@ -1,0 +1,142 @@
+{
+  "model": "GTD65GBSJWS",
+  "brand": "GE",
+  "kind": "Dryer",
+  "source": "GTD65GBSJWS.pdf",
+  "pages": "12–14",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "water-on-floor-in-back-of-dryer",
+      "symptom": "Water on floor in back of dryer",
+      "causes": [
+        {
+          "id": "water-on-floor-in-back-of-dryer-0",
+          "label": "Loose water hose connection to valve",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Tighten connection."
+          ],
+          "evidence": "GE manual, page 14: \"Loose water hose connection to valve\"",
+          "source": {
+            "line": 9,
+            "manual": "GE manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "water-on-floor-in-back-of-dryer-1",
+          "label": "Hose missing rubber washer at connection with valve",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Install rubber washer provided with hose."
+          ],
+          "evidence": "GE manual, page 14: \"Hose missing rubber washer at connection with valve\"",
+          "source": {
+            "line": 11,
+            "manual": "GE manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "cannot-see-steam-at-beginning-of-cycle",
+      "symptom": "Cannot see steam at beginning of cycle",
+      "causes": [
+        {
+          "id": "cannot-see-steam-at-beginning-of-cycle-0",
+          "label": "Steam released at different time in cycle",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 14: \"Steam released at different time in cycle\"",
+          "source": {
+            "line": 16,
+            "manual": "GE manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "garments-still-wrinkled-after-steam-cycl",
+      "symptom": "Garments still wrinkled after steam cycle",
+      "causes": [
+        {
+          "id": "garments-still-wrinkled-after-steam-cycl-0",
+          "label": "Too many garments",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Load fewer garments; manually increase time."
+          ],
+          "evidence": "GE manual, page 14: \"Too many garments\"",
+          "source": {
+            "line": 21,
+            "manual": "GE manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "garments-are-wet-after-steam-cycle",
+      "symptom": "Garments are wet after Steam cycle",
+      "causes": [
+        {
+          "id": "garments-are-wet-after-steam-cycle-0",
+          "label": "Lint filter not clean",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Clean lint filter"
+          ],
+          "evidence": "GE manual, page 14: \"Lint filter not clean\"",
+          "source": {
+            "line": 26,
+            "manual": "GE manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "time-remaining-jumped-to-a-lower-number",
+      "symptom": "Time Remaining jumped to a lower number",
+      "causes": [
+        {
+          "id": "time-remaining-jumped-to-a-lower-number-0",
+          "label": "The estimated time may change when a smaller load than usual is drying",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 14: \"The estimated time may change when a smaller load than usual is drying\"",
+          "source": {
+            "line": 32,
+            "manual": "GE manual",
+            "page": 14
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-04T15:20:12.129Z",
+  "learnedAt": "2026-10-04T15:19:06.212Z",
+  "alsoCovers": [
+    "GTD65EBSJWS",
+    "GTD75ECPLDG",
+    "GTD75ECSLWS",
+    "GTD75GCPLDG"
+  ]
+}

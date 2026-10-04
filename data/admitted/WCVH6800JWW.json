@@ -3,6 +3,16 @@
   "brand": "GE",
   "kind": "Washer",
   "alsoCovers": [
+    "GFWN1000LWW",
+    "WBVH5200JWW",
+    "WBVH5300KWW",
+    "WCVH6400JWW",
+    "WCVH6800JBB",
+    "WCVH6800JMR",
+    "WCVH6800JMS",
+    "WCVH6800JMV",
+    "WHDVH680JMR",
+    "WHDVH680JMS",
     "WHDVH680JWW"
   ],
   "source": "WCVH6800JWW.pdf",

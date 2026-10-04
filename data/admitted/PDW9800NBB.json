@@ -4,7 +4,9 @@
   "kind": "Dishwasher",
   "alsoCovers": [
     "PDW8280NSS",
-    "PDW8900NBB"
+    "PDW8900NBB",
+    "PDW9200NBB",
+    "PDW9200NWW"
   ],
   "source": "PDW9800NBB.pdf",
   "pages": "15–18",

@@ -1,0 +1,242 @@
+{
+  "model": "GSD3320CBB",
+  "brand": "GE",
+  "kind": "Dishwasher",
+  "source": "GSD3320CBB.pdf",
+  "pages": "19–24",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "dishwasher-won-t-run",
+      "symptom": "Dishwasher won’t run",
+      "causes": [
+        {
+          "id": "dishwasher-won-t-run-0",
+          "label": "Fuse is blown, or the circuit breaker tripped",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace fuse or reset circuit breaker.",
+            "Remove any other appliances from the circuit."
+          ],
+          "evidence": "GE manual, page 19: \"Fuse is blown, or the circuit breaker tripped\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 19
+          }
+        }
+      ]
+    },
+    {
+      "id": "noise",
+      "symptom": "Noise",
+      "causes": [
+        {
+          "id": "noise-0",
+          "label": "Some of the sounds you’ll hear are normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Soft food disposal shredding action.",
+            "Drain valve opening to pump water out.",
+            "Timer control as cycle progresses.",
+            "Detergent cup opening.",
+            "The motor stopping during the drying period."
+          ],
+          "evidence": "GE manual, page 19: \"Some of the sounds you’ll hear are normal\"",
+          "source": {
+            "line": 16,
+            "manual": "GE manual",
+            "page": 19
+          }
+        },
+        {
+          "id": "noise-1",
+          "label": "Utensils are not secure in the rack or something small has dropped into the rack",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Make sure everything is secured in dishwasher."
+          ],
+          "evidence": "GE manual, page 19: \"Utensils are not secure in the rack or something small has dropped into the rack\"",
+          "source": {
+            "line": 25,
+            "manual": "GE manual",
+            "page": 19
+          }
+        },
+        {
+          "id": "noise-2",
+          "label": "Motor hums",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Dishwasher has not been used on a regular basis.",
+            "If you do not use your dishwasher often, set it to fill and pump out once every week.",
+            "This will help keep the seal moist and the garbage disposer clear."
+          ],
+          "evidence": "GE manual, page 19: \"Motor hums\"",
+          "source": {
+            "line": 34,
+            "manual": "GE manual",
+            "page": 19
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloudiness-on-glassware",
+      "symptom": "Cloudiness on glassware",
+      "causes": [
+        {
+          "id": "cloudiness-on-glassware-0",
+          "label": "Combination of soft water and too much detergent",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is called etching and is permanent.",
+            "To prevent this from happening, use less detergent if you have soft water.",
+            "Wash glassware in the shortest cycle that will get them clean."
+          ],
+          "evidence": "GE manual, page 22: \"Combination of soft water and too much detergent\"",
+          "source": {
+            "line": 47,
+            "manual": "GE manual",
+            "page": 22
+          }
+        },
+        {
+          "id": "cloudiness-on-glassware-1",
+          "label": "Water temperature entering the dishwasher exceeds 150°F",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Lower the water heater temperature."
+          ],
+          "evidence": "GE manual, page 22: \"Water temperature entering the dishwasher exceeds 150°F\"",
+          "source": {
+            "line": 59,
+            "manual": "GE manual",
+            "page": 22
+          }
+        }
+      ]
+    },
+    {
+      "id": "detergent-cup-lid-won-t-latch",
+      "symptom": "Detergent cup lid won’t latch",
+      "causes": [
+        {
+          "id": "detergent-cup-lid-won-t-latch-0",
+          "label": "Dial is not in the OFF position",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Turn the Dial to OFF and slide the door latch to the left."
+          ],
+          "evidence": "GE manual, page 24: \"Dial is not in the OFF position\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 24
+          }
+        }
+      ]
+    },
+    {
+      "id": "detergent-left-in-dispenser-cups",
+      "symptom": "Detergent left in dispenser cups",
+      "causes": [
+        {
+          "id": "detergent-left-in-dispenser-cups-0",
+          "label": "Dishes are blocking the detergent cups",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Reposition the dishes."
+          ],
+          "evidence": "GE manual, page 24: \"Dishes are blocking the detergent cups\"",
+          "source": {
+            "line": 16,
+            "manual": "GE manual",
+            "page": 24
+          }
+        }
+      ]
+    },
+    {
+      "id": "steam",
+      "symptom": "Steam",
+      "causes": [
+        {
+          "id": "steam-0",
+          "label": "This is normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Steam comes through the vent by the door latch during drying and when water is being pumped out."
+          ],
+          "evidence": "GE manual, page 24: \"This is normal\"",
+          "source": {
+            "line": 18,
+            "manual": "GE manual",
+            "page": 24
+          }
+        }
+      ]
+    },
+    {
+      "id": "black-or-gray-marks-on-dishes",
+      "symptom": "Black or gray marks on dishes",
+      "causes": [
+        {
+          "id": "black-or-gray-marks-on-dishes-0",
+          "label": "Aluminum utensils have rubbed against dishes",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Remove marks with a mild, abrasive cleaner."
+          ],
+          "evidence": "GE manual, page 24: \"Aluminum utensils have rubbed against dishes\"",
+          "source": {
+            "line": 22,
+            "manual": "GE manual",
+            "page": 24
+          }
+        }
+      ]
+    },
+    {
+      "id": "cycle-and-energy-option-indicator-lights",
+      "symptom": "Cycle and Energy Option indicator lights stay on when cycle is completed",
+      "causes": [
+        {
+          "id": "cycle-and-energy-option-indicator-lights-0",
+          "label": "This is normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Unlock the door to turn off the Cycle and Energy Option indicator lights.",
+            "NOTE: The CYCLE ON light will stay on until all cycles are complete.",
+            "Wait until this light goes off to unlock the door or a cycle will be interrupted."
+          ],
+          "evidence": "GE manual, page 24: \"This is normal\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 24
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "spots-and-filming-on-glasses-and-flatwar"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-04T15:20:09.816Z",
+  "learnedAt": "2026-10-04T15:17:30.662Z"
+}

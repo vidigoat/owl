@@ -3,7 +3,9 @@
   "brand": "GE",
   "kind": "Washer",
   "alsoCovers": [
-    "GFW650SSNWW"
+    "GFW550SSNWW",
+    "GFW650SSNWW",
+    "GFW850SSNWW"
   ],
   "source": "GFW650SPNSN.pdf",
   "pages": "31–34",

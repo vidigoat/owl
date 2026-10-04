@@ -3,7 +3,16 @@
   "brand": "GE",
   "kind": "Washer",
   "alsoCovers": [
-    "WCVH6260FGG"
+    "WBVH5100HWW",
+    "WBVH6240FGG",
+    "WBVH6240FWW",
+    "WCVH6260FGG",
+    "WCVH6260FWW",
+    "WCVH6600HBB",
+    "WCVH6600HGG",
+    "WCVH6600HWW",
+    "WHDVH626FGG",
+    "WHDVH660HWW"
   ],
   "source": "WHDVH626FWW.pdf",
   "pages": "20–22",

@@ -4,6 +4,7 @@
   "kind": "Dishwasher",
   "alsoCovers": [
     "GDF650SGJBB",
+    "GDT655SGJWW",
     "GDT695SFLDS",
     "PDF820SGJBB",
     "PDF820SGJWW",
@@ -15,6 +16,7 @@
     "PDT846SMJES",
     "PDT855SBLTS",
     "PDT855SFLDS",
+    "PDT855SIJII",
     "PDT855SMJES"
   ],
   "source": "GDT655SBLTS.pdf",

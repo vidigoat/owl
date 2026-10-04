@@ -1,0 +1,279 @@
+{
+  "model": "GSC3400JWW",
+  "brand": "GE",
+  "kind": "Dishwasher",
+  "source": "GSC3400JWW.pdf",
+  "pages": "23–27",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "dishwasher-won-t-run",
+      "symptom": "Dishwasher won’t run",
+      "causes": [
+        {
+          "id": "dishwasher-won-t-run-0",
+          "label": "Fuse is blown, or the circuit breaker tripped",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace fuse or reset circuit breaker.",
+            "Remove any other appliances from the circuit."
+          ],
+          "evidence": "GE manual, page 23: \"Fuse is blown, or the circuit breaker tripped\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 23
+          }
+        }
+      ]
+    },
+    {
+      "id": "noise",
+      "symptom": "Noise",
+      "causes": [
+        {
+          "id": "noise-0",
+          "label": "Some of the sounds you’ll hear are normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Soft food disposal shredding action.",
+            "Drain valve opening to pump water out.",
+            "Timer control as cycle progresses.",
+            "Detergent cup opening.",
+            "The motor stopping during the drying period."
+          ],
+          "evidence": "GE manual, page 23: \"Some of the sounds you’ll hear are normal\"",
+          "source": {
+            "line": 17,
+            "manual": "GE manual",
+            "page": 23
+          }
+        },
+        {
+          "id": "noise-1",
+          "label": "Utensils are not secure in the rack or something small has dropped into the rack",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Make sure everything is secured in dishwasher."
+          ],
+          "evidence": "GE manual, page 23: \"Utensils are not secure in the rack or something small has dropped into the rack\"",
+          "source": {
+            "line": 26,
+            "manual": "GE manual",
+            "page": 23
+          }
+        },
+        {
+          "id": "noise-2",
+          "label": "Motor hums",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Dishwasher has not been used on a regular basis.",
+            "If you do not use your dishwasher often, set it to fill and pump out once every week.",
+            "This will help keep the seal moist and the garbage disposer clear."
+          ],
+          "evidence": "GE manual, page 23: \"Motor hums\"",
+          "source": {
+            "line": 35,
+            "manual": "GE manual",
+            "page": 23
+          }
+        }
+      ]
+    },
+    {
+      "id": "stained-tub-interior",
+      "symptom": "Stained tub interior",
+      "causes": [
+        {
+          "id": "stained-tub-interior-0",
+          "label": "Detergent with colorant was used",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Some detergents contain colorant (pigment or dyes) that will discolor the tub interior with extended use.",
+            "Check the detergent cup for signs of any discoloration.",
+            "If cup is discolored, change to detergent without any colorant.",
+            "Cascade® Automatic Dishwashing Detergent has been approved for use in all GE dishwashers."
+          ],
+          "evidence": "GE manual, page 25: \"Detergent with colorant was used\"",
+          "source": {
+            "line": 4,
+            "manual": "GE manual",
+            "page": 25
+          }
+        },
+        {
+          "id": "stained-tub-interior-1",
+          "label": "Some tomato-based foods can stain",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Use of the RINSE ONLY cycle (on some models) after adding the dish to the load can decrease the level of staining."
+          ],
+          "evidence": "GE manual, page 25: \"Some tomato-based foods can stain\"",
+          "source": {
+            "line": 23,
+            "manual": "GE manual",
+            "page": 25
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishes-don-t-dry",
+      "symptom": "Dishes don’t dry",
+      "causes": [
+        {
+          "id": "dishes-don-t-dry-0",
+          "label": "Low inlet water temperature",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure inlet water temperature is correct."
+          ],
+          "evidence": "GE manual, page 25: \"Low inlet water temperature\"",
+          "source": {
+            "line": 33,
+            "manual": "GE manual",
+            "page": 25
+          }
+        },
+        {
+          "id": "dishes-don-t-dry-1",
+          "label": "Rinse agent dispenser is empty",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the rinse agent dispenser."
+          ],
+          "evidence": "GE manual, page 25: \"Rinse agent dispenser is empty\"",
+          "source": {
+            "line": 35,
+            "manual": "GE manual",
+            "page": 25
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishes-and-flatware-not-clean",
+      "symptom": "Dishes and flatware not clean",
+      "causes": [
+        {
+          "id": "dishes-and-flatware-not-clean-0",
+          "label": "Inlet water temperature is below 120°F.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Raise the water heater temperature to 120°F.",
+            "Use the HI TEMP WASH or HOT START option."
+          ],
+          "evidence": "GE manual, page 25: \"Inlet water temperature is below 120°F.\"",
+          "source": {
+            "line": 37,
+            "manual": "GE manual",
+            "page": 25
+          }
+        },
+        {
+          "id": "dishes-and-flatware-not-clean-1",
+          "label": "Water pressure is temporarily low",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Turn on a faucet.",
+            "Is water coming out more slowly than usual?",
+            "If so, wait until pressure is normal before using your dishwasher."
+          ],
+          "evidence": "GE manual, page 25: \"Water pressure is temporarily low\"",
+          "source": {
+            "line": 41,
+            "manual": "GE manual",
+            "page": 25
+          }
+        },
+        {
+          "id": "dishes-and-flatware-not-clean-2",
+          "label": "Air gap is clogged",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Clean the air gap."
+          ],
+          "evidence": "GE manual, page 25: \"Air gap is clogged\"",
+          "source": {
+            "line": 51,
+            "manual": "GE manual",
+            "page": 25
+          }
+        },
+        {
+          "id": "dishes-and-flatware-not-clean-3",
+          "label": "Improper rack loading",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Make sure large dishware does not block the detergent dispenser or the wash arm."
+          ],
+          "evidence": "GE manual, page 25: \"Improper rack loading\"",
+          "source": {
+            "line": 52,
+            "manual": "GE manual",
+            "page": 25
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloudiness-on-glassware",
+      "symptom": "Cloudiness on glassware",
+      "causes": [
+        {
+          "id": "cloudiness-on-glassware-0",
+          "label": "Combination of soft water and too much detergent",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is called etching and is permanent.",
+            "To prevent this from happening, use less detergent if you have soft water.",
+            "Wash glassware in the shortest cycle that will get them clean."
+          ],
+          "evidence": "GE manual, page 26: \"Combination of soft water and too much detergent\"",
+          "source": {
+            "line": 48,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "cloudiness-on-glassware-1",
+          "label": "Water temperature entering the dishwasher exceeds 150°F.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Lower the water heater temperature."
+          ],
+          "evidence": "GE manual, page 26: \"Water temperature entering the dishwasher exceeds 150°F.\"",
+          "source": {
+            "line": 60,
+            "manual": "GE manual",
+            "page": 26
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "spots-and-filming-on-glasses-and-flatwar"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-04T15:20:08.951Z",
+  "learnedAt": "2026-10-04T15:17:25.494Z"
+}

@@ -3,9 +3,17 @@
   "brand": "GE",
   "kind": "Dryer",
   "alsoCovers": [
+    "DNSB514EBWW",
+    "DNSB514GBWW",
     "DPSB513EBCC",
+    "DPSB513GBCC",
+    "DPSB513GBWW",
     "DPSB519EBCC",
-    "DPSB519EBWC"
+    "DPSB519EBWC",
+    "DPSB519EBWW",
+    "DPSB519GBWC",
+    "DPXB515EBWW",
+    "DPXB515GBCC"
   ],
   "source": "DPXB515GBWW.pdf",
   "pages": "19–21",

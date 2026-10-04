@@ -1,0 +1,205 @@
+{
+  "model": "JGP326BEVBB",
+  "brand": "GE",
+  "kind": "Range",
+  "source": "JGP326BEVBB.pdf",
+  "pages": "13–13",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "burners-have-yellow-or-yellow-tipped-fla",
+      "symptom": "Burners have yellow or yellow-tipped flames",
+      "causes": [
+        {
+          "id": "burners-have-yellow-or-yellow-tipped-fla-0",
+          "label": "The combustion quality of burner flames needs to be determined visually.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use the illustrations below to determine if your burner flames are normal.",
+            "If burner flames look like A, call for service.",
+            "Normal burner flames should look like B or C, depending on the type of gas you use.",
+            "With LP gas, some yellow tipping on outer cones is normal.",
+            "A–Yellow flames    B–Yellow tips        C–Soft blue flames Call for service   on outer cones       Normal for natural Normal for LP gas    gas"
+          ],
+          "evidence": "GE manual, page 13: \"The combustion quality of burner flames needs to be determined visually.\"",
+          "source": {
+            "line": 9,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "control-knobs-will-not-turn",
+      "symptom": "Control knobs will not turn",
+      "causes": [
+        {
+          "id": "control-knobs-will-not-turn-0",
+          "label": "Controls improperly set.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "To turn from the OFF position, push the knob in and then turn."
+          ],
+          "evidence": "GE manual, page 13: \"Controls improperly set.\"",
+          "source": {
+            "line": 27,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "burners-do-not-light",
+      "symptom": "Burners do not light",
+      "causes": [
+        {
+          "id": "burners-do-not-light-0",
+          "label": "Plug on cooktop is not completely inserted in the electrical outlet.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure electrical plug is plugged into a live, properly grounded outlet."
+          ],
+          "evidence": "GE manual, page 13: \"Plug on cooktop is not completely inserted in the electrical outlet.\"",
+          "source": {
+            "line": 34,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "burners-do-not-light-1",
+          "label": "Gas supply not connected or turned on.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See the Installation Instructions that came with your cooktop."
+          ],
+          "evidence": "GE manual, page 13: \"Gas supply not connected or turned on.\"",
+          "source": {
+            "line": 37,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "burners-do-not-light-2",
+          "label": "A fuse in your home may be blown or the circuit breaker tripped.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Replace the fuse or reset the circuit breaker."
+          ],
+          "evidence": "GE manual, page 13: \"A fuse in your home may be blown or the circuit breaker tripped.\"",
+          "source": {
+            "line": 39,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "burners-do-not-light-3",
+          "label": "Igniter orifice in burner body may be clogged.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Remove the obstruction.",
+            "See the Care and cleaning of the cooktop section."
+          ],
+          "evidence": "GE manual, page 13: \"Igniter orifice in burner body may be clogged.\"",
+          "source": {
+            "line": 42,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "burners-do-not-light-4",
+          "label": "Burner parts not replaced correctly.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "See the Care and cleaning of the cooktop section."
+          ],
+          "evidence": "GE manual, page 13: \"Burner parts not replaced correctly.\"",
+          "source": {
+            "line": 49,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "burners-do-not-light-5",
+          "label": "Hole in burner top behind the igniter may be clogged.",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "Use a small sewing needle to unplug."
+          ],
+          "evidence": "GE manual, page 13: \"Hole in burner top behind the igniter may be clogged.\"",
+          "source": {
+            "line": 51,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "ticking-sound-of-spark-igniter-persists-",
+      "symptom": "Ticking sound of spark igniter persists after burner lights",
+      "causes": [
+        {
+          "id": "ticking-sound-of-spark-igniter-persists--0",
+          "label": "Control knob is still in the LITE position.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Turn the knob out of the LITE position to the desired setting.",
+            "Turn the burner off and relight.",
+            "If ticking is still present, call for service."
+          ],
+          "evidence": "GE manual, page 13: \"Control knob is still in the LITE position.\"",
+          "source": {
+            "line": 54,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "burner-flames-very-large-or-yellow",
+      "symptom": "Burner flames very large or yellow",
+      "causes": [
+        {
+          "id": "burner-flames-very-large-or-yellow-0",
+          "label": "Improper air to gas ratio.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "If cooktop is connected to LP gas, check all steps in the Installation Instructions that came with your cooktop."
+          ],
+          "evidence": "GE manual, page 13: \"Improper air to gas ratio.\"",
+          "source": {
+            "line": 67,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "ticking-sound-persists"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-04T15:20:21.207Z",
+  "learnedAt": "2026-10-04T15:19:16.426Z"
+}

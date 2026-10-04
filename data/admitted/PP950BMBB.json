@@ -1,0 +1,342 @@
+{
+  "model": "PP950BMBB",
+  "brand": "GE",
+  "kind": "Range",
+  "source": "PP950BMBB.pdf",
+  "pages": "15–16",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "surface-elements-do-not-work-properly",
+      "symptom": "Surface elements do not work properly",
+      "causes": [
+        {
+          "id": "surface-elements-do-not-work-properly-0",
+          "label": "Cooktop controls improperly set.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check to see the correct control is set for the surface element you are using."
+          ],
+          "evidence": "GE manual, page 15: \"Cooktop controls improperly set.\"",
+          "source": {
+            "line": 18,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "scratches-on-cooktop-glass-surface",
+      "symptom": "Scratches on cooktop glass surface",
+      "causes": [
+        {
+          "id": "scratches-on-cooktop-glass-surface-0",
+          "label": "Incorrect cleaning methods being used.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use recommended cleaning procedures.",
+            "See the Cleaning the glass cooktop section."
+          ],
+          "evidence": "GE manual, page 15: \"Incorrect cleaning methods being used.\"",
+          "source": {
+            "line": 21,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "scratches-on-cooktop-glass-surface-1",
+          "label": "Cookware with rough bottoms being used or coarse particles (salt or sand) were between the cookware and the surface of the cooktop.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "To avoid scratches, use the recommended cleaning procedures.",
+            "Make sure bottoms of cookware are clean before use, and use cookware with smooth bottoms."
+          ],
+          "evidence": "GE manual, page 15: \"Cookware with rough bottoms being used or coarse particles (salt or sand) were between the cookware and the surface of the cooktop.\"",
+          "source": {
+            "line": 23,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "scratches-on-cooktop-glass-surface-2",
+          "label": "Cookware has been slid across the cooktop surface.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [],
+          "evidence": "GE manual, page 15: \"Cookware has been slid across the cooktop surface.\"",
+          "source": {
+            "line": 28,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "areas-of-discoloration-on-the-cooktop",
+      "symptom": "Areas of discoloration on the cooktop",
+      "causes": [
+        {
+          "id": "areas-of-discoloration-on-the-cooktop-0",
+          "label": "Food spillovers not cleaned before next use.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See the Cleaning the glass cooktop section."
+          ],
+          "evidence": "GE manual, page 15: \"Food spillovers not cleaned before next use.\"",
+          "source": {
+            "line": 35,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "areas-of-discoloration-on-the-cooktop-1",
+          "label": "Hot surface on a model with a light-colored glass cooktop.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "This is normal.",
+            "The surface may appear discolored when it is hot.",
+            "This is temporary and will disappear as the glass cools."
+          ],
+          "evidence": "GE manual, page 15: \"Hot surface on a model with a light-colored glass cooktop.\"",
+          "source": {
+            "line": 38,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "plastic-melted-to-the-surface",
+      "symptom": "Plastic melted to the surface",
+      "causes": [
+        {
+          "id": "plastic-melted-to-the-surface-0",
+          "label": "Hot cooktop came into contact with plastic placed on the hot cooktop.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See the Glass surface – potential for permanent damage section in the Cleaning the glass cooktop section."
+          ],
+          "evidence": "GE manual, page 15: \"Hot cooktop came into contact with plastic placed on the hot cooktop.\"",
+          "source": {
+            "line": 42,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "pitting-or-indentation-of-the-cooktop",
+      "symptom": "Pitting (or indentation) of the cooktop",
+      "causes": [
+        {
+          "id": "pitting-or-indentation-of-the-cooktop-0",
+          "label": "Hot sugar mixture spilled on the cooktop.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Call a qualified technician for replacement."
+          ],
+          "evidence": "GE manual, page 15: \"Hot sugar mixture spilled on the cooktop.\"",
+          "source": {
+            "line": 46,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "frequent-cycling-off-and-on-of-surface-e",
+      "symptom": "Frequent cycling off and on of surface elements",
+      "causes": [
+        {
+          "id": "frequent-cycling-off-and-on-of-surface-e-0",
+          "label": "Improper cookware being used.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use only flat cookware to minimize cycling.",
+            "See the Radiant surface elements section."
+          ],
+          "evidence": "GE manual, page 15: \"Improper cookware being used.\"",
+          "source": {
+            "line": 54,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "unresponsive-keypad",
+      "symptom": "Unresponsive keypad",
+      "causes": [
+        {
+          "id": "unresponsive-keypad-0",
+          "label": "Keypad is dirty.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Clean the keypad."
+          ],
+          "evidence": "GE manual, page 15: \"Keypad is dirty.\"",
+          "source": {
+            "line": 58,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "unresponsive-keypad-1",
+          "label": "A fuse in your home may be blown or the circuit breaker tripped.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Replace the fuse or reset the circuit breaker."
+          ],
+          "evidence": "GE manual, page 15: \"A fuse in your home may be blown or the circuit breaker tripped.\"",
+          "source": {
+            "line": 59,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "pan-detection-sizing-not-working-properl",
+      "symptom": "Pan detection/sizing not working properly",
+      "causes": [
+        {
+          "id": "pan-detection-sizing-not-working-properl-0",
+          "label": "Improper cookware being used.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use a flat, metallic pan that is 4.0″ or larger."
+          ],
+          "evidence": "GE manual, page 15: \"Improper cookware being used.\"",
+          "source": {
+            "line": 63,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "pan-detection-sizing-not-working-properl-1",
+          "label": "Pan is improperly placed.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Make sure the pan is centered on the corresponding surface element."
+          ],
+          "evidence": "GE manual, page 15: \"Pan is improperly placed.\"",
+          "source": {
+            "line": 70,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "pan-detection-sizing-not-working-properl-2",
+          "label": "Cooktop control improperly set.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Check to see that the control is set properly."
+          ],
+          "evidence": "GE manual, page 15: \"Cooktop control improperly set.\"",
+          "source": {
+            "line": 72,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "temp-appears-in-the-display",
+      "symptom": "TEMP appears in the display",
+      "causes": [
+        {
+          "id": "temp-appears-in-the-display-0",
+          "label": "Cooktop too hot and the time-out feature activated.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Allow the surface element(s) to cool for 1/2 to 1 hour before using again."
+          ],
+          "evidence": "GE manual, page 16: \"Cooktop too hot and the time-out feature activated.\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "surface-element-is-glowing-red-when-it-s",
+      "symptom": "Surface element is glowing red when it should be on a low power setting",
+      "causes": [
+        {
+          "id": "surface-element-is-glowing-red-when-it-s-0",
+          "label": "The rapid heat-up feature activated.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "The cooktop has a rapid heat-up feature and is designed to do this.",
+            "See the Radiant surface elements section."
+          ],
+          "evidence": "GE manual, page 16: \"The rapid heat-up feature activated.\"",
+          "source": {
+            "line": 15,
+            "manual": "GE manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "f-and-a-number-appear-in-the-display-and",
+      "symptom": "“F” and a number appear in the display and the cooktop produces an audible sound",
+      "causes": [
+        {
+          "id": "f-and-a-number-appear-in-the-display-and-0",
+          "label": "You have a fault code.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Write down the “F” and the number and touch the CONTROL LOCK pad.",
+            "See the Fault code section."
+          ],
+          "evidence": "GE manual, page 16: \"You have a fault code.\"",
+          "source": {
+            "line": 20,
+            "manual": "GE manual",
+            "page": 16
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-04T15:20:27.101Z",
+  "learnedAt": "2026-10-04T15:19:17.942Z"
+}
