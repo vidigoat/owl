@@ -1,0 +1,361 @@
+{
+  "model": "GSD2100RCC",
+  "brand": "GE",
+  "kind": "Dishwasher",
+  "alsoCovers": [
+    "GSD2340RSA",
+    "GSD3300VWW",
+    "GSD4060RSS"
+  ],
+  "source": "GSD2100RCC.pdf",
+  "pages": "15–16",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "dishwasher-won-t-run-noise",
+      "symptom": "dishwasher won’t run noise",
+      "suspect": true,
+      "causes": [
+        {
+          "id": "dishwasher-won-t-run-noise-0",
+          "label": "Fuse is blown, or the circuit breaker tripped",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace fuse or reset circuit breaker.",
+            "Remove any other appliances from the circuit.",
+            "Try pressing the STArT/rESET pad (Electronic models) two times."
+          ],
+          "evidence": "GE manual, page 15: \"Fuse is blown, or the circuit breaker tripped\"",
+          "source": {
+            "line": 11,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "dishwasher-won-t-run-noise-1",
+          "label": "Power is turned off",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "In some installations, power to the dishwasher is provided through a wall switch, often located next to the disposer switch.",
+            "Make sure it is on."
+          ],
+          "evidence": "GE manual, page 15: \"Power is turned off\"",
+          "source": {
+            "line": 14,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "dishwasher-won-t-run-noise-2",
+          "label": "Some of the sounds",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Soft food disposal shredding action."
+          ],
+          "evidence": "GE manual, page 15: \"Some of the sounds\"",
+          "source": {
+            "line": 16,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-standing-in-the-bottom-of-the-tub",
+      "symptom": "Water standing in the bottom of the tub",
+      "causes": [
+        {
+          "id": "water-standing-in-the-bottom-of-the-tub-0",
+          "label": "This is normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "A small amount of clean water around the outlet on the tub bottom at the back of the tub keeps the water seal lubricated."
+          ],
+          "evidence": "GE manual, page 15: \"This is normal\"",
+          "source": {
+            "line": 35,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-won-t-pump-out-of-the-tub",
+      "symptom": "Water won’t pump out of the tub",
+      "causes": [
+        {
+          "id": "water-won-t-pump-out-of-the-tub-0",
+          "label": "Drain is clogged",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "If you have an air gap, clean it.",
+            "Check to see if your kitchen sink is draining well.",
+            "If not, you may need a plumber.",
+            "If the dishwasher drains into a disposer, run disposer clear."
+          ],
+          "evidence": "GE manual, page 15: \"Drain is clogged\"",
+          "source": {
+            "line": 37,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "suds-in-the-tub",
+      "symptom": "Suds in the tub",
+      "causes": [
+        {
+          "id": "suds-in-the-tub-0",
+          "label": "Wrong detergent was used",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use only automatic dishwasher detergents to avoid sudsing.",
+            "Cascade®, Cascade® Complete and Electrasol® Automatic Dishwashing Detergents have been approved for use in all GE dishwashers.",
+            "To remove suds from the tub, open the dishwasher and let suds dissipate.",
+            "Add 1 gallon of cold water to the tub.",
+            "On Models with a Dial: Close and latch the dishwasher.",
+            "Pump out water by slowly turning the Dial until a drain period is reached.",
+            "Repeat if necessary.",
+            "On Models with Electronic Control: Pump out water by pressing the STArT/rESET pad, then 10 seconds later, press STArT/rESET pad again.",
+            "Repeat if necessary."
+          ],
+          "evidence": "GE manual, page 15: \"Wrong detergent was used\"",
+          "source": {
+            "line": 46,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "stained-tub-interior",
+      "symptom": "Stained tub interior",
+      "causes": [
+        {
+          "id": "stained-tub-interior-0",
+          "label": "Some tomato-based",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use of the rInSE Only cycle after adding the dish to the load"
+          ],
+          "evidence": "GE manual, page 15: \"Some tomato-based\"",
+          "source": {
+            "line": 56,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishes-don-t-dry",
+      "symptom": "dishes don’t dry",
+      "suspect": true,
+      "causes": [
+        {
+          "id": "dishes-don-t-dry-0",
+          "label": "Low inlet water temperature",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure inlet water temperature is at least 120°F.",
+            "Select HEATEd dry.",
+            "Use HOT STArT and AddEd HEAT options.",
+            "Select a higher cycle, such as pOTS & pAnS or HEAvy WASH."
+          ],
+          "evidence": "GE manual, page 16: \"Low inlet water temperature\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 16
+          }
+        },
+        {
+          "id": "dishes-don-t-dry-1",
+          "label": "Rinse agent dispenser is empty",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the rinse agent dispenser and fill as required."
+          ],
+          "evidence": "GE manual, page 16: \"Rinse agent dispenser is empty\"",
+          "source": {
+            "line": 11,
+            "manual": "GE manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "spots-and-filming-on-glasses-and-flatwar",
+      "symptom": "Spots and filming on glasses and flatware",
+      "causes": [
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-1",
+          "label": "Overloading the dishwasher",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "1 Remove all metal utensils from the dishwasher. 2 Do not add detergent."
+          ],
+          "evidence": "GE manual, page 16: \"Overloading the dishwasher\"",
+          "source": {
+            "line": 33,
+            "manual": "GE manual",
+            "page": 16
+          }
+        },
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-2",
+          "label": "Improper loading",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "3 Select the longest cycle."
+          ],
+          "evidence": "GE manual, page 16: \"Improper loading\"",
+          "source": {
+            "line": 35,
+            "manual": "GE manual",
+            "page": 16
+          }
+        },
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-3",
+          "label": "Old or damp powder detergent",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "4 Start the dishwasher and allow to run for 18 to 22 minutes.",
+            "Dishwasher will now be in the main wash."
+          ],
+          "evidence": "GE manual, page 16: \"Old or damp powder detergent\"",
+          "source": {
+            "line": 36,
+            "manual": "GE manual",
+            "page": 16
+          }
+        },
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-4",
+          "label": "Rinse agent dispenser empty",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "5 Open the door and pour 2 cups (500 ml) of white vinegar into the bottom of the dishwasher."
+          ],
+          "evidence": "GE manual, page 16: \"Rinse agent dispenser empty\"",
+          "source": {
+            "line": 43,
+            "manual": "GE manual",
+            "page": 16
+          }
+        },
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-5",
+          "label": "Too little detergent",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "6 Close the door and allow to complete the cycle.",
+            "If vinegar rinse doesn’t work: Repeat as above, except use 1/4 cup (60 ml) of citric acid crystals instead of vinegar."
+          ],
+          "evidence": "GE manual, page 16: \"Too little detergent\"",
+          "source": {
+            "line": 45,
+            "manual": "GE manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloudiness-on-glassware",
+      "symptom": "Cloudiness on glassware",
+      "causes": [
+        {
+          "id": "cloudiness-on-glassware-0",
+          "label": "Combination of soft water and too much detergent",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is called etching and is permanent.",
+            "To prevent this from happening, use less detergent if you have soft water.",
+            "Wash glassware in the shortest cycle that will get it clean."
+          ],
+          "evidence": "GE manual, page 16: \"Combination of soft water and too much detergent\"",
+          "source": {
+            "line": 48,
+            "manual": "GE manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "steam",
+      "symptom": "Steam",
+      "causes": [
+        {
+          "id": "steam-0",
+          "label": "This is normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Steam comes through the vent by the door latch during drying and when water is being pumped out."
+          ],
+          "evidence": "GE manual, page 16: \"This is normal\"",
+          "source": {
+            "line": 58,
+            "manual": "GE manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "control-panel-responded-to-inputs-but-di",
+      "symptom": "Control panel responded to inputs but dishwasher never filled with water",
+      "causes": [
+        {
+          "id": "control-panel-responded-to-inputs-but-di-0",
+          "label": "Door latch may not be properly seated",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Call for service."
+          ],
+          "evidence": "GE manual, page 16: \"Door latch may not be properly seated\"",
+          "source": {
+            "line": 70,
+            "manual": "GE manual",
+            "page": 16
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "spots-and-filming-on-glasses-and-flatwar-0"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-04T09:43:11.398Z",
+  "learnedAt": "2026-10-04T09:51:23.222Z"
+}

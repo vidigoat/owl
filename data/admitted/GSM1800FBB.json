@@ -1,0 +1,385 @@
+{
+  "model": "GSM1800FBB",
+  "brand": "GE",
+  "kind": "Dishwasher",
+  "source": "GSM1800FBB.pdf",
+  "pages": "14–17",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "dishes-and-flatware-not-clean",
+      "symptom": "Dishes and flatware not clean",
+      "causes": [
+        {
+          "id": "dishes-and-flatware-not-clean-0",
+          "label": "Main or Fine filter is clogged",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See the Care and cleaning section."
+          ],
+          "evidence": "GE manual, page 15: \"Main or Fine filter is clogged\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "dishes-and-flatware-not-clean-1",
+          "label": "Low inlet water temperature",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Make sure inlet water temperature is correct (see the Using the dishwasher section).",
+            "Turn on the hot water faucet nearest the dishwasher, let run until the water temperature stops rising.",
+            "Then start the dishwasher and turn off the faucet.",
+            "This ensures the entering water is hot."
+          ],
+          "evidence": "GE manual, page 15: \"Low inlet water temperature\"",
+          "source": {
+            "line": 9,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "spots-and-filming-on-glasses-and-flatwar",
+      "symptom": "Spots and filming on glasses and flatware",
+      "causes": [
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-0",
+          "label": "Extremely hard water",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use rinse agents such as Cascade® Complete Rinse Aid to prevent spots and prevent new film buildup.",
+            "If water is extremely hard, a softener may be required."
+          ],
+          "evidence": "GE manual, page 15: \"Extremely hard water\"",
+          "source": {
+            "line": 20,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-1",
+          "label": "Low inlet water temperature",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Make sure water temperature is at least 120°F (49°C)."
+          ],
+          "evidence": "GE manual, page 15: \"Low inlet water temperature\"",
+          "source": {
+            "line": 23,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-2",
+          "label": "Overloading or improper loading of the dishwasher",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Load dishwasher as shown in the Loading Place Settings section."
+          ],
+          "evidence": "GE manual, page 15: \"Overloading or improper loading of the dishwasher\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "detergent-left-in-dispenser-cups",
+      "symptom": "Detergent left in dispenser cups",
+      "causes": [
+        {
+          "id": "detergent-left-in-dispenser-cups-0",
+          "label": "Dishes or utensils are blocking the detergent cup",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Reposition the dishes, so the water from the lower spray arm can flush the detergent cup.",
+            "See the Loading the dishwasher section.",
+            "Reposition the tall utensils or heavy silverware that may be keeping the dispenser cup door from opening.",
+            "See the Loading the dishwasher section.",
+            "Don’t place large bowls or pots directly under the detergent dispenser."
+          ],
+          "evidence": "GE manual, page 16: \"Dishes or utensils are blocking the detergent cup\"",
+          "source": {
+            "line": 16,
+            "manual": "GE manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "black-or-gray-marks-on-dishes",
+      "symptom": "Black or gray marks on dishes",
+      "causes": [
+        {
+          "id": "black-or-gray-marks-on-dishes-0",
+          "label": "Aluminum utensils have rubbed against dishes",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Remove marks with a mild, abrasive cleaner."
+          ],
+          "evidence": "GE manual, page 16: \"Aluminum utensils have rubbed against dishes\"",
+          "source": {
+            "line": 22,
+            "manual": "GE manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishes-don-t-dry",
+      "symptom": "Dishes don’t dry",
+      "causes": [
+        {
+          "id": "dishes-don-t-dry-0",
+          "label": "Low inlet water temperature",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure inlet water temperature is at least 120°F.",
+            "Select HEATED DRY ON.",
+            "Select a higher cycle, such as POTS & PANS."
+          ],
+          "evidence": "GE manual, page 16: \"Low inlet water temperature\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 16
+          }
+        },
+        {
+          "id": "dishes-don-t-dry-1",
+          "label": "Rinse agent dispenser is empty",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the rinse agent dispenser and fill as required."
+          ],
+          "evidence": "GE manual, page 16: \"Rinse agent dispenser is empty\"",
+          "source": {
+            "line": 27,
+            "manual": "GE manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishwasher-won-t-run",
+      "symptom": "Dishwasher won’t run",
+      "causes": [
+        {
+          "id": "dishwasher-won-t-run-0",
+          "label": "Fuse is blown or circuit breaker is tripped",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace fuse or reset circuit breaker.",
+            "Remove any other appliances from the circuit."
+          ],
+          "evidence": "GE manual, page 16: \"Fuse is blown or circuit breaker is tripped\"",
+          "source": {
+            "line": 38,
+            "manual": "GE manual",
+            "page": 16
+          }
+        },
+        {
+          "id": "dishwasher-won-t-run-1",
+          "label": "Power is turned off",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "In some installations, the power to the dishwasher is provided through a wall switch, often located next to the disposer switch.",
+            "Make sure it is on."
+          ],
+          "evidence": "GE manual, page 16: \"Power is turned off\"",
+          "source": {
+            "line": 40,
+            "manual": "GE manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-standing-in-the-bottom-of-the-tub",
+      "symptom": "Water standing in the bottom of the tub",
+      "causes": [
+        {
+          "id": "water-standing-in-the-bottom-of-the-tub-0",
+          "label": "Air gap is clogged",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Clean the air gap.",
+            "See the Care and cleaning section."
+          ],
+          "evidence": "GE manual, page 17: \"Air gap is clogged\"",
+          "source": {
+            "line": 3,
+            "manual": "GE manual",
+            "page": 17
+          }
+        },
+        {
+          "id": "water-standing-in-the-bottom-of-the-tub-1",
+          "label": "High drain loop or air gap not installed",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Refer to the Installation Instructions for proper drain line installation."
+          ],
+          "evidence": "GE manual, page 17: \"High drain loop or air gap not installed\"",
+          "source": {
+            "line": 5,
+            "manual": "GE manual",
+            "page": 17
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-won-t-pump-out-of-the-tub",
+      "symptom": "Water won’t pump out of the tub",
+      "causes": [
+        {
+          "id": "water-won-t-pump-out-of-the-tub-0",
+          "label": "Drain is clogged",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "If you have an air gap, clean it.",
+            "See the Care and cleaning section.",
+            "If the dishwasher drains into a disposer, run disposer clear.",
+            "Check to see if your kitchen sink is draining well.",
+            "If not, you may need a plumber."
+          ],
+          "evidence": "GE manual, page 17: \"Drain is clogged\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 17
+          }
+        }
+      ]
+    },
+    {
+      "id": "steam",
+      "symptom": "Steam",
+      "causes": [
+        {
+          "id": "steam-0",
+          "label": "This is normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Warm, moist air comes through the vent during drying and when water is being pumped out.",
+            "This is necessary for drying."
+          ],
+          "evidence": "GE manual, page 17: \"This is normal\"",
+          "source": {
+            "line": 11,
+            "manual": "GE manual",
+            "page": 17
+          }
+        }
+      ]
+    },
+    {
+      "id": "noise",
+      "symptom": "Noise",
+      "causes": [
+        {
+          "id": "noise-0",
+          "label": "Normal operating sounds:",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "These are all normal.",
+            "No action is required."
+          ],
+          "evidence": "GE manual, page 17: \"Normal operating sounds:\"",
+          "source": {
+            "line": 13,
+            "manual": "GE manual",
+            "page": 17
+          }
+        },
+        {
+          "id": "noise-2",
+          "label": "Rattling dishes when the spray arm rotates",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Make sure dishes are properly loaded.",
+            "See the Loading the dishwasher section."
+          ],
+          "evidence": "GE manual, page 17: \"Rattling dishes when the spray arm rotates\"",
+          "source": {
+            "line": 22,
+            "manual": "GE manual",
+            "page": 17
+          }
+        }
+      ]
+    },
+    {
+      "id": "a-white-film-on-glassware-dishware-and-t",
+      "symptom": "A white film on glassware, dishware and the interior",
+      "causes": [
+        {
+          "id": "a-white-film-on-glassware-dishware-and-t-0",
+          "label": "This problem is likely caused by a low quality phosphate-free dishwasher detergent",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "To remove the white film, run your dishes through a dishwasher cycle with citric acid.",
+            "Use a WD35X151 citric acid kit found online.",
+            "Otherwise, use Lemi Shine (WX10X10019) found at your local grocery store.",
+            "Pour the citric acid in the detergent cup and close the cover.",
+            "Place the filmed but otherwise clean glassware and dishware in the dishwasher.",
+            "Leave silverware and other metal items out of the dishwasher.",
+            "Turn the dishwasher on and let it run through a complete cycle without detergent.",
+            "The glassware, dishware, and dishwasher should come out film free.",
+            "Alternatively, a vinegar rinse may be used.",
+            "Pour 1 cup of vinegar into dishwasher just after the detergent cup opens and let the dishwasher complete its cycle.",
+            "This may be repeated several times a year as needed The use of a rinse agent such as Cascade® Complete Rinse Aid may help minimize a repeat build up of film.",
+            "Also, the use of a highly rated detergent such as Cascade® Platinum Pacs will help prevent film build-up."
+          ],
+          "evidence": "GE manual, page 17: \"This problem is likely caused by a low quality phosphate-free dishwasher detergent\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 17
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "noise-1"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-04T09:43:12.171Z",
+  "learnedAt": "2026-10-04T09:51:26.153Z"
+}

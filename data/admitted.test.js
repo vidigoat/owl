@@ -107,7 +107,9 @@ it('no machine is filed as something its own manual says it is not', () => {
     Dishwasher: /rinse aid|dishes|detergent dispenser/i,
     Oven: /cookware|pyrolytic|warming drawer|oven/i,
     Dryer: /\bdryer\b|lint|drying cycle/i,
-    Washer: /\bwash cycle\b|spin cycle|detergent drawer/i,
+    // "washer" itself, and agitation: a GE top-loader's table never says "wash cycle", and does
+    // tell you what to do if you have no clothes dryer — which read as a dryer's manual and nothing else.
+    Washer: /\bwash cycle\b|spin cycle|detergent drawer|\bwasher\b|agitat/i,
   };
 
   // Kinds as the product pages name them, grouped into the families the tells above distinguish:

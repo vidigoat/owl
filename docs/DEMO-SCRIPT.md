@@ -122,7 +122,8 @@ above will not be where you look for them.**
 
 **Two things that are true now and were not when the storyboard was written.**
 
-The library is **110 machines across five manufacturers and eleven kinds of appliance** —
+The library is **176 machines across six manufacturers and eleven kinds of appliance** (66 of them
+GE, read from GE's three-column tables, answering for 204 GE model numbers) —
 dishwashers, washers, a dryer, refrigerators and fridge freezers, ovens, ranges, cooktops,
 microwaves, range hoods — and it answers for **157 of the 496 major appliances Bosch US, Bosch UK
 and Siemens UK list** (`npm run coverage`), with **2,491 quotations re-read off the manufacturer's

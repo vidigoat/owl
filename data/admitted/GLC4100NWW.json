@@ -1,0 +1,374 @@
+{
+  "model": "GLC4100NWW",
+  "brand": "GE",
+  "kind": "Dishwasher",
+  "source": "GLC4100NWW.pdf",
+  "pages": "13–15",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "dishes-and-flatware-not-clean",
+      "symptom": "Dishes and flatware not clean",
+      "causes": [
+        {
+          "id": "dishes-and-flatware-not-clean-0",
+          "label": "Low inlet water temperature",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure the inlet water temperature is at least 120°F.",
+            "Remove the Unicouple, if attached, and run the hot water faucet until the water temperature stops rising to purge cold water from the hot water line.",
+            "Turn off the faucet.",
+            "Reconnect the Unicouple and then turn the faucet back on.",
+            "If the water temperature did not reach 120°F, consider increasing the water temperature at the water heater.",
+            "Water temperature must not exceed 150°F."
+          ],
+          "evidence": "GE manual, page 13: \"Low inlet water temperature\"",
+          "source": {
+            "line": 29,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "spots-and-filming-on-glasses-and-flatwar",
+      "symptom": "Spots and filming on glasses and flatware",
+      "causes": [
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-0",
+          "label": "Extremely hard water",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use Jet-Dry ® or Cascade Crystal Clear® rinse agents to remove spots and"
+          ],
+          "evidence": "GE manual, page 13: \"Extremely hard water\"",
+          "source": {
+            "line": 40,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-1",
+          "label": "Low inlet water temperature",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "prevent new film buildup."
+          ],
+          "evidence": "GE manual, page 13: \"Low inlet water temperature\"",
+          "source": {
+            "line": 46,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-2",
+          "label": "Overloading the dishwasher",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "To remove stubborn spots and pre-existing film from glassware:"
+          ],
+          "evidence": "GE manual, page 13: \"Overloading the dishwasher\"",
+          "source": {
+            "line": 48,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-3",
+          "label": "Improper loading",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "1 Remove all metal utensils from the dishwasher."
+          ],
+          "evidence": "GE manual, page 13: \"Improper loading\"",
+          "source": {
+            "line": 49,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-4",
+          "label": "Old or damp powder detergent",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "2 Do not add detergent."
+          ],
+          "evidence": "GE manual, page 13: \"Old or damp powder detergent\"",
+          "source": {
+            "line": 50,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloudiness-on-glassware",
+      "symptom": "Cloudiness on glassware",
+      "causes": [
+        {
+          "id": "cloudiness-on-glassware-0",
+          "label": "Combination of soft water and too much detergent",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is called etching and is permanent.",
+            "To prevent this from happening, use less detergent if you have soft water.",
+            "Wash glassware in the shortest cycle that will get them clean."
+          ],
+          "evidence": "GE manual, page 13: \"Combination of soft water and too much detergent\"",
+          "source": {
+            "line": 60,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "cloudiness-on-glassware-1",
+          "label": "Water temperature entering the dishwasher exceeds 150°F",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "This could be etching.",
+            "Lower the water heater temperature."
+          ],
+          "evidence": "GE manual, page 13: \"Water temperature entering the dishwasher exceeds 150°F\"",
+          "source": {
+            "line": 68,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "suds-in-the-tub",
+      "symptom": "Suds in the tub",
+      "causes": [
+        {
+          "id": "suds-in-the-tub-0",
+          "label": "Wrong detergent",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use only automatic dishwasher detergents to avoid sudsing.",
+            "Cascade® and Electrasol® Automatic Dishwashing Detergents have been approved for use in all GE dishwashers.",
+            "To remove suds from the tub, open the dishwasher and let suds dissipate.",
+            "Close and latch the dishwasher.",
+            "Pump out water by touching the START/RESET pad once; then 30 seconds later, touch the START/RESET pad again.",
+            "Repeat if necessary."
+          ],
+          "evidence": "GE manual, page 13: \"Wrong detergent\"",
+          "source": {
+            "line": 70,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "suds-in-the-tub-1",
+          "label": "Rinse agent was spilled",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Always wipe up rinse agent spills immediately."
+          ],
+          "evidence": "GE manual, page 13: \"Rinse agent was spilled\"",
+          "source": {
+            "line": 77,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "detergent-left-in-dispenser-cups",
+      "symptom": "Detergent left in dispenser cups",
+      "causes": [
+        {
+          "id": "detergent-left-in-dispenser-cups-0",
+          "label": "Dishes are blocking the detergent cup",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Reposition the dishes, so the water from the lower spray arm can flush the detergent cup.",
+            "See the Loading the dishwasher section."
+          ],
+          "evidence": "GE manual, page 14: \"Dishes are blocking the detergent cup\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "black-or-gray-marks-on-dishes",
+      "symptom": "Black or gray marks on dishes",
+      "causes": [
+        {
+          "id": "black-or-gray-marks-on-dishes-0",
+          "label": "Aluminum utensils have rubbed against dishes",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Remove marks with a mild, abrasive cleaner."
+          ],
+          "evidence": "GE manual, page 14: \"Aluminum utensils have rubbed against dishes\"",
+          "source": {
+            "line": 9,
+            "manual": "GE manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishes-don-t-dry",
+      "symptom": "Dishes don’t dry",
+      "causes": [
+        {
+          "id": "dishes-don-t-dry-0",
+          "label": "Low inlet water temperature",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure inlet water temperature is at least 120°F.",
+            "Select HEATED DRY.",
+            "Use HOT START, HOT WASH or ADDED HEAT options.",
+            "Select a higher cycle, such as HEAVY WASH."
+          ],
+          "evidence": "GE manual, page 14: \"Low inlet water temperature\"",
+          "source": {
+            "line": 11,
+            "manual": "GE manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "dishes-don-t-dry-1",
+          "label": "Rinse agent dispenser is empty",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the rinse agent dispenser and fill as required."
+          ],
+          "evidence": "GE manual, page 14: \"Rinse agent dispenser is empty\"",
+          "source": {
+            "line": 15,
+            "manual": "GE manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "stained-tub-interior",
+      "symptom": "Stained tub interior",
+      "causes": [
+        {
+          "id": "stained-tub-interior-0",
+          "label": "Some tomato-based foods can cause reddish stains",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use of the RINSE ONLY cycle after adding the dish to the load can decrease the level of staining.",
+            "GE recommends Cascade® Plastic Booster to help remove these types of stains."
+          ],
+          "evidence": "GE manual, page 14: \"Some tomato-based foods can cause reddish stains\"",
+          "source": {
+            "line": 27,
+            "manual": "GE manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "stained-tub-interior-1",
+          "label": "Tea or coffee stains",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Remove the stain by hand, using a solution of 1/2 cup bleach and 3 cups warm water.",
+            "WARNING Before cleaning interior, wait at least 20 minutes after a cycle for the heating elements to cool down.",
+            "Failure to do so can result in burns."
+          ],
+          "evidence": "GE manual, page 14: \"Tea or coffee stains\"",
+          "source": {
+            "line": 30,
+            "manual": "GE manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "control-panel-lights-go-off-when-you-re-",
+      "symptom": "Control panel lights go off when you’re setting controls",
+      "causes": [
+        {
+          "id": "control-panel-lights-go-off-when-you-re--0",
+          "label": "Time too long between touching of selected pads",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Each pad must be touched within 30 seconds of the others.",
+            "To relight, touch any pad again, or unlock and relatch door."
+          ],
+          "evidence": "GE manual, page 14: \"Time too long between touching of selected pads\"",
+          "source": {
+            "line": 54,
+            "manual": "GE manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "noise",
+      "symptom": "Noise",
+      "causes": [
+        {
+          "id": "noise-0",
+          "label": "Normal operating sounds",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Detergent cup opening.",
+            "Water entering dishwasher.",
+            "The motor stops and starts at various times during the cycle.",
+            "Drain pump sounds during the pump out."
+          ],
+          "evidence": "GE manual, page 14: \"Normal operating sounds\"",
+          "source": {
+            "line": 61,
+            "manual": "GE manual",
+            "page": 14
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "start-reset-status-indicator-light-flash",
+    "dishwasher-beeps-once-every-30-seconds",
+    "spots-and-filming-on-glasses-and-flatwar-5"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-04T09:43:08.664Z",
+  "learnedAt": "2026-10-04T09:51:25.270Z"
+}

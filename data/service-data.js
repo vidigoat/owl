@@ -323,7 +323,35 @@ const NOISE = new Set([
   'the', 'a', 'an', 'is', 'are', 'was', 'were', 'be', 'been', 'and', 'or', 'of', 'in', 'on', 'at',
   'to', 'for', 'with', 'my', 'it', 'its', 'this', 'that', 'there', 'has', 'have', 'does', 'do',
   'not', 'no', 'up', 'out', 'appliance', 'machine', 'unit',
+  // Words that say WHEN or how a person is telling it, never what is wrong. "The dishes are still
+  // wet when it finishes" matched a row about the control panel on the strength of "when".
+  'when', 'while', 'after', 'before', 'during', 'still', 'just', 'always', 'keeps', 'keep', 'you',
+  'your', 're', 'don', 'doesn', 'won', 'isn', 'will', 'can', 'from', 'by', 'as', 'so', 'very',
+  'really', 'some', 'any', 'all', 'they', 'them', 'he', 'she', 'we', 'our', 'me', 'am',
 ]);
+
+/*
+ * The same fault, in an owner's word and in a manual's.
+ *
+ * A manual says "odor"; a person says "it smells". A manual says "Dishes don't dry"; a person says
+ * "they are still wet". Not one word in common, so the library refused a problem the manual prints
+ * in so many words. Each list below is one idea, and every word in it is read as the first.
+ *
+ * Kept to pairs where the two sides mean the same thing about an appliance, on any appliance — not
+ * a list of likely faults. A wrong merge costs a candidate the person can see and reject; a missing
+ * one costs the answer.
+ */
+const SAME_IDEA = [
+  ['smell', 'odor', 'odour', 'stink', 'stinky', 'smelly'],
+  ['dry', 'wet', 'damp'],
+  ['start', 'run', 'operat', 'work', 'turn'],
+  ['cloudy', 'cloudines', 'cloud', 'film', 'filming', 'hazy'],
+  ['glas', 'glasswar', 'glassware'],
+  ['dish', 'dishwar', 'dishware'],
+  ['nois', 'noisy', 'loud', 'sound'],
+  ['leak', 'drip'],
+];
+const IDEA = new Map(SAME_IDEA.flatMap((group) => group.map((w) => [w, group[0]])));
 
 /*
  * A trailing "s" is not a different word here, and pretending it is chose the opposite answer.
@@ -369,7 +397,7 @@ const stem = (w) => {
 
 const words = (s) =>
   new Set(
-    String(s).toLowerCase().match(/[a-z]{2,}/g)?.filter((w) => !NOISE.has(w)).map(stem) || []
+    String(s).toLowerCase().match(/[a-z]{2,}/g)?.filter((w) => !NOISE.has(w)).map(stem).map((w) => IDEA.get(w) || w) || []
   );
 
 /** How much two descriptions share, as a fraction of the shorter one. Nothing clever. */

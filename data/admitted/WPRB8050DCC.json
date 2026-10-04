@@ -1,0 +1,363 @@
+{
+  "model": "WPRB8050DCC",
+  "brand": "GE",
+  "kind": "Washer",
+  "source": "WPRB8050DCC.pdf",
+  "pages": "15–18",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "too-many-suds",
+      "symptom": "Too many suds",
+      "causes": [
+        {
+          "id": "too-many-suds-0",
+          "label": "Type of detergent",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Switch to a lower sudsing detergent brand and follow instructions on package."
+          ],
+          "evidence": "GE manual, page 17: \"Type of detergent\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 17
+          }
+        },
+        {
+          "id": "too-many-suds-1",
+          "label": "Very soft water",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Try less detergent."
+          ],
+          "evidence": "GE manual, page 17: \"Very soft water\"",
+          "source": {
+            "line": 10,
+            "manual": "GE manual",
+            "page": 17
+          }
+        },
+        {
+          "id": "too-many-suds-2",
+          "label": "Too much detergent",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Measure your detergent carefully.",
+            "Use less soap if you have soft water, a smaller load or a lightly soiled load."
+          ],
+          "evidence": "GE manual, page 17: \"Too much detergent\"",
+          "source": {
+            "line": 11,
+            "manual": "GE manual",
+            "page": 17
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-leaks",
+      "symptom": "Water leaks",
+      "causes": [
+        {
+          "id": "water-leaks-0",
+          "label": "Fill hoses or drain hose is improperly connected",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure hose connections are tight at faucets and at washer.",
+            "Make sure end of drain hose is properly connected to washer and correctly inserted in and secured to drain facility."
+          ],
+          "evidence": "GE manual, page 17: \"Fill hoses or drain hose is improperly connected\"",
+          "source": {
+            "line": 14,
+            "manual": "GE manual",
+            "page": 17
+          }
+        },
+        {
+          "id": "water-leaks-1",
+          "label": "Household drain may be clogged",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check household plumbing.",
+            "You may need to call a plumber."
+          ],
+          "evidence": "GE manual, page 17: \"Household drain may be clogged\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 17
+          }
+        },
+        {
+          "id": "water-leaks-2",
+          "label": "Constant water pressure to the fill hoses at the water source",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Tighten hoses at the faucets and turn the water off after each use.",
+            "Check condition of the fill hoses; they should be replaced every 5 years."
+          ],
+          "evidence": "GE manual, page 17: \"Constant water pressure to the fill hoses at the water source\"",
+          "source": {
+            "line": 26,
+            "manual": "GE manual",
+            "page": 17
+          }
+        },
+        {
+          "id": "water-leaks-3",
+          "label": "Using too much detergent in washer",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Use less detergent.",
+            "Use less soap if you have soft water, a smaller load or a lightly soiled load."
+          ],
+          "evidence": "GE manual, page 17: \"Using too much detergent in washer\"",
+          "source": {
+            "line": 30,
+            "manual": "GE manual",
+            "page": 17
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-temperature-seems-incorrect",
+      "symptom": "Water temperature seems incorrect",
+      "causes": [
+        {
+          "id": "water-temperature-seems-incorrect-0",
+          "label": "Cooler water temperatures provide improved energy efficiency",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "New laundry detergents have been formulated to work with cooler water temperatures without affecting wash performance."
+          ],
+          "evidence": "GE manual, page 17: \"Cooler water temperatures provide improved energy efficiency\"",
+          "source": {
+            "line": 33,
+            "manual": "GE manual",
+            "page": 17
+          }
+        },
+        {
+          "id": "water-temperature-seems-incorrect-1",
+          "label": "Control is not set properly",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check water temperature control and adjust."
+          ],
+          "evidence": "GE manual, page 17: \"Control is not set properly\"",
+          "source": {
+            "line": 36,
+            "manual": "GE manual",
+            "page": 17
+          }
+        },
+        {
+          "id": "water-temperature-seems-incorrect-2",
+          "label": "Water supply is turned off or improperly connected",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Turn both hot and cold faucets fully on and make sure hoses are connected to correct faucets."
+          ],
+          "evidence": "GE manual, page 17: \"Water supply is turned off or improperly connected\"",
+          "source": {
+            "line": 37,
+            "manual": "GE manual",
+            "page": 17
+          }
+        },
+        {
+          "id": "water-temperature-seems-incorrect-3",
+          "label": "Water valve screens are stopped up",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Turn off the water source and disconnect water fill hoses from the upper back of the washer.",
+            "Use a brush or toothpick to clean the screens in the machine.",
+            "Reconnect the hoses and turn the water back on."
+          ],
+          "evidence": "GE manual, page 17: \"Water valve screens are stopped up\"",
+          "source": {
+            "line": 39,
+            "manual": "GE manual",
+            "page": 17
+          }
+        },
+        {
+          "id": "water-temperature-seems-incorrect-4",
+          "label": "House water heater is not set properly",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Make sure house water heater is delivering water at 120°F–140°F (48°C–60°C)."
+          ],
+          "evidence": "GE manual, page 17: \"House water heater is not set properly\"",
+          "source": {
+            "line": 48,
+            "manual": "GE manual",
+            "page": 17
+          }
+        },
+        {
+          "id": "water-temperature-seems-incorrect-5",
+          "label": "PerfecTemp Plus feature was not activated",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "The lid must be closed for PerfecTemp Plus to work."
+          ],
+          "evidence": "GE manual, page 17: \"PerfecTemp Plus feature was not activated\"",
+          "source": {
+            "line": 51,
+            "manual": "GE manual",
+            "page": 17
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-pumped-out-before-cycle-is-complet",
+      "symptom": "Water pumped out before cycle is complete",
+      "causes": [
+        {
+          "id": "water-pumped-out-before-cycle-is-complet-0",
+          "label": "Lid lifted or cycle was put in pause for over 24 hours",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Reset cycle."
+          ],
+          "evidence": "GE manual, page 17: \"Lid lifted or cycle was put in pause for over 24 hours\"",
+          "source": {
+            "line": 54,
+            "manual": "GE manual",
+            "page": 17
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-won-t-drain",
+      "symptom": "Water won’t drain",
+      "causes": [
+        {
+          "id": "water-won-t-drain-0",
+          "label": "Drain hose is kinked or improperly connected",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Straighten drain hose and make sure washer is not sitting on it.",
+            "Top of drain outlet should be less than 8 ft (2.5 m) above floor."
+          ],
+          "evidence": "GE manual, page 17: \"Drain hose is kinked or improperly connected\"",
+          "source": {
+            "line": 58,
+            "manual": "GE manual",
+            "page": 17
+          }
+        }
+      ]
+    },
+    {
+      "id": "washer-is-noisy",
+      "symptom": "Washer is noisy",
+      "causes": [
+        {
+          "id": "washer-is-noisy-0",
+          "label": "Washer is uneven",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "To level the front of the washer, adjust the front leveling legs by rotating the individual leg in the proper direction for up or down.",
+            "To level back of washer, lift back of machine 4″ (11 cm) and set down."
+          ],
+          "evidence": "GE manual, page 18: \"Washer is uneven\"",
+          "source": {
+            "line": 28,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "washer-is-noisy-1",
+          "label": "Washer load is unbalanced",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Press START to pause the washer, open the lid and redistribute the load evenly.",
+            "Close the lid and press START again."
+          ],
+          "evidence": "GE manual, page 18: \"Washer load is unbalanced\"",
+          "source": {
+            "line": 32,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "washer-is-noisy-2",
+          "label": "Shipping rod is still assembled in unit",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "To remove shipping rod from washer, pull yellow tag and attached rod from the bottom right hand side of washer."
+          ],
+          "evidence": "GE manual, page 18: \"Shipping rod is still assembled in unit\"",
+          "source": {
+            "line": 35,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "washer-is-noisy-3",
+          "label": "Washer is sitting too close to wall (causes knocking during cycle)",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Pull washer away from the wall; about 4″ (11 cm) is needed."
+          ],
+          "evidence": "GE manual, page 18: \"Washer is sitting too close to wall (causes knocking during cycle)\"",
+          "source": {
+            "line": 37,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "washer-is-noisy-4",
+          "label": "PerfecTemp Plus feature is being used",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "This is normal.",
+            "PerfecTemp Plus turns water valves off and on to adjust water temperature."
+          ],
+          "evidence": "GE manual, page 18: \"PerfecTemp Plus feature is being used\"",
+          "source": {
+            "line": 45,
+            "manual": "GE manual",
+            "page": 18
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-04T09:43:29.425Z",
+  "learnedAt": "2026-10-04T09:51:36.127Z"
+}

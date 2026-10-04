@@ -28,7 +28,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const pdf = require('../manual/pdf');
-const { columnBoundary } = require('../manual/symptoms');
+const { causeColumn } = require('../manual/symptoms');
 
 const ROOT = path.join(__dirname, '..');
 const MANUALS = path.join(ROOT, 'manuals');
@@ -74,8 +74,7 @@ function pagesOf(file) {
   return (n) => {
     if (!cache.has(n)) {
       for (const [i, text] of pdf.pages(file).entries()) {
-        const lines = String(text).split(/\r?\n/);
-        const boundary = columnBoundary(lines);
+
         /*
          * Both readings of the page, because neither alone covers it.
          *
@@ -88,7 +87,9 @@ function pagesOf(file) {
          * accused 51 correctly-recovered collided rows of being invented.
          */
         cache.set(i + 1, [
-          boundary ? lines.map((l) => l.slice(boundary.at)).join(' ') : '',
+          // The cause column as the reader took it: right of the boundary on a two-column page,
+          // the middle column on a three-column one.
+          causeColumn(text),
           text,
         ]);
       }
@@ -122,6 +123,19 @@ function verify(record) {
       // quotation to check, so it is counted and skipped rather than crashing the run.
       if (!c.label) {
         out.unlabelled = (out.unlabelled || 0) + 1;
+        continue;
+      }
+
+      /*
+       * A row the reader itself was unsure of is refused before the page is consulted.
+       *
+       * Two causes read as one are still "printed on the page" — their words sit one after the
+       * other in the same column — so this check would pass them, attached to the wrong remedy.
+       * The reader knows when it could not tell, and says so; that is the only place it can be caught.
+       */
+      if (c.unsure) {
+        out.bad.push(c.id);
+        out.missing.push({ page, symptom: s.symptom, label: c.label, why: c.unsure });
         continue;
       }
 

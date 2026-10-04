@@ -1,0 +1,306 @@
+{
+  "model": "GFE26GGKBB",
+  "brand": "GE",
+  "kind": "Refrigerator",
+  "source": "GFE26GGKBB.pdf",
+  "pages": "46–49",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "water-filter-indicated-as-installed-inco",
+      "symptom": "Water filter indicated as installed incorrectly or a leak is present on cap control panel. ³:DUQLQJ\u00037ULDQJOH´\u0003LV\u0003OLW 5HSODFH\u0003)LOWHU\u00125HSODFH\u0003:DWHU\u0003)LOWHU\u0003 is lit 2YHU\u0003'XH\u0003OLJKW\u0003LV\u0003OLW 'LVSHQVHU\u00032II\u0003LV\u0003OLW Not filtering",
+      "causes": [
+        {
+          "id": "water-filter-indicated-as-installed-inco-0",
+          "label": "Water filter installed backward or is leaking.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "&KHFN\u0003IRU\u0003OHDN\u0011\u0003,I\u0003QR\u0003OHDN\u0003LV\u0003SUHVHQW\u000f\u0003 UHPRYH\u0003ILOWHU\u0012E\\SDVV\u0003SOXJ \u000f\u0003URWDWH\u0003 180° and reinstall."
+          ],
+          "evidence": "GE manual, page 46: \"Water filter installed backward or is leaking.\"",
+          "source": {
+            "line": 9,
+            "manual": "GE manual",
+            "page": 46
+          }
+        }
+      ]
+    },
+    {
+      "id": "5hvhw-lowhu-lv-olw",
+      "symptom": "5HVHW\u0003)LOWHU\u0003LV\u0003OLW",
+      "causes": [
+        {
+          "id": "5hvhw-lowhu-lv-olw-0",
+          "label": "Water filter leaking or needs replacing",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace water filter, or install filter bypass ** 3UHVV\u0003DQG\u0003KROG\u00035HVHW\u0003)LOWHU\u0003IRU\u0003\u0016\u0003 VHFRQGV\u0003WR\u0003UHVHW\u0003 &RQWURO\u0003'\u0003RQO\\"
+          ],
+          "evidence": "GE manual, page 46: \"Water filter leaking or needs replacing\"",
+          "source": {
+            "line": 20,
+            "manual": "GE manual",
+            "page": 46
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-filter-indicator-light-is-not-lit-",
+      "symptom": "Water filter indicator light is not lit +DQGOH\u0003LV\u0003ORRVH\u0012KDQGOH\u0003KDV\u0003D\u0003JDS\u0011",
+      "causes": [
+        {
+          "id": "water-filter-indicator-light-is-not-lit--0",
+          "label": "This is normal. This indicator will turn on to tell you that you need to replace the filter soon.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See About the Water Filter for more information."
+          ],
+          "evidence": "GE manual, page 46: \"This is normal. This indicator will turn on to tell you that you need to replace the filter soon.\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 46
+          }
+        },
+        {
+          "id": "water-filter-indicator-light-is-not-lit--1",
+          "label": "Handle needs adjusting",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See Attach Fresh Food Handle and $WWDFK\u0003WKH\u0003)UHH]HU\u0003+DQGOH\u0003VHFWLRQV\u0003IRU\u0003 detailed instructions."
+          ],
+          "evidence": "GE manual, page 46: \"Handle needs adjusting\"",
+          "source": {
+            "line": 27,
+            "manual": "GE manual",
+            "page": 46
+          }
+        }
+      ]
+    },
+    {
+      "id": "refrigerator-beeping",
+      "symptom": "Refrigerator beeping",
+      "causes": [
+        {
+          "id": "refrigerator-beeping-0",
+          "label": "This is door alarm",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "-Turn off or disable with door closed \u0010,I\u0003GRRU\u0003RSHQ\u0003DQG\u0003DODUP\u0003LV\u0003VRXQGLQJ\u000f\u0003 \\RX\u0003FDQ\u0003RQO\\\u0003VQRR]H\u0003WKH\u0003DODUP"
+          ],
+          "evidence": "GE manual, page 46: \"This is door alarm\"",
+          "source": {
+            "line": 30,
+            "manual": "GE manual",
+            "page": 46
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-spurting-from-dispenser",
+      "symptom": "Water spurting from dispenser*",
+      "causes": [
+        {
+          "id": "water-spurting-from-dispenser-0",
+          "label": "Newly installed filter cartridge",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Run water from the dispenser for 5 PLQXWHV\u0003 DERXW\u0003\u0015\u0003JDOORQV"
+          ],
+          "evidence": "GE manual, page 47: \"Newly installed filter cartridge\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 47
+          }
+        }
+      ]
+    },
+    {
+      "id": "no-water-or-ice-cube-production",
+      "symptom": "No water or ice cube production*",
+      "causes": [
+        {
+          "id": "no-water-or-ice-cube-production-0",
+          "label": "Supply line or shutoff valve is clogged",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Call a plumber"
+          ],
+          "evidence": "GE manual, page 47: \"Supply line or shutoff valve is clogged\"",
+          "source": {
+            "line": 9,
+            "manual": "GE manual",
+            "page": 47
+          }
+        },
+        {
+          "id": "no-water-or-ice-cube-production-1",
+          "label": "Water filter is clogged",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Replace filter cartridge or remove filter and install bypass plug**"
+          ],
+          "evidence": "GE manual, page 47: \"Water filter is clogged\"",
+          "source": {
+            "line": 11,
+            "manual": "GE manual",
+            "page": 47
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-is-leaking-from-dispenser",
+      "symptom": "Water is leaking from dispenser*",
+      "causes": [
+        {
+          "id": "water-is-leaking-from-dispenser-0",
+          "label": "Air may be present in the water line system, causing water to drip after being dispensed",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "'LVSHQVH\u0003ZDWHU\u0003IRU\u0003DW\u0003OHDVW\u0003\u0018\u0003PLQXWHV\u0003WR\u0003 remove air from system"
+          ],
+          "evidence": "GE manual, page 47: \"Air may be present in the water line system, causing water to drip after being dispensed\"",
+          "source": {
+            "line": 17,
+            "manual": "GE manual",
+            "page": 47
+          }
+        }
+      ]
+    },
+    {
+      "id": "auto-fill-xqghu-iloo-qr-iloo",
+      "symptom": "AUTO FILL\u0003XQGHU\u0003ILOO\u0012QR\u0003ILOO",
+      "causes": [
+        {
+          "id": "auto-fill-xqghu-iloo-qr-iloo-1",
+          "label": "Error message",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See page 14 Clean sensor.",
+            "See page 14."
+          ],
+          "evidence": "GE manual, page 47: \"Error message\"",
+          "source": {
+            "line": 23,
+            "manual": "GE manual",
+            "page": 47
+          }
+        }
+      ]
+    },
+    {
+      "id": "auto-fill-overfills-uhh-hu-frrolqj-iuhvk",
+      "symptom": "AUTO FILL overfills* )UHH]HU\u0003FRROLQJ\u000f\u0003IUHVK\u0003IRRG\u0003QRW\u0003 cooling ,FH\u0003GLVSHQVHU\u0003RSHQV\u0003DIWHU\u0003FORVLQJ\u0003 IUHH]HU\u0003GUDZHU\u0003",
+      "causes": [
+        {
+          "id": "auto-fill-overfills-uhh-hu-frrolqj-iuhvk-1",
+          "label": "Normal, when refrigerator first plugged in or after extended power outage",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Wait 24 hours for temperature in both compartments to reach selected temperatures."
+          ],
+          "evidence": "GE manual, page 47: \"Normal, when refrigerator first plugged in or after extended power outage\"",
+          "source": {
+            "line": 27,
+            "manual": "GE manual",
+            "page": 47
+          }
+        },
+        {
+          "id": "auto-fill-overfills-uhh-hu-frrolqj-iuhvk-2",
+          "label": "Normal",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "The ice dispenser door may open after FORVLQJ\u0003IUHH]HU\u0003GRRU\u0003WR\u0003DOORZ\u0003DFFHVV\u0003"
+          ],
+          "evidence": "GE manual, page 47: \"Normal\"",
+          "source": {
+            "line": 30,
+            "manual": "GE manual",
+            "page": 47
+          }
+        }
+      ]
+    },
+    {
+      "id": "low-brewing-flow-rate-rz-euhzlqj-iorz-ud",
+      "symptom": "Low brewing flow rate /RZ\u0003EUHZLQJ\u0003IORZ\u0003UDWH\u0003\u0012\u0003ZDWHU\u0003GULSV\u0003 from inner door Brewer is not detected or hot water leaking from top of the brewer",
+      "causes": [
+        {
+          "id": "low-brewing-flow-rate-rz-euhzlqj-iorz-ud-1",
+          "label": "Top needle of the brewer clogged ,QFRUUHFW\u0003DVVHPEO\\\u0003RI\u0003EUHZHU\u0003LQ\u0003WKH\u0003 bracket",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "8QFORJ\u0003WKH\u0003WRS\u0003QHHGOH\u0003KROHV\u0003XVLQJ\u0003D\u0003 paper clip and rinse brewer.",
+            "Rinse brewer after every use. 0DNH\u0003VXUH\u0003WKH\u0003.HXULJ\u0003/RJR\u0003LV\u0003LQ\u0003WKH\u0003 front.",
+            "Push brewer all the way in the brackets"
+          ],
+          "evidence": "GE manual, page 47: \"Top needle of the brewer clogged ,QFRUUHFW\u0003DVVHPEO\\\u0003RI\u0003EUHZHU\u0003LQ\u0003WKH\u0003 bracket\"",
+          "source": {
+            "line": 36,
+            "manual": "GE manual",
+            "page": 47
+          }
+        }
+      ]
+    },
+    {
+      "id": "coffee-dispensed-with-splash-or-bubble-b",
+      "symptom": "Coffee dispensed with splash or bubble bursting *Select Models Only",
+      "causes": [
+        {
+          "id": "coffee-dispensed-with-splash-or-bubble-b-0",
+          "label": "Blocked vent hole in the brewer",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure the vent hole at the bottom of the brewer is clear from food or any other contamination"
+          ],
+          "evidence": "GE manual, page 47: \"Blocked vent hole in the brewer\"",
+          "source": {
+            "line": 42,
+            "manual": "GE manual",
+            "page": 47
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "not-cooling-dwhu-kdv-srru-wdvwh-rgru",
+    "water-in-glass-is-warm",
+    "water-dispenser-does-not-work",
+    "beverage-quality-not-as-expected-liquid-",
+    "brewer-leaks-during-the-brew-cycle-selec",
+    "water-filter-indicated-as-installed-inco-1",
+    "water-filter-indicated-as-installed-inco-2",
+    "auto-fill-xqghu-iloo-qr-iloo-0",
+    "auto-fill-overfills-uhh-hu-frrolqj-iuhvk-0",
+    "low-brewing-flow-rate-rz-euhzlqj-iorz-ud-0"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-04T09:43:06.347Z",
+  "learnedAt": "2026-10-04T09:26:53.148Z"
+}

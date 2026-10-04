@@ -259,7 +259,9 @@ function looksGarbled(text) {
  *
  * It also stops the pipeline paying a vision model to re-read a table whose codes do not exist.
  */
-const SYMPTOM_HEADING = /\bcause\s+and\s+troubleshooting\b|\bfault\s+cause\s+and\s+remedy\b/i;
+// The third alternative is the three-column kind — Problem | Possible Cause | What To Do — which GE
+// and most North American manuals print (manual/symptoms.js, readThreeColumns).
+const SYMPTOM_HEADING = /\bcause\s+and\s+troubleshooting\b|\bfault\s+cause\s+and\s+remedy\b|^\s*(?:Problem|Symptom|Issue|Fault|[A-Z][A-Za-z&\/ -]{2,28}?(?=\s{2,}(?:Possible|Probable)\s))\s{2,}(?:Possible\s+|Probable\s+)?(?:Causes?|Reasons?)\s{2,}(?:What To Do|Solutions?|Remed(?:y|ies)|Corrective Action|Action|Fix)\s*$/im;
 const ANY_CODE = /\b(?:fault|error)\s+code\b|^\s*(?:E:?\s?\d{1,3}|F\d{1,2}|[A-Z]\d[A-Z]?)\s{2,}/im;
 
 /**
@@ -331,7 +333,7 @@ function scorePage(text) {
  */
 // "Issue" and "Malfunction" as in manual/symptoms.js — two copies of this rule drifted once
 // (symptoms.js learned "Issue", this did not, and every range hood came back empty).
-const TABLE_HEADER = /^(\s*)(?:Fault|Problem|Symptom|Issue|Malfunction)\s{2,}(?:Cause and troubleshooting|Cause and remedy|Cause\b.*)$/im;
+const TABLE_HEADER = /^(\s*)(?:(?:Fault|Problem|Symptom|Issue|Malfunction)\s{2,}(?:Cause and troubleshooting|Cause and remedy|Cause\b.*|(?:Possible\s+|Probable\s+)?(?:Causes?|Reasons?)\s{2,}(?:What To Do|Solutions?|Remed(?:y|ies)|Corrective Action|Action|Fix)\s*)|[A-Z][A-Za-z&\/ -]{2,28}?\s{2,}(?:Possible|Probable)\s+(?:Causes?|Reasons?)\s{2,}(?:What To Do|Solutions?|Remed(?:y|ies)|Corrective Action|Action|Fix)\s*)$/im;
 
   /*
    * ── A page that carries the header outranks one that merely looks like a table ──

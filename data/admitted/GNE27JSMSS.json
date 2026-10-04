@@ -1,0 +1,611 @@
+{
+  "model": "GNE27JSMSS",
+  "brand": "GE",
+  "kind": "Refrigerator",
+  "source": "GNE27JSMSS.pdf",
+  "pages": "45–47",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "refrigerator-does-not-operate",
+      "symptom": "Refrigerator does not operate",
+      "causes": [
+        {
+          "id": "refrigerator-does-not-operate-0",
+          "label": "Refrigerator in defrost cycle.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wait about 30 minutes for defrost cycle to end."
+          ],
+          "evidence": "GE manual, page 45: \"Refrigerator in defrost cycle.\"",
+          "source": {
+            "line": 5,
+            "manual": "GE manual",
+            "page": 45
+          }
+        },
+        {
+          "id": "refrigerator-does-not-operate-1",
+          "label": "(LWKHU\u0003RU\u0003ERWK\u0003FRQWUROV\u0003VHW\u0003WR\u00032))\u0011\u0003",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Set the controls to a lower temperature setting."
+          ],
+          "evidence": "GE manual, page 45: \"(LWKHU\u0003RU\u0003ERWK\u0003FRQWUROV\u0003VHW\u0003WR\u00032))\u0011\u0003\"",
+          "source": {
+            "line": 6,
+            "manual": "GE manual",
+            "page": 45
+          }
+        },
+        {
+          "id": "refrigerator-does-not-operate-2",
+          "label": "Refrigerator is unplugged.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Push the plug completely into the outlet."
+          ],
+          "evidence": "GE manual, page 45: \"Refrigerator is unplugged.\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 45
+          }
+        },
+        {
+          "id": "refrigerator-does-not-operate-3",
+          "label": "The fuse is blown/circuit breaker is tripped.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Replace fuse or reset the breaker."
+          ],
+          "evidence": "GE manual, page 45: \"The fuse is blown/circuit breaker is tripped.\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 45
+          }
+        },
+        {
+          "id": "refrigerator-does-not-operate-4",
+          "label": "Refrigerator is in showroom mode.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "8QSOXJ\u0003WKH\u0003UHIULJHUDWRU\u0003DQG\u0003SOXJ\u0003LW\u0003EDFN\u0003LQ\u0011"
+          ],
+          "evidence": "GE manual, page 45: \"Refrigerator is in showroom mode.\"",
+          "source": {
+            "line": 10,
+            "manual": "GE manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "vibration-or-rattling-slight-vibration-i",
+      "symptom": "Vibration or rattling (slight vibration is normal)",
+      "causes": [
+        {
+          "id": "vibration-or-rattling-slight-vibration-i-0",
+          "label": "Leveling legs need adjusting.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See Level the refrigerator."
+          ],
+          "evidence": "GE manual, page 45: \"Leveling legs need adjusting.\"",
+          "source": {
+            "line": 11,
+            "manual": "GE manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "motor-operates-for-long-periods-or-cycle",
+      "symptom": "Motor operates for long periods or cycles on and off frequently. (Modern refrigerators with more storage space",
+      "causes": [
+        {
+          "id": "motor-operates-for-long-periods-or-cycle-0",
+          "label": "Normal when refrigerator is first plugged in.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wait 24 hours for the refrigerator to completely cool down."
+          ],
+          "evidence": "GE manual, page 45: \"Normal when refrigerator is first plugged in.\"",
+          "source": {
+            "line": 13,
+            "manual": "GE manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "dqg-d-odujhu-iuhh-hu-uhtxluh-pruh-operat",
+      "symptom": "DQG\u0003D\u0003ODUJHU\u0003IUHH]HU\u0003UHTXLUH\u0003PRUH\u0003 operating time. They start and stop often to maintain even temperatures.)",
+      "causes": [
+        {
+          "id": "dqg-d-odujhu-iuhh-hu-uhtxluh-pruh-operat-0",
+          "label": "Often occurs when large amounts of food are placed in refrigerator. 'RRU\u0003OHIW\u0003RSHQ\u0011\u0003",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal.",
+            "Check to see if package is holding door open."
+          ],
+          "evidence": "GE manual, page 45: \"Often occurs when large amounts of food are placed in refrigerator. 'RRU\u0003OHIW\u0003RSHQ\u0011\u0003\"",
+          "source": {
+            "line": 16,
+            "manual": "GE manual",
+            "page": 45
+          }
+        },
+        {
+          "id": "dqg-d-odujhu-iuhh-hu-uhtxluh-pruh-operat-1",
+          "label": "Hot weather or frequent door openings.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 45: \"Hot weather or frequent door openings.\"",
+          "source": {
+            "line": 19,
+            "manual": "GE manual",
+            "page": 45
+          }
+        },
+        {
+          "id": "dqg-d-odujhu-iuhh-hu-uhtxluh-pruh-operat-2",
+          "label": "Temperature controls set at the coldest setting.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "See Controls section"
+          ],
+          "evidence": "GE manual, page 45: \"Temperature controls set at the coldest setting.\"",
+          "source": {
+            "line": 20,
+            "manual": "GE manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "5hiuljhudwru-ru-iuhh-hu-frpsduwphqw-too-",
+      "symptom": "5HIULJHUDWRU\u0003RU\u0003IUHH]HU\u0003FRPSDUWPHQW\u0003 too warm )URVW\u0003RU\u0003LFH\u0003FU\\VWDOV\u0003RQ\u0003IUR]HQ\u0003IRRG\u0003 (frost within package is normal) 'LYLGHU\u0003EHWZHHQ\u0003UHIULJHUDWRU\u0003DQG\u0003 IUHH]HU\u0003FRPSDUWPHQWV\u0003IHHOV\u0003ZDUP Automatic icemaker does not work )UHH]HU\u0003FRROLQJ\u000f\u0003UHIULJHUDWRU\u0003QRW\u0003 cooling ,FH\u0003GLVSHQVHU\u0003RSHQV\u0003DIWHU\u0003FORVLQJ\u0003 IUHH]HU\u0003GUDZHU\u0003 RQ\u0003VRPH\u0003PRGHOV ,FH\u0003FXEHV\u0003KDYH\u0003RGRU\u0012WDVWH\u0003",
+      "causes": [
+        {
+          "id": "5hiuljhudwru-ru-iuhh-hu-frpsduwphqw-too--0",
+          "label": "Temperature control not set cold enough.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See Controls section"
+          ],
+          "evidence": "GE manual, page 45: \"Temperature control not set cold enough.\"",
+          "source": {
+            "line": 22,
+            "manual": "GE manual",
+            "page": 45
+          }
+        },
+        {
+          "id": "5hiuljhudwru-ru-iuhh-hu-frpsduwphqw-too--1",
+          "label": "Warm weather or frequent door openings. 'RRU\u0003OHIW\u0003RSHQ\u0011\u0003 'RRU\u0003OHIW\u0003RSHQ\u0011\u0003",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Set the temperature control one step colder.",
+            "See Controls section Check to see if package is holding door open.",
+            "Check to see if package is holding door open."
+          ],
+          "evidence": "GE manual, page 45: \"Warm weather or frequent door openings. 'RRU\u0003OHIW\u0003RSHQ\u0011\u0003 'RRU\u0003OHIW\u0003RSHQ\u0011\u0003\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 45
+          }
+        },
+        {
+          "id": "5hiuljhudwru-ru-iuhh-hu-frpsduwphqw-too--2",
+          "label": "Too frequent or too long door openings.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 45: \"Too frequent or too long door openings.\"",
+          "source": {
+            "line": 29,
+            "manual": "GE manual",
+            "page": 45
+          }
+        },
+        {
+          "id": "5hiuljhudwru-ru-iuhh-hu-frpsduwphqw-too--4",
+          "label": "Water supply turned off or not connected. )UHH]HU\u0003FRPSDUWPHQW\u0003WRR\u0003ZDUP\u0011\u0003",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "6HH\u0003,QVWDOOLQJ\u0003WKH\u0003:DWHU\u0003/LQH\u0003VHFWLRQ Wait 24 hours for the refrigerator to completely cool down."
+          ],
+          "evidence": "GE manual, page 45: \"Water supply turned off or not connected. )UHH]HU\u0003FRPSDUWPHQW\u0003WRR\u0003ZDUP\u0011\u0003\"",
+          "source": {
+            "line": 34,
+            "manual": "GE manual",
+            "page": 45
+          }
+        },
+        {
+          "id": "5hiuljhudwru-ru-iuhh-hu-frpsduwphqw-too--5",
+          "label": "Piled up cubes in the storage bin cause the icemaker to shut off. ,FH\u0003FXEHV\u0003VWXFN\u0003LQ\u0003LFHPDNHU\u0011\u0003 )LOWHU\u0003LV\u0003QRW\u0003SURSHUO\\\u0003LQVWDOOHG )LOWHU\u0003ZDWHU\u0003OHDN",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "Level cubes by hand.",
+            "Turn off the icemaker, remove cubes, and turn the icemaker back on.",
+            "Replace filter or make sure the water filter is properly installed (see water filter section)."
+          ],
+          "evidence": "GE manual, page 45: \"Piled up cubes in the storage bin cause the icemaker to shut off. ,FH\u0003FXEHV\u0003VWXFN\u0003LQ\u0003LFHPDNHU\u0011\u0003 )LOWHU\u0003LV\u0003QRW\u0003SURSHUO\\\u0003LQVWDOOHG )LOWHU\u0003ZDWHU\u0003OHDN\"",
+          "source": {
+            "line": 38,
+            "manual": "GE manual",
+            "page": 45
+          }
+        },
+        {
+          "id": "5hiuljhudwru-ru-iuhh-hu-frpsduwphqw-too--6",
+          "label": "Normal, when refrigerator first plugged in or after extended power outage",
+          "likelihood": 0.132,
+          "cost": null,
+          "remedies": [
+            "Wait 24 hours for temperature in both compartments to reach selected temperatures."
+          ],
+          "evidence": "GE manual, page 45: \"Normal, when refrigerator first plugged in or after extended power outage\"",
+          "source": {
+            "line": 44,
+            "manual": "GE manual",
+            "page": 45
+          }
+        },
+        {
+          "id": "5hiuljhudwru-ru-iuhh-hu-frpsduwphqw-too--7",
+          "label": "Normal ,FH\u0003VWRUDJH\u0003ELQ\u0003QHHGV\u0003FOHDQLQJ\u0011\u0003 )RRG\u0003WUDQVPLWWLQJ\u0003RGRU\u0012WDVWH\u0003WR\u0003LFH\u0003 cubes. ,QWHULRU\u0003RI\u0003UHIULJHUDWRU\u0003QHHGV\u0003FOHDQLQJ\u0011\u0003",
+          "likelihood": 0.116,
+          "cost": null,
+          "remedies": [
+            "The ice dispenser door may open after closing IUHH]HU\u0003GRRU\u0003WR\u0003DOORZ\u0003DFFHVV\u0011\u0003 (PSW\\\u0003DQG\u0003ZDVK\u0003ELQ\u0011\u0003'LVFDUG\u0003ROG\u0003FXEHV\u0011 Wrap foods well.",
+            "See Care and Cleaning section."
+          ],
+          "evidence": "GE manual, page 45: \"Normal ,FH\u0003VWRUDJH\u0003ELQ\u0003QHHGV\u0003FOHDQLQJ\u0011\u0003 )RRG\u0003WUDQVPLWWLQJ\u0003RGRU\u0012WDVWH\u0003WR\u0003LFH\u0003 cubes. ,QWHULRU\u0003RI\u0003UHIULJHUDWRU\u0003QHHGV\u0003FOHDQLQJ\u0011\u0003\"",
+          "source": {
+            "line": 46,
+            "manual": "GE manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "small-or-hollow-cubes-6orz-lfh-fxeh-iuhh",
+      "symptom": "Small or hollow cubes 6ORZ\u0003LFH\u0003FXEH\u0003IUHH]LQJ\u0003 )UHTXHQW\u0003µEX]]LQJ\u0003VRXQG´\u0003",
+      "causes": [
+        {
+          "id": "small-or-hollow-cubes-6orz-lfh-fxeh-iuhh-0",
+          "label": "Water filter clogged. 'RRU\u0003OHIW\u0003RSHQ\u0011\u0003",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace filter cartridge with new cartridge or with plug.",
+            "Check to see if package is holding door open."
+          ],
+          "evidence": "GE manual, page 45: \"Water filter clogged. 'RRU\u0003OHIW\u0003RSHQ\u0011\u0003\"",
+          "source": {
+            "line": 52,
+            "manual": "GE manual",
+            "page": 45
+          }
+        },
+        {
+          "id": "small-or-hollow-cubes-6orz-lfh-fxeh-iuhh-1",
+          "label": "Temperature control not set cold enough. ,FHPDNHU\u0003VZLWFK\u0003LV\u0003LQ\u0003WKH\u0003RQ\u0003SRVLWLRQ\u000f\u0003 but the water supply to the refrigerator has not been connected.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See Controls section 6HW\u0003WKH\u0003VZLWFK\u0003WR\u0003WKH\u0003RII\u0003SRVLWLRQ\u0011\u0003.HHSLQJ\u0003LW\u0003LQ\u0003 the on position will damage the water valve."
+          ],
+          "evidence": "GE manual, page 45: \"Temperature control not set cold enough. ,FHPDNHU\u0003VZLWFK\u0003LV\u0003LQ\u0003WKH\u0003RQ\u0003SRVLWLRQ\u000f\u0003 but the water supply to the refrigerator has not been connected.\"",
+          "source": {
+            "line": 55,
+            "manual": "GE manual",
+            "page": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-has-poor-taste-odor",
+      "symptom": "Water has poor taste/odor",
+      "causes": [
+        {
+          "id": "water-has-poor-taste-odor-0",
+          "label": "Water dispenser has not been used for a long time.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "'LVSHQVH\u0003ZDWHU\u0003XQWLO\u0003DOO\u0003ZDWHU\u0003LQ\u0003V\\VWHP\u0003LV\u0003 replenished."
+          ],
+          "evidence": "GE manual, page 46: \"Water dispenser has not been used for a long time.\"",
+          "source": {
+            "line": 3,
+            "manual": "GE manual",
+            "page": 46
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-in-first-glass-is-warm",
+      "symptom": "Water in first glass is warm",
+      "causes": [
+        {
+          "id": "water-in-first-glass-is-warm-0",
+          "label": "Normal when refrigerator is first installed.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wait 24 hours for the refrigerator to completely cool down."
+          ],
+          "evidence": "GE manual, page 46: \"Normal when refrigerator is first installed.\"",
+          "source": {
+            "line": 5,
+            "manual": "GE manual",
+            "page": 46
+          }
+        },
+        {
+          "id": "water-in-first-glass-is-warm-1",
+          "label": "Water dispenser has not been used for a long time.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "'LVSHQVH\u0003ZDWHU\u0003XQWLO\u0003DOO\u0003ZDWHU\u0003LQ\u0003V\\VWHP\u0003LV\u0003 replenished."
+          ],
+          "evidence": "GE manual, page 46: \"Water dispenser has not been used for a long time.\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 46
+          }
+        },
+        {
+          "id": "water-in-first-glass-is-warm-2",
+          "label": "Water system has been drained.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Allow several hours for replenished supply to chill."
+          ],
+          "evidence": "GE manual, page 46: \"Water system has been drained.\"",
+          "source": {
+            "line": 9,
+            "manual": "GE manual",
+            "page": 46
+          }
+        }
+      ]
+    },
+    {
+      "id": "no-water-or-ice-cube-production-refriger",
+      "symptom": "No water or ice cube production Refrigerator has odor Moisture forms on outside of refrigerator",
+      "causes": [
+        {
+          "id": "no-water-or-ice-cube-production-refriger-0",
+          "label": "Supply line or shutoff valve is clogged.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Call a plumber."
+          ],
+          "evidence": "GE manual, page 46: \"Supply line or shutoff valve is clogged.\"",
+          "source": {
+            "line": 20,
+            "manual": "GE manual",
+            "page": 46
+          }
+        }
+      ]
+    },
+    {
+      "id": "moisture-collects-inside-in-humid-weathe",
+      "symptom": "Moisture collects inside (in humid weather, air carries moisture into refrigerator when doors are opened) ,QWHULRU\u0003OLJKW\u0003GRHV\u0003QRW\u0003ZRUN\u0003 Hot air from bottom of refrigerator",
+      "causes": [
+        {
+          "id": "moisture-collects-inside-in-humid-weathe-0",
+          "label": "Too frequent or too long door openings. 'XH\u0003WR\u0003WKH\u0003KLJKHU\u0003KXPLGLW\\\u0003LQ\u0003WKH\u0003 refrigerator, you may on occasion experience fog or small amounts of moisture in the refrigerator compartment.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal.",
+            "This is normal and may come and go as different food loads and environmental conditions change.",
+            "Wipe dry with a paper towel if desired."
+          ],
+          "evidence": "GE manual, page 46: \"Too frequent or too long door openings. 'XH\u0003WR\u0003WKH\u0003KLJKHU\u0003KXPLGLW\\\u0003LQ\u0003WKH\u0003 refrigerator, you may on occasion experience fog or small amounts of moisture in the refrigerator compartment.\"",
+          "source": {
+            "line": 31,
+            "manual": "GE manual",
+            "page": 46
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-is-leaking-from-dispenser",
+      "symptom": "Water is leaking from dispenser",
+      "causes": [
+        {
+          "id": "water-is-leaking-from-dispenser-0",
+          "label": "Glass not being held under the dispenser long enough after button is released.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Hold the glass underneath the dispenser for 2–3 seconds after releasing the dispenser button.",
+            "Water may continue to dispense after the button is released"
+          ],
+          "evidence": "GE manual, page 47: \"Glass not being held under the dispenser long enough after button is released.\"",
+          "source": {
+            "line": 12,
+            "manual": "GE manual",
+            "page": 47
+          }
+        },
+        {
+          "id": "water-is-leaking-from-dispenser-1",
+          "label": "Air may be present in the water line system, causing water to drip after being dispensed.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "'LVSHQVH\u0003ZDWHU\u0003IRU\u0003DW\u0003OHDVW\u0003\u0015\u0003PLQXWHV\u0003WR\u0003UHPRYH\u0003DLU\u0003IURP\u0003 system."
+          ],
+          "evidence": "GE manual, page 47: \"Air may be present in the water line system, causing water to drip after being dispensed.\"",
+          "source": {
+            "line": 15,
+            "manual": "GE manual",
+            "page": 47
+          }
+        }
+      ]
+    },
+    {
+      "id": "my-display-is-showing-tc",
+      "symptom": "My display is showing tc",
+      "causes": [
+        {
+          "id": "my-display-is-showing-tc-0",
+          "label": "Turbo Cool function is activated.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See Controls section"
+          ],
+          "evidence": "GE manual, page 47: \"Turbo Cool function is activated.\"",
+          "source": {
+            "line": 18,
+            "manual": "GE manual",
+            "page": 47
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-filter-indicator-light-changed-col",
+      "symptom": "Water filter indicator light changed color Water filter indicator light remains red even after replacing the water filter",
+      "causes": [
+        {
+          "id": "water-filter-indicator-light-changed-col-1",
+          "label": "Water filter indicator must be reset (on some models).",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "3UHVV\u0003DQG\u0003KROG\u0003WKH\u0003:$7(5\u0003),/7(5\u0003SDG\u0003IRU\u0003\u0016\u0003VHFRQGV\u0011\u0003 6HH\u0003:DWHU\u0003)LOWHU\u0003&DUWULGJH"
+          ],
+          "evidence": "GE manual, page 47: \"Water filter indicator must be reset (on some models).\"",
+          "source": {
+            "line": 25,
+            "manual": "GE manual",
+            "page": 47
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-filter-indicator-light-is-not-lit",
+      "symptom": "Water filter indicator light is not lit",
+      "causes": [
+        {
+          "id": "water-filter-indicator-light-is-not-lit-0",
+          "label": "This is normal. The filter cartridge should be replaced when the replacement indicator light turns red.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "6HH\u0003:DWHU\u0003)LOWHU\u0003&DUWULGJH\u0003\u0010\u00030:)\u0003RU\u0003;:)(\u0003VHFWLRQ"
+          ],
+          "evidence": "GE manual, page 47: \"This is normal. The filter cartridge should be replaced when the replacement indicator light turns red.\"",
+          "source": {
+            "line": 27,
+            "manual": "GE manual",
+            "page": 47
+          }
+        }
+      ]
+    },
+    {
+      "id": "handle-is-loose-handle-has-a-gap-refrige",
+      "symptom": "Handle is loose / handle has a gap Refrigerator doors are not even RQ\u0003)UHQFK\u0003'RRU\u0003PRGHOV\u0003RQO\\",
+      "causes": [
+        {
+          "id": "handle-is-loose-handle-has-a-gap-refrige-0",
+          "label": "Handle needs adjusting. 'RRUV\u0003QHHG\u0003UHDOLJQLQJ\u0011\u0003",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "6HH\u0003$WWDFK\u0003WKH\u00035HIULJHUDWRU\u0003+DQGOH\u0003DQG\u0003$WWDFK\u0003WKH\u0003)UHH]HU\u0003 Handle sections 6HH\u0003/HYHO\u0003WKH\u00035HIULJHUDWRU\u0003'RRUV\u0003VHFWLRQ\u0011"
+          ],
+          "evidence": "GE manual, page 47: \"Handle needs adjusting. 'RRUV\u0003QHHG\u0003UHDOLJQLQJ\u0011\u0003\"",
+          "source": {
+            "line": 31,
+            "manual": "GE manual",
+            "page": 47
+          }
+        }
+      ]
+    },
+    {
+      "id": "baskets-stick-or-jam-when-opening-or-clo",
+      "symptom": "Baskets stick or jam when opening or closing )LOWHU\u00036WDWXV\u0003,QGLFDWRU\u0003/('\u0003WXUQV\u0003 red",
+      "causes": [
+        {
+          "id": "baskets-stick-or-jam-when-opening-or-clo-0",
+          "label": "Baskets are too full. )LOWHU\u0003UHDFKLQJ\u0003H[SLUHG\u0003VWDWH\u0003RU\u0003 expired",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "To open: remove some of the products from the basket when opened as far as possible.",
+            "Readjust the products left in the basket and try to open the basket again.",
+            "To close: readjust products in the basket or remove any product that is above the rim of the basket and close the basket.",
+            "Press the Filter Status pad to show remaining filter life. ,I\u0003WKH\u0003GLVSOD\\\u0003VKRZV\u0003\u0013\b\u000f\u0003WKH\u0003ILOWHU\u0003QHHGV\u0003WR\u0003EH\u0003UHSODFHG\u0011 When the unit has detected a new filter (a filter has been UHSODFHG \u0003WKH\u0003)LOWHU\u00036WDWXV\u0003/('\u0003ZLOO\u0003IODVK\u0003\u0016\u0003WLPHV\u0003DQG\u0003WKHQ\u0003 remain off to indicate the filter was successfully replaced."
+          ],
+          "evidence": "GE manual, page 47: \"Baskets are too full. )LOWHU\u0003UHDFKLQJ\u0003H[SLUHG\u0003VWDWH\u0003RU\u0003 expired\"",
+          "source": {
+            "line": 35,
+            "manual": "GE manual",
+            "page": 47
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "actual-temperature-not-equal-to-set-temp",
+    "5hiuljhudwru-ru-iuhh-hu-frpsduwphqw-too--3",
+    "no-water-or-ice-cube-production-refriger-1",
+    "moisture-collects-inside-in-humid-weathe-1",
+    "water-filter-indicator-light-changed-col-0"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-04T09:43:10.798Z",
+  "learnedAt": "2026-10-04T09:26:56.799Z"
+}

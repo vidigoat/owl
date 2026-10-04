@@ -1,0 +1,541 @@
+{
+  "model": "PDWF800RBB",
+  "brand": "GE",
+  "kind": "Dishwasher",
+  "alsoCovers": [
+    "GDWT200RWW",
+    "GDWT360RSS",
+    "PDWT180RSS",
+    "PDWT400RBB",
+    "PDWT500RWW"
+  ],
+  "source": "PDWF800RBB.pdf",
+  "pages": "17–20",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "start-reset-status",
+      "symptom": "START/RESET status",
+      "causes": [
+        {
+          "id": "start-reset-status-0",
+          "label": "You have pressed the",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Press the START/RESET pad only one time to start the dishwasher.",
+            "When the"
+          ],
+          "evidence": "GE manual, page 18: \"You have pressed the\"",
+          "source": {
+            "line": 10,
+            "manual": "GE manual",
+            "page": 18
+          }
+        }
+      ]
+    },
+    {
+      "id": "beeping-at-the-end-of-the-cycle",
+      "symptom": "Beeping at the end of the cycle",
+      "causes": [
+        {
+          "id": "beeping-at-the-end-of-the-cycle-0",
+          "label": "This is normal. The dishwasher will beep twice at the end of the cycle.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "To turn off the double beep indicator (or re-activate it if it was previously turned off), press the HEATED DRY pad 5 times within 3 seconds.",
+            "A triple beep will sound to indicate the end-of-cycle beep option has been turned on or off."
+          ],
+          "evidence": "GE manual, page 18: \"This is normal. The dishwasher will beep twice at the end of the cycle.\"",
+          "source": {
+            "line": 33,
+            "manual": "GE manual",
+            "page": 18
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishes-and-flatware-not-clean",
+      "symptom": "Dishes and flatware not clean",
+      "causes": [
+        {
+          "id": "dishes-and-flatware-not-clean-0",
+          "label": "Low inlet water temperature",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure inlet water temperature is correct (see page 10).",
+            "Turn on the hot water faucet nearest the dishwasher; let run until the water temperature stops rising.",
+            "Then start the dishwasher and turn off the faucet.",
+            "This ensures the entering water is hot.",
+            "Try not to use the dishwasher when hot water is being used elsewhere in the house; for example, when doing laundry or when a family member is using the shower."
+          ],
+          "evidence": "GE manual, page 18: \"Low inlet water temperature\"",
+          "source": {
+            "line": 43,
+            "manual": "GE manual",
+            "page": 18
+          }
+        }
+      ]
+    },
+    {
+      "id": "spots-and-filming-on-glasses-and-flatwar",
+      "symptom": "Spots and filming on glasses and flatware",
+      "causes": [
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-1",
+          "label": "Overloading the dishwasher",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Load dishwasher as shown in the Loading Place Settings section."
+          ],
+          "evidence": "GE manual, page 19: \"Overloading the dishwasher\"",
+          "source": {
+            "line": 10,
+            "manual": "GE manual",
+            "page": 19
+          }
+        },
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-2",
+          "label": "Improper loading",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Make sure detergent is fresh."
+          ],
+          "evidence": "GE manual, page 19: \"Improper loading\"",
+          "source": {
+            "line": 12,
+            "manual": "GE manual",
+            "page": 19
+          }
+        },
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-4",
+          "label": "Too little detergent",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [],
+          "evidence": "GE manual, page 19: \"Too little detergent\"",
+          "source": {
+            "line": 20,
+            "manual": "GE manual",
+            "page": 19
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloudiness-on-glassware",
+      "symptom": "Cloudiness on glassware",
+      "causes": [
+        {
+          "id": "cloudiness-on-glassware-0",
+          "label": "Combination of soft water and too much detergent",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is called etching and is permanent.",
+            "To prevent this from happening, use less detergent if you have soft water.",
+            "Wash glassware in the shortest cycle that will get them clean.",
+            "See pages 11, 12 and 13."
+          ],
+          "evidence": "GE manual, page 19: \"Combination of soft water and too much detergent\"",
+          "source": {
+            "line": 21,
+            "manual": "GE manual",
+            "page": 19
+          }
+        },
+        {
+          "id": "cloudiness-on-glassware-1",
+          "label": "Water temperature entering the dishwasher exceeds 150°F",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "This could be etching.",
+            "Lower the water heater temperature."
+          ],
+          "evidence": "GE manual, page 19: \"Water temperature entering the dishwasher exceeds 150°F\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 19
+          }
+        }
+      ]
+    },
+    {
+      "id": "suds-in-the-tub",
+      "symptom": "Suds in the tub",
+      "causes": [
+        {
+          "id": "suds-in-the-tub-0",
+          "label": "Correct detergent wasn’t used",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use only automatic dishwasher detergents to avoid sudsing.",
+            "Cascade® Automatic Dishwashing Detergents have been approved for use in all GE dishwashers.",
+            "To remove suds from the tub, open the dishwasher and let suds dissipate.",
+            "Close and latch the dishwasher door.",
+            "Pump out water by touching the START/RESET pad once; then 30 seconds later, touch the START/RESET pad again.",
+            "Repeat if necessary."
+          ],
+          "evidence": "GE manual, page 19: \"Correct detergent wasn’t used\"",
+          "source": {
+            "line": 26,
+            "manual": "GE manual",
+            "page": 19
+          }
+        },
+        {
+          "id": "suds-in-the-tub-1",
+          "label": "Rinse agent was spilled",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Always wipe up rinse agent spills immediately."
+          ],
+          "evidence": "GE manual, page 19: \"Rinse agent was spilled\"",
+          "source": {
+            "line": 33,
+            "manual": "GE manual",
+            "page": 19
+          }
+        }
+      ]
+    },
+    {
+      "id": "detergent-left-in-dispenser-cups",
+      "symptom": "Detergent left in dispenser cups",
+      "causes": [
+        {
+          "id": "detergent-left-in-dispenser-cups-0",
+          "label": "Dishes are blocking the detergent cup",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Reposition the dishes, so the water from the lower spray arm can flush the detergent cup.",
+            "See pages 15 and 16."
+          ],
+          "evidence": "GE manual, page 19: \"Dishes are blocking the detergent cup\"",
+          "source": {
+            "line": 34,
+            "manual": "GE manual",
+            "page": 19
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-in-the-smartdispense-dispenser",
+      "symptom": "Water in the SmartDispense™ dispenser",
+      "causes": [
+        {
+          "id": "water-in-the-smartdispense-dispenser-0",
+          "label": "Cap not tightened after filling the dispenser",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use a turkey baster to remove as much water as possible from the SmartDispense™ dispenser and refill it as normal.",
+            "Be sure to tighten the cap fully to prevent water from entering the dispenser."
+          ],
+          "evidence": "GE manual, page 19: \"Cap not tightened after filling the dispenser\"",
+          "source": {
+            "line": 36,
+            "manual": "GE manual",
+            "page": 19
+          }
+        }
+      ]
+    },
+    {
+      "id": "black-or-gray-marks-on-dishes",
+      "symptom": "Black or gray marks on dishes",
+      "causes": [
+        {
+          "id": "black-or-gray-marks-on-dishes-0",
+          "label": "Aluminum utensils have rubbed against dishes",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Remove marks with a mild, abrasive cleaner."
+          ],
+          "evidence": "GE manual, page 19: \"Aluminum utensils have rubbed against dishes\"",
+          "source": {
+            "line": 44,
+            "manual": "GE manual",
+            "page": 19
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishes-don-t-dry",
+      "symptom": "Dishes don’t dry",
+      "causes": [
+        {
+          "id": "dishes-don-t-dry-0",
+          "label": "Low inlet water temperature",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure inlet water temperature is at least 120°F.",
+            "Select HEATED DRY.",
+            "Use PRE-WASH or ADDED HEAT options.",
+            "Select a higher cycle, such as ANTI-BACTERIAL or COOKWARE."
+          ],
+          "evidence": "GE manual, page 19: \"Low inlet water temperature\"",
+          "source": {
+            "line": 46,
+            "manual": "GE manual",
+            "page": 19
+          }
+        },
+        {
+          "id": "dishes-don-t-dry-1",
+          "label": "Rinse agent dispenser is empty",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the rinse agent dispenser and fill as required."
+          ],
+          "evidence": "GE manual, page 19: \"Rinse agent dispenser is empty\"",
+          "source": {
+            "line": 50,
+            "manual": "GE manual",
+            "page": 19
+          }
+        }
+      ]
+    },
+    {
+      "id": "stained-tub-interior",
+      "symptom": "Stained tub interior",
+      "causes": [
+        {
+          "id": "stained-tub-interior-0",
+          "label": "Some tomato-based foods can cause reddish stains",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use of the RINSE AND HOLD cycle after adding the dish to the load can decrease the level of staining."
+          ],
+          "evidence": "GE manual, page 19: \"Some tomato-based foods can cause reddish stains\"",
+          "source": {
+            "line": 51,
+            "manual": "GE manual",
+            "page": 19
+          }
+        },
+        {
+          "id": "stained-tub-interior-1",
+          "label": "Tea or coffee stains",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Remove the stain by hand, using a solution of 1/2 cup bleach and 3 cups warm water.",
+            "WARNING Before cleaning interior, wait at least 20 minutes after a cycle for the heating elements to cool down.",
+            "Failure to do so can result in burns.",
+            "ADVERTENCIA Antes de limpiar el interior, espere por lo menos 20 minutos después de un ciclo para que los elementos calentadores se enfríen.",
+            "No hacerlo puede provocar quemaduras."
+          ],
+          "evidence": "GE manual, page 19: \"Tea or coffee stains\"",
+          "source": {
+            "line": 53,
+            "manual": "GE manual",
+            "page": 19
+          }
+        }
+      ]
+    },
+    {
+      "id": "control-panel-lights-go-off-when-you-re-",
+      "symptom": "Control panel lights go off when you’re setting controls",
+      "causes": [
+        {
+          "id": "control-panel-lights-go-off-when-you-re--0",
+          "label": "Time too long between touching of selected pads",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Each pad must be touched within 5 minutes of the others.",
+            "To relight, touch any pad again, or unlock and relatch door."
+          ],
+          "evidence": "GE manual, page 20: \"Time too long between touching of selected pads\"",
+          "source": {
+            "line": 30,
+            "manual": "GE manual",
+            "page": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-standing-in-the-bottom-of-the-tub",
+      "symptom": "Water standing in the bottom of the tub",
+      "causes": [
+        {
+          "id": "water-standing-in-the-bottom-of-the-tub-0",
+          "label": "This is normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "A small amount of clean water around the outlet on the tub bottom at the back of the tub keeps the pump seal lubricated."
+          ],
+          "evidence": "GE manual, page 20: \"This is normal\"",
+          "source": {
+            "line": 33,
+            "manual": "GE manual",
+            "page": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-won-t-pump-out-of-the-tub",
+      "symptom": "Water won’t pump out of the tub",
+      "causes": [
+        {
+          "id": "water-won-t-pump-out-of-the-tub-0",
+          "label": "Drain is clogged",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "If you have an air gap, clean it.",
+            "See page 17.",
+            "If the dishwasher drains into a disposer, run disposer clear.",
+            "Check to see if your kitchen sink is draining well.",
+            "If not, you may need a plumber."
+          ],
+          "evidence": "GE manual, page 20: \"Drain is clogged\"",
+          "source": {
+            "line": 35,
+            "manual": "GE manual",
+            "page": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "steam",
+      "symptom": "Steam",
+      "causes": [
+        {
+          "id": "steam-0",
+          "label": "This is normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Warm, moist air comes through the vent by the door latch during drying and when water is being pumped out (front-control models).",
+            "This is normal and necessary for drying."
+          ],
+          "evidence": "GE manual, page 20: \"This is normal\"",
+          "source": {
+            "line": 39,
+            "manual": "GE manual",
+            "page": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "sanitized-light-does-not-illuminate-at-t",
+      "symptom": "Sanitized light does not illuminate at the end of the cycle",
+      "causes": [
+        {
+          "id": "sanitized-light-does-not-illuminate-at-t-0",
+          "label": "The door was opened and the cycle was interrupted during or after the main wash portion",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Do not interrupt the cycle anytime during or after main wash."
+          ],
+          "evidence": "GE manual, page 20: \"The door was opened and the cycle was interrupted during or after the main wash portion\"",
+          "source": {
+            "line": 47,
+            "manual": "GE manual",
+            "page": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "anti-bacteria-cycle-only",
+      "symptom": "(Anti-Bacteria cycle only)",
+      "causes": [
+        {
+          "id": "anti-bacteria-cycle-only-0",
+          "label": "The incoming water temperature was too low",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Raise the water heater temperature to between 120°F and 140°F."
+          ],
+          "evidence": "GE manual, page 20: \"The incoming water temperature was too low\"",
+          "source": {
+            "line": 50,
+            "manual": "GE manual",
+            "page": 20
+          }
+        },
+        {
+          "id": "anti-bacteria-cycle-only-1",
+          "label": "The cycle is complete and the door has been open for longer than 60 seconds",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "This is normal.",
+            "No action is required."
+          ],
+          "evidence": "GE manual, page 20: \"The cycle is complete and the door has been open for longer than 60 seconds\"",
+          "source": {
+            "line": 52,
+            "manual": "GE manual",
+            "page": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "noise",
+      "symptom": "Noise",
+      "causes": [
+        {
+          "id": "noise-2",
+          "label": "Rattling dishes when the spray arm rotates",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Make sure dishes are properly loaded.",
+            "See the Loading the dishwasher racks section."
+          ],
+          "evidence": "GE manual, page 20: \"Rattling dishes when the spray arm rotates\"",
+          "source": {
+            "line": 70,
+            "manual": "GE manual",
+            "page": 20
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "spots-and-filming-on-glasses-and-flatwar-0",
+    "spots-and-filming-on-glasses-and-flatwar-3",
+    "noise-0",
+    "noise-1"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-04T09:43:21.429Z",
+  "learnedAt": "2026-10-04T09:51:15.934Z"
+}

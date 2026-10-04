@@ -1,0 +1,527 @@
+{
+  "model": "GTS10AAMRWW",
+  "brand": "GE",
+  "kind": "Refrigerator",
+  "source": "GTS10AAMRWW.pdf",
+  "pages": "11–12",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "refrigerator-does-not-operate",
+      "symptom": "Refrigerator does not operate",
+      "causes": [
+        {
+          "id": "refrigerator-does-not-operate-0",
+          "label": "Temperature control set to OFF.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Set the control to a temperature setting."
+          ],
+          "evidence": "GE manual, page 11: \"Temperature control set to OFF.\"",
+          "source": {
+            "line": 12,
+            "manual": "GE manual",
+            "page": 11
+          }
+        },
+        {
+          "id": "refrigerator-does-not-operate-1",
+          "label": "Refrigerator is unplugged.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Push the plug completely into the outlet."
+          ],
+          "evidence": "GE manual, page 11: \"Refrigerator is unplugged.\"",
+          "source": {
+            "line": 14,
+            "manual": "GE manual",
+            "page": 11
+          }
+        },
+        {
+          "id": "refrigerator-does-not-operate-2",
+          "label": "The fuse is blown/circuit breaker is tripped.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Replace fuse or reset the breaker."
+          ],
+          "evidence": "GE manual, page 11: \"The fuse is blown/circuit breaker is tripped.\"",
+          "source": {
+            "line": 20,
+            "manual": "GE manual",
+            "page": 11
+          }
+        }
+      ]
+    },
+    {
+      "id": "vibration-or-rattling-slight-vibration-i",
+      "symptom": "Vibration or rattling (slight vibration is normal)",
+      "causes": [
+        {
+          "id": "vibration-or-rattling-slight-vibration-i-0",
+          "label": "Leveling legs need adjustment.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See Leveling Legs."
+          ],
+          "evidence": "GE manual, page 11: \"Leveling legs need adjustment.\"",
+          "source": {
+            "line": 23,
+            "manual": "GE manual",
+            "page": 11
+          }
+        },
+        {
+          "id": "vibration-or-rattling-slight-vibration-i-1",
+          "label": "Floor is weak.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Install on a floor strong enough to support the refrigerator fully loaded."
+          ],
+          "evidence": "GE manual, page 11: \"Floor is weak.\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 11
+          }
+        },
+        {
+          "id": "vibration-or-rattling-slight-vibration-i-2",
+          "label": "Floor is uneven.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Leveling legs need adjusting.",
+            "See Leveling Legs."
+          ],
+          "evidence": "GE manual, page 11: \"Floor is uneven.\"",
+          "source": {
+            "line": 26,
+            "manual": "GE manual",
+            "page": 11
+          }
+        }
+      ]
+    },
+    {
+      "id": "motor-operates-for-long-periods-or-cycle",
+      "symptom": "Motor operates for long periods or cycles on and off frequently.",
+      "causes": [
+        {
+          "id": "motor-operates-for-long-periods-or-cycle-0",
+          "label": "Normal when refrigerator is first plugged in.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wait 24 hours for the refrigerator to completely cool down."
+          ],
+          "evidence": "GE manual, page 11: \"Normal when refrigerator is first plugged in.\"",
+          "source": {
+            "line": 27,
+            "manual": "GE manual",
+            "page": 11
+          }
+        },
+        {
+          "id": "motor-operates-for-long-periods-or-cycle-1",
+          "label": "Often occurs when large amounts of food are placed in refrigerator.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 11: \"Often occurs when large amounts of food are placed in refrigerator.\"",
+          "source": {
+            "line": 29,
+            "manual": "GE manual",
+            "page": 11
+          }
+        },
+        {
+          "id": "motor-operates-for-long-periods-or-cycle-2",
+          "label": "Door left open.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Check to see if package is holding door open.",
+            "Door not closing.",
+            "Make sure refrigerator is tilted properly.",
+            "See Leveling Legs."
+          ],
+          "evidence": "GE manual, page 11: \"Door left open.\"",
+          "source": {
+            "line": 37,
+            "manual": "GE manual",
+            "page": 11
+          }
+        },
+        {
+          "id": "motor-operates-for-long-periods-or-cycle-3",
+          "label": "Hot weather or frequent door openings.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 11: \"Hot weather or frequent door openings.\"",
+          "source": {
+            "line": 40,
+            "manual": "GE manual",
+            "page": 11
+          }
+        },
+        {
+          "id": "motor-operates-for-long-periods-or-cycle-4",
+          "label": "Temperature controls set improperly.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "See About the controls."
+          ],
+          "evidence": "GE manual, page 11: \"Temperature controls set improperly.\"",
+          "source": {
+            "line": 42,
+            "manual": "GE manual",
+            "page": 11
+          }
+        }
+      ]
+    },
+    {
+      "id": "fresh-food-compartment-too-warm",
+      "symptom": "Fresh food compartment too warm",
+      "causes": [
+        {
+          "id": "fresh-food-compartment-too-warm-0",
+          "label": "Temperature control not set cold enough.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See About the controls."
+          ],
+          "evidence": "GE manual, page 11: \"Temperature control not set cold enough.\"",
+          "source": {
+            "line": 44,
+            "manual": "GE manual",
+            "page": 11
+          }
+        },
+        {
+          "id": "fresh-food-compartment-too-warm-1",
+          "label": "Warm weather or frequent door openings.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Set the temperature control one step colder.",
+            "See About the controls."
+          ],
+          "evidence": "GE manual, page 11: \"Warm weather or frequent door openings.\"",
+          "source": {
+            "line": 46,
+            "manual": "GE manual",
+            "page": 11
+          }
+        },
+        {
+          "id": "fresh-food-compartment-too-warm-2",
+          "label": "Door left open.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Check to see if package is holding door open."
+          ],
+          "evidence": "GE manual, page 11: \"Door left open.\"",
+          "source": {
+            "line": 53,
+            "manual": "GE manual",
+            "page": 11
+          }
+        },
+        {
+          "id": "fresh-food-compartment-too-warm-3",
+          "label": "Air discharge outlets obstructed by large items.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Rearrange items so outlets are not obstructed."
+          ],
+          "evidence": "GE manual, page 11: \"Air discharge outlets obstructed by large items.\"",
+          "source": {
+            "line": 54,
+            "manual": "GE manual",
+            "page": 11
+          }
+        }
+      ]
+    },
+    {
+      "id": "fresh-food-compartment-too-cold",
+      "symptom": "Fresh food compartment too cold",
+      "causes": [
+        {
+          "id": "fresh-food-compartment-too-cold-0",
+          "label": "Temperature control set too cold.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Set the temperature control one step warmer.",
+            "See About the controls."
+          ],
+          "evidence": "GE manual, page 11: \"Temperature control set too cold.\"",
+          "source": {
+            "line": 56,
+            "manual": "GE manual",
+            "page": 11
+          }
+        }
+      ]
+    },
+    {
+      "id": "frost-or-ice-crystals-on-frozen-food-fro",
+      "symptom": "Frost or ice crystals on frozen food (frost within package is normal)",
+      "causes": [
+        {
+          "id": "frost-or-ice-crystals-on-frozen-food-fro-0",
+          "label": "Door left open.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check to see if package is holding door open."
+          ],
+          "evidence": "GE manual, page 11: \"Door left open.\"",
+          "source": {
+            "line": 58,
+            "manual": "GE manual",
+            "page": 11
+          }
+        },
+        {
+          "id": "frost-or-ice-crystals-on-frozen-food-fro-1",
+          "label": "Too frequent or too long door openings.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [],
+          "evidence": "GE manual, page 11: \"Too frequent or too long door openings.\"",
+          "source": {
+            "line": 59,
+            "manual": "GE manual",
+            "page": 11
+          }
+        }
+      ]
+    },
+    {
+      "id": "slow-ice-cube-freezing",
+      "symptom": "Slow ice cube freezing",
+      "causes": [
+        {
+          "id": "slow-ice-cube-freezing-0",
+          "label": "Temperature control not set cold enough.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See About the controls."
+          ],
+          "evidence": "GE manual, page 11: \"Temperature control not set cold enough.\"",
+          "source": {
+            "line": 62,
+            "manual": "GE manual",
+            "page": 11
+          }
+        },
+        {
+          "id": "slow-ice-cube-freezing-1",
+          "label": "Door left open.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check to see if package is holding door open."
+          ],
+          "evidence": "GE manual, page 11: \"Door left open.\"",
+          "source": {
+            "line": 69,
+            "manual": "GE manual",
+            "page": 11
+          }
+        }
+      ]
+    },
+    {
+      "id": "ice-cubes-have-odor-taste",
+      "symptom": "Ice cubes have odor/taste",
+      "causes": [
+        {
+          "id": "ice-cubes-have-odor-taste-0",
+          "label": "Food transmitting odor/taste to ice cubes.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wrap foods well."
+          ],
+          "evidence": "GE manual, page 12: \"Food transmitting odor/taste to ice cubes.\"",
+          "source": {
+            "line": 5,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "ice-cubes-have-odor-taste-1",
+          "label": "Interior of refrigerator needs cleaning.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See Care and cleaning."
+          ],
+          "evidence": "GE manual, page 12: \"Interior of refrigerator needs cleaning.\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "refrigerator-has-odor",
+      "symptom": "Refrigerator has odor",
+      "causes": [
+        {
+          "id": "refrigerator-has-odor-0",
+          "label": "Foods transmitting odor to refrigerator.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Foods with strong odors should be tightly wrapped. •Keep an open box of baking soda in the refrigerator; replace every three months."
+          ],
+          "evidence": "GE manual, page 12: \"Foods transmitting odor to refrigerator.\"",
+          "source": {
+            "line": 9,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "refrigerator-has-odor-1",
+          "label": "Interior needs cleaning.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See Care and cleaning."
+          ],
+          "evidence": "GE manual, page 12: \"Interior needs cleaning.\"",
+          "source": {
+            "line": 17,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "moisture-forms-on-outside-of-refrigerato",
+      "symptom": "Moisture forms on outside of refrigerator",
+      "causes": [
+        {
+          "id": "moisture-forms-on-outside-of-refrigerato-0",
+          "label": "Not unusual during periods of high humidity.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wipe surface dry."
+          ],
+          "evidence": "GE manual, page 12: \"Not unusual during periods of high humidity.\"",
+          "source": {
+            "line": 19,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "moisture-collects-inside-the-refrigerato",
+      "symptom": "Moisture collects inside the refrigerator",
+      "causes": [
+        {
+          "id": "moisture-collects-inside-the-refrigerato-0",
+          "label": "In humid weather, air carries moisture into the refrigerator when doors are opened.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Prevent too frequent or too long door openings."
+          ],
+          "evidence": "GE manual, page 12: \"In humid weather, air carries moisture into the refrigerator when doors are opened.\"",
+          "source": {
+            "line": 21,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "interior-light-does-not-work",
+      "symptom": "Interior light does not work",
+      "causes": [
+        {
+          "id": "interior-light-does-not-work-0",
+          "label": "No power at outlet.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace fuse or reset the breaker."
+          ],
+          "evidence": "GE manual, page 12: \"No power at outlet.\"",
+          "source": {
+            "line": 27,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "interior-light-does-not-work-1",
+          "label": "Light bulb burned out.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See Replacing the light bulbs."
+          ],
+          "evidence": "GE manual, page 12: \"Light bulb burned out.\"",
+          "source": {
+            "line": 33,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "interior-light-does-not-work-2",
+          "label": "Light bulb is loose.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Make sure light bulb is screwed all the way in."
+          ],
+          "evidence": "GE manual, page 12: \"Light bulb is loose.\"",
+          "source": {
+            "line": 34,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-04T09:43:12.907Z",
+  "learnedAt": "2026-10-04T09:51:58.545Z"
+}

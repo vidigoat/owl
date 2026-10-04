@@ -1,0 +1,395 @@
+{
+  "model": "GSD5900GWW",
+  "brand": "GE",
+  "kind": "Dishwasher",
+  "alsoCovers": [
+    "GSD5500GWW",
+    "GSD5800GBB"
+  ],
+  "source": "GSD5900GWW.pdf",
+  "pages": "13–14",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "dishwasher-won-t-run",
+      "symptom": "Dishwasher won’t run",
+      "causes": [
+        {
+          "id": "dishwasher-won-t-run-0",
+          "label": "Fuse is blown, or the circuit breaker tripped",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace fuse or reset circuit breaker.",
+            "Remove any other appliances from the circuit.",
+            "Try resetting the START/RESET pad."
+          ],
+          "evidence": "GE manual, page 13: \"Fuse is blown, or the circuit breaker tripped\"",
+          "source": {
+            "line": 17,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "noise",
+      "symptom": "Noise",
+      "causes": [
+        {
+          "id": "noise-0",
+          "label": "Some of the sounds you’ll hear are normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Soft food disposal shredding action.",
+            "Drain valve opening to pump water out.",
+            "Timer control as cycle progresses.",
+            "Detergent cup opening.",
+            "The motor stopping during the drying period.",
+            "Water draining out of the tub immediately after you touch the START/RESET pad."
+          ],
+          "evidence": "GE manual, page 13: \"Some of the sounds you’ll hear are normal\"",
+          "source": {
+            "line": 25,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-standing-in-the-bottom-of-the-tub",
+      "symptom": "Water standing in the bottom of the tub",
+      "causes": [
+        {
+          "id": "water-standing-in-the-bottom-of-the-tub-0",
+          "label": "This is normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "A small amount of clean water around the outlet on the tub bottom at the back of the tub keeps the water seal lubricated."
+          ],
+          "evidence": "GE manual, page 13: \"This is normal\"",
+          "source": {
+            "line": 39,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-won-t-pump-out-of-the-tub",
+      "symptom": "Water won’t pump out of the tub",
+      "causes": [
+        {
+          "id": "water-won-t-pump-out-of-the-tub-0",
+          "label": "Drain is clogged",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "If you have an air gap, clean it.",
+            "Check to see if your kitchen sink is draining well.",
+            "If not, you may need a plumber.",
+            "If the dishwasher drains into a disposer, run disposer clear."
+          ],
+          "evidence": "GE manual, page 13: \"Drain is clogged\"",
+          "source": {
+            "line": 46,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "suds-in-the-tub",
+      "symptom": "Suds in the tub",
+      "causes": [
+        {
+          "id": "suds-in-the-tub-0",
+          "label": "Correct detergent wasn’t used",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use only automatic dishwasher detergents to avoid sudsing.",
+            "Cascade®, Cascade® Complete and Electrasol® Automatic Dishwashing Detergents have been approved for use in all GE dishwashers.",
+            "To remove suds from the tub, open the dishwasher and let suds evaporate.",
+            "Add 1 gallon of cold water to the tub.",
+            "Close and latch the dishwasher.",
+            "Pump out water by pressing the START/RESET pad; then immediately press the START/RESET pad again.",
+            "Repeat if necessary."
+          ],
+          "evidence": "GE manual, page 13: \"Correct detergent wasn’t used\"",
+          "source": {
+            "line": 50,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "suds-in-the-tub-1",
+          "label": "Rinse agent was spilled",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Always wipe up rinse agent spills immediately."
+          ],
+          "evidence": "GE manual, page 13: \"Rinse agent was spilled\"",
+          "source": {
+            "line": 57,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "stained-tub-interior",
+      "symptom": "Stained tub interior",
+      "causes": [
+        {
+          "id": "stained-tub-interior-0",
+          "label": "Detergent with colorant was used",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Some detergents contain colorant (pigment or dyes) that will discolor the tub interior with extended use.",
+            "Check the detergent cup for signs of any discoloration.",
+            "If cup is discolored, change to detergent without any colorant.",
+            "Cascade®, Cascade® Complete and Electrasol® Automatic Dishwashing Detergents have been approved for use in all GE dishwashers."
+          ],
+          "evidence": "GE manual, page 13: \"Detergent with colorant was used\"",
+          "source": {
+            "line": 59,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "stained-tub-interior-1",
+          "label": "Some tomato-based foods can stain",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Use of the RINSE ONLY cycle (on some models) after adding the dish to the load can decrease the level of staining.",
+            "GE recommends Cascade® Plastic Booster™ to help remove these types of stains."
+          ],
+          "evidence": "GE manual, page 13: \"Some tomato-based foods can stain\"",
+          "source": {
+            "line": 70,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishes-don-t-dry",
+      "symptom": "Dishes don’t dry",
+      "causes": [
+        {
+          "id": "dishes-don-t-dry-0",
+          "label": "Low inlet water temperature",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure inlet water temperature is correct.",
+            "Select SPEED DRY or HEATED DRY."
+          ],
+          "evidence": "GE manual, page 13: \"Low inlet water temperature\"",
+          "source": {
+            "line": 73,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "dishes-don-t-dry-1",
+          "label": "Rinse agent dispenser is empty",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the rinse agent dispenser. 13"
+          ],
+          "evidence": "GE manual, page 13: \"Rinse agent dispenser is empty\"",
+          "source": {
+            "line": 75,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "spots-and-filming-on-glasses-and-flatwar",
+      "symptom": "Spots and filming on glasses and flatware",
+      "causes": [
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-1",
+          "label": "Overloading the dishwasher",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "2 Do not add detergent."
+          ],
+          "evidence": "GE manual, page 14: \"Overloading the dishwasher\"",
+          "source": {
+            "line": 22,
+            "manual": "GE manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-2",
+          "label": "Improper loading",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "3 Select the longest cycle."
+          ],
+          "evidence": "GE manual, page 14: \"Improper loading\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-3",
+          "label": "Old or damp powder detergent",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "4 Start the dishwasher and allow to run for 18 to 22 minutes.",
+            "Dishwasher will now be in the main wash. 5 Open the door and pour 2 cups (500 ml) of white vinegar into the"
+          ],
+          "evidence": "GE manual, page 14: \"Old or damp powder detergent\"",
+          "source": {
+            "line": 25,
+            "manual": "GE manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-4",
+          "label": "Rinse agent dispenser empty Too little detergent",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "bottom of the dishwasher. 6 Close the door and allow to complete the cycle.",
+            "If vinegar rinse doesn’t work: Repeat as above, except use 1/4 cup (60 ml) of citric acid crystals instead of vinegar."
+          ],
+          "evidence": "GE manual, page 14: \"Rinse agent dispenser empty Too little detergent\"",
+          "source": {
+            "line": 28,
+            "manual": "GE manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloudiness-on-glassware",
+      "symptom": "Cloudiness on glassware",
+      "causes": [
+        {
+          "id": "cloudiness-on-glassware-0",
+          "label": "Combination of soft water and too much detergent",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is called etching and is permanent.",
+            "To prevent this from happening, use less detergent if you have soft water.",
+            "Wash glassware in the shortest cycle that will get them clean."
+          ],
+          "evidence": "GE manual, page 14: \"Combination of soft water and too much detergent\"",
+          "source": {
+            "line": 34,
+            "manual": "GE manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "yellow-or-brown-film-on-tub",
+      "symptom": "Yellow or brown film on tub",
+      "causes": [
+        {
+          "id": "yellow-or-brown-film-on-tub-0",
+          "label": "Tea or coffee stains",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Remove the stain by hand, using a solution of 1/2 cup bleach and 3 cups warm water.",
+            "WARNING Before cleaning interior, wait at least 20 minutes after a cycle for the heating element to cool down.",
+            "Failure to do so can result in burns."
+          ],
+          "evidence": "GE manual, page 14: \"Tea or coffee stains\"",
+          "source": {
+            "line": 45,
+            "manual": "GE manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "white-film-on-inside-surfaces",
+      "symptom": "White film on inside surfaces",
+      "causes": [
+        {
+          "id": "white-film-on-inside-surfaces-0",
+          "label": "Hard water minerals",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "GE recommends Jet-Dry® or Cascade Rinse Aid® to help remove some hard water mineral stains.",
+            "For extreme staining, clean the interior by applying dishwasher detergent to a damp sponge.",
+            "Wear rubber gloves.",
+            "DO NOT use any type of cleaners other than those recommended or hand dishwashing detergent because it may cause foaming or sudsing.",
+            "Cascade®, Cascade® Complete and Electrasol® Dishwashing Detergents have been approved for all GE dishwashers."
+          ],
+          "evidence": "GE manual, page 14: \"Hard water minerals\"",
+          "source": {
+            "line": 54,
+            "manual": "GE manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "steam",
+      "symptom": "Steam",
+      "causes": [
+        {
+          "id": "steam-0",
+          "label": "This is normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Steam comes through the vent by the door latch during drying and when water is being pumped out."
+          ],
+          "evidence": "GE manual, page 14: \"This is normal\"",
+          "source": {
+            "line": 69,
+            "manual": "GE manual",
+            "page": 14
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "spots-and-filming-on-glasses-and-flatwar-0"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-04T09:43:11.623Z",
+  "learnedAt": "2026-10-04T09:51:22.480Z"
+}

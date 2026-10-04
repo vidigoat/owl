@@ -159,7 +159,7 @@ confident the ranking, and it will not sell a part while a free check is still s
 the product, and it is the thing under test.
 
 **Two numbers that measure the claim (`npm run no-bad-buy`, `npm run eval`).** Swept across every
-cause of every machine in the library — 2,502 causes on 110 machines — the gate opened a cart for an
+cause of every machine in the library — 4,875 causes on 176 machines — the gate opened a cart for an
 unestablished or mains fault **0 times**, checked independently of the gate by re-deriving whether a
 cheaper or comparably-likely cause was still live; and it still opens a legitimate cart once the
 cheaper causes are ruled out, so "zero" is not "refuses everything" (`docs/no-bad-buy.json`). On the

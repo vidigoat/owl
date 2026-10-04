@@ -1,0 +1,1025 @@
+{
+  "model": "GSHS3KGXSS",
+  "brand": "GE",
+  "kind": "Refrigerator",
+  "source": "GSHS3KGXSS.pdf",
+  "pages": "34–36",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "refrigerator-does-not-operate",
+      "symptom": "Refrigerator does not operate",
+      "causes": [
+        {
+          "id": "refrigerator-does-not-operate-0",
+          "label": "Refrigerator in defrost cycle.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wait about 30 minutes for defrost cycle to end."
+          ],
+          "evidence": "GE manual, page 34: \"Refrigerator in defrost cycle.\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "vibration-or-rattling-slight-vibration-i",
+      "symptom": "Vibration or rattling (slight vibration is normal)",
+      "causes": [
+        {
+          "id": "vibration-or-rattling-slight-vibration-i-0",
+          "label": "Rollers need adjusting.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See Rollers."
+          ],
+          "evidence": "GE manual, page 34: \"Rollers need adjusting.\"",
+          "source": {
+            "line": 21,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "motor-operates-for-long-periods-or-cycle",
+      "symptom": "Motor operates for long periods or cycles on and off frequently. (Modern refrigerators with more storage space and a larger freezer require more operating time.",
+      "causes": [
+        {
+          "id": "motor-operates-for-long-periods-or-cycle-0",
+          "label": "Normal when refrigerator is first plugged in.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wait 24 hours for the refrigerator to completely cool down."
+          ],
+          "evidence": "GE manual, page 34: \"Normal when refrigerator is first plugged in.\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "motor-operates-for-long-periods-or-cycle-1",
+          "label": "Often occurs when large amounts of food are placed in refrigerator.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 34: \"Often occurs when large amounts of food are placed in refrigerator.\"",
+          "source": {
+            "line": 26,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "motor-operates-for-long-periods-or-cycle-2",
+          "label": "Door left open.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Check to see if package is holding door open."
+          ],
+          "evidence": "GE manual, page 34: \"Door left open.\"",
+          "source": {
+            "line": 32,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "they-start-and-stop-often-to-maintain-ev",
+      "symptom": "They start and stop often to maintain even temperatures.)",
+      "causes": [
+        {
+          "id": "they-start-and-stop-often-to-maintain-ev-0",
+          "label": "Hot weather or frequent door openings.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 34: \"Hot weather or frequent door openings.\"",
+          "source": {
+            "line": 33,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "they-start-and-stop-often-to-maintain-ev-1",
+          "label": "Temperature controls set at the coldest setting.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See About the controls."
+          ],
+          "evidence": "GE manual, page 34: \"Temperature controls set at the coldest setting.\"",
+          "source": {
+            "line": 38,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "refrigerator-or-freezer-compartment-too-",
+      "symptom": "Refrigerator or freezer compartment too warm",
+      "causes": [
+        {
+          "id": "refrigerator-or-freezer-compartment-too--0",
+          "label": "Temperature control not set cold enough.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See About the controls."
+          ],
+          "evidence": "GE manual, page 34: \"Temperature control not set cold enough.\"",
+          "source": {
+            "line": 40,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "refrigerator-or-freezer-compartment-too--1",
+          "label": "Warm weather or frequent door openings.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Set the temperature control one step colder.",
+            "See About the controls."
+          ],
+          "evidence": "GE manual, page 34: \"Warm weather or frequent door openings.\"",
+          "source": {
+            "line": 42,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "refrigerator-or-freezer-compartment-too--2",
+          "label": "Door left open.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Check to see if package is holding door open."
+          ],
+          "evidence": "GE manual, page 34: \"Door left open.\"",
+          "source": {
+            "line": 49,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "frost-or-ice-crystals-on-frozen-food-fro",
+      "symptom": "Frost or ice crystals on frozen food (frost within package is normal)",
+      "causes": [
+        {
+          "id": "frost-or-ice-crystals-on-frozen-food-fro-0",
+          "label": "Door left open.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check to see if package is holding door open."
+          ],
+          "evidence": "GE manual, page 34: \"Door left open.\"",
+          "source": {
+            "line": 50,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "frost-or-ice-crystals-on-frozen-food-fro-1",
+          "label": "Too frequent or too long door openings.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [],
+          "evidence": "GE manual, page 34: \"Too frequent or too long door openings.\"",
+          "source": {
+            "line": 52,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "divider-between-refrigerator-and-freezer",
+      "symptom": "Divider between refrigerator and freezer compartments feels warm",
+      "causes": [
+        {
+          "id": "divider-between-refrigerator-and-freezer-0",
+          "label": "Automatic energy saver system circulates warm liquid around front edge of freezer compartment.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This helps prevent condensation on the outside."
+          ],
+          "evidence": "GE manual, page 34: \"Automatic energy saver system circulates warm liquid around front edge of freezer compartment.\"",
+          "source": {
+            "line": 56,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "automatic-icemaker-does-not-work",
+      "symptom": "Automatic icemaker does not work",
+      "causes": [
+        {
+          "id": "automatic-icemaker-does-not-work-0",
+          "label": "Icemaker power switch is in the OFF position.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Set the power switch to the ON position."
+          ],
+          "evidence": "GE manual, page 34: \"Icemaker power switch is in the OFF position.\"",
+          "source": {
+            "line": 60,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "automatic-icemaker-does-not-work-1",
+          "label": "Water supply turned off or not connected.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See Installing the water line."
+          ],
+          "evidence": "GE manual, page 34: \"Water supply turned off or not connected.\"",
+          "source": {
+            "line": 62,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "automatic-icemaker-does-not-work-2",
+          "label": "Freezer compartment too warm.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Wait 24 hours for the refrigerator to completely cool down."
+          ],
+          "evidence": "GE manual, page 34: \"Freezer compartment too warm.\"",
+          "source": {
+            "line": 69,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "automatic-icemaker-does-not-work-3",
+          "label": "Piled up cubes in the storage bin cause the icemaker to shut off.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Level cubes by hand."
+          ],
+          "evidence": "GE manual, page 34: \"Piled up cubes in the storage bin cause the icemaker to shut off.\"",
+          "source": {
+            "line": 71,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "automatic-icemaker-does-not-work-4",
+          "label": "Ice cubes stuck in icemaker.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Turn off the icemaker, remove cubes and turn the icemaker back on."
+          ],
+          "evidence": "GE manual, page 34: \"Ice cubes stuck in icemaker.\"",
+          "source": {
+            "line": 74,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "frequent-buzzing-sound",
+      "symptom": "Frequent “buzzing” sound",
+      "causes": [
+        {
+          "id": "frequent-buzzing-sound-0",
+          "label": "Icemaker power switch is in the ON position, but the water supply to the refrigerator has not been connected.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Set the power switch to the OFF position.",
+            "Keeping it in the ON position will damage the water valve."
+          ],
+          "evidence": "GE manual, page 35: \"Icemaker power switch is in the ON position, but the water supply to the refrigerator has not been connected.\"",
+          "source": {
+            "line": 4,
+            "manual": "GE manual",
+            "page": 35
+          }
+        }
+      ]
+    },
+    {
+      "id": "ice-cubes-have-odor-taste",
+      "symptom": "Ice cubes have odor/taste",
+      "causes": [
+        {
+          "id": "ice-cubes-have-odor-taste-0",
+          "label": "Ice storage bin needs cleaning.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Empty and wash bin.",
+            "Discard old cubes."
+          ],
+          "evidence": "GE manual, page 35: \"Ice storage bin needs cleaning.\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 35
+          }
+        },
+        {
+          "id": "ice-cubes-have-odor-taste-1",
+          "label": "Food transmitting odor/taste to ice cubes.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Wrap foods well."
+          ],
+          "evidence": "GE manual, page 35: \"Food transmitting odor/taste to ice cubes.\"",
+          "source": {
+            "line": 9,
+            "manual": "GE manual",
+            "page": 35
+          }
+        },
+        {
+          "id": "ice-cubes-have-odor-taste-2",
+          "label": "Interior of refrigerator needs cleaning.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "See Care and cleaning."
+          ],
+          "evidence": "GE manual, page 35: \"Interior of refrigerator needs cleaning.\"",
+          "source": {
+            "line": 16,
+            "manual": "GE manual",
+            "page": 35
+          }
+        }
+      ]
+    },
+    {
+      "id": "small-or-hollow-cubes",
+      "symptom": "Small or hollow cubes",
+      "causes": [
+        {
+          "id": "small-or-hollow-cubes-0",
+          "label": "Water filter clogged.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace filter cartridge with new cartridge or with plug."
+          ],
+          "evidence": "GE manual, page 35: \"Water filter clogged.\"",
+          "source": {
+            "line": 18,
+            "manual": "GE manual",
+            "page": 35
+          }
+        }
+      ]
+    },
+    {
+      "id": "slow-ice-cube-freezing",
+      "symptom": "Slow ice cube freezing",
+      "causes": [
+        {
+          "id": "slow-ice-cube-freezing-0",
+          "label": "Door left open.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check to see if package is holding door open."
+          ],
+          "evidence": "GE manual, page 35: \"Door left open.\"",
+          "source": {
+            "line": 19,
+            "manual": "GE manual",
+            "page": 35
+          }
+        },
+        {
+          "id": "slow-ice-cube-freezing-1",
+          "label": "Temperature control not set cold enough.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See About the controls."
+          ],
+          "evidence": "GE manual, page 35: \"Temperature control not set cold enough.\"",
+          "source": {
+            "line": 20,
+            "manual": "GE manual",
+            "page": 35
+          }
+        }
+      ]
+    },
+    {
+      "id": "cube-dispenser-does-not-work",
+      "symptom": "Cube dispenser does not work",
+      "causes": [
+        {
+          "id": "cube-dispenser-does-not-work-0",
+          "label": "Icemaker turned off or water supply turned off.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Turn on icemaker or water supply."
+          ],
+          "evidence": "GE manual, page 35: \"Icemaker turned off or water supply turned off.\"",
+          "source": {
+            "line": 22,
+            "manual": "GE manual",
+            "page": 35
+          }
+        },
+        {
+          "id": "cube-dispenser-does-not-work-1",
+          "label": "An item is blocking or has fallen into the ice chute inside the top door bin of the freezer.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Remove any item that might be blocking, or has fallen into the chute."
+          ],
+          "evidence": "GE manual, page 35: \"An item is blocking or has fallen into the ice chute inside the top door bin of the freezer.\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 35
+          }
+        },
+        {
+          "id": "cube-dispenser-does-not-work-2",
+          "label": "Ice cubes are frozen to icemaker feeler arm.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Remove cubes."
+          ],
+          "evidence": "GE manual, page 35: \"Ice cubes are frozen to icemaker feeler arm.\"",
+          "source": {
+            "line": 27,
+            "manual": "GE manual",
+            "page": 35
+          }
+        },
+        {
+          "id": "cube-dispenser-does-not-work-3",
+          "label": "Irregular ice clumps in storage container.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Break up with fingertip pressure and discard remaining clumps.",
+            "Freezer may be too warm.",
+            "Adjust the freezer control to a colder setting, one position at a time, until clumps do not form."
+          ],
+          "evidence": "GE manual, page 35: \"Irregular ice clumps in storage container.\"",
+          "source": {
+            "line": 29,
+            "manual": "GE manual",
+            "page": 35
+          }
+        },
+        {
+          "id": "cube-dispenser-does-not-work-4",
+          "label": "Dispenser is LOCKED.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Press and hold the LOCK pad for 3 seconds."
+          ],
+          "evidence": "GE manual, page 35: \"Dispenser is LOCKED.\"",
+          "source": {
+            "line": 36,
+            "manual": "GE manual",
+            "page": 35
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-has-poor-taste-odor",
+      "symptom": "Water has poor taste/odor",
+      "causes": [
+        {
+          "id": "water-has-poor-taste-odor-0",
+          "label": "Water dispenser has not been used for a long time.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Dispense water until all water in system is replenished."
+          ],
+          "evidence": "GE manual, page 35: \"Water dispenser has not been used for a long time.\"",
+          "source": {
+            "line": 37,
+            "manual": "GE manual",
+            "page": 35
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-in-first-glass-is-warm",
+      "symptom": "Water in first glass is warm",
+      "causes": [
+        {
+          "id": "water-in-first-glass-is-warm-0",
+          "label": "Normal when refrigerator is first installed.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wait 24 hours for the refrigerator to completely cool down."
+          ],
+          "evidence": "GE manual, page 35: \"Normal when refrigerator is first installed.\"",
+          "source": {
+            "line": 39,
+            "manual": "GE manual",
+            "page": 35
+          }
+        },
+        {
+          "id": "water-in-first-glass-is-warm-1",
+          "label": "Water dispenser has not been used for a long time.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Dispense water until all water in system is replenished."
+          ],
+          "evidence": "GE manual, page 35: \"Water dispenser has not been used for a long time.\"",
+          "source": {
+            "line": 41,
+            "manual": "GE manual",
+            "page": 35
+          }
+        },
+        {
+          "id": "water-in-first-glass-is-warm-2",
+          "label": "Water system has been drained.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Allow several hours for replenished supply to chill."
+          ],
+          "evidence": "GE manual, page 35: \"Water system has been drained.\"",
+          "source": {
+            "line": 48,
+            "manual": "GE manual",
+            "page": 35
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-dispenser-does-not-work",
+      "symptom": "Water dispenser does not work",
+      "causes": [
+        {
+          "id": "water-dispenser-does-not-work-0",
+          "label": "Water supply line turned off or not connected.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See Installing the water line."
+          ],
+          "evidence": "GE manual, page 35: \"Water supply line turned off or not connected.\"",
+          "source": {
+            "line": 49,
+            "manual": "GE manual",
+            "page": 35
+          }
+        },
+        {
+          "id": "water-dispenser-does-not-work-1",
+          "label": "Water filter clogged.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Replace filter cartridge or remove filter and install plug."
+          ],
+          "evidence": "GE manual, page 35: \"Water filter clogged.\"",
+          "source": {
+            "line": 51,
+            "manual": "GE manual",
+            "page": 35
+          }
+        },
+        {
+          "id": "water-dispenser-does-not-work-2",
+          "label": "Air may be trapped in the water system.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Press the dispenser arm for at least two minutes."
+          ],
+          "evidence": "GE manual, page 35: \"Air may be trapped in the water system.\"",
+          "source": {
+            "line": 52,
+            "manual": "GE manual",
+            "page": 35
+          }
+        },
+        {
+          "id": "water-dispenser-does-not-work-3",
+          "label": "Dispenser is LOCKED.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Press and hold the LOCK pad for 3 seconds."
+          ],
+          "evidence": "GE manual, page 35: \"Dispenser is LOCKED.\"",
+          "source": {
+            "line": 54,
+            "manual": "GE manual",
+            "page": 35
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-spurting-from-dispenser",
+      "symptom": "Water spurting from dispenser",
+      "causes": [
+        {
+          "id": "water-spurting-from-dispenser-0",
+          "label": "Newly-installed filter cartridge.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Run water from the dispenser for 3 minutes (about one and a half gallons)."
+          ],
+          "evidence": "GE manual, page 35: \"Newly-installed filter cartridge.\"",
+          "source": {
+            "line": 55,
+            "manual": "GE manual",
+            "page": 35
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-is-not-dispensed-but-icemaker-is-w",
+      "symptom": "Water is not dispensed but icemaker is working",
+      "causes": [
+        {
+          "id": "water-is-not-dispensed-but-icemaker-is-w-0",
+          "label": "Water in reservoir is frozen.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Call for service."
+          ],
+          "evidence": "GE manual, page 35: \"Water in reservoir is frozen.\"",
+          "source": {
+            "line": 57,
+            "manual": "GE manual",
+            "page": 35
+          }
+        },
+        {
+          "id": "water-is-not-dispensed-but-icemaker-is-w-1",
+          "label": "Refrigerator control setting is too cold.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Set to a warmer setting."
+          ],
+          "evidence": "GE manual, page 35: \"Refrigerator control setting is too cold.\"",
+          "source": {
+            "line": 64,
+            "manual": "GE manual",
+            "page": 35
+          }
+        }
+      ]
+    },
+    {
+      "id": "orange-glow-in-the-freezer",
+      "symptom": "Orange glow in the freezer",
+      "causes": [
+        {
+          "id": "orange-glow-in-the-freezer-0",
+          "label": "Defrost heater is on.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 36: \"Defrost heater is on.\"",
+          "source": {
+            "line": 3,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "refrigerator-has-odor",
+      "symptom": "Refrigerator has odor",
+      "causes": [
+        {
+          "id": "refrigerator-has-odor-0",
+          "label": "Foods transmitting odor to refrigerator.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Foods with strong odors should be tightly wrapped.",
+            "Keep an open box of baking soda in the refrigerator; replace every three months."
+          ],
+          "evidence": "GE manual, page 36: \"Foods transmitting odor to refrigerator.\"",
+          "source": {
+            "line": 5,
+            "manual": "GE manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "refrigerator-has-odor-1",
+          "label": "Interior needs cleaning.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See Care and cleaning."
+          ],
+          "evidence": "GE manual, page 36: \"Interior needs cleaning.\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "door-not-closing-properly",
+      "symptom": "Door not closing properly",
+      "causes": [
+        {
+          "id": "door-not-closing-properly-0",
+          "label": "Door gasket on hinge side sticking or folding over.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Apply paraffin wax to the face of the gasket."
+          ],
+          "evidence": "GE manual, page 36: \"Door gasket on hinge side sticking or folding over.\"",
+          "source": {
+            "line": 14,
+            "manual": "GE manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "door-not-closing-properly-1",
+          "label": "A door bin is hitting a shelf inside the refrigerator.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Move the door bin up one position."
+          ],
+          "evidence": "GE manual, page 36: \"A door bin is hitting a shelf inside the refrigerator.\"",
+          "source": {
+            "line": 16,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "moisture-forms-on-outside-of-refrigerato",
+      "symptom": "Moisture forms on outside of refrigerator",
+      "causes": [
+        {
+          "id": "moisture-forms-on-outside-of-refrigerato-0",
+          "label": "Not unusual during periods of high humidity.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wipe surface dry."
+          ],
+          "evidence": "GE manual, page 36: \"Not unusual during periods of high humidity.\"",
+          "source": {
+            "line": 18,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "interior-light-does-not-work",
+      "symptom": "Interior light does not work",
+      "causes": [
+        {
+          "id": "interior-light-does-not-work-0",
+          "label": "No power at outlet.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace fuse or reset the breaker."
+          ],
+          "evidence": "GE manual, page 36: \"No power at outlet.\"",
+          "source": {
+            "line": 25,
+            "manual": "GE manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "interior-light-does-not-work-1",
+          "label": "Light bulb burned out.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See Replacing the light bulbs."
+          ],
+          "evidence": "GE manual, page 36: \"Light bulb burned out.\"",
+          "source": {
+            "line": 27,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-on-kitchen-floor-or-on-bottom-of-f",
+      "symptom": "Water on kitchen floor or on bottom of freezer",
+      "causes": [
+        {
+          "id": "water-on-kitchen-floor-or-on-bottom-of-f-0",
+          "label": "Cubes jammed in chute.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Poke ice through with a wooden spoon."
+          ],
+          "evidence": "GE manual, page 36: \"Cubes jammed in chute.\"",
+          "source": {
+            "line": 30,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "hot-air-from-bottom-of-refrigerator",
+      "symptom": "Hot air from bottom of refrigerator",
+      "causes": [
+        {
+          "id": "hot-air-from-bottom-of-refrigerator-0",
+          "label": "Normal air flow cooling motor.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [],
+          "evidence": "GE manual, page 36: \"Normal air flow cooling motor.\"",
+          "source": {
+            "line": 32,
+            "manual": "GE manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "hot-air-from-bottom-of-refrigerator-1",
+          "label": "In the refrigeration process, it is normal that heat be expelled in the area under the refrigerator. Some floor coverings are sensitive and will discolor at these normal and safe temperatures.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [],
+          "evidence": "GE manual, page 36: \"In the refrigeration process, it is normal that heat be expelled in the area under the refrigerator. Some floor coverings are sensitive and will discolor at these normal and safe temperatures.\"",
+          "source": {
+            "line": 35,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "refrigerator-never-shuts-off-but-the-tem",
+      "symptom": "Refrigerator never shuts off but the temperatures are OK",
+      "causes": [
+        {
+          "id": "refrigerator-never-shuts-off-but-the-tem-0",
+          "label": "Adaptive defrost keeps compressor running during door openings.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal.",
+            "The refrigerator will cycle off after the door remains closed for 2 hours."
+          ],
+          "evidence": "GE manual, page 36: \"Adaptive defrost keeps compressor running during door openings.\"",
+          "source": {
+            "line": 41,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "refrigerator-beeping",
+      "symptom": "Refrigerator beeping",
+      "causes": [
+        {
+          "id": "refrigerator-beeping-0",
+          "label": "Door open.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Close door."
+          ],
+          "evidence": "GE manual, page 36: \"Door open.\"",
+          "source": {
+            "line": 49,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "actual-temperature-not-equal-to-set-temp",
+      "symptom": "Actual temperature not equal to Set temperature",
+      "causes": [
+        {
+          "id": "actual-temperature-not-equal-to-set-temp-0",
+          "label": "Unit just plugged in.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Allow 24 hours for system to stabilize."
+          ],
+          "evidence": "GE manual, page 36: \"Unit just plugged in.\"",
+          "source": {
+            "line": 50,
+            "manual": "GE manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "actual-temperature-not-equal-to-set-temp-1",
+          "label": "Door open for too long.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Allow 24 hours for system to stabilize."
+          ],
+          "evidence": "GE manual, page 36: \"Door open for too long.\"",
+          "source": {
+            "line": 52,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-04T09:52:34.285Z",
+  "learnedAt": "2026-10-04T09:52:00.304Z"
+}

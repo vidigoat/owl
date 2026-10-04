@@ -119,6 +119,28 @@ async function learnOne(file, flags) {
   // then hand faultgraph French, which faultgraph cannot parse, and we would have paid for the
   // privilege. Not spending is the correct behaviour here, and saying why is the difference between
   // a budget guard and a silent skip.
+  /*
+   * A symptom table that the code reader found one "code" in is still a symptom table.
+   *
+   * faultgraph reads anything shaped like a code at a line start, and an older GE table's numbered
+   * steps ("1 Remove all metal utensils") gave it exactly one. That was enough to make the free
+   * attempt look like it had worked, and a manual with fourteen problems and thirty causes went
+   * into the queue as a machine with a single fault code. When a page in the run heads itself as a
+   * symptom table, count what the symptom reader gets from the same pages, and let the table that
+   * is actually there win.
+   */
+  let asSymptoms = 0;
+  if (graph.found > 0 && report.symptomsOnly) {
+    const texts = pdf.pages(file);
+    for (let n = best.from; n <= best.to; n++) asSymptoms += readSymptoms({ text: texts[n - 1] || '', sourceName: `${brand} manual`, page: n }).found;
+    if (asSymptoms > graph.found * 3) {
+      report.steps.push(`but ${asSymptoms} described problems on the same pages — reading it as the symptom table it is`);
+      // And the "code" goes: on these pages it was a colour suffix ("BB – black") read as a fault
+      // code, and a record that kept it would answer for a fault the machine does not have.
+      graph = { ...graph, codes: {}, found: 0, coverage: 'no fault codes on these pages' };
+    }
+  }
+
   if (graph.found === 0 && report.symptomsOnly && !flags['force-vision']) {
     /*
      * A troubleshooting table with no codes in it — so read it as what it is.

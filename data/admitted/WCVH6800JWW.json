@@ -1,0 +1,287 @@
+{
+  "model": "WCVH6800JWW",
+  "brand": "GE",
+  "kind": "Washer",
+  "alsoCovers": [
+    "WHDVH680JWW"
+  ],
+  "source": "WCVH6800JWW.pdf",
+  "pages": "21–24",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "not-draining-not-spinning-not-agitating",
+      "symptom": "Not draining Not spinning Not agitating",
+      "causes": [
+        {
+          "id": "not-draining-not-spinning-not-agitating-0",
+          "label": "Load is out of balance\u0003 \u0003",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "\u00035HGLVWULEXWH\u0003FORWKHV\u0003DQG\u0003UXQ\u0003GUDLQ\u0003 \u0003VSLQ\u0003RU\u0003ULQVH\u0003 \u0003VSLQ\u0011 \u0003,QFUHDVH\u0003ORDG\u0003VL]H\u0003LI\u0003ZDVKLQJ\u0003VPDOO\u0003ORDG\u0003FRQWDLQLQJ\u0003KHDY\\\u0003 and light items."
+          ],
+          "evidence": "GE manual, page 21: \"Load is out of balance\u0003 \u0003\"",
+          "source": {
+            "line": 12,
+            "manual": "GE manual",
+            "page": 21
+          }
+        }
+      ]
+    },
+    {
+      "id": "snags-holes-tears-rips-or-excessive-wear",
+      "symptom": "Snags, holes, tears, rips or excessive wear Control time wrong or changes",
+      "causes": [
+        {
+          "id": "snags-holes-tears-rips-or-excessive-wear-0",
+          "label": "Overloaded\u0003",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "\u0003'R\u0003QRW\u0003H[FHHG\u0003PD[LPXP\u0003UHFRPPHQGHG\u0003ORDG\u0003VL]HV\u0011\u0003 See recommended maximum load sizes on page 11."
+          ],
+          "evidence": "GE manual, page 22: \"Overloaded\u0003\"",
+          "source": {
+            "line": 46,
+            "manual": "GE manual",
+            "page": 22
+          }
+        },
+        {
+          "id": "snags-holes-tears-rips-or-excessive-wear-1",
+          "label": "Pens, pencils, nails, screws or\u0003 other objects left in pockets",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "\u00035HPRYH\u0003ORRVH\u0003LWHPV\u0003IURP\u0003SRFNHWV\u0011"
+          ],
+          "evidence": "GE manual, page 22: \"Pens, pencils, nails, screws or\u0003 other objects left in pockets\"",
+          "source": {
+            "line": 48,
+            "manual": "GE manual",
+            "page": 22
+          }
+        }
+      ]
+    },
+    {
+      "id": "not-enough-water",
+      "symptom": "Not enough water",
+      "causes": [
+        {
+          "id": "not-enough-water-0",
+          "label": "This is normal\u0003",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "\u0003+RUL]RQWDO\u0003ZDVKHUV\u0003GR\u0003QRW\u0003UHTXLUH\u0003WKH\u0003WXE\u0003WR\u0003¿OO\u0003ZLWK\u0003ZDWHU\u0003 like top-load washers."
+          ],
+          "evidence": "GE manual, page 22: \"This is normal\u0003\"",
+          "source": {
+            "line": 62,
+            "manual": "GE manual",
+            "page": 22
+          }
+        }
+      ]
+    },
+    {
+      "id": "washer-pauses-or-has-to-be-restarted-or-",
+      "symptom": "Washer pauses or has to be restarted, or washer door is locked and will not open",
+      "causes": [
+        {
+          "id": "washer-pauses-or-has-to-be-restarted-or--0",
+          "label": "Pump clogged\u0003",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "\u00036HH\u0003SDJH\u0003\u0014\u0016\u0003RQ\u0003KRZ\u0003WR\u0003FOHDQ\u0003WKH\u00033XPS\u0003)LOWHU\u0011"
+          ],
+          "evidence": "GE manual, page 22: \"Pump clogged\u0003\"",
+          "source": {
+            "line": 64,
+            "manual": "GE manual",
+            "page": 22
+          }
+        }
+      ]
+    },
+    {
+      "id": "door-unlocks-or-press-start-and-machine-",
+      "symptom": "Door unlocks or press START and machine doesn’t operate \u0003\u0003",
+      "causes": [
+        {
+          "id": "door-unlocks-or-press-start-and-machine--0",
+          "label": "This is normal\u0003 ,QFRUUHFW\u0003RSHUDWLRQ\u0003",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "\u0003)URQW\u0010ORDG\u0003ZDVKHUV\u0003VWDUW\u0003XS\u0003GLȺHUHQWO\\\u0003WKDQ\u0003WRS\u0010ORDG\u0003 washers, and it takes 30 seconds to check the system.",
+            "The door will lock and unlock. \u00036LPSO\\\u0003RSHQ\u0003DQG\u0003FORVH\u0003WKH\u0003GRRU\u0003¿UPO\\\u001e\u0003WKHQ\u0003SUHVV\u0003START."
+          ],
+          "evidence": "GE manual, page 22: \"This is normal\u0003 ,QFRUUHFW\u0003RSHUDWLRQ\u0003\"",
+          "source": {
+            "line": 73,
+            "manual": "GE manual",
+            "page": 22
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-does-not-enter-washer-or-enters-sl",
+      "symptom": "Water does not enter washer or enters slowly",
+      "causes": [
+        {
+          "id": "water-does-not-enter-washer-or-enters-sl-0",
+          "label": "Automatic self system checks\u0003",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "\u0003$IWHU\u0003START is pressed, the washer does several system FKHFNV\u0011\u0003:DWHU\u0003ZLOO\u0003ÀRZ\u0003\u0019\u0013\u0003VHFRQGV\u0003DIWHU\u0003START is pressed."
+          ],
+          "evidence": "GE manual, page 23: \"Automatic self system checks\u0003\"",
+          "source": {
+            "line": 5,
+            "manual": "GE manual",
+            "page": 23
+          }
+        }
+      ]
+    },
+    {
+      "id": "wrinkling-grayed-or-yellowed-clothes",
+      "symptom": "Wrinkling Grayed or yellowed clothes \u0003",
+      "causes": [
+        {
+          "id": "wrinkling-grayed-or-yellowed-clothes-0",
+          "label": "Improper sorting\u0003",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "\u0003$YRLG\u0003PL[LQJ\u0003KHDY\\\u0003LWHPV\u0003 OLNH\u0003ZRUN\u0003FORWKHV \u0003ZLWK\u0003 light items (like blouses)."
+          ],
+          "evidence": "GE manual, page 23: \"Improper sorting\u0003\"",
+          "source": {
+            "line": 17,
+            "manual": "GE manual",
+            "page": 23
+          }
+        },
+        {
+          "id": "wrinkling-grayed-or-yellowed-clothes-1",
+          "label": "Overloading \u0003",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "\u0003/RDG\u0003\\RXU\u0003ZDVKHU\u0003VR\u0003FORWKHV\u0003KDYH\u0003HQRXJK\u0003URRP\u0003 to move freely."
+          ],
+          "evidence": "GE manual, page 23: \"Overloading \u0003\"",
+          "source": {
+            "line": 19,
+            "manual": "GE manual",
+            "page": 23
+          }
+        },
+        {
+          "id": "wrinkling-grayed-or-yellowed-clothes-2",
+          "label": "Incorrect wash cycle\u0003",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "\u00030DWFK\u0003F\\FOH\u0003VHOHFWLRQ\u0003WR\u0003WKH\u0003W\\SH\u0003RI\u0003IDEULF\u0003\\RX\u0003DUH washing (especially for easy care loads)."
+          ],
+          "evidence": "GE manual, page 23: \"Incorrect wash cycle\u0003\"",
+          "source": {
+            "line": 21,
+            "manual": "GE manual",
+            "page": 23
+          }
+        },
+        {
+          "id": "wrinkling-grayed-or-yellowed-clothes-4",
+          "label": "Water is not hot enough\u0003",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "\u00030DNH\u0003VXUH\u0003ZDWHU\u0003KHDWHU\u0003LV\u0003GHOLYHULQJ\u0003ZDWHU\u0003DW\u0003 120°–140°F (48°–60°C)."
+          ],
+          "evidence": "GE manual, page 23: \"Water is not hot enough\u0003\"",
+          "source": {
+            "line": 31,
+            "manual": "GE manual",
+            "page": 23
+          }
+        },
+        {
+          "id": "wrinkling-grayed-or-yellowed-clothes-5",
+          "label": "Detergent is not\u0003 dissolving",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "\u00037U\\\u0003D\u0003OLTXLG\u0003GHWHUJHQW\u0011"
+          ],
+          "evidence": "GE manual, page 23: \"Detergent is not\u0003 dissolving\"",
+          "source": {
+            "line": 35,
+            "manual": "GE manual",
+            "page": 23
+          }
+        },
+        {
+          "id": "wrinkling-grayed-or-yellowed-clothes-6",
+          "label": "Dye transfer\u0003",
+          "likelihood": 0.132,
+          "cost": null,
+          "remedies": [
+            "\u00036RUW\u0003FORWKHV\u0003E\\\u0003FRORU\u0011\u0003,I\u0003IDEULF\u0003ODEHO\u0003VWDWHV\u0003ZDVK\u0003VHSDUDWHO\\\u000f\u0003 unstable dyes may be indicated."
+          ],
+          "evidence": "GE manual, page 23: \"Dye transfer\u0003\"",
+          "source": {
+            "line": 40,
+            "manual": "GE manual",
+            "page": 23
+          }
+        }
+      ]
+    },
+    {
+      "id": "bad-odor-inside-your-washer",
+      "symptom": "Bad odor inside your washer \u0003\u0003 \u0003 \u0003\u0003 \u0003 \u0003\u0003",
+      "causes": [
+        {
+          "id": "bad-odor-inside-your-washer-0",
+          "label": "Washer unused for a long time,\u0003 not using recommended\u0003 quality of HE detergent or used too much detergent \u0003 \u0003 \u0003 \u0003",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "\u00035XQ\u0003D\u0003BasketClean cycle. \u0003,Q\u0003WKH\u0003FDVH\u0003RI\u0003VWURQJ\u0003RGRU\u000f\u0003\\RX\u0003PD\\\u0003QHHG\u0003WR\u0003UXQ\u0003 the BasketClean cycle more than once. \u00038VH\u0003RQO\\\u0003WKH\u0003DPRXQW\u0003RI\u0003GHWHUJHQW\u0003UHFRPPHQGHG\u0003RQ\u0003WKH\u0003\u0003 \u0003 detergent container. \u00038VH\u0003RQO\\\u0003+(\u0003 KLJK\u0010HȻFLHQF\\ \u0003GHWHUJHQW\u0011 \u0003$OZD\\V\u0003UHPRYH\u0003ZHW\u0003LWHPV\u0003IURP\u0003WKH\u0003ZDVKHU\u0003SURPSWO\\\u0003DIWHU\u0003\u0003 machine stops running. \u0003/HDYH\u0003WKH\u0003GRRU\u0003VOLJKWO\\\u0003RSHQ\u0003IRU\u0003WKH\u0003ZDWHU\u0003WR\u0003DLU\u0003GU\\\u0011\u0003&ORVH\u0003\u0003 supervision is necessary if this appliance is used by or near children.",
+            "Do not allow children to play on, with or inside this or any other appliance."
+          ],
+          "evidence": "GE manual, page 23: \"Washer unused for a long time,\u0003 not using recommended\u0003 quality of HE detergent or used too much detergent \u0003 \u0003 \u0003 \u0003\"",
+          "source": {
+            "line": 58,
+            "manual": "GE manual",
+            "page": 23
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "colored-spots",
+    "water-temperature-is-incorrect-slight-va",
+    "detergent-leak-improper-dispensing-of-so",
+    "not-draining-not-spinning-not-agitating-1",
+    "snags-holes-tears-rips-or-excessive-wear-2",
+    "water-does-not-enter-washer-or-enters-sl-1",
+    "wrinkling-grayed-or-yellowed-clothes-3"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-04T09:43:28.703Z",
+  "learnedAt": "2026-10-04T09:26:39.007Z"
+}
