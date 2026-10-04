@@ -168,6 +168,22 @@ function buildPdf(stream, compressed) {
     await new Promise((r) => setTimeout(r, 50));
   }
 
+  await it('every bundle the built page needs is committed, not just built and left untracked', () => {
+    // A rebuild gives the bundle a new content-hashed name. Committing dist/index.html with the new
+    // name and not the file it names is green everywhere — every suite reads the working tree,
+    // where the file exists — and broken for anybody who clones. The built site is committed on
+    // purpose, so everything under dist/assets has to be tracked.
+    const assets = path.join(__dirname, 'dist', 'assets');
+    if (!fs.existsSync(assets)) return;
+    const tracked = new Set(require('node:child_process').execFileSync('git', ['-C', __dirname, 'ls-files', 'dist/assets'], { encoding: 'utf8' }).split('\n').filter(Boolean));
+    const untracked = fs.readdirSync(assets).map((f) => `dist/assets/${f}`).filter((f) => !tracked.has(f));
+    assert.deepEqual(untracked, [], `built bundles were left uncommitted: ${untracked.join(', ')}`);
+    const html = fs.readFileSync(path.join(__dirname, 'dist', 'index.html'), 'utf8');
+    for (const ref of [...html.matchAll(/(?:src|href)="\/(assets\/[^"]+)"/g)].map((m) => m[1])) {
+      assert.ok(fs.existsSync(path.join(__dirname, 'dist', ref)), `dist/index.html names ${ref}, which is not there`);
+    }
+  });
+
   await it('both surfaces are served', async () => {
     // The bench shipped once with nothing linking to it. This is the cheaper version of that
     // lesson: a page that 404s is a page that does not exist.
