@@ -36,7 +36,7 @@ npm run demo          # the whole loop in a terminal, ~20 seconds
 npm run mcp:session   # a real MCP session — the Alexa+ deliverable, proven in one command
 npm start             # http://localhost:8792 — the device experience
 npm run alexa         # talk to it — Amazon Nova on Bedrock choosing the tools, over MCP
-npm test              # 44 suites · 516 checks
+npm test              # 44 suites · 519 checks
 npm run smoke:live    # every route of the deployed site and the MCP handshake, after a deploy
 ```
 
@@ -97,10 +97,16 @@ fix, and told somebody a repair needed "no tools" when no tool had said so. Each
 | asked a check it made up rather than the one `next_test` chose | a question while a diagnosis is open is sent back until `next_test` has been asked |
 | started from scratch on a machine this house had repaired three weeks before | the machine's record is read when a diagnosis starts, and a fault that has come back is said first — *"This E24 is back — last time, on September 2: replaced the drain pump."* |
 
-`npm run agent:eval` checks that against nine conversations — among them an order smuggled in as a "system override" and an answer that is neither yes nor no — the person scripted, everything else
-live — and ten rules on every turn. Last run: **9 of 9** agent scenarios, **0** rule violations,
-recorded in `docs/agent-eval.json`. It also found two bugs the unit suite had not: a model said as
-"Bosch SGE53C55UC" answered as unknown, and a symptom matched perfectly with nowhere to go next.
+`npm run agent:eval` checks that against twenty-two conversations — among them an order smuggled in
+as a "system override", an electrician who insists on being talked through mains work, a question
+in place of a yes, and a house asked what it is owed — the person scripted, everything else
+live — and ten rules on every turn. Last run: **22 of 22** agent scenarios, **0** rule violations,
+recorded in `docs/agent-eval.json`. The agent is a language model and a run can differ; the rules
+that matter are held by the client and the server, not asked of it. The eval has found five bugs the
+unit suite had not: a model said as "Bosch SGE53C55UC" answered as unknown; a symptom matched
+perfectly with nowhere to go next; the agent inventing a model number nobody said ("Whirlpool
+WDT750SAHZ"), which the client now withholds; `guide` reading out a repair behind mains wiring
+when called directly, which it now refuses itself; and a refusal sent back only once.
 
 ## What the screen shows — an MCP App
 

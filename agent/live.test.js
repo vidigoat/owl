@@ -133,7 +133,8 @@ const scripted = (rounds) => () => {
       [{ tool: 'guide', input: { model: 'SHE3AR75UC', code: 'E24', causeId: 'pump' } }],
       [{ tool: 'speak', input: { text: 'It is the drain pump. Shall I order one?' } }],
     ]);
-    const r = await live.turn({ said: "It's silent." }, { make });
+    // The person names the machine: the client lets a model number through only if somebody said it.
+    const r = await live.turn({ said: "My SHE3AR75UC shows E24, and the pump is silent." }, { make });
     // Recorded footage showed "No procedure on record" here: the held-back guide call, drawn.
     assert.equal(r.body.card.tool, 'verify_diagnosis');
     assert.equal(r.body.card.result.structuredContent.upheld, true);

@@ -162,6 +162,36 @@ it('does not read out a fallback remedy for a cause the owner already ruled out'
   assert.ok(full.steps.length > proc.steps.length, 'ruling causes out should remove fallback steps');
 });
 
+it('guide refuses a repair behind mains wiring by itself — called directly, with no gate before it', () => {
+  // guide is a tool on a public MCP server: any agent can call it with a cause id, without ever
+  // asking verify_diagnosis. On a machine learned from its manual it used to answer with the
+  // manual's own words — "Replace the heating element" — and offer other mains remedies as
+  // fallback steps. The gate refusing is not enough if the next tool along does not.
+  const g = parse({ model: 'TEST-MAINS', sourceName: 'test manual', text: 'Fault codes\nE5   Water is not heating\n     Clean the filter\n     Replace the heating element\n     Replace the control board\n' });
+  assert.equal(learn({ model: 'TEST-MAINS', brand: 'Test', codes: g.codes, source: 'test manual' }).learned, true);
+  const causes = lookup('TEST-MAINS', 'E5').causes;
+  const mains = causes.filter((c) => c.mains === true);
+  const safe = causes.find((c) => c.mains === false);
+  assert.ok(mains.length >= 2 && safe, 'the fixture should have two mains causes and one that is not');
+
+  for (const c of mains) {
+    const direct = guide({ model: 'TEST-MAINS', code: 'E5', causeId: c.id });
+    assert.equal(direct.known, false, `a mains repair was talked through: ${c.remedy}`);
+    assert.equal(direct.refused, true);
+    assert.deepEqual(direct.steps, []);
+    assert.match(direct.reason, /technician/);
+  }
+  // And the safe cause's guide does not smuggle them back in as "if that did not do it" steps.
+  const ok = guide({ model: 'TEST-MAINS', code: 'E5', causeId: safe.id });
+  assert.equal(ok.known, true);
+  const spoken = ok.steps.map((s) => s.say).join(' | ');
+  for (const c of mains) assert.ok(!spoken.includes(c.remedy), `a mains remedy was offered as a fallback step: "${c.remedy}"`);
+  assert.equal(ok.mainsWithheld, mains.length);
+  assert.match(ok.beyond, /technician/);
+  // The hand-written machine too: E09's causes are all behind mains wiring.
+  assert.equal(guide({ model: 'SHE3AR75UC', code: 'E09', causeId: 'element' }).refused, true);
+});
+
 it('still prefers a hand-written procedure over a generated one', () => {
   const proc = guide({ model: 'SHE3AR75UC', code: 'E24', causeId: 'filter' });
   assert.equal(proc.known, true);

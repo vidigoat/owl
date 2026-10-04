@@ -180,6 +180,20 @@ class Alexa {
     const args = { ...(input || {}) };
     const m = this.memory;
     const filled = [];
+
+    /*
+     * A model number is a fact about the room, and the agent does not get to supply one.
+     *
+     * Told only "My dishwasher says E24", a live run called hypotheses with model "Whirlpool
+     * WDT750SAHZ" — a machine nobody mentioned — and then told the person it had no service data
+     * for their Whirlpool. A model number is allowed through only if the person said it or a tool
+     * read it (the camera, the household's record). Otherwise it is withheld, the tool answers
+     * "which model?", and that is the question the person hears.
+     */
+    if (typeof args.model === 'string' && args.model && !this.grounded(args.model)) {
+      delete args.model;
+      filled.push('model withheld (nobody said it and no tool read it)');
+    }
     const fill = (key, value) => {
       if ((args[key] === undefined || args[key] === null || args[key] === '') && value != null) {
         args[key] = value;
@@ -300,10 +314,29 @@ class Alexa {
     return this.tools.filter((t) => !PHOTO_TOOLS.has(t.toolSpec.name));
   }
 
+  /** Did the person say this model number, or did a tool read it? */
+  grounded(model) {
+    const m = this.memory;
+    const squash = (t) => String(t).toUpperCase().replace(/[^A-Z0-9]/g, '');
+    const heard = squash(m.heard || '');
+    const known = new Set((m.models || []).map(squash));
+    if (known.has(squash(model))) return true;
+    // "Bosch SHE3AR75UC" is grounded by its model-shaped part: a token with a digit in it, four
+    // characters or more. A brand name alone grounds nothing.
+    const parts = String(model).toUpperCase().split(/[^A-Z0-9]+/).filter((t) => t.length >= 4 && /\d/.test(t));
+    return parts.length > 0 && parts.every((t) => heard.includes(t) || known.has(t));
+  }
+
   /** Learn from what a tool returned: the state the next call will need. */
   absorb(name, args, value) {
     const m = this.memory;
     if (!value || typeof value !== 'object') return;
+    // Every model number a tool has returned — the camera's reading, the household's machines —
+    // is one the agent may use from here on.
+    try {
+      const seen = JSON.stringify(value).match(/"model":"([^"]{2,40})"/g) || [];
+      if (seen.length) m.models = [...new Set([...(m.models || []), ...seen.map((x) => x.slice(9, -1))])].slice(-40);
+    } catch { /* a result that cannot be serialised grounds nothing */ }
     if (args.model) m.model = args.model;
     if (args.code) m.code = args.code;
     if (name === 'see' || name === 'read_error' || name === 'identify_appliance') {
@@ -346,13 +379,15 @@ class Alexa {
     this.turnNo++;
     if (photo) this.memory.photo = photo;
 
+    // What the person has said, kept so a model number can be checked against it (see prepare).
+    this.memory.heard = `${this.memory.heard || ''} ${String(text || '').slice(0, 2000)}`.slice(-8000);
     const content = [{ text: String(text || '').slice(0, 2000) }];
     if (photo) content.push({ text: '(They are holding the appliance panel up to the camera.)' });
     this.messages.push({ role: 'user', content });
 
     const steps = [];
     let say = '';
-    let tooLongOnce = false;
+    let tooLong = 0;
     let askedWithoutNext = false;
     let claimedFixedOnce = false;
     let rounds = 0;
@@ -426,8 +461,9 @@ class Alexa {
             continue;
           }
           const long = wordCount(text) > MAX_SPOKEN_WORDS || sentenceCount(text) > 3;
-          if (long && !tooLongOnce) {
-            tooLongOnce = true;
+          if (long && tooLong < 2) {
+            // Sent back twice at most: a live run was refused once and came back with four sentences again.
+            tooLong++;
             steps.push({ tool: 'speak', asked: { text: text.slice(0, 80) }, filled: [], answer: `refused: ${wordCount(text)} words — too long to say across a room`, isError: true, private: true });
             results.push({ toolResult: { toolUseId, content: [{ text: `Not said: ${wordCount(text)} words is too long to hear across a room. Say ONE thing in under ${MAX_SPOKEN_WORDS} words — if you are guiding, just the next step — and wait.` }], status: 'error' } });
             continue;
@@ -449,7 +485,22 @@ class Alexa {
         const blind = PHOTO_TOOLS.has(name) && !args.imageBase64 && !args.imagePath;
         const unheard = name === 'confirm_checkout' ? this.unheardCheckout(args) : null;
         const partFirst = name === 'guide' ? this.partFirst(args) : null;
-        if (partFirst) {
+        /*
+         * No machine has been named, and the model tried to supply one.
+         *
+         * Withholding the invented model and sending the call on was not enough: the server answered
+         * "hypotheses needs model.", and a live run asked again with "Dishwasher" seven times. The
+         * client knows why there is no model, so it answers, with the one thing to do next.
+         */
+        const unnamed = filled.some((f) => f.startsWith('model withheld')) && !args.model && NEEDS_MODEL.has(name);
+        if (unnamed) {
+          value = {
+            known: false,
+            refused: true,
+            reason: 'Nobody has said which machine this is, and a model number cannot be guessed — a brand or "dishwasher" is not one. Do not call this again. Ask them for the model number, which is on the rating plate inside the door, or to hold the plate up to the camera.',
+            answeredBy: 'client',
+          };
+        } else if (partFirst) {
           value = { known: false, refused: true, reason: partFirst, answeredBy: 'client' };
         } else if (unheard) {
           value = { ok: false, refused: true, reason: unheard, answeredBy: 'client' };
@@ -566,6 +617,8 @@ function forModel(name, value) {
   return v && typeof v === 'object' && !Array.isArray(v) ? { json: v } : { text: JSON.stringify(v) };
 }
 
+// Tools that cannot answer without knowing which machine it is.
+const NEEDS_MODEL = new Set(['hypotheses', 'describe_problem', 'verify_diagnosis', 'guide', 'find_part', 'begin_checkout', 'replace_or_repair']);
 const MAX_SPOKEN_WORDS = 40;
 const wordCount = (t) => String(t).split(/\s+/).filter(Boolean).length;
 const sentenceCount = (t) => String(t).split(/(?<=[.!?])\s+/).filter(Boolean).length;
@@ -583,6 +636,8 @@ function spokenTotal(text, total) {
 function summarise(name, v) {
   if (!v || typeof v !== 'object') return String(v).slice(0, 160);
   if (v.error) return `error: ${v.error}`;
+  // Whatever the tool, a call the client answered itself says so first.
+  if (v.answeredBy === 'client') return `held by the client: ${v.reason || ''}`.slice(0, 160);
   if (name === 'hypotheses') return `${(v.space || []).length} possible causes, ${(v.bits ?? 0).toFixed(2)} bits of uncertainty`;
   if (name === 'next_test') {
     if (v.test) return `ask: ${v.test.question}`;
@@ -597,7 +652,8 @@ function summarise(name, v) {
       : `cart opened: ${v.totals?.total ?? v.totals?.grandTotal ?? JSON.stringify(v.totals || {}).slice(0, 60)}`;
   }
   if (name === 'describe_problem') return v.known ? `"${v.matches?.[0]?.symptom}"` : `not in the manual: ${v.reason || ''}`.slice(0, 160);
-  if (v.answeredBy === 'client') return `held by the client: ${v.reason || ''}`.slice(0, 160);
+  // A refusal is not "no procedure on record": mains work is refused by guide itself.
+  if (name === 'guide' && v.refused) return `refused: ${v.reason || ''}`.slice(0, 160);
   if (name === 'guide') return v.known ? `${v.steps.length} steps${v.procedures ? `, from the manual's "${v.procedures[0].heading}"` : ''} · first: ${v.steps[0]?.say || ''}`.slice(0, 160) : `no procedure: ${v.reason || ''}`.slice(0, 160);
   if (name === 'find_part') return v.found ? `${v.part.name} $${v.part.price} · ${v.part.eta} · fits ${v.part.fitsModel}` : `no part: ${v.reason || ''}`.slice(0, 160);
   if (name === 'confirm_checkout') return v.ok ? `ordered ${v.order.part} · $${v.order.total} · ${v.order.orderId}` : `not ordered: ${v.reason || ''}`;

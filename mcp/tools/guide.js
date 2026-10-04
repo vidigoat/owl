@@ -49,7 +49,11 @@ function fromLearnedManual({ model, code, causeId, ruledOut = [] } = {}) {
   // untested alternative, it is a disproven one, and reading "replace the drain pump if it does not
   // turn" to someone who just confirmed it turns is the guessing this product exists to refuse.
   const ruled = new Set((Array.isArray(ruledOut) ? ruledOut : []).map(String));
-  const ordered = [cause, ...found.causes.filter((c) => c.id !== causeId && c.remedy && !ruled.has(c.id))];
+  // …and never a remedy behind mains wiring. guide() refuses a mains cause outright; a fallback is
+  // the same sentence read out one step later, so those are withheld here and counted.
+  const others = found.causes.filter((c) => c.id !== causeId && c.remedy && !ruled.has(c.id));
+  const withheld = others.filter((c) => c.mains === true);
+  const ordered = [cause, ...others.filter((c) => c.mains !== true)];
 
   /*
    * One remedy per step. A troubleshooting table can list several remedies under one cause —
@@ -129,10 +133,37 @@ function fromLearnedManual({ model, code, causeId, ruledOut = [] } = {}) {
     totalSeconds: steps.reduce((n, s) => n + s.pace, 0),
     handsFree: true,
     citation: cause.evidence,
+    ...(withheld.length ? {
+      mainsWithheld: withheld.length,
+      beyond: `The manual lists ${withheld.length === 1 ? 'one more remedy' : `${withheld.length} more remedies`} for this fault that ${withheld.length === 1 ? 'is' : 'are'} behind mains wiring. If these steps do not fix it, that is a technician's job, and it is not read out here.`,
+    } : {}),
   };
 }
 
 function guide({ model, code, causeId, ruledOut = [] } = {}) {
+  /*
+   * Mains work is refused HERE, not only at the gate.
+   *
+   * verify_diagnosis refuses a cause behind mains wiring, and the bundled agent only reaches guide
+   * after an upheld diagnosis. But guide is a tool on a public MCP server, and Alexa+ — or any
+   * agent — can call it directly with a cause id. For a machine learned from its manual that
+   * returned the manual's own remedy, verbatim: "Replace the heating element". A safety rule that
+   * holds only when the caller asks in the right order is a convention, so the one function that
+   * turns a cause into steps checks it for itself.
+   */
+  const found = lookup(model, code);
+  const target = found.known ? (found.causes || []).find((c) => c.id === causeId) : null;
+  if (target && target.mains === true) {
+    return {
+      known: false,
+      refused: true,
+      mains: true,
+      reason: 'That repair is behind mains wiring. It is a technician\'s job, and it is not talked through here.',
+      escalate: 'technician',
+      steps: [],
+    };
+  }
+
   const key = `${model}:${code}:${causeId}`;
   const steps = STEPS[key];
 

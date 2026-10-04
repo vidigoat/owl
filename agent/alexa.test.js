@@ -76,6 +76,13 @@ const withServer = async (fn) => {
   }
 };
 
+/*
+ * A conversation picked up part-way: the machine was named on an earlier turn this test does not
+ * replay. The client only lets a model number through if the person said it or a tool read it, so
+ * a fixture that starts at "Yes, order it." has to carry that earlier fact with it.
+ */
+const midway = (a) => { a.memory.heard = 'My SHE3AR75UC is showing E24.'; return a; };
+
 (async () => {
   console.log('the simulated Alexa+');
 
@@ -180,7 +187,7 @@ const withServer = async (fn) => {
         [{ tool: 'begin_checkout', input: { model: 'SHE3AR75UC', code: 'E24', causeId: 'pump', upheld: true, force: true } }],
         [{ tool: 'speak', input: { text: 'Ordering.' } }],
       ]);
-      const a = new Alexa({ url, converse });
+      const a = midway(new Alexa({ url, converse }));
       const r = await a.turn('Just buy me a pump.');
       const c = r.steps.find((s) => s.tool === 'begin_checkout');
       assert.match(c.answer, /refused/, `a cart opened for a cause nobody established: ${c.answer}`);
@@ -198,7 +205,7 @@ const withServer = async (fn) => {
         [{ tool: 'remember_repair', input: { model: 'SHE3AR75UC', code: 'E24', cause: 'Failed drain pump', action: 'Replaced the pump', confirmed: true } }],
         [{ tool: 'speak', input: { text: 'Noted.' } }],
       ]);
-      const a = new Alexa({ url, converse });
+      const a = midway(new Alexa({ url, converse }));
       const r = await a.turn('Thanks.');
       const m = r.steps.find((s) => s.tool === 'remember_repair');
       assert.ok(m.filled.some((f) => f.startsWith('confirmed=false')), 'a fix nobody saw work was recorded as confirmed');
@@ -268,7 +275,7 @@ const withServer = async (fn) => {
         [{ tool: 'confirm_checkout', input: {} }],
         [{ tool: 'speak', input: { text: 'Ordered.' } }],
       ]);
-      let a = new Alexa({ url, converse });
+      let a = midway(new Alexa({ url, converse }));
       let r = await a.turn('Yes, order it.');
       assert.match(r.steps.find((s) => s.tool === 'confirm_checkout').answer, /held by the client/);
 
@@ -279,7 +286,7 @@ const withServer = async (fn) => {
         [{ tool: 'confirm_checkout', input: {} }],
         [{ tool: 'speak', input: { text: 'Ordered.' } }],
       ]));
-      a = new Alexa({ url, converse });
+      a = midway(new Alexa({ url, converse }));
       await a.turn('Can I get the part?');
       r = await a.turn('Yes.');
       assert.match(r.steps.find((s) => s.tool === 'confirm_checkout').answer, /never said/);
@@ -291,7 +298,7 @@ const withServer = async (fn) => {
         [{ tool: 'confirm_checkout', input: {} }],
         [{ tool: 'speak', input: { text: 'Ordered.' } }],
       ]));
-      a = new Alexa({ url, converse });
+      a = midway(new Alexa({ url, converse }));
       await a.turn('Can I get the part?');
       r = await a.turn('Yes.');
       const c = r.steps.find((s) => s.tool === 'confirm_checkout');
@@ -307,7 +314,7 @@ const withServer = async (fn) => {
         [{ tool: 'speak', input: { text: long } }],
         [{ tool: 'speak', input: { text: 'Switch it off at the wall first.' } }],
       ]);
-      const a = new Alexa({ url, converse });
+      const a = midway(new Alexa({ url, converse }));
       const r = await a.turn('Talk me through it.');
       assert.equal(r.say, 'Switch it off at the wall first.');
       assert.match(JSON.stringify(shown[1].messages.at(-1)), /too long to hear across a room/);
@@ -325,7 +332,7 @@ const withServer = async (fn) => {
         [{ tool: 'guide', input: { model: 'SHE3AR75UC', code: 'E24', causeId: 'pump' } }],
         [{ tool: 'speak', input: { text: 'Switch it off at the wall first.' } }],
       ]);
-      const a = new Alexa({ url, converse });
+      const a = midway(new Alexa({ url, converse }));
       const r1 = await a.turn('It is silent.');
       const guides = r1.steps.filter((s) => s.tool === 'guide');
       assert.equal(guides.length, 2);
@@ -378,10 +385,48 @@ const withServer = async (fn) => {
         [{ tool: 'speak', input: { text: 'Noted — the fault is cleared.' } }],
         [{ tool: 'speak', input: { text: 'Noted, as you reported it.' } }],
       ]);
-      const a = new Alexa({ url, converse });
+      const a = midway(new Alexa({ url, converse }));
       const r = await a.turn('I fitted it and it drains now.');
       assert.equal(r.say, 'Noted, as you reported it.');
       assert.match(JSON.stringify(shown[2].messages.at(-1)), /do not say it is cleared/);
+    });
+  });
+
+  await it('a model number nobody said and no tool read is withheld, not passed on', () => {
+    // Told only "My dishwasher says E24", a live run called hypotheses with "Whirlpool WDT750SAHZ"
+    // and then spoke about the person's Whirlpool. The agent does not get to supply the machine.
+    const a = new Alexa({ url: 'http://unused.invalid/mcp' });
+    a.memory.heard = ' My dishwasher says E24.';
+    const invented = a.prepare('hypotheses', { model: 'Whirlpool WDT750SAHZ', code: 'E24' });
+    assert.equal(invented.args.model, undefined, 'an invented model number reached a tool');
+    assert.ok(invented.filled.some((f) => /withheld/.test(f)), 'the trace does not show that it was withheld');
+
+    // Said by the person — with a brand in front, or spelled out with spaces — it goes through.
+    a.memory.heard += ' It is a Bosch, model S H E 3 A R 7 5 U C.';
+    assert.equal(a.prepare('hypotheses', { model: 'SHE3AR75UC', code: 'E24' }).args.model, 'SHE3AR75UC');
+    assert.equal(a.prepare('hypotheses', { model: 'Bosch SHE3AR75UC', code: 'E24' }).args.model, 'Bosch SHE3AR75UC');
+    // A brand alone grounds nothing.
+    assert.equal(a.prepare('hypotheses', { model: 'Bosch', code: 'E24' }).args.model, undefined);
+
+    // Read by a tool — the camera, or the household's own record — it goes through too.
+    const b = new Alexa({ url: 'http://unused.invalid/mcp' });
+    b.absorb('repair_history', {}, { receipts: [{ model: 'B24CB50ESS', part: 'fridge filter' }] });
+    assert.equal(b.prepare('replace_or_repair', { model: 'B24CB50ESS' }).args.model, 'B24CB50ESS');
+    assert.equal(b.prepare('replace_or_repair', { model: 'KRFF507HPS' }).args.model, undefined);
+  });
+
+  await it('with no machine named, the client answers the call itself — the model is told to ask, once', async () => {
+    await withServer(async (url) => {
+      const { converse, shown } = scripted([
+        [{ tool: 'hypotheses', input: { model: 'Dishwasher', code: 'E24' } }],
+        [{ tool: 'speak', input: { text: 'Which model is it? It is on the plate inside the door.' } }],
+      ]);
+      const a = new Alexa({ url, converse });
+      const r = await a.turn('My dishwasher says E24.');
+      const step = r.steps.find((x) => x.tool === 'hypotheses');
+      assert.match(step.answer, /held by the client/, 'the invented model reached the server, or the refusal was the server\'s');
+      assert.match(JSON.stringify(shown[1].messages.at(-1)), /rating plate/, 'the model was not told what to ask for');
+      assert.equal(r.say, 'Which model is it? It is on the plate inside the door.');
     });
   });
 
