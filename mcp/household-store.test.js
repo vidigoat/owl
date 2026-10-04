@@ -102,6 +102,27 @@ const repair = { model: 'SHE3AR75UC', code: 'E24', cause: 'Blocked filter', acti
     } finally { srv.close(); setHouseholdStore(undefined); }
   });
 
+  await it('a seeded demo household is labelled made-up, and is not a fallback the tools lack', async () => {
+    // The wake screen offers each row of the house as something to ask the agent about. That is
+    // only honest when the tools hold the same record — so "demo" (made up) and "fallback" (shown
+    // because nothing is recorded, and the tools do not have it) are told apart.
+    const t = fakeTable();
+    t.item.state = JSON.stringify({ demo: true, appliances: { M1: { model: 'M1', kind: 'Dishwasher' } }, receipts: [],
+      open: [{ model: 'M1', code: 'E1', cause: 'pump', waitingFor: 'drain pump', expectedBy: '2020-01-01T00:00:00.000Z', at: '2019-12-28T00:00:00.000Z' }] });
+    t.item.version = 1;
+    setHouseholdStore(new HouseholdStore({ table: 't', creds: CREDS, fetchImpl: t.fetchImpl }));
+    const http = require('node:http');
+    const srv = http.createServer(require('../server'));
+    await new Promise((r) => srv.listen(0, '127.0.0.1', r));
+    try {
+      const j = await (await fetch(`http://127.0.0.1:${srv.address().port}/api/household`)).json();
+      assert.equal(j.demo, true, 'a made-up household was shown as a real one');
+      assert.equal(j.fallback, false, 'a household the tools hold was called a fallback');
+      assert.equal(j.resumable.length, 1, 'a repair waiting on a part that was due is the first thing the screen should say');
+      assert.match(j.resumable[0].say, /\S/);
+    } finally { srv.close(); setHouseholdStore(undefined); }
+  });
+
   await it('the device page\'s /api/remember writes to the same table the tools do', async () => {
     const t = fakeTable();
     setHouseholdStore(new HouseholdStore({ table: 't', creds: CREDS, fetchImpl: t.fetchImpl }));

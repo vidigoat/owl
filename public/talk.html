@@ -14,13 +14,16 @@
   checked. It is a simulation of Alexa+, and says so, because entrants cannot run an add-on against
   Alexa+ itself.
 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap">
 <style>
   :root {
     --paper: #e8e5dc; --paper-2: #e1ddd2; --ink: #191714; --ink-2: #4a453d; --faint: #6a6358; --rule: #c9c4b6;
     --amber: #b8761f; --stop: #a8321f; --done: #3f6b4e;
-    --screen: #14161a; --screen-ink: #f2f0ea; --screen-dim: #98a0aa;
-    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-    --mono: ui-monospace, "SF Mono", Menlo, monospace;
+    --screen: #14161a; --screen-2: #1c1f25; --screen-rule: #2a2e36; --screen-ink: #f2f0ea; --screen-dim: #98a0aa; --screen-amber: #e0a04a;
+    --sans: Archivo, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "DM Mono", ui-monospace, "SF Mono", Menlo, monospace;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) { --paper: #17181b; --paper-2: #1f2024; --ink: #ecebe6; --ink-2: #c4c1b8; --faint: #8f8c84; --rule: #34363b; }
@@ -29,25 +32,53 @@
   /* `hidden` has to win over the flex and grid rules below, or hidden controls stay on screen. */
   [hidden] { display: none !important; }
   body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.45 var(--sans); }
-  .wrap { max-width: 1180px; margin: 0 auto; padding: 28px 16px 56px; }
-  header h1 { margin: 0; font-size: 24px; letter-spacing: -0.015em; }
-  header p { margin: 6px 0 0; color: var(--faint); max-width: 72ch; }
-  .stage { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 28px; margin-top: 24px; align-items: start; }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 22px 20px 56px; }
+  header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; }
+  header h1 { margin: 0; font: 500 13px var(--mono); color: var(--ink-2); }
+  header h1 a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--rule); }
+  header p { margin: 0; color: var(--faint); font-size: 14px; max-width: 86ch; }
+  .stage { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(300px, 1fr); gap: 28px; margin-top: 18px; align-items: start; }
 
-  .show { background: #0b0c0e; border-radius: 26px; padding: 16px; box-shadow: 0 34px 70px -34px rgba(0,0,0,.65); position: sticky; top: 16px; }
-  .show iframe { display: block; width: 100%; height: 360px; border: 0; border-radius: 14px; background: var(--screen); transition: height 220ms ease; }
-  .voice { margin-top: 12px; padding: 16px 18px 18px; border-radius: 14px; background: var(--screen); color: var(--screen-ink); min-height: 96px; }
-  .voice small { display: flex; align-items: center; gap: 8px; font: 12px var(--mono); color: var(--screen-dim); }
+  /* ── the device: a kitchen screen, landscape, read from across a room ── */
+  .show { background: #0b0c0e; border-radius: 28px; padding: 14px; box-shadow: 0 34px 70px -34px rgba(0,0,0,.65); position: sticky; top: 14px; }
+  .screen { background: var(--screen); color: var(--screen-ink); border-radius: 16px; min-height: min(66vh, 600px); display: grid; grid-template-rows: auto 1fr auto; overflow: hidden; }
+  .bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 20px; font: 12px var(--mono); color: var(--screen-dim); border-bottom: 1px solid var(--screen-rule); }
+  .bar .who { display: flex; align-items: center; gap: 8px; }
   .ring { width: 10px; height: 10px; border-radius: 50%; background: #3a8fd6; opacity: .35; }
   .thinking .ring { opacity: 1; animation: pulse 1.1s ease-in-out infinite; }
   @keyframes pulse { 50% { transform: scale(1.6); opacity: .4; } }
   @media (prefers-reduced-motion: reduce) { .thinking .ring { animation: none; } }
-  .voice p { margin: 8px 0 0; font-size: 22px; line-height: 1.3; letter-spacing: -0.01em; }
+  .body { min-height: 0; }
+  .body iframe { display: block; width: 100%; height: 360px; border: 0; background: var(--screen); transition: height 220ms ease; }
 
+  /* the house: what the screen shows before anybody has said a word */
+  .house { padding: 26px 28px 22px; display: grid; gap: 22px; align-content: start; }
+  .house h2 { margin: 0; font-size: clamp(26px, 3vw, 38px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.08; }
+  .house .sub { margin: 6px 0 0; color: var(--screen-dim); font-size: 15px; }
+  .needs { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+  .needs button { all: unset; box-sizing: border-box; cursor: pointer; width: 100%; display: grid; grid-template-columns: 10px 1fr auto; gap: 14px; align-items: center; padding: 14px 16px; min-height: 48px; background: var(--screen-2); border: 1px solid var(--screen-rule); border-radius: 12px; }
+  .needs button:hover { border-color: var(--screen-amber); }
+  .needs button:focus-visible { outline: 2px solid var(--screen-amber); outline-offset: 2px; }
+  .needs .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--screen-amber); }
+  .needs b { display: block; font-weight: 600; font-size: 18px; letter-spacing: -0.01em; }
+  .needs span.why { display: block; margin-top: 2px; color: var(--screen-dim); font-size: 14px; }
+  .needs .ask { font: 12px var(--mono); color: var(--screen-amber); white-space: nowrap; }
+  .machines { display: flex; flex-wrap: wrap; gap: 8px; }
+  .machines span { font: 12px var(--mono); color: var(--screen-dim); border: 1px solid var(--screen-rule); border-radius: 999px; padding: 6px 12px; }
+  .machines span b { color: var(--screen-ink); font-weight: 500; }
+  .house .honest { margin: 0; font: 12px var(--mono); color: var(--screen-dim); }
+
+  .voice { padding: 16px 22px 20px; border-top: 1px solid var(--screen-rule); background: var(--screen-2); min-height: 92px; }
+  .voice p { margin: 0; font-size: clamp(20px, 2.1vw, 26px); line-height: 1.28; letter-spacing: -0.012em; }
+
+  /* ── the rail: what was said, and every tool the agent chose ── */
   .talk { display: grid; gap: 14px; }
-  .log { display: grid; gap: 14px; max-height: 58vh; overflow: auto; padding-right: 4px; }
+  .talk h2 { margin: 0; font: 500 12px var(--mono); color: var(--faint); }
+  .log { display: grid; gap: 14px; max-height: 52vh; overflow: auto; padding-right: 4px; }
+  .log:empty::before { content: 'Each reply lists the MCP tools the agent called to produce it.'; color: var(--faint); font-size: 14px; }
+  .turn { padding-top: 12px; border-top: 1px solid var(--rule); }
   .turn .you { font-weight: 600; }
-  .turn .you::before { content: 'You  '; color: var(--faint); font-weight: 400; font: 12px var(--mono); }
+  .turn .you::before { content: 'You  '; color: var(--faint); font: 400 12px var(--mono); }
   .turn .her { margin-top: 4px; }
   .turn .her::before { content: 'Alexa+  '; color: var(--amber); font: 12px var(--mono); }
   .calls { margin: 6px 0 0; padding: 0; list-style: none; font: 12px/1.5 var(--mono); color: var(--faint); }
@@ -55,7 +86,7 @@
   .calls b { color: var(--ink-2); font-weight: 500; }
   .calls .err { color: var(--stop); }
   .form { display: flex; gap: 8px; }
-  .form input { flex: 1; font: inherit; color: var(--ink); background: transparent; border: 1px solid var(--rule); border-radius: 10px; padding: 12px 14px; min-height: 48px; }
+  .form input { flex: 1; min-width: 0; font: inherit; color: var(--ink); background: transparent; border: 1px solid var(--rule); border-radius: 10px; padding: 12px 14px; min-height: 48px; }
   button { font: inherit; color: var(--ink); background: transparent; border: 1px solid var(--rule); border-radius: 10px; padding: 10px 16px; min-height: 48px; cursor: pointer; }
   button.primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
   button[aria-pressed="true"] { border-color: var(--amber); color: var(--amber); }
@@ -66,33 +97,39 @@
   .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
   .meta { font: 12px var(--mono); color: var(--faint); }
   .closed { padding: 16px; border: 1px solid var(--rule); border-radius: 12px; }
-  @media (max-width: 860px) { .stage { grid-template-columns: 1fr; } .show { position: static; } }
+  @media (max-width: 900px) { .stage { grid-template-columns: 1fr; } .show { position: static; } .house { padding: 20px 18px; } .needs button { grid-template-columns: 10px 1fr; } .needs .ask { display: none; } }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1>Talk to it</h1>
-    <p>A simulated Alexa+: Amazon Nova on Bedrock, choosing this project's MCP tools itself. Say what your machine is doing. What it says, every tool it calls, and the card on the screen are this turn's — nothing here is scripted.</p>
+    <h1><a href="/">Second Set of Hands</a> · a simulated Alexa+</h1>
+    <p id="lede">Amazon Nova on Bedrock, choosing this project's MCP tools itself. The screen opens on what the house already knows. What it says, every tool it calls, and the card are this turn's — nothing here is scripted.</p>
   </header>
 
   <div class="stage" role="main">
     <div class="show">
-      <iframe id="card" title="What the screen shows" sandbox="allow-scripts"></iframe>
-      <div class="voice" id="voice" aria-live="polite">
-        <small><span class="ring" aria-hidden="true"></span><span id="state">Alexa+ · ready</span></small>
-        <p id="said">Tell me what the machine is doing.</p>
+      <div class="screen" id="voice" aria-live="polite">
+        <div class="bar">
+          <span class="who"><span class="ring" aria-hidden="true"></span><span id="state">Alexa+ · ready</span></span>
+          <span>kitchen</span>
+        </div>
+        <div class="body">
+          <section class="house" id="house" aria-label="What the house knows"></section>
+          <iframe id="card" title="What the screen shows" sandbox="allow-scripts" hidden></iframe>
+        </div>
+        <div class="voice"><p id="said">Tell me what the machine is doing.</p></div>
       </div>
     </div>
 
     <div class="talk">
       <div id="closed" class="closed" hidden></div>
+      <h2>say it, or start from one of these</h2>
       <div class="starts" id="starts" aria-label="Ways to start">
         <button data-say="My Bosch dishwasher is showing E24. The model is SHE3AR75UC.">E24 on a SHE3AR75UC</button>
         <button data-say="My Bosch SGE53C55UC leaves water in the bottom at the end of the program.">Water left in an SGE53C55UC</button>
         <button data-say="My SHE3AR75UC dishwasher says E09.">E09</button>
       </div>
-      <div class="log" id="log" role="log" aria-label="Conversation"></div>
       <form class="form" id="form" autocomplete="off">
         <input id="input" name="said" placeholder="Say what it is doing…" aria-label="What you say" maxlength="500">
         <button type="button" id="mic" aria-pressed="false" hidden>Hold to talk</button>
@@ -103,6 +140,8 @@
         <button type="button" id="restart">New conversation</button>
         <span class="meta" id="meta"></span>
       </div>
+      <h2>what it said, and the tools it chose</h2>
+      <div class="log" id="log" role="log" aria-label="Conversation"></div>
     </div>
   </div>
 </div>
@@ -140,6 +179,8 @@
   });
   async function draw(card) {
     if (!html) return;
+    $('house').hidden = true;
+    frame.hidden = false;
     currentTool = card.tool;
     const ready = new Promise((r) => { markReady = r; });
     frame.srcdoc = html;
@@ -155,8 +196,45 @@
     const sid = init.res.headers.get('mcp-session-id');
     const read = await post({ jsonrpc: '2.0', id: 2, method: 'resources/read', params: { uri: 'ui://second-set-of-hands/card' } }, sid);
     html = read.json.result.contents[0].text;
-    frame.srcdoc = html; // the card's own idle state until there is something to draw
   }
+
+  /*
+   * ── the house ────────────────────────────────────────────────────────────
+   * What the screen shows before anybody has spoken: the machines this household has recorded and
+   * what its own history says needs attention — a filter past its interval, a fault that keeps
+   * coming back, a part that was due to arrive. All of it is arithmetic over the record
+   * (/api/household → mcp/tools/home.js); none of it is a model's opinion. Each row is a sentence
+   * the person could say, and pressing it says it.
+   */
+  async function showHouse() {
+    const el = $('house');
+    frame.hidden = true;
+    el.hidden = false;
+    let h = null;
+    try { h = await (await fetch('/api/household')).json(); } catch { h = null; }
+    // A made-up house shown only because nothing is recorded here is not one the agent's tools
+    // have, so its rows are not offered as things to ask about.
+    if (!h || !h.known || h.fallback) {
+      el.innerHTML = '<div><h2>Nothing remembered yet.</h2><p class="sub">Tell me what a machine is doing. What gets fixed here is kept, so the next conversation starts further along.</p></div>'
+        + (h && h.fallback ? '<p class="honest">npm run home:demo loads a made-up household, so the screen and the agent share one record</p>' : '');
+      return;
+    }
+    const name = (model) => { const a = (h.appliances || []).find((x) => x.model === model); return a ? (a.nickname || `the ${String(a.kind || 'machine').toLowerCase()}`) : model; };
+    const cap = (t) => t.charAt(0).toUpperCase() + t.slice(1);
+    const rows = [];
+    for (const r of h.resumable || []) rows.push({ title: `${cap(name(r.model))}: a repair is waiting`, why: r.say || 'A part was due to arrive.', say: `Let's carry on with ${name(r.model)}. The model is ${r.model}.`, ask: 'carry on' });
+    for (const r of h.recurring || []) rows.push({ title: `${r.code} on ${name(r.model)}, ${r.times} times in ${r.daysSinceFirst} days`, why: `Last time was ${r.daysSinceLast} days ago. ${r.confirmedFixes ? `${r.confirmedFixes} of those fixes were seen to work.` : 'None of those fixes was seen to work.'}`, say: `Is ${name(r.model)} worth repairing again? The model is ${r.model} and it keeps showing ${r.code}.`, ask: 'ask about it' });
+    for (const d of h.due || []) rows.push({ title: `${cap(d.part)}, ${d.daysSince} days old`, why: `On ${name(d.model)}. It is due after ${d.dueAfter}.`, say: 'What needs doing in my house?', ask: 'ask about it' });
+    const n = (h.appliances || []).length;
+    const head = rows.length
+      ? `<h2>${rows.length === 1 ? 'One thing needs' : `${rows.length} things need`} attention.</h2>`
+      : '<h2>Nothing needs attention.</h2>';
+    el.innerHTML = `<div>${head}<p class="sub">${n} machine${n === 1 ? '' : 's'} on record, ${(h.receipts || []).length} repair${(h.receipts || []).length === 1 ? '' : 's'} remembered. Worked out from this house's own history.</p></div>`
+      + (rows.length ? `<ul class="needs">${rows.map((r) => `<li><button type="button" data-say="${esc(r.say)}"><span class="dot" aria-hidden="true"></span><span><b>${esc(r.title)}</b><span class="why">${esc(r.why)}</span></span><span class="ask">${esc(r.ask)}</span></button></li>`).join('')}</ul>` : '')
+      + `<div class="machines">${(h.appliances || []).map((a) => `<span><b>${esc(a.nickname || a.kind)}</b> ${esc(a.brand || '')} ${esc(a.model)}</span>`).join('')}</div>`
+      + (h.demo ? '<p class="honest">a household made up for this demo; the machines, manuals and faults are real</p>' : '');
+  }
+  $('house').addEventListener('click', (e) => { const b = e.target.closest('button[data-say]'); if (b) say(b.dataset.say); });
 
   // ── talking ────────────────────────────────────────────────────────────
   function speak(line) {
@@ -221,7 +299,7 @@
     $('starts').hidden = false;
     $('said').textContent = 'Tell me what the machine is doing.';
     $('meta').textContent = '';
-    if (html) frame.srcdoc = html;
+    showHouse();
   });
 
   // Push to talk, where the browser can hear. Never listening unless the button is held.
@@ -249,6 +327,7 @@
   }
 
   (async () => {
+    showHouse();
     try { await loadCard(); } catch { /* the words still work without the screen */ }
     try {
       const a = await (await fetch('/api/alexa')).json();
@@ -268,7 +347,8 @@
         $('aloud').hidden = true;
         document.querySelector('.show').innerHTML = '<video src="/media/talk.webm" autoplay muted loop playsinline controls aria-label="A recorded session: the agent asks the pump check, offers the part, reads the total, orders, and recognises the fault coming back" style="display:block;width:100%;border-radius:14px;background:#14161a"></video>';
         document.querySelector('.stage').style.gridTemplateColumns = '1fr';
-        document.querySelector('header p').textContent = 'A simulated Alexa+: Amazon Nova on Bedrock, choosing this project\'s MCP tools itself. Below is a recording of a real session — the person\'s lines are typed on screen; everything Alexa+ says, every tool it calls, and the card are what it actually did.';
+        document.querySelectorAll('.talk h2').forEach((h) => { h.hidden = true; });
+        document.querySelector('header p').textContent = 'Amazon Nova on Bedrock, choosing this project\'s MCP tools itself. Below is a recording of a real session — the person\'s lines are typed on screen; everything Alexa+ says, every tool it calls, and the card are what it actually did.';
       }
     } catch { /* offered anyway; a turn will say what went wrong */ }
   })();

@@ -13,6 +13,7 @@
     "mcp": "node mcp/server.js",
     "eval": "node eval/run.js",
     "learn": "node scripts/learn-manual.js",
+    "home:demo": "node scripts/seed-home-demo.js",
     "demo": "node scripts/demo.js",
     "test": "node scripts/test.js",
     "capture": "node scripts/capture.js",

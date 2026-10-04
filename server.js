@@ -659,12 +659,19 @@ function handler(req, res) {
 
       return send(res, 200, JSON.stringify({
         known: true,
-        demo,
+        // `demo` is what the reader is told: this house is made up. `fallback` is narrower — the
+        // made-up house is being SHOWN because nothing is recorded here, so the tools do not have
+        // it, and a screen that offered its rows as things to ask about would be promising a
+        // history the agent cannot find. A seeded demo (npm run home:demo) is demo but not fallback.
+        demo: demo || state.demo === true,
+        fallback: demo,
         describes: state.describes || null,
         appliances: Object.values(state.appliances || {}),
         receipts: state.receipts || [],
         due: attention.due,
         recurring: attention.recurring,
+        // A repair left half-way whose part was due by now — the first thing the screen should say.
+        resumable: attention.resumable,
       }), 'application/json');
     })();
 
