@@ -2,6 +2,16 @@
   "model": "GUD27GESNWW",
   "brand": "GE",
   "kind": "Dryer",
+  "alsoCovers": [
+    "GUD24ESSMWW",
+    "GUD24GSSMWW",
+    "GUD27EESNWW",
+    "GUD27ESPMDG",
+    "GUD27ESSMWW",
+    "GUD27GSPMDG",
+    "GUD27GSSMWW",
+    "GUV27ESSMWW"
+  ],
   "source": "GUD27GESNWW.pdf",
   "pages": "18–22",
   "readWith": "text-layer",
@@ -1139,12 +1149,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:16.504Z",
-  "learnedAt": "2026-10-04T15:18:54.135Z",
-  "alsoCovers": [
-    "GUD24ESSMWW",
-    "GUD27EESNWW",
-    "GUD27ESPMDG",
-    "GUD27ESSMWW",
-    "GUV27ESSMWW"
-  ]
+  "learnedAt": "2026-10-05T10:02:20.400Z"
 }

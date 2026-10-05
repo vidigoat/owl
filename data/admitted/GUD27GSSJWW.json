@@ -1,0 +1,517 @@
+{
+  "model": "GUD27GSSJWW",
+  "brand": "GE",
+  "kind": "Dryer",
+  "alsoCovers": [
+    "GUD27ESSJWW"
+  ],
+  "source": "GUD27GSSJWW.pdf",
+  "pages": "14–18",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "washer-won-t-operate-movement-inside-mac",
+      "symptom": "Washer won’t operate Movement inside machine when shut off",
+      "causes": [
+        {
+          "id": "washer-won-t-operate-movement-inside-mac-0",
+          "label": "Circuit breaker/fuse is tripped/blown",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check house circuit breakers/fuses.",
+            "Replace fuses or reset breaker.",
+            "Washer should have separate outlet."
+          ],
+          "evidence": "GE manual, page 15: \"Circuit breaker/fuse is tripped/blown\"",
+          "source": {
+            "line": 10,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "washer-won-t-operate-movement-inside-mac-1",
+          "label": "Electronics need to be reset",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Unplug washer, wait 2 minutes, plug back in and press Start."
+          ],
+          "evidence": "GE manual, page 15: \"Electronics need to be reset\"",
+          "source": {
+            "line": 12,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "washer-won-t-operate-movement-inside-mac-2",
+          "label": "Start was not pressed",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Press Start."
+          ],
+          "evidence": "GE manual, page 15: \"Start was not pressed\"",
+          "source": {
+            "line": 13,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "washer-won-t-operate-movement-inside-mac-3",
+          "label": "Lid magnet missing",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Call for service."
+          ],
+          "evidence": "GE manual, page 15: \"Lid magnet missing\"",
+          "source": {
+            "line": 14,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "washer-won-t-operate-movement-inside-mac-4",
+          "label": "Shifting mechanism is disengaging the motor",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "When the machine is manually turned off, the shifter will disengage the motor before completely shutting down.",
+            "If lid is raised before the motor is disengaged, it will resume when lid is closed.",
+            "Make sure the spin cycle selected matches the load you are"
+          ],
+          "evidence": "GE manual, page 15: \"Shifting mechanism is disengaging the motor\"",
+          "source": {
+            "line": 15,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "clothes-too-wet-colored-spots",
+      "symptom": "Clothes too wet Colored spots",
+      "causes": [
+        {
+          "id": "clothes-too-wet-colored-spots-1",
+          "label": "Dye transfer",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Sort whites or lightly colored items from dark colors Use more detergent (especially with larger loads).",
+            "Be sure to follow"
+          ],
+          "evidence": "GE manual, page 15: \"Dye transfer\"",
+          "source": {
+            "line": 32,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "grayed-or-yellowed-clothes-lint-or-resid",
+      "symptom": "Grayed or yellowed clothes Lint or residue on clothes",
+      "causes": [
+        {
+          "id": "grayed-or-yellowed-clothes-lint-or-resid-0",
+          "label": "Water is not hot enough",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "60°C)."
+          ],
+          "evidence": "GE manual, page 15: \"Water is not hot enough\"",
+          "source": {
+            "line": 40,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "grayed-or-yellowed-clothes-lint-or-resid-1",
+          "label": "Washer is overloaded",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Select load size to match clothes load.",
+            "Add detergent as wash basket fills with water before you load"
+          ],
+          "evidence": "GE manual, page 15: \"Washer is overloaded\"",
+          "source": {
+            "line": 43,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "grayed-or-yellowed-clothes-lint-or-resid-5",
+          "label": "Incorrect sorting",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "Separate lint producers from lint collectors."
+          ],
+          "evidence": "GE manual, page 15: \"Incorrect sorting\"",
+          "source": {
+            "line": 53,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "grayed-or-yellowed-clothes-lint-or-resid-6",
+          "label": "Washing too long",
+          "likelihood": 0.132,
+          "cost": null,
+          "remedies": [
+            "Wash small loads for a shorter time than larger loads Add detergent as wash basket fills with water, before you load clothes."
+          ],
+          "evidence": "GE manual, page 15: \"Washing too long\"",
+          "source": {
+            "line": 54,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "grayed-or-yellowed-clothes-lint-or-resid-7",
+          "label": "Detergent not dissolving",
+          "likelihood": 0.116,
+          "cost": null,
+          "remedies": [
+            "Try a liquid detergent.",
+            "Use warmer water temperature.",
+            "Load clothes no higher than the top row of holes in the washer"
+          ],
+          "evidence": "GE manual, page 15: \"Detergent not dissolving\"",
+          "source": {
+            "line": 57,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "grayed-or-yellowed-clothes-lint-or-resid-9",
+          "label": "Incorrect use of fabric softener",
+          "likelihood": 0.094,
+          "cost": null,
+          "remedies": [
+            "Check fabric softener package for instructions and follow directions for using dispenser."
+          ],
+          "evidence": "GE manual, page 15: \"Incorrect use of fabric softener\"",
+          "source": {
+            "line": 62,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "pilling-snags-holes-tears-rips-or-excess",
+      "symptom": "Pilling Snags, holes, tears, rips or excessive wear Wrinkling “Metallic clicking” Back and forth",
+      "causes": [
+        {
+          "id": "pilling-snags-holes-tears-rips-or-excess-0",
+          "label": "Pins, snaps, hooks, sharp buttons, belt buckles, zippers and sharp objects left in pockets",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Fasten snaps, hooks, buttons and zippers.",
+            "Remove loose items like pins, objects in pockets and sharp buttons.",
+            "Turn knits (which snag easily) inside out.",
+            "Check bleach package instructions for proper amount."
+          ],
+          "evidence": "GE manual, page 16: \"Pins, snaps, hooks, sharp buttons, belt buckles, zippers and sharp objects left in pockets\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 16
+          }
+        },
+        {
+          "id": "pilling-snags-holes-tears-rips-or-excess-1",
+          "label": "Undiluted chlorine bleach",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Never add undiluted bleach to wash or allow clothes to come in contact with undiluted bleach."
+          ],
+          "evidence": "GE manual, page 16: \"Undiluted chlorine bleach\"",
+          "source": {
+            "line": 12,
+            "manual": "GE manual",
+            "page": 16
+          }
+        },
+        {
+          "id": "pilling-snags-holes-tears-rips-or-excess-2",
+          "label": "Chemicals like hair bleach or dye, permanent wave solution Improper sorting",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Rinse items that may have chemicals on them before washing.",
+            "Avoid mixing heavy items (like work clothes) with light items (like blouses).",
+            "Try a fabric softener."
+          ],
+          "evidence": "GE manual, page 16: \"Chemicals like hair bleach or dye, permanent wave solution Improper sorting\"",
+          "source": {
+            "line": 14,
+            "manual": "GE manual",
+            "page": 16
+          }
+        },
+        {
+          "id": "pilling-snags-holes-tears-rips-or-excess-3",
+          "label": "Overloading or incorrect water level",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Load your washer so clothes have enough room to move freely with water covering all of the clothes."
+          ],
+          "evidence": "GE manual, page 16: \"Overloading or incorrect water level\"",
+          "source": {
+            "line": 20,
+            "manual": "GE manual",
+            "page": 16
+          }
+        },
+        {
+          "id": "pilling-snags-holes-tears-rips-or-excess-5",
+          "label": "Shifter mechanism is engaging or disengaging",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "The drive system will engage at the start of agitate and disengage when agitate is complete.",
+            "This occurs multiple times during the wash."
+          ],
+          "evidence": "GE manual, page 16: \"Shifter mechanism is engaging or disengaging\"",
+          "source": {
+            "line": 31,
+            "manual": "GE manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "quick-short-agitation-sounds-at-end-of-a",
+      "symptom": "Quick short agitation sounds at end of agitate",
+      "causes": [
+        {
+          "id": "quick-short-agitation-sounds-at-end-of-a-0",
+          "label": "Clothing redistribution",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "At the end of agitate, the motor makes short agitation strokes to redistribute the load."
+          ],
+          "evidence": "GE manual, page 16: \"Clothing redistribution\"",
+          "source": {
+            "line": 38,
+            "manual": "GE manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "click-when-water-stops-filling",
+      "symptom": "“Click” when water stops filling",
+      "causes": [
+        {
+          "id": "click-when-water-stops-filling-0",
+          "label": "Relay switch",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "The relay makes a click sound when activated.",
+            "The water level activates the relay and stops filling."
+          ],
+          "evidence": "GE manual, page 16: \"Relay switch\"",
+          "source": {
+            "line": 40,
+            "manual": "GE manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "clicking-behind-control-panel-during-fil",
+      "symptom": "“Clicking” behind Control Panel during fill",
+      "causes": [
+        {
+          "id": "clicking-behind-control-panel-during-fil-0",
+          "label": "Automatic Temperature Control Valve",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This valve mixes in cold and hot water.",
+            "The “clicking” is the valve turning on and off."
+          ],
+          "evidence": "GE manual, page 16: \"Automatic Temperature Control Valve\"",
+          "source": {
+            "line": 42,
+            "manual": "GE manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "dryer-doesn-t-start",
+      "symptom": "Dryer doesn’t start",
+      "causes": [
+        {
+          "id": "dryer-doesn-t-start-0",
+          "label": "Fuse is blown/circuit breaker is tripped",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check the house fuse/circuit breaker box and replace fuse or reset breaker.",
+            "Note: Most electric dryers use 2 fuses/breakers."
+          ],
+          "evidence": "GE manual, page 17: \"Fuse is blown/circuit breaker is tripped\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 17
+          }
+        }
+      ]
+    },
+    {
+      "id": "greasy-spots-on-clothes",
+      "symptom": "Greasy spots on clothes",
+      "causes": [
+        {
+          "id": "greasy-spots-on-clothes-0",
+          "label": "Drying dirty items with clean ones",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use your dryer to dry only clean items.",
+            "Dirty items can stain clean items and the dryer."
+          ],
+          "evidence": "GE manual, page 17: \"Drying dirty items with clean ones\"",
+          "source": {
+            "line": 21,
+            "manual": "GE manual",
+            "page": 17
+          }
+        }
+      ]
+    },
+    {
+      "id": "clothes-take-too-long-to-dry-clothes-are",
+      "symptom": "Clothes take too long to dry Clothes are wrinkled Clothes shrink",
+      "causes": [
+        {
+          "id": "clothes-take-too-long-to-dry-clothes-are-0",
+          "label": "Improper or obstructed ducting",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check to see if outside wall damper operates easily.",
+            "Check the Installation Instructions to make sure the dryer venting is correct."
+          ],
+          "evidence": "GE manual, page 18: \"Improper or obstructed ducting\"",
+          "source": {
+            "line": 12,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "clothes-take-too-long-to-dry-clothes-are-3",
+          "label": "Overdrying",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Remove items while they still hold a slight amount of moisture.",
+            "Select a Less Dry setting."
+          ],
+          "evidence": "GE manual, page 18: \"Overdrying\"",
+          "source": {
+            "line": 25,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "clothes-take-too-long-to-dry-clothes-are-4",
+          "label": "Letting items sit in dryer after cycle ends",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Remove items when cycle ends and fold or hang immediately."
+          ],
+          "evidence": "GE manual, page 18: \"Letting items sit in dryer after cycle ends\"",
+          "source": {
+            "line": 28,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "clothes-take-too-long-to-dry-clothes-are-5",
+          "label": "Overloading",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "Separate large loads into smaller ones."
+          ],
+          "evidence": "GE manual, page 18: \"Overloading\"",
+          "source": {
+            "line": 31,
+            "manual": "GE manual",
+            "page": 18
+          }
+        },
+        {
+          "id": "clothes-take-too-long-to-dry-clothes-are-6",
+          "label": "Some fabrics will naturally shrink when washed. Others can be safely washed, but will shrink in the dryer",
+          "likelihood": 0.132,
+          "cost": null,
+          "remedies": [
+            "To avoid shrinkage, follow garment care labels exactly.",
+            "Some items may be pressed back into shape after drying If you are concerned about shrinkage in a particular item, do not machine wash or tumble dry it."
+          ],
+          "evidence": "GE manual, page 18: \"Some fabrics will naturally shrink when washed. Others can be safely washed, but will shrink in the dryer\"",
+          "source": {
+            "line": 33,
+            "manual": "GE manual",
+            "page": 18
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "humming-gurgling",
+    "clothes-too-wet-colored-spots-0",
+    "clothes-too-wet-colored-spots-2",
+    "clothes-too-wet-colored-spots-3",
+    "grayed-or-yellowed-clothes-lint-or-resid-2",
+    "grayed-or-yellowed-clothes-lint-or-resid-3",
+    "grayed-or-yellowed-clothes-lint-or-resid-4",
+    "grayed-or-yellowed-clothes-lint-or-resid-8",
+    "pilling-snags-holes-tears-rips-or-excess-4",
+    "clothes-take-too-long-to-dry-clothes-are-1",
+    "clothes-take-too-long-to-dry-clothes-are-2"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T10:05:29.992Z",
+  "learnedAt": "2026-10-05T10:02:36.802Z"
+}

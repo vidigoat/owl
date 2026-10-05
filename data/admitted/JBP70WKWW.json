@@ -2,6 +2,9 @@
   "model": "JBP70WKWW",
   "brand": "GE",
   "kind": "Range",
+  "alsoCovers": [
+    "JBP70SKSS"
+  ],
   "source": "JBP70WKWW.pdf",
   "pages": "26–29",
   "readWith": "text-layer",
@@ -736,5 +739,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:20.484Z",
-  "learnedAt": "2026-10-04T15:19:15.572Z"
+  "learnedAt": "2026-10-05T10:03:57.688Z"
 }

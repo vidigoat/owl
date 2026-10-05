@@ -1,0 +1,328 @@
+{
+  "model": "DBSR453EBWW",
+  "brand": "GE",
+  "kind": "Dryer",
+  "alsoCovers": [
+    "DBSR453EBCC",
+    "DBSR453GBCC",
+    "DBSR453GBWW",
+    "DS4500EBWW",
+    "DS4500EYWW",
+    "DZSR483EFGG",
+    "DZSR483GFGG"
+  ],
+  "source": "DBSR453EBWW.pdf",
+  "pages": "12–13",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "dryer-doesn-t-start",
+      "symptom": "Dryer doesn’t start",
+      "causes": [
+        {
+          "id": "dryer-doesn-t-start-0",
+          "label": "Dryer is unplugged",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure the dryer plug is pushed completely into the outlet."
+          ],
+          "evidence": "GE manual, page 12: \"Dryer is unplugged\"",
+          "source": {
+            "line": 11,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "dryer-doesn-t-start-1",
+          "label": "Fuse is blown/circuit breaker is tripped",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the house fuse/circuit breaker box and replace fuse or reset breaker.",
+            "NOTE: Most electric dryers use 2 fuses/breakers."
+          ],
+          "evidence": "GE manual, page 12: \"Fuse is blown/circuit breaker is tripped\"",
+          "source": {
+            "line": 13,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "dryer-doesn-t-heat",
+      "symptom": "Dryer doesn’t heat",
+      "causes": [
+        {
+          "id": "dryer-doesn-t-heat-0",
+          "label": "Fuse is blown/circuit breaker is tripped; the dryer may tumble but not heat",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check the house fuse/circuit breaker box and replace both fuses or reset both breakers.",
+            "Your dryer may tumble if only one fuse is blown or one breaker tripped."
+          ],
+          "evidence": "GE manual, page 12: \"Fuse is blown/circuit breaker is tripped; the dryer may tumble but not heat\"",
+          "source": {
+            "line": 17,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "dryer-doesn-t-heat-1",
+          "label": "Gas service is off",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Make sure gas shutoff at dryer and main shutoff are fully open."
+          ],
+          "evidence": "GE manual, page 12: \"Gas service is off\"",
+          "source": {
+            "line": 25,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "dryer-shakes-or-makes-noise",
+      "symptom": "Dryer shakes or makes noise",
+      "causes": [
+        {
+          "id": "dryer-shakes-or-makes-noise-0",
+          "label": "Some shaking/noise is normal. Dryer may be sitting unevenly",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Move dryer to an even floor space, or adjust leveling legs as necessary until even."
+          ],
+          "evidence": "GE manual, page 12: \"Some shaking/noise is normal. Dryer may be sitting unevenly\"",
+          "source": {
+            "line": 28,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "greasy-spots-on-clothes",
+      "symptom": "Greasy spots on clothes",
+      "causes": [
+        {
+          "id": "greasy-spots-on-clothes-0",
+          "label": "Improper use of fabric softener",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Follow directions on fabric softener package."
+          ],
+          "evidence": "GE manual, page 12: \"Improper use of fabric softener\"",
+          "source": {
+            "line": 31,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "greasy-spots-on-clothes-1",
+          "label": "Drying dirty items with clean ones",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Use your dryer to dry only clean items.",
+            "Dirty items can stain clean items and the dryer."
+          ],
+          "evidence": "GE manual, page 12: \"Drying dirty items with clean ones\"",
+          "source": {
+            "line": 32,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "greasy-spots-on-clothes-2",
+          "label": "Clothes were not completely clean",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Sometimes stains which cannot be seen when the clothes are wet appear after drying.",
+            "Use proper washing procedures before drying."
+          ],
+          "evidence": "GE manual, page 12: \"Clothes were not completely clean\"",
+          "source": {
+            "line": 34,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "lint-on-clothes",
+      "symptom": "Lint on clothes",
+      "causes": [
+        {
+          "id": "lint-on-clothes-0",
+          "label": "Lint filter is full",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Clean lint screen before each load."
+          ],
+          "evidence": "GE manual, page 12: \"Lint filter is full\"",
+          "source": {
+            "line": 38,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "lint-on-clothes-1",
+          "label": "Improper sorting",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Sort lint producers (like chenille) from lint collectors (like corduroy)."
+          ],
+          "evidence": "GE manual, page 12: \"Improper sorting\"",
+          "source": {
+            "line": 44,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "lint-on-clothes-2",
+          "label": "Static electricity can attract lint",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "See suggestions in this section under STATIC."
+          ],
+          "evidence": "GE manual, page 12: \"Static electricity can attract lint\"",
+          "source": {
+            "line": 46,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "lint-on-clothes-3",
+          "label": "Overloading",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Separate large loads into smaller ones."
+          ],
+          "evidence": "GE manual, page 12: \"Overloading\"",
+          "source": {
+            "line": 47,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "lint-on-clothes-4",
+          "label": "Paper, tissue, etc. left in pockets",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Empty all pockets before laundering clothes."
+          ],
+          "evidence": "GE manual, page 12: \"Paper, tissue, etc. left in pockets\"",
+          "source": {
+            "line": 48,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "static-occurs",
+      "symptom": "Static occurs",
+      "causes": [
+        {
+          "id": "static-occurs-0",
+          "label": "No fabric softener was used",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Try a fabric softener.",
+            "Bounce® Fabric Conditioner Dryer Sheets have been approved for use in all GE Dryers when used in accordance with the manufacturer’s instructions."
+          ],
+          "evidence": "GE manual, page 12: \"No fabric softener was used\"",
+          "source": {
+            "line": 50,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "static-occurs-1",
+          "label": "Overdrying",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Try a fabric softener.",
+            "Adjust setting to LESS DRY or DAMP DRY."
+          ],
+          "evidence": "GE manual, page 12: \"Overdrying\"",
+          "source": {
+            "line": 54,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "static-occurs-2",
+          "label": "Synthetics, permanent press and blends can cause static",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Try a fabric softener."
+          ],
+          "evidence": "GE manual, page 12: \"Synthetics, permanent press and blends can cause static\"",
+          "source": {
+            "line": 56,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "inconsistent-drying-times",
+      "symptom": "Inconsistent drying times",
+      "causes": [
+        {
+          "id": "inconsistent-drying-times-0",
+          "label": "Type of heat",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Automatic drying times will vary according to the type of heat used (electric, natural or LP gas), size of load, types of fabrics, wetness of clothes and condition of exhaust ducts."
+          ],
+          "evidence": "GE manual, page 12: \"Type of heat\"",
+          "source": {
+            "line": 64,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T09:55:15.185Z",
+  "learnedAt": "2026-10-05T10:02:35.340Z"
+}

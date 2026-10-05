@@ -2,6 +2,9 @@
   "model": "PP950BMBB",
   "brand": "GE",
   "kind": "Range",
+  "alsoCovers": [
+    "PP980BMBB"
+  ],
   "source": "PP950BMBB.pdf",
   "pages": "15–16",
   "readWith": "text-layer",
@@ -338,5 +341,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:27.101Z",
-  "learnedAt": "2026-10-04T15:19:17.942Z"
+  "learnedAt": "2026-10-05T10:04:00.001Z"
 }

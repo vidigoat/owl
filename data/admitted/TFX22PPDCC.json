@@ -2,6 +2,9 @@
   "model": "TFX22PPDCC",
   "brand": "GE",
   "kind": "Refrigerator",
+  "alsoCovers": [
+    "TFS26PPDBS"
+  ],
   "source": "TFX22PPDCC.pdf",
   "pages": "21–24",
   "readWith": "text-layer",
@@ -903,5 +906,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:35.216Z",
-  "learnedAt": "2026-10-04T15:17:59.464Z"
+  "learnedAt": "2026-10-05T10:03:19.633Z"
 }

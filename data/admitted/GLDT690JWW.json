@@ -2,6 +2,10 @@
   "model": "GLDT690JWW",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "GLDT690JBB",
+    "GLDT696JSS"
+  ],
   "source": "GLDT690JWW.pdf",
   "pages": "12–14",
   "readWith": "text-layer",
@@ -382,5 +386,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:05.336Z",
-  "learnedAt": "2026-10-04T15:17:25.255Z"
+  "learnedAt": "2026-10-05T10:00:43.822Z"
 }

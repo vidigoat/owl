@@ -2,6 +2,31 @@
   "model": "GSD3200GCC",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "GSD1200GWW",
+    "GSD1900JWH",
+    "GSD2000GBB",
+    "GSD2000GCC",
+    "GSD2000GWW",
+    "GSD2001GWW",
+    "GSD2001JBB",
+    "GSD2001JWW",
+    "GSD2200GBB",
+    "GSD2200GCC",
+    "GSD2600GBB",
+    "GSD2600GCC",
+    "GSD2600GWW",
+    "GSD3200GBB",
+    "GSD3200GWW",
+    "GSD3460GSS",
+    "GSD4000JCC",
+    "GSD4000JWW",
+    "GSD4060JSS",
+    "GSD4200JBB",
+    "GSD4200JCC",
+    "GSD4200JWW",
+    "GSD4260JSS"
+  ],
   "source": "GSD3200GCC.pdf",
   "pages": "13–14",
   "readWith": "text-layer",
@@ -294,11 +319,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:09.708Z",
-  "learnedAt": "2026-10-04T15:17:17.564Z",
-  "alsoCovers": [
-    "GSD1200GWW",
-    "GSD2000GCC",
-    "GSD2001JWW",
-    "GSD2200GCC"
-  ]
+  "learnedAt": "2026-10-05T10:00:35.953Z"
 }

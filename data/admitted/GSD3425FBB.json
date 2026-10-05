@@ -2,6 +2,14 @@
   "model": "GSD3425FBB",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "GSD3415FAA",
+    "GSD3610FAA",
+    "GSD3620FBB",
+    "GSD3630FWW",
+    "GSD3715FAA",
+    "GSD3725FBB"
+  ],
   "source": "GSD3425FBB.pdf",
   "pages": "19–23",
   "readWith": "text-layer",
@@ -341,5 +349,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:09.869Z",
-  "learnedAt": "2026-10-04T15:17:30.178Z"
+  "learnedAt": "2026-10-05T10:00:48.692Z"
 }

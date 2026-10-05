@@ -1,0 +1,476 @@
+{
+  "model": "PGB911DEJBB",
+  "brand": "GE",
+  "kind": "Range",
+  "source": "PGB911DEJBB.pdf",
+  "pages": "34–36",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "my-new-oven-doesn-t-cook-like-my-old-one",
+      "symptom": "My new oven doesn't cook like my old one. Is something wrong with the temperature settings?",
+      "causes": [
+        {
+          "id": "my-new-oven-doesn-t-cook-like-my-old-one-0",
+          "label": "Your new oven has a different cooking system from your old oven and therefore may cook differently than your old oven.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "For the first few uses, follow your recipe times and temperatures carefully and use rack positions recommended in the Cooking Guide.",
+            "If you still think your new oven is too hot or too cold, you can adjust the temperature yourself to meet your specific cooking preference.",
+            "See the Special Features section."
+          ],
+          "evidence": "GE manual, page 34: \"Your new oven has a different cooking system from your old oven and therefore may cook differently than your old oven.\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-does-not-bake-properly",
+      "symptom": "Food does not bake properly",
+      "causes": [
+        {
+          "id": "food-does-not-bake-properly-0",
+          "label": "Oven controls improperly set.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See the Cooking Modes section."
+          ],
+          "evidence": "GE manual, page 34: \"Oven controls improperly set.\"",
+          "source": {
+            "line": 15,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "food-does-not-bake-properly-1",
+          "label": "Rack position is incorrect or rack is not level.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See the Cooking Modes section and Cooking Guide."
+          ],
+          "evidence": "GE manual, page 34: \"Rack position is incorrect or rack is not level.\"",
+          "source": {
+            "line": 16,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "food-does-not-bake-properly-2",
+          "label": "Incorrect cookware or cookware of improper size being used.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "See the Cookware section."
+          ],
+          "evidence": "GE manual, page 34: \"Incorrect cookware or cookware of improper size being used.\"",
+          "source": {
+            "line": 18,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "food-does-not-bake-properly-3",
+          "label": "Oven temperature needs adjustment.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "See the Special Features section."
+          ],
+          "evidence": "GE manual, page 34: \"Oven temperature needs adjustment.\"",
+          "source": {
+            "line": 20,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-does-not-broil-properly",
+      "symptom": "Food does not broil properly",
+      "causes": [
+        {
+          "id": "food-does-not-broil-properly-0",
+          "label": "Oven controls improperly set.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure you select the appropriate broil mode."
+          ],
+          "evidence": "GE manual, page 34: \"Oven controls improperly set.\"",
+          "source": {
+            "line": 21,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "food-does-not-broil-properly-1",
+          "label": "Improper rack position being used.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See Cooking Guide for rack location suggestions."
+          ],
+          "evidence": "GE manual, page 34: \"Improper rack position being used.\"",
+          "source": {
+            "line": 23,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "food-does-not-broil-properly-2",
+          "label": "Cookware not suited for broiling.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Use a pan specifically designed for broiling."
+          ],
+          "evidence": "GE manual, page 34: \"Cookware not suited for broiling.\"",
+          "source": {
+            "line": 25,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "food-does-not-broil-properly-3",
+          "label": "Aluminum foil on the broil pan has not been fitted properly or slit to drain grease.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "If using aluminum foil on broil pan, wrap tightly and add slits conforming to those in the pan to allow grease to drain."
+          ],
+          "evidence": "GE manual, page 34: \"Aluminum foil on the broil pan has not been fitted properly or slit to drain grease.\"",
+          "source": {
+            "line": 26,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "oven-temperature-too-hot-or-too-cold",
+      "symptom": "Oven temperature too hot or too cold",
+      "causes": [
+        {
+          "id": "oven-temperature-too-hot-or-too-cold-0",
+          "label": "Oven temperature needs adjustment.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See the Special Features section."
+          ],
+          "evidence": "GE manual, page 34: \"Oven temperature needs adjustment.\"",
+          "source": {
+            "line": 29,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "oven-and-or-display-appears-not-to-work",
+      "symptom": "Oven and/or display appears not to work",
+      "causes": [
+        {
+          "id": "oven-and-or-display-appears-not-to-work-0",
+          "label": "A fuse in your home may be blown or the circuit breaker tripped.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace the fuse or reset the circuit breaker."
+          ],
+          "evidence": "GE manual, page 34: \"A fuse in your home may be blown or the circuit breaker tripped.\"",
+          "source": {
+            "line": 31,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "oven-and-or-display-appears-not-to-work-1",
+          "label": "Oven controls improperly set.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See the Using the Oven section."
+          ],
+          "evidence": "GE manual, page 34: \"Oven controls improperly set.\"",
+          "source": {
+            "line": 33,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "oven-and-or-display-appears-not-to-work-2",
+          "label": "Oven is in Sabbath Mode.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "9HULI\\\u000f\u0003WKDW\u0003WKH\u0003RYHQ\u0003LV\u0003QRW\u0003LQ\u00036DEEDWK\u00030RGH\u0011\u0003 See the Special Features section."
+          ],
+          "evidence": "GE manual, page 34: \"Oven is in Sabbath Mode.\"",
+          "source": {
+            "line": 34,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "oven-and-or-display-appears-not-to-work-3",
+          "label": "The clock is turned off.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "See the Special Features section."
+          ],
+          "evidence": "GE manual, page 34: \"The clock is turned off.\"",
+          "source": {
+            "line": 36,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "crackling-or-popping-sound",
+      "symptom": "“Crackling” or “popping” sound",
+      "causes": [
+        {
+          "id": "crackling-or-popping-sound-0",
+          "label": "This is the sound of the metal heating and cooling during both the cooking and cleaning functions.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 34: \"This is the sound of the metal heating and cooling during both the cooking and cleaning functions.\"",
+          "source": {
+            "line": 37,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "why-is-my-range-making-a-clicking-noise-",
+      "symptom": "Why is my range making a \"clicking\" noise when using my oven?",
+      "causes": [
+        {
+          "id": "why-is-my-range-making-a-clicking-noise--0",
+          "label": "Your range has been designed to maintain a tighter control over your oven's temperature.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 34: \"Your range has been designed to maintain a tighter control over your oven's temperature.\"",
+          "source": {
+            "line": 40,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "why-is-my-range-making-a-clicking-noise--1",
+          "label": "You may hear your oven's heating elements \"click\" on and off more frequently than in older ovens to achieve better results during baking, broiling, and self-clean cycles.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [],
+          "evidence": "GE manual, page 34: \"You may hear your oven's heating elements \"click\" on and off more frequently than in older ovens to achieve better results during baking, broiling, and self-clean cycles.\"",
+          "source": {
+            "line": 42,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "sometimes-the-oven-takes-longer-to-prehe",
+      "symptom": "Sometimes the oven takes longer to preheat to the same temperature",
+      "causes": [
+        {
+          "id": "sometimes-the-oven-takes-longer-to-prehe-0",
+          "label": "Cookware, food, and/or number of racks in oven.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Cookware, food, and racks in the oven will cause differences in preheat times.",
+            "Remove excess items to reduce preheat time. 49-85221"
+          ],
+          "evidence": "GE manual, page 34: \"Cookware, food, and/or number of racks in oven.\"",
+          "source": {
+            "line": 46,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "top-burners-do-not-burn-evenly",
+      "symptom": "Top burners do not burn evenly",
+      "causes": [
+        {
+          "id": "top-burners-do-not-burn-evenly-0",
+          "label": "Improper burner assembly.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure the burner caps are seated correctly.",
+            "See the Care and Cleaning of the range section."
+          ],
+          "evidence": "GE manual, page 36: \"Improper burner assembly.\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "top-burners-do-not-burn-evenly-1",
+          "label": "Burner slots on the side of the burner may be clogged.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Remove the burners for cleaning.",
+            "See the Care and Cleaning of the range section."
+          ],
+          "evidence": "GE manual, page 36: \"Burner slots on the side of the burner may be clogged.\"",
+          "source": {
+            "line": 9,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "burner-flames-are-very-large-or-yellow",
+      "symptom": "Burner flames are very large or yellow",
+      "causes": [
+        {
+          "id": "burner-flames-are-very-large-or-yellow-0",
+          "label": "Improper air to gas ratio.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "If range is connected to Propane gas, contact the technician who installed your range or made the conversion."
+          ],
+          "evidence": "GE manual, page 36: \"Improper air to gas ratio.\"",
+          "source": {
+            "line": 11,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "surface-burners-light-but-bake-and-broil",
+      "symptom": "Surface burners light but bake and broil burners do not.",
+      "causes": [
+        {
+          "id": "surface-burners-light-but-bake-and-broil-0",
+          "label": "Gas to the oven burners may have been shut off.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "The oven gas shut-off is located on the gas regulator near the JDV\u0003OLQH\u0003DWWDFKPHQW\u0003WR\u0003\\RXU\u0003UDQJH\u0011\u0003/RFDWH\u0003LW\u0003DQG\u0003IOLS\u0003WKH\u0003OHYHU\u0011 Lever is shown closed.",
+            "PULL TO OPEN.",
+            "Sealed burner models"
+          ],
+          "evidence": "GE manual, page 36: \"Gas to the oven burners may have been shut off.\"",
+          "source": {
+            "line": 13,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "my-oven-door-glass-appears-to-be-tinted-",
+      "symptom": "My oven door glass appears to be \"tinted\" or have a \"rainbow\" color.",
+      "causes": [
+        {
+          "id": "my-oven-door-glass-appears-to-be-tinted--0",
+          "label": "The inner oven glass is coated with a heat barrier to reflect the heat back into the oven to prevent heat loss and keep the outer door cool while baking.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal.",
+            "Under certain light or angles, you may see this tint or rainbow color."
+          ],
+          "evidence": "GE manual, page 36: \"The inner oven glass is coated with a heat barrier to reflect the heat back into the oven to prevent heat loss and keep the outer door cool while baking.\"",
+          "source": {
+            "line": 26,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "drawer-does-not-slide-smoothly-or-drags",
+      "symptom": "Drawer does not slide smoothly or drags",
+      "causes": [
+        {
+          "id": "drawer-does-not-slide-smoothly-or-drags-0",
+          "label": "The drawer is out of alignment.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Fully extend the drawer and push it all the way in.",
+            "See the Care and Cleaning of the range section."
+          ],
+          "evidence": "GE manual, page 36: \"The drawer is out of alignment.\"",
+          "source": {
+            "line": 31,
+            "manual": "GE manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "drawer-does-not-slide-smoothly-or-drags-1",
+          "label": "Drawer is over-loaded or load is unbalanced.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Reduce weight or redistribute drawer contents. 49-85221"
+          ],
+          "evidence": "GE manual, page 36: \"Drawer is over-loaded or load is unbalanced.\"",
+          "source": {
+            "line": 33,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T10:05:44.695Z",
+  "learnedAt": "2026-10-05T10:04:10.330Z"
+}

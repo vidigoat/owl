@@ -156,21 +156,6 @@
           }
         },
         {
-          "id": "washer-won-t-operate-11",
-          "label": "Hard water",
-          "likelihood": 0.079,
-          "cost": null,
-          "remedies": [
-            "a water softener."
-          ],
-          "evidence": "GE manual, page 13: \"Hard water\"",
-          "source": {
-            "line": 38,
-            "manual": "GE manual",
-            "page": 13
-          }
-        },
-        {
           "id": "washer-won-t-operate-12",
           "label": "Water is not hot enough",
           "likelihood": 0.074,
@@ -385,10 +370,11 @@
     "washer-won-t-operate-7",
     "washer-won-t-operate-8",
     "washer-won-t-operate-10",
+    "washer-won-t-operate-11",
     "washer-won-t-operate-16"
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T15:20:37.919Z",
-  "learnedAt": "2026-10-04T15:18:39.480Z"
+  "reviewedAt": "2026-10-05T10:06:01.013Z",
+  "learnedAt": "2026-10-05T10:01:38.833Z"
 }

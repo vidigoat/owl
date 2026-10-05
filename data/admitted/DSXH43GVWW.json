@@ -1,0 +1,405 @@
+{
+  "model": "DSXH43GVWW",
+  "brand": "GE",
+  "kind": "Dryer",
+  "alsoCovers": [
+    "DSXH43EVWW"
+  ],
+  "source": "DSXH43GVWW.pdf",
+  "pages": "20–21",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "dryer-doesn-t-start",
+      "symptom": "Dryer doesn’t start",
+      "causes": [
+        {
+          "id": "dryer-doesn-t-start-0",
+          "label": "Dryer is unplugged",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure the dryer plug is pushed completely into the outlet."
+          ],
+          "evidence": "GE manual, page 20: \"Dryer is unplugged\"",
+          "source": {
+            "line": 10,
+            "manual": "GE manual",
+            "page": 20
+          }
+        },
+        {
+          "id": "dryer-doesn-t-start-1",
+          "label": "Fuse is blown/circuit breaker is tripped",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the house fuse/circuit breaker box and replace fuse or reset breaker.",
+            "Note: Most electric dryers use two fuses/breakers."
+          ],
+          "evidence": "GE manual, page 20: \"Fuse is blown/circuit breaker is tripped\"",
+          "source": {
+            "line": 17,
+            "manual": "GE manual",
+            "page": 20
+          }
+        },
+        {
+          "id": "dryer-doesn-t-start-2",
+          "label": "Thermal limiter tripped",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Call authorized service person for replacement."
+          ],
+          "evidence": "GE manual, page 20: \"Thermal limiter tripped\"",
+          "source": {
+            "line": 21,
+            "manual": "GE manual",
+            "page": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "dryer-doesn-t-heat",
+      "symptom": "Dryer doesn’t heat",
+      "causes": [
+        {
+          "id": "dryer-doesn-t-heat-0",
+          "label": "Fuse is blown/circuit breaker is tripped, the dryer may tumble but not heat",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check the house fuse/circuit breaker box and replace fuse or reset breaker."
+          ],
+          "evidence": "GE manual, page 20: \"Fuse is blown/circuit breaker is tripped, the dryer may tumble but not heat\"",
+          "source": {
+            "line": 23,
+            "manual": "GE manual",
+            "page": 20
+          }
+        },
+        {
+          "id": "dryer-doesn-t-heat-1",
+          "label": "Gas service is off",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Make sure gas shutoff at dryer and main shutoff are fully open."
+          ],
+          "evidence": "GE manual, page 20: \"Gas service is off\"",
+          "source": {
+            "line": 26,
+            "manual": "GE manual",
+            "page": 20
+          }
+        },
+        {
+          "id": "dryer-doesn-t-heat-2",
+          "label": "There are 2 house fuses in the dryer circuit. If 1 of the 2 fuses is blown, the drum may turn but the heater will not operate",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Replace fuse."
+          ],
+          "evidence": "GE manual, page 20: \"There are 2 house fuses in the dryer circuit. If 1 of the 2 fuses is blown, the drum may turn but the heater will not operate\"",
+          "source": {
+            "line": 28,
+            "manual": "GE manual",
+            "page": 20
+          }
+        },
+        {
+          "id": "dryer-doesn-t-heat-3",
+          "label": "Gas supply valve is not open (gas models)",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Check to make sure supply valve is open.",
+            "See Installation Instructions for procedure."
+          ],
+          "evidence": "GE manual, page 20: \"Gas supply valve is not open (gas models)\"",
+          "source": {
+            "line": 37,
+            "manual": "GE manual",
+            "page": 20
+          }
+        },
+        {
+          "id": "dryer-doesn-t-heat-4",
+          "label": "Dryer does not have enough air supply to support the burner flame (gas models)",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "See Installation Instructions."
+          ],
+          "evidence": "GE manual, page 20: \"Dryer does not have enough air supply to support the burner flame (gas models)\"",
+          "source": {
+            "line": 39,
+            "manual": "GE manual",
+            "page": 20
+          }
+        },
+        {
+          "id": "dryer-doesn-t-heat-5",
+          "label": "LP gas supply tank is empty or there has been a utility interruption of natural gas (gas models)",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "Refill or replace tank.",
+            "Dryer should heat when utility service is restored."
+          ],
+          "evidence": "GE manual, page 20: \"LP gas supply tank is empty or there has been a utility interruption of natural gas (gas models)\"",
+          "source": {
+            "line": 42,
+            "manual": "GE manual",
+            "page": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "dryer-shakes-or-makes-noise",
+      "symptom": "Dryer shakes or makes noise",
+      "causes": [
+        {
+          "id": "dryer-shakes-or-makes-noise-0",
+          "label": "Some shaking/noise is normal. Dryer may be sitting unevenly",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Move dryer to an even floor space, or adjust leveling legs as necessary until even."
+          ],
+          "evidence": "GE manual, page 20: \"Some shaking/noise is normal. Dryer may be sitting unevenly\"",
+          "source": {
+            "line": 51,
+            "manual": "GE manual",
+            "page": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "greasy-spots-on-clothes",
+      "symptom": "Greasy spots on clothes",
+      "causes": [
+        {
+          "id": "greasy-spots-on-clothes-0",
+          "label": "Improper use of fabric softener",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Follow directions on fabric softener package."
+          ],
+          "evidence": "GE manual, page 20: \"Improper use of fabric softener\"",
+          "source": {
+            "line": 54,
+            "manual": "GE manual",
+            "page": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "lint-on-clothes",
+      "symptom": "Lint on clothes",
+      "causes": [
+        {
+          "id": "lint-on-clothes-0",
+          "label": "Lint filter is full",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Clean lint screen before each load."
+          ],
+          "evidence": "GE manual, page 20: \"Lint filter is full\"",
+          "source": {
+            "line": 61,
+            "manual": "GE manual",
+            "page": 20
+          }
+        },
+        {
+          "id": "lint-on-clothes-1",
+          "label": "Improper sorting",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Sort lint producers (like chenille) from lint collectors (like corduroy)."
+          ],
+          "evidence": "GE manual, page 20: \"Improper sorting\"",
+          "source": {
+            "line": 62,
+            "manual": "GE manual",
+            "page": 20
+          }
+        },
+        {
+          "id": "lint-on-clothes-2",
+          "label": "Static electricity can attract lint",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "See suggestions in this section under STATIC."
+          ],
+          "evidence": "GE manual, page 20: \"Static electricity can attract lint\"",
+          "source": {
+            "line": 69,
+            "manual": "GE manual",
+            "page": 20
+          }
+        },
+        {
+          "id": "lint-on-clothes-3",
+          "label": "Overloading",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Separate large loads into smaller ones."
+          ],
+          "evidence": "GE manual, page 20: \"Overloading\"",
+          "source": {
+            "line": 70,
+            "manual": "GE manual",
+            "page": 20
+          }
+        },
+        {
+          "id": "lint-on-clothes-4",
+          "label": "Paper, tissue, etc., left in pockets",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Empty all pockets before laundering clothes."
+          ],
+          "evidence": "GE manual, page 20: \"Paper, tissue, etc., left in pockets\"",
+          "source": {
+            "line": 71,
+            "manual": "GE manual",
+            "page": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "static-occurs-inconsistent-drying-times",
+      "symptom": "Static occurs Inconsistent drying times",
+      "causes": [
+        {
+          "id": "static-occurs-inconsistent-drying-times-0",
+          "label": "Overdrying",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Try a fabric softener.",
+            "Adjust controls for less drying."
+          ],
+          "evidence": "GE manual, page 21: \"Overdrying\"",
+          "source": {
+            "line": 2,
+            "manual": "GE manual",
+            "page": 21
+          }
+        },
+        {
+          "id": "static-occurs-inconsistent-drying-times-1",
+          "label": "No fabric softener was used",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Try a fabric softener."
+          ],
+          "evidence": "GE manual, page 21: \"No fabric softener was used\"",
+          "source": {
+            "line": 4,
+            "manual": "GE manual",
+            "page": 21
+          }
+        },
+        {
+          "id": "static-occurs-inconsistent-drying-times-2",
+          "label": "Synthetics, permanent press and blends can cause static",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Try a fabric softener.",
+            "Automatic drying times will vary according to the type"
+          ],
+          "evidence": "GE manual, page 21: \"Synthetics, permanent press and blends can cause static\"",
+          "source": {
+            "line": 5,
+            "manual": "GE manual",
+            "page": 21
+          }
+        }
+      ]
+    },
+    {
+      "id": "clothes-take-too-long-to-dry",
+      "symptom": "Clothes take too long to dry",
+      "causes": [
+        {
+          "id": "clothes-take-too-long-to-dry-0",
+          "label": "Improper sorting",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Separate heavy items from lightweight items (generally, a well-sorted washer load is a well-sorted dryer load)."
+          ],
+          "evidence": "GE manual, page 21: \"Improper sorting\"",
+          "source": {
+            "line": 19,
+            "manual": "GE manual",
+            "page": 21
+          }
+        }
+      ]
+    },
+    {
+      "id": "clothes-are-wrinkled",
+      "symptom": "Clothes are wrinkled",
+      "causes": [
+        {
+          "id": "clothes-are-wrinkled-0",
+          "label": "Overdrying",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Select a shorter drying time.",
+            "Remove items while they still hold a slight amount of moisture."
+          ],
+          "evidence": "GE manual, page 21: \"Overdrying\"",
+          "source": {
+            "line": 51,
+            "manual": "GE manual",
+            "page": 21
+          }
+        },
+        {
+          "id": "clothes-are-wrinkled-1",
+          "label": "Letting items sit in dryer after cycle ends",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Remove items when cycle ends and fold or hang immediately."
+          ],
+          "evidence": "GE manual, page 21: \"Letting items sit in dryer after cycle ends\"",
+          "source": {
+            "line": 54,
+            "manual": "GE manual",
+            "page": 21
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "static-occurs-inconsistent-drying-times-3"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T10:04:38.270Z",
+  "learnedAt": "2026-10-05T10:02:42.894Z"
+}

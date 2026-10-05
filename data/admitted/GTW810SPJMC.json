@@ -2,6 +2,9 @@
   "model": "GTW810SPJMC",
   "brand": "GE",
   "kind": "Washer",
+  "alsoCovers": [
+    "GTW810SSJWS"
+  ],
   "source": "GTW810SPJMC.pdf",
   "pages": "11–13",
   "readWith": "text-layer",
@@ -750,11 +753,11 @@
       ]
     },
     {
-      "id": "lint-or-residue-on-clothes-12",
-      "symptom": "Lint or residue on clothes 12",
+      "id": "lint-or-residue-on-clothes",
+      "symptom": "Lint or residue on clothes",
       "causes": [
         {
-          "id": "lint-or-residue-on-clothes-12-0",
+          "id": "lint-or-residue-on-clothes-0",
           "label": "Clothes are air or line dried",
           "likelihood": 0.625,
           "cost": null,
@@ -769,7 +772,7 @@
           }
         },
         {
-          "id": "lint-or-residue-on-clothes-12-1",
+          "id": "lint-or-residue-on-clothes-1",
           "label": "Incorrect sorting",
           "likelihood": 0.385,
           "cost": null,
@@ -784,7 +787,7 @@
           }
         },
         {
-          "id": "lint-or-residue-on-clothes-12-2",
+          "id": "lint-or-residue-on-clothes-2",
           "label": "Washing too long",
           "likelihood": 0.278,
           "cost": null,
@@ -799,7 +802,7 @@
           }
         },
         {
-          "id": "lint-or-residue-on-clothes-12-3",
+          "id": "lint-or-residue-on-clothes-3",
           "label": "Detergent not dissolving",
           "likelihood": 0.217,
           "cost": null,
@@ -816,7 +819,7 @@
           }
         },
         {
-          "id": "lint-or-residue-on-clothes-12-4",
+          "id": "lint-or-residue-on-clothes-4",
           "label": "Overloading",
           "likelihood": 0.179,
           "cost": null,
@@ -832,7 +835,7 @@
           }
         },
         {
-          "id": "lint-or-residue-on-clothes-12-5",
+          "id": "lint-or-residue-on-clothes-5",
           "label": "Incorrect use of fabric softener",
           "likelihood": 0.152,
           "cost": null,
@@ -853,9 +856,6 @@
   "rejected": [],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T15:20:14.407Z",
-  "learnedAt": "2026-10-04T15:18:34.260Z",
-  "alsoCovers": [
-    "GTW810SSJWS"
-  ]
+  "reviewedAt": "2026-10-05T10:05:26.498Z",
+  "learnedAt": "2026-10-05T10:01:33.755Z"
 }

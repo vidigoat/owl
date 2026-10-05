@@ -2,6 +2,9 @@
   "model": "GTWS8450DWS",
   "brand": "GE",
   "kind": "Washer",
+  "alsoCovers": [
+    "GTWS8455DMC"
+  ],
   "source": "GTWS8450DWS.pdf",
   "pages": "12–14",
   "readWith": "text-layer",
@@ -847,8 +850,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:15.703Z",
-  "learnedAt": "2026-10-04T15:18:41.959Z",
-  "alsoCovers": [
-    "GTWS8455DMC"
-  ]
+  "learnedAt": "2026-10-05T10:01:41.272Z"
 }

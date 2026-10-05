@@ -2,6 +2,10 @@
   "model": "WSXH208AWW",
   "brand": "GE",
   "kind": "Washer",
+  "alsoCovers": [
+    "WPXH214ACC",
+    "WPXH214AWW"
+  ],
   "source": "WSXH208AWW.pdf",
   "pages": "17–18",
   "readWith": "text-layer",
@@ -610,9 +614,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:38.656Z",
-  "learnedAt": "2026-10-04T15:18:25.121Z",
-  "alsoCovers": [
-    "WPXH214ACC",
-    "WPXH214AWW"
-  ]
+  "learnedAt": "2026-10-05T10:01:24.514Z"
 }

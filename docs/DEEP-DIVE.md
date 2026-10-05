@@ -857,7 +857,7 @@ kinds of appliance from two manufacturers. With the hand-written ones that is **
 **26 September — the whole catalogue.** Every major-appliance product page Bosch US, Bosch UK and
 Siemens UK publish was visited: 496 models, 296 with an English manual, behind only 172 distinct
 documents, because one book covers a line (one wall-oven manual is listed on 22 model pages). Read,
-verified quote by quote, admitted: **110 machines** (294 since 4 October, when GE's three-column
+verified quote by quote, admitted: **110 machines** (453 by 5 October, after GE's three-column
 tables became readable — `scripts/source-ge.js`), and through the manufacturer's own listings
 (`alsoCovers`) answers for **157 models**. What it cost to get there: 56 downloads not made
 because the manual was already here, three reader bugs (a heading the rules did not know, a

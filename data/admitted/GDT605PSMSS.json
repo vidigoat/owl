@@ -2,6 +2,28 @@
   "model": "GDT605PSMSS",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "GDF530PGMBB",
+    "GDF530PGMCC",
+    "GDF530PGMWW",
+    "GDF530PMMES",
+    "GDF530PSMSS",
+    "GDF630PGMBB",
+    "GDF630PGMWW",
+    "GDF630PSMSS",
+    "GDF640HGMBB",
+    "GDF640HGMWW",
+    "GDF640HMMES",
+    "GDF640HSMSS",
+    "GDT535PSMSS",
+    "GDT605PFMDS",
+    "GDT605PGMBB",
+    "GDT605PGMWW",
+    "GDT630PFMDS",
+    "GDT630PMMES",
+    "GDT630PSMSS",
+    "GDT635HSMSS"
+  ],
   "source": "GDT605PSMSS.pdf",
   "pages": "19–22",
   "readWith": "text-layer",
@@ -932,10 +954,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:19:51.355Z",
-  "learnedAt": "2026-10-04T15:17:20.941Z",
-  "alsoCovers": [
-    "GDF630PSMSS",
-    "GDT630PSMSS",
-    "GDT635HSMSS"
-  ]
+  "learnedAt": "2026-10-05T10:00:39.360Z"
 }

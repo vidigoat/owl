@@ -2,6 +2,13 @@
   "model": "GDT535PSJSS",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "GDF510PGJBB",
+    "GDF510PGJWW",
+    "GDF510PSJSS",
+    "GDT535PGJBB",
+    "GDT535PGJWW"
+  ],
   "source": "GDT535PSJSS.pdf",
   "pages": "19–22",
   "readWith": "text-layer",
@@ -504,7 +511,7 @@
     },
     {
       "id": "control-panel-responded-to-inputs-but-di",
-      "symptom": "Control panel responded to inputs but dishwasher never filled with water 20",
+      "symptom": "Control panel responded to inputs but dishwasher never filled with water",
       "causes": [
         {
           "id": "control-panel-responded-to-inputs-but-di-0",
@@ -892,7 +899,7 @@
     },
     {
       "id": "a-white-film-on-glassware-dishware-and-t",
-      "symptom": "A white film on glassware, dishware and the interior 22",
+      "symptom": "A white film on glassware, dishware and the interior",
       "causes": [
         {
           "id": "a-white-film-on-glassware-dishware-and-t-0",
@@ -931,9 +938,6 @@
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T15:19:50.297Z",
-  "learnedAt": "2026-10-04T15:17:19.404Z",
-  "alsoCovers": [
-    "GDF510PGJBB"
-  ]
+  "reviewedAt": "2026-10-05T10:04:46.808Z",
+  "learnedAt": "2026-10-05T10:00:37.826Z"
 }

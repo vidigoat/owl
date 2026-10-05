@@ -2,6 +2,16 @@
   "model": "GSC23LGQBB",
   "brand": "GE",
   "kind": "Refrigerator",
+  "alsoCovers": [
+    "GSC23LSQSS",
+    "PSC23MGPWW",
+    "PSC23NHPBB",
+    "PSI23MGPBB",
+    "PSI23MGPCC",
+    "PSS23LSSSS",
+    "PSS26MGPBB",
+    "PSS26MGPWW"
+  ],
   "source": "GSC23LGQBB.pdf",
   "pages": "34–36",
   "readWith": "text-layer",
@@ -283,11 +293,11 @@
       ]
     },
     {
-      "id": "automatic-icemaker-does-not-work-34",
-      "symptom": "Automatic icemaker does not work 34",
+      "id": "automatic-icemaker-does-not-work",
+      "symptom": "Automatic icemaker does not work",
       "causes": [
         {
-          "id": "automatic-icemaker-does-not-work-34-0",
+          "id": "automatic-icemaker-does-not-work-0",
           "label": "Icemaker power switch is in the O (off) position.",
           "likelihood": 0.625,
           "cost": null,
@@ -302,7 +312,7 @@
           }
         },
         {
-          "id": "automatic-icemaker-does-not-work-34-1",
+          "id": "automatic-icemaker-does-not-work-1",
           "label": "Water supply turned off or not connected.",
           "likelihood": 0.385,
           "cost": null,
@@ -317,7 +327,7 @@
           }
         },
         {
-          "id": "automatic-icemaker-does-not-work-34-2",
+          "id": "automatic-icemaker-does-not-work-2",
           "label": "Freezer compartment too warm.",
           "likelihood": 0.278,
           "cost": null,
@@ -332,7 +342,7 @@
           }
         },
         {
-          "id": "automatic-icemaker-does-not-work-34-3",
+          "id": "automatic-icemaker-does-not-work-3",
           "label": "Piled up cubes in the storage bin cause the icemaker to shut off.",
           "likelihood": 0.217,
           "cost": null,
@@ -347,7 +357,7 @@
           }
         },
         {
-          "id": "automatic-icemaker-does-not-work-34-4",
+          "id": "automatic-icemaker-does-not-work-4",
           "label": "Ice cubes stuck in icemaker. (Green power light on icemaker blinking).",
           "likelihood": 0.179,
           "cost": null,
@@ -1131,9 +1141,6 @@
   "rejected": [],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T15:20:08.830Z",
-  "learnedAt": "2026-10-04T15:18:01.161Z",
-  "alsoCovers": [
-    "PSS26MGPBB"
-  ]
+  "reviewedAt": "2026-10-05T10:05:15.483Z",
+  "learnedAt": "2026-10-05T10:03:21.314Z"
 }

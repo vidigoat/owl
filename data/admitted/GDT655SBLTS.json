@@ -3,21 +3,32 @@
   "brand": "GE",
   "kind": "Dishwasher",
   "alsoCovers": [
+    "GDF650SFJDS",
     "GDF650SGJBB",
+    "GDF650SGJWW",
+    "GDF650SSJSS",
+    "GDT655SGJBB",
     "GDT655SGJWW",
     "GDT695SFLDS",
+    "GDT695SGJWW",
+    "GDT695SMJES",
+    "GDT695SSJSS",
     "PDF820SGJBB",
     "PDF820SGJWW",
     "PDF820SSJSS",
     "PDT825SGJWW",
     "PDT825SSJSS",
+    "PDT845SBLTS",
     "PDT845SFLDS",
+    "PDT845SMJES",
     "PDT845SSJSS",
     "PDT846SMJES",
+    "PDT846SSJSS",
     "PDT855SBLTS",
     "PDT855SFLDS",
     "PDT855SIJII",
-    "PDT855SMJES"
+    "PDT855SMJES",
+    "PDT855SSJSS"
   ],
   "source": "GDT655SBLTS.pdf",
   "pages": "21–24",
@@ -330,11 +341,11 @@
       ]
     },
     {
-      "id": "cloudiness-on-glassware-22",
-      "symptom": "Cloudiness on glassware 22",
+      "id": "cloudiness-on-glassware",
+      "symptom": "Cloudiness on glassware",
       "causes": [
         {
-          "id": "cloudiness-on-glassware-22-0",
+          "id": "cloudiness-on-glassware-0",
           "label": "Combination of soft water and too much detergent",
           "likelihood": 0.625,
           "cost": null,
@@ -351,7 +362,7 @@
           }
         },
         {
-          "id": "cloudiness-on-glassware-22-1",
+          "id": "cloudiness-on-glassware-1",
           "label": "Low performing phosphatefree detergent",
           "likelihood": 0.385,
           "cost": null,
@@ -880,7 +891,7 @@
     },
     {
       "id": "a-white-film-on-glassware-dishware-and-t",
-      "symptom": "A white film on glassware, dishware and the interior 24",
+      "symptom": "A white film on glassware, dishware and the interior",
       "causes": [
         {
           "id": "a-white-film-on-glassware-dishware-and-t-0",
@@ -913,11 +924,11 @@
     }
   ],
   "rejected": [
-    "cloudiness-on-glassware-22-2",
+    "cloudiness-on-glassware-2",
     "noise-2"
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T09:52:25.264Z",
-  "learnedAt": "2026-10-04T09:51:11.640Z"
+  "reviewedAt": "2026-10-05T10:04:51.933Z",
+  "learnedAt": "2026-10-05T10:00:13.080Z"
 }

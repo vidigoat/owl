@@ -2,6 +2,12 @@
   "model": "WCRE6270HWW",
   "brand": "GE",
   "kind": "Washer",
+  "alsoCovers": [
+    "WBB4500GWW",
+    "WCRE6270HCC",
+    "WJRE5500GWW",
+    "WJRE5550HWW"
+  ],
   "source": "WCRE6270HWW.pdf",
   "pages": "8–11",
   "readWith": "text-layer",
@@ -23,27 +29,6 @@
           "evidence": "GE manual, page 8: \"The washer is in a cold rinse cycle\"",
           "source": {
             "line": 10,
-            "manual": "GE manual",
-            "page": 8
-          }
-        }
-      ]
-    },
-    {
-      "id": "review-perfectemp-in-the-about-the-contr",
-      "symptom": "(Review PerfecTemp in the “About the control panel” section)",
-      "causes": [
-        {
-          "id": "review-perfectemp-in-the-about-the-contr-0",
-          "label": "All the water in your household water heater has been used",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "Wait until the water in the water heater is heated to the correct temperature."
-          ],
-          "evidence": "GE manual, page 8: \"All the water in your household water heater has been used\"",
-          "source": {
-            "line": 13,
             "manual": "GE manual",
             "page": 8
           }
@@ -1008,15 +993,11 @@
       ]
     }
   ],
-  "rejected": [],
+  "rejected": [
+    "review-perfectemp-in-the-about-the-contr"
+  ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T15:20:35.896Z",
-  "learnedAt": "2026-10-04T15:18:27.880Z",
-  "alsoCovers": [
-    "WBB4500GWW",
-    "WCRE6270HCC",
-    "WJRE5500GWW",
-    "WJRE5550HWW"
-  ]
+  "reviewedAt": "2026-10-05T10:05:57.364Z",
+  "learnedAt": "2026-10-05T10:01:27.342Z"
 }

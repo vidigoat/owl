@@ -2,6 +2,12 @@
   "model": "GFE26GGKBB",
   "brand": "GE",
   "kind": "Refrigerator",
+  "alsoCovers": [
+    "GFD28GBLTS",
+    "GFE28GGKWW",
+    "GFE28HMKES",
+    "GNE29GSKSS"
+  ],
   "source": "GFE26GGKBB.pdf",
   "pages": "46–49",
   "readWith": "text-layer",

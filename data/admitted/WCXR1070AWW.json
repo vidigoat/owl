@@ -2,6 +2,13 @@
   "model": "WCXR1070AWW",
   "brand": "GE",
   "kind": "Washer",
+  "alsoCovers": [
+    "WBXR1090AAA",
+    "WBXR1090AWW",
+    "WCXR1070AAA",
+    "WVSR1060AAA",
+    "WVSR1060AWW"
+  ],
   "source": "WCXR1070AWW.pdf",
   "pages": "10–12",
   "readWith": "text-layer",
@@ -552,12 +559,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:36.353Z",
-  "learnedAt": "2026-10-04T15:18:24.379Z",
-  "alsoCovers": [
-    "WBXR1090AAA",
-    "WBXR1090AWW",
-    "WCXR1070AAA",
-    "WVSR1060AAA",
-    "WVSR1060AWW"
-  ]
+  "learnedAt": "2026-10-05T10:01:23.774Z"
 }

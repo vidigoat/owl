@@ -3,12 +3,20 @@
   "brand": "GE",
   "kind": "Range",
   "alsoCovers": [
+    "JB3000RWW",
     "JB640DPWW",
     "JB640SPSS",
     "JB645CPWW",
     "JB650DNWW",
+    "JB680DPWW",
+    "JB690DNWW",
     "JBP23DNCC",
-    "JBP62DMWW"
+    "JBP23DNWW",
+    "JBP23SPSS",
+    "JBP62DMWW",
+    "JBP62SNSS",
+    "JBP68MMBS",
+    "JBP80DMCC"
   ],
   "source": "JBP80SMSS.pdf",
   "pages": "33–36",
@@ -866,5 +874,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T09:43:17.939Z",
-  "learnedAt": "2026-10-04T09:52:04.170Z"
+  "learnedAt": "2026-10-05T10:03:52.534Z"
 }

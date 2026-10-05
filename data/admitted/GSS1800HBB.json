@@ -1,0 +1,299 @@
+{
+  "model": "GSS1800HBB",
+  "brand": "GE",
+  "kind": "Dishwasher",
+  "alsoCovers": [
+    "GSS1800Z"
+  ],
+  "source": "GSS1800HBB.pdf",
+  "pages": "14–16",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "dishwasher-will-not-fill",
+      "symptom": "Dishwasher will not fill",
+      "causes": [
+        {
+          "id": "dishwasher-will-not-fill-1",
+          "label": "Water supply line may be clogged",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check water supply line.",
+            "You may need a plumber."
+          ],
+          "evidence": "GE manual, page 15: \"Water supply line may be clogged\"",
+          "source": {
+            "line": 6,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "aluminum-discoloration",
+      "symptom": "Aluminum discoloration",
+      "causes": [
+        {
+          "id": "aluminum-discoloration-0",
+          "label": "Certain water conditions in combination with some detergents tend to darken aluminum",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Scour all surfaces with a soap-filled pad.",
+            "Try another dishwasher detergent.",
+            "Cascade®, Cascade® Complete and Electrasol® Automatic Dishwashing Detergents have been approved for use in all GE dishwashers."
+          ],
+          "evidence": "GE manual, page 15: \"Certain water conditions in combination with some detergents tend to darken aluminum\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishes-don-t-dry",
+      "symptom": "Dishes don’t dry",
+      "causes": [
+        {
+          "id": "dishes-don-t-dry-0",
+          "label": "Low inlet water temperature",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure inlet water temperature is correct."
+          ],
+          "evidence": "GE manual, page 15: \"Low inlet water temperature\"",
+          "source": {
+            "line": 22,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "dishes-don-t-dry-1",
+          "label": "Rinse agent dispenser is empty",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the rinse agent dispenser."
+          ],
+          "evidence": "GE manual, page 15: \"Rinse agent dispenser is empty\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "dishes-don-t-dry-2",
+          "label": "Improper rack loading",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Load items to permit proper drainage."
+          ],
+          "evidence": "GE manual, page 15: \"Improper rack loading\"",
+          "source": {
+            "line": 26,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "dishes-don-t-dry-3",
+          "label": "HEATED DRY OFF is selected",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Select HEATED DRY ON."
+          ],
+          "evidence": "GE manual, page 15: \"HEATED DRY OFF is selected\"",
+          "source": {
+            "line": 33,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishes-and-flatware-not-clean",
+      "symptom": "Dishes and flatware not clean",
+      "causes": [
+        {
+          "id": "dishes-and-flatware-not-clean-0",
+          "label": "Inlet water temperature is below 120°F",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Raise the water heater temperature to 120°F."
+          ],
+          "evidence": "GE manual, page 15: \"Inlet water temperature is below 120°F\"",
+          "source": {
+            "line": 35,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "dishes-and-flatware-not-clean-1",
+          "label": "Water pressure is temporarily low",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Turn on a faucet.",
+            "Is water coming out more slowly than usual?",
+            "If so, wait until pressure is normal before using your dishwasher."
+          ],
+          "evidence": "GE manual, page 15: \"Water pressure is temporarily low\"",
+          "source": {
+            "line": 37,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "dishes-and-flatware-not-clean-2",
+          "label": "Air gap is clogged",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Clean the air gap."
+          ],
+          "evidence": "GE manual, page 15: \"Air gap is clogged\"",
+          "source": {
+            "line": 42,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "dishes-and-flatware-not-clean-3",
+          "label": "Improper rack loading",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Make sure large dishware does not block the detergent dispenser or the wash arm."
+          ],
+          "evidence": "GE manual, page 15: \"Improper rack loading\"",
+          "source": {
+            "line": 43,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "dishes-and-flatware-not-clean-4",
+          "label": "Detergent",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Use the correct amount of dishwasher detergent that is fresh and dry.",
+            "Cascade®, Cascade® Complete and Electrasol® Automatic Dishwashing Detergents have been approved for use in all GE dishwashers."
+          ],
+          "evidence": "GE manual, page 15: \"Detergent\"",
+          "source": {
+            "line": 51,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "rust-deposits",
+      "symptom": "Rust deposits",
+      "causes": [
+        {
+          "id": "rust-deposits-0",
+          "label": "Iron deposits in water supply",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Install an iron filter in the water supply line."
+          ],
+          "evidence": "GE manual, page 16: \"Iron deposits in water supply\"",
+          "source": {
+            "line": 6,
+            "manual": "GE manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "cloudiness-on-glassware",
+      "symptom": "Cloudiness on glassware",
+      "causes": [
+        {
+          "id": "cloudiness-on-glassware-0",
+          "label": "Combination of soft water and too much detergent",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is called etching and is permanent.",
+            "To prevent this from happening, use less detergent if you have soft water.",
+            "Wash glassware in the shortest cycle that will get them clean."
+          ],
+          "evidence": "GE manual, page 16: \"Combination of soft water and too much detergent\"",
+          "source": {
+            "line": 45,
+            "manual": "GE manual",
+            "page": 16
+          }
+        },
+        {
+          "id": "cloudiness-on-glassware-1",
+          "label": "Water temperature entering the dishwasher exceeds 150°F",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Lower the water heater temperature."
+          ],
+          "evidence": "GE manual, page 16: \"Water temperature entering the dishwasher exceeds 150°F\"",
+          "source": {
+            "line": 57,
+            "manual": "GE manual",
+            "page": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "black-or-gray-marks-on-dishes",
+      "symptom": "Black or gray marks on dishes",
+      "causes": [
+        {
+          "id": "black-or-gray-marks-on-dishes-0",
+          "label": "Aluminum utensils have rubbed against dishes",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Remove marks with a mild, abrasive cleaner.",
+            "Load items so that they do not touch."
+          ],
+          "evidence": "GE manual, page 16: \"Aluminum utensils have rubbed against dishes\"",
+          "source": {
+            "line": 60,
+            "manual": "GE manual",
+            "page": 16
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "dish-fading",
+    "spots-and-filming-on-glasses-and-flatwar",
+    "dishwasher-will-not-fill-0"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T10:05:19.877Z",
+  "learnedAt": "2026-10-05T10:01:10.611Z"
+}

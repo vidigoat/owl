@@ -1,0 +1,322 @@
+{
+  "model": "PGP989SNSS",
+  "brand": "GE",
+  "kind": "Range",
+  "alsoCovers": [
+    "PGP9830SJSS",
+    "PGP9830TJWW"
+  ],
+  "source": "PGP989SNSS.pdf",
+  "pages": "35–36",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "control-knobs-will-not-turn",
+      "symptom": "Control knobs will not turn",
+      "causes": [
+        {
+          "id": "control-knobs-will-not-turn-0",
+          "label": "Controls improperly set.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "To turn from the OFF position, push the knob in and then turn.",
+            "The knob can only be turned in a counterclockwise direction.",
+            "When the knob is at any other position, it can be turned in either direction without being pushed in."
+          ],
+          "evidence": "GE manual, page 36: \"Controls improperly set.\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "fan-does-not-work",
+      "symptom": "Fan does not work",
+      "causes": [
+        {
+          "id": "fan-does-not-work-0",
+          "label": "The fan control knob is improperly set.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Turn knob in clockwise direction to turn fan on."
+          ],
+          "evidence": "GE manual, page 36: \"The fan control knob is improperly set.\"",
+          "source": {
+            "line": 11,
+            "manual": "GE manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "fan-does-not-work-1",
+          "label": "Cord improperly connected or power turned off.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check connections.",
+            "Turn on power at the fuse box."
+          ],
+          "evidence": "GE manual, page 36: \"Cord improperly connected or power turned off.\"",
+          "source": {
+            "line": 12,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "poor-venting",
+      "symptom": "Poor venting",
+      "causes": [
+        {
+          "id": "poor-venting-0",
+          "label": "Clogged filter.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Clean filter per instructions."
+          ],
+          "evidence": "GE manual, page 36: \"Clogged filter.\"",
+          "source": {
+            "line": 14,
+            "manual": "GE manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "poor-venting-1",
+          "label": "House too airtight.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Open a window slightly to provide fresh air source."
+          ],
+          "evidence": "GE manual, page 36: \"House too airtight.\"",
+          "source": {
+            "line": 15,
+            "manual": "GE manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "poor-venting-2",
+          "label": "Wall cap obstructed.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Remove blockage from exterior wall cap."
+          ],
+          "evidence": "GE manual, page 36: \"Wall cap obstructed.\"",
+          "source": {
+            "line": 16,
+            "manual": "GE manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "poor-venting-3",
+          "label": "Wall cap damper door stuck.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Check exterior wall cap damper door for free movement or obstruction."
+          ],
+          "evidence": "GE manual, page 36: \"Wall cap damper door stuck.\"",
+          "source": {
+            "line": 17,
+            "manual": "GE manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "poor-venting-4",
+          "label": "Duct length exceeds recommended 100 equivalent foot maximum.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Reduce number of elbows to simplify duct run."
+          ],
+          "evidence": "GE manual, page 36: \"Duct length exceeds recommended 100 equivalent foot maximum.\"",
+          "source": {
+            "line": 19,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "tiny-scratches-or-metal-marks-may-appear",
+      "symptom": "Tiny scratches or metal marks (may appear as cracks) or abrasions on radiant cooktop glass surface",
+      "causes": [
+        {
+          "id": "tiny-scratches-or-metal-marks-may-appear-0",
+          "label": "Incorrect cleaning methods being used.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See the Cleaning the glass cooktop section."
+          ],
+          "evidence": "GE manual, page 36: \"Incorrect cleaning methods being used.\"",
+          "source": {
+            "line": 21,
+            "manual": "GE manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "tiny-scratches-or-metal-marks-may-appear-1",
+          "label": "Cookware with rough bottoms being used or coarse particles (salt or sand) were between the cookware and the surface of the cooktop.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "%H\u0003VXUH\u0003FRRNZDUH\u0003ERWWRPV\u0003DQG\u0003FRRNZDUH\u0003DUH\u0003FOHDQ\u0003 before use.",
+            "Use cookware with smooth bottoms.",
+            "Tiny scratches are not removable but will become less visible in time as a result of cleaning."
+          ],
+          "evidence": "GE manual, page 36: \"Cookware with rough bottoms being used or coarse particles (salt or sand) were between the cookware and the surface of the cooktop.\"",
+          "source": {
+            "line": 22,
+            "manual": "GE manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "tiny-scratches-or-metal-marks-may-appear-2",
+          "label": "Cookware has been slid across the cooktop surface.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [],
+          "evidence": "GE manual, page 36: \"Cookware has been slid across the cooktop surface.\"",
+          "source": {
+            "line": 26,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "areas-of-discoloration-or-dark-streaks-o",
+      "symptom": "Areas of discoloration or dark streaks on the cooktop",
+      "causes": [
+        {
+          "id": "areas-of-discoloration-or-dark-streaks-o-0",
+          "label": "Improper cookware being used.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Marks from aluminum and copper pans as well as mineral deposits from water or food can be removed with the cleaning cream."
+          ],
+          "evidence": "GE manual, page 36: \"Improper cookware being used.\"",
+          "source": {
+            "line": 28,
+            "manual": "GE manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "areas-of-discoloration-or-dark-streaks-o-1",
+          "label": "Hot surface on a model with a lightcolored cooktop.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "This is normal.",
+            "The surface may appear discolored when it is hot.",
+            "This is temporary and will disappear as the glass cools."
+          ],
+          "evidence": "GE manual, page 36: \"Hot surface on a model with a lightcolored cooktop.\"",
+          "source": {
+            "line": 31,
+            "manual": "GE manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "areas-of-discoloration-or-dark-streaks-o-2",
+          "label": "Food spillovers not cleaned before next use.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "See the Cleaning the glass cooktop section."
+          ],
+          "evidence": "GE manual, page 36: \"Food spillovers not cleaned before next use.\"",
+          "source": {
+            "line": 34,
+            "manual": "GE manual",
+            "page": 36
+          }
+        },
+        {
+          "id": "areas-of-discoloration-or-dark-streaks-o-3",
+          "label": "Incorrect cleaning methods being used.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Use recommended cleaning procedures."
+          ],
+          "evidence": "GE manual, page 36: \"Incorrect cleaning methods being used.\"",
+          "source": {
+            "line": 36,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "hot-sugar-mixtures-or-plastic-melted-to-",
+      "symptom": "Hot sugar mixtures or plastic melted to the surface",
+      "causes": [
+        {
+          "id": "hot-sugar-mixtures-or-plastic-melted-to--0",
+          "label": "Hot cooktop came into contact with these substances.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See the Glass surface—potential for permanent damage section in the Cleaning the glass cooktop section."
+          ],
+          "evidence": "GE manual, page 36: \"Hot cooktop came into contact with these substances.\"",
+          "source": {
+            "line": 37,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    },
+    {
+      "id": "pitting-or-indentation-of-the-cooktop",
+      "symptom": "Pitting (or indentation) of the cooktop",
+      "causes": [
+        {
+          "id": "pitting-or-indentation-of-the-cooktop-0",
+          "label": "Hot sugar mixture spilled or plastic melted on the cooktop.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Call a qualified technician for replacement. 49-80516-4"
+          ],
+          "evidence": "GE manual, page 36: \"Hot sugar mixture spilled or plastic melted on the cooktop.\"",
+          "source": {
+            "line": 40,
+            "manual": "GE manual",
+            "page": 36
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T10:05:45.382Z",
+  "learnedAt": "2026-10-05T10:04:01.238Z"
+}

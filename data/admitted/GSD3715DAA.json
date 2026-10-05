@@ -2,6 +2,10 @@
   "model": "GSD3715DAA",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "GSD3725DBB",
+    "GSD3732DWW"
+  ],
   "source": "GSD3715DAA.pdf",
   "pages": "19–23",
   "readWith": "text-layer",
@@ -340,5 +344,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:09.925Z",
-  "learnedAt": "2026-10-04T15:17:16.960Z"
+  "learnedAt": "2026-10-05T10:00:35.342Z"
 }

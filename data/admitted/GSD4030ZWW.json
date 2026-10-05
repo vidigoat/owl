@@ -2,6 +2,9 @@
   "model": "GSD4030ZWW",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "GSD4020ZBB"
+  ],
   "source": "GSD4030ZWW.pdf",
   "pages": "20–24",
   "readWith": "text-layer",
@@ -395,8 +398,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:09.978Z",
-  "learnedAt": "2026-10-04T15:17:24.183Z",
-  "alsoCovers": [
-    "GSD4020ZBB"
-  ]
+  "learnedAt": "2026-10-05T10:00:42.726Z"
 }

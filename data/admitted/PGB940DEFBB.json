@@ -1,0 +1,216 @@
+{
+  "model": "PGB940DEFBB",
+  "brand": "GE",
+  "kind": "Range",
+  "alsoCovers": [
+    "PGB940DEFWW"
+  ],
+  "source": "PGB940DEFBB.pdf",
+  "pages": "29–32",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "drawer-does-not-slide-smoothly-or-drags",
+      "symptom": "Drawer does not slide smoothly or drags",
+      "causes": [
+        {
+          "id": "drawer-does-not-slide-smoothly-or-drags-0",
+          "label": "The drawer is out of alignment.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Fully extend the drawer and push it all the way in.",
+            "See the Care and cleaning of the range section."
+          ],
+          "evidence": "GE manual, page 32: \"The drawer is out of alignment.\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 32
+          }
+        },
+        {
+          "id": "drawer-does-not-slide-smoothly-or-drags-1",
+          "label": "Drawer is over-loaded or load is unbalanced.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Reduce weight.",
+            "Redistribute drawer contents."
+          ],
+          "evidence": "GE manual, page 32: \"Drawer is over-loaded or load is unbalanced.\"",
+          "source": {
+            "line": 9,
+            "manual": "GE manual",
+            "page": 32
+          }
+        }
+      ]
+    },
+    {
+      "id": "lower-oven-drawer-or-warming-drawer-will",
+      "symptom": "Lower oven drawer or warming drawer will not work",
+      "causes": [
+        {
+          "id": "lower-oven-drawer-or-warming-drawer-will-0",
+          "label": "A fuse in your home may be blown or the circuit breaker tripped.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace the fuse or reset the circuit breaker."
+          ],
+          "evidence": "GE manual, page 32: \"A fuse in your home may be blown or the circuit breaker tripped.\"",
+          "source": {
+            "line": 11,
+            "manual": "GE manual",
+            "page": 32
+          }
+        },
+        {
+          "id": "lower-oven-drawer-or-warming-drawer-will-1",
+          "label": "The oven is self-cleaning.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Wait for the self-clean cycle to finish and the oven to cool."
+          ],
+          "evidence": "GE manual, page 32: \"The oven is self-cleaning.\"",
+          "source": {
+            "line": 13,
+            "manual": "GE manual",
+            "page": 32
+          }
+        },
+        {
+          "id": "lower-oven-drawer-or-warming-drawer-will-2",
+          "label": "Controls improperly set.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "See the Electric warming drawer or Lower oven rawer section."
+          ],
+          "evidence": "GE manual, page 32: \"Controls improperly set.\"",
+          "source": {
+            "line": 15,
+            "manual": "GE manual",
+            "page": 32
+          }
+        }
+      ]
+    },
+    {
+      "id": "excessive-condensation-in-the-drawer",
+      "symptom": "Excessive condensation in the drawer",
+      "causes": [
+        {
+          "id": "excessive-condensation-in-the-drawer-0",
+          "label": "Liquid in drawer.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Remove liquid."
+          ],
+          "evidence": "GE manual, page 32: \"Liquid in drawer.\"",
+          "source": {
+            "line": 17,
+            "manual": "GE manual",
+            "page": 32
+          }
+        },
+        {
+          "id": "excessive-condensation-in-the-drawer-1",
+          "label": "Uncovered foods.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Cover food with lid or aluminum foil."
+          ],
+          "evidence": "GE manual, page 32: \"Uncovered foods.\"",
+          "source": {
+            "line": 18,
+            "manual": "GE manual",
+            "page": 32
+          }
+        },
+        {
+          "id": "excessive-condensation-in-the-drawer-2",
+          "label": "Temperature setting too high.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Reduce temperature setting."
+          ],
+          "evidence": "GE manual, page 32: \"Temperature setting too high.\"",
+          "source": {
+            "line": 20,
+            "manual": "GE manual",
+            "page": 32
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-dries-out-in-the-lower-oven-drawer-",
+      "symptom": "Food dries out in the lower oven drawer or warming drawer",
+      "causes": [
+        {
+          "id": "food-dries-out-in-the-lower-oven-drawer--0",
+          "label": "Moisture escaping.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Cover food with lid or aluminum foil."
+          ],
+          "evidence": "GE manual, page 32: \"Moisture escaping.\"",
+          "source": {
+            "line": 21,
+            "manual": "GE manual",
+            "page": 32
+          }
+        },
+        {
+          "id": "food-dries-out-in-the-lower-oven-drawer--1",
+          "label": "Drawer not fully closed.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Push drawer in until latch engages."
+          ],
+          "evidence": "GE manual, page 32: \"Drawer not fully closed.\"",
+          "source": {
+            "line": 22,
+            "manual": "GE manual",
+            "page": 32
+          }
+        }
+      ]
+    },
+    {
+      "id": "oven-will-not-work-remotely",
+      "symptom": "Oven will not work remotely",
+      "causes": [
+        {
+          "id": "oven-will-not-work-remotely-0",
+          "label": "Router issues, no wireless signal, etc. Oven is not connected.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "For assistance with oven wireless network FRQQHFWLYLW\\\u000f\u0003SOHDVH\u0003FDOO\u0003\u0014\u0010\u001b\u0013\u0013\u0010\u0015\u0015\u0013\u0010\u0019\u001b\u001c\u001c\u0011 49-85211-4"
+          ],
+          "evidence": "GE manual, page 32: \"Router issues, no wireless signal, etc. Oven is not connected.\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 32
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T10:05:44.814Z",
+  "learnedAt": "2026-10-05T10:04:04.595Z"
+}

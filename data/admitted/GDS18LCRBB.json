@@ -2,6 +2,9 @@
   "model": "GDS18LCRBB",
   "brand": "GE",
   "kind": "Refrigerator",
+  "alsoCovers": [
+    "GDS18SBPLSS"
+  ],
   "source": "GDS18LCRBB.pdf",
   "pages": "22–24",
   "readWith": "text-layer",
@@ -663,5 +666,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T09:43:02.010Z",
-  "learnedAt": "2026-10-04T09:51:47.879Z"
+  "learnedAt": "2026-10-05T10:02:53.805Z"
 }

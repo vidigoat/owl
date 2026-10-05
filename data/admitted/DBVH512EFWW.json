@@ -2,6 +2,13 @@
   "model": "DBVH512EFWW",
   "brand": "GE",
   "kind": "Dryer",
+  "alsoCovers": [
+    "DBVH510EHWW",
+    "DBVH510GHWW",
+    "DBVH512EFGG",
+    "DBVH512GFGG",
+    "DBVH512GFWW"
+  ],
   "source": "DBVH512EFWW.pdf",
   "pages": "23–25",
   "readWith": "text-layer",
@@ -577,10 +584,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:19:41.741Z",
-  "learnedAt": "2026-10-04T15:18:55.105Z",
-  "alsoCovers": [
-    "DBVH510EHWW",
-    "DBVH512GFGG",
-    "DBVH512GFWW"
-  ]
+  "learnedAt": "2026-10-05T10:02:21.354Z"
 }

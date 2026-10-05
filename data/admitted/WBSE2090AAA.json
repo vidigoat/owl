@@ -2,6 +2,10 @@
   "model": "WBSE2090AAA",
   "brand": "GE",
   "kind": "Washer",
+  "alsoCovers": [
+    "WJSR2070BCC",
+    "WJSR2070BWW"
+  ],
   "source": "WBSE2090AAA.pdf",
   "pages": "11–13",
   "readWith": "text-layer",
@@ -308,8 +312,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:35.818Z",
-  "learnedAt": "2026-10-04T15:18:40.376Z",
-  "alsoCovers": [
-    "WJSR2070BCC"
-  ]
+  "learnedAt": "2026-10-05T10:01:39.715Z"
 }

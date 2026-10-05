@@ -4,9 +4,20 @@
   "kind": "Range",
   "alsoCovers": [
     "JBP15BJBB",
+    "JBP60BHWH",
+    "JBP60BMWH",
+    "JBS03BHCT",
+    "JBS03HCT",
     "JBS07CWW",
+    "JBS07HWW",
+    "JBS15FCT",
+    "JBS15FWH",
     "JBS15HCC",
-    "JBS27SHSS"
+    "JBS27BHBB",
+    "JBS27SHSS",
+    "JBS27WCWW",
+    "JBS56DMWW",
+    "JBS56WLWW"
   ],
   "source": "JBP27DMWW.pdf",
   "pages": "31–34",
@@ -1078,5 +1089,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T09:43:17.512Z",
-  "learnedAt": "2026-10-04T09:52:00.857Z"
+  "learnedAt": "2026-10-05T10:03:49.361Z"
 }

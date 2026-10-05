@@ -2,6 +2,13 @@
   "model": "GTD45EASJWS",
   "brand": "GE",
   "kind": "Dryer",
+  "alsoCovers": [
+    "GTD42EASJWW",
+    "GTD42GASJWW",
+    "GTD45GASJWS",
+    "GTX42EASJWW",
+    "GTX42GASJWW"
+  ],
   "source": "GTD45EASJWS.pdf",
   "pages": "9–10",
   "readWith": "text-layer",
@@ -499,9 +506,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:12.027Z",
-  "learnedAt": "2026-10-04T15:18:46.294Z",
-  "alsoCovers": [
-    "GTD42GASJWW",
-    "GTX42EASJWW"
-  ]
+  "learnedAt": "2026-10-05T10:02:12.527Z"
 }

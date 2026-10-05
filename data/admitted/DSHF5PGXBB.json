@@ -116,72 +116,6 @@
       ]
     },
     {
-      "id": "modern-refrigerators-with-more-storage-s",
-      "symptom": "(Modern refrigerators with more storage space and a larger freezer require more operating time. They start and stop often to maintain even temperatures.)",
-      "causes": [
-        {
-          "id": "modern-refrigerators-with-more-storage-s-0",
-          "label": "Often occurs when large amounts of food are placed in refrigerator.",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "This is normal."
-          ],
-          "evidence": "GE manual, page 28: \"Often occurs when large amounts of food are placed in refrigerator.\"",
-          "source": {
-            "line": 26,
-            "manual": "GE manual",
-            "page": 28
-          }
-        },
-        {
-          "id": "modern-refrigerators-with-more-storage-s-1",
-          "label": "Door left open.",
-          "likelihood": 0.385,
-          "cost": null,
-          "remedies": [
-            "Check to see if package is holding door open."
-          ],
-          "evidence": "GE manual, page 28: \"Door left open.\"",
-          "source": {
-            "line": 30,
-            "manual": "GE manual",
-            "page": 28
-          }
-        },
-        {
-          "id": "modern-refrigerators-with-more-storage-s-2",
-          "label": "Hot weather or frequent door openings.",
-          "likelihood": 0.278,
-          "cost": null,
-          "remedies": [
-            "This is normal."
-          ],
-          "evidence": "GE manual, page 28: \"Hot weather or frequent door openings.\"",
-          "source": {
-            "line": 34,
-            "manual": "GE manual",
-            "page": 28
-          }
-        },
-        {
-          "id": "modern-refrigerators-with-more-storage-s-3",
-          "label": "Temperature controls set at the coldest setting.",
-          "likelihood": 0.217,
-          "cost": null,
-          "remedies": [
-            "See About the controls."
-          ],
-          "evidence": "GE manual, page 28: \"Temperature controls set at the coldest setting.\"",
-          "source": {
-            "line": 36,
-            "manual": "GE manual",
-            "page": 28
-          }
-        }
-      ]
-    },
-    {
       "id": "refrigerator-or-freezer-compartment-too-",
       "symptom": "Refrigerator or freezer compartment too warm",
       "causes": [
@@ -1117,9 +1051,11 @@
       ]
     }
   ],
-  "rejected": [],
+  "rejected": [
+    "modern-refrigerators-with-more-storage-s"
+  ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T15:19:43.685Z",
-  "learnedAt": "2026-10-04T15:18:05.195Z"
+  "reviewedAt": "2026-10-05T10:04:38.015Z",
+  "learnedAt": "2026-10-05T10:03:25.339Z"
 }

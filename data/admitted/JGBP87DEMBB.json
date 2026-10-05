@@ -1,0 +1,887 @@
+{
+  "model": "JGBP87DEMBB",
+  "brand": "GE",
+  "kind": "Range",
+  "alsoCovers": [
+    "JGBP36BELBB",
+    "JGBP36CEJCC",
+    "JGBP36DEMCC",
+    "JGBP36DEMWW",
+    "JGBP87BELBB",
+    "JGBP87MELBG",
+    "JGBP87SEKSS"
+  ],
+  "source": "JGBP87DEMBB.pdf",
+  "pages": "46–49",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "top-burners-do-not-light-or-do-not-burn-",
+      "symptom": "Top burners do not light or do not burn evenly",
+      "causes": [
+        {
+          "id": "top-burners-do-not-light-or-do-not-burn--0",
+          "label": "Plug on range is not completely inserted in the electrical outlet.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure electrical plug is plugged into a live, properly grounded outlet."
+          ],
+          "evidence": "GE manual, page 46: \"Plug on range is not completely inserted in the electrical outlet.\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 46
+          }
+        },
+        {
+          "id": "top-burners-do-not-light-or-do-not-burn--1",
+          "label": "Burner hole or slits on the side of the burner may be clogged.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Remove the burners (on models with standard twin burners) or burner heads and caps (on models with sealed burners) and clean them with a sewing needle or twist-tie.",
+            "Make sure you do not enlarge the holes.",
+            "On sealed burner models, check and clean the electrode area for burned-on food or grease."
+          ],
+          "evidence": "GE manual, page 46: \"Burner hole or slits on the side of the burner may be clogged.\"",
+          "source": {
+            "line": 15,
+            "manual": "GE manual",
+            "page": 46
+          }
+        },
+        {
+          "id": "top-burners-do-not-light-or-do-not-burn--2",
+          "label": "Improper burner assembly.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Make sure the burner parts are installed correctly.",
+            "See the Care and cleaning of the range section."
+          ],
+          "evidence": "GE manual, page 46: \"Improper burner assembly.\"",
+          "source": {
+            "line": 21,
+            "manual": "GE manual",
+            "page": 46
+          }
+        }
+      ]
+    },
+    {
+      "id": "burner-flames-very-large-or-yellow",
+      "symptom": "Burner flames very large or yellow",
+      "causes": [
+        {
+          "id": "burner-flames-very-large-or-yellow-0",
+          "label": "Improper air to gas ratio.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "If range is connected to LP gas, contact the person who installed your range or made the conversion."
+          ],
+          "evidence": "GE manual, page 46: \"Improper air to gas ratio.\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 46
+          }
+        }
+      ]
+    },
+    {
+      "id": "surface-burners-light-but-oven-does-not-",
+      "symptom": "Surface burners light but oven does not Instructions",
+      "causes": [
+        {
+          "id": "surface-burners-light-but-oven-does-not--0",
+          "label": "The oven gas shut-off valve may have accidentally been moved during cleaning or moving.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "To check the oven gas shut-off valve on sealed burner models, remove the storage drawer or kick panel (see the Care and cleaning of the range section) and look for the gas shut-off lever at the back of the range.",
+            "Lever is shown closed.",
+            "PULL TO OPEN.",
+            "Sealed burner models",
+            "To check the oven gas shut-off valve on standard twin burner models, raise the cooktop and look for the gas shut-off lever at the extreme right rear corner.",
+            "Follow the directions in box A or B that match your regulator type.",
+            "Lever is shown closed.",
+            "A   Lever is shown closed.",
+            "B PULL TO OPEN.",
+            "PULL TO OPEN.",
+            "Standard twin burner models       Standard twin burner models"
+          ],
+          "evidence": "GE manual, page 46: \"The oven gas shut-off valve may have accidentally been moved during cleaning or moving.\"",
+          "source": {
+            "line": 27,
+            "manual": "GE manual",
+            "page": 46
+          }
+        }
+      ]
+    },
+    {
+      "id": "control-signals-after",
+      "symptom": "Control signals after",
+      "causes": [
+        {
+          "id": "control-signals-after-0",
+          "label": "You forgot to enter a bake",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Touch the Bake pad and desired temperature or"
+          ],
+          "evidence": "GE manual, page 46: \"You forgot to enter a bake\"",
+          "source": {
+            "line": 58,
+            "manual": "GE manual",
+            "page": 46
+          }
+        }
+      ]
+    },
+    {
+      "id": "clock-and-timer-do-not-work",
+      "symptom": "Clock and timer do not work",
+      "causes": [
+        {
+          "id": "clock-and-timer-do-not-work-0",
+          "label": "Plug on range is not completely inserted in the electrical outlet.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure electrical plug is plugged into a live, properly grounded outlet."
+          ],
+          "evidence": "GE manual, page 46: \"Plug on range is not completely inserted in the electrical outlet.\"",
+          "source": {
+            "line": 67,
+            "manual": "GE manual",
+            "page": 46
+          }
+        },
+        {
+          "id": "clock-and-timer-do-not-work-1",
+          "label": "A fuse in your home may be blown or the circuit breaker tripped.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Replace the fuse or reset the circuit breaker."
+          ],
+          "evidence": "GE manual, page 46: \"A fuse in your home may be blown or the circuit breaker tripped.\"",
+          "source": {
+            "line": 69,
+            "manual": "GE manual",
+            "page": 46
+          }
+        },
+        {
+          "id": "clock-and-timer-do-not-work-2",
+          "label": "Oven controls improperly set.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "See the Using the clock and timer section."
+          ],
+          "evidence": "GE manual, page 46: \"Oven controls improperly set.\"",
+          "source": {
+            "line": 72,
+            "manual": "GE manual",
+            "page": 46
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-does-not-bake-or-roast-properly",
+      "symptom": "Food does not bake or roast properly",
+      "causes": [
+        {
+          "id": "food-does-not-bake-or-roast-properly-0",
+          "label": "Oven controls improperly set.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See the Using the oven section."
+          ],
+          "evidence": "GE manual, page 47: \"Oven controls improperly set.\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 47
+          }
+        },
+        {
+          "id": "food-does-not-bake-or-roast-properly-1",
+          "label": "Rack position is incorrect.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See the Using the oven section."
+          ],
+          "evidence": "GE manual, page 47: \"Rack position is incorrect.\"",
+          "source": {
+            "line": 9,
+            "manual": "GE manual",
+            "page": 47
+          }
+        },
+        {
+          "id": "food-does-not-bake-or-roast-properly-2",
+          "label": "Incorrect cookware or cookware of improper size being used.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "See the Using the oven section."
+          ],
+          "evidence": "GE manual, page 47: \"Incorrect cookware or cookware of improper size being used.\"",
+          "source": {
+            "line": 15,
+            "manual": "GE manual",
+            "page": 47
+          }
+        },
+        {
+          "id": "food-does-not-bake-or-roast-properly-3",
+          "label": "Oven thermostat needs adjustment.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "See the Adjust the oven thermostat—Do it yourself! section."
+          ],
+          "evidence": "GE manual, page 47: \"Oven thermostat needs adjustment.\"",
+          "source": {
+            "line": 17,
+            "manual": "GE manual",
+            "page": 47
+          }
+        },
+        {
+          "id": "food-does-not-bake-or-roast-properly-4",
+          "label": "Clock not set correctly. (on some models)",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "See the Using the clock and timer section."
+          ],
+          "evidence": "GE manual, page 47: \"Clock not set correctly. (on some models)\"",
+          "source": {
+            "line": 19,
+            "manual": "GE manual",
+            "page": 47
+          }
+        },
+        {
+          "id": "food-does-not-bake-or-roast-properly-5",
+          "label": "Aluminum foil used improperly in the oven.",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "See the Care and cleaning of the range section."
+          ],
+          "evidence": "GE manual, page 47: \"Aluminum foil used improperly in the oven.\"",
+          "source": {
+            "line": 21,
+            "manual": "GE manual",
+            "page": 47
+          }
+        },
+        {
+          "id": "food-does-not-bake-or-roast-properly-6",
+          "label": "Oven bottom not securely seated in position.",
+          "likelihood": 0.132,
+          "cost": null,
+          "remedies": [
+            "See the Installation of the range section."
+          ],
+          "evidence": "GE manual, page 47: \"Oven bottom not securely seated in position.\"",
+          "source": {
+            "line": 23,
+            "manual": "GE manual",
+            "page": 47
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-does-not-broil-properly",
+      "symptom": "Food does not broil properly",
+      "causes": [
+        {
+          "id": "food-does-not-broil-properly-0",
+          "label": "Oven controls improperly set.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure you touch the Broil Hi/Lo pad."
+          ],
+          "evidence": "GE manual, page 47: \"Oven controls improperly set.\"",
+          "source": {
+            "line": 26,
+            "manual": "GE manual",
+            "page": 47
+          }
+        },
+        {
+          "id": "food-does-not-broil-properly-1",
+          "label": "Oven door not closed.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See the Using the oven section."
+          ],
+          "evidence": "GE manual, page 47: \"Oven door not closed.\"",
+          "source": {
+            "line": 28,
+            "manual": "GE manual",
+            "page": 47
+          }
+        },
+        {
+          "id": "food-does-not-broil-properly-2",
+          "label": "Improper rack position being used.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "See the Broiling Guide."
+          ],
+          "evidence": "GE manual, page 47: \"Improper rack position being used.\"",
+          "source": {
+            "line": 31,
+            "manual": "GE manual",
+            "page": 47
+          }
+        },
+        {
+          "id": "food-does-not-broil-properly-3",
+          "label": "Food being cooked in a hot pan.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "For best results, use a pan designed for broiling.",
+            "Make sure it is cool."
+          ],
+          "evidence": "GE manual, page 47: \"Food being cooked in a hot pan.\"",
+          "source": {
+            "line": 36,
+            "manual": "GE manual",
+            "page": 47
+          }
+        },
+        {
+          "id": "food-does-not-broil-properly-4",
+          "label": "Cookware not suited for broiling.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "For best results, use a pan designed for broiling."
+          ],
+          "evidence": "GE manual, page 47: \"Cookware not suited for broiling.\"",
+          "source": {
+            "line": 38,
+            "manual": "GE manual",
+            "page": 47
+          }
+        },
+        {
+          "id": "food-does-not-broil-properly-5",
+          "label": "Oven bottom not securely seated in position.",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "See the Installation of the range section."
+          ],
+          "evidence": "GE manual, page 47: \"Oven bottom not securely seated in position.\"",
+          "source": {
+            "line": 39,
+            "manual": "GE manual",
+            "page": 47
+          }
+        }
+      ]
+    },
+    {
+      "id": "oven-temperature-too-hot-or-too-cold",
+      "symptom": "Oven temperature too hot or too cold",
+      "causes": [
+        {
+          "id": "oven-temperature-too-hot-or-too-cold-0",
+          "label": "Oven thermostat needs adjustment.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See the Adjust the oven thermostat—Do it yourself! section."
+          ],
+          "evidence": "GE manual, page 47: \"Oven thermostat needs adjustment.\"",
+          "source": {
+            "line": 42,
+            "manual": "GE manual",
+            "page": 47
+          }
+        }
+      ]
+    },
+    {
+      "id": "oven-light-does-not-work",
+      "symptom": "Oven light does not work",
+      "causes": [
+        {
+          "id": "oven-light-does-not-work-0",
+          "label": "Light bulb is loose or defective.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Tighten or replace the bulb."
+          ],
+          "evidence": "GE manual, page 47: \"Light bulb is loose or defective.\"",
+          "source": {
+            "line": 50,
+            "manual": "GE manual",
+            "page": 47
+          }
+        },
+        {
+          "id": "oven-light-does-not-work-1",
+          "label": "Plug on range is not completely inserted in the electrical outlet.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Make sure electrical plug is plugged into a live, properly grounded outlet."
+          ],
+          "evidence": "GE manual, page 47: \"Plug on range is not completely inserted in the electrical outlet.\"",
+          "source": {
+            "line": 51,
+            "manual": "GE manual",
+            "page": 47
+          }
+        }
+      ]
+    },
+    {
+      "id": "crackling-or-popping-sound",
+      "symptom": "“Crackling” or “popping” sound",
+      "causes": [
+        {
+          "id": "crackling-or-popping-sound-0",
+          "label": "This is the sound of the metal heating and cooling during both the cooking and cleaning functions.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 47: \"This is the sound of the metal heating and cooling during both the cooking and cleaning functions.\"",
+          "source": {
+            "line": 65,
+            "manual": "GE manual",
+            "page": 47
+          }
+        }
+      ]
+    },
+    {
+      "id": "excessive-smoking",
+      "symptom": "Excessive smoking",
+      "causes": [
+        {
+          "id": "excessive-smoking-0",
+          "label": "Excessive soil.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Touch the Clear/Off pad."
+          ],
+          "evidence": "GE manual, page 48: \"Excessive soil.\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 48
+          }
+        }
+      ]
+    },
+    {
+      "id": "oven-door-will-not-open-after-a-clean-cy",
+      "symptom": "Oven door will not open after a clean cycle",
+      "causes": [
+        {
+          "id": "oven-door-will-not-open-after-a-clean-cy-0",
+          "label": "Oven too hot.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Allow the oven to cool below locking temperature."
+          ],
+          "evidence": "GE manual, page 48: \"Oven too hot.\"",
+          "source": {
+            "line": 10,
+            "manual": "GE manual",
+            "page": 48
+          }
+        }
+      ]
+    },
+    {
+      "id": "oven-not-clean-after-a-clean-cycle",
+      "symptom": "Oven not clean after a clean cycle",
+      "causes": [
+        {
+          "id": "oven-not-clean-after-a-clean-cycle-0",
+          "label": "Oven controls not properly set.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See the Using the self-cleaning oven section."
+          ],
+          "evidence": "GE manual, page 48: \"Oven controls not properly set.\"",
+          "source": {
+            "line": 18,
+            "manual": "GE manual",
+            "page": 48
+          }
+        },
+        {
+          "id": "oven-not-clean-after-a-clean-cycle-1",
+          "label": "Oven was heavily soiled.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Clean up heavy spillovers before starting the clean cycle.",
+            "Heavily soiled ovens may need to self-clean again or for a longer period of time."
+          ],
+          "evidence": "GE manual, page 48: \"Oven was heavily soiled.\"",
+          "source": {
+            "line": 20,
+            "manual": "GE manual",
+            "page": 48
+          }
+        }
+      ]
+    },
+    {
+      "id": "oven-door-will-not-unlock-on-models-with",
+      "symptom": "Oven door will not unlock (on models with a door latch)",
+      "causes": [
+        {
+          "id": "oven-door-will-not-unlock-on-models-with-0",
+          "label": "Oven is too hot.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Allow the oven to cool below locking temperature.",
+            "Do not lock the door with the door latch except when using the self-clean feature."
+          ],
+          "evidence": "GE manual, page 48: \"Oven is too hot.\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 48
+          }
+        }
+      ]
+    },
+    {
+      "id": "self-clean-light-blinks-during-self-clea",
+      "symptom": "Self clean light blinks during self clean cycle",
+      "causes": [
+        {
+          "id": "self-clean-light-blinks-during-self-clea-0",
+          "label": "A power interruption occurred.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Touch the Clear/Off pad, wait for the oven to cool, and on models with a latch, move it to the left as far as it will go.",
+            "Reset the range controls to the desired settings.",
+            "See the Using the self-cleaning oven section."
+          ],
+          "evidence": "GE manual, page 48: \"A power interruption occurred.\"",
+          "source": {
+            "line": 28,
+            "manual": "GE manual",
+            "page": 48
+          }
+        },
+        {
+          "id": "self-clean-light-blinks-during-self-clea-1",
+          "label": "Self-cleaning cycle has been selected, but the oven door was not closed, and on models with a latch, it was not moved all the way to the right.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Close the oven door.",
+            "On models with a latch, move it all the way to the right."
+          ],
+          "evidence": "GE manual, page 48: \"Self-cleaning cycle has been selected, but the oven door was not closed, and on models with a latch, it was not moved all the way to the right.\"",
+          "source": {
+            "line": 35,
+            "manual": "GE manual",
+            "page": 48
+          }
+        }
+      ]
+    },
+    {
+      "id": "f-and-a-number-or-letter-flash-in-the-di",
+      "symptom": "“F—and a number or letter” flash in the display (on some models)",
+      "causes": [
+        {
+          "id": "f-and-a-number-or-letter-flash-in-the-di-0",
+          "label": "On models with a door latch, if a function error code appears during the self-cleaning cycle, check the oven door latch.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "The latch may have been moved, even if only slightly, from the locked position.",
+            "Make sure the latch is moved to the right as far as it will go."
+          ],
+          "evidence": "GE manual, page 48: \"On models with a door latch, if a function error code appears during the self-cleaning cycle, check the oven door latch.\"",
+          "source": {
+            "line": 52,
+            "manual": "GE manual",
+            "page": 48
+          }
+        },
+        {
+          "id": "f-and-a-number-or-letter-flash-in-the-di-1",
+          "label": "You have a function error code.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Touch the Clear/Off pad.",
+            "Allow the oven to cool for one hour.",
+            "Put the oven back into operation."
+          ],
+          "evidence": "GE manual, page 48: \"You have a function error code.\"",
+          "source": {
+            "line": 56,
+            "manual": "GE manual",
+            "page": 48
+          }
+        },
+        {
+          "id": "f-and-a-number-or-letter-flash-in-the-di-2",
+          "label": "If the function code repeats.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Disconnect all power to the range for 5 minutes and then reconnect power.",
+            "If the function error code repeats, call for service."
+          ],
+          "evidence": "GE manual, page 48: \"If the function code repeats.\"",
+          "source": {
+            "line": 58,
+            "manual": "GE manual",
+            "page": 48
+          }
+        }
+      ]
+    },
+    {
+      "id": "display-goes-blank",
+      "symptom": "Display goes blank",
+      "causes": [
+        {
+          "id": "display-goes-blank-0",
+          "label": "A fuse in your home may be blown or the circuit breaker tripped.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace the fuse or reset the circuit breaker."
+          ],
+          "evidence": "GE manual, page 49: \"A fuse in your home may be blown or the circuit breaker tripped.\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 49
+          }
+        },
+        {
+          "id": "display-goes-blank-1",
+          "label": "The clock is turned off so that it does not show in the display.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See the Using the clock and timer section."
+          ],
+          "evidence": "GE manual, page 49: \"The clock is turned off so that it does not show in the display.\"",
+          "source": {
+            "line": 15,
+            "manual": "GE manual",
+            "page": 49
+          }
+        }
+      ]
+    },
+    {
+      "id": "display-flashes",
+      "symptom": "Display flashes",
+      "causes": [
+        {
+          "id": "display-flashes-0",
+          "label": "Power failure.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Reset the clock."
+          ],
+          "evidence": "GE manual, page 49: \"Power failure.\"",
+          "source": {
+            "line": 18,
+            "manual": "GE manual",
+            "page": 49
+          }
+        }
+      ]
+    },
+    {
+      "id": "unable-to-get-the-display-to-show-sf",
+      "symptom": "Unable to get the display to show “SF”",
+      "causes": [
+        {
+          "id": "unable-to-get-the-display-to-show-sf-0",
+          "label": "Oven control pads were not touched properly.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "The Bake and Broil Hi/Lo pads must be touched at the same time and held for 3 seconds."
+          ],
+          "evidence": "GE manual, page 49: \"Oven control pads were not touched properly.\"",
+          "source": {
+            "line": 20,
+            "manual": "GE manual",
+            "page": 49
+          }
+        }
+      ]
+    },
+    {
+      "id": "power-outage-clock-flashes",
+      "symptom": "Power outage, clock flashes",
+      "causes": [
+        {
+          "id": "power-outage-clock-flashes-0",
+          "label": "Power outage or surge.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Reset the clock.",
+            "If the oven was in use, you must reset it by touching the Clear/Off pad, setting the clock and resetting any cooking function."
+          ],
+          "evidence": "GE manual, page 49: \"Power outage or surge.\"",
+          "source": {
+            "line": 23,
+            "manual": "GE manual",
+            "page": 49
+          }
+        }
+      ]
+    },
+    {
+      "id": "burning-or-oily-odor-emitting-from-the-v",
+      "symptom": "“Burning” or “oily” odor emitting from the vent",
+      "causes": [
+        {
+          "id": "burning-or-oily-odor-emitting-from-the-v-0",
+          "label": "This is normal in a new oven and will disappear in time.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "To speed the process, set a self-clean cycle for a minimum of 3 hours.",
+            "See the Using the self-cleaning oven section."
+          ],
+          "evidence": "GE manual, page 49: \"This is normal in a new oven and will disappear in time.\"",
+          "source": {
+            "line": 27,
+            "manual": "GE manual",
+            "page": 49
+          }
+        }
+      ]
+    },
+    {
+      "id": "strong-odor",
+      "symptom": "Strong odor",
+      "causes": [
+        {
+          "id": "strong-odor-0",
+          "label": "An odor from the insulation around the inside of the oven is normal for the first few times the oven is used.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is temporary."
+          ],
+          "evidence": "GE manual, page 49: \"An odor from the insulation around the inside of the oven is normal for the first few times the oven is used.\"",
+          "source": {
+            "line": 33,
+            "manual": "GE manual",
+            "page": 49
+          }
+        }
+      ]
+    },
+    {
+      "id": "fan-noise",
+      "symptom": "Fan noise",
+      "causes": [
+        {
+          "id": "fan-noise-0",
+          "label": "A cooling fan may automatically turn on and off to cool internal parts.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal.",
+            "The cooling fan will turn off and on."
+          ],
+          "evidence": "GE manual, page 49: \"A cooling fan may automatically turn on and off to cool internal parts.\"",
+          "source": {
+            "line": 40,
+            "manual": "GE manual",
+            "page": 49
+          }
+        }
+      ]
+    },
+    {
+      "id": "drawer-does-not-slide-smoothly-or-drags",
+      "symptom": "Drawer does not slide smoothly or drags",
+      "causes": [
+        {
+          "id": "drawer-does-not-slide-smoothly-or-drags-0",
+          "label": "The drawer is out of alignment.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Fully extend the drawer and push it all the way in.",
+            "See the Care and cleaning of the range section."
+          ],
+          "evidence": "GE manual, page 49: \"The drawer is out of alignment.\"",
+          "source": {
+            "line": 44,
+            "manual": "GE manual",
+            "page": 49
+          }
+        },
+        {
+          "id": "drawer-does-not-slide-smoothly-or-drags-1",
+          "label": "Drawer is over-loaded or load is unbalanced.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Reduce weight.",
+            "Redistribute drawer contents."
+          ],
+          "evidence": "GE manual, page 49: \"Drawer is over-loaded or load is unbalanced.\"",
+          "source": {
+            "line": 51,
+            "manual": "GE manual",
+            "page": 49
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T09:56:14.482Z",
+  "learnedAt": "2026-10-05T10:04:06.798Z"
+}

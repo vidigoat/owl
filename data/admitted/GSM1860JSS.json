@@ -2,6 +2,10 @@
   "model": "GSM1860JSS",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "GSM1800JWW",
+    "GSM1860NSS"
+  ],
   "source": "GSM1860JSS.pdf",
   "pages": "10–13",
   "readWith": "text-layer",
@@ -451,5 +455,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:11.031Z",
-  "learnedAt": "2026-10-04T15:17:32.212Z"
+  "learnedAt": "2026-10-05T10:00:50.672Z"
 }

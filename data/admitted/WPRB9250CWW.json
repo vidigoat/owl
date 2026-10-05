@@ -2,6 +2,9 @@
   "model": "WPRB9250CWW",
   "brand": "GE",
   "kind": "Washer",
+  "alsoCovers": [
+    "WPRB9250CCC"
+  ],
   "source": "WPRB9250CWW.pdf",
   "pages": "15–18",
   "readWith": "text-layer",
@@ -293,8 +296,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:37.623Z",
-  "learnedAt": "2026-10-04T15:18:37.901Z",
-  "alsoCovers": [
-    "WPRB9250CCC"
-  ]
+  "learnedAt": "2026-10-05T10:01:37.293Z"
 }

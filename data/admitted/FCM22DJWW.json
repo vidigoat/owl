@@ -1,0 +1,376 @@
+{
+  "model": "FCM22DJWW",
+  "brand": "GE",
+  "kind": "Refrigerator",
+  "source": "FCM22DJWW.pdf",
+  "pages": "11–12",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "moisture-forms-on-outside-of-cabinet",
+      "symptom": "Moisture forms on outside of cabinet",
+      "causes": [
+        {
+          "id": "moisture-forms-on-outside-of-cabinet-0",
+          "label": "Not unusual during periods of high humidity.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wipe surface dry."
+          ],
+          "evidence": "GE manual, page 12: \"Not unusual during periods of high humidity.\"",
+          "source": {
+            "line": 3,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "moisture-forms-on-outside-of-cabinet-1",
+          "label": "Lid may not be seating properly, causing cold air from inside the freezer to meet warm moist air from the outside.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See Preparing to install the freezer."
+          ],
+          "evidence": "GE manual, page 12: \"Lid may not be seating properly, causing cold air from inside the freezer to meet warm moist air from the outside.\"",
+          "source": {
+            "line": 5,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "interior-light-does-not-work",
+      "symptom": "Interior light does not work",
+      "causes": [
+        {
+          "id": "interior-light-does-not-work-0",
+          "label": "No power at outlet.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace fuse or reset the breaker."
+          ],
+          "evidence": "GE manual, page 12: \"No power at outlet.\"",
+          "source": {
+            "line": 9,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "interior-light-does-not-work-1",
+          "label": "Freezer is unplugged.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Push the plug completely into the outlet."
+          ],
+          "evidence": "GE manual, page 12: \"Freezer is unplugged.\"",
+          "source": {
+            "line": 10,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "lid-won-t-fully-close-by-itself",
+      "symptom": "Lid won’t fully close by itself",
+      "causes": [
+        {
+          "id": "lid-won-t-fully-close-by-itself-0",
+          "label": "Package holding lid open.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Move package to a different location."
+          ],
+          "evidence": "GE manual, page 12: \"Package holding lid open.\"",
+          "source": {
+            "line": 11,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "slow-starting-time-after-being-off",
+      "symptom": "Slow starting time after being off",
+      "causes": [
+        {
+          "id": "slow-starting-time-after-being-off-0",
+          "label": "Built-in overload protection.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal after being off."
+          ],
+          "evidence": "GE manual, page 12: \"Built-in overload protection.\"",
+          "source": {
+            "line": 13,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "excessive-frost-buildup",
+      "symptom": "Excessive frost buildup",
+      "causes": [
+        {
+          "id": "excessive-frost-buildup-0",
+          "label": "Lid left open.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check to see if package is holding lid open."
+          ],
+          "evidence": "GE manual, page 12: \"Lid left open.\"",
+          "source": {
+            "line": 15,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "excessive-frost-buildup-1",
+          "label": "Too frequent or too long lid openings.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Open the lid less often."
+          ],
+          "evidence": "GE manual, page 12: \"Too frequent or too long lid openings.\"",
+          "source": {
+            "line": 16,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "excessive-frost-buildup-2",
+          "label": "Not unusual during periods of high humidity.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Wipe surface dry."
+          ],
+          "evidence": "GE manual, page 12: \"Not unusual during periods of high humidity.\"",
+          "source": {
+            "line": 18,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "freezer-external-surface-temperature-is-",
+      "symptom": "Freezer external surface temperature is warm",
+      "causes": [
+        {
+          "id": "freezer-external-surface-temperature-is--0",
+          "label": "The external freezer walls can be as much as 30°F warmer than room temperature.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal while the compressor works to transfer heat from inside the freezer cabinet."
+          ],
+          "evidence": "GE manual, page 12: \"The external freezer walls can be as much as 30°F warmer than room temperature.\"",
+          "source": {
+            "line": 20,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "louder-sound-levels-whenever-freezer-is-",
+      "symptom": "Louder sound levels whenever freezer is on",
+      "causes": [
+        {
+          "id": "louder-sound-levels-whenever-freezer-is--0",
+          "label": "Modern freezers have increased storage capacity and more stable temperatures. They require a highefficiency compressor.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal.",
+            "When the surrounding noise level is low, you might hear the compressor running while it cools the interior."
+          ],
+          "evidence": "GE manual, page 12: \"Modern freezers have increased storage capacity and more stable temperatures. They require a highefficiency compressor.\"",
+          "source": {
+            "line": 23,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "higher-sound-levels-when-compressor-come",
+      "symptom": "Higher sound levels when compressor comes on",
+      "causes": [
+        {
+          "id": "higher-sound-levels-when-compressor-come-0",
+          "label": "Freezer operates at higher pressures during the start of the ON cycle.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal.",
+            "Sound will level off or disappear as freezer continues to run."
+          ],
+          "evidence": "GE manual, page 12: \"Freezer operates at higher pressures during the start of the ON cycle.\"",
+          "source": {
+            "line": 27,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "popping-or-cracking-sound-when-compresso",
+      "symptom": "Popping or cracking sound when compressor comes on",
+      "causes": [
+        {
+          "id": "popping-or-cracking-sound-when-compresso-0",
+          "label": "Metal parts undergo expansion and contraction, as in hot water pipes.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal.",
+            "Sound will level off or disappear as freezer continues to run."
+          ],
+          "evidence": "GE manual, page 12: \"Metal parts undergo expansion and contraction, as in hot water pipes.\"",
+          "source": {
+            "line": 30,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "bubbling-or-gurgling-sound-like-boiling-",
+      "symptom": "Bubbling or gurgling sound, like boiling water",
+      "causes": [
+        {
+          "id": "bubbling-or-gurgling-sound-like-boiling--0",
+          "label": "Refrigerant (used to cool freezer) is circulating throughout the system.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 12: \"Refrigerant (used to cool freezer) is circulating throughout the system.\"",
+          "source": {
+            "line": 33,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "moisture-forms-on-inside-freezer-walls",
+      "symptom": "Moisture forms on inside freezer walls",
+      "causes": [
+        {
+          "id": "moisture-forms-on-inside-freezer-walls-0",
+          "label": "Weather is hot and humid, which increases internal rate of frost buildup.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 12: \"Weather is hot and humid, which increases internal rate of frost buildup.\"",
+          "source": {
+            "line": 36,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "moisture-forms-on-inside-freezer-walls-1",
+          "label": "Lid may not be seating properly.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See Preparing to install the freezer."
+          ],
+          "evidence": "GE manual, page 12: \"Lid may not be seating properly.\"",
+          "source": {
+            "line": 39,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "moisture-forms-on-inside-freezer-walls-2",
+          "label": "Lid is kept open too long, or is opened too frequently.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Open the lid less often."
+          ],
+          "evidence": "GE manual, page 12: \"Lid is kept open too long, or is opened too frequently.\"",
+          "source": {
+            "line": 40,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "odors-in-freezer",
+      "symptom": "Odors in freezer",
+      "causes": [
+        {
+          "id": "odors-in-freezer-0",
+          "label": "Interior needs to be cleaned.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Clean interior with sponge, warm water and baking soda."
+          ],
+          "evidence": "GE manual, page 12: \"Interior needs to be cleaned.\"",
+          "source": {
+            "line": 42,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "odors-in-freezer-1",
+          "label": "Foods with strong odors are in the freezer.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Cover the food tightly. 49-60760-2"
+          ],
+          "evidence": "GE manual, page 12: \"Foods with strong odors are in the freezer.\"",
+          "source": {
+            "line": 44,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T10:04:42.448Z",
+  "learnedAt": "2026-10-05T10:03:35.266Z"
+}

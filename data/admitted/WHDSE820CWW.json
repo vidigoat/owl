@@ -5,11 +5,16 @@
   "alsoCovers": [
     "S4200BWW",
     "WBSE3120BCC",
+    "WBSE3120BWW",
     "WCSE4160BCC",
     "WCSE4160BWW",
+    "WJSE4150BCC",
+    "WJSE4150BWW",
     "WLE4000BWW",
+    "WSSE5210BCC",
     "WSSE5210BWW",
-    "WWSE5200BCC"
+    "WWSE5200BCC",
+    "WWSE5200BWW"
   ],
   "source": "WHDSE820CWW.pdf",
   "pages": "12–15",
@@ -398,5 +403,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T09:43:28.758Z",
-  "learnedAt": "2026-10-04T09:51:36.514Z"
+  "learnedAt": "2026-10-05T10:01:17.408Z"
 }

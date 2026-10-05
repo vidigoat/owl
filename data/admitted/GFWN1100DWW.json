@@ -2,6 +2,10 @@
   "model": "GFWN1100DWW",
   "brand": "GE",
   "kind": "Washer",
+  "alsoCovers": [
+    "GFWH1200DWW",
+    "GFWS1500DWW"
+  ],
   "source": "GFWN1100DWW.pdf",
   "pages": "21–24",
   "readWith": "text-layer",
@@ -1023,9 +1027,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:02.290Z",
-  "learnedAt": "2026-10-04T15:18:35.463Z",
-  "alsoCovers": [
-    "GFWH1200DWW",
-    "GFWS1500DWW"
-  ]
+  "learnedAt": "2026-10-05T10:01:34.936Z"
 }

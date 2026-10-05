@@ -597,20 +597,51 @@ function readSymptoms({ text, sourceName = 'service manual', page = null } = {})
     usable.length = 0;
   }
 
+  /*
+   * A page reference printed after a symptom — GE's tables say "Cloudiness on glassware 14",
+   * pointing at the page that explains it. Read out, that is a stray number. It is only stripped
+   * after a lower-case word or a closing bracket: "E 22" is a code, and a code is never touched.
+   */
+  const pageRef = (t) => String(t).replace(/(?<=[a-z’')])\s+\d{1,3}$/, '');
+
+  /*
+   * Rows whose words are all on the page but which were still read wrongly, so the page check —
+   * which asks only whether a sentence is printed there — passes them. Each one is marked unsure
+   * with its reason, and an unsure row is refused by name before it reaches the library:
+   *
+   *   a remedy that opens in lower case lost its start to the column beside it
+   *     ("se high quality rinse agents", "ter after agitation stops");
+   *   a "symptom" that opens with a bracket is an aside from the row above
+   *     ("(Modern refrigerators … require more operating time.)"), not a problem anyone has;
+   *   a cause whose label is one phrase twice ("Water drain pump Water drain pump") is two
+   *     columns' worth of the same line, and the remedy beside it is cut.
+   */
+  const doubled = (t) => {
+    const w = String(t || '').trim().split(/\s+/);
+    const h = w.length / 2;
+    return w.length >= 4 && Number.isInteger(h) && w.slice(0, h).join(' ') === w.slice(h).join(' ');
+  };
+  const doubtOf = (s, c) =>
+    (c.unsure && 'this may be two rows read as one') ||
+    (/^[a-z]/.test(String(c.remedies?.[0]?.text || '').trim()) && 'its remedy begins mid-sentence') ||
+    (/^\(/.test(String(s.symptom).trim()) && 'this is an aside from the row above, not a symptom') ||
+    (doubled(c.label) && 'its cause is one line read twice') ||
+    undefined;
+
   const out = usable.map((s) => ({
     // A stable handle for the row, so a reviewer can accept or reject this symptom by name. The
     // symptom text itself is a sentence and makes a poor key.
-    id: slug(s.symptom),
-    symptom: s.symptom,
+    id: slug(pageRef(s.symptom)),
+    symptom: pageRef(s.symptom),
     suspect: looksTruncated(s.symptom) || undefined,
     causes: s.causes.map((c, k) => ({
-      id: `${slug(s.symptom)}-${k}`,
+      id: `${slug(pageRef(s.symptom))}-${k}`,
       label: c.label,
       // Begins mid-sentence, so the start of it was lost to a column collision. Not repairable
       // here; flagged so a reviewer's eye goes to it.
-      suspect: looksTruncated(c.label) || c.unsure || undefined,
-      // Set by the three-column reader when it could not tell one wrapped cause from two.
-      unsure: c.unsure ? 'this may be two rows read as one' : undefined,
+      suspect: looksTruncated(c.label) || Boolean(doubtOf(s, c)) || undefined,
+      // Why the reader doubts this row, when it does. scripts/verify-against-pages.js refuses it.
+      unsure: doubtOf(s, c),
       // The manual's ordering is the prior: the first cause listed is the commonest.
       likelihood: Number((1 / (k + 1.6)).toFixed(3)),
       // A manual lists remedies, never prices. Null, not zero — zero would mean free.

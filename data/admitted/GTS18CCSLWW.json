@@ -2,6 +2,18 @@
   "model": "GTS18CCSLWW",
   "brand": "GE",
   "kind": "Refrigerator",
+  "alsoCovers": [
+    "GTH17BBTLBB",
+    "GTS17BBSLCC",
+    "GTS17BBSLWW",
+    "GTS18CBSLWW",
+    "GTS18CBSRCC",
+    "GTS18CCSLCC",
+    "GTS18CCSRWW",
+    "GTS18FBSWW",
+    "GTS18FCSWW",
+    "GTS18GCSBB"
+  ],
   "source": "GTS18CCSLWW.pdf",
   "pages": "17–18",
   "readWith": "text-layer",
@@ -460,8 +472,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:13.061Z",
-  "learnedAt": "2026-10-04T15:17:54.213Z",
-  "alsoCovers": [
-    "GTS18CCSRWW"
-  ]
+  "learnedAt": "2026-10-05T10:03:14.423Z"
 }

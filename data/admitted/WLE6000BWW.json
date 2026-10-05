@@ -2,6 +2,14 @@
   "model": "WLE6000BWW",
   "brand": "GE",
   "kind": "Washer",
+  "alsoCovers": [
+    "EWA3000BWW",
+    "WKSE6280BCC",
+    "WKSE6280BWW",
+    "WLE6500BWW",
+    "WNSE6280BCC",
+    "WNSE6280BWW"
+  ],
   "source": "WLE6000BWW.pdf",
   "pages": "12–14",
   "readWith": "text-layer",
@@ -703,13 +711,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:36.878Z",
-  "learnedAt": "2026-10-04T15:18:25.517Z",
-  "alsoCovers": [
-    "EWA3000BWW",
-    "WKSE6280BCC",
-    "WKSE6280BWW",
-    "WLE6500BWW",
-    "WNSE6280BCC",
-    "WNSE6280BWW"
-  ]
+  "learnedAt": "2026-10-05T10:01:24.900Z"
 }

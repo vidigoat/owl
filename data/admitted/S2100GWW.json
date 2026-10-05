@@ -2,6 +2,19 @@
   "model": "S2100GWW",
   "brand": "GE",
   "kind": "Washer",
+  "alsoCovers": [
+    "WBB2090GWW",
+    "WCSR2090GCC",
+    "WCSR2090GWW",
+    "WDRR2500KWW",
+    "WDSR2080GCC",
+    "WDSR2080GWW",
+    "WDSR2120JWW",
+    "WHDSR209GWW",
+    "WLSR2000GWW",
+    "WLSR2010KWW",
+    "WVSR1060GWW"
+  ],
   "source": "S2100GWW.pdf",
   "pages": "10–12",
   "readWith": "text-layer",
@@ -796,21 +809,6 @@
             "manual": "GE manual",
             "page": 12
           }
-        },
-        {
-          "id": "water-volume-changes-during-fill-1",
-          "label": "Control Valve",
-          "likelihood": 0.385,
-          "cost": null,
-          "remedies": [
-            "when the valves are turned on and off."
-          ],
-          "evidence": "GE manual, page 12: \"Control Valve\"",
-          "source": {
-            "line": 61,
-            "manual": "GE manual",
-            "page": 12
-          }
         }
       ]
     },
@@ -880,22 +878,11 @@
       ]
     }
   ],
-  "rejected": [],
+  "rejected": [
+    "water-volume-changes-during-fill-1"
+  ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T15:20:28.432Z",
-  "learnedAt": "2026-10-04T15:18:26.503Z",
-  "alsoCovers": [
-    "WBB2090GWW",
-    "WCSR2090GCC",
-    "WCSR2090GWW",
-    "WDRR2500KWW",
-    "WDSR2080GCC",
-    "WDSR2080GWW",
-    "WDSR2120JWW",
-    "WHDSR209GWW",
-    "WLSR2000GWW",
-    "WLSR2010KWW",
-    "WVSR1060GWW"
-  ]
+  "reviewedAt": "2026-10-05T10:05:48.667Z",
+  "learnedAt": "2026-10-05T10:01:25.954Z"
 }

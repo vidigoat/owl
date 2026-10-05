@@ -4,48 +4,50 @@
   "kind": "Dishwasher",
   "alsoCovers": [
     "EDW5100NBB",
+    "EDW5100NCC",
+    "EDW5100NWW",
     "EDW6100NBB",
+    "EDW6100NCC",
     "EDW6160NSS",
+    "GHDA480NBB",
+    "GHDA485NCS",
+    "GHDA486NSS",
+    "GHDA670NBB",
+    "GHDA670NWW",
+    "GHDA674NBG",
     "GHDA676NSS",
     "GLD4400NBB",
+    "GLD4400NWW",
+    "GLD4450NCS",
+    "GLD4460NSS",
+    "GLD4500NBB",
+    "GLD4500NCC",
     "GLD4500NWW",
     "GLD4550NCS",
     "GLD4560NSS",
     "GLD4600NBB",
+    "GLD4600NCC",
+    "GLD4650NCS",
     "GLD4660NSS",
     "GLD5600NBB",
+    "GLD5600NWW",
+    "GLD5660NSS",
     "GLD5700NBB",
     "GLD5700NCC",
     "GLD5700NWW",
     "GLD5760NSS",
-    "GLD6700NBB"
+    "GLD5800PBB",
+    "GLD5800PCC",
+    "GLD5800PWW",
+    "GLD6700NBB",
+    "GLD6700NCC",
+    "GLD6700NWW"
   ],
   "source": "GHDA480NWW.pdf",
   "pages": "12–14",
   "readWith": "text-layer",
   "codes": {},
   "symptoms": [
-    {
-      "id": "dishwasher-beeps",
-      "symptom": "Dishwasher BEEPS",
-      "causes": [
-        {
-          "id": "dishwasher-beeps-0",
-          "label": "This is a reminder that your",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "Close and latch the door after opening it mid-cycle."
-          ],
-          "evidence": "GE manual, page 13: \"This is a reminder that your\"",
-          "source": {
-            "line": 17,
-            "manual": "GE manual",
-            "page": 13
-          }
-        }
-      ]
-    },
     {
       "id": "dishes-and-flatware-not-clean",
       "symptom": "Dishes and flatware not clean",
@@ -64,57 +66,6 @@
           "evidence": "GE manual, page 13: \"Low inlet water temperature\"",
           "source": {
             "line": 29,
-            "manual": "GE manual",
-            "page": 13
-          }
-        }
-      ]
-    },
-    {
-      "id": "spots-and-filming-on-glasses-and-flatwar",
-      "symptom": "Spots and filming on glasses and flatware",
-      "causes": [
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-1",
-          "label": "Overloading the dishwasher",
-          "likelihood": 0.385,
-          "cost": null,
-          "remedies": [
-            "To remove stubborn spots and pre-existing film from glassware:"
-          ],
-          "evidence": "GE manual, page 13: \"Overloading the dishwasher\"",
-          "source": {
-            "line": 48,
-            "manual": "GE manual",
-            "page": 13
-          }
-        },
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-2",
-          "label": "Improper loading",
-          "likelihood": 0.278,
-          "cost": null,
-          "remedies": [
-            "1 Remove all metal utensils from the dishwasher."
-          ],
-          "evidence": "GE manual, page 13: \"Improper loading\"",
-          "source": {
-            "line": 49,
-            "manual": "GE manual",
-            "page": 13
-          }
-        },
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-3",
-          "label": "Old or damp powder detergent",
-          "likelihood": 0.217,
-          "cost": null,
-          "remedies": [
-            "2 Do not add detergent."
-          ],
-          "evidence": "GE manual, page 13: \"Old or damp powder detergent\"",
-          "source": {
-            "line": 50,
             "manual": "GE manual",
             "page": 13
           }
@@ -486,35 +437,15 @@
           }
         }
       ]
-    },
-    {
-      "id": "anti-bacteria-cycle-only",
-      "symptom": "(Anti-Bacteria cycle only)",
-      "causes": [
-        {
-          "id": "anti-bacteria-cycle-only-0",
-          "label": "The incoming water temperature was too low",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "Raise the water heater temperature to between 120°F and 140°F."
-          ],
-          "evidence": "GE manual, page 14: \"The incoming water temperature was too low\"",
-          "source": {
-            "line": 70,
-            "manual": "GE manual",
-            "page": 14
-          }
-        }
-      ]
     }
   ],
   "rejected": [
-    "spots-and-filming-on-glasses-and-flatwar-0",
-    "spots-and-filming-on-glasses-and-flatwar-4"
+    "dishwasher-beeps",
+    "spots-and-filming-on-glasses-and-flatwar",
+    "anti-bacteria-cycle-only"
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T09:43:08.496Z",
-  "learnedAt": "2026-10-04T09:51:19.007Z"
+  "reviewedAt": "2026-10-05T10:05:08.301Z",
+  "learnedAt": "2026-10-05T10:00:19.934Z"
 }

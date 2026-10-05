@@ -2,6 +2,9 @@
   "model": "PDW1800NII",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "PDW1860NSS"
+  ],
   "source": "PDW1800NII.pdf",
   "pages": "14–17",
   "readWith": "text-layer",
@@ -417,5 +420,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:25.005Z",
-  "learnedAt": "2026-10-04T15:17:17.968Z"
+  "learnedAt": "2026-10-05T10:00:36.356Z"
 }

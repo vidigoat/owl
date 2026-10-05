@@ -2,6 +2,11 @@
   "model": "GSD2000JCC",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "ADW1000KWW",
+    "GSD1000GWW",
+    "GSD2000JBB"
+  ],
   "source": "GSD2000JCC.pdf",
   "pages": "13–14",
   "readWith": "text-layer",
@@ -294,5 +299,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:09.277Z",
-  "learnedAt": "2026-10-04T15:17:31.409Z"
+  "learnedAt": "2026-10-05T10:00:49.886Z"
 }

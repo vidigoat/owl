@@ -2,6 +2,9 @@
   "model": "GTH18ECEBB",
   "brand": "GE",
   "kind": "Refrigerator",
+  "alsoCovers": [
+    "GTH18DBDBB"
+  ],
   "source": "GTH18ECEBB.pdf",
   "pages": "19–21",
   "readWith": "text-layer",
@@ -1114,8 +1117,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T09:52:35.121Z",
-  "learnedAt": "2026-10-04T09:51:57.881Z",
-  "alsoCovers": [
-    "GTH18DBDBB"
-  ]
+  "learnedAt": "2026-10-05T10:03:03.835Z"
 }

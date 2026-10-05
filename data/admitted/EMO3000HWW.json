@@ -1,0 +1,228 @@
+{
+  "model": "EMO3000HWW",
+  "brand": "GE",
+  "kind": "Range",
+  "alsoCovers": [
+    "EMO3000HSS",
+    "JVM1651CB",
+    "JVM1653SH"
+  ],
+  "source": "EMO3000HWW.pdf",
+  "pages": "42–42",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "oven-will-not-start",
+      "symptom": "Oven will not start",
+      "causes": [
+        {
+          "id": "oven-will-not-start-0",
+          "label": "A fuse in your home may be blown or the circuit breaker tripped.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace fuse or reset circuit breaker."
+          ],
+          "evidence": "GE manual, page 42: \"A fuse in your home may be blown or the circuit breaker tripped.\"",
+          "source": {
+            "line": 5,
+            "manual": "GE manual",
+            "page": 42
+          }
+        },
+        {
+          "id": "oven-will-not-start-1",
+          "label": "Power surge.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Unplug the microwave oven, then plug it back in."
+          ],
+          "evidence": "GE manual, page 42: \"Power surge.\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 42
+          }
+        },
+        {
+          "id": "oven-will-not-start-2",
+          "label": "Plug not fully inserted into wall outlet.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Make sure the 3-prong plug on the oven is fully inserted into wall outlet."
+          ],
+          "evidence": "GE manual, page 42: \"Plug not fully inserted into wall outlet.\"",
+          "source": {
+            "line": 10,
+            "manual": "GE manual",
+            "page": 42
+          }
+        }
+      ]
+    },
+    {
+      "id": "floor-of-the-oven-is-warm-even-when-the-",
+      "symptom": "Floor of the oven is warm, even when the oven has not been used",
+      "causes": [
+        {
+          "id": "floor-of-the-oven-is-warm-even-when-the--0",
+          "label": "Heat from the cooktop light may make the oven floor get warm.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 42: \"Heat from the cooktop light may make the oven floor get warm.\"",
+          "source": {
+            "line": 13,
+            "manual": "GE manual",
+            "page": 42
+          }
+        }
+      ]
+    },
+    {
+      "id": "locked-appears-on-display",
+      "symptom": "“LOCKED” appears on display",
+      "causes": [
+        {
+          "id": "locked-appears-on-display-0",
+          "label": "The control has been locked.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Press and hold CLEAR/OFF for about 3 seconds to unlock the control."
+          ],
+          "evidence": "GE manual, page 42: \"The control has been locked.\"",
+          "source": {
+            "line": 17,
+            "manual": "GE manual",
+            "page": 42
+          }
+        }
+      ]
+    },
+    {
+      "id": "you-hear-an-unusual-low-tone-beep",
+      "symptom": "You hear an unusual, low-tone beep",
+      "causes": [
+        {
+          "id": "you-hear-an-unusual-low-tone-beep-0",
+          "label": "You have tried to start the Reminder without a valid time of day.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Start over and enter a valid time of day."
+          ],
+          "evidence": "GE manual, page 42: \"You have tried to start the Reminder without a valid time of day.\"",
+          "source": {
+            "line": 19,
+            "manual": "GE manual",
+            "page": 42
+          }
+        }
+      ]
+    },
+    {
+      "id": "sensor-error-appears-on-display",
+      "symptom": "“SENSOR ERROR” appears on display",
+      "causes": [
+        {
+          "id": "sensor-error-appears-on-display-0",
+          "label": "When using a Sensor feature, the door was opened before steam could be detected.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Do not open door until steam is sensed and time is shown counting down on display."
+          ],
+          "evidence": "GE manual, page 42: \"When using a Sensor feature, the door was opened before steam could be detected.\"",
+          "source": {
+            "line": 25,
+            "manual": "GE manual",
+            "page": 42
+          }
+        },
+        {
+          "id": "sensor-error-appears-on-display-1",
+          "label": "Steam not detected in maximum amount of time.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Use Time Cook to heat for more time."
+          ],
+          "evidence": "GE manual, page 42: \"Steam not detected in maximum amount of time.\"",
+          "source": {
+            "line": 29,
+            "manual": "GE manual",
+            "page": 42
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-amount-too-large-for-sensor-reheat",
+      "symptom": "Food amount too large for Sensor Reheat",
+      "causes": [
+        {
+          "id": "food-amount-too-large-for-sensor-reheat-0",
+          "label": "Sensor Reheat is for single servings of recommended foods.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use Time Cook for large amounts of food."
+          ],
+          "evidence": "GE manual, page 42: \"Sensor Reheat is for single servings of recommended foods.\"",
+          "source": {
+            "line": 32,
+            "manual": "GE manual",
+            "page": 42
+          }
+        }
+      ]
+    },
+    {
+      "id": "bad-probe-or-please-insert-probe-appears",
+      "symptom": "“BAD PROBE” or “PLEASE INSERT PROBE” appears on display",
+      "causes": [
+        {
+          "id": "bad-probe-or-please-insert-probe-appears-0",
+          "label": "Probe has been forgotten or may not be inserted properly into oven outlet.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Insert the probe properly into the oven wall outlet."
+          ],
+          "evidence": "GE manual, page 42: \"Probe has been forgotten or may not be inserted properly into oven outlet.\"",
+          "source": {
+            "line": 35,
+            "manual": "GE manual",
+            "page": 42
+          }
+        },
+        {
+          "id": "bad-probe-or-please-insert-probe-appears-1",
+          "label": "The probe is defective.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Replace the probe."
+          ],
+          "evidence": "GE manual, page 42: \"The probe is defective.\"",
+          "source": {
+            "line": 39,
+            "manual": "GE manual",
+            "page": 42
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T09:55:23.110Z",
+  "learnedAt": "2026-10-05T10:04:08.009Z"
+}

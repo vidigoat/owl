@@ -2,6 +2,16 @@
   "model": "GFD85ESSNWW",
   "brand": "GE",
   "kind": "Dryer",
+  "alsoCovers": [
+    "GFD55ESPNDG",
+    "GFD55GSPNDG",
+    "GFD65ESPNSN",
+    "GFD65ESSNWW",
+    "GFD65GSPNSN",
+    "GFD65GSSNWW",
+    "GFD85ESPNDG",
+    "GFD85GSPNDG"
+  ],
   "source": "GFD85ESSNWW.pdf",
   "pages": "38–40",
   "readWith": "text-layer",
@@ -1022,10 +1032,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:19:56.538Z",
-  "learnedAt": "2026-10-04T15:18:53.169Z",
-  "alsoCovers": [
-    "GFD65ESPNSN",
-    "GFD65ESSNWW",
-    "GFD65GSPNSN"
-  ]
+  "learnedAt": "2026-10-05T10:02:19.436Z"
 }

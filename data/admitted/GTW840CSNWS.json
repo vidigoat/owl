@@ -2,6 +2,13 @@
   "model": "GTW840CSNWS",
   "brand": "GE",
   "kind": "Washer",
+  "alsoCovers": [
+    "GTW720BPNDG",
+    "GTW720BSNWS",
+    "GTW725BPNDG",
+    "GTW725BSNWS",
+    "GTW840CPNDG"
+  ],
   "source": "GTW840CSNWS.pdf",
   "pages": "26–28",
   "readWith": "text-layer",
@@ -846,12 +853,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:15.387Z",
-  "learnedAt": "2026-10-04T15:18:33.016Z",
-  "alsoCovers": [
-    "GTW720BPNDG",
-    "GTW720BSNWS",
-    "GTW725BPNDG",
-    "GTW725BSNWS",
-    "GTW840CPNDG"
-  ]
+  "learnedAt": "2026-10-05T10:01:32.540Z"
 }

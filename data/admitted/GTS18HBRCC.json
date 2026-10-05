@@ -3,11 +3,15 @@
   "brand": "GE",
   "kind": "Refrigerator",
   "alsoCovers": [
+    "GTH15BBRLBB",
     "GTH15BBRRBB",
+    "GTR17BBRLWW",
     "GTS17BBRRCC",
     "GTS17BCRLCC",
+    "GTS17BCRRCC",
     "GTS18ABRRWW",
-    "GTS18GBRCC"
+    "GTS18GBRCC",
+    "GTS18HCRWW"
   ],
   "source": "GTS18HBRCC.pdf",
   "pages": "26–27",
@@ -580,5 +584,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T09:43:12.996Z",
-  "learnedAt": "2026-10-04T09:51:58.261Z"
+  "learnedAt": "2026-10-05T10:03:04.217Z"
 }

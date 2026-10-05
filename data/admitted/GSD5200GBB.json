@@ -2,6 +2,9 @@
   "model": "GSD5200GBB",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "GSD5200GWW"
+  ],
   "source": "GSD5200GBB.pdf",
   "pages": "12–13",
   "readWith": "text-layer",
@@ -183,11 +186,11 @@
       ]
     },
     {
-      "id": "dishes-don-t-dry-12",
-      "symptom": "Dishes don’t dry 12",
+      "id": "dishes-don-t-dry",
+      "symptom": "Dishes don’t dry",
       "causes": [
         {
-          "id": "dishes-don-t-dry-12-0",
+          "id": "dishes-don-t-dry-0",
           "label": "Low inlet water temperature",
           "likelihood": 0.625,
           "cost": null,
@@ -203,7 +206,7 @@
           }
         },
         {
-          "id": "dishes-don-t-dry-12-1",
+          "id": "dishes-don-t-dry-1",
           "label": "Rinse agent dispenser is empty",
           "likelihood": 0.385,
           "cost": null,
@@ -319,6 +322,6 @@
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T15:20:10.194Z",
-  "learnedAt": "2026-10-04T15:17:31.782Z"
+  "reviewedAt": "2026-10-05T10:05:18.008Z",
+  "learnedAt": "2026-10-05T10:00:50.253Z"
 }

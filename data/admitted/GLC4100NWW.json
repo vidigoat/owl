@@ -2,6 +2,9 @@
   "model": "GLC4100NWW",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "GLC4100NBB"
+  ],
   "source": "GLC4100NWW.pdf",
   "pages": "13–15",
   "readWith": "text-layer",
@@ -27,87 +30,6 @@
           "evidence": "GE manual, page 13: \"Low inlet water temperature\"",
           "source": {
             "line": 29,
-            "manual": "GE manual",
-            "page": 13
-          }
-        }
-      ]
-    },
-    {
-      "id": "spots-and-filming-on-glasses-and-flatwar",
-      "symptom": "Spots and filming on glasses and flatware",
-      "causes": [
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-0",
-          "label": "Extremely hard water",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "Use Jet-Dry ® or Cascade Crystal Clear® rinse agents to remove spots and"
-          ],
-          "evidence": "GE manual, page 13: \"Extremely hard water\"",
-          "source": {
-            "line": 40,
-            "manual": "GE manual",
-            "page": 13
-          }
-        },
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-1",
-          "label": "Low inlet water temperature",
-          "likelihood": 0.385,
-          "cost": null,
-          "remedies": [
-            "prevent new film buildup."
-          ],
-          "evidence": "GE manual, page 13: \"Low inlet water temperature\"",
-          "source": {
-            "line": 46,
-            "manual": "GE manual",
-            "page": 13
-          }
-        },
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-2",
-          "label": "Overloading the dishwasher",
-          "likelihood": 0.278,
-          "cost": null,
-          "remedies": [
-            "To remove stubborn spots and pre-existing film from glassware:"
-          ],
-          "evidence": "GE manual, page 13: \"Overloading the dishwasher\"",
-          "source": {
-            "line": 48,
-            "manual": "GE manual",
-            "page": 13
-          }
-        },
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-3",
-          "label": "Improper loading",
-          "likelihood": 0.217,
-          "cost": null,
-          "remedies": [
-            "1 Remove all metal utensils from the dishwasher."
-          ],
-          "evidence": "GE manual, page 13: \"Improper loading\"",
-          "source": {
-            "line": 49,
-            "manual": "GE manual",
-            "page": 13
-          }
-        },
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-4",
-          "label": "Old or damp powder detergent",
-          "likelihood": 0.179,
-          "cost": null,
-          "remedies": [
-            "2 Do not add detergent."
-          ],
-          "evidence": "GE manual, page 13: \"Old or damp powder detergent\"",
-          "source": {
-            "line": 50,
             "manual": "GE manual",
             "page": 13
           }
@@ -365,10 +287,10 @@
   "rejected": [
     "start-reset-status-indicator-light-flash",
     "dishwasher-beeps-once-every-30-seconds",
-    "spots-and-filming-on-glasses-and-flatwar-5"
+    "spots-and-filming-on-glasses-and-flatwar"
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T09:43:08.664Z",
-  "learnedAt": "2026-10-04T09:51:25.270Z"
+  "reviewedAt": "2026-10-05T09:55:49.463Z",
+  "learnedAt": "2026-10-05T10:00:25.952Z"
 }

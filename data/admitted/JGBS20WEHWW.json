@@ -3,8 +3,17 @@
   "brand": "GE",
   "kind": "Range",
   "alsoCovers": [
+    "JGBS04BPAAD",
+    "JGBS04BPAWH",
+    "JGBS04PEAAD",
+    "JGBS04PPACT",
     "JGBS07PEHBB",
+    "JGBS07PEHWW",
+    "JGBS17PEHCT",
+    "JGBS20BEHCT",
     "JGBS21PECWW",
+    "JGBS23BEHBB",
+    "JGBS23CEACC",
     "JGBS23DEFBB"
   ],
   "source": "JGBS20WEHWW.pdf",
@@ -611,5 +620,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T09:43:18.069Z",
-  "learnedAt": "2026-10-04T09:52:02.921Z"
+  "learnedAt": "2026-10-05T10:03:51.350Z"
 }

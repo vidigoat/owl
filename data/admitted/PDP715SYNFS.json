@@ -2,6 +2,21 @@
   "model": "PDP715SYNFS",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "GDP665SYNFS",
+    "GDT645SGNWW",
+    "GDT645SMNES",
+    "GDT645SSNSS",
+    "GDT645SYNFS",
+    "GDT665SFNDS",
+    "GDT665SGNBB",
+    "GDT665SGNWW",
+    "GDT665SMNES",
+    "PDT715SBNTS",
+    "PDT715SMNES",
+    "PDT715SYNFS",
+    "PDT775SYNFS"
+  ],
   "source": "PDP715SYNFS.pdf",
   "pages": "21–24",
   "readWith": "text-layer",
@@ -959,5 +974,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:24.620Z",
-  "learnedAt": "2026-10-04T15:17:27.140Z"
+  "learnedAt": "2026-10-05T10:00:45.709Z"
 }

@@ -3,40 +3,34 @@
   "brand": "GE",
   "kind": "Dishwasher",
   "alsoCovers": [
+    "GDWT200RBB",
     "GDWT200RWW",
+    "GDWT260RSS",
+    "GDWT300RBB",
+    "GDWT300RWW",
     "GDWT360RSS",
+    "PDWF600RBB",
+    "PDWF600RWW",
+    "PDWF680RSS",
+    "PDWF800RWW",
     "PDWT100RBB",
+    "PDWT100RWW",
     "PDWT180RSS",
+    "PDWT300RBB",
+    "PDWT300RWW",
+    "PDWT380RSS",
     "PDWT400RBB",
-    "PDWT500RWW"
+    "PDWT400RWW",
+    "PDWT480RSS",
+    "PDWT500RBB",
+    "PDWT500RWW",
+    "PDWT502RII"
   ],
   "source": "PDWF800RBB.pdf",
   "pages": "17–20",
   "readWith": "text-layer",
   "codes": {},
   "symptoms": [
-    {
-      "id": "start-reset-status",
-      "symptom": "START/RESET status",
-      "causes": [
-        {
-          "id": "start-reset-status-0",
-          "label": "You have pressed the",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "Press the START/RESET pad only one time to start the dishwasher.",
-            "When the"
-          ],
-          "evidence": "GE manual, page 18: \"You have pressed the\"",
-          "source": {
-            "line": 10,
-            "manual": "GE manual",
-            "page": 18
-          }
-        }
-      ]
-    },
     {
       "id": "beeping-at-the-end-of-the-cycle",
       "symptom": "Beeping at the end of the cycle",
@@ -470,43 +464,6 @@
       ]
     },
     {
-      "id": "anti-bacteria-cycle-only",
-      "symptom": "(Anti-Bacteria cycle only)",
-      "causes": [
-        {
-          "id": "anti-bacteria-cycle-only-0",
-          "label": "The incoming water temperature was too low",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "Raise the water heater temperature to between 120°F and 140°F."
-          ],
-          "evidence": "GE manual, page 20: \"The incoming water temperature was too low\"",
-          "source": {
-            "line": 50,
-            "manual": "GE manual",
-            "page": 20
-          }
-        },
-        {
-          "id": "anti-bacteria-cycle-only-1",
-          "label": "The cycle is complete and the door has been open for longer than 60 seconds",
-          "likelihood": 0.385,
-          "cost": null,
-          "remedies": [
-            "This is normal.",
-            "No action is required."
-          ],
-          "evidence": "GE manual, page 20: \"The cycle is complete and the door has been open for longer than 60 seconds\"",
-          "source": {
-            "line": 52,
-            "manual": "GE manual",
-            "page": 20
-          }
-        }
-      ]
-    },
-    {
       "id": "noise",
       "symptom": "Noise",
       "causes": [
@@ -530,6 +487,8 @@
     }
   ],
   "rejected": [
+    "start-reset-status",
+    "anti-bacteria-cycle-only",
     "spots-and-filming-on-glasses-and-flatwar-0",
     "spots-and-filming-on-glasses-and-flatwar-3",
     "noise-0",
@@ -537,6 +496,6 @@
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T09:43:21.429Z",
-  "learnedAt": "2026-10-04T09:51:15.934Z"
+  "reviewedAt": "2026-10-05T10:05:42.149Z",
+  "learnedAt": "2026-10-05T10:00:17.085Z"
 }

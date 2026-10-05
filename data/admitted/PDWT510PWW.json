@@ -2,6 +2,13 @@
   "model": "PDWT510PWW",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "GDWT100RBB",
+    "GDWT100RWW",
+    "GDWT160RSS",
+    "PDWT510PBB",
+    "PDWT518PSS"
+  ],
   "source": "PDWT510PWW.pdf",
   "pages": "15–18",
   "readWith": "text-layer",
@@ -468,43 +475,6 @@
       ]
     },
     {
-      "id": "anti-bacteria-cycle-only",
-      "symptom": "(Anti-Bacteria cycle only)",
-      "causes": [
-        {
-          "id": "anti-bacteria-cycle-only-0",
-          "label": "The incoming water temperature was too low",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "Raise the water heater temperature to between 120°F and 140°F."
-          ],
-          "evidence": "GE manual, page 18: \"The incoming water temperature was too low\"",
-          "source": {
-            "line": 37,
-            "manual": "GE manual",
-            "page": 18
-          }
-        },
-        {
-          "id": "anti-bacteria-cycle-only-1",
-          "label": "The cycle is complete and the door has been open for longer than 60 seconds",
-          "likelihood": 0.385,
-          "cost": null,
-          "remedies": [
-            "This is normal.",
-            "No action is required."
-          ],
-          "evidence": "GE manual, page 18: \"The cycle is complete and the door has been open for longer than 60 seconds\"",
-          "source": {
-            "line": 39,
-            "manual": "GE manual",
-            "page": 18
-          }
-        }
-      ]
-    },
-    {
       "id": "noise",
       "symptom": "Noise",
       "causes": [
@@ -529,15 +499,13 @@
   ],
   "rejected": [
     "start-reset-status",
+    "anti-bacteria-cycle-only",
     "spots-and-filming-on-glasses-and-flatwar-0",
     "spots-and-filming-on-glasses-and-flatwar-3",
     "noise-0"
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T15:20:26.242Z",
-  "learnedAt": "2026-10-04T15:17:28.918Z",
-  "alsoCovers": [
-    "PDWT510PBB"
-  ]
+  "reviewedAt": "2026-10-05T10:05:42.572Z",
+  "learnedAt": "2026-10-05T10:00:47.468Z"
 }

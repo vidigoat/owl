@@ -6,12 +6,18 @@
     "WBVH5100HWW",
     "WBVH6240FGG",
     "WBVH6240FWW",
+    "WBVH6240HWW",
     "WCVH6260FGG",
     "WCVH6260FWW",
+    "WCVH6260HWW",
     "WCVH6600HBB",
     "WCVH6600HGG",
+    "WCVH6600HMR",
+    "WCVH6600HMS",
     "WCVH6600HWW",
     "WHDVH626FGG",
+    "WHDVH660HBB",
+    "WHDVH660HGG",
     "WHDVH660HWW"
   ],
   "source": "WHDVH626FWW.pdf",
@@ -823,5 +829,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T09:43:29.062Z",
-  "learnedAt": "2026-10-04T09:51:39.345Z"
+  "learnedAt": "2026-10-05T10:01:20.089Z"
 }

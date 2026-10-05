@@ -2,6 +2,13 @@
   "model": "WNSB9100BWW",
   "brand": "GE",
   "kind": "Washer",
+  "alsoCovers": [
+    "WNSB8060BCC",
+    "WNSB8060BWW",
+    "WNSB9080BCC",
+    "WNSB9080BWW",
+    "WNSB9100BCC"
+  ],
   "source": "WNSB9100BWW.pdf",
   "pages": "15–18",
   "readWith": "text-layer",
@@ -246,11 +253,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:36.932Z",
-  "learnedAt": "2026-10-04T15:18:24.754Z",
-  "alsoCovers": [
-    "WNSB8060BCC",
-    "WNSB8060BWW",
-    "WNSB9080BCC",
-    "WNSB9080BWW"
-  ]
+  "learnedAt": "2026-10-05T10:01:24.131Z"
 }

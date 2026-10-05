@@ -2,6 +2,13 @@
   "model": "GTS18ICMWW",
   "brand": "GE",
   "kind": "Refrigerator",
+  "alsoCovers": [
+    "ETS19XBMCC",
+    "GTS18DBMLAA",
+    "GTS18DCMLCC",
+    "GTS18DCMRWW",
+    "GTS18IBMWW"
+  ],
   "source": "GTS18ICMWW.pdf",
   "pages": "24–26",
   "readWith": "text-layer",
@@ -852,8 +859,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:13.364Z",
-  "learnedAt": "2026-10-04T15:17:50.067Z",
-  "alsoCovers": [
-    "ETS19XBMCC"
-  ]
+  "learnedAt": "2026-10-05T10:03:10.218Z"
 }

@@ -2,6 +2,12 @@
   "model": "DSF26DHWBB",
   "brand": "GE",
   "kind": "Refrigerator",
+  "alsoCovers": [
+    "GSC23KSWSS",
+    "LSS25XSWSS",
+    "PSF23MGWWW",
+    "PSSC6KGWWW"
+  ],
   "source": "DSF26DHWBB.pdf",
   "pages": "29–31",
   "readWith": "text-layer",
@@ -108,72 +114,6 @@
           "evidence": "GE manual, page 29: \"Normal when refrigerator is first plugged in.\"",
           "source": {
             "line": 28,
-            "manual": "GE manual",
-            "page": 29
-          }
-        }
-      ]
-    },
-    {
-      "id": "modern-refrigerators-with-more-storage-s",
-      "symptom": "(Modern refrigerators with more storage space and a larger freezer require more operating time. They start and stop often to maintain even temperatures.)",
-      "causes": [
-        {
-          "id": "modern-refrigerators-with-more-storage-s-0",
-          "label": "Often occurs when large amounts of food are placed in refrigerator.",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "This is normal."
-          ],
-          "evidence": "GE manual, page 29: \"Often occurs when large amounts of food are placed in refrigerator.\"",
-          "source": {
-            "line": 31,
-            "manual": "GE manual",
-            "page": 29
-          }
-        },
-        {
-          "id": "modern-refrigerators-with-more-storage-s-1",
-          "label": "Door left open.",
-          "likelihood": 0.385,
-          "cost": null,
-          "remedies": [
-            "Check to see if package is holding door open."
-          ],
-          "evidence": "GE manual, page 29: \"Door left open.\"",
-          "source": {
-            "line": 39,
-            "manual": "GE manual",
-            "page": 29
-          }
-        },
-        {
-          "id": "modern-refrigerators-with-more-storage-s-2",
-          "label": "Hot weather or frequent door openings.",
-          "likelihood": 0.278,
-          "cost": null,
-          "remedies": [
-            "This is normal."
-          ],
-          "evidence": "GE manual, page 29: \"Hot weather or frequent door openings.\"",
-          "source": {
-            "line": 41,
-            "manual": "GE manual",
-            "page": 29
-          }
-        },
-        {
-          "id": "modern-refrigerators-with-more-storage-s-3",
-          "label": "Temperature controls set at the coldest setting.",
-          "likelihood": 0.217,
-          "cost": null,
-          "remedies": [
-            "See About the controls."
-          ],
-          "evidence": "GE manual, page 29: \"Temperature controls set at the coldest setting.\"",
-          "source": {
-            "line": 43,
             "manual": "GE manual",
             "page": 29
           }
@@ -1114,12 +1054,11 @@
       ]
     }
   ],
-  "rejected": [],
+  "rejected": [
+    "modern-refrigerators-with-more-storage-s"
+  ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T15:19:43.357Z",
-  "learnedAt": "2026-10-04T15:18:03.950Z",
-  "alsoCovers": [
-    "GSC23KSWSS"
-  ]
+  "reviewedAt": "2026-10-05T10:04:37.574Z",
+  "learnedAt": "2026-10-05T10:03:24.072Z"
 }

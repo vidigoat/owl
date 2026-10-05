@@ -1,0 +1,152 @@
+{
+  "model": "DPGT750GCPL",
+  "brand": "GE",
+  "kind": "Dryer",
+  "alsoCovers": [
+    "DPGT750ECPL",
+    "DPGT750ECWW",
+    "DPGT750GCWW"
+  ],
+  "source": "DPGT750GCPL.pdf",
+  "pages": "41–41",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "dryer-won-t-operate",
+      "symptom": "Dryer won’t operate",
+      "causes": [
+        {
+          "id": "dryer-won-t-operate-0",
+          "label": "Control panel is asleep",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal.",
+            "Press POWER, the touch screen or any button to activate the control panel."
+          ],
+          "evidence": "GE manual, page 41: \"Control panel is asleep\"",
+          "source": {
+            "line": 10,
+            "manual": "GE manual",
+            "page": 41
+          }
+        },
+        {
+          "id": "dryer-won-t-operate-1",
+          "label": "Dryer is unplugged",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Make sure cord is plugged securely into a working outlet."
+          ],
+          "evidence": "GE manual, page 41: \"Dryer is unplugged\"",
+          "source": {
+            "line": 13,
+            "manual": "GE manual",
+            "page": 41
+          }
+        },
+        {
+          "id": "dryer-won-t-operate-2",
+          "label": "Controls are not set properly",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Make sure the cycle was set correctly, close the lid and press START."
+          ],
+          "evidence": "GE manual, page 41: \"Controls are not set properly\"",
+          "source": {
+            "line": 15,
+            "manual": "GE manual",
+            "page": 41
+          }
+        },
+        {
+          "id": "dryer-won-t-operate-3",
+          "label": "Fuse is blown/circuit breaker is tripped",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Check house circuit breakers/fuses.",
+            "Replace fuses or reset breaker.",
+            "NOTE: Electric dryers use two fuses or breakers."
+          ],
+          "evidence": "GE manual, page 41: \"Fuse is blown/circuit breaker is tripped\"",
+          "source": {
+            "line": 17,
+            "manual": "GE manual",
+            "page": 41
+          }
+        },
+        {
+          "id": "dryer-won-t-operate-4",
+          "label": "Electronics need to be reset",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Unplug dryer, wait 2 minutes, plug back in and press POWER."
+          ],
+          "evidence": "GE manual, page 41: \"Electronics need to be reset\"",
+          "source": {
+            "line": 21,
+            "manual": "GE manual",
+            "page": 41
+          }
+        },
+        {
+          "id": "dryer-won-t-operate-5",
+          "label": "START was not pressed after a cycle was set",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "Press START."
+          ],
+          "evidence": "GE manual, page 41: \"START was not pressed after a cycle was set\"",
+          "source": {
+            "line": 23,
+            "manual": "GE manual",
+            "page": 41
+          }
+        },
+        {
+          "id": "dryer-won-t-operate-6",
+          "label": "Door was opened during the dry cycle",
+          "likelihood": 0.132,
+          "cost": null,
+          "remedies": [
+            "Close the door and reset cycle, to the beginning if necessary.",
+            "Press START."
+          ],
+          "evidence": "GE manual, page 41: \"Door was opened during the dry cycle\"",
+          "source": {
+            "line": 25,
+            "manual": "GE manual",
+            "page": 41
+          }
+        },
+        {
+          "id": "dryer-won-t-operate-7",
+          "label": "Dryer is too cold",
+          "likelihood": 0.116,
+          "cost": null,
+          "remedies": [
+            "If the dryer has been exposed to temperatures below freezing for an extended period of time, allow it to warm up before pressing POWER.",
+            "Otherwise, the display will not come on."
+          ],
+          "evidence": "GE manual, page 41: \"Dryer is too cold\"",
+          "source": {
+            "line": 27,
+            "manual": "GE manual",
+            "page": 41
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T09:55:16.925Z",
+  "learnedAt": "2026-10-05T10:02:43.392Z"
+}

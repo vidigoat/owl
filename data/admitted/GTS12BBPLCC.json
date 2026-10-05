@@ -2,6 +2,10 @@
   "model": "GTS12BBPLCC",
   "brand": "GE",
   "kind": "Refrigerator",
+  "alsoCovers": [
+    "GTR11AAPRWW",
+    "GTS12BBPRWW"
+  ],
   "source": "GTS12BBPLCC.pdf",
   "pages": "15–16",
   "readWith": "text-layer",
@@ -466,5 +470,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:12.967Z",
-  "learnedAt": "2026-10-04T15:18:03.200Z"
+  "learnedAt": "2026-10-05T10:03:23.319Z"
 }

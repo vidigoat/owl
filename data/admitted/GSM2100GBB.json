@@ -2,6 +2,30 @@
   "model": "GSM2100GBB",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "GSD3200JBB",
+    "GSD3200JCC",
+    "GSD3200JWW",
+    "GSD3260JSS",
+    "GSD3600GCC",
+    "GSD3600GWW",
+    "GSD3660GSS",
+    "GSD3800GBB",
+    "GSD3800GCC",
+    "GSD3800GWW",
+    "GSD3900LBB",
+    "GSD3900LCC",
+    "GSD3900LWW",
+    "GSD3960LSS",
+    "GSD4100JBB",
+    "GSD4100JCC",
+    "GSD4100JWW",
+    "GSD4160JSS",
+    "GSD4300LBB",
+    "GSD4300LWW",
+    "GSM2100GCC",
+    "GSM2100GWW"
+  ],
   "source": "GSM2100GBB.pdf",
   "pages": "13–14",
   "readWith": "text-layer",
@@ -294,16 +318,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:11.087Z",
-  "learnedAt": "2026-10-04T15:17:22.068Z",
-  "alsoCovers": [
-    "GSD3200JCC",
-    "GSD3260JSS",
-    "GSD3660GSS",
-    "GSD3900LBB",
-    "GSD3900LWW",
-    "GSD3960LSS",
-    "GSD4100JBB",
-    "GSD4100JCC",
-    "GSD4300LBB"
-  ]
+  "learnedAt": "2026-10-05T10:00:40.508Z"
 }

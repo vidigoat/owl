@@ -2,6 +2,11 @@
   "model": "PSF26NGPBB",
   "brand": "GE",
   "kind": "Refrigerator",
+  "alsoCovers": [
+    "PSC23NGPBB",
+    "PSF26NGPCC",
+    "PSI23NCRWV"
+  ],
   "source": "PSF26NGPBB.pdf",
   "pages": "36–38",
   "readWith": "text-layer",
@@ -1074,7 +1079,7 @@
     },
     {
       "id": "select-temp-or-beverage-center-feature-i",
-      "symptom": "Select Temp or Beverage Center feature is not working 38",
+      "symptom": "Select Temp or Beverage Center feature is not working",
       "causes": [
         {
           "id": "select-temp-or-beverage-center-feature-i-0",
@@ -1113,6 +1118,6 @@
   "rejected": [],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T15:20:27.621Z",
-  "learnedAt": "2026-10-04T15:17:51.174Z"
+  "reviewedAt": "2026-10-05T10:05:46.535Z",
+  "learnedAt": "2026-10-05T10:03:11.389Z"
 }

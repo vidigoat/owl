@@ -2,6 +2,11 @@
   "model": "JGP326BEVBB",
   "brand": "GE",
   "kind": "Range",
+  "alsoCovers": [
+    "JGP326WEFWW",
+    "JGP336BEVBB",
+    "JGP636AEVAA"
+  ],
   "source": "JGP326BEVBB.pdf",
   "pages": "13–13",
   "readWith": "text-layer",
@@ -201,5 +206,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:21.207Z",
-  "learnedAt": "2026-10-04T15:19:16.426Z"
+  "learnedAt": "2026-10-05T10:03:58.520Z"
 }

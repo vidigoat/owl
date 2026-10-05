@@ -2,6 +2,10 @@
   "model": "STS15ABRWW",
   "brand": "GE",
   "kind": "Refrigerator",
+  "alsoCovers": [
+    "STS15ABMWW",
+    "STS18HBMCC"
+  ],
   "source": "STS15ABRWW.pdf",
   "pages": "24–25",
   "readWith": "text-layer",
@@ -573,9 +577,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:34.965Z",
-  "learnedAt": "2026-10-04T15:17:53.070Z",
-  "alsoCovers": [
-    "STS15ABMWW",
-    "STS18HBMCC"
-  ]
+  "learnedAt": "2026-10-05T10:03:13.293Z"
 }

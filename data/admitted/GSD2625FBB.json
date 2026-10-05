@@ -2,6 +2,15 @@
   "model": "GSD2625FBB",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "GSD2030FWW",
+    "GSD2200FAD",
+    "GSD2200FWH",
+    "GSD2220FBB",
+    "GSD2230FWW",
+    "GSD2325FBB",
+    "GSD2615FAA"
+  ],
   "source": "GSD2625FBB.pdf",
   "pages": "19–24",
   "readWith": "text-layer",
@@ -359,5 +368,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:09.648Z",
-  "learnedAt": "2026-10-04T15:17:23.926Z"
+  "learnedAt": "2026-10-05T10:00:42.456Z"
 }

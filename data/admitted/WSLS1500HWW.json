@@ -2,6 +2,9 @@
   "model": "WSLS1500HWW",
   "brand": "GE",
   "kind": "Washer",
+  "alsoCovers": [
+    "WSLP1500HWW"
+  ],
   "source": "WSLS1500HWW.pdf",
   "pages": "23–24",
   "readWith": "text-layer",
@@ -679,8 +682,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:38.569Z",
-  "learnedAt": "2026-10-04T15:18:40.052Z",
-  "alsoCovers": [
-    "WSLP1500HWW"
-  ]
+  "learnedAt": "2026-10-05T10:01:39.399Z"
 }

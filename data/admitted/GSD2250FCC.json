@@ -2,6 +2,9 @@
   "model": "GSD2250FCC",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "GSD2335FWW"
+  ],
   "source": "GSD2250FCC.pdf",
   "pages": "19–24",
   "readWith": "text-layer",
@@ -359,8 +362,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:09.600Z",
-  "learnedAt": "2026-10-04T15:17:17.158Z",
-  "alsoCovers": [
-    "GSD2335FWW"
-  ]
+  "learnedAt": "2026-10-05T10:00:35.547Z"
 }

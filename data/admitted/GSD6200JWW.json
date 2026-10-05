@@ -3,38 +3,32 @@
   "brand": "GE",
   "kind": "Dishwasher",
   "alsoCovers": [
+    "EDW4060GSS",
     "GHDA960KBB",
+    "GHDA960KWW",
+    "GHDA980KBB",
+    "GHDA980KWW",
+    "GHDA986KSS",
+    "GSD6100KWW",
+    "GSD6150KCS",
+    "GSD6160KSS",
     "GSD6200JBB",
+    "GSD6200JCC",
     "GSD6260JSS",
+    "GSD6600GBB",
+    "GSD6660GSS",
+    "GSD6700GBB",
+    "GSD6700GCC",
     "GSD6700GWW",
-    "GSD6860JSS"
+    "GSD6760GSS",
+    "GSD6860JSS",
+    "GSD6960JSS"
   ],
   "source": "GSD6200JWW.pdf",
   "pages": "11–12",
   "readWith": "text-layer",
   "codes": {},
   "symptoms": [
-    {
-      "id": "dishwasher-beeps",
-      "symptom": "Dishwasher BEEPS",
-      "causes": [
-        {
-          "id": "dishwasher-beeps-0",
-          "label": "This is a reminder that your",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "Close and latch the door after opening it mid-cycle."
-          ],
-          "evidence": "GE manual, page 11: \"This is a reminder that your\"",
-          "source": {
-            "line": 18,
-            "manual": "GE manual",
-            "page": 11
-          }
-        }
-      ]
-    },
     {
       "id": "dishes-and-flatware-not-clean",
       "symptom": "Dishes and flatware not clean",
@@ -53,57 +47,6 @@
           "evidence": "GE manual, page 11: \"Low inlet water temperature\"",
           "source": {
             "line": 30,
-            "manual": "GE manual",
-            "page": 11
-          }
-        }
-      ]
-    },
-    {
-      "id": "spots-and-filming-on-glasses-and-flatwar",
-      "symptom": "Spots and filming on glasses and flatware",
-      "causes": [
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-1",
-          "label": "Overloading the dishwasher",
-          "likelihood": 0.385,
-          "cost": null,
-          "remedies": [
-            "To remove stubborn spots and pre-existing film from glassware:"
-          ],
-          "evidence": "GE manual, page 11: \"Overloading the dishwasher\"",
-          "source": {
-            "line": 49,
-            "manual": "GE manual",
-            "page": 11
-          }
-        },
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-2",
-          "label": "Improper loading",
-          "likelihood": 0.278,
-          "cost": null,
-          "remedies": [
-            "1 Remove all metal utensils from the dishwasher."
-          ],
-          "evidence": "GE manual, page 11: \"Improper loading\"",
-          "source": {
-            "line": 50,
-            "manual": "GE manual",
-            "page": 11
-          }
-        },
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-3",
-          "label": "Old or damp powder detergent",
-          "likelihood": 0.217,
-          "cost": null,
-          "remedies": [
-            "2 Do not add detergent."
-          ],
-          "evidence": "GE manual, page 11: \"Old or damp powder detergent\"",
-          "source": {
-            "line": 51,
             "manual": "GE manual",
             "page": 11
           }
@@ -490,35 +433,15 @@
           }
         }
       ]
-    },
-    {
-      "id": "anti-bacteria-cycle-only",
-      "symptom": "(Anti-Bacteria cycle only)",
-      "causes": [
-        {
-          "id": "anti-bacteria-cycle-only-0",
-          "label": "The incoming water temperature was too low",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "Raise the water heater temperature to between 120°F and 140°F."
-          ],
-          "evidence": "GE manual, page 12: \"The incoming water temperature was too low\"",
-          "source": {
-            "line": 70,
-            "manual": "GE manual",
-            "page": 12
-          }
-        }
-      ]
     }
   ],
   "rejected": [
-    "spots-and-filming-on-glasses-and-flatwar-0",
-    "spots-and-filming-on-glasses-and-flatwar-4"
+    "dishwasher-beeps",
+    "spots-and-filming-on-glasses-and-flatwar",
+    "anti-bacteria-cycle-only"
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T09:43:11.798Z",
-  "learnedAt": "2026-10-04T09:51:25.730Z"
+  "reviewedAt": "2026-10-05T10:05:18.565Z",
+  "learnedAt": "2026-10-05T10:00:26.417Z"
 }

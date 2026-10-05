@@ -1,0 +1,234 @@
+{
+  "model": "WNCD2050AWC",
+  "brand": "GE",
+  "kind": "Washer",
+  "source": "WNCD2050AWC.pdf",
+  "pages": "9–12",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "washer-pauses-in-cycle",
+      "symptom": "Washer pauses in cycle",
+      "causes": [
+        {
+          "id": "washer-pauses-in-cycle-0",
+          "label": "The DELICATES cycle was chosen",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal.",
+            "The DELICATES cycle has a short soak period."
+          ],
+          "evidence": "GE manual, page 10: \"The DELICATES cycle was chosen\"",
+          "source": {
+            "line": 46,
+            "manual": "GE manual",
+            "page": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "washer-won-t-operate",
+      "symptom": "Washer won’t operate",
+      "causes": [
+        {
+          "id": "washer-won-t-operate-0",
+          "label": "Washer is unplugged",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure cord is plugged securely into a working outlet."
+          ],
+          "evidence": "GE manual, page 10: \"Washer is unplugged\"",
+          "source": {
+            "line": 48,
+            "manual": "GE manual",
+            "page": 10
+          }
+        },
+        {
+          "id": "washer-won-t-operate-1",
+          "label": "Water supply is turned off",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Turn both hot and cold faucets fully on."
+          ],
+          "evidence": "GE manual, page 10: \"Water supply is turned off\"",
+          "source": {
+            "line": 49,
+            "manual": "GE manual",
+            "page": 10
+          }
+        },
+        {
+          "id": "washer-won-t-operate-2",
+          "label": "Controls are not set properly",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Check controls."
+          ],
+          "evidence": "GE manual, page 10: \"Controls are not set properly\"",
+          "source": {
+            "line": 50,
+            "manual": "GE manual",
+            "page": 10
+          }
+        },
+        {
+          "id": "washer-won-t-operate-3",
+          "label": "Lid is open",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Close lid."
+          ],
+          "evidence": "GE manual, page 10: \"Lid is open\"",
+          "source": {
+            "line": 51,
+            "manual": "GE manual",
+            "page": 10
+          }
+        },
+        {
+          "id": "washer-won-t-operate-4",
+          "label": "Circuit breaker/fuse is tripped/blown",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Check house circuit breakers/fuses.",
+            "Replace fuses or reset breaker.",
+            "Washer should have separate outlet."
+          ],
+          "evidence": "GE manual, page 10: \"Circuit breaker/fuse is tripped/blown\"",
+          "source": {
+            "line": 52,
+            "manual": "GE manual",
+            "page": 10
+          }
+        },
+        {
+          "id": "washer-won-t-operate-5",
+          "label": "Electronics need to be reset",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "Unplug washer, wait 2 minutes, plug back in, and press START."
+          ],
+          "evidence": "GE manual, page 10: \"Electronics need to be reset\"",
+          "source": {
+            "line": 54,
+            "manual": "GE manual",
+            "page": 10
+          }
+        },
+        {
+          "id": "washer-won-t-operate-6",
+          "label": "START was not pressed",
+          "likelihood": 0.132,
+          "cost": null,
+          "remedies": [
+            "Press START."
+          ],
+          "evidence": "GE manual, page 10: \"START was not pressed\"",
+          "source": {
+            "line": 61,
+            "manual": "GE manual",
+            "page": 10
+          }
+        },
+        {
+          "id": "washer-won-t-operate-7",
+          "label": "Extremely low water pressure",
+          "likelihood": 0.116,
+          "cost": null,
+          "remedies": [
+            "Press START again."
+          ],
+          "evidence": "GE manual, page 10: \"Extremely low water pressure\"",
+          "source": {
+            "line": 63,
+            "manual": "GE manual",
+            "page": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "washer-is-noisy",
+      "symptom": "Washer is noisy",
+      "causes": [
+        {
+          "id": "washer-is-noisy-0",
+          "label": "Washer is uneven",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "To level the front of the washer, adjust the front leveling legs by rotating the individual leg in the proper direction for up or down.",
+            "To level back of washer, lift back of machine 4″ (11 cm) and set down."
+          ],
+          "evidence": "GE manual, page 12: \"Washer is uneven\"",
+          "source": {
+            "line": 32,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "washer-is-noisy-1",
+          "label": "Washer load is unbalanced",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Press PAUSE to stop the washer, open the lid and redistribute the load evenly.",
+            "Close the lid and press START."
+          ],
+          "evidence": "GE manual, page 12: \"Washer load is unbalanced\"",
+          "source": {
+            "line": 36,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "washer-is-noisy-2",
+          "label": "Shipping rod is still assembled in unit",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "To remove shipping rod from washer, pull yellow tag and attached rod from the bottom right hand side of washer."
+          ],
+          "evidence": "GE manual, page 12: \"Shipping rod is still assembled in unit\"",
+          "source": {
+            "line": 39,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "washer-is-noisy-3",
+          "label": "Washer is sitting too close to wall (causes knocking during cycle)",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Pull washer away from the wall; about 4″ (11 cm) is needed."
+          ],
+          "evidence": "GE manual, page 12: \"Washer is sitting too close to wall (causes knocking during cycle)\"",
+          "source": {
+            "line": 46,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T09:56:36.558Z",
+  "learnedAt": "2026-10-05T10:01:59.111Z"
+}

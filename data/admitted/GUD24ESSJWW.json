@@ -2,6 +2,9 @@
   "model": "GUD24ESSJWW",
   "brand": "GE",
   "kind": "Dryer",
+  "alsoCovers": [
+    "GUD24GSSJWW"
+  ],
   "source": "GUD24ESSJWW.pdf",
   "pages": "18–22",
   "readWith": "text-layer",
@@ -1113,11 +1116,11 @@
       ]
     },
     {
-      "id": "clothes-shrink-22",
-      "symptom": "Clothes shrink 22",
+      "id": "clothes-shrink",
+      "symptom": "Clothes shrink",
       "causes": [
         {
-          "id": "clothes-shrink-22-0",
+          "id": "clothes-shrink-0",
           "label": "Some fabrics will naturally shrink when washed. Others can be safely washed, but will shrink in the dryer",
           "likelihood": 0.625,
           "cost": null,
@@ -1138,6 +1141,6 @@
   "rejected": [],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T15:20:16.167Z",
-  "learnedAt": "2026-10-04T15:19:05.783Z"
+  "reviewedAt": "2026-10-05T10:05:29.399Z",
+  "learnedAt": "2026-10-05T10:02:31.897Z"
 }

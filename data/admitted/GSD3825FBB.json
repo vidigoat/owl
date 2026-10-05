@@ -1,0 +1,349 @@
+{
+  "model": "GSD3825FBB",
+  "brand": "GE",
+  "kind": "Dishwasher",
+  "alsoCovers": [
+    "GSD3835FWW",
+    "GSD3855FCC"
+  ],
+  "source": "GSD3825FBB.pdf",
+  "pages": "20–24",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "noise",
+      "symptom": "Noise",
+      "causes": [
+        {
+          "id": "noise-0",
+          "label": "Some of the sounds you’ll hear are normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Hard food disposal shredding action.",
+            "Timer control as cycle progresses.",
+            "Detergent cup opening.",
+            "The motor stopping during the drying period.",
+            "Water draining out of the tub immediately after you touch START/RESET pad."
+          ],
+          "evidence": "GE manual, page 20: \"Some of the sounds you’ll hear are normal\"",
+          "source": {
+            "line": 10,
+            "manual": "GE manual",
+            "page": 20
+          }
+        },
+        {
+          "id": "noise-1",
+          "label": "Utensils are not secure in the rack or something small has dropped into the rack",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Make sure everything is secured in dishwasher."
+          ],
+          "evidence": "GE manual, page 20: \"Utensils are not secure in the rack or something small has dropped into the rack\"",
+          "source": {
+            "line": 25,
+            "manual": "GE manual",
+            "page": 20
+          }
+        },
+        {
+          "id": "noise-2",
+          "label": "Motor hums",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Dishwasher has not been used on a regular basis.",
+            "If you do not use your dishwasher often, set it to fill and pump out once every week.",
+            "This will help keep the seal moist and the garbage disposer clear."
+          ],
+          "evidence": "GE manual, page 20: \"Motor hums\"",
+          "source": {
+            "line": 29,
+            "manual": "GE manual",
+            "page": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "detergent-left-in-dispenser-cups",
+      "symptom": "Detergent left in dispenser cups",
+      "causes": [
+        {
+          "id": "detergent-left-in-dispenser-cups-0",
+          "label": "Dishes are blocking the detergent cups",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Reposition the dishes."
+          ],
+          "evidence": "GE manual, page 20: \"Dishes are blocking the detergent cups\"",
+          "source": {
+            "line": 42,
+            "manual": "GE manual",
+            "page": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "detergent-cup-lid-won-t-latch",
+      "symptom": "Detergent cup lid won’t latch",
+      "causes": [
+        {
+          "id": "detergent-cup-lid-won-t-latch-0",
+          "label": "Dial is not in the OFF position",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Turn the Dial to OFF and slide the door latch to the left."
+          ],
+          "evidence": "GE manual, page 20: \"Dial is not in the OFF position\"",
+          "source": {
+            "line": 44,
+            "manual": "GE manual",
+            "page": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-standing-in-the-bottom-of-the-tub",
+      "symptom": "Water standing in the bottom of the tub",
+      "causes": [
+        {
+          "id": "water-standing-in-the-bottom-of-the-tub-0",
+          "label": "This is normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "A small amount of clean water around the outlet on the tub bottom at the back of the tub keeps the water seal lubricated."
+          ],
+          "evidence": "GE manual, page 20: \"This is normal\"",
+          "source": {
+            "line": 47,
+            "manual": "GE manual",
+            "page": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishes-and-flatware-not-clean",
+      "symptom": "Dishes and flatware not clean",
+      "causes": [
+        {
+          "id": "dishes-and-flatware-not-clean-0",
+          "label": "Low inlet water temperature.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure inlet water temperature is correct (see page 12).",
+            "Use HOT START option."
+          ],
+          "evidence": "GE manual, page 22: \"Low inlet water temperature.\"",
+          "source": {
+            "line": 10,
+            "manual": "GE manual",
+            "page": 22
+          }
+        },
+        {
+          "id": "dishes-and-flatware-not-clean-1",
+          "label": "Water pressure is temporarily low",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Turn on a faucet.",
+            "Is water coming out more slowly than usual?",
+            "If so, wait until pressure is normal before using your dishwasher."
+          ],
+          "evidence": "GE manual, page 22: \"Water pressure is temporarily low\"",
+          "source": {
+            "line": 20,
+            "manual": "GE manual",
+            "page": 22
+          }
+        },
+        {
+          "id": "dishes-and-flatware-not-clean-2",
+          "label": "Air gap is clogged",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Clean the air gap."
+          ],
+          "evidence": "GE manual, page 22: \"Air gap is clogged\"",
+          "source": {
+            "line": 25,
+            "manual": "GE manual",
+            "page": 22
+          }
+        },
+        {
+          "id": "dishes-and-flatware-not-clean-3",
+          "label": "Improper rack loading",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Make sure large dishware does not block the detergent dispenser or the wash arm."
+          ],
+          "evidence": "GE manual, page 22: \"Improper rack loading\"",
+          "source": {
+            "line": 26,
+            "manual": "GE manual",
+            "page": 22
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishes-don-t-dry",
+      "symptom": "Dishes don’t dry",
+      "causes": [
+        {
+          "id": "dishes-don-t-dry-0",
+          "label": "Low inlet water temperature",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure inlet water temperature is correct (see page 12).",
+            "Select HI TEMP RINSE and/or HEATED DRY."
+          ],
+          "evidence": "GE manual, page 24: \"Low inlet water temperature\"",
+          "source": {
+            "line": 10,
+            "manual": "GE manual",
+            "page": 24
+          }
+        },
+        {
+          "id": "dishes-don-t-dry-1",
+          "label": "Rinse agent dispenser is empty",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the rinse agent dispenser."
+          ],
+          "evidence": "GE manual, page 24: \"Rinse agent dispenser is empty\"",
+          "source": {
+            "line": 20,
+            "manual": "GE manual",
+            "page": 24
+          }
+        }
+      ]
+    },
+    {
+      "id": "control-panel-responded-to-inputs-but-di",
+      "symptom": "Control panel responded to inputs but dishwasher never filled with water",
+      "causes": [
+        {
+          "id": "control-panel-responded-to-inputs-but-di-0",
+          "label": "Door latch may not be properly seated",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Call for service."
+          ],
+          "evidence": "GE manual, page 24: \"Door latch may not be properly seated\"",
+          "source": {
+            "line": 22,
+            "manual": "GE manual",
+            "page": 24
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishwasher-won-t-run",
+      "symptom": "Dishwasher won’t run",
+      "causes": [
+        {
+          "id": "dishwasher-won-t-run-0",
+          "label": "Fuse is blown, or the circuit breaker tripped",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace fuse or reset circuit breaker.",
+            "Remove any other appliances from the circuit.",
+            "Try resetting the START/RESET pad."
+          ],
+          "evidence": "GE manual, page 24: \"Fuse is blown, or the circuit breaker tripped\"",
+          "source": {
+            "line": 26,
+            "manual": "GE manual",
+            "page": 24
+          }
+        }
+      ]
+    },
+    {
+      "id": "steam",
+      "symptom": "Steam",
+      "causes": [
+        {
+          "id": "steam-0",
+          "label": "This is normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Steam comes through the vent by the door latch during drying and when water is being pumped out."
+          ],
+          "evidence": "GE manual, page 24: \"This is normal\"",
+          "source": {
+            "line": 37,
+            "manual": "GE manual",
+            "page": 24
+          }
+        }
+      ]
+    },
+    {
+      "id": "sanitized-light-does-not-illuminate-at-t",
+      "symptom": "Sanitized light does not illuminate at the end of the cycle",
+      "causes": [
+        {
+          "id": "sanitized-light-does-not-illuminate-at-t-0",
+          "label": "The door was opened and the cycle was interrupted during or after the main wash portion",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Do not interrupt the cycle anytime during or after main wash."
+          ],
+          "evidence": "GE manual, page 24: \"The door was opened and the cycle was interrupted during or after the main wash portion\"",
+          "source": {
+            "line": 41,
+            "manual": "GE manual",
+            "page": 24
+          }
+        },
+        {
+          "id": "sanitized-light-does-not-illuminate-at-t-1",
+          "label": "The incoming water temperature was too low",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Raise the water heater temperature to 120°F."
+          ],
+          "evidence": "GE manual, page 24: \"The incoming water temperature was too low\"",
+          "source": {
+            "line": 46,
+            "manual": "GE manual",
+            "page": 24
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "spots-and-filming-on-glasses-and-flatwar"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T09:55:57.174Z",
+  "learnedAt": "2026-10-05T10:01:09.967Z"
+}

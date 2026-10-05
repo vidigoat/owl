@@ -6,12 +6,16 @@
     "DNSB514EBWW",
     "DNSB514GBWW",
     "DPSB513EBCC",
+    "DPSB513EBWW",
     "DPSB513GBCC",
     "DPSB513GBWW",
     "DPSB519EBCC",
     "DPSB519EBWC",
     "DPSB519EBWW",
+    "DPSB519GBCC",
     "DPSB519GBWC",
+    "DPSB519GBWW",
+    "DPXB515EBCC",
     "DPXB515EBWW",
     "DPXB515GBCC"
   ],
@@ -696,5 +700,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T09:52:19.708Z",
-  "learnedAt": "2026-10-04T09:51:44.689Z"
+  "learnedAt": "2026-10-05T10:02:10.180Z"
 }

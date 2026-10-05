@@ -3,9 +3,24 @@
   "brand": "GE",
   "kind": "Dishwasher",
   "alsoCovers": [
+    "GSD2100RWW",
+    "GSD2101RWW",
+    "GSD2300RBB",
     "GSD2300RWW",
+    "GSD2300VBB",
+    "GSD2301VWW",
     "GSD2340RSA",
+    "GSD2340VSA",
+    "GSD2350RCS",
+    "GSD2350VCS",
+    "GSD3300RCC",
+    "GSD3300RWW",
+    "GSD3300VBB",
+    "GSD3300VCC",
     "GSD3300VWW",
+    "GSD3360RSS",
+    "GSD4000RBB",
+    "GSD4000VBB",
     "GSD4000VWW",
     "GSD4060RSS",
     "GSD4060VSS"
@@ -206,89 +221,6 @@
       ]
     },
     {
-      "id": "spots-and-filming-on-glasses-and-flatwar",
-      "symptom": "Spots and filming on glasses and flatware",
-      "causes": [
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-1",
-          "label": "Overloading the dishwasher",
-          "likelihood": 0.385,
-          "cost": null,
-          "remedies": [
-            "1 Remove all metal utensils from the dishwasher. 2 Do not add detergent."
-          ],
-          "evidence": "GE manual, page 16: \"Overloading the dishwasher\"",
-          "source": {
-            "line": 33,
-            "manual": "GE manual",
-            "page": 16
-          }
-        },
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-2",
-          "label": "Improper loading",
-          "likelihood": 0.278,
-          "cost": null,
-          "remedies": [
-            "3 Select the longest cycle."
-          ],
-          "evidence": "GE manual, page 16: \"Improper loading\"",
-          "source": {
-            "line": 35,
-            "manual": "GE manual",
-            "page": 16
-          }
-        },
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-3",
-          "label": "Old or damp powder detergent",
-          "likelihood": 0.217,
-          "cost": null,
-          "remedies": [
-            "4 Start the dishwasher and allow to run for 18 to 22 minutes.",
-            "Dishwasher will now be in the main wash."
-          ],
-          "evidence": "GE manual, page 16: \"Old or damp powder detergent\"",
-          "source": {
-            "line": 36,
-            "manual": "GE manual",
-            "page": 16
-          }
-        },
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-4",
-          "label": "Rinse agent dispenser empty",
-          "likelihood": 0.179,
-          "cost": null,
-          "remedies": [
-            "5 Open the door and pour 2 cups (500 ml) of white vinegar into the bottom of the dishwasher."
-          ],
-          "evidence": "GE manual, page 16: \"Rinse agent dispenser empty\"",
-          "source": {
-            "line": 43,
-            "manual": "GE manual",
-            "page": 16
-          }
-        },
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-5",
-          "label": "Too little detergent",
-          "likelihood": 0.152,
-          "cost": null,
-          "remedies": [
-            "6 Close the door and allow to complete the cycle.",
-            "If vinegar rinse doesn’t work: Repeat as above, except use 1/4 cup (60 ml) of citric acid crystals instead of vinegar."
-          ],
-          "evidence": "GE manual, page 16: \"Too little detergent\"",
-          "source": {
-            "line": 45,
-            "manual": "GE manual",
-            "page": 16
-          }
-        }
-      ]
-    },
-    {
       "id": "cloudiness-on-glassware",
       "symptom": "Cloudiness on glassware",
       "causes": [
@@ -355,10 +287,10 @@
     }
   ],
   "rejected": [
-    "spots-and-filming-on-glasses-and-flatwar-0"
+    "spots-and-filming-on-glasses-and-flatwar"
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T09:43:11.398Z",
-  "learnedAt": "2026-10-04T09:51:23.222Z"
+  "reviewedAt": "2026-10-05T09:55:56.393Z",
+  "learnedAt": "2026-10-05T10:00:23.979Z"
 }

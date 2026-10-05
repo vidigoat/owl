@@ -1,0 +1,166 @@
+{
+  "model": "JNM1851DMCC",
+  "brand": "GE",
+  "kind": "Range",
+  "source": "JNM1851DMCC.pdf",
+  "pages": "39–39",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "oven-will-not-start",
+      "symptom": "Oven will not start",
+      "causes": [
+        {
+          "id": "oven-will-not-start-0",
+          "label": "A fuse in your home may be blown or the circuit breaker tripped.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace fuse or reset circuit breaker."
+          ],
+          "evidence": "GE manual, page 39: \"A fuse in your home may be blown or the circuit breaker tripped.\"",
+          "source": {
+            "line": 12,
+            "manual": "GE manual",
+            "page": 39
+          }
+        },
+        {
+          "id": "oven-will-not-start-1",
+          "label": "Power surge.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Unplug the microwave oven; then plug it back in."
+          ],
+          "evidence": "GE manual, page 39: \"Power surge.\"",
+          "source": {
+            "line": 15,
+            "manual": "GE manual",
+            "page": 39
+          }
+        },
+        {
+          "id": "oven-will-not-start-2",
+          "label": "Plug not fully inserted into wall outlet.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Make sure the 3-prong plug on the oven is fully inserted into wall outlet."
+          ],
+          "evidence": "GE manual, page 39: \"Plug not fully inserted into wall outlet.\"",
+          "source": {
+            "line": 22,
+            "manual": "GE manual",
+            "page": 39
+          }
+        },
+        {
+          "id": "oven-will-not-start-3",
+          "label": "Door is not closed.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Open and close the door securely."
+          ],
+          "evidence": "GE manual, page 39: \"Door is not closed.\"",
+          "source": {
+            "line": 25,
+            "manual": "GE manual",
+            "page": 39
+          }
+        }
+      ]
+    },
+    {
+      "id": "floor-of-the-oven-is-warm-even-when-the-",
+      "symptom": "Floor of the oven is warm, even when the oven has not been used",
+      "causes": [
+        {
+          "id": "floor-of-the-oven-is-warm-even-when-the--0",
+          "label": "Heat from the cooktop light may make the oven floor get warm.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 39: \"Heat from the cooktop light may make the oven floor get warm.\"",
+          "source": {
+            "line": 27,
+            "manual": "GE manual",
+            "page": 39
+          }
+        }
+      ]
+    },
+    {
+      "id": "control-locked-or-locked-appears-on-the-",
+      "symptom": "“CONTROL LOCKED” or “LOCKED” appears on the display",
+      "causes": [
+        {
+          "id": "control-locked-or-locked-appears-on-the--0",
+          "label": "The control has been locked.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Press and hold CLEAR/OFF for about 3 seconds to unlock the control."
+          ],
+          "evidence": "GE manual, page 39: \"The control has been locked.\"",
+          "source": {
+            "line": 30,
+            "manual": "GE manual",
+            "page": 39
+          }
+        }
+      ]
+    },
+    {
+      "id": "you-hear-an-unusual-low-tone-beep",
+      "symptom": "You hear an unusual, low-tone beep",
+      "causes": [
+        {
+          "id": "you-hear-an-unusual-low-tone-beep-0",
+          "label": "You have tried to start the Reminder without a valid time of day.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Start over and enter a valid time of day."
+          ],
+          "evidence": "GE manual, page 39: \"You have tried to start the Reminder without a valid time of day.\"",
+          "source": {
+            "line": 45,
+            "manual": "GE manual",
+            "page": 39
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-amount-too-large-for-sensor-reheat",
+      "symptom": "Food amount too large for Sensor Reheat",
+      "causes": [
+        {
+          "id": "food-amount-too-large-for-sensor-reheat-0",
+          "label": "Sensor Reheat is for single servings of recommended foods.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use Time Cook for large amounts of food."
+          ],
+          "evidence": "GE manual, page 39: \"Sensor Reheat is for single servings of recommended foods.\"",
+          "source": {
+            "line": 61,
+            "manual": "GE manual",
+            "page": 39
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T09:56:15.393Z",
+  "learnedAt": "2026-10-05T10:04:02.583Z"
+}

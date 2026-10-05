@@ -2,6 +2,15 @@
   "model": "GTX22EASKWW",
   "brand": "GE",
   "kind": "Dryer",
+  "alsoCovers": [
+    "GTD33EASKWW",
+    "GTD33GASKWW",
+    "GTX22GASKWW",
+    "GTX33EASKWW",
+    "GTX33GASKWW",
+    "GTX52EASPWB",
+    "GTX52GASPWB"
+  ],
   "source": "GTX22EASKWW.pdf",
   "pages": "9–10",
   "readWith": "text-layer",
@@ -512,11 +521,11 @@
       ]
     },
     {
-      "id": "static-occurs-10",
-      "symptom": "Static occurs 10",
+      "id": "static-occurs",
+      "symptom": "Static occurs",
       "causes": [
         {
-          "id": "static-occurs-10-0",
+          "id": "static-occurs-0",
           "label": "No fabric softener was used",
           "likelihood": 0.625,
           "cost": null,
@@ -532,7 +541,7 @@
           }
         },
         {
-          "id": "static-occurs-10-1",
+          "id": "static-occurs-1",
           "label": "Overdrying",
           "likelihood": 0.385,
           "cost": null,
@@ -548,7 +557,7 @@
           }
         },
         {
-          "id": "static-occurs-10-2",
+          "id": "static-occurs-2",
           "label": "Synthetics, permanent press and blends can cause static",
           "likelihood": 0.278,
           "cost": null,
@@ -568,10 +577,6 @@
   "rejected": [],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T15:20:15.824Z",
-  "learnedAt": "2026-10-04T15:18:50.841Z",
-  "alsoCovers": [
-    "GTD33GASKWW",
-    "GTX22GASKWW"
-  ]
+  "reviewedAt": "2026-10-05T10:05:29.055Z",
+  "learnedAt": "2026-10-05T10:02:17.109Z"
 }

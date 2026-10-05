@@ -1,0 +1,156 @@
+{
+  "model": "WHDRR418GWW",
+  "brand": "GE",
+  "kind": "Washer",
+  "alsoCovers": [
+    "WHDRR418EWW"
+  ],
+  "source": "WHDRR418GWW.pdf",
+  "pages": "11–14",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "too-many-suds",
+      "symptom": "Too many suds",
+      "causes": [
+        {
+          "id": "too-many-suds-0",
+          "label": "Type of detergent",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Switch to a lower sudsing detergent brand and follow instructions on package."
+          ],
+          "evidence": "GE manual, page 11: \"Type of detergent\"",
+          "source": {
+            "line": 12,
+            "manual": "GE manual",
+            "page": 11
+          }
+        },
+        {
+          "id": "too-many-suds-1",
+          "label": "Soft water",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Try less detergent."
+          ],
+          "evidence": "GE manual, page 11: \"Soft water\"",
+          "source": {
+            "line": 14,
+            "manual": "GE manual",
+            "page": 11
+          }
+        },
+        {
+          "id": "too-many-suds-2",
+          "label": "Too much detergent",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Measure your detergent carefully.",
+            "Use less soap if you have soft water, a smaller load or a lightly soiled load."
+          ],
+          "evidence": "GE manual, page 11: \"Too much detergent\"",
+          "source": {
+            "line": 15,
+            "manual": "GE manual",
+            "page": 11
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-leaks",
+      "symptom": "Water leaks",
+      "causes": [
+        {
+          "id": "water-leaks-0",
+          "label": "Fill hoses or drain hose is improperly connected",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure hose connections are tight at faucets and rubber washers are installed.",
+            "Make sure end of drain hose is correctly inserted in and secured to drain facility.",
+            "The drain hose should be inserted into the washer and the collar or clip should be screwed in.",
+            "Remove any kinks from the drain hose.",
+            "Make sure that the hose connection is not strained when the washer is pushed close to the wall."
+          ],
+          "evidence": "GE manual, page 11: \"Fill hoses or drain hose is improperly connected\"",
+          "source": {
+            "line": 17,
+            "manual": "GE manual",
+            "page": 11
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-won-t-drain",
+      "symptom": "Water won’t drain",
+      "causes": [
+        {
+          "id": "water-won-t-drain-0",
+          "label": "Drain hose is kinked or improperly connected",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Straighten drain hose and make sure washer is not sitting on it.",
+            "Top of drain outlet should be less than 8 ft.",
+            "(2.5 m) above floor."
+          ],
+          "evidence": "GE manual, page 11: \"Drain hose is kinked or improperly connected\"",
+          "source": {
+            "line": 67,
+            "manual": "GE manual",
+            "page": 11
+          }
+        }
+      ]
+    },
+    {
+      "id": "colored-spots",
+      "symptom": "Colored spots",
+      "causes": [
+        {
+          "id": "colored-spots-0",
+          "label": "Incorrect use of fabric softener",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check fabric softener package for instructions and follow directions for using dispenser.",
+            "Pretreat stain and rewash."
+          ],
+          "evidence": "GE manual, page 12: \"Incorrect use of fabric softener\"",
+          "source": {
+            "line": 75,
+            "manual": "GE manual",
+            "page": 12
+          }
+        },
+        {
+          "id": "colored-spots-1",
+          "label": "Dye transfer",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Sort whites or lightly colored items from dark colors."
+          ],
+          "evidence": "GE manual, page 12: \"Dye transfer\"",
+          "source": {
+            "line": 78,
+            "manual": "GE manual",
+            "page": 12
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T09:56:35.834Z",
+  "learnedAt": "2026-10-05T10:02:06.714Z"
+}

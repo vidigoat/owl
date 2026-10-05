@@ -2,6 +2,9 @@
   "model": "GTWS8350HWS",
   "brand": "GE",
   "kind": "Washer",
+  "alsoCovers": [
+    "GTWS8355HMC"
+  ],
   "source": "GTWS8350HWS.pdf",
   "pages": "12–14",
   "readWith": "text-layer",
@@ -847,8 +850,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:15.627Z",
-  "learnedAt": "2026-10-04T15:18:41.119Z",
-  "alsoCovers": [
-    "GTWS8355HMC"
-  ]
+  "learnedAt": "2026-10-05T10:01:40.443Z"
 }

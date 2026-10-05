@@ -1,0 +1,424 @@
+{
+  "model": "JGP990SELSS",
+  "brand": "GE",
+  "kind": "Range",
+  "source": "JGP990SELSS.pdf",
+  "pages": "34–35",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "burners-do-not-light",
+      "symptom": "Burners do not light",
+      "causes": [
+        {
+          "id": "burners-do-not-light-0",
+          "label": "Plug on cooktop is not completely inserted in the electrical outlet.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure electrical plug is plugged into a live, properly grounded outlet."
+          ],
+          "evidence": "GE manual, page 34: \"Plug on cooktop is not completely inserted in the electrical outlet.\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "burners-do-not-light-1",
+          "label": "Gas supply not connected or turned on.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See the Installation Instructions section."
+          ],
+          "evidence": "GE manual, page 34: \"Gas supply not connected or turned on.\"",
+          "source": {
+            "line": 16,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "burners-do-not-light-2",
+          "label": "A fuse in your home may be blown or the circuit breaker tripped.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Replace the fuse or reset the circuit breaker."
+          ],
+          "evidence": "GE manual, page 34: \"A fuse in your home may be blown or the circuit breaker tripped.\"",
+          "source": {
+            "line": 18,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "burners-do-not-light-3",
+          "label": "Igniter orifice in burner body may be clogged.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Remove the obstruction."
+          ],
+          "evidence": "GE manual, page 34: \"Igniter orifice in burner body may be clogged.\"",
+          "source": {
+            "line": 21,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "burners-do-not-light-4",
+          "label": "Burner parts not replaced correctly.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "See Sealed Burner Modules in the Care and cleaning of the cooktop section."
+          ],
+          "evidence": "GE manual, page 34: \"Burner parts not replaced correctly.\"",
+          "source": {
+            "line": 23,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "burners-do-not-light-5",
+          "label": "Slits in the burner head may be clogged.",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "Use a small sewing needle or paper clip to unplug."
+          ],
+          "evidence": "GE manual, page 34: \"Slits in the burner head may be clogged.\"",
+          "source": {
+            "line": 25,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "burners-have-yellow-or-yellow-tipped-fla",
+      "symptom": "Burners have yellow or yellow-tipped flames or flames lift off the port",
+      "causes": [
+        {
+          "id": "burners-have-yellow-or-yellow-tipped-fla-0",
+          "label": "The combustion quality of burner flames needs to be determined visually.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "A–Yellow flames     B–Yellow tips on C–Soft blue flames Call for service    outer cones             Normal for natural Normal for LP gas gas",
+            "If burner flame looks like A, call for service.",
+            "Normal burner flames should look like B or C, depending on the type of gas.",
+            "NOTE: The grill burner will show orange flames from grease drippings."
+          ],
+          "evidence": "GE manual, page 34: \"The combustion quality of burner flames needs to be determined visually.\"",
+          "source": {
+            "line": 32,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "burners-have-yellow-or-yellow-tipped-fla-1",
+          "label": "Burner parts not replaced correctly.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See Care and cleaning of the cooktop section."
+          ],
+          "evidence": "GE manual, page 34: \"Burner parts not replaced correctly.\"",
+          "source": {
+            "line": 48,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "burner-flames-make-excessive-noise",
+      "symptom": "Burner flames make excessive noise",
+      "causes": [
+        {
+          "id": "burner-flames-make-excessive-noise-0",
+          "label": "Burner has not been used recently.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "A “cold” burner ignited in the HI setting may have some flame “roar” or “lifting.” This should dissipate after 4 to 5 minutes."
+          ],
+          "evidence": "GE manual, page 34: \"Burner has not been used recently.\"",
+          "source": {
+            "line": 51,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "burner-flames-pulled-toward-vent-grille",
+      "symptom": "Burner flames pulled toward vent grille",
+      "causes": [
+        {
+          "id": "burner-flames-pulled-toward-vent-grille-0",
+          "label": "Vent fan set at HI speed.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal.",
+            "If cooking performance is affected, change fan to a lower fan speed setting."
+          ],
+          "evidence": "GE manual, page 34: \"Vent fan set at HI speed.\"",
+          "source": {
+            "line": 55,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "occasional-sparking-sound",
+      "symptom": "Occasional sparking sound",
+      "causes": [
+        {
+          "id": "occasional-sparking-sound-0",
+          "label": "Changing blower speed.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is a typical electrical switching noise.",
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 35: \"Changing blower speed.\"",
+          "source": {
+            "line": 25,
+            "manual": "GE manual",
+            "page": 35
+          }
+        }
+      ]
+    },
+    {
+      "id": "burner-flames-very-large-or-yellow",
+      "symptom": "Burner flames very large or yellow",
+      "causes": [
+        {
+          "id": "burner-flames-very-large-or-yellow-0",
+          "label": "Burner parts not replaced correctly.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See Care and cleaning of the cooktop section."
+          ],
+          "evidence": "GE manual, page 35: \"Burner parts not replaced correctly.\"",
+          "source": {
+            "line": 27,
+            "manual": "GE manual",
+            "page": 35
+          }
+        }
+      ]
+    },
+    {
+      "id": "flames-are-uneven",
+      "symptom": "Flames are uneven",
+      "causes": [
+        {
+          "id": "flames-are-uneven-0",
+          "label": "Burner ports may be clogged.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See the Care and cleaning section."
+          ],
+          "evidence": "GE manual, page 35: \"Burner ports may be clogged.\"",
+          "source": {
+            "line": 34,
+            "manual": "GE manual",
+            "page": 35
+          }
+        },
+        {
+          "id": "flames-are-uneven-1",
+          "label": "Flame setting may need",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See Flames too high or too low at the LOW setting"
+          ],
+          "evidence": "GE manual, page 35: \"Flame setting may need\"",
+          "source": {
+            "line": 36,
+            "manual": "GE manual",
+            "page": 35
+          }
+        }
+      ]
+    },
+    {
+      "id": "control-knobs-will-not-turn",
+      "symptom": "Control knobs will not turn",
+      "causes": [
+        {
+          "id": "control-knobs-will-not-turn-0",
+          "label": "Controls improperly set.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "To turn from the OFF position, push the knob in and then turn.",
+            "The knob can only be turned in a counterclockwise direction.",
+            "When the knob is at any other position, it can be turned in either direction without being pushed in."
+          ],
+          "evidence": "GE manual, page 35: \"Controls improperly set.\"",
+          "source": {
+            "line": 38,
+            "manual": "GE manual",
+            "page": 35
+          }
+        }
+      ]
+    },
+    {
+      "id": "fan-does-not-work",
+      "symptom": "Fan does not work",
+      "causes": [
+        {
+          "id": "fan-does-not-work-0",
+          "label": "Cord improperly connected or power turned off.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check connections.",
+            "Turn on power at the fuse box."
+          ],
+          "evidence": "GE manual, page 35: \"Cord improperly connected or power turned off.\"",
+          "source": {
+            "line": 43,
+            "manual": "GE manual",
+            "page": 35
+          }
+        }
+      ]
+    },
+    {
+      "id": "poor-venting",
+      "symptom": "Poor venting",
+      "causes": [
+        {
+          "id": "poor-venting-0",
+          "label": "Clogged filter.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Clean filter per instructions."
+          ],
+          "evidence": "GE manual, page 35: \"Clogged filter.\"",
+          "source": {
+            "line": 53,
+            "manual": "GE manual",
+            "page": 35
+          }
+        },
+        {
+          "id": "poor-venting-1",
+          "label": "House too airtight.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Open a window slightly to provide fresh air source."
+          ],
+          "evidence": "GE manual, page 35: \"House too airtight.\"",
+          "source": {
+            "line": 54,
+            "manual": "GE manual",
+            "page": 35
+          }
+        },
+        {
+          "id": "poor-venting-2",
+          "label": "Wall cap obstructed.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Remove blockage from exterior wall cap."
+          ],
+          "evidence": "GE manual, page 35: \"Wall cap obstructed.\"",
+          "source": {
+            "line": 55,
+            "manual": "GE manual",
+            "page": 35
+          }
+        },
+        {
+          "id": "poor-venting-3",
+          "label": "Wall cap damper door stuck.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Check exterior wall cap damper door for free movement or obstruction."
+          ],
+          "evidence": "GE manual, page 35: \"Wall cap damper door stuck.\"",
+          "source": {
+            "line": 56,
+            "manual": "GE manual",
+            "page": 35
+          }
+        },
+        {
+          "id": "poor-venting-4",
+          "label": "Duct length exceeds recommended 100 equivalent foot maximum.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Reduce number of elbows to simplify duct run."
+          ],
+          "evidence": "GE manual, page 35: \"Duct length exceeds recommended 100 equivalent foot maximum.\"",
+          "source": {
+            "line": 58,
+            "manual": "GE manual",
+            "page": 35
+          }
+        }
+      ]
+    },
+    {
+      "id": "areas-of-discoloration-on-the-cooktop-wa",
+      "symptom": "Areas of discoloration on the cooktop Water won’t boil",
+      "causes": [
+        {
+          "id": "areas-of-discoloration-on-the-cooktop-wa-0",
+          "label": "Food spillovers not cleaned before next use.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See the Care and cleaning section.",
+            "Cover pan with a lid.",
+            "Turn the downdraft fan OFF until the water begins to boil."
+          ],
+          "evidence": "GE manual, page 35: \"Food spillovers not cleaned before next use.\"",
+          "source": {
+            "line": 66,
+            "manual": "GE manual",
+            "page": 35
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "sparking-sound-persists"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T09:56:14.981Z",
+  "learnedAt": "2026-10-05T10:04:12.800Z"
+}

@@ -3,10 +3,32 @@
   "brand": "GE",
   "kind": "Range",
   "alsoCovers": [
+    "EER3000DSS",
+    "EER3000DTW",
+    "EER3000KBB",
     "EER3000LTW",
     "JB710WHWW",
+    "JB905KHCC",
+    "JB905THWW",
+    "JBP21BCCT",
+    "JBP21BHWH",
+    "JBP26BBWH",
+    "JBP64BBWH",
+    "JBP64WBWW",
     "JBP66WHWW",
-    "JBP80WKWW"
+    "JBP68CDCC",
+    "JBP68HHBB",
+    "JBP68HHWW",
+    "JBP69CHCC",
+    "JBP69SFSS",
+    "JBP80BFBB",
+    "JBP80SHSS",
+    "JBP80WKWW",
+    "JBP99KHCC",
+    "JBP99SHSS",
+    "JBS15HBB",
+    "JSP47BFBB",
+    "JSP57BFBB"
   ],
   "source": "JBP64BHWH.pdf",
   "pages": "34–37",
@@ -1120,5 +1142,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T09:43:17.644Z",
-  "learnedAt": "2026-10-04T09:52:04.664Z"
+  "learnedAt": "2026-10-05T10:03:53.008Z"
 }

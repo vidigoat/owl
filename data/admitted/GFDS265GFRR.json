@@ -2,6 +2,17 @@
   "model": "GFDS265GFRR",
   "brand": "GE",
   "kind": "Dryer",
+  "alsoCovers": [
+    "GFDS265EFMC",
+    "GFDS265EFRR",
+    "GFDS265GFMC",
+    "GHDS360EFWW",
+    "GHDS360GFWW",
+    "GHDS365EFMC",
+    "GHDS365EFRR",
+    "GHDS365GFMC",
+    "GHDS365GFRR"
+  ],
   "source": "GFDS265GFRR.pdf",
   "pages": "39–42",
   "readWith": "text-layer",
@@ -970,13 +981,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:19:58.601Z",
-  "learnedAt": "2026-10-04T15:19:04.357Z",
-  "alsoCovers": [
-    "GFDS265EFMC",
-    "GFDS265EFRR",
-    "GHDS360GFWW",
-    "GHDS365EFMC",
-    "GHDS365EFRR",
-    "GHDS365GFRR"
-  ]
+  "learnedAt": "2026-10-05T10:02:30.487Z"
 }

@@ -2,6 +2,11 @@
   "model": "TNX22BACLBB",
   "brand": "GE",
   "kind": "Refrigerator",
+  "alsoCovers": [
+    "TNS22BRCRBS",
+    "TNX22PACRWW",
+    "TNX22PRCRCC"
+  ],
   "source": "TNX22BACLBB.pdf",
   "pages": "29–32",
   "readWith": "text-layer",
@@ -880,9 +885,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:35.570Z",
-  "learnedAt": "2026-10-04T15:17:57.338Z",
-  "alsoCovers": [
-    "TNS22BRCRBS",
-    "TNX22PRCRCC"
-  ]
+  "learnedAt": "2026-10-05T10:03:17.515Z"
 }

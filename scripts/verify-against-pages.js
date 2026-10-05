@@ -139,6 +139,19 @@ function verify(record) {
         continue;
       }
 
+      /*
+       * The same doubt, asked again here for records read before the reader knew to ask it: a
+       * remedy that opens in lower case ("tap water (manganese).", "appliance.") is the tail of a
+       * sentence whose start went to another row. Every word of it is on the page, so the check
+       * below would pass it — and it would be read out to someone as an instruction.
+       */
+      const first = String((Array.isArray(c.remedies) && c.remedies[0]) || c.remedy || '').trim();
+      if (/^[a-z]/.test(first)) {
+        out.bad.push(c.id);
+        out.missing.push({ page, symptom: s.symptom, label: c.label, why: 'its remedy begins mid-sentence' });
+        continue;
+      }
+
       // The cause label is the manufacturer's sentence; that is the claim being checked.
       const want = flatten(c.label);
 

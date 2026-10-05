@@ -2,6 +2,9 @@
   "model": "GNW128PSMWW",
   "brand": "GE",
   "kind": "Washer",
+  "alsoCovers": [
+    "GNW128SSMWW"
+  ],
   "source": "GNW128PSMWW.pdf",
   "pages": "20–22",
   "readWith": "text-layer",
@@ -1042,8 +1045,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:07.849Z",
-  "learnedAt": "2026-10-04T15:18:30.241Z",
-  "alsoCovers": [
-    "GNW128SSMWW"
-  ]
+  "learnedAt": "2026-10-05T10:01:29.758Z"
 }

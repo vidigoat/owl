@@ -2,6 +2,10 @@
   "model": "EDW1500JBB",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "EDW1500JCC",
+    "EDW1500JWW"
+  ],
   "source": "EDW1500JBB.pdf",
   "pages": "10–12",
   "readWith": "text-layer",
@@ -239,119 +243,6 @@
       ]
     },
     {
-      "id": "spots-and-filming-on-glasses-and-flatwar",
-      "symptom": "Spots and filming on glasses and flatware",
-      "causes": [
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-0",
-          "label": "Extremely hard water",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "Use Jet-Dry® or Cascade Rinse Aid® rinse agent to remove spots and prevent new film buildup."
-          ],
-          "evidence": "GE manual, page 12: \"Extremely hard water\"",
-          "source": {
-            "line": 13,
-            "manual": "GE manual",
-            "page": 12
-          }
-        },
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-1",
-          "label": "Low inlet water temperature",
-          "likelihood": 0.385,
-          "cost": null,
-          "remedies": [
-            "To remove stubborn spots and pre-existing film from glassware: 1 Remove all metal utensils from the dishwasher."
-          ],
-          "evidence": "GE manual, page 12: \"Low inlet water temperature\"",
-          "source": {
-            "line": 15,
-            "manual": "GE manual",
-            "page": 12
-          }
-        },
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-2",
-          "label": "Overloading the dishwasher",
-          "likelihood": 0.278,
-          "cost": null,
-          "remedies": [
-            "2 Do not add detergent."
-          ],
-          "evidence": "GE manual, page 12: \"Overloading the dishwasher\"",
-          "source": {
-            "line": 24,
-            "manual": "GE manual",
-            "page": 12
-          }
-        },
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-3",
-          "label": "Improper loading",
-          "likelihood": 0.217,
-          "cost": null,
-          "remedies": [
-            "3 Select the longest cycle."
-          ],
-          "evidence": "GE manual, page 12: \"Improper loading\"",
-          "source": {
-            "line": 26,
-            "manual": "GE manual",
-            "page": 12
-          }
-        },
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-4",
-          "label": "Old or damp powder detergent",
-          "likelihood": 0.179,
-          "cost": null,
-          "remedies": [
-            "4 Start the dishwasher and allow to run for 18 to 22 minutes.",
-            "Dishwasher will now be in the main wash."
-          ],
-          "evidence": "GE manual, page 12: \"Old or damp powder detergent\"",
-          "source": {
-            "line": 27,
-            "manual": "GE manual",
-            "page": 12
-          }
-        },
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-5",
-          "label": "Rinse agent dispenser empty",
-          "likelihood": 0.152,
-          "cost": null,
-          "remedies": [
-            "5 Open the door and pour 2 cups (500 ml) of white vinegar into the bottom of the dishwasher."
-          ],
-          "evidence": "GE manual, page 12: \"Rinse agent dispenser empty\"",
-          "source": {
-            "line": 29,
-            "manual": "GE manual",
-            "page": 12
-          }
-        },
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-6",
-          "label": "Too little detergent",
-          "likelihood": 0.132,
-          "cost": null,
-          "remedies": [
-            "6 Close the door and allow to complete the cycle.",
-            "If vinegar rinse doesn’t work: Repeat as above, except use 1/4 cup (60 ml) of citric acid crystals instead of vinegar."
-          ],
-          "evidence": "GE manual, page 12: \"Too little detergent\"",
-          "source": {
-            "line": 31,
-            "manual": "GE manual",
-            "page": 12
-          }
-        }
-      ]
-    },
-    {
       "id": "cloudiness-on-glassware",
       "symptom": "Cloudiness on glassware",
       "causes": [
@@ -444,9 +335,11 @@
       ]
     }
   ],
-  "rejected": [],
+  "rejected": [
+    "spots-and-filming-on-glasses-and-flatwar"
+  ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T09:43:00.344Z",
-  "learnedAt": "2026-10-04T09:51:22.000Z"
+  "reviewedAt": "2026-10-05T09:55:22.633Z",
+  "learnedAt": "2026-10-05T10:00:22.772Z"
 }

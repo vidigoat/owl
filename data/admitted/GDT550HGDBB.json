@@ -3,6 +3,14 @@
   "brand": "GE",
   "kind": "Dishwasher",
   "alsoCovers": [
+    "GDF510PGDWW",
+    "GDF510PMDSA",
+    "GDF510PSDSS",
+    "GDF520PGDCC",
+    "GDF520PGDWW",
+    "GDF520PSFSS",
+    "GDF540HGDBB",
+    "GDF540HGDWW",
     "GDF540HMFES",
     "GDF540HSFSS",
     "GDT550HGDWW",
@@ -13,28 +21,6 @@
   "readWith": "text-layer",
   "codes": {},
   "symptoms": [
-    {
-      "id": "start-status",
-      "symptom": "Start Status",
-      "causes": [
-        {
-          "id": "start-status-0",
-          "label": "The door was opened or the",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "Press the Start pad once to start the dishwasher.",
-            "Press the"
-          ],
-          "evidence": "GE manual, page 14: \"The door was opened or the\"",
-          "source": {
-            "line": 7,
-            "manual": "GE manual",
-            "page": 14
-          }
-        }
-      ]
-    },
     {
       "id": "spots-and-filming-on-glasses-and-flatwar",
       "symptom": "Spots and filming on glasses and flatware",
@@ -548,11 +534,12 @@
     }
   ],
   "rejected": [
+    "start-status",
     "dishwasher-beeps-once-every-minute-on-so",
     "noise-1"
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T09:43:02.439Z",
-  "learnedAt": "2026-10-04T09:51:29.059Z"
+  "reviewedAt": "2026-10-05T09:55:28.149Z",
+  "learnedAt": "2026-10-05T10:00:29.711Z"
 }

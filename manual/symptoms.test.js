@@ -876,4 +876,32 @@ it('a cause whose words stop mid-phrase is in doubt', () => {
   assert.ok(readSymptoms({ text: page }).symptoms[0].causes[0].unsure);
 });
 
+// One table row with each column where the header puts it.
+const row = (a, b, c) => `${a.padEnd(32)}${b.padEnd(32)}${c}`;
+
+it('a page reference after a symptom is not part of the problem; a code is never mistaken for one', () => {
+  const page = [row('Problem', 'Possible Causes', 'What To Do'),
+    ['Cloudiness on glassware 14', 'Hard water', 'Use a rinse agent.'],
+    ['E 22', 'Filter blocked', 'Clean the filter.'],
+  ].map((r) => (Array.isArray(r) ? row(...r) : r)).join('\n');
+  const r = readSymptoms({ text: page });
+  assert.ok(r.symptoms.some((s) => s.symptom === 'Cloudiness on glassware'), r.symptoms.map((s) => s.symptom).join(' | '));
+  assert.ok(r.symptoms.some((s) => s.symptom === 'E 22'), 'a code lost its number');
+});
+
+it('rows read wrongly from words that ARE on the page are put in doubt, each with its reason', () => {
+  const page = [row('Problem', 'Possible Causes', 'What To Do'),
+    ['Spots on dishes', 'Hard water', 'se high quality rinse agents.'],
+    ['Noise', 'Drain pump Drain pump', 'This is normal.'],
+    ['Runs often', 'Normal operation', 'This is normal.'],
+    ['(Modern models run longer.)', 'Larger freezer', 'This is normal.'],
+  ].map((r) => (Array.isArray(r) ? row(...r) : r)).join('\n');
+  const r = readSymptoms({ text: page });
+  const why = (start) => r.symptoms.find((s) => s.symptom.startsWith(start))?.causes[0].unsure;
+  assert.match(why('Spots') || '', /mid-sentence/);
+  assert.match(why('Noise') || '', /read twice/);
+  assert.match(why('(Modern') || '', /aside/);
+  assert.equal(why('Runs often'), undefined, 'a clean row was put in doubt');
+});
+
 console.log(`\n${passed} passed`);

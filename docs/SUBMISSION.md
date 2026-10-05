@@ -384,13 +384,13 @@ every state.
 
 **It reads the manuals North American kitchens actually have.** The library began as Bosch and
 Siemens. GE prints a different table — three columns side by side, header words centred over them,
-nothing but position to say where a cause begins — and it is read now: **184 GE dishwashers,
-washers, dryers, refrigerators and ranges, answering for 725 model numbers**, every cause re-read
+nothing but position to say where a cause begins — and it is read now: **343 GE dishwashers,
+washers, dryers, refrigerators and ranges, answering for 1,930 model numbers**, every cause re-read
 off the page it cites. Getting there meant finding three ways a table reader can be confidently
 wrong, each on a real manual, and refusing instead: a row whose columns ran together where the
 edge happens to land on a space; two causes that read as one and still pass a check that asks only
 whether the words are printed; and a page whose text layer is scrambled by its font. The library
-is 294 machines; the zero-bad-buy sweep still holds across all 9,071 causes.
+is 453 machines; the zero-bad-buy sweep still holds across all 14,237 causes.
 
 **The screen opens on what the house already knows.** Before anybody speaks, the device shows what
 this household's own record says needs attention — *E24 on the dishwasher, three times in 225

@@ -2,6 +2,12 @@
   "model": "GSD3320CBB",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "GSD3310CAA",
+    "GSD3330CWW",
+    "GSD3410ZAA",
+    "GSD3420ZBB"
+  ],
   "source": "GSD3320CBB.pdf",
   "pages": "19–24",
   "readWith": "text-layer",
@@ -238,5 +244,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:09.816Z",
-  "learnedAt": "2026-10-04T15:17:30.662Z"
+  "learnedAt": "2026-10-05T10:00:49.143Z"
 }

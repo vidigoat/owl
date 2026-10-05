@@ -322,27 +322,6 @@
           }
         }
       ]
-    },
-    {
-      "id": "cooling-fan-continues-to-run-when-the-ov",
-      "symptom": "Cooling fan continues to run when the oven is switched off.",
-      "causes": [
-        {
-          "id": "cooling-fan-continues-to-run-when-the-ov-0",
-          "label": "No fault: The cooling fan will cool down until the oven temperature has reached",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "temperature chosen in the settings."
-          ],
-          "evidence": "Bosch manual, page 34: \"No fault: The cooling fan will cool down until the oven temperature has reached\"",
-          "source": {
-            "line": 58,
-            "manual": "Bosch manual",
-            "page": 34
-          }
-        }
-      ]
     }
   ],
   "rejected": [
@@ -350,10 +329,11 @@
     "an-buzzer-alarm-sound-occurs-intermitten",
     "cooking-results-are-not-as-expected",
     "if-the-oven-is-cold-with-the-oven-contro",
-    "the-oven-door-feels-hotter-than-before-a"
+    "the-oven-door-feels-hotter-than-before-a",
+    "cooling-fan-continues-to-run-when-the-ov"
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-09-26T13:58:03.411Z",
+  "reviewedAt": "2026-10-05T10:07:36.041Z",
   "learnedAt": "2026-09-26T13:51:09.578Z"
 }

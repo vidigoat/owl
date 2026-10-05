@@ -2,6 +2,17 @@
   "model": "GTD65GBSJWS",
   "brand": "GE",
   "kind": "Dryer",
+  "alsoCovers": [
+    "GTD65EBPLDG",
+    "GTD65EBSJWS",
+    "GTD65GBPLDG",
+    "GTD75ECPLDG",
+    "GTD75ECSLWS",
+    "GTD75GCPLDG",
+    "GTD75GCSLWS",
+    "GTX65EBSJWS",
+    "GTX65GBSJWS"
+  ],
   "source": "GTD65GBSJWS.pdf",
   "pages": "12–14",
   "readWith": "text-layer",
@@ -132,11 +143,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:12.129Z",
-  "learnedAt": "2026-10-04T15:19:06.212Z",
-  "alsoCovers": [
-    "GTD65EBSJWS",
-    "GTD75ECPLDG",
-    "GTD75ECSLWS",
-    "GTD75GCPLDG"
-  ]
+  "learnedAt": "2026-10-05T10:02:32.322Z"
 }

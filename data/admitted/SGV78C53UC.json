@@ -744,22 +744,6 @@
       "symptom": "There are colored coatings (blue, yellow, brown) inside the ap- or pliance or on stainless steel dishware that are",
       "causes": [
         {
-          "id": "there-are-colored-coatings-blue-yellow-b-0",
-          "label": "The formation of films is due to substances contained in vegetables (cabbage, celery, potatoes, noodles, etc.)",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "tap water (manganese).",
-            "Clean the appliance."
-          ],
-          "evidence": "Bosch manual, page 45: \"The formation of films is due to substances contained in vegetables (cabbage, celery, potatoes, noodles, etc.)\"",
-          "source": {
-            "line": 31,
-            "manual": "Bosch manual",
-            "page": 45
-          }
-        },
-        {
           "id": "there-are-colored-coatings-blue-yellow-b-1",
           "label": "You can remove coatings with Mechanical cleaning or",
           "likelihood": 0.385,
@@ -1461,10 +1445,11 @@
     "6",
     "1",
     "2",
-    "there-are-colored"
+    "there-are-colored",
+    "there-are-colored-coatings-blue-yellow-b-0"
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-09-22T15:27:13.051Z",
+  "reviewedAt": "2026-10-05T10:07:53.634Z",
   "learnedAt": "2026-09-22T15:26:49.547Z"
 }

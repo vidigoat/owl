@@ -2,6 +2,13 @@
   "model": "JP336DDWW",
   "brand": "GE",
   "kind": "Range",
+  "alsoCovers": [
+    "JP336DDBB",
+    "JP346CMCC",
+    "JP356SMSS",
+    "JP655BMBB",
+    "JP655SMSS"
+  ],
   "source": "JP336DDWW.pdf",
   "pages": "13–13",
   "readWith": "text-layer",
@@ -274,5 +281,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:21.368Z",
-  "learnedAt": "2026-10-04T15:19:12.915Z"
+  "learnedAt": "2026-10-05T10:03:55.063Z"
 }

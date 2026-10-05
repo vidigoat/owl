@@ -2,6 +2,9 @@
   "model": "DNCD450GAWC",
   "brand": "GE",
   "kind": "Dryer",
+  "alsoCovers": [
+    "DNCD450EAWC"
+  ],
   "source": "DNCD450GAWC.pdf",
   "pages": "11–12",
   "readWith": "text-layer",
@@ -493,8 +496,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:19:42.373Z",
-  "learnedAt": "2026-10-04T15:18:46.663Z",
-  "alsoCovers": [
-    "DNCD450EAWC"
-  ]
+  "learnedAt": "2026-10-05T10:02:12.904Z"
 }

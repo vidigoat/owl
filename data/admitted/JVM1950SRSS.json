@@ -1,0 +1,328 @@
+{
+  "model": "JVM1950SRSS",
+  "brand": "GE",
+  "kind": "Range",
+  "source": "JVM1950SRSS.pdf",
+  "pages": "31–32",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "oven-will-not-start",
+      "symptom": "Oven will not start",
+      "causes": [
+        {
+          "id": "oven-will-not-start-0",
+          "label": "A fuse in your home may be blown or the circuit breaker tripped.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace fuse or reset circuit breaker."
+          ],
+          "evidence": "GE manual, page 31: \"A fuse in your home may be blown or the circuit breaker tripped.\"",
+          "source": {
+            "line": 9,
+            "manual": "GE manual",
+            "page": 31
+          }
+        },
+        {
+          "id": "oven-will-not-start-1",
+          "label": "Power surge.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Unplug the microwave oven, then plug it back in."
+          ],
+          "evidence": "GE manual, page 31: \"Power surge.\"",
+          "source": {
+            "line": 12,
+            "manual": "GE manual",
+            "page": 31
+          }
+        },
+        {
+          "id": "oven-will-not-start-2",
+          "label": "Plug not fully inserted into wall outlet",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Make sure the 3-prong plug on the oven is fully inserted into wall outlet."
+          ],
+          "evidence": "GE manual, page 31: \"Plug not fully inserted into wall outlet\"",
+          "source": {
+            "line": 14,
+            "manual": "GE manual",
+            "page": 31
+          }
+        },
+        {
+          "id": "oven-will-not-start-3",
+          "label": "Door not securely closed.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Open the door and close securely."
+          ],
+          "evidence": "GE manual, page 31: \"Door not securely closed.\"",
+          "source": {
+            "line": 16,
+            "manual": "GE manual",
+            "page": 31
+          }
+        },
+        {
+          "id": "oven-will-not-start-4",
+          "label": "Power Saver (Energy Saver) button not engaged.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Push the Power Saver (Energy Saver) button so it is pressed in."
+          ],
+          "evidence": "GE manual, page 31: \"Power Saver (Energy Saver) button not engaged.\"",
+          "source": {
+            "line": 17,
+            "manual": "GE manual",
+            "page": 31
+          }
+        }
+      ]
+    },
+    {
+      "id": "control-panel-lighted-yet-oven-will-not-",
+      "symptom": "Control panel lighted, yet oven will not start",
+      "causes": [
+        {
+          "id": "control-panel-lighted-yet-oven-will-not--0",
+          "label": "Door not securely closed.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Open the door and close securely."
+          ],
+          "evidence": "GE manual, page 31: \"Door not securely closed.\"",
+          "source": {
+            "line": 19,
+            "manual": "GE manual",
+            "page": 31
+          }
+        },
+        {
+          "id": "control-panel-lighted-yet-oven-will-not--1",
+          "label": "START/PAUSE button not pressed after entering cooking selection.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Press START/PAUSE."
+          ],
+          "evidence": "GE manual, page 31: \"START/PAUSE button not pressed after entering cooking selection.\"",
+          "source": {
+            "line": 21,
+            "manual": "GE manual",
+            "page": 31
+          }
+        },
+        {
+          "id": "control-panel-lighted-yet-oven-will-not--2",
+          "label": "Another selection entered already in oven and CANCEL/ OFF button not pressed to cancel it.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Press CANCEL/OFF."
+          ],
+          "evidence": "GE manual, page 31: \"Another selection entered already in oven and CANCEL/ OFF button not pressed to cancel it.\"",
+          "source": {
+            "line": 25,
+            "manual": "GE manual",
+            "page": 31
+          }
+        },
+        {
+          "id": "control-panel-lighted-yet-oven-will-not--3",
+          "label": "Cooking time not entered after pressing TIME COOK",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Make sure you have entered cooking time after pressing TIME COOK."
+          ],
+          "evidence": "GE manual, page 31: \"Cooking time not entered after pressing TIME COOK\"",
+          "source": {
+            "line": 29,
+            "manual": "GE manual",
+            "page": 31
+          }
+        },
+        {
+          "id": "control-panel-lighted-yet-oven-will-not--4",
+          "label": "CANCEL/OFF was pressed accidentally.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Reset cooking program and press START/PAUSE."
+          ],
+          "evidence": "GE manual, page 31: \"CANCEL/OFF was pressed accidentally.\"",
+          "source": {
+            "line": 31,
+            "manual": "GE manual",
+            "page": 31
+          }
+        },
+        {
+          "id": "control-panel-lighted-yet-oven-will-not--5",
+          "label": "Food weight not entered after selecting AUTO DEFROST or 1 lb QUICK DEFROST.",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "Make sure you have entered food weight after selecting AUTO DEFROST or FAST DEFROST."
+          ],
+          "evidence": "GE manual, page 31: \"Food weight not entered after selecting AUTO DEFROST or 1 lb QUICK DEFROST.\"",
+          "source": {
+            "line": 33,
+            "manual": "GE manual",
+            "page": 31
+          }
+        },
+        {
+          "id": "control-panel-lighted-yet-oven-will-not--6",
+          "label": "Food type not entered after pressing AUTO COOK.",
+          "likelihood": 0.132,
+          "cost": null,
+          "remedies": [
+            "Make sure you have entered a food type."
+          ],
+          "evidence": "GE manual, page 31: \"Food type not entered after pressing AUTO COOK.\"",
+          "source": {
+            "line": 36,
+            "manual": "GE manual",
+            "page": 31
+          }
+        }
+      ]
+    },
+    {
+      "id": "control-locked-appears-on-display",
+      "symptom": "CONTROL LOCKED appears on display",
+      "causes": [
+        {
+          "id": "control-locked-appears-on-display-0",
+          "label": "The control has been locked.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Press and hold CANCEL/OFF for about 3 seconds to unlock the control."
+          ],
+          "evidence": "GE manual, page 31: \"The control has been locked.\"",
+          "source": {
+            "line": 38,
+            "manual": "GE manual",
+            "page": 31
+          }
+        }
+      ]
+    },
+    {
+      "id": "floor-of-the-oven-is-warm-even-when-the-",
+      "symptom": "Floor of the oven is warm even when the overn has not been used",
+      "causes": [
+        {
+          "id": "floor-of-the-oven-is-warm-even-when-the--0",
+          "label": "The cooktop light is located below the oven floor. When light is on, the heat it produces may make the oven floor get warm.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 31: \"The cooktop light is located below the oven floor. When light is on, the heat it produces may make the oven floor get warm.\"",
+          "source": {
+            "line": 40,
+            "manual": "GE manual",
+            "page": 31
+          }
+        }
+      ]
+    },
+    {
+      "id": "you-hear-an-unusual-low-tone-beep",
+      "symptom": "You hear an unusual low-tone beep",
+      "causes": [
+        {
+          "id": "you-hear-an-unusual-low-tone-beep-0",
+          "label": "You have tried to change the power level when it is not allowed",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Many of the oven’s features are preset and cannot be changed."
+          ],
+          "evidence": "GE manual, page 31: \"You have tried to change the power level when it is not allowed\"",
+          "source": {
+            "line": 45,
+            "manual": "GE manual",
+            "page": 31
+          }
+        }
+      ]
+    },
+    {
+      "id": "vent-fan-comes-on-automatically",
+      "symptom": "Vent fan comes on automatically",
+      "causes": [
+        {
+          "id": "vent-fan-comes-on-automatically-0",
+          "label": "The vent fan automatically turns on to protect the microwave if it senses too much heat rising from the cooktop below.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 32: \"The vent fan automatically turns on to protect the microwave if it senses too much heat rising from the cooktop below.\"",
+          "source": {
+            "line": 2,
+            "manual": "GE manual",
+            "page": 32
+          }
+        }
+      ]
+    },
+    {
+      "id": "sensor-error-appears-on-the-display",
+      "symptom": "SENSOR ERROR appears on the display",
+      "causes": [
+        {
+          "id": "sensor-error-appears-on-the-display-0",
+          "label": "When using a Sensor feature, the door was opened before steam could be detected.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Do not open door until steam is sensed and time is shown counting down on the display."
+          ],
+          "evidence": "GE manual, page 32: \"When using a Sensor feature, the door was opened before steam could be detected.\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 32
+          }
+        },
+        {
+          "id": "sensor-error-appears-on-the-display-1",
+          "label": "Steam was not detected in a maxiumum amount of time.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Use Time Cook to heat for more time."
+          ],
+          "evidence": "GE manual, page 32: \"Steam was not detected in a maxiumum amount of time.\"",
+          "source": {
+            "line": 10,
+            "manual": "GE manual",
+            "page": 32
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T09:56:16.572Z",
+  "learnedAt": "2026-10-05T10:04:13.212Z"
+}

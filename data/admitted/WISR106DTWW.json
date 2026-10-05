@@ -2,6 +2,9 @@
   "model": "WISR106DTWW",
   "brand": "GE",
   "kind": "Washer",
+  "alsoCovers": [
+    "WISR309DTWW"
+  ],
   "source": "WISR106DTWW.pdf",
   "pages": "8–10",
   "readWith": "text-layer",
@@ -839,8 +842,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:36.743Z",
-  "learnedAt": "2026-10-04T15:18:33.313Z",
-  "alsoCovers": [
-    "WISR309DTWW"
-  ]
+  "learnedAt": "2026-10-05T10:01:32.831Z"
 }

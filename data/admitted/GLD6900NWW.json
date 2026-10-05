@@ -4,14 +4,25 @@
   "kind": "Dishwasher",
   "alsoCovers": [
     "GLD6900NBB",
+    "GLD6960NSS",
     "GSD6900NBB",
+    "GSD6900NCC",
+    "GSD6900NWW",
     "GSD6960NSS",
+    "PDW7300NBB",
     "PDW7300NCC",
+    "PDW7380NSS",
+    "PDW7800NBB",
     "PDW7800NCC",
+    "PDW7800NWW",
+    "PDW7880NSS",
     "PDW7900NBB",
+    "PDW7900NCC",
     "PDW7900NWW",
     "PDW7900PBB",
+    "PDW7900PWW",
     "PDW7980PSS",
+    "PDWF780PBB",
     "PDWF780PWW",
     "PDWF788PSS"
   ],
@@ -20,46 +31,6 @@
   "readWith": "text-layer",
   "codes": {},
   "symptoms": [
-    {
-      "id": "dishwasher-beeps",
-      "symptom": "Dishwasher BEEPS",
-      "causes": [
-        {
-          "id": "dishwasher-beeps-0",
-          "label": "This is a reminder that your",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "Close and latch the door after opening it mid-cycle."
-          ],
-          "evidence": "GE manual, page 12: \"This is a reminder that your\"",
-          "source": {
-            "line": 82,
-            "manual": "GE manual",
-            "page": 12
-          }
-        }
-      ]
-    },
-    {
-      "id": "low-detergent-light",
-      "symptom": "Low Detergent light",
-      "causes": [
-        {
-          "id": "low-detergent-light-0",
-          "label": "SmartDispense has less than",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [],
-          "evidence": "GE manual, page 13: \"SmartDispense has less than\"",
-          "source": {
-            "line": 11,
-            "manual": "GE manual",
-            "page": 13
-          }
-        }
-      ]
-    },
     {
       "id": "dishes-and-flatware-not-clean",
       "symptom": "Dishes and flatware not clean",
@@ -252,21 +223,6 @@
       "symptom": "Detergent left in dispenser cups",
       "causes": [
         {
-          "id": "detergent-left-in-dispenser-cups-0",
-          "label": "Dishes are blocking the detergent cup or",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "Reposition the dishes, so the water from the lower spray arm can flush the detergent cup or the outlet on the SmartDispense™ system."
-          ],
-          "evidence": "GE manual, page 13: \"Dishes are blocking the detergent cup or\"",
-          "source": {
-            "line": 74,
-            "manual": "GE manual",
-            "page": 13
-          }
-        },
-        {
           "id": "detergent-left-in-dispenser-cups-1",
           "label": "SmartDispense™ outlet",
           "likelihood": 0.385,
@@ -299,27 +255,6 @@
           "evidence": "GE manual, page 13: \"Cap not tightened after filling the dispenser\"",
           "source": {
             "line": 77,
-            "manual": "GE manual",
-            "page": 13
-          }
-        }
-      ]
-    },
-    {
-      "id": "black-or-gray",
-      "symptom": "Black or gray",
-      "causes": [
-        {
-          "id": "black-or-gray-0",
-          "label": "Aluminum utensils have",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "Remove marks with a mild, abrasive cleaner."
-          ],
-          "evidence": "GE manual, page 13: \"Aluminum utensils have\"",
-          "source": {
-            "line": 80,
             "manual": "GE manual",
             "page": 13
           }
@@ -540,10 +475,14 @@
     }
   ],
   "rejected": [
-    "spots-and-filming-on-glasses-and-flatwar-4"
+    "dishwasher-beeps",
+    "low-detergent-light",
+    "black-or-gray",
+    "spots-and-filming-on-glasses-and-flatwar-4",
+    "detergent-left-in-dispenser-cups-0"
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T09:52:31.406Z",
-  "learnedAt": "2026-10-04T09:51:12.623Z"
+  "reviewedAt": "2026-10-05T09:55:50.563Z",
+  "learnedAt": "2026-10-05T10:00:14.017Z"
 }

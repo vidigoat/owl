@@ -4,62 +4,42 @@
   "kind": "Dishwasher",
   "alsoCovers": [
     "GLD4404RBB",
+    "GLD4404RCC",
+    "GLD4404RWW",
+    "GLD4406RWW",
+    "GLD4408RBB",
+    "GLD4408RWW",
+    "GLD4456RCS",
+    "GLD4468RSS",
     "GLD4500RBB",
     "GLD4500RCC",
+    "GLD4500RWW",
+    "GLD4550RCS",
+    "GLD5600RBB",
+    "GLD5600RCC",
+    "GLD5600RWW",
     "GLD5660RSS",
+    "GLD6904RBB",
     "GLD6904RWW",
+    "GLD6906RWW",
+    "GLD6908RBB",
+    "GLD6908RWW",
+    "GLD6964RSS",
     "GLD6966RSS",
+    "GLD6968RSS",
+    "GLD7400RBB",
+    "GLD7400RCC",
     "GLD7400RWW",
-    "PDW7800RWW"
+    "GLD7460RSS",
+    "PDW7800RBB",
+    "PDW7800RWW",
+    "PDW7880RSS"
   ],
   "source": "GLD4406RBB.pdf",
   "pages": "18–21",
   "readWith": "text-layer",
   "codes": {},
   "symptoms": [
-    {
-      "id": "start-reset-status",
-      "symptom": "START/RESET status",
-      "causes": [
-        {
-          "id": "start-reset-status-0",
-          "label": "You have pressed the",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "Press the START/RESET pad once to start the dishwasher.",
-            "Press the"
-          ],
-          "evidence": "GE manual, page 19: \"You have pressed the\"",
-          "source": {
-            "line": 11,
-            "manual": "GE manual",
-            "page": 19
-          }
-        }
-      ]
-    },
-    {
-      "id": "dishwasher-beeps",
-      "symptom": "Dishwasher BEEPS",
-      "causes": [
-        {
-          "id": "dishwasher-beeps-0",
-          "label": "This is a reminder that your",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "Close and latch the door after opening it mid-cycle."
-          ],
-          "evidence": "GE manual, page 19: \"This is a reminder that your\"",
-          "source": {
-            "line": 29,
-            "manual": "GE manual",
-            "page": 19
-          }
-        }
-      ]
-    },
     {
       "id": "dishes-and-flatware-not-clean",
       "symptom": "Dishes and flatware not clean",
@@ -219,21 +199,6 @@
       "id": "detergent-left-in-dispenser-cups",
       "symptom": "Detergent left in dispenser cups",
       "causes": [
-        {
-          "id": "detergent-left-in-dispenser-cups-0",
-          "label": "Dishes are blocking the detergent cup or",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "Reposition the dishes, so the water from the lower spray arm can flush the detergent cup or the outlet on the SmartDispense™ system."
-          ],
-          "evidence": "GE manual, page 20: \"Dishes are blocking the detergent cup or\"",
-          "source": {
-            "line": 17,
-            "manual": "GE manual",
-            "page": 20
-          }
-        },
         {
           "id": "detergent-left-in-dispenser-cups-1",
           "label": "SmartDispense™ outlet",
@@ -556,11 +521,14 @@
     }
   ],
   "rejected": [
+    "start-reset-status",
+    "dishwasher-beeps",
     "spots-and-filming-on-glasses-and-flatwar-0",
-    "spots-and-filming-on-glasses-and-flatwar-4"
+    "spots-and-filming-on-glasses-and-flatwar-4",
+    "detergent-left-in-dispenser-cups-0"
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T09:52:31.198Z",
-  "learnedAt": "2026-10-04T09:51:17.855Z"
+  "reviewedAt": "2026-10-05T09:55:50.130Z",
+  "learnedAt": "2026-10-05T10:00:18.849Z"
 }

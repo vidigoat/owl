@@ -187,33 +187,13 @@
           }
         }
       ]
-    },
-    {
-      "id": "12-how-it-works-here-you-can-find-the-id",
-      "symptom": "12 How it works Here, you can find the ideal settings tailored these recommendations to your",
-      "causes": [
-        {
-          "id": "12-how-it-works-here-you-can-find-the-id-0",
-          "label": "for various dishes as well as the best accessories and cookware. We have",
-          "suspect": true,
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "appliance."
-          ],
-          "evidence": "Bosch manual, page 7: \"for various dishes as well as the best accessories and cookware. We have\"",
-          "source": {
-            "line": 34,
-            "manual": "Bosch manual",
-            "page": 7
-          }
-        }
-      ]
     }
   ],
-  "rejected": [],
+  "rejected": [
+    "12-how-it-works-here-you-can-find-the-id"
+  ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-09-22T15:27:12.200Z",
+  "reviewedAt": "2026-10-05T10:06:36.757Z",
   "learnedAt": "2026-09-22T15:26:44.470Z"
 }

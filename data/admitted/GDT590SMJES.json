@@ -1,0 +1,406 @@
+{
+  "model": "GDT590SMJES",
+  "brand": "GE",
+  "kind": "Dishwasher",
+  "alsoCovers": [
+    "GDT590SGJBB",
+    "GDT590SGJWW",
+    "GDT590SSJSS"
+  ],
+  "source": "GDT590SMJES.pdf",
+  "pages": "25–28",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "display-shows-leak-detected",
+      "symptom": "Display shows “LEAK DETECTED”",
+      "causes": [
+        {
+          "id": "display-shows-leak-detected-0",
+          "label": "Possible leak is detected",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Some models are equipped with leak detection and the cycle will be cancelled if a leak is detected.",
+            "The display will show “LEAK DETECTED”.",
+            "Call for service."
+          ],
+          "evidence": "GE manual, page 26: \"Possible leak is detected\"",
+          "source": {
+            "line": 15,
+            "manual": "GE manual",
+            "page": 26
+          }
+        }
+      ]
+    },
+    {
+      "id": "spots-and-filming-on-glasses-and-flatwar",
+      "symptom": "Spots and filming on glasses and flatware",
+      "causes": [
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-0",
+          "label": "Extremely hard water",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use rinse agents such as Cascade® Rinse Aid to prevent spots and prevent new film buildup.",
+            "If water is extremely hard, a softener may be required."
+          ],
+          "evidence": "GE manual, page 26: \"Extremely hard water\"",
+          "source": {
+            "line": 34,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-1",
+          "label": "Low inlet water temperature",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Make sure water temperature is at least 120°F (49°C)."
+          ],
+          "evidence": "GE manual, page 26: \"Low inlet water temperature\"",
+          "source": {
+            "line": 37,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-2",
+          "label": "Overloading or improper loading of the dishwasher",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Load dishwasher as shown in the Loading Place Settings section."
+          ],
+          "evidence": "GE manual, page 26: \"Overloading or improper loading of the dishwasher\"",
+          "source": {
+            "line": 38,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-3",
+          "label": "Old or damp powder detergent",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Make sure detergent is fresh."
+          ],
+          "evidence": "GE manual, page 26: \"Old or damp powder detergent\"",
+          "source": {
+            "line": 40,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-4",
+          "label": "Rinse agent dispenser empty",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Refill with rinse agent such as Cascade® Rinse Aid."
+          ],
+          "evidence": "GE manual, page 26: \"Rinse agent dispenser empty\"",
+          "source": {
+            "line": 41,
+            "manual": "GE manual",
+            "page": 26
+          }
+        },
+        {
+          "id": "spots-and-filming-on-glasses-and-flatwar-5",
+          "label": "Too little or low performing detergent",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "Make sure you use the proper amount of highly rated detergent."
+          ],
+          "evidence": "GE manual, page 26: \"Too little or low performing detergent\"",
+          "source": {
+            "line": 42,
+            "manual": "GE manual",
+            "page": 26
+          }
+        }
+      ]
+    },
+    {
+      "id": "detergent-left-in-dispenser-cups",
+      "symptom": "Detergent left in dispenser cups",
+      "causes": [
+        {
+          "id": "detergent-left-in-dispenser-cups-0",
+          "label": "Dishes or utensils are blocking the detergent cup",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Reposition the dishes, so the water from the lower spray arm can flush the detergent cup.",
+            "See the Loading the dishwasher section.",
+            "Reposition the tall utensils or heavy silverware that may be keeping the dispenser cup door from opening.",
+            "See the Loading the dishwasher section.",
+            "Don’t place large bowls or pots directly under the detergent dispenser."
+          ],
+          "evidence": "GE manual, page 27: \"Dishes or utensils are blocking the detergent cup\"",
+          "source": {
+            "line": 17,
+            "manual": "GE manual",
+            "page": 27
+          }
+        }
+      ]
+    },
+    {
+      "id": "black-or-gray-marks-on-dishes",
+      "symptom": "Black or gray marks on dishes",
+      "causes": [
+        {
+          "id": "black-or-gray-marks-on-dishes-0",
+          "label": "Aluminum utensils have rubbed against dishes",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Remove marks with a mild, abrasive cleaner."
+          ],
+          "evidence": "GE manual, page 27: \"Aluminum utensils have rubbed against dishes\"",
+          "source": {
+            "line": 23,
+            "manual": "GE manual",
+            "page": 27
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishes-don-t-dry",
+      "symptom": "Dishes don’t dry",
+      "causes": [
+        {
+          "id": "dishes-don-t-dry-0",
+          "label": "Low inlet water temperature",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure inlet water temperature is at least 120°F.",
+            "Select Heated Dry.",
+            "Use Wash Temp Boost or Boost Temp option.",
+            "Select a higher cycle, such as Wash Temp Sani, Sanitize Temp or Heavy."
+          ],
+          "evidence": "GE manual, page 27: \"Low inlet water temperature\"",
+          "source": {
+            "line": 25,
+            "manual": "GE manual",
+            "page": 27
+          }
+        },
+        {
+          "id": "dishes-don-t-dry-1",
+          "label": "Rinse agent dispenser is empty",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the rinse agent dispenser and fill as required."
+          ],
+          "evidence": "GE manual, page 27: \"Rinse agent dispenser is empty\"",
+          "source": {
+            "line": 29,
+            "manual": "GE manual",
+            "page": 27
+          }
+        },
+        {
+          "id": "dishes-don-t-dry-2",
+          "label": "Additional drying time is needed",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Leave door closed after the Clean light appears to allow the fan to run an additional 90 minutes.",
+            "Note: If you open the door, this fan extension will be cancelled."
+          ],
+          "evidence": "GE manual, page 27: \"Additional drying time is needed\"",
+          "source": {
+            "line": 30,
+            "manual": "GE manual",
+            "page": 27
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishwasher-won-t-run",
+      "symptom": "Dishwasher won’t run",
+      "causes": [
+        {
+          "id": "dishwasher-won-t-run-0",
+          "label": "Fuse is blown or circuit breaker is tripped",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace fuse or reset circuit breaker.",
+            "Remove any other appliances from the circuit."
+          ],
+          "evidence": "GE manual, page 27: \"Fuse is blown or circuit breaker is tripped\"",
+          "source": {
+            "line": 45,
+            "manual": "GE manual",
+            "page": 27
+          }
+        },
+        {
+          "id": "dishwasher-won-t-run-1",
+          "label": "Power is turned off",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "In some installations, the power to the dishwasher is provided through a wall switch, often located next to the disposer switch.",
+            "Make sure it is on."
+          ],
+          "evidence": "GE manual, page 27: \"Power is turned off\"",
+          "source": {
+            "line": 47,
+            "manual": "GE manual",
+            "page": 27
+          }
+        },
+        {
+          "id": "dishwasher-won-t-run-2",
+          "label": "Control panel is locked",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Unlock control panel.",
+            "See the Getting started section."
+          ],
+          "evidence": "GE manual, page 27: \"Control panel is locked\"",
+          "source": {
+            "line": 49,
+            "manual": "GE manual",
+            "page": 27
+          }
+        },
+        {
+          "id": "dishwasher-won-t-run-3",
+          "label": "Possible leak is detected",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Some models are equipped with leak detection and the cycle will be cancelled if a leak is detected.",
+            "The display will show “LEAK DETECTED”.",
+            "Call for service."
+          ],
+          "evidence": "GE manual, page 27: \"Possible leak is detected\"",
+          "source": {
+            "line": 50,
+            "manual": "GE manual",
+            "page": 27
+          }
+        },
+        {
+          "id": "dishwasher-won-t-run-4",
+          "label": "Proper Start sequence was not followed",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "See the Using the dishwasher section."
+          ],
+          "evidence": "GE manual, page 27: \"Proper Start sequence was not followed\"",
+          "source": {
+            "line": 52,
+            "manual": "GE manual",
+            "page": 27
+          }
+        }
+      ]
+    },
+    {
+      "id": "steam",
+      "symptom": "Steam",
+      "causes": [
+        {
+          "id": "steam-0",
+          "label": "This is normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Warm, moist air comes through the vent during drying and when water is being pumped out.",
+            "This is necessary for drying."
+          ],
+          "evidence": "GE manual, page 28: \"This is normal\"",
+          "source": {
+            "line": 13,
+            "manual": "GE manual",
+            "page": 28
+          }
+        }
+      ]
+    },
+    {
+      "id": "sanitized-or-cycle-sanitized-light-does-",
+      "symptom": "Sanitized or Cycle Sanitized light does not illuminate at the",
+      "causes": [
+        {
+          "id": "sanitized-or-cycle-sanitized-light-does--0",
+          "label": "The door was opened and the cycle was interrupted during final rinse",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Do not interrupt the cycle by opening the door during the wash cycle."
+          ],
+          "evidence": "GE manual, page 28: \"The door was opened and the cycle was interrupted during final rinse\"",
+          "source": {
+            "line": 15,
+            "manual": "GE manual",
+            "page": 28
+          }
+        }
+      ]
+    },
+    {
+      "id": "a-white-film-on-glassware-dishware-and-t",
+      "symptom": "A white film on glassware, dishware and the interior",
+      "causes": [
+        {
+          "id": "a-white-film-on-glassware-dishware-and-t-0",
+          "label": "This problem is likely caused by a low quality phosphate-free dishwasher detergent",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "To remove the white film, run your dishes through a dishwasher cycle with citric acid.",
+            "Use a WD35X151 citric acid kit found online.",
+            "Otherwise, use Lemi Shine (WX10X10019) found at your local grocery store.",
+            "Pour the citric acid in the detergent cup and close the cover.",
+            "Place the filmed but otherwise clean glassware and dishware in the dishwasher.",
+            "Leave silverware and other metal items out of the dishwasher.",
+            "Turn the dishwasher on and let it run through a complete cycle without detergent.",
+            "The glassware, dishware, and dishwasher should come out film free.",
+            "Alternatively, a vinegar rinse may be used.",
+            "Pour 1 cup of vinegar into dishwasher just after the detergent cup opens and let the dishwasher complete its cycle.",
+            "This may be repeated several times a year as needed The use of a rinse agent such as Cascade® Rinse Aid may help minimize a repeat build up of film.",
+            "Also, the use of a highly rated detergent such as Cascade® Platinum Pacs will help prevent film build-up."
+          ],
+          "evidence": "GE manual, page 28: \"This problem is likely caused by a low quality phosphate-free dishwasher detergent\"",
+          "source": {
+            "line": 35,
+            "manual": "GE manual",
+            "page": 28
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "start-status",
+    "dishwasher-beeps-once-every-minute"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T09:55:28.959Z",
+  "learnedAt": "2026-10-05T10:01:09.747Z"
+}

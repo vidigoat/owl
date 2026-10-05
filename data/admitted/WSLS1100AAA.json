@@ -2,6 +2,9 @@
   "model": "WSLS1100AAA",
   "brand": "GE",
   "kind": "Washer",
+  "alsoCovers": [
+    "WSLS1100AWW"
+  ],
   "source": "WSLS1100AAA.pdf",
   "pages": "18–20",
   "readWith": "text-layer",
@@ -305,21 +308,6 @@
           }
         },
         {
-          "id": "washer-won-t-operate-5",
-          "label": "Washer has not been turned on",
-          "likelihood": 0.152,
-          "cost": null,
-          "remedies": [
-            "Press the POWER ON/OFF button."
-          ],
-          "evidence": "GE manual, page 19: \"Washer has not been turned on\"",
-          "source": {
-            "line": 21,
-            "manual": "GE manual",
-            "page": 19
-          }
-        },
-        {
           "id": "washer-won-t-operate-6",
           "label": "Colored spots            Incorrect use of fabric softener",
           "likelihood": 0.132,
@@ -521,12 +509,11 @@
       ]
     }
   ],
-  "rejected": [],
+  "rejected": [
+    "washer-won-t-operate-5"
+  ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T09:43:29.782Z",
-  "learnedAt": "2026-10-04T09:51:36.852Z",
-  "alsoCovers": [
-    "WSLS1100AWW"
-  ]
+  "reviewedAt": "2026-10-05T09:56:38.668Z",
+  "learnedAt": "2026-10-05T10:01:17.724Z"
 }

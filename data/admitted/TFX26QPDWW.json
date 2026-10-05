@@ -2,6 +2,14 @@
   "model": "TFX26QPDWW",
   "brand": "GE",
   "kind": "Refrigerator",
+  "alsoCovers": [
+    "TFX22KRDWW",
+    "TFX22ZPDBB",
+    "TFX22ZPDCC",
+    "TFX26APDWW",
+    "TFX26KPDWW",
+    "TFX26ZPDAA"
+  ],
   "source": "TFX26QPDWW.pdf",
   "pages": "18–21",
   "readWith": "text-layer",
@@ -938,8 +946,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:35.370Z",
-  "learnedAt": "2026-10-04T15:18:02.884Z",
-  "alsoCovers": [
-    "TFX26ZPDAA"
-  ]
+  "learnedAt": "2026-10-05T10:03:23.012Z"
 }

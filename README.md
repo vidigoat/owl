@@ -36,7 +36,7 @@ npm run demo          # the whole loop in a terminal, ~20 seconds
 npm run mcp:session   # a real MCP session — the Alexa+ deliverable, proven in one command
 npm start             # http://localhost:8792 — the device experience
 npm run alexa         # talk to it — Amazon Nova on Bedrock choosing the tools, over MCP
-npm test              # 45 suites · 538 checks
+npm test              # 46 suites · 542 checks
 npm run smoke:live    # every route of the deployed site and the MCP handshake, after a deploy
 ```
 
@@ -143,11 +143,12 @@ The refusals are the product. Each one exists in code and has a test proving it 
 
 ## The library, and how it came to know things
 
-301 manuals read — **4548 symptoms, 9437 causes**, every one citing its page — which with the
-hand-written ones puts **294 machines in the library**, across six manufacturers and eleven kinds of
-appliance. Then **every quotation is re-read off the page it cites** by script: 8,987 of 9,305
-found, and the 318 that were not are refused by name. A machine also answers for the other model
-numbers its manufacturer lists the same manual for — 593 more, exactly those, never a near one
+460 manuals read — **7026 symptoms, 14937 causes**, every one citing its page — which with the
+hand-written ones puts **453 machines in the library**, across six manufacturers and eleven kinds of
+appliance. Then **every quotation is re-read off the page it cites** by script: 14,226 of 14,805
+admitted, and the 579 that failed — not on the page, or read in a way the reader itself doubts —
+are refused by name. A machine also answers for the other model
+numbers its manufacturer lists the same manual for — 1,639 more, exactly those, never a near one
 (`scripts/cover-families.js`). How much of what Bosch and Siemens sell that reaches, per kind, is
 `npm run coverage` (`docs/coverage.json`).
 
@@ -155,14 +156,18 @@ numbers its manufacturer lists the same manual for — 593 more, exactly those, 
 and Siemens — one manufacturer's family. GE prints a different table: three columns side by side
 (*Problem · Possible Cause · What To Do*), the header words centred over them, no indent to say
 where a cause begins. `manual/symptoms.js` reads that by position now, and `scripts/source-ge.js`
-follows GE's own route from a model number to its owner's manual: **184 GE machines — dishwashers,
-washers, dryers, refrigerators and ranges — answering for 725 model numbers**, 6,569 causes, each
+follows GE's own route from a model number to its owner's manual: **343 GE machines — dishwashers,
+washers, dryers, refrigerators and ranges — answering for 1,930 model numbers**, 11,748 causes, each
 re-read off its page. Four things it refuses rather than guesses, each found on a real manual:
 a row whose columns ran together (dropped whole, not cut at a convenient space), a cause it cannot
 tell from two (marked, and refused at admission), and a page whose text layer is font-scrambled
 (`(LWKHURUERWKFRQWUROVVHWWR2))` is what one GE refrigerator's says for "Either or both controls
 set to OFF") — refused whole; and one numbered procedure printed beside several causes, which read
-row by row files step two under a cause it was never printed for.
+row by row files step two under a cause it was never printed for. And the rows the page check
+cannot catch, because every word of them IS on the page: a remedy that opens mid-sentence ("se high
+quality rinse agents"), an aside in brackets read as a problem, one line read twice as a cause. Each
+is refused by name, with its reason; a page number trailing a symptom ("Cloudiness on glassware 14")
+is simply dropped.
 
 <img src="docs/media/bench.jpg" alt="The review bench: the manufacturer's rendered page on the left, the parse on the right, every cause citing its page" width="100%">
 

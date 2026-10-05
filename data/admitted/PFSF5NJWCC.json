@@ -3,9 +3,15 @@
   "brand": "GE",
   "kind": "Refrigerator",
   "alsoCovers": [
+    "PDSF5NBWBB",
+    "PDSS5NBWLSS",
     "PDSS5NBWRSS",
+    "PFCF1NFWWW",
     "PFCF1NJWCC",
+    "PFCS1NFWSS",
     "PFCS1NJWSS",
+    "PFIC1NFWWV",
+    "PFSF5NJWBB",
     "PFSF5NJWWW"
   ],
   "source": "PFSF5NJWCC.pdf",
@@ -1177,5 +1183,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T09:43:21.778Z",
-  "learnedAt": "2026-10-04T09:51:59.530Z"
+  "learnedAt": "2026-10-05T10:03:05.474Z"
 }

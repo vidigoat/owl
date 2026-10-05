@@ -2,6 +2,19 @@
   "model": "GDT635HSJSS",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "GDF570SGJBB",
+    "GDF570SGJWW",
+    "GDF570SSJSS",
+    "GDF630PFMDS",
+    "GDF640HFMDS",
+    "GDP615HBMTS",
+    "GDP615HFMDS",
+    "GDP615HSMSS",
+    "GDP615HYNFS",
+    "GDT635HGJBB",
+    "GDT635HGJWW"
+  ],
   "source": "GDT635HSJSS.pdf",
   "pages": "19–22",
   "readWith": "text-layer",
@@ -504,7 +517,7 @@
     },
     {
       "id": "control-panel-responded-to-inputs-but-di",
-      "symptom": "Control panel responded to inputs but dishwasher never filled with water 20",
+      "symptom": "Control panel responded to inputs but dishwasher never filled with water",
       "causes": [
         {
           "id": "control-panel-responded-to-inputs-but-di-0",
@@ -892,7 +905,7 @@
     },
     {
       "id": "a-white-film-on-glassware-dishware-and-t",
-      "symptom": "A white film on glassware, dishware and the interior 22",
+      "symptom": "A white film on glassware, dishware and the interior",
       "causes": [
         {
           "id": "a-white-film-on-glassware-dishware-and-t-0",
@@ -931,10 +944,6 @@
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T15:19:52.616Z",
-  "learnedAt": "2026-10-04T15:17:16.127Z",
-  "alsoCovers": [
-    "GDF630PFMDS",
-    "GDT635HGJWW"
-  ]
+  "reviewedAt": "2026-10-05T10:04:51.276Z",
+  "learnedAt": "2026-10-05T10:00:34.463Z"
 }

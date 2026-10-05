@@ -2,6 +2,13 @@
   "model": "DPVH880EJMG",
   "brand": "GE",
   "kind": "Dryer",
+  "alsoCovers": [
+    "DPVH880EJMV",
+    "DPVH880EJWW",
+    "DPVH880GJMG",
+    "DPVH880GJMV",
+    "DPVH880GJWW"
+  ],
   "source": "DPVH880EJMG.pdf",
   "pages": "46–48",
   "readWith": "text-layer",
@@ -748,10 +755,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:19:43.039Z",
-  "learnedAt": "2026-10-04T15:18:49.760Z",
-  "alsoCovers": [
-    "DPVH880EJWW",
-    "DPVH880GJMG",
-    "DPVH880GJMV"
-  ]
+  "learnedAt": "2026-10-05T10:02:16.026Z"
 }

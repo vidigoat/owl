@@ -308,11 +308,11 @@
       ]
     },
     {
-      "id": "oven-door-is-crooked-26",
-      "symptom": "Oven door is crooked 26",
+      "id": "oven-door-is-crooked",
+      "symptom": "Oven door is crooked",
       "causes": [
         {
-          "id": "oven-door-is-crooked-26-0",
+          "id": "oven-door-is-crooked-0",
           "label": "The door is out of position.",
           "likelihood": 0.625,
           "cost": null,
@@ -907,11 +907,11 @@
       ]
     },
     {
-      "id": "excessive-condensation-in-the-drawer-28",
-      "symptom": "Excessive condensation in the drawer 28",
+      "id": "excessive-condensation-in-the-drawer",
+      "symptom": "Excessive condensation in the drawer",
       "causes": [
         {
-          "id": "excessive-condensation-in-the-drawer-28-0",
+          "id": "excessive-condensation-in-the-drawer-0",
           "label": "Liquid in drawer.",
           "likelihood": 0.625,
           "cost": null,
@@ -926,7 +926,7 @@
           }
         },
         {
-          "id": "excessive-condensation-in-the-drawer-28-1",
+          "id": "excessive-condensation-in-the-drawer-1",
           "label": "Uncovered foods.",
           "likelihood": 0.385,
           "cost": null,
@@ -941,7 +941,7 @@
           }
         },
         {
-          "id": "excessive-condensation-in-the-drawer-28-2",
+          "id": "excessive-condensation-in-the-drawer-2",
           "label": "Temperature setting too high.",
           "likelihood": 0.278,
           "cost": null,
@@ -961,6 +961,6 @@
   "rejected": [],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T15:20:20.072Z",
-  "learnedAt": "2026-10-04T15:19:15.191Z"
+  "reviewedAt": "2026-10-05T10:05:33.576Z",
+  "learnedAt": "2026-10-05T10:03:57.309Z"
 }

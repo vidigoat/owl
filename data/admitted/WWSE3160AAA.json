@@ -2,6 +2,18 @@
   "model": "WWSE3160AAA",
   "brand": "GE",
   "kind": "Washer",
+  "alsoCovers": [
+    "WBSE2090AWW",
+    "WBXE2070AAA",
+    "WBXE2070AWW",
+    "WCSE3100AAA",
+    "WCSE3100AWW",
+    "WCSE4230AWW",
+    "WJSE3110AAA",
+    "WJSE3110ACC",
+    "WJSE3110AWW",
+    "WWSE3160AWW"
+  ],
   "source": "WWSE3160AAA.pdf",
   "pages": "10–12",
   "readWith": "text-layer",
@@ -80,17 +92,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:38.884Z",
-  "learnedAt": "2026-10-04T15:18:40.700Z",
-  "alsoCovers": [
-    "WBSE2090AWW",
-    "WBXE2070AAA",
-    "WBXE2070AWW",
-    "WCSE3100AAA",
-    "WCSE3100AWW",
-    "WCSE4230AWW",
-    "WJSE3110AAA",
-    "WJSE3110ACC",
-    "WJSE3110AWW",
-    "WWSE3160AWW"
-  ]
+  "learnedAt": "2026-10-05T10:01:40.029Z"
 }

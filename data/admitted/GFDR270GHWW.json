@@ -2,6 +2,17 @@
   "model": "GFDR270GHWW",
   "brand": "GE",
   "kind": "Dryer",
+  "alsoCovers": [
+    "GFDR270EHWW",
+    "GFDR275EHMC",
+    "GFDR275GHMC",
+    "GFDR480EFWW",
+    "GFDR480GFWW",
+    "GFDR485EFMC",
+    "GFDR485GFMC",
+    "GFDS260EFWW",
+    "GFDS260GFWW"
+  ],
   "source": "GFDR270GHWW.pdf",
   "pages": "39–42",
   "readWith": "text-layer",
@@ -970,14 +981,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:19:57.796Z",
-  "learnedAt": "2026-10-04T15:19:01.185Z",
-  "alsoCovers": [
-    "GFDR270EHWW",
-    "GFDR275EHMC",
-    "GFDR275GHMC",
-    "GFDR480GFWW",
-    "GFDR485EFMC",
-    "GFDS260EFWW",
-    "GFDS260GFWW"
-  ]
+  "learnedAt": "2026-10-05T10:02:27.315Z"
 }

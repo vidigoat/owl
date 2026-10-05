@@ -1,0 +1,805 @@
+{
+  "model": "WPRB9220DCC",
+  "brand": "GE",
+  "kind": "Washer",
+  "alsoCovers": [
+    "WPRB9220DWW"
+  ],
+  "source": "WPRB9220DCC.pdf",
+  "pages": "13–16",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "perfectemp-plus-wash-temperature-is-inco",
+      "symptom": "PerfecTemp Plus wash temperature is incorrect",
+      "causes": [
+        {
+          "id": "perfectemp-plus-wash-temperature-is-inco-0",
+          "label": "The washer is in a cold rinse cycle",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal.",
+            "The PerfecTemp Plus feature is designed not to activate during a cold rinse cycle to improve the energy efficiency of your washer."
+          ],
+          "evidence": "GE manual, page 13: \"The washer is in a cold rinse cycle\"",
+          "source": {
+            "line": 12,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "clothes-too-wet",
+      "symptom": "Clothes too wet",
+      "causes": [
+        {
+          "id": "clothes-too-wet-0",
+          "label": "Incorrect spin speed selected",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure the spin cycle selected matches the load you are washing.",
+            "Some fabrics will feel wetter when rinsed with cold water."
+          ],
+          "evidence": "GE manual, page 13: \"Incorrect spin speed selected\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "colored-spots",
+      "symptom": "Colored spots",
+      "causes": [
+        {
+          "id": "colored-spots-0",
+          "label": "Incorrect use of fabric softener",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check fabric softener package for instructions and follow directions for using dispenser.",
+            "Pretreat stain and rewash."
+          ],
+          "evidence": "GE manual, page 13: \"Incorrect use of fabric softener\"",
+          "source": {
+            "line": 28,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "colored-spots-1",
+          "label": "Dye transfer",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Sort whites or lightly colored items from dark colors."
+          ],
+          "evidence": "GE manual, page 13: \"Dye transfer\"",
+          "source": {
+            "line": 31,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "grayed-or-yellowed-clothes",
+      "symptom": "Grayed or yellowed clothes",
+      "causes": [
+        {
+          "id": "grayed-or-yellowed-clothes-0",
+          "label": "Not enough detergent",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use more detergent (especially with larger loads).",
+            "Be sure to follow detergent manufacturer’s directions."
+          ],
+          "evidence": "GE manual, page 13: \"Not enough detergent\"",
+          "source": {
+            "line": 33,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "grayed-or-yellowed-clothes-1",
+          "label": "Hard water",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Use a water conditioner like Calgon brand or install a water softener."
+          ],
+          "evidence": "GE manual, page 13: \"Hard water\"",
+          "source": {
+            "line": 35,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "grayed-or-yellowed-clothes-2",
+          "label": "Water is not hot enough",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Make sure water heater is delivering water at 120°F–140°F (48°C–60°C)."
+          ],
+          "evidence": "GE manual, page 13: \"Water is not hot enough\"",
+          "source": {
+            "line": 42,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "grayed-or-yellowed-clothes-3",
+          "label": "Washer is overloaded",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Select load size to match clothes load."
+          ],
+          "evidence": "GE manual, page 13: \"Washer is overloaded\"",
+          "source": {
+            "line": 44,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "grayed-or-yellowed-clothes-4",
+          "label": "Detergent is not dissolving",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Add detergent as wash basket fills with water before you load clothes."
+          ],
+          "evidence": "GE manual, page 13: \"Detergent is not dissolving\"",
+          "source": {
+            "line": 45,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "grayed-or-yellowed-clothes-5",
+          "label": "Dye transfer",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "Sort clothes by color.",
+            "If fabric label states wash separately, unstable dyes may be indicated."
+          ],
+          "evidence": "GE manual, page 13: \"Dye transfer\"",
+          "source": {
+            "line": 47,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "lint-or-residue-on-clothes",
+      "symptom": "Lint or residue on clothes",
+      "causes": [
+        {
+          "id": "lint-or-residue-on-clothes-0",
+          "label": "Clothes are air or line dried",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "If you do not dry your clothes with a clothes dryer, your clothes may retain more lint."
+          ],
+          "evidence": "GE manual, page 13: \"Clothes are air or line dried\"",
+          "source": {
+            "line": 50,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "lint-or-residue-on-clothes-1",
+          "label": "Incorrect sorting",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Separate lint producers from lint collectors."
+          ],
+          "evidence": "GE manual, page 13: \"Incorrect sorting\"",
+          "source": {
+            "line": 52,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "lint-or-residue-on-clothes-2",
+          "label": "Washing too long",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Wash small loads for a shorter time than larger loads."
+          ],
+          "evidence": "GE manual, page 13: \"Washing too long\"",
+          "source": {
+            "line": 53,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "lint-or-residue-on-clothes-3",
+          "label": "Detergent not dissolving",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Add detergent as wash basket fills with water, before you load clothes.",
+            "Try a liquid detergent.",
+            "Use warmer water temperature."
+          ],
+          "evidence": "GE manual, page 13: \"Detergent not dissolving\"",
+          "source": {
+            "line": 54,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "lint-or-residue-on-clothes-4",
+          "label": "Overloading",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Load clothes no higher than the top row of holes in the washer basket.",
+            "Make sure load size selected matches clothes load size."
+          ],
+          "evidence": "GE manual, page 13: \"Overloading\"",
+          "source": {
+            "line": 63,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "lint-or-residue-on-clothes-5",
+          "label": "Incorrect use of fabric softener",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "Check fabric softener package for instructions and follow directions for using dispenser."
+          ],
+          "evidence": "GE manual, page 13: \"Incorrect use of fabric softener\"",
+          "source": {
+            "line": 66,
+            "manual": "GE manual",
+            "page": 13
+          }
+        },
+        {
+          "id": "lint-or-residue-on-clothes-6",
+          "label": "Wash speed is too fast",
+          "likelihood": 0.132,
+          "cost": null,
+          "remedies": [
+            "Choose a wash cycle with a slower wash speed."
+          ],
+          "evidence": "GE manual, page 13: \"Wash speed is too fast\"",
+          "source": {
+            "line": 68,
+            "manual": "GE manual",
+            "page": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "washer-pauses-during-wash-cycle",
+      "symptom": "Washer pauses during wash cycle",
+      "causes": [
+        {
+          "id": "washer-pauses-during-wash-cycle-0",
+          "label": "The ULTRA HANDWASH, DELICATES or CASUALS cycle was chosen",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal.",
+            "The washer alternates between agitate and soak during the ULTRA HANDWASH, DELICATES and CASUALS cycles to get your clothes cleaner with less wear."
+          ],
+          "evidence": "GE manual, page 14: \"The ULTRA HANDWASH, DELICATES or CASUALS cycle was chosen\"",
+          "source": {
+            "line": 43,
+            "manual": "GE manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "washer-pauses-during-wash-cycle-1",
+          "label": "The highest SOIL LEVEL setting was chosen",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "The highest SOIL LEVEL setting adds a 15 minute Stain Wash agitate and soak period at the beginning of the wash cycle."
+          ],
+          "evidence": "GE manual, page 14: \"The highest SOIL LEVEL setting was chosen\"",
+          "source": {
+            "line": 46,
+            "manual": "GE manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "washer-pauses-during-spin-cycle",
+      "symptom": "Washer pauses during spin cycle",
+      "causes": [
+        {
+          "id": "washer-pauses-during-spin-cycle-0",
+          "label": "This is normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "The washer may pause during the spin cycle to remove soapy water more efficiently."
+          ],
+          "evidence": "GE manual, page 14: \"This is normal\"",
+          "source": {
+            "line": 50,
+            "manual": "GE manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "washer-won-t-operate",
+      "symptom": "Washer won’t operate",
+      "causes": [
+        {
+          "id": "washer-won-t-operate-0",
+          "label": "Control panel is asleep",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal.",
+            "Press POWER to activate the control panel."
+          ],
+          "evidence": "GE manual, page 14: \"Control panel is asleep\"",
+          "source": {
+            "line": 53,
+            "manual": "GE manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "washer-won-t-operate-1",
+          "label": "Washer is unplugged",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Make sure cord is plugged securely into a working outlet."
+          ],
+          "evidence": "GE manual, page 14: \"Washer is unplugged\"",
+          "source": {
+            "line": 55,
+            "manual": "GE manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "washer-won-t-operate-2",
+          "label": "Water supply is turned off",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Turn both hot and cold faucets fully on."
+          ],
+          "evidence": "GE manual, page 14: \"Water supply is turned off\"",
+          "source": {
+            "line": 56,
+            "manual": "GE manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "washer-won-t-operate-3",
+          "label": "Controls are not set properly",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Check controls."
+          ],
+          "evidence": "GE manual, page 14: \"Controls are not set properly\"",
+          "source": {
+            "line": 62,
+            "manual": "GE manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "washer-won-t-operate-4",
+          "label": "Lid is open—safety feature prevents agitation and spinning when lid is up.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Close lid and reset cycle, to the beginning if necessary."
+          ],
+          "evidence": "GE manual, page 14: \"Lid is open—safety feature prevents agitation and spinning when lid is up.\"",
+          "source": {
+            "line": 63,
+            "manual": "GE manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "washer-won-t-operate-5",
+          "label": "Circuit breaker/fuse is tripped/blown",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "Check house circuit breakers/fuses.",
+            "Replace fuses or reset breaker.",
+            "Washer should have separate outlet."
+          ],
+          "evidence": "GE manual, page 14: \"Circuit breaker/fuse is tripped/blown\"",
+          "source": {
+            "line": 66,
+            "manual": "GE manual",
+            "page": 14
+          }
+        },
+        {
+          "id": "washer-won-t-operate-6",
+          "label": "Electronics need to be reset",
+          "likelihood": 0.132,
+          "cost": null,
+          "remedies": [
+            "Unplug washer, wait 2 minutes, plug back in and press POWER."
+          ],
+          "evidence": "GE manual, page 14: \"Electronics need to be reset\"",
+          "source": {
+            "line": 68,
+            "manual": "GE manual",
+            "page": 14
+          }
+        }
+      ]
+    },
+    {
+      "id": "too-many-suds",
+      "symptom": "Too many suds",
+      "causes": [
+        {
+          "id": "too-many-suds-0",
+          "label": "Type of detergent",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Switch to a lower sudsing detergent brand and follow instructions on package."
+          ],
+          "evidence": "GE manual, page 15: \"Type of detergent\"",
+          "source": {
+            "line": 14,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "too-many-suds-1",
+          "label": "Very soft water",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Try less detergent."
+          ],
+          "evidence": "GE manual, page 15: \"Very soft water\"",
+          "source": {
+            "line": 16,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "too-many-suds-2",
+          "label": "Too much detergent",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Measure your detergent carefully.",
+            "Use less soap if you have soft water, a smaller load or a lightly soiled load."
+          ],
+          "evidence": "GE manual, page 15: \"Too much detergent\"",
+          "source": {
+            "line": 22,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-leaks",
+      "symptom": "Water leaks",
+      "causes": [
+        {
+          "id": "water-leaks-0",
+          "label": "Fill hoses or drain hose is improperly connected",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure hose connections are tight at faucets and at washer.",
+            "Make sure end of drain hose is properly connected to washer and correctly inserted in and secured to drain facility."
+          ],
+          "evidence": "GE manual, page 15: \"Fill hoses or drain hose is improperly connected\"",
+          "source": {
+            "line": 25,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "water-leaks-1",
+          "label": "Household drain may be clogged",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check household plumbing.",
+            "You may need to call a plumber."
+          ],
+          "evidence": "GE manual, page 15: \"Household drain may be clogged\"",
+          "source": {
+            "line": 30,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "water-leaks-2",
+          "label": "Constant water pressure to the fill hoses at the water source",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Tighten hoses at the faucets and turn the water off after each use.",
+            "Check condition of the fill hoses; they should be replaced every 5 years."
+          ],
+          "evidence": "GE manual, page 15: \"Constant water pressure to the fill hoses at the water source\"",
+          "source": {
+            "line": 32,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "water-leaks-3",
+          "label": "Using too much detergent in washer",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Use less detergent.",
+            "Use less soap if you have soft water, a smaller load or a lightly soiled load."
+          ],
+          "evidence": "GE manual, page 15: \"Using too much detergent in washer\"",
+          "source": {
+            "line": 41,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-temperature-seems-incorrect",
+      "symptom": "Water temperature seems incorrect",
+      "causes": [
+        {
+          "id": "water-temperature-seems-incorrect-0",
+          "label": "Cooler water temperatures provide improved energy efficiency",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "New laundry detergents have been formulated to work with cooler water temperatures without affecting wash performance."
+          ],
+          "evidence": "GE manual, page 15: \"Cooler water temperatures provide improved energy efficiency\"",
+          "source": {
+            "line": 44,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "water-temperature-seems-incorrect-1",
+          "label": "Control is not set properly",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check water temperature control and adjust."
+          ],
+          "evidence": "GE manual, page 15: \"Control is not set properly\"",
+          "source": {
+            "line": 47,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "water-temperature-seems-incorrect-2",
+          "label": "Water supply is turned off or improperly connected",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Turn both hot and cold faucets fully on and make sure hoses are connected to correct faucets."
+          ],
+          "evidence": "GE manual, page 15: \"Water supply is turned off or improperly connected\"",
+          "source": {
+            "line": 48,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "water-temperature-seems-incorrect-3",
+          "label": "Water valve screens are stopped up",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Turn off the water source and disconnect water fill hoses from the upper back of the washer.",
+            "Use a brush or toothpick to clean the screens in the machine.",
+            "Reconnect the hoses and turn the water back on."
+          ],
+          "evidence": "GE manual, page 15: \"Water valve screens are stopped up\"",
+          "source": {
+            "line": 50,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "water-temperature-seems-incorrect-4",
+          "label": "House water heater is not set properly",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Make sure house water heater is delivering water at 120°F–140°F (48°C–60°C)."
+          ],
+          "evidence": "GE manual, page 15: \"House water heater is not set properly\"",
+          "source": {
+            "line": 54,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "water-temperature-seems-incorrect-5",
+          "label": "PerfecTemp Plus feature was not activated",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "The lid must be closed for PerfecTemp Plus to work."
+          ],
+          "evidence": "GE manual, page 15: \"PerfecTemp Plus feature was not activated\"",
+          "source": {
+            "line": 61,
+            "manual": "GE manual",
+            "page": 15
+          }
+        },
+        {
+          "id": "water-temperature-seems-incorrect-6",
+          "label": "Wash temperature was set to TAP COLD",
+          "likelihood": 0.132,
+          "cost": null,
+          "remedies": [
+            "When the Tap Cold feature is selected, the water temperature may vary depending on the temperature of your household tap water."
+          ],
+          "evidence": "GE manual, page 15: \"Wash temperature was set to TAP COLD\"",
+          "source": {
+            "line": 63,
+            "manual": "GE manual",
+            "page": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "washer-is-noisy",
+      "symptom": "Washer is noisy",
+      "causes": [
+        {
+          "id": "washer-is-noisy-0",
+          "label": "Washer is uneven",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "To level the front of the washer, adjust the front leveling legs by rotating the individual leg in the proper direction for up or down.",
+            "To level back of washer, lift back of machine 4″ (11 cm) and set down."
+          ],
+          "evidence": "GE manual, page 16: \"Washer is uneven\"",
+          "source": {
+            "line": 34,
+            "manual": "GE manual",
+            "page": 16
+          }
+        },
+        {
+          "id": "washer-is-noisy-1",
+          "label": "Washer load is unbalanced",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Press START to pause the washer, open the lid and redistribute the load evenly.",
+            "Close the lid and press START again."
+          ],
+          "evidence": "GE manual, page 16: \"Washer load is unbalanced\"",
+          "source": {
+            "line": 43,
+            "manual": "GE manual",
+            "page": 16
+          }
+        },
+        {
+          "id": "washer-is-noisy-2",
+          "label": "Shipping rod is still assembled in unit",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "To remove shipping rod from washer, pull yellow tag and attached rod from the bottom right hand side of washer."
+          ],
+          "evidence": "GE manual, page 16: \"Shipping rod is still assembled in unit\"",
+          "source": {
+            "line": 46,
+            "manual": "GE manual",
+            "page": 16
+          }
+        },
+        {
+          "id": "washer-is-noisy-3",
+          "label": "Washer is sitting too close to wall (causes knocking during cycle)",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Pull washer away from the wall; about 4″ (11 cm) is needed."
+          ],
+          "evidence": "GE manual, page 16: \"Washer is sitting too close to wall (causes knocking during cycle)\"",
+          "source": {
+            "line": 48,
+            "manual": "GE manual",
+            "page": 16
+          }
+        },
+        {
+          "id": "washer-is-noisy-4",
+          "label": "PerfecTemp Plus feature is being used",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "This is normal.",
+            "PerfecTemp Plus turns water valves off and on to adjust water temperature."
+          ],
+          "evidence": "GE manual, page 16: \"PerfecTemp Plus feature is being used\"",
+          "source": {
+            "line": 51,
+            "manual": "GE manual",
+            "page": 16
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "review-perfectemp-plus-in-the-about-wash"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T10:06:00.659Z",
+  "learnedAt": "2026-10-05T10:01:43.125Z"
+}

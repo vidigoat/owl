@@ -2,6 +2,9 @@
   "model": "GTW860SSJWS",
   "brand": "GE",
   "kind": "Washer",
+  "alsoCovers": [
+    "GTW860SPJMC"
+  ],
   "source": "GTW860SSJWS.pdf",
   "pages": "14–16",
   "readWith": "text-layer",
@@ -834,8 +837,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T09:43:13.785Z",
-  "learnedAt": "2026-10-04T09:51:37.511Z",
-  "alsoCovers": [
-    "GTW860SPJMC"
-  ]
+  "learnedAt": "2026-10-05T10:01:18.320Z"
 }

@@ -589,11 +589,11 @@
       ]
     },
     {
-      "id": "no-power-washer-not-working-or-dead-22",
-      "symptom": "No power/washer not working or dead 22",
+      "id": "no-power-washer-not-working-or-dead",
+      "symptom": "No power/washer not working or dead",
       "causes": [
         {
-          "id": "no-power-washer-not-working-or-dead-22-0",
+          "id": "no-power-washer-not-working-or-dead-0",
           "label": "Drain hose is kinked or improperly connected",
           "likelihood": 0.625,
           "cost": null,
@@ -608,7 +608,7 @@
           }
         },
         {
-          "id": "no-power-washer-not-working-or-dead-22-1",
+          "id": "no-power-washer-not-working-or-dead-1",
           "label": "Household drain may be clogged",
           "likelihood": 0.385,
           "cost": null,
@@ -624,7 +624,7 @@
           }
         },
         {
-          "id": "no-power-washer-not-working-or-dead-22-2",
+          "id": "no-power-washer-not-working-or-dead-2",
           "label": "Drain hose pushed too far down the drain",
           "likelihood": 0.278,
           "cost": null,
@@ -639,7 +639,7 @@
           }
         },
         {
-          "id": "no-power-washer-not-working-or-dead-22-3",
+          "id": "no-power-washer-not-working-or-dead-3",
           "label": "Washer pump filter may be clogged",
           "likelihood": 0.217,
           "cost": null,
@@ -655,7 +655,7 @@
           }
         },
         {
-          "id": "no-power-washer-not-working-or-dead-22-4",
+          "id": "no-power-washer-not-working-or-dead-4",
           "label": "Washer is unplugged",
           "likelihood": 0.179,
           "cost": null,
@@ -670,7 +670,7 @@
           }
         },
         {
-          "id": "no-power-washer-not-working-or-dead-22-5",
+          "id": "no-power-washer-not-working-or-dead-5",
           "label": "Water supply is turned off",
           "likelihood": 0.152,
           "cost": null,
@@ -685,7 +685,7 @@
           }
         },
         {
-          "id": "no-power-washer-not-working-or-dead-22-6",
+          "id": "no-power-washer-not-working-or-dead-6",
           "label": "Circuit breaker/fuse is tripped/blown",
           "likelihood": 0.132,
           "cost": null,
@@ -702,7 +702,7 @@
           }
         },
         {
-          "id": "no-power-washer-not-working-or-dead-22-7",
+          "id": "no-power-washer-not-working-or-dead-7",
           "label": "Controls are not set properly",
           "likelihood": 0.116,
           "cost": null,
@@ -717,7 +717,7 @@
           }
         },
         {
-          "id": "no-power-washer-not-working-or-dead-22-8",
+          "id": "no-power-washer-not-working-or-dead-8",
           "label": "Automatic self system checks",
           "likelihood": 0.104,
           "cost": null,
@@ -1110,6 +1110,6 @@
   "rejected": [],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T09:43:29.333Z",
-  "learnedAt": "2026-10-04T09:51:42.725Z"
+  "reviewedAt": "2026-10-05T10:05:59.622Z",
+  "learnedAt": "2026-10-05T10:01:23.490Z"
 }

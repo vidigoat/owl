@@ -2,6 +2,11 @@
   "model": "GHDS835EDMC",
   "brand": "GE",
   "kind": "Dryer",
+  "alsoCovers": [
+    "GHDS830EDWS",
+    "GHDS830GDWS",
+    "GHDS835GDMC"
+  ],
   "source": "GHDS835EDMC.pdf",
   "pages": "12–14",
   "readWith": "text-layer",
@@ -785,9 +790,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:03.650Z",
-  "learnedAt": "2026-10-04T15:18:47.239Z",
-  "alsoCovers": [
-    "GHDS830EDWS",
-    "GHDS835GDMC"
-  ]
+  "learnedAt": "2026-10-05T10:02:13.480Z"
 }

@@ -2,6 +2,9 @@
   "model": "GDT530PGDWW",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "GDT530PGDBB"
+  ],
   "source": "GDT530PGDWW.pdf",
   "pages": "11–14",
   "readWith": "text-layer",
@@ -458,5 +461,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:19:49.694Z",
-  "learnedAt": "2026-10-04T15:17:28.230Z"
+  "learnedAt": "2026-10-05T10:00:46.785Z"
 }

@@ -2,6 +2,12 @@
   "model": "WSLS1100HWW",
   "brand": "GE",
   "kind": "Washer",
+  "alsoCovers": [
+    "WSLP1100DWH",
+    "WSLP1100DWW",
+    "WSLP1100HWW",
+    "WSLS1100DWW"
+  ],
   "source": "WSLS1100HWW.pdf",
   "pages": "18–20",
   "readWith": "text-layer",
@@ -240,11 +246,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:38.388Z",
-  "learnedAt": "2026-10-04T15:18:33.655Z",
-  "alsoCovers": [
-    "WSLP1100DWH",
-    "WSLP1100DWW",
-    "WSLP1100HWW",
-    "WSLS1100DWW"
-  ]
+  "learnedAt": "2026-10-05T10:01:33.164Z"
 }

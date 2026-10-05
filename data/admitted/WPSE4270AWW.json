@@ -2,6 +2,16 @@
   "model": "WPSE4270AWW",
   "brand": "GE",
   "kind": "Washer",
+  "alsoCovers": [
+    "WASE4220AAA",
+    "WASE4220AWW",
+    "WPSE4200AAA",
+    "WPSE4200ACC",
+    "WPSE4200AWW",
+    "WPSE4270AAA",
+    "WSSE4220AAA",
+    "WSSE4220AWW"
+  ],
   "source": "WPSE4270AWW.pdf",
   "pages": "11–13",
   "readWith": "text-layer",
@@ -390,15 +400,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:37.826Z",
-  "learnedAt": "2026-10-04T15:18:30.731Z",
-  "alsoCovers": [
-    "WASE4220AAA",
-    "WASE4220AWW",
-    "WPSE4200AAA",
-    "WPSE4200ACC",
-    "WPSE4200AWW",
-    "WPSE4270AAA",
-    "WSSE4220AAA",
-    "WSSE4220AWW"
-  ]
+  "learnedAt": "2026-10-05T10:01:30.270Z"
 }

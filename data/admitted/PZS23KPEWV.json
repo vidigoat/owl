@@ -1,0 +1,58 @@
+{
+  "model": "PZS23KPEWV",
+  "brand": "GE",
+  "kind": "Refrigerator",
+  "alsoCovers": [
+    "PSE26KGEBB",
+    "PSE26KSESS",
+    "PZS23KGEBB"
+  ],
+  "source": "PZS23KPEWV.pdf",
+  "pages": "44–47",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "selecttemp-or-beverage-center-feature-is",
+      "symptom": "SelectTemp or Beverage Center feature is not working While QuickFreeze™ is enabled, the actual freezer temperature may drop as low as –3°F (–19°C)",
+      "causes": [
+        {
+          "id": "selecttemp-or-beverage-center-feature-is-0",
+          "label": "Refrigerator compartment temperature control is set at warmest setting.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "7KLV\u0003LV\u0003QRUPDO\u0011\u0003,Q\u0003RUGHU\u0003WR\u0003PLQLPL]H\u0003HQHUJ\\\u0003XVDJH\u000f\u0003 the SelectTemp and Beverage Center features are disabled when the refrigerator temperature control is set at the warmest setting."
+          ],
+          "evidence": "GE manual, page 47: \"Refrigerator compartment temperature control is set at warmest setting.\"",
+          "source": {
+            "line": 3,
+            "manual": "GE manual",
+            "page": 47
+          }
+        },
+        {
+          "id": "selecttemp-or-beverage-center-feature-is-1",
+          "label": "Beverage Center feature turns off after six months of continuous operation.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Press Beverage Center pad to restart.",
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 47: \"Beverage Center feature turns off after six months of continuous operation.\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 47
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T09:56:27.343Z",
+  "learnedAt": "2026-10-05T10:03:42.990Z"
+}

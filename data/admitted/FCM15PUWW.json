@@ -2,6 +2,16 @@
   "model": "FCM15PUWW",
   "brand": "GE",
   "kind": "Refrigerator",
+  "alsoCovers": [
+    "FCM15DTWH",
+    "FCM15SPWH",
+    "FCM20SUWW",
+    "FCM25DSWH",
+    "FUF20DPRWH",
+    "FUM14SMRWH",
+    "FUM17DTRWH",
+    "FUM21DRRWH"
+  ],
   "source": "FCM15PUWW.pdf",
   "pages": "14–16",
   "readWith": "text-layer",
@@ -684,5 +694,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:19:47.189Z",
-  "learnedAt": "2026-10-04T15:17:58.869Z"
+  "learnedAt": "2026-10-05T10:03:19.038Z"
 }

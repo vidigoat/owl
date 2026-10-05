@@ -2,6 +2,14 @@
   "model": "GSD2000ZWH",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "GSD2000ZAD",
+    "GSD2030ZWW",
+    "GSD2200ZAD",
+    "GSD2200ZWH",
+    "GSD2220ZBB",
+    "GSD2230ZWW"
+  ],
   "source": "GSD2000ZWH.pdf",
   "pages": "19–24",
   "readWith": "text-layer",
@@ -407,8 +415,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:09.332Z",
-  "learnedAt": "2026-10-04T15:17:30.443Z",
-  "alsoCovers": [
-    "GSD2230ZWW"
-  ]
+  "learnedAt": "2026-10-05T10:00:48.935Z"
 }

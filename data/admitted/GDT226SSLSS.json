@@ -180,22 +180,6 @@
       "symptom": "Spots and filming on glasses and flatware",
       "causes": [
         {
-          "id": "spots-and-filming-on-glasses-and-flatwar-0",
-          "label": "Extremely hard water",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "se high quality rinse agents such as Cascade® Platinum™ Power Dry™ Rinse Aid or Finish® Jet-Dry® Rinse Aid to prevent spots and prevent new film build-up.",
-            "If water is extremely hard, a softener may be required."
-          ],
-          "evidence": "GE manual, page 14: \"Extremely hard water\"",
-          "source": {
-            "line": 38,
-            "manual": "GE manual",
-            "page": 14
-          }
-        },
-        {
           "id": "spots-and-filming-on-glasses-and-flatwar-1",
           "label": "Low inlet water temperature",
           "likelihood": 0.385,
@@ -274,11 +258,11 @@
       ]
     },
     {
-      "id": "cloudiness-on-glassware-14",
-      "symptom": "Cloudiness on glassware 14",
+      "id": "cloudiness-on-glassware",
+      "symptom": "Cloudiness on glassware",
       "causes": [
         {
-          "id": "cloudiness-on-glassware-14-0",
+          "id": "cloudiness-on-glassware-0",
           "label": "Combination of soft water and too much detergent",
           "likelihood": 0.625,
           "cost": null,
@@ -771,12 +755,13 @@
   ],
   "rejected": [
     "dishes-and-flatware-not-clean-3",
-    "cloudiness-on-glassware-14-1",
+    "spots-and-filming-on-glasses-and-flatwar-0",
+    "cloudiness-on-glassware-1",
     "dishes-don-t-dry-0",
     "noise-1"
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T15:19:49.318Z",
-  "learnedAt": "2026-10-04T15:17:23.068Z"
+  "reviewedAt": "2026-10-05T10:04:45.814Z",
+  "learnedAt": "2026-10-05T10:00:41.566Z"
 }

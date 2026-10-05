@@ -2,6 +2,9 @@
   "model": "GSC3500VBB",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "GSC3500VWW"
+  ],
   "source": "GSC3500VBB.pdf",
   "pages": "14–15",
   "readWith": "text-layer",
@@ -74,8 +77,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:09.170Z",
-  "learnedAt": "2026-10-04T15:17:21.660Z",
-  "alsoCovers": [
-    "GSC3500VWW"
-  ]
+  "learnedAt": "2026-10-05T10:00:40.090Z"
 }

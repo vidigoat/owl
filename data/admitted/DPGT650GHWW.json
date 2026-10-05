@@ -2,6 +2,11 @@
   "model": "DPGT650GHWW",
   "brand": "GE",
   "kind": "Dryer",
+  "alsoCovers": [
+    "DPGT650EHMG",
+    "DPGT650EHWW",
+    "DPGT650GHMG"
+  ],
   "source": "DPGT650GHWW.pdf",
   "pages": "33–35",
   "readWith": "text-layer",
@@ -162,9 +167,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:19:42.518Z",
-  "learnedAt": "2026-10-04T15:18:58.538Z",
-  "alsoCovers": [
-    "DPGT650EHWW",
-    "DPGT650GHMG"
-  ]
+  "learnedAt": "2026-10-05T10:02:24.706Z"
 }

@@ -2,6 +2,11 @@
   "model": "WPRB8050DCC",
   "brand": "GE",
   "kind": "Washer",
+  "alsoCovers": [
+    "WPRB8050DWW",
+    "WPRB9110DCC",
+    "WPRB9110DWW"
+  ],
   "source": "WPRB8050DCC.pdf",
   "pages": "15–18",
   "readWith": "text-layer",
@@ -359,10 +364,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T09:43:29.425Z",
-  "learnedAt": "2026-10-04T09:51:36.127Z",
-  "alsoCovers": [
-    "WPRB8050DWW",
-    "WPRB9110DCC",
-    "WPRB9110DWW"
-  ]
+  "learnedAt": "2026-10-05T10:01:17.031Z"
 }

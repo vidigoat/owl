@@ -1,0 +1,1108 @@
+{
+  "model": "JS998BHBB",
+  "brand": "GE",
+  "kind": "Range",
+  "alsoCovers": [
+    "JS998SHSS"
+  ],
+  "source": "JS998BHBB.pdf",
+  "pages": "48–52",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "surface-units-will-not-maintain-a-rollin",
+      "symptom": "Surface units will not maintain a rolling boil or cooking is not fast enough",
+      "causes": [
+        {
+          "id": "surface-units-will-not-maintain-a-rollin-0",
+          "label": "Improper cookware being used.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use pans which are flat and match the diameter of the surface unit selected."
+          ],
+          "evidence": "GE manual, page 48: \"Improper cookware being used.\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 48
+          }
+        }
+      ]
+    },
+    {
+      "id": "surface-units-do-not-work-properly",
+      "symptom": "Surface units do not work properly",
+      "causes": [
+        {
+          "id": "surface-units-do-not-work-properly-0",
+          "label": "A fuse in your home may be blown or the circuit breaker tripped.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace the fuse or reset the circuit breaker."
+          ],
+          "evidence": "GE manual, page 48: \"A fuse in your home may be blown or the circuit breaker tripped.\"",
+          "source": {
+            "line": 18,
+            "manual": "GE manual",
+            "page": 48
+          }
+        },
+        {
+          "id": "surface-units-do-not-work-properly-1",
+          "label": "Cooktop controls improperly set.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check to see the correct control is set for the surface unit you are using."
+          ],
+          "evidence": "GE manual, page 48: \"Cooktop controls improperly set.\"",
+          "source": {
+            "line": 21,
+            "manual": "GE manual",
+            "page": 48
+          }
+        }
+      ]
+    },
+    {
+      "id": "scratches-may-appear-as-cracks-on-cookto",
+      "symptom": "Scratches (may appear as cracks) on cooktop glass surface",
+      "causes": [
+        {
+          "id": "scratches-may-appear-as-cracks-on-cookto-0",
+          "label": "Incorrect cleaning methods being used.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Scratches are not removable.",
+            "Tiny scratches will become less visible in time as a result of cleaning."
+          ],
+          "evidence": "GE manual, page 48: \"Incorrect cleaning methods being used.\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 48
+          }
+        },
+        {
+          "id": "scratches-may-appear-as-cracks-on-cookto-1",
+          "label": "Cookware with rough bottoms being used or coarse particles (salt or sand) were between the cookware and the surface of the cooktop.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "To avoid scratches, use the recommended cleaning procedures.",
+            "Make sure bottoms of cookware are clean before use, and use cookware with smooth bottoms."
+          ],
+          "evidence": "GE manual, page 48: \"Cookware with rough bottoms being used or coarse particles (salt or sand) were between the cookware and the surface of the cooktop.\"",
+          "source": {
+            "line": 26,
+            "manual": "GE manual",
+            "page": 48
+          }
+        },
+        {
+          "id": "scratches-may-appear-as-cracks-on-cookto-2",
+          "label": "Cookware has been slid across the cooktop surface.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [],
+          "evidence": "GE manual, page 48: \"Cookware has been slid across the cooktop surface.\"",
+          "source": {
+            "line": 36,
+            "manual": "GE manual",
+            "page": 48
+          }
+        }
+      ]
+    },
+    {
+      "id": "areas-of-discoloration-on-the-cooktop",
+      "symptom": "Areas of discoloration on the cooktop",
+      "causes": [
+        {
+          "id": "areas-of-discoloration-on-the-cooktop-0",
+          "label": "Food spillovers not cleaned before next use.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See the Cleaning the glass cooktop section."
+          ],
+          "evidence": "GE manual, page 48: \"Food spillovers not cleaned before next use.\"",
+          "source": {
+            "line": 39,
+            "manual": "GE manual",
+            "page": 48
+          }
+        },
+        {
+          "id": "areas-of-discoloration-on-the-cooktop-1",
+          "label": "Hot surface on a model with a light-colored cooktop.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "This is normal.",
+            "The surface may appear discolored when it is hot.",
+            "This is temporary and will disappear as the glass cools."
+          ],
+          "evidence": "GE manual, page 48: \"Hot surface on a model with a light-colored cooktop.\"",
+          "source": {
+            "line": 42,
+            "manual": "GE manual",
+            "page": 48
+          }
+        }
+      ]
+    },
+    {
+      "id": "plastic-melted-to-the-surface",
+      "symptom": "Plastic melted to the surface",
+      "causes": [
+        {
+          "id": "plastic-melted-to-the-surface-0",
+          "label": "Hot cooktop came into contact with plastic placed on the hot cooktop.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See the Glass surface—potential for permanent damage section in the Cleaning the glass cooktop section."
+          ],
+          "evidence": "GE manual, page 48: \"Hot cooktop came into contact with plastic placed on the hot cooktop.\"",
+          "source": {
+            "line": 50,
+            "manual": "GE manual",
+            "page": 48
+          }
+        }
+      ]
+    },
+    {
+      "id": "pitting-or-indentation-of-the-cooktop",
+      "symptom": "Pitting (or indentation) of the cooktop",
+      "causes": [
+        {
+          "id": "pitting-or-indentation-of-the-cooktop-0",
+          "label": "Hot sugar mixture spilled on the cooktop.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Call a qualified technician for replacement."
+          ],
+          "evidence": "GE manual, page 48: \"Hot sugar mixture spilled on the cooktop.\"",
+          "source": {
+            "line": 54,
+            "manual": "GE manual",
+            "page": 48
+          }
+        }
+      ]
+    },
+    {
+      "id": "frequent-cycling-off-and-on-of-surface-u",
+      "symptom": "Frequent cycling off and on of surface units",
+      "causes": [
+        {
+          "id": "frequent-cycling-off-and-on-of-surface-u-0",
+          "label": "Improper cookware being used.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use only flat cookware to minimize cycling."
+          ],
+          "evidence": "GE manual, page 48: \"Improper cookware being used.\"",
+          "source": {
+            "line": 57,
+            "manual": "GE manual",
+            "page": 48
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-does-not-speed-bake-properly",
+      "symptom": "Food does not speed bake properly",
+      "causes": [
+        {
+          "id": "food-does-not-speed-bake-properly-0",
+          "label": "Oven controls improperly set.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See Using the Trivection™ Oven section."
+          ],
+          "evidence": "GE manual, page 49: \"Oven controls improperly set.\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 49
+          }
+        },
+        {
+          "id": "food-does-not-speed-bake-properly-1",
+          "label": "Rack position is incorrect or the rack is not level.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See Using the Trivection™ Oven section."
+          ],
+          "evidence": "GE manual, page 49: \"Rack position is incorrect or the rack is not level.\"",
+          "source": {
+            "line": 14,
+            "manual": "GE manual",
+            "page": 49
+          }
+        },
+        {
+          "id": "food-does-not-speed-bake-properly-2",
+          "label": "Incorrect use of cookware and/or aluminum foil.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "See Using the Trivection™ Oven section."
+          ],
+          "evidence": "GE manual, page 49: \"Incorrect use of cookware and/or aluminum foil.\"",
+          "source": {
+            "line": 16,
+            "manual": "GE manual",
+            "page": 49
+          }
+        },
+        {
+          "id": "food-does-not-speed-bake-properly-3",
+          "label": "Cookware of improper size being used.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [],
+          "evidence": "GE manual, page 49: \"Cookware of improper size being used.\"",
+          "source": {
+            "line": 18,
+            "manual": "GE manual",
+            "page": 49
+          }
+        },
+        {
+          "id": "food-does-not-speed-bake-properly-4",
+          "label": "Door not closed.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Close door completely."
+          ],
+          "evidence": "GE manual, page 49: \"Door not closed.\"",
+          "source": {
+            "line": 20,
+            "manual": "GE manual",
+            "page": 49
+          }
+        },
+        {
+          "id": "food-does-not-speed-bake-properly-5",
+          "label": "Very delicate item.",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "Use traditional bake."
+          ],
+          "evidence": "GE manual, page 49: \"Very delicate item.\"",
+          "source": {
+            "line": 21,
+            "manual": "GE manual",
+            "page": 49
+          }
+        },
+        {
+          "id": "food-does-not-speed-bake-properly-6",
+          "label": "Food not to desired doneness.",
+          "likelihood": 0.132,
+          "cost": null,
+          "remedies": [
+            "Cook times will vary due to recipe and pan variations.",
+            "Check food when prompted and add additional time with More Time if needed."
+          ],
+          "evidence": "GE manual, page 49: \"Food not to desired doneness.\"",
+          "source": {
+            "line": 22,
+            "manual": "GE manual",
+            "page": 49
+          }
+        },
+        {
+          "id": "food-does-not-speed-bake-properly-7",
+          "label": "Sauce on food gets too brown.",
+          "likelihood": 0.116,
+          "cost": null,
+          "remedies": [
+            "Apply sauce later in cooking cycle."
+          ],
+          "evidence": "GE manual, page 49: \"Sauce on food gets too brown.\"",
+          "source": {
+            "line": 30,
+            "manual": "GE manual",
+            "page": 49
+          }
+        },
+        {
+          "id": "food-does-not-speed-bake-properly-8",
+          "label": "Meat cooked too long.",
+          "likelihood": 0.104,
+          "cost": null,
+          "remedies": [
+            "Remove from oven sooner and allow to stand.",
+            "Meat temperature will continue to rise."
+          ],
+          "evidence": "GE manual, page 49: \"Meat cooked too long.\"",
+          "source": {
+            "line": 31,
+            "manual": "GE manual",
+            "page": 49
+          }
+        },
+        {
+          "id": "food-does-not-speed-bake-properly-9",
+          "label": "Put food in too early.",
+          "likelihood": 0.094,
+          "cost": null,
+          "remedies": [
+            "Place food in the oven once the oven is preheated and the display shows, “PUT FOOD IN OVEN.”"
+          ],
+          "evidence": "GE manual, page 49: \"Put food in too early.\"",
+          "source": {
+            "line": 33,
+            "manual": "GE manual",
+            "page": 49
+          }
+        }
+      ]
+    },
+    {
+      "id": "temperature-reading-on-meat-thermometer-",
+      "symptom": "Temperature reading on meat thermometer seems inaccurate",
+      "causes": [
+        {
+          "id": "temperature-reading-on-meat-thermometer--0",
+          "label": "Don’t use a meat thermometer in oven while speedcooking.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Take the temperature of the meat after removing it from the oven."
+          ],
+          "evidence": "GE manual, page 49: \"Don’t use a meat thermometer in oven while speedcooking.\"",
+          "source": {
+            "line": 36,
+            "manual": "GE manual",
+            "page": 49
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-does-not-speed-broil-properly",
+      "symptom": "Food does not speed broil properly",
+      "causes": [
+        {
+          "id": "food-does-not-speed-broil-properly-0",
+          "label": "Oven controls improperly set.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See Using the Trivection™ Oven section."
+          ],
+          "evidence": "GE manual, page 49: \"Oven controls improperly set.\"",
+          "source": {
+            "line": 41,
+            "manual": "GE manual",
+            "page": 49
+          }
+        },
+        {
+          "id": "food-does-not-speed-broil-properly-1",
+          "label": "Improper rack position being used.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See the Broiling Guide."
+          ],
+          "evidence": "GE manual, page 49: \"Improper rack position being used.\"",
+          "source": {
+            "line": 48,
+            "manual": "GE manual",
+            "page": 49
+          }
+        }
+      ]
+    },
+    {
+      "id": "cook-time-doesn-t-countdown-while-speedc",
+      "symptom": "Cook time doesn’t countdown while speedcooking",
+      "causes": [
+        {
+          "id": "cook-time-doesn-t-countdown-while-speedc-0",
+          "label": "Oven controls improperly set.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See Using the Trivection™ Oven section."
+          ],
+          "evidence": "GE manual, page 49: \"Oven controls improperly set.\"",
+          "source": {
+            "line": 65,
+            "manual": "GE manual",
+            "page": 49
+          }
+        },
+        {
+          "id": "cook-time-doesn-t-countdown-while-speedc-1",
+          "label": "Door is not closed completely.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Close door completely."
+          ],
+          "evidence": "GE manual, page 49: \"Door is not closed completely.\"",
+          "source": {
+            "line": 67,
+            "manual": "GE manual",
+            "page": 49
+          }
+        },
+        {
+          "id": "cook-time-doesn-t-countdown-while-speedc-2",
+          "label": "START not selected.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Press START once food is placed in the oven."
+          ],
+          "evidence": "GE manual, page 49: \"START not selected.\"",
+          "source": {
+            "line": 69,
+            "manual": "GE manual",
+            "page": 49
+          }
+        }
+      ]
+    },
+    {
+      "id": "arcing-between-metal-surfaces-in-oven-wh",
+      "symptom": "Arcing between metal surfaces in oven while speedcooking or defrosting",
+      "causes": [
+        {
+          "id": "arcing-between-metal-surfaces-in-oven-wh-0",
+          "label": "Improper spacing between metal surfaces and/or aluminum foil.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See Using the Trivection™ Oven section."
+          ],
+          "evidence": "GE manual, page 50: \"Improper spacing between metal surfaces and/or aluminum foil.\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 50
+          }
+        }
+      ]
+    },
+    {
+      "id": "display-shows-miswired-detected",
+      "symptom": "Display shows “Miswired detected”",
+      "causes": [
+        {
+          "id": "display-shows-miswired-detected-0",
+          "label": "Wiring from house to oven is incorrect.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Contact installer or qualified electrician to check house wiring to range."
+          ],
+          "evidence": "GE manual, page 50: \"Wiring from house to oven is incorrect.\"",
+          "source": {
+            "line": 18,
+            "manual": "GE manual",
+            "page": 50
+          }
+        }
+      ]
+    },
+    {
+      "id": "option-not-seen-on-the-display-screen",
+      "symptom": "Option not seen on the display screen",
+      "causes": [
+        {
+          "id": "option-not-seen-on-the-display-screen-0",
+          "label": "Option may be listed on the next screen.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Select MORE to see additional items."
+          ],
+          "evidence": "GE manual, page 50: \"Option may be listed on the next screen.\"",
+          "source": {
+            "line": 21,
+            "manual": "GE manual",
+            "page": 50
+          }
+        }
+      ]
+    },
+    {
+      "id": "hot-air-from-oven",
+      "symptom": "Hot air from oven",
+      "causes": [
+        {
+          "id": "hot-air-from-oven-0",
+          "label": "When using the cooking features, hot air will exit the oven through the vent located above the door.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 50: \"When using the cooking features, hot air will exit the oven through the vent located above the door.\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 50
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-does-not-bake-or-roast-properly-in-",
+      "symptom": "Food does not bake or roast properly in the oven",
+      "causes": [
+        {
+          "id": "food-does-not-bake-or-roast-properly-in--0",
+          "label": "Oven controls improperly set.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See the Using traditional bake and roast section."
+          ],
+          "evidence": "GE manual, page 50: \"Oven controls improperly set.\"",
+          "source": {
+            "line": 29,
+            "manual": "GE manual",
+            "page": 50
+          }
+        },
+        {
+          "id": "food-does-not-bake-or-roast-properly-in--1",
+          "label": "Shelf position is incorrect or the shelf is not level.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See the Using traditional bake and roast section."
+          ],
+          "evidence": "GE manual, page 50: \"Shelf position is incorrect or the shelf is not level.\"",
+          "source": {
+            "line": 36,
+            "manual": "GE manual",
+            "page": 50
+          }
+        },
+        {
+          "id": "food-does-not-bake-or-roast-properly-in--2",
+          "label": "Incorrect cookware or cookware of improper size being used.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "See the Using traditional bake and roast section."
+          ],
+          "evidence": "GE manual, page 50: \"Incorrect cookware or cookware of improper size being used.\"",
+          "source": {
+            "line": 38,
+            "manual": "GE manual",
+            "page": 50
+          }
+        },
+        {
+          "id": "food-does-not-bake-or-roast-properly-in--3",
+          "label": "Oven temperature needs adjustment.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "See the Adjust the oven temperature—Do it yourself! section."
+          ],
+          "evidence": "GE manual, page 50: \"Oven temperature needs adjustment.\"",
+          "source": {
+            "line": 41,
+            "manual": "GE manual",
+            "page": 50
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-does-not-broil-properly",
+      "symptom": "Food does not broil properly",
+      "causes": [
+        {
+          "id": "food-does-not-broil-properly-0",
+          "label": "Oven controls improperly set.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure you select BROIL."
+          ],
+          "evidence": "GE manual, page 50: \"Oven controls improperly set.\"",
+          "source": {
+            "line": 44,
+            "manual": "GE manual",
+            "page": 50
+          }
+        },
+        {
+          "id": "food-does-not-broil-properly-1",
+          "label": "Improper shelf position being used.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See the Broiling Guide."
+          ],
+          "evidence": "GE manual, page 50: \"Improper shelf position being used.\"",
+          "source": {
+            "line": 46,
+            "manual": "GE manual",
+            "page": 50
+          }
+        },
+        {
+          "id": "food-does-not-broil-properly-2",
+          "label": "Cookware not suited for broiling.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "For best results, use a pan designed for broiling."
+          ],
+          "evidence": "GE manual, page 50: \"Cookware not suited for broiling.\"",
+          "source": {
+            "line": 53,
+            "manual": "GE manual",
+            "page": 50
+          }
+        },
+        {
+          "id": "food-does-not-broil-properly-3",
+          "label": "In some areas the power (voltage) may be low.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Preheat the broil element for 10 minutes.",
+            "Broil for the longest period of time recommended in the Broiling Guide."
+          ],
+          "evidence": "GE manual, page 50: \"In some areas the power (voltage) may be low.\"",
+          "source": {
+            "line": 55,
+            "manual": "GE manual",
+            "page": 50
+          }
+        }
+      ]
+    },
+    {
+      "id": "clock-and-timer-do-not-work-or-display-g",
+      "symptom": "Clock and timer do not work or display goes blank",
+      "causes": [
+        {
+          "id": "clock-and-timer-do-not-work-or-display-g-0",
+          "label": "The clock is in the no clock mode.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See the Settings section for the oven clock."
+          ],
+          "evidence": "GE manual, page 50: \"The clock is in the no clock mode.\"",
+          "source": {
+            "line": 60,
+            "manual": "GE manual",
+            "page": 50
+          }
+        },
+        {
+          "id": "clock-and-timer-do-not-work-or-display-g-1",
+          "label": "Controls improperly set.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See the Using the clock and lower oven timer section."
+          ],
+          "evidence": "GE manual, page 50: \"Controls improperly set.\"",
+          "source": {
+            "line": 63,
+            "manual": "GE manual",
+            "page": 50
+          }
+        },
+        {
+          "id": "clock-and-timer-do-not-work-or-display-g-2",
+          "label": "A fuse in your home may be blown or the circuit breaker tripped.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Replace the fuse or reset the circuit breaker."
+          ],
+          "evidence": "GE manual, page 50: \"A fuse in your home may be blown or the circuit breaker tripped.\"",
+          "source": {
+            "line": 64,
+            "manual": "GE manual",
+            "page": 50
+          }
+        }
+      ]
+    },
+    {
+      "id": "oven-temperature-too-hot-or-too-cold",
+      "symptom": "Oven temperature too hot or too cold",
+      "causes": [
+        {
+          "id": "oven-temperature-too-hot-or-too-cold-0",
+          "label": "Oven temperature needs adjustment.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See the Adjust the oven temperature—Do it yourself! section."
+          ],
+          "evidence": "GE manual, page 51: \"Oven temperature needs adjustment.\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 51
+          }
+        }
+      ]
+    },
+    {
+      "id": "oven-will-not-work",
+      "symptom": "Oven will not work",
+      "causes": [
+        {
+          "id": "oven-will-not-work-0",
+          "label": "Oven controls improperly set.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See the Using the oven section."
+          ],
+          "evidence": "GE manual, page 51: \"Oven controls improperly set.\"",
+          "source": {
+            "line": 16,
+            "manual": "GE manual",
+            "page": 51
+          }
+        },
+        {
+          "id": "oven-will-not-work-1",
+          "label": "A fuse in your home may be blown or the circuit breaker tripped.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Replace the fuse or reset the circuit breaker."
+          ],
+          "evidence": "GE manual, page 51: \"A fuse in your home may be blown or the circuit breaker tripped.\"",
+          "source": {
+            "line": 17,
+            "manual": "GE manual",
+            "page": 51
+          }
+        }
+      ]
+    },
+    {
+      "id": "crackling-or-popping-sound-in-the-oven",
+      "symptom": "“Crackling” or “popping” sound in the oven",
+      "causes": [
+        {
+          "id": "crackling-or-popping-sound-in-the-oven-0",
+          "label": "This is the sound of the metal heating and cooling during both the cooking and cleaning functions.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 51: \"This is the sound of the metal heating and cooling during both the cooking and cleaning functions.\"",
+          "source": {
+            "line": 25,
+            "manual": "GE manual",
+            "page": 51
+          }
+        }
+      ]
+    },
+    {
+      "id": "excessive-smoking-in-the-oven-during-a-c",
+      "symptom": "Excessive smoking in the oven during a clean cycle",
+      "causes": [
+        {
+          "id": "excessive-smoking-in-the-oven-during-a-c-0",
+          "label": "Excessive soil.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Press the CLEAR/OFF pad.",
+            "Open the windows to rid the room of smoke.",
+            "Wait until the    (LOCK) light goes off.",
+            "Wipe up the excess soil and reset the clean cycle."
+          ],
+          "evidence": "GE manual, page 51: \"Excessive soil.\"",
+          "source": {
+            "line": 35,
+            "manual": "GE manual",
+            "page": 51
+          }
+        }
+      ]
+    },
+    {
+      "id": "oven-door-will-not-open-after-a-clean-cy",
+      "symptom": "Oven door will not open after a clean cycle",
+      "causes": [
+        {
+          "id": "oven-door-will-not-open-after-a-clean-cy-0",
+          "label": "Oven too hot.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Allow the oven to cool below locking temperature."
+          ],
+          "evidence": "GE manual, page 51: \"Oven too hot.\"",
+          "source": {
+            "line": 40,
+            "manual": "GE manual",
+            "page": 51
+          }
+        }
+      ]
+    },
+    {
+      "id": "oven-not-clean-after-a-clean-cycle",
+      "symptom": "Oven not clean after a clean cycle",
+      "causes": [
+        {
+          "id": "oven-not-clean-after-a-clean-cycle-0",
+          "label": "Oven controls improperly set.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See the Using the self-cleaning oven section."
+          ],
+          "evidence": "GE manual, page 51: \"Oven controls improperly set.\"",
+          "source": {
+            "line": 44,
+            "manual": "GE manual",
+            "page": 51
+          }
+        },
+        {
+          "id": "oven-not-clean-after-a-clean-cycle-1",
+          "label": "Oven was heavily soiled.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Clean up heavy spillovers before starting the clean cycle.",
+            "Heavily soiled ovens may need to self-clean again or for a longer period of time."
+          ],
+          "evidence": "GE manual, page 51: \"Oven was heavily soiled.\"",
+          "source": {
+            "line": 51,
+            "manual": "GE manual",
+            "page": 51
+          }
+        }
+      ]
+    },
+    {
+      "id": "display-shows-err",
+      "symptom": "Display shows \"ERR\"",
+      "causes": [
+        {
+          "id": "display-shows-err-0",
+          "label": "A temperature was set outside the allowable range of 170°F–550°F.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Set the temperature between 170°F–550°F."
+          ],
+          "evidence": "GE manual, page 51: \"A temperature was set outside the allowable range of 170°F–550°F.\"",
+          "source": {
+            "line": 61,
+            "manual": "GE manual",
+            "page": 51
+          }
+        }
+      ]
+    },
+    {
+      "id": "f-and-a-number-or-letter-flash-in-the-ov",
+      "symptom": "“F— and a number or letter” flash in the oven display",
+      "causes": [
+        {
+          "id": "f-and-a-number-or-letter-flash-in-the-ov-0",
+          "label": "You have a function error code.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Press the CLEAR/OFF pad.",
+            "Allow the oven to cool for one hour.",
+            "Put the oven back into operation."
+          ],
+          "evidence": "GE manual, page 52: \"You have a function error code.\"",
+          "source": {
+            "line": 17,
+            "manual": "GE manual",
+            "page": 52
+          }
+        },
+        {
+          "id": "f-and-a-number-or-letter-flash-in-the-ov-1",
+          "label": "If the function code repeats.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Disconnect all power to the cooking center for at least 30 seconds and then reconnect power.",
+            "If the function error code repeats, call for service."
+          ],
+          "evidence": "GE manual, page 52: \"If the function code repeats.\"",
+          "source": {
+            "line": 20,
+            "manual": "GE manual",
+            "page": 52
+          }
+        }
+      ]
+    },
+    {
+      "id": "power-outage-clock-flashes",
+      "symptom": "Power outage, clock flashes",
+      "causes": [
+        {
+          "id": "power-outage-clock-flashes-0",
+          "label": "Power outage or surge.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Reset the clock.",
+            "If the oven was in use, you must reset it by pressing the CLEAR/OFF pad, setting the clock and resetting any cooking function."
+          ],
+          "evidence": "GE manual, page 52: \"Power outage or surge.\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 52
+          }
+        }
+      ]
+    },
+    {
+      "id": "burning-or-oily-odor-emitting-from-oven-",
+      "symptom": "“Burning” or “oily” odor emitting from oven vent",
+      "causes": [
+        {
+          "id": "burning-or-oily-odor-emitting-from-oven--0",
+          "label": "This is normal in a new oven and will disappear in time.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "To speed the process, set a self-clean cycle for a minimum of 3 hours.",
+            "See the Using the self-cleaning oven section."
+          ],
+          "evidence": "GE manual, page 52: \"This is normal in a new oven and will disappear in time.\"",
+          "source": {
+            "line": 42,
+            "manual": "GE manual",
+            "page": 52
+          }
+        }
+      ]
+    },
+    {
+      "id": "strong-odor-in-the-oven",
+      "symptom": "Strong odor in the oven",
+      "causes": [
+        {
+          "id": "strong-odor-in-the-oven-0",
+          "label": "An odor from the insulation around the inside of the oven is normal for the first few times the oven is used.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is temporary."
+          ],
+          "evidence": "GE manual, page 52: \"An odor from the insulation around the inside of the oven is normal for the first few times the oven is used.\"",
+          "source": {
+            "line": 46,
+            "manual": "GE manual",
+            "page": 52
+          }
+        }
+      ]
+    },
+    {
+      "id": "storage-drawer-is-crooked",
+      "symptom": "Storage drawer is crooked",
+      "causes": [
+        {
+          "id": "storage-drawer-is-crooked-0",
+          "label": "Rear drawer support is on top of the guide rail.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Reposition the drawer.",
+            "See the Storage Drawer Removal instructions in the Care and cleaning of your range section."
+          ],
+          "evidence": "GE manual, page 52: \"Rear drawer support is on top of the guide rail.\"",
+          "source": {
+            "line": 62,
+            "manual": "GE manual",
+            "page": 52
+          }
+        }
+      ]
+    },
+    {
+      "id": "storage-drawer-won-t-close",
+      "symptom": "Storage drawer won’t close",
+      "causes": [
+        {
+          "id": "storage-drawer-won-t-close-0",
+          "label": "Power cord may be obstructing drawer in the lower back of the range.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Reposition the drawer and power cord.",
+            "See the Storage Drawer Removal instructions in the Care and cleaning of your range section."
+          ],
+          "evidence": "GE manual, page 52: \"Power cord may be obstructing drawer in the lower back of the range.\"",
+          "source": {
+            "line": 66,
+            "manual": "GE manual",
+            "page": 52
+          }
+        },
+        {
+          "id": "storage-drawer-won-t-close-1",
+          "label": "Rear drawer support is on top of the guide rail.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Reposition the drawer.",
+            "See the Storage Drawer Removal instructions in the Care and cleaning of your range section."
+          ],
+          "evidence": "GE manual, page 52: \"Rear drawer support is on top of the guide rail.\"",
+          "source": {
+            "line": 75,
+            "manual": "GE manual",
+            "page": 52
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "oven-will-not-self-clean",
+    "lock-light-is-on-when-you-want-to-cook-i"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T10:05:36.530Z",
+  "learnedAt": "2026-10-05T10:04:03.025Z"
+}

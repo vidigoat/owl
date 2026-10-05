@@ -2,6 +2,12 @@
   "model": "JVM1540DNWW",
   "brand": "GE",
   "kind": "Range",
+  "alsoCovers": [
+    "HVM1540LNCS",
+    "JNM1541DNCC",
+    "JVM1540DNCC",
+    "JVM1540LNCS"
+  ],
   "source": "JVM1540DNWW.pdf",
   "pages": "36–36",
   "readWith": "text-layer",
@@ -185,5 +191,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:21.735Z",
-  "learnedAt": "2026-10-04T15:19:11.144Z"
+  "learnedAt": "2026-10-05T10:03:53.272Z"
 }

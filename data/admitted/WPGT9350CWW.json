@@ -1,0 +1,297 @@
+{
+  "model": "WPGT9350CWW",
+  "brand": "GE",
+  "kind": "Washer",
+  "alsoCovers": [
+    "WPGT9350CPL",
+    "WPGT9360EPL",
+    "WPGT9360EWW"
+  ],
+  "source": "WPGT9350CWW.pdf",
+  "pages": "29–31",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "washer-won-t-operate",
+      "symptom": "Washer won’t operate",
+      "causes": [
+        {
+          "id": "washer-won-t-operate-0",
+          "label": "Control panel is asleep",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This is normal.",
+            "Press POWER, the Touch Screen or any button to activate the control panel."
+          ],
+          "evidence": "GE manual, page 29: \"Control panel is asleep\"",
+          "source": {
+            "line": 11,
+            "manual": "GE manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "washer-won-t-operate-1",
+          "label": "Washer is unplugged",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Make sure cord is plugged securely into a working outlet."
+          ],
+          "evidence": "GE manual, page 29: \"Washer is unplugged\"",
+          "source": {
+            "line": 13,
+            "manual": "GE manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "washer-won-t-operate-2",
+          "label": "Water supply is turned off",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Turn both hot and cold faucets fully on."
+          ],
+          "evidence": "GE manual, page 29: \"Water supply is turned off\"",
+          "source": {
+            "line": 14,
+            "manual": "GE manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "washer-won-t-operate-3",
+          "label": "Controls are not set properly",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Make sure the cycle was set correctly, close the lid and press START."
+          ],
+          "evidence": "GE manual, page 29: \"Controls are not set properly\"",
+          "source": {
+            "line": 15,
+            "manual": "GE manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "washer-won-t-operate-4",
+          "label": "Lid is open—safety feature.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Close lid and reset cycle, to the beginning if necessary."
+          ],
+          "evidence": "GE manual, page 29: \"Lid is open—safety feature.\"",
+          "source": {
+            "line": 17,
+            "manual": "GE manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "washer-won-t-operate-5",
+          "label": "Prevents the washer from filling and operating when lid is up",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [],
+          "evidence": "GE manual, page 29: \"Prevents the washer from filling and operating when lid is up\"",
+          "source": {
+            "line": 18,
+            "manual": "GE manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "washer-won-t-operate-6",
+          "label": "Circuit breaker/fuse is tripped/blown",
+          "likelihood": 0.132,
+          "cost": null,
+          "remedies": [
+            "Check house circuit breakers/fuses.",
+            "Replace fuses or reset breaker.",
+            "Washer should have separate outlet."
+          ],
+          "evidence": "GE manual, page 29: \"Circuit breaker/fuse is tripped/blown\"",
+          "source": {
+            "line": 20,
+            "manual": "GE manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "washer-won-t-operate-7",
+          "label": "Electronics need to be reset",
+          "likelihood": 0.116,
+          "cost": null,
+          "remedies": [
+            "Unplug washer, wait 2 minutes, plug back in and press POWER."
+          ],
+          "evidence": "GE manual, page 29: \"Electronics need to be reset\"",
+          "source": {
+            "line": 22,
+            "manual": "GE manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "washer-won-t-operate-8",
+          "label": "START was not pressed after a cycle was set",
+          "likelihood": 0.104,
+          "cost": null,
+          "remedies": [
+            "Press START."
+          ],
+          "evidence": "GE manual, page 29: \"START was not pressed after a cycle was set\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "washer-won-t-operate-9",
+          "label": "Extremely low water pressure",
+          "likelihood": 0.094,
+          "cost": null,
+          "remedies": [
+            "Press START again."
+          ],
+          "evidence": "GE manual, page 29: \"Extremely low water pressure\"",
+          "source": {
+            "line": 26,
+            "manual": "GE manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "washer-won-t-operate-10",
+          "label": "Washer is too cold",
+          "likelihood": 0.086,
+          "cost": null,
+          "remedies": [
+            "If the washer has been exposed to temperatures below freezing for an extended period of time, allow it to warm up before pressing POWER.",
+            "Otherwise, the display will not come on."
+          ],
+          "evidence": "GE manual, page 29: \"Washer is too cold\"",
+          "source": {
+            "line": 27,
+            "manual": "GE manual",
+            "page": 29
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-not-filling-properly",
+      "symptom": "Water not filling properly",
+      "causes": [
+        {
+          "id": "water-not-filling-properly-0",
+          "label": "Filter clogged or fill hoses may be kinked",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure that the water valve filters (blue and orange screen must be free of solids) on the unit are not clogged.",
+            "Turn off water and check filter by disconnecting hose at machine.",
+            "Check that fill hoses are not kinked or clogged."
+          ],
+          "evidence": "GE manual, page 29: \"Filter clogged or fill hoses may be kinked\"",
+          "source": {
+            "line": 31,
+            "manual": "GE manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "water-not-filling-properly-1",
+          "label": "Energy efficiency",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "This is an energy efficient washer.",
+            "As a result, the temperature settings for this washer may be different than non-energy efficient washers."
+          ],
+          "evidence": "GE manual, page 29: \"Energy efficiency\"",
+          "source": {
+            "line": 36,
+            "manual": "GE manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "water-not-filling-properly-2",
+          "label": "Insufficient water supply",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Make sure that the water supply is turned on.",
+            "Make sure that the water faucets are turned to their completely open positions."
+          ],
+          "evidence": "GE manual, page 29: \"Insufficient water supply\"",
+          "source": {
+            "line": 39,
+            "manual": "GE manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "water-not-filling-properly-3",
+          "label": "The washer lid is open",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "The washer lid must be closed for all washer cycle operations.",
+            "If the lid is opened during washer operation, all functions will stop, including water filling."
+          ],
+          "evidence": "GE manual, page 29: \"The washer lid is open\"",
+          "source": {
+            "line": 42,
+            "manual": "GE manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "water-not-filling-properly-4",
+          "label": "Incorrect fill hose connection",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "Make sure that the fill hoses connect the hot water supply to the hot inlet on the washer, and the cold water supply to the cold inlet on the washer (hot to hot, cold to cold)."
+          ],
+          "evidence": "GE manual, page 29: \"Incorrect fill hose connection\"",
+          "source": {
+            "line": 45,
+            "manual": "GE manual",
+            "page": 29
+          }
+        },
+        {
+          "id": "water-not-filling-properly-5",
+          "label": "Water fill optimization",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "Water may not cover the top level of the clothes.",
+            "This is normal for this high efficiency washer.",
+            "The water fill is optimized by the system for best wash performance."
+          ],
+          "evidence": "GE manual, page 29: \"Water fill optimization\"",
+          "source": {
+            "line": 49,
+            "manual": "GE manual",
+            "page": 29
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T09:56:37.774Z",
+  "learnedAt": "2026-10-05T10:01:43.571Z"
+}

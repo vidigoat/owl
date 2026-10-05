@@ -2,6 +2,12 @@
   "model": "JGBS23DEMCC",
   "brand": "GE",
   "kind": "Range",
+  "alsoCovers": [
+    "JGBS07DEMBB",
+    "JGBS18DENBB",
+    "JGBS23DEMBB",
+    "JGBS23DEMWW"
+  ],
   "source": "JGBS23DEMCC.pdf",
   "pages": "43–45",
   "readWith": "text-layer",
@@ -606,5 +612,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:21.137Z",
-  "learnedAt": "2026-10-04T15:19:11.644Z"
+  "learnedAt": "2026-10-05T10:03:53.769Z"
 }

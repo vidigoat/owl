@@ -2,6 +2,9 @@
   "model": "DSXH47EGWW",
   "brand": "GE",
   "kind": "Dryer",
+  "alsoCovers": [
+    "DSXH47GGWW"
+  ],
   "source": "DSXH47EGWW.pdf",
   "pages": "19–20",
   "readWith": "text-layer",
@@ -373,5 +376,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:19:43.828Z",
-  "learnedAt": "2026-10-04T15:19:04.803Z"
+  "learnedAt": "2026-10-05T10:02:30.928Z"
 }

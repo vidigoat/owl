@@ -2,6 +2,9 @@
   "model": "WPSE7003AAA",
   "brand": "GE",
   "kind": "Washer",
+  "alsoCovers": [
+    "WPSE7003AWW"
+  ],
   "source": "WPSE7003AAA.pdf",
   "pages": "14–17",
   "readWith": "text-layer",
@@ -224,8 +227,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:38.031Z",
-  "learnedAt": "2026-10-04T15:18:39.067Z",
-  "alsoCovers": [
-    "WPSE7003AWW"
-  ]
+  "learnedAt": "2026-10-05T10:01:38.431Z"
 }

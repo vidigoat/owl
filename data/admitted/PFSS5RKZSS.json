@@ -2,6 +2,11 @@
   "model": "PFSS5RKZSS",
   "brand": "GE",
   "kind": "Refrigerator",
+  "alsoCovers": [
+    "PFCF1RKZBB",
+    "PFCS1RKZSS",
+    "PGCS1RKZSS"
+  ],
   "source": "PFSS5RKZSS.pdf",
   "pages": "37–40",
   "readWith": "text-layer",
@@ -1052,8 +1057,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:27.019Z",
-  "learnedAt": "2026-10-04T15:17:55.925Z",
-  "alsoCovers": [
-    "PFCF1RKZBB"
-  ]
+  "learnedAt": "2026-10-05T10:03:16.088Z"
 }

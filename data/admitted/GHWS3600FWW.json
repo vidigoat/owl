@@ -2,6 +2,12 @@
   "model": "GHWS3600FWW",
   "brand": "GE",
   "kind": "Washer",
+  "alsoCovers": [
+    "GFWS2605FMC",
+    "GFWS2605FRR",
+    "GHWS3605FMC",
+    "GHWS3605FRR"
+  ],
   "source": "GHWS3600FWW.pdf",
   "pages": "26–29",
   "readWith": "text-layer",
@@ -1113,9 +1119,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:04.371Z",
-  "learnedAt": "2026-10-04T15:18:37.549Z",
-  "alsoCovers": [
-    "GHWS3605FMC",
-    "GHWS3605FRR"
-  ]
+  "learnedAt": "2026-10-05T10:01:36.953Z"
 }

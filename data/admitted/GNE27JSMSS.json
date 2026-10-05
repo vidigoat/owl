@@ -2,6 +2,12 @@
   "model": "GNE27JSMSS",
   "brand": "GE",
   "kind": "Refrigerator",
+  "alsoCovers": [
+    "GDE21ESKSS",
+    "GNE25JGKBB",
+    "GNE27JGMBB",
+    "GNE27JMMES"
+  ],
   "source": "GNE27JSMSS.pdf",
   "pages": "45–47",
   "readWith": "text-layer",
@@ -607,9 +613,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T09:43:10.798Z",
-  "learnedAt": "2026-10-04T09:26:56.799Z",
-  "alsoCovers": [
-    "GDE21ESKSS",
-    "GNE25JGKBB"
-  ]
+  "learnedAt": "2026-10-04T09:26:56.799Z"
 }

@@ -2,6 +2,14 @@
   "model": "PTS22LHPWW",
   "brand": "GE",
   "kind": "Refrigerator",
+  "alsoCovers": [
+    "GTS22KBPCC",
+    "GTS22KBPWW",
+    "PTS22LHPBB",
+    "PTS22LHRBB",
+    "PTS22SCPBS",
+    "PTS22SHRBS"
+  ],
   "source": "PTS22LHPWW.pdf",
   "pages": "24–26",
   "readWith": "text-layer",
@@ -951,9 +959,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:28.334Z",
-  "learnedAt": "2026-10-04T15:17:54.835Z",
-  "alsoCovers": [
-    "GTS22KBPCC",
-    "PTS22LHPBB"
-  ]
+  "learnedAt": "2026-10-05T10:03:15.009Z"
 }

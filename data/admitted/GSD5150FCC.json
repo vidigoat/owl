@@ -1,0 +1,293 @@
+{
+  "model": "GSD5150FCC",
+  "brand": "GE",
+  "kind": "Dishwasher",
+  "source": "GSD5150FCC.pdf",
+  "pages": "21–25",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "control-panel-lights-go-off-when-you-re-",
+      "symptom": "Control panel lights go off when you’re setting controls",
+      "causes": [
+        {
+          "id": "control-panel-lights-go-off-when-you-re--0",
+          "label": "Time too long between touching of selected pads",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Each pad must be touched within 30 seconds of the others.",
+            "To relight, touch any pad again, or unlock and relatch door."
+          ],
+          "evidence": "GE manual, page 21: \"Time too long between touching of selected pads\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 21
+          }
+        }
+      ]
+    },
+    {
+      "id": "noise",
+      "symptom": "Noise",
+      "causes": [
+        {
+          "id": "noise-0",
+          "label": "Some of the sounds you’ll hear are normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Hard food disposal shredding action.",
+            "Drain valve opening to pump water out.",
+            "Timer control as cycle progresses.",
+            "Detergent cup opening.",
+            "The motor stopping during the drying period.",
+            "Water draining out of the tub immediately after you touch START/RESET pad."
+          ],
+          "evidence": "GE manual, page 21: \"Some of the sounds you’ll hear are normal\"",
+          "source": {
+            "line": 18,
+            "manual": "GE manual",
+            "page": 21
+          }
+        },
+        {
+          "id": "noise-1",
+          "label": "Utensils are not secure in the rack or something small has dropped into the rack",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Make sure everything is secured in dishwasher."
+          ],
+          "evidence": "GE manual, page 21: \"Utensils are not secure in the rack or something small has dropped into the rack\"",
+          "source": {
+            "line": 35,
+            "manual": "GE manual",
+            "page": 21
+          }
+        },
+        {
+          "id": "noise-2",
+          "label": "Motor hums",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Dishwasher has not been used on a regular basis.",
+            "If you do not use your dishwasher often, set it to fill and pump out once every week.",
+            "This will help keep the seal moist and the garbage disposer clear."
+          ],
+          "evidence": "GE manual, page 21: \"Motor hums\"",
+          "source": {
+            "line": 39,
+            "manual": "GE manual",
+            "page": 21
+          }
+        }
+      ]
+    },
+    {
+      "id": "detergent-left-in-dispenser-cups-deterge",
+      "symptom": "Detergent left in dispenser cups Detergent cup lid latched accidentally by user",
+      "causes": [
+        {
+          "id": "detergent-left-in-dispenser-cups-deterge-0",
+          "label": "Dishes are blocking the detergent cups",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Reposition the dishes.",
+            "Unlatch the door.",
+            "Press the START/RESET pad three times within two seconds.",
+            "The detergent cup will trip."
+          ],
+          "evidence": "GE manual, page 21: \"Dishes are blocking the detergent cups\"",
+          "source": {
+            "line": 52,
+            "manual": "GE manual",
+            "page": 21
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishes-and-flatware-not-clean",
+      "symptom": "Dishes and flatware not clean",
+      "causes": [
+        {
+          "id": "dishes-and-flatware-not-clean-0",
+          "label": "Low inlet water temperature",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure inlet water temperature is correct (see page 12).",
+            "Use HI TEMP WASH."
+          ],
+          "evidence": "GE manual, page 23: \"Low inlet water temperature\"",
+          "source": {
+            "line": 2,
+            "manual": "GE manual",
+            "page": 23
+          }
+        },
+        {
+          "id": "dishes-and-flatware-not-clean-1",
+          "label": "Water pressure is temporarily low",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Turn on a faucet.",
+            "Is water coming out more slowly than usual?",
+            "If so, wait until pressure is normal before using your dishwasher."
+          ],
+          "evidence": "GE manual, page 23: \"Water pressure is temporarily low\"",
+          "source": {
+            "line": 6,
+            "manual": "GE manual",
+            "page": 23
+          }
+        },
+        {
+          "id": "dishes-and-flatware-not-clean-2",
+          "label": "Air gap is clogged",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Clean the air gap."
+          ],
+          "evidence": "GE manual, page 23: \"Air gap is clogged\"",
+          "source": {
+            "line": 16,
+            "manual": "GE manual",
+            "page": 23
+          }
+        },
+        {
+          "id": "dishes-and-flatware-not-clean-3",
+          "label": "Improper rack loading",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Make sure large dishware does not block the detergent dispenser or the wash arms."
+          ],
+          "evidence": "GE manual, page 23: \"Improper rack loading\"",
+          "source": {
+            "line": 17,
+            "manual": "GE manual",
+            "page": 23
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishes-don-t-dry",
+      "symptom": "Dishes don’t dry",
+      "causes": [
+        {
+          "id": "dishes-don-t-dry-0",
+          "label": "Low inlet water temperature",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure inlet water temperature is correct (see page 12).",
+            "Select HI TEMP RINSE and/or HEATED DRY."
+          ],
+          "evidence": "GE manual, page 25: \"Low inlet water temperature\"",
+          "source": {
+            "line": 2,
+            "manual": "GE manual",
+            "page": 25
+          }
+        },
+        {
+          "id": "dishes-don-t-dry-1",
+          "label": "Rinse agent dispenser is empty",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the rinse agent dispenser."
+          ],
+          "evidence": "GE manual, page 25: \"Rinse agent dispenser is empty\"",
+          "source": {
+            "line": 7,
+            "manual": "GE manual",
+            "page": 25
+          }
+        }
+      ]
+    },
+    {
+      "id": "control-panel-responded-to-inputs-but-di",
+      "symptom": "Control panel responded to inputs but dishwasher never filled with water",
+      "causes": [
+        {
+          "id": "control-panel-responded-to-inputs-but-di-0",
+          "label": "Door latch may not be properly seated",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Call for service."
+          ],
+          "evidence": "GE manual, page 25: \"Door latch may not be properly seated\"",
+          "source": {
+            "line": 14,
+            "manual": "GE manual",
+            "page": 25
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishwasher-won-t-run",
+      "symptom": "Dishwasher won’t run",
+      "causes": [
+        {
+          "id": "dishwasher-won-t-run-0",
+          "label": "Fuse is blown, or the circuit breaker tripped",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace fuse or reset circuit breaker.",
+            "Remove any other appliances from the circuit.",
+            "Try resetting the START/RESET pad."
+          ],
+          "evidence": "GE manual, page 25: \"Fuse is blown, or the circuit breaker tripped\"",
+          "source": {
+            "line": 18,
+            "manual": "GE manual",
+            "page": 25
+          }
+        }
+      ]
+    },
+    {
+      "id": "steam",
+      "symptom": "Steam",
+      "causes": [
+        {
+          "id": "steam-0",
+          "label": "This is normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Steam comes through the vent by the door latch during drying and when water is being pumped out."
+          ],
+          "evidence": "GE manual, page 25: \"This is normal\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 25
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "spots-and-filming-on-glasses-and-flatwar"
+  ],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T09:55:57.514Z",
+  "learnedAt": "2026-10-05T10:01:00.741Z"
+}

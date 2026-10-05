@@ -4,7 +4,10 @@
   "kind": "Range",
   "alsoCovers": [
     "JK910BABB",
-    "JT910WAWW"
+    "JK950CACC",
+    "JKP56AAAA",
+    "JT910WAWW",
+    "JTP56AAAA"
   ],
   "source": "JK950AAAA.pdf",
   "pages": "30–32",
@@ -774,5 +777,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T09:43:18.143Z",
-  "learnedAt": "2026-10-04T09:52:03.633Z"
+  "learnedAt": "2026-10-05T10:03:52.023Z"
 }

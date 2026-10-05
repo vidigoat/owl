@@ -2,6 +2,10 @@
   "model": "GSD6200GBB",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "GSD6200GCC",
+    "GSD6200GWW"
+  ],
   "source": "GSD6200GBB.pdf",
   "pages": "11–12",
   "readWith": "text-layer",
@@ -301,57 +305,6 @@
       ]
     },
     {
-      "id": "spots-and-filming-on-glasses-and-flatwar",
-      "symptom": "Spots and filming on glasses and flatware",
-      "causes": [
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-1",
-          "label": "Overloading the dishwasher",
-          "likelihood": 0.385,
-          "cost": null,
-          "remedies": [
-            "To remove stubborn spots and pre-existing film from glassware:"
-          ],
-          "evidence": "GE manual, page 12: \"Overloading the dishwasher\"",
-          "source": {
-            "line": 9,
-            "manual": "GE manual",
-            "page": 12
-          }
-        },
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-2",
-          "label": "Improper loading",
-          "likelihood": 0.278,
-          "cost": null,
-          "remedies": [
-            "1 Remove all metal utensils from the dishwasher."
-          ],
-          "evidence": "GE manual, page 12: \"Improper loading\"",
-          "source": {
-            "line": 10,
-            "manual": "GE manual",
-            "page": 12
-          }
-        },
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-3",
-          "label": "Old or damp powder detergent",
-          "likelihood": 0.217,
-          "cost": null,
-          "remedies": [
-            "2 Do not add detergent."
-          ],
-          "evidence": "GE manual, page 12: \"Old or damp powder detergent\"",
-          "source": {
-            "line": 11,
-            "manual": "GE manual",
-            "page": 12
-          }
-        }
-      ]
-    },
-    {
       "id": "cloudiness-on-glassware",
       "symptom": "Cloudiness on glassware",
       "causes": [
@@ -559,35 +512,14 @@
           }
         }
       ]
-    },
-    {
-      "id": "anti-bacteria-cycle-only",
-      "symptom": "(Anti-Bacteria cycle only)",
-      "causes": [
-        {
-          "id": "anti-bacteria-cycle-only-0",
-          "label": "The incoming water temperature was too low",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "Raise the water heater temperature to 120°F."
-          ],
-          "evidence": "GE manual, page 12: \"The incoming water temperature was too low\"",
-          "source": {
-            "line": 72,
-            "manual": "GE manual",
-            "page": 12
-          }
-        }
-      ]
     }
   ],
   "rejected": [
-    "spots-and-filming-on-glasses-and-flatwar-0",
-    "spots-and-filming-on-glasses-and-flatwar-4"
+    "spots-and-filming-on-glasses-and-flatwar",
+    "anti-bacteria-cycle-only"
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T09:43:11.719Z",
-  "learnedAt": "2026-10-04T09:51:13.099Z"
+  "reviewedAt": "2026-10-05T10:05:18.486Z",
+  "learnedAt": "2026-10-05T10:00:14.454Z"
 }

@@ -2,6 +2,10 @@
   "model": "ESS25XGMBB",
   "brand": "GE",
   "kind": "Refrigerator",
+  "alsoCovers": [
+    "ESS22XGMBB",
+    "ESS25XGMWW"
+  ],
   "source": "ESS25XGMBB.pdf",
   "pages": "22–25",
   "readWith": "text-layer",
@@ -965,9 +969,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:19:47.011Z",
-  "learnedAt": "2026-10-04T15:17:47.242Z",
-  "alsoCovers": [
-    "ESS22XGMBB",
-    "ESS25XGMWW"
-  ]
+  "learnedAt": "2026-10-05T10:03:07.375Z"
 }

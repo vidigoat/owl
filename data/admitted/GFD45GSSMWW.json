@@ -2,6 +2,17 @@
   "model": "GFD45GSSMWW",
   "brand": "GE",
   "kind": "Dryer",
+  "alsoCovers": [
+    "GFD43ESSMWW",
+    "GFD43GSSMWW",
+    "GFD45ESPKDG",
+    "GFD45ESPMDG",
+    "GFD45ESSKWW",
+    "GFD45ESSMWW",
+    "GFD45GSPKDG",
+    "GFD45GSPMDG",
+    "GFD45GSSKWW"
+  ],
   "source": "GFD45GSSMWW.pdf",
   "pages": "18–20",
   "readWith": "text-layer",
@@ -404,11 +415,11 @@
       ]
     },
     {
-      "id": "clean-lint-filter-message-18",
-      "symptom": "Clean Lint Filter (message) 18",
+      "id": "clean-lint-filter-message",
+      "symptom": "Clean Lint Filter (message)",
       "causes": [
         {
-          "id": "clean-lint-filter-message-18-0",
+          "id": "clean-lint-filter-message-0",
           "label": "Power button was activated",
           "likelihood": 0.625,
           "cost": null,
@@ -1096,7 +1107,7 @@
     },
     {
       "id": "garments-still-wrinkled-after-steam-cycl",
-      "symptom": "Garments still wrinkled after steam cycle 20",
+      "symptom": "Garments still wrinkled after steam cycle",
       "causes": [
         {
           "id": "garments-still-wrinkled-after-steam-cycl-0",
@@ -1121,12 +1132,6 @@
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T15:19:54.616Z",
-  "learnedAt": "2026-10-04T15:19:02.520Z",
-  "alsoCovers": [
-    "GFD43GSSMWW",
-    "GFD45ESPMDG",
-    "GFD45ESSKWW",
-    "GFD45GSPMDG"
-  ]
+  "reviewedAt": "2026-10-05T10:04:53.383Z",
+  "learnedAt": "2026-10-05T10:02:28.654Z"
 }

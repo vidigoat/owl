@@ -2,6 +2,11 @@
   "model": "GSC3400JWW",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "GSC3200JBB",
+    "GSC3200JWW",
+    "GSC3430FWW"
+  ],
   "source": "GSC3400JWW.pdf",
   "pages": "23–27",
   "readWith": "text-layer",
@@ -275,5 +280,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:08.951Z",
-  "learnedAt": "2026-10-04T15:17:25.494Z"
+  "learnedAt": "2026-10-05T10:00:44.065Z"
 }

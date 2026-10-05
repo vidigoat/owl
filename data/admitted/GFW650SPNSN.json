@@ -3,6 +3,8 @@
   "brand": "GE",
   "kind": "Washer",
   "alsoCovers": [
+    "GFW510SCNWW",
+    "GFW550SPNDG",
     "GFW550SSNWW",
     "GFW650SSNWW",
     "GFW850SSNWW"
@@ -558,21 +560,6 @@
             "manual": "GE manual",
             "page": 33
           }
-        },
-        {
-          "id": "door-unlocks-or-press-start-and-machine--2",
-          "label": "Control Lock On",
-          "likelihood": 0.278,
-          "cost": null,
-          "remedies": [
-            "Press and hold the Control Lock button for 3 seconds."
-          ],
-          "evidence": "GE manual, page 33: \"Control Lock On\"",
-          "source": {
-            "line": 19,
-            "manual": "GE manual",
-            "page": 33
-          }
         }
       ]
     },
@@ -962,11 +949,11 @@
       ]
     },
     {
-      "id": "pump-running-while-washer-is-not-in-use-",
-      "symptom": "Pump running while washer is not in use 34",
+      "id": "pump-running-while-washer-is-not-in-use",
+      "symptom": "Pump running while washer is not in use",
       "causes": [
         {
-          "id": "pump-running-while-washer-is-not-in-use--0",
+          "id": "pump-running-while-washer-is-not-in-use-0",
           "label": "Clog in sump drain",
           "likelihood": 0.625,
           "cost": null,
@@ -986,9 +973,11 @@
       ]
     }
   ],
-  "rejected": [],
+  "rejected": [
+    "door-unlocks-or-press-start-and-machine--2"
+  ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T09:52:29.511Z",
-  "learnedAt": "2026-10-04T09:51:33.799Z"
+  "reviewedAt": "2026-10-05T10:05:04.747Z",
+  "learnedAt": "2026-10-05T10:01:14.748Z"
 }

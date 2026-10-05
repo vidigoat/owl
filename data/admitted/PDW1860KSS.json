@@ -2,6 +2,10 @@
   "model": "PDW1860KSS",
   "brand": "GE",
   "kind": "Dishwasher",
+  "alsoCovers": [
+    "PDW1800KBB",
+    "PDW1800KWW"
+  ],
   "source": "PDW1860KSS.pdf",
   "pages": "16–18",
   "readWith": "text-layer",
@@ -261,11 +265,11 @@
       ]
     },
     {
-      "id": "suds-in-the-tub-16",
-      "symptom": "Suds in the tub 16",
+      "id": "suds-in-the-tub",
+      "symptom": "Suds in the tub",
       "causes": [
         {
-          "id": "suds-in-the-tub-16-0",
+          "id": "suds-in-the-tub-0",
           "label": "Wrong detergent",
           "likelihood": 0.625,
           "cost": null,
@@ -281,7 +285,7 @@
           }
         },
         {
-          "id": "suds-in-the-tub-16-1",
+          "id": "suds-in-the-tub-1",
           "label": "Rinse agent was spilled",
           "likelihood": 0.385,
           "cost": null,
@@ -303,6 +307,6 @@
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T15:20:25.061Z",
-  "learnedAt": "2026-10-04T15:17:16.738Z"
+  "reviewedAt": "2026-10-05T10:05:40.698Z",
+  "learnedAt": "2026-10-05T10:00:35.109Z"
 }

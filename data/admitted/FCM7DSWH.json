@@ -2,6 +2,11 @@
   "model": "FCM7DSWH",
   "brand": "GE",
   "kind": "Refrigerator",
+  "alsoCovers": [
+    "FCM7DNWH",
+    "FCM7WMNWW",
+    "FCM9DMWH"
+  ],
   "source": "FCM7DSWH.pdf",
   "pages": "11–12",
   "readWith": "text-layer",
@@ -540,8 +545,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:19:47.222Z",
-  "learnedAt": "2026-10-04T15:18:00.472Z",
-  "alsoCovers": [
-    "FCM7DNWH"
-  ]
+  "learnedAt": "2026-10-05T10:03:20.632Z"
 }

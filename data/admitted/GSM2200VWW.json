@@ -5,8 +5,13 @@
   "alsoCovers": [
     "GSD2100VCC",
     "GSD3300KBB",
+    "GSD3300KWW",
+    "GSD3301KBB",
+    "GSD3301KWW",
     "GSD3360KSS",
-    "GSD3361KSS"
+    "GSD3361KSS",
+    "GSM2200VBB",
+    "GSM2260VSS"
   ],
   "source": "GSM2200VWW.pdf",
   "pages": "18–21",
@@ -228,11 +233,11 @@
       ]
     },
     {
-      "id": "cloudiness-on-glassware-18",
-      "symptom": "Cloudiness on glassware 18",
+      "id": "cloudiness-on-glassware",
+      "symptom": "Cloudiness on glassware",
       "causes": [
         {
-          "id": "cloudiness-on-glassware-18-0",
+          "id": "cloudiness-on-glassware-0",
           "label": "Combination of soft water and too much detergent",
           "likelihood": 0.625,
           "cost": null,
@@ -249,7 +254,7 @@
           }
         },
         {
-          "id": "cloudiness-on-glassware-18-1",
+          "id": "cloudiness-on-glassware-1",
           "label": "Low performing phosphatefree detergent",
           "likelihood": 0.385,
           "cost": null,
@@ -264,7 +269,7 @@
           }
         },
         {
-          "id": "cloudiness-on-glassware-18-2",
+          "id": "cloudiness-on-glassware-2",
           "label": "Water temperature entering dishwasher exceeds 150°F",
           "likelihood": 0.278,
           "cost": null,
@@ -573,11 +578,11 @@
       ]
     },
     {
-      "id": "dishwasher-won-t-run-20",
-      "symptom": "Dishwasher won’t run 20",
+      "id": "dishwasher-won-t-run",
+      "symptom": "Dishwasher won’t run",
       "causes": [
         {
-          "id": "dishwasher-won-t-run-20-0",
+          "id": "dishwasher-won-t-run-0",
           "label": "Fuse is blown or circuit breaker is tripped",
           "likelihood": 0.625,
           "cost": null,
@@ -593,7 +598,7 @@
           }
         },
         {
-          "id": "dishwasher-won-t-run-20-1",
+          "id": "dishwasher-won-t-run-1",
           "label": "Power is turned off",
           "likelihood": 0.385,
           "cost": null,
@@ -903,6 +908,6 @@
   "rejected": [],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T09:15:01.809Z",
-  "learnedAt": "2026-10-04T09:51:18.419Z"
+  "reviewedAt": "2026-10-05T10:05:19.831Z",
+  "learnedAt": "2026-10-05T10:00:19.414Z"
 }

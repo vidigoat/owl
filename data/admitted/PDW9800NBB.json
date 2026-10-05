@@ -3,38 +3,22 @@
   "brand": "GE",
   "kind": "Dishwasher",
   "alsoCovers": [
+    "PDW8200NBB",
     "PDW8280NSS",
+    "PDW8400NBB",
+    "PDW8400NWW",
     "PDW8900NBB",
+    "PDW8900NWW",
     "PDW9200NBB",
-    "PDW9200NWW"
+    "PDW9200NWW",
+    "PDW9280NSS",
+    "PDW9800NWW"
   ],
   "source": "PDW9800NBB.pdf",
   "pages": "15–18",
   "readWith": "text-layer",
   "codes": {},
   "symptoms": [
-    {
-      "id": "start-reset-status",
-      "symptom": "START/RESET status",
-      "causes": [
-        {
-          "id": "start-reset-status-0",
-          "label": "You have pressed the",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "Press the START/RESET pad only one time to start the dishwasher.",
-            "When the"
-          ],
-          "evidence": "GE manual, page 16: \"You have pressed the\"",
-          "source": {
-            "line": 10,
-            "manual": "GE manual",
-            "page": 16
-          }
-        }
-      ]
-    },
     {
       "id": "beeping-at-the-end-of-the-cycle",
       "symptom": "Beeping at the end of the cycle",
@@ -217,21 +201,6 @@
       "id": "detergent-left-in-dispenser-cups-or-on-d",
       "symptom": "Detergent left in dispenser cups or on door",
       "causes": [
-        {
-          "id": "detergent-left-in-dispenser-cups-or-on-d-0",
-          "label": "Dishes are blocking the detergent cup or",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "Reposition the dishes, so the water from the lower spray arm can flush the detergent cup or outlet from the SmartDispenseTM system."
-          ],
-          "evidence": "GE manual, page 17: \"Dishes are blocking the detergent cup or\"",
-          "source": {
-            "line": 36,
-            "manual": "GE manual",
-            "page": 17
-          }
-        },
         {
           "id": "detergent-left-in-dispenser-cups-or-on-d-1",
           "label": "SmartDispenseTM outlet",
@@ -513,11 +482,13 @@
     }
   ],
   "rejected": [
+    "start-reset-status",
     "spots-and-filming-on-glasses-and-flatwar-0",
-    "spots-and-filming-on-glasses-and-flatwar-3"
+    "spots-and-filming-on-glasses-and-flatwar-3",
+    "detergent-left-in-dispenser-cups-or-on-d-0"
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T09:43:20.973Z",
-  "learnedAt": "2026-10-04T09:51:26.861Z"
+  "reviewedAt": "2026-10-05T09:56:20.707Z",
+  "learnedAt": "2026-10-05T10:00:27.531Z"
 }

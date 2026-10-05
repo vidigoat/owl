@@ -2,6 +2,17 @@
   "model": "DBXR453EAAA",
   "brand": "GE",
   "kind": "Dryer",
+  "alsoCovers": [
+    "DBSR453EAAA",
+    "DBSR453EAWW",
+    "DBSR453GAAA",
+    "DBSR453GAWW",
+    "DBXR453EACC",
+    "DBXR453EAWW",
+    "DBXR453GAAA",
+    "DBXR453GACC",
+    "DBXR453GAWW"
+  ],
   "source": "DBXR453EAAA.pdf",
   "pages": "12–13",
   "readWith": "text-layer",
@@ -267,12 +278,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:19:41.784Z",
-  "learnedAt": "2026-10-04T15:18:54.532Z",
-  "alsoCovers": [
-    "DBSR453GAAA",
-    "DBXR453EACC",
-    "DBXR453GAAA",
-    "DBXR453GACC",
-    "DBXR453GAWW"
-  ]
+  "learnedAt": "2026-10-05T10:02:20.792Z"
 }

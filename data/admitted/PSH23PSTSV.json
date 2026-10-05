@@ -2,6 +2,10 @@
   "model": "PSH23PSTSV",
   "brand": "GE",
   "kind": "Refrigerator",
+  "alsoCovers": [
+    "PSC25MGTWW",
+    "PSH23PGTWV"
+  ],
   "source": "PSH23PSTSV.pdf",
   "pages": "36–38",
   "readWith": "text-layer",
@@ -1130,5 +1134,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:20:27.897Z",
-  "learnedAt": "2026-10-04T15:17:56.690Z"
+  "learnedAt": "2026-10-05T10:03:16.862Z"
 }

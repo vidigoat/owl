@@ -2,6 +2,21 @@
   "model": "GFD49ERSKWW",
   "brand": "GE",
   "kind": "Dryer",
+  "alsoCovers": [
+    "GFD48ESPKDG",
+    "GFD48ESPKRR",
+    "GFD48ESSKWW",
+    "GFD48GSPKDG",
+    "GFD48GSPKRR",
+    "GFD48GSSKWW",
+    "GFD49ERPKDG",
+    "GFD49ERPKRR",
+    "GFD49GRPKDG",
+    "GFD49GRPKRR",
+    "GFD49GRSKWW",
+    "GFDR485EFRR",
+    "GFDR485GFRR"
+  ],
   "source": "GFD49ERSKWW.pdf",
   "pages": "42–45",
   "readWith": "text-layer",
@@ -1169,11 +1184,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:19:55.498Z",
-  "learnedAt": "2026-10-04T15:18:58.015Z",
-  "alsoCovers": [
-    "GFD48ESPKRR",
-    "GFD48GSPKRR",
-    "GFD49ERPKDG",
-    "GFD49GRSKWW"
-  ]
+  "learnedAt": "2026-10-05T10:02:24.223Z"
 }

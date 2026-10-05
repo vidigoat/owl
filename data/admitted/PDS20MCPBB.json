@@ -1,0 +1,483 @@
+{
+  "model": "PDS20MCPBB",
+  "brand": "GE",
+  "kind": "Refrigerator",
+  "alsoCovers": [
+    "GBS22HBPBB",
+    "GBS22KBPBB",
+    "PDS20MCPCC",
+    "PDS22SCPRSS"
+  ],
+  "source": "PDS20MCPBB.pdf",
+  "pages": "33–34",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "refrigerator-does-not-operate",
+      "symptom": "Refrigerator does not operate",
+      "causes": [
+        {
+          "id": "refrigerator-does-not-operate-0",
+          "label": "Refrigerator in defrost cycle.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wait about 30 minutes for defrost cycle to end."
+          ],
+          "evidence": "GE manual, page 33: \"Refrigerator in defrost cycle.\"",
+          "source": {
+            "line": 60,
+            "manual": "GE manual",
+            "page": 33
+          }
+        },
+        {
+          "id": "refrigerator-does-not-operate-1",
+          "label": "Control in 0 (off) position.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Move the control to a temperature setting."
+          ],
+          "evidence": "GE manual, page 33: \"Control in 0 (off) position.\"",
+          "source": {
+            "line": 62,
+            "manual": "GE manual",
+            "page": 33
+          }
+        },
+        {
+          "id": "refrigerator-does-not-operate-2",
+          "label": "Refrigerator is unplugged.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Push the plug completely into the outlet."
+          ],
+          "evidence": "GE manual, page 33: \"Refrigerator is unplugged.\"",
+          "source": {
+            "line": 68,
+            "manual": "GE manual",
+            "page": 33
+          }
+        },
+        {
+          "id": "refrigerator-does-not-operate-3",
+          "label": "The fuse is blown/circuit breaker is tripped.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Replace fuse or reset the breaker."
+          ],
+          "evidence": "GE manual, page 33: \"The fuse is blown/circuit breaker is tripped.\"",
+          "source": {
+            "line": 69,
+            "manual": "GE manual",
+            "page": 33
+          }
+        }
+      ]
+    },
+    {
+      "id": "vibration-or-rattling-slight-vibration-i",
+      "symptom": "Vibration or rattling (slight vibration is normal)",
+      "causes": [
+        {
+          "id": "vibration-or-rattling-slight-vibration-i-0",
+          "label": "Leveling legs need adjusting.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See Level the Refrigerator."
+          ],
+          "evidence": "GE manual, page 33: \"Leveling legs need adjusting.\"",
+          "source": {
+            "line": 72,
+            "manual": "GE manual",
+            "page": 33
+          }
+        }
+      ]
+    },
+    {
+      "id": "motor-operates-for-long-periods-or-cycle",
+      "symptom": "Motor operates for long periods or cycles on and off frequently. (Modern refrigerators with more storage space and a larger freezer require more operating time. They start and stop often to maintain even temperatures.)",
+      "causes": [
+        {
+          "id": "motor-operates-for-long-periods-or-cycle-0",
+          "label": "Normal when refrigerator is first plugged in.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wait 24 hours for the refrigerator to completely cool down."
+          ],
+          "evidence": "GE manual, page 34: \"Normal when refrigerator is first plugged in.\"",
+          "source": {
+            "line": 5,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "motor-operates-for-long-periods-or-cycle-1",
+          "label": "Often occurs when large amounts of food are placed in refrigerator.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 34: \"Often occurs when large amounts of food are placed in refrigerator.\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "motor-operates-for-long-periods-or-cycle-2",
+          "label": "Door left open.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Check to see if package is holding door open."
+          ],
+          "evidence": "GE manual, page 34: \"Door left open.\"",
+          "source": {
+            "line": 13,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "motor-operates-for-long-periods-or-cycle-3",
+          "label": "Hot weather or frequent door openings.",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "This is normal."
+          ],
+          "evidence": "GE manual, page 34: \"Hot weather or frequent door openings.\"",
+          "source": {
+            "line": 20,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "motor-operates-for-long-periods-or-cycle-4",
+          "label": "Temperature control set at the coldest setting.",
+          "likelihood": 0.179,
+          "cost": null,
+          "remedies": [
+            "See About the controls."
+          ],
+          "evidence": "GE manual, page 34: \"Temperature control set at the coldest setting.\"",
+          "source": {
+            "line": 22,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "motor-operates-for-long-periods-or-cycle-5",
+          "label": "Grille and condenser need cleaning.",
+          "likelihood": 0.152,
+          "cost": null,
+          "remedies": [
+            "See Care and cleaning."
+          ],
+          "evidence": "GE manual, page 34: \"Grille and condenser need cleaning.\"",
+          "source": {
+            "line": 24,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "refrigerator-or-freezer-compartment-too-",
+      "symptom": "Refrigerator or freezer compartment too warm",
+      "causes": [
+        {
+          "id": "refrigerator-or-freezer-compartment-too--0",
+          "label": "Temperature controls not set cold enough.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See About the controls."
+          ],
+          "evidence": "GE manual, page 34: \"Temperature controls not set cold enough.\"",
+          "source": {
+            "line": 27,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "refrigerator-or-freezer-compartment-too--1",
+          "label": "Warm weather or frequent door openings.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Set the temperature control one step colder.",
+            "See About the controls."
+          ],
+          "evidence": "GE manual, page 34: \"Warm weather or frequent door openings.\"",
+          "source": {
+            "line": 29,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "refrigerator-or-freezer-compartment-too--2",
+          "label": "Door left open.",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Check to see if package is holding door open."
+          ],
+          "evidence": "GE manual, page 34: \"Door left open.\"",
+          "source": {
+            "line": 31,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "frost-or-ice-crystals-on-frozen-food-fro",
+      "symptom": "Frost or ice crystals on frozen food (frost within package is normal)",
+      "causes": [
+        {
+          "id": "frost-or-ice-crystals-on-frozen-food-fro-0",
+          "label": "Door left open.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check to see if package is holding door open."
+          ],
+          "evidence": "GE manual, page 34: \"Door left open.\"",
+          "source": {
+            "line": 37,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "frost-or-ice-crystals-on-frozen-food-fro-1",
+          "label": "Too frequent or too long door openings.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [],
+          "evidence": "GE manual, page 34: \"Too frequent or too long door openings.\"",
+          "source": {
+            "line": 39,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "ice-cubes-have-odor-taste",
+      "symptom": "Ice cubes have odor/taste",
+      "causes": [
+        {
+          "id": "ice-cubes-have-odor-taste-0",
+          "label": "Food transmitting odor/taste to ice cubes.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wrap foods well."
+          ],
+          "evidence": "GE manual, page 34: \"Food transmitting odor/taste to ice cubes.\"",
+          "source": {
+            "line": 43,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "ice-cubes-have-odor-taste-1",
+          "label": "Interior of refrigerator needs cleaning.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See Care and cleaning."
+          ],
+          "evidence": "GE manual, page 34: \"Interior of refrigerator needs cleaning.\"",
+          "source": {
+            "line": 45,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "slow-ice-cube-freezing",
+      "symptom": "Slow ice cube freezing",
+      "causes": [
+        {
+          "id": "slow-ice-cube-freezing-0",
+          "label": "Door left open.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Check to see if package is holding door open."
+          ],
+          "evidence": "GE manual, page 34: \"Door left open.\"",
+          "source": {
+            "line": 48,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "slow-ice-cube-freezing-1",
+          "label": "Freezer control not set cold enough.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See About the controls."
+          ],
+          "evidence": "GE manual, page 34: \"Freezer control not set cold enough.\"",
+          "source": {
+            "line": 49,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "refrigerator-has-odor",
+      "symptom": "Refrigerator has odor",
+      "causes": [
+        {
+          "id": "refrigerator-has-odor-0",
+          "label": "Foods transmitting odor to refrigerator.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Foods with strong odors should be tightly wrapped.",
+            "Keep an open box of baking soda in the refrigerator; replace every three months."
+          ],
+          "evidence": "GE manual, page 34: \"Foods transmitting odor to refrigerator.\"",
+          "source": {
+            "line": 57,
+            "manual": "GE manual",
+            "page": 34
+          }
+        },
+        {
+          "id": "refrigerator-has-odor-1",
+          "label": "Interior needs cleaning.",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "See Care and cleaning."
+          ],
+          "evidence": "GE manual, page 34: \"Interior needs cleaning.\"",
+          "source": {
+            "line": 60,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "moisture-forms-on-outside-of-refrigerato",
+      "symptom": "Moisture forms on outside of refrigerator",
+      "causes": [
+        {
+          "id": "moisture-forms-on-outside-of-refrigerato-0",
+          "label": "Not unusual during periods of high humidity.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Wipe surface dry and reset the refrigerator control one setting colder."
+          ],
+          "evidence": "GE manual, page 34: \"Not unusual during periods of high humidity.\"",
+          "source": {
+            "line": 62,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "moisture-collects-inside-in-humid-weathe",
+      "symptom": "Moisture collects inside (in humid weather, air carries moisture into refrigerator when doors are opened)",
+      "causes": [
+        {
+          "id": "moisture-collects-inside-in-humid-weathe-0",
+          "label": "Too frequent or too long door openings.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [],
+          "evidence": "GE manual, page 34: \"Too frequent or too long door openings.\"",
+          "source": {
+            "line": 65,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "door-drawer-does-not-close-by-itself",
+      "symptom": "Door/drawer does not close by itself",
+      "causes": [
+        {
+          "id": "door-drawer-does-not-close-by-itself-0",
+          "label": "Leveling legs need adjusting.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "See Installing the Refrigerator."
+          ],
+          "evidence": "GE manual, page 34: \"Leveling legs need adjusting.\"",
+          "source": {
+            "line": 75,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    },
+    {
+      "id": "freezer-door-drawer-pops-open-when-refri",
+      "symptom": "Freezer door/drawer pops open when refrigerator door is closed",
+      "causes": [
+        {
+          "id": "freezer-door-drawer-pops-open-when-refri-0",
+          "label": "This is normal if, after popping open, the freezer door/drawer closed on its own.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "This indicates that there is a good seal on the freezer door/drawer.",
+            "If the freezer door/drawer does not automatically close after popping open, then see the Problem: Door/drawer does not close by itself, above."
+          ],
+          "evidence": "GE manual, page 34: \"This is normal if, after popping open, the freezer door/drawer closed on its own.\"",
+          "source": {
+            "line": 78,
+            "manual": "GE manual",
+            "page": 34
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T09:56:19.525Z",
+  "learnedAt": "2026-10-05T10:03:34.496Z"
+}

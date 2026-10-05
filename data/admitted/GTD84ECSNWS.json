@@ -2,6 +2,15 @@
   "model": "GTD84ECSNWS",
   "brand": "GE",
   "kind": "Dryer",
+  "alsoCovers": [
+    "GTD72EBPNDG",
+    "GTD72EBSNWS",
+    "GTD72GBPNDG",
+    "GTD72GBSNWS",
+    "GTD84ECPNDG",
+    "GTD84GCPNDG",
+    "GTD84GCSNWS"
+  ],
   "source": "GTD84ECSNWS.pdf",
   "pages": "12–14",
   "readWith": "text-layer",
@@ -331,7 +340,7 @@
     },
     {
       "id": "dryer-is-running-but-00-is-displayed-in-",
-      "symptom": "Dryer is running but 00 is displayed in Time Remaining “Check Vent” light is on 12",
+      "symptom": "Dryer is running but 00 is displayed in Time Remaining “Check Vent” light is on",
       "causes": [
         {
           "id": "dryer-is-running-but-00-is-displayed-in--0",
@@ -1020,15 +1029,6 @@
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T15:20:12.215Z",
-  "learnedAt": "2026-10-04T15:18:55.575Z",
-  "alsoCovers": [
-    "GTD72EBPNDG",
-    "GTD72EBSNWS",
-    "GTD72GBPNDG",
-    "GTD72GBSNWS",
-    "GTD84ECPNDG",
-    "GTD84GCPNDG",
-    "GTD84GCSNWS"
-  ]
+  "reviewedAt": "2026-10-05T10:05:21.027Z",
+  "learnedAt": "2026-10-05T10:02:21.819Z"
 }

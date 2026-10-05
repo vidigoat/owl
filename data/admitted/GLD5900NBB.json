@@ -3,10 +3,22 @@
   "brand": "GE",
   "kind": "Dishwasher",
   "alsoCovers": [
+    "GLD4900PBB",
     "GLD4900PCC",
     "GLD4950PCS",
+    "GLD4960PSS",
+    "GLD5900NCC",
+    "GLD5900NWW",
+    "GLD5950NCS",
+    "GLD5960NSS",
+    "GLD6800NBB",
     "GLD6800NCC",
-    "GLDL500NCC"
+    "GLD6800NWW",
+    "GLD6860NSS",
+    "GLDL500NBB",
+    "GLDL500NCC",
+    "GLDL500NWW",
+    "GLDL560NSS"
   ],
   "source": "GLD5900NBB.pdf",
   "pages": "14–15",
@@ -32,57 +44,6 @@
           "evidence": "GE manual, page 14: \"Low inlet water temperature\"",
           "source": {
             "line": 28,
-            "manual": "GE manual",
-            "page": 14
-          }
-        }
-      ]
-    },
-    {
-      "id": "spots-and-filming-on-glasses-and-flatwar",
-      "symptom": "Spots and filming on glasses and flatware",
-      "causes": [
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-1",
-          "label": "Overloading the dishwasher",
-          "likelihood": 0.385,
-          "cost": null,
-          "remedies": [
-            "To remove stubborn spots and pre-existing film from glassware:"
-          ],
-          "evidence": "GE manual, page 14: \"Overloading the dishwasher\"",
-          "source": {
-            "line": 47,
-            "manual": "GE manual",
-            "page": 14
-          }
-        },
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-2",
-          "label": "Improper loading",
-          "likelihood": 0.278,
-          "cost": null,
-          "remedies": [
-            "1 Remove all metal utensils from the dishwasher."
-          ],
-          "evidence": "GE manual, page 14: \"Improper loading\"",
-          "source": {
-            "line": 48,
-            "manual": "GE manual",
-            "page": 14
-          }
-        },
-        {
-          "id": "spots-and-filming-on-glasses-and-flatwar-3",
-          "label": "Old or damp powder detergent",
-          "likelihood": 0.217,
-          "cost": null,
-          "remedies": [
-            "2 Do not add detergent."
-          ],
-          "evidence": "GE manual, page 14: \"Old or damp powder detergent\"",
-          "source": {
-            "line": 49,
             "manual": "GE manual",
             "page": 14
           }
@@ -469,37 +430,16 @@
           }
         }
       ]
-    },
-    {
-      "id": "anti-bacteria-cycle-only",
-      "symptom": "(Anti-Bacteria cycle only)",
-      "causes": [
-        {
-          "id": "anti-bacteria-cycle-only-0",
-          "label": "The incoming water temperature was too low",
-          "likelihood": 0.625,
-          "cost": null,
-          "remedies": [
-            "Raise the water heater temperature to between 120°F and 140°F."
-          ],
-          "evidence": "GE manual, page 15: \"The incoming water temperature was too low\"",
-          "source": {
-            "line": 71,
-            "manual": "GE manual",
-            "page": 15
-          }
-        }
-      ]
     }
   ],
   "rejected": [
     "start-reset-status-indicator-light-flash",
     "dishwasher-beeps-once-every-30-seconds",
-    "spots-and-filming-on-glasses-and-flatwar-0",
-    "spots-and-filming-on-glasses-and-flatwar-4"
+    "spots-and-filming-on-glasses-and-flatwar",
+    "anti-bacteria-cycle-only"
   ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-10-04T09:43:09.069Z",
-  "learnedAt": "2026-10-04T09:51:13.610Z"
+  "reviewedAt": "2026-10-05T10:05:10.762Z",
+  "learnedAt": "2026-10-05T10:00:14.939Z"
 }

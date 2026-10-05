@@ -30,22 +30,6 @@
           }
         },
         {
-          "id": "the-appliance-is-not-cooling-the-display-1",
-          "label": "a The lighting on the control panels and the interior lighting switch themselves off",
-          "suspect": true,
-          "likelihood": 0.385,
-          "cost": null,
-          "remedies": [
-            "briefly."
-          ],
-          "evidence": "Bosch manual, page 28: \"a The lighting on the control panels and the interior lighting switch themselves off\"",
-          "source": {
-            "line": 28,
-            "manual": "Bosch manual",
-            "page": 28
-          }
-        },
-        {
           "id": "the-appliance-is-not-cooling-the-display-2",
           "label": "a \"alarm off\" flashes and a warning signal sounds.",
           "suspect": true,
@@ -501,9 +485,11 @@
       ]
     }
   ],
-  "rejected": [],
+  "rejected": [
+    "the-appliance-is-not-cooling-the-display-1"
+  ],
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
-  "reviewedAt": "2026-09-26T13:57:57.990Z",
+  "reviewedAt": "2026-10-05T10:06:35.754Z",
   "learnedAt": "2026-09-26T13:50:57.538Z"
 }

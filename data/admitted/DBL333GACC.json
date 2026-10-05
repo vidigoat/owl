@@ -2,6 +2,17 @@
   "model": "DBL333GACC",
   "brand": "GE",
   "kind": "Dryer",
+  "alsoCovers": [
+    "DBL333EAAA",
+    "DBL333EACC",
+    "DBL333EAWW",
+    "DBL333GAAA",
+    "DBL333GAWW",
+    "DVL223EAAA",
+    "DVL223EAWW",
+    "DVL223GAAA",
+    "DVL223GAWW"
+  ],
   "source": "DBL333GACC.pdf",
   "pages": "20–21",
   "readWith": "text-layer",
@@ -546,12 +557,5 @@
   "reviewed": true,
   "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
   "reviewedAt": "2026-10-04T15:19:41.596Z",
-  "learnedAt": "2026-10-04T15:18:47.589Z",
-  "alsoCovers": [
-    "DBL333EAAA",
-    "DBL333EACC",
-    "DBL333GAWW",
-    "DVL223GAAA",
-    "DVL223GAWW"
-  ]
+  "learnedAt": "2026-10-05T10:02:13.834Z"
 }

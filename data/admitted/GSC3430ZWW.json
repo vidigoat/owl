@@ -1,0 +1,398 @@
+{
+  "model": "GSC3430ZWW",
+  "brand": "GE",
+  "kind": "Dishwasher",
+  "alsoCovers": [
+    "GSC3200ZBL",
+    "GSC3230ZWW",
+    "GSC3400ZBL"
+  ],
+  "source": "GSC3430ZWW.pdf",
+  "pages": "22–27",
+  "readWith": "text-layer",
+  "codes": {},
+  "symptoms": [
+    {
+      "id": "dishwasher-won-t-run",
+      "symptom": "Dishwasher won’t run",
+      "causes": [
+        {
+          "id": "dishwasher-won-t-run-0",
+          "label": "Fuse is blown, or the circuit breaker tripped",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Replace fuse or reset circuit breaker.",
+            "Remove any other appliances from the circuit."
+          ],
+          "evidence": "GE manual, page 22: \"Fuse is blown, or the circuit breaker tripped\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 22
+          }
+        }
+      ]
+    },
+    {
+      "id": "noise",
+      "symptom": "Noise",
+      "causes": [
+        {
+          "id": "noise-0",
+          "label": "Some of the sounds you’ll hear are normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Soft food disposal shredding action.",
+            "Drain valve opening to pump water out.",
+            "Timer control as cycle progresses.",
+            "Detergent cup opening.",
+            "The motor stopping during the drying period."
+          ],
+          "evidence": "GE manual, page 22: \"Some of the sounds you’ll hear are normal\"",
+          "source": {
+            "line": 17,
+            "manual": "GE manual",
+            "page": 22
+          }
+        },
+        {
+          "id": "noise-1",
+          "label": "Utensils are not secure in the rack or something small has dropped into the rack",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Make sure everything is secured in dishwasher."
+          ],
+          "evidence": "GE manual, page 22: \"Utensils are not secure in the rack or something small has dropped into the rack\"",
+          "source": {
+            "line": 26,
+            "manual": "GE manual",
+            "page": 22
+          }
+        },
+        {
+          "id": "noise-2",
+          "label": "Motor hums",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Dishwasher has not been used on a regular basis.",
+            "If you do not use your dishwasher often, set it to fill and pump out once every week.",
+            "This will help keep the seal moist and the garbage disposer clear."
+          ],
+          "evidence": "GE manual, page 22: \"Motor hums\"",
+          "source": {
+            "line": 35,
+            "manual": "GE manual",
+            "page": 22
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-standing-in-the-bottom-of-the-tub",
+      "symptom": "Water standing in the bottom of the tub",
+      "causes": [
+        {
+          "id": "water-standing-in-the-bottom-of-the-tub-0",
+          "label": "This is normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "A small amount of clean water around the outlet on the tub bottom at the back of the tub keeps the water seal lubricated."
+          ],
+          "evidence": "GE manual, page 23: \"This is normal\"",
+          "source": {
+            "line": 4,
+            "manual": "GE manual",
+            "page": 23
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-won-t-pump-out-of-the-tub",
+      "symptom": "Water won’t pump out of the tub",
+      "causes": [
+        {
+          "id": "water-won-t-pump-out-of-the-tub-0",
+          "label": "Drain is clogged",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "If you have an air gap, clean it.",
+            "Check to see if your kitchen sink is draining well.",
+            "If not, you may need a plumber.",
+            "If the dishwasher drains into a disposer, run disposer clear."
+          ],
+          "evidence": "GE manual, page 23: \"Drain is clogged\"",
+          "source": {
+            "line": 14,
+            "manual": "GE manual",
+            "page": 23
+          }
+        }
+      ]
+    },
+    {
+      "id": "suds-in-the-tub",
+      "symptom": "Suds in the tub",
+      "causes": [
+        {
+          "id": "suds-in-the-tub-0",
+          "label": "Correct detergent wasn’t used",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Use only automatic dishwasher detergents to avoid sudsing.",
+            "To remove suds from the tub, open the dishwasher and let suds evaporate.",
+            "Add 1 gallon of cold water to the tub.",
+            "Close and latch the dishwasher.",
+            "Pump out water by slowly turning the Dial until a drain period is reached.",
+            "Repeat if necessary."
+          ],
+          "evidence": "GE manual, page 23: \"Correct detergent wasn’t used\"",
+          "source": {
+            "line": 22,
+            "manual": "GE manual",
+            "page": 23
+          }
+        },
+        {
+          "id": "suds-in-the-tub-1",
+          "label": "Rinse agent was spilled",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Always wipe up rinse agent spills immediately."
+          ],
+          "evidence": "GE manual, page 23: \"Rinse agent was spilled\"",
+          "source": {
+            "line": 40,
+            "manual": "GE manual",
+            "page": 23
+          }
+        }
+      ]
+    },
+    {
+      "id": "stained-tub-interior",
+      "symptom": "Stained tub interior",
+      "causes": [
+        {
+          "id": "stained-tub-interior-0",
+          "label": "Detergent with colorant was used",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Some detergents contain colorant (pigment or dyes) that will discolor the tub interior with extended use.",
+            "Check the detergent cup for signs of any discoloration.",
+            "If cup is discolored, change to detergent without any colorant."
+          ],
+          "evidence": "GE manual, page 24: \"Detergent with colorant was used\"",
+          "source": {
+            "line": 8,
+            "manual": "GE manual",
+            "page": 24
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishes-don-t-dry",
+      "symptom": "Dishes don’t dry",
+      "causes": [
+        {
+          "id": "dishes-don-t-dry-0",
+          "label": "Low inlet water temperature",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Make sure inlet water temperature is correct."
+          ],
+          "evidence": "GE manual, page 24: \"Low inlet water temperature\"",
+          "source": {
+            "line": 23,
+            "manual": "GE manual",
+            "page": 24
+          }
+        },
+        {
+          "id": "dishes-don-t-dry-1",
+          "label": "Rinse agent dispenser is empty",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Check the rinse agent dispenser."
+          ],
+          "evidence": "GE manual, page 24: \"Rinse agent dispenser is empty\"",
+          "source": {
+            "line": 25,
+            "manual": "GE manual",
+            "page": 24
+          }
+        }
+      ]
+    },
+    {
+      "id": "dishes-and-flatware-not-clean",
+      "symptom": "Dishes and flatware not clean",
+      "causes": [
+        {
+          "id": "dishes-and-flatware-not-clean-0",
+          "label": "Inlet water temperature is below 120°F.",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Raise the water heater temperature to 120°F.",
+            "Use the HI TEMP WASH option."
+          ],
+          "evidence": "GE manual, page 24: \"Inlet water temperature is below 120°F.\"",
+          "source": {
+            "line": 27,
+            "manual": "GE manual",
+            "page": 24
+          }
+        },
+        {
+          "id": "dishes-and-flatware-not-clean-1",
+          "label": "Water pressure is temporarily low",
+          "likelihood": 0.385,
+          "cost": null,
+          "remedies": [
+            "Turn on a faucet.",
+            "Is water coming out more slowly than usual?",
+            "If so, wait until pressure is normal before using your dishwasher."
+          ],
+          "evidence": "GE manual, page 24: \"Water pressure is temporarily low\"",
+          "source": {
+            "line": 36,
+            "manual": "GE manual",
+            "page": 24
+          }
+        },
+        {
+          "id": "dishes-and-flatware-not-clean-2",
+          "label": "Air gap is clogged",
+          "likelihood": 0.278,
+          "cost": null,
+          "remedies": [
+            "Clean the air gap."
+          ],
+          "evidence": "GE manual, page 24: \"Air gap is clogged\"",
+          "source": {
+            "line": 41,
+            "manual": "GE manual",
+            "page": 24
+          }
+        },
+        {
+          "id": "dishes-and-flatware-not-clean-3",
+          "label": "Improper rack loading",
+          "likelihood": 0.217,
+          "cost": null,
+          "remedies": [
+            "Make sure large dishware does not block the detergent dispenser or the wash arm."
+          ],
+          "evidence": "GE manual, page 24: \"Improper rack loading\"",
+          "source": {
+            "line": 42,
+            "manual": "GE manual",
+            "page": 24
+          }
+        }
+      ]
+    },
+    {
+      "id": "detergent-cup-lid-won-t-latch",
+      "symptom": "Detergent cup lid won’t latch",
+      "causes": [
+        {
+          "id": "detergent-cup-lid-won-t-latch-0",
+          "label": "Dial is not in the OFF position",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Turn the Dial to OFF and slide the door latch to the left."
+          ],
+          "evidence": "GE manual, page 27: \"Dial is not in the OFF position\"",
+          "source": {
+            "line": 4,
+            "manual": "GE manual",
+            "page": 27
+          }
+        }
+      ]
+    },
+    {
+      "id": "detergent-left-in-dispenser-cups",
+      "symptom": "Detergent left in dispenser cups",
+      "causes": [
+        {
+          "id": "detergent-left-in-dispenser-cups-0",
+          "label": "Dishes are blocking the detergent cups",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Reposition the dishes."
+          ],
+          "evidence": "GE manual, page 27: \"Dishes are blocking the detergent cups\"",
+          "source": {
+            "line": 12,
+            "manual": "GE manual",
+            "page": 27
+          }
+        }
+      ]
+    },
+    {
+      "id": "steam",
+      "symptom": "Steam",
+      "causes": [
+        {
+          "id": "steam-0",
+          "label": "This is normal",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Steam comes through the vent by the door latch during drying and when water is being pumped out."
+          ],
+          "evidence": "GE manual, page 27: \"This is normal\"",
+          "source": {
+            "line": 14,
+            "manual": "GE manual",
+            "page": 27
+          }
+        }
+      ]
+    },
+    {
+      "id": "black-or-gray-marks-on-dishes",
+      "symptom": "Black or gray marks on dishes",
+      "causes": [
+        {
+          "id": "black-or-gray-marks-on-dishes-0",
+          "label": "Aluminum utensils have rubbed against dishes",
+          "likelihood": 0.625,
+          "cost": null,
+          "remedies": [
+            "Remove marks with a mild, abrasive cleaner."
+          ],
+          "evidence": "GE manual, page 27: \"Aluminum utensils have rubbed against dishes\"",
+          "source": {
+            "line": 18,
+            "manual": "GE manual",
+            "page": 27
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "reviewed": true,
+  "reviewedBy": "script — every quotation re-read off the manufacturer page it cites",
+  "reviewedAt": "2026-10-05T09:55:55.230Z",
+  "learnedAt": "2026-10-05T10:00:55.789Z"
+}
