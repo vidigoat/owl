@@ -2,9 +2,11 @@
 
 <br>
 
-# Second Set of Hands
+# Owl
 
 ### An appliance repair copilot for Alexa+, that will not guess.
+
+*Owls see in the dark, and that is where this is used — on the kitchen floor with a torch, at ten at night, when nobody who repairs dishwashers is answering. To Alexa it is **Night Owl**: "Alexa, ask Night Owl why my dishwasher is showing E24."*
 
 <br>
 
@@ -30,7 +32,7 @@ through the repair without your hands, and orders a part only if the diagnosis w
 ## Try it
 
 ```bash
-git clone <repo> && cd second-set-of-hands
+git clone <repo> && cd owl
 
 npm run demo          # the whole loop in a terminal, ~20 seconds
 npm run mcp:session   # a real MCP session — the Alexa+ deliverable, proven in one command
@@ -70,7 +72,7 @@ its tools live, so what it lists is what is there.
 **Talk to it at `/talk.html`** (`npm start`, with AWS credentials): say what the machine is doing,
 and the screen draws the real MCP App card for whichever tool the agent just called, with every
 call listed under its reply. Where there are no credentials — the hosted URL, today — the page says
-so, and plays a recording of a real session (`docs/media/talk.webm`) rather than pretending. Hosting
+so, and plays a recording of a real session (`public/media/talk.webm`) rather than pretending. Hosting
 it live is one confirmed step, `scripts/hosted-setup.sh`, behind a spend ceiling every instance
 shares (`mcp/shared-budget.js`): a deployment with keys and no shared ledger refuses to talk. The
 same table then keeps the household — machines and their repairs — across sessions
@@ -112,7 +114,7 @@ fix nobody saw work.
 ## What the screen shows — an MCP App
 
 On an Echo Show, Alexa+ draws a tool's UI through the MCP Apps extension. Eight of the tools name
-`ui://second-set-of-hands/card` in `_meta.ui.resourceUri`; the card is one self-contained page
+`ui://owl/card` in `_meta.ui.resourceUri`; the card is one self-contained page
 served as `text/html;profile=mcp-app` that speaks the host protocol over postMessage and draws
 whatever the tool returned: the causes still standing, the one check, the verdict, one step at a
 time, the itemised cart. It computes nothing and loads nothing from anywhere, so it needs no CSP

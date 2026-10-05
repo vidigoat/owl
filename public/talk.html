@@ -103,7 +103,7 @@
 <body>
 <div class="wrap">
   <header>
-    <h1><a href="/">Second Set of Hands</a> · a simulated Alexa+</h1>
+    <h1><a href="/">Owl</a> · a simulated Alexa+</h1>
     <p id="lede">Amazon Nova on Bedrock, choosing this project's MCP tools itself. The screen opens on what the house already knows. What it says, every tool it calls, and the card are this turn's — nothing here is scripted.</p>
   </header>
 
@@ -194,7 +194,7 @@
     };
     const init = await post({ jsonrpc: '2.0', id: 1, method: 'initialize', params: { protocolVersion: '2025-11-25', capabilities: {}, clientInfo: { name: 'talk', version: '1' } } });
     const sid = init.res.headers.get('mcp-session-id');
-    const read = await post({ jsonrpc: '2.0', id: 2, method: 'resources/read', params: { uri: 'ui://second-set-of-hands/card' } }, sid);
+    const read = await post({ jsonrpc: '2.0', id: 2, method: 'resources/read', params: { uri: 'ui://owl/card' } }, sid);
     html = read.json.result.contents[0].text;
   }
 

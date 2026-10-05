@@ -160,7 +160,7 @@ async function memory() {
 }
 
 (async () => {
-  console.log(`${C.bold}SECOND SET OF HANDS preflight${C.off}  ${C.dim}— the assumptions only real AWS can check${C.off}`);
+  console.log(`${C.bold}OWL preflight${C.off}  ${C.dim}— the assumptions only real AWS can check${C.off}`);
   if (await cli()) await bedrock();
   await memory();
 

@@ -9,7 +9,7 @@
   A minimal MCP Apps host, for seeing the card the way a screen-bearing Alexa+ device would draw it.
 
   Everything is real: it connects to this server's /mcp over Streamable HTTP, reads the card from
-  `ui://second-set-of-hands/card` with resources/read, runs it in a sandboxed iframe with scripts
+  `ui://owl/card` with resources/read, runs it in a sandboxed iframe with scripts
   and no origin, and speaks the host half of the MCP Apps protocol to it — ui/initialize,
   initialized, tool-input, tool-result, size-changed. Each "next" is a real tools/call.
 
@@ -55,7 +55,7 @@
 <div class="caption" id="caption" aria-hidden="true">
   <svg viewBox="0 0 240 240"><circle cx="98" cy="120" r="50" fill="none" stroke="#f2f0ea" stroke-width="16"/><circle cx="142" cy="120" r="50" fill="none" stroke="#e0a34a" stroke-width="16"/></svg>
   <p id="caption-text"></p>
-  <small>Second Set of Hands · the card, as Alexa+ would draw it</small>
+  <small>Owl · the card, as Alexa+ would draw it</small>
 </div>
 <div class="wrap" role="main">
   <h1>The repair card, in an MCP Apps host</h1>
@@ -118,7 +118,7 @@
     if (m.method === 'ui/initialize') {
       toView({ id: m.id, result: {
         protocolVersion: '2026-01-26',
-        hostInfo: { name: 'second-set-of-hands reference host', version: '1.0.0' },
+        hostInfo: { name: 'owl reference host', version: '1.0.0' },
         hostCapabilities: { serverTools: {} },
         hostContext: { theme, displayMode: 'inline', platform: 'web', containerDimensions: { maxHeight: 900 },
           toolInfo: currentTool ? { tool: currentTool } : undefined },
@@ -211,7 +211,7 @@
     const init = await rpc('initialize', { protocolVersion: '2025-11-25', capabilities: { extensions: { 'io.modelcontextprotocol/ui': { mimeTypes: ['text/html;profile=mcp-app'] } } }, clientInfo: { name: 'card-host', version: '1.0.0' } });
     await rpc('notifications/initialized', {});
     tools = (await rpc('tools/list', {})).tools;
-    const read = await rpc('resources/read', { uri: 'ui://second-set-of-hands/card' });
+    const read = await rpc('resources/read', { uri: 'ui://owl/card' });
     html = read.contents[0].text;
     trace(`connected to ${init.serverInfo.name} · ${tools.length} tools · card ${read.contents[0].mimeType}`);
     const want = new URLSearchParams(location.search).get('scenario');

@@ -1,5 +1,5 @@
 /**
- * SECOND SET OF HANDS — Alexa+ repair copilot
+ * OWL — Alexa+ repair copilot
  *
  * Real shape of the system (only the device shell and the vision call are simulated today):
  *

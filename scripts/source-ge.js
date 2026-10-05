@@ -31,7 +31,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 
-const UA = 'second-set-of-hands/0.1 (appliance fault-table research; contact via repo)';
+const UA = 'owl/0.1 (appliance fault-table research; contact via repo)';
 const ROOT = path.join(__dirname, '..');
 const MANUALS = path.join(ROOT, 'manuals');
 const CACHE = path.join(MANUALS, '.ge');

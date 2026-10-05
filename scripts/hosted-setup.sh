@@ -5,9 +5,9 @@
 #   AWS_PROFILE=<an admin profile> bash scripts/hosted-setup.sh --undo   # takes it all away again
 #
 # What it makes, and nothing else:
-#   - a DynamoDB table `sosh-spend`, provisioned at 1 read / 1 write — inside the always-free tier —
+#   - a DynamoDB table `owl-spend`, provisioned at 1 read / 1 write — inside the always-free tier —
 #     holding ONE item: what the hosted agent has spent, across every instance (mcp/shared-budget.js)
-#   - an IAM user `sosh-hosted` that can call Nova 2 Lite through Converse — the agent, and watching
+#   - an IAM user `owl-hosted` that can call Nova 2 Lite through Converse — the agent, and watching
 #     a step through the camera — and read/update that one table. Not the laptop's user: revoking
 #     the hosted agent never breaks local runs.
 #   - its access key, piped straight into `vercel env add` for production — never printed, never on disk
@@ -17,8 +17,8 @@
 # order below cannot leave it spending without a ceiling.
 set -euo pipefail
 
-TABLE=sosh-spend
-USER_NAME=sosh-hosted
+TABLE=owl-spend
+USER_NAME=owl-hosted
 REGION=us-east-1
 CEILING="${HANDS_BUDGET_USD:-5}"
 cd "$(dirname "$0")/.."
@@ -29,7 +29,7 @@ if [[ "${1:-}" == "--undo" ]]; then
   for k in $(aws iam list-access-keys --user-name "$USER_NAME" --query 'AccessKeyMetadata[].AccessKeyId' --output text 2>/dev/null); do
     aws iam delete-access-key --user-name "$USER_NAME" --access-key-id "$k"
   done
-  aws iam delete-user-policy --user-name "$USER_NAME" --policy-name sosh-hosted 2>/dev/null || true
+  aws iam delete-user-policy --user-name "$USER_NAME" --policy-name owl-hosted 2>/dev/null || true
   aws iam delete-user --user-name "$USER_NAME" 2>/dev/null || true
   for v in AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY HANDS_LEDGER_TABLE HANDS_BUDGET_USD AWS_REGION; do
     vercel env rm "$v" production --yes 2>/dev/null || true
@@ -61,7 +61,7 @@ if ! aws dynamodb describe-table --table-name "$TABLE" --region "$REGION" >/dev/
 fi
 
 aws iam get-user --user-name "$USER_NAME" >/dev/null 2>&1 || aws iam create-user --user-name "$USER_NAME" >/dev/null
-aws iam put-user-policy --user-name "$USER_NAME" --policy-name sosh-hosted --policy-document "$(cat <<JSON
+aws iam put-user-policy --user-name "$USER_NAME" --policy-name owl-hosted --policy-document "$(cat <<JSON
 {
   "Version": "2012-10-17",
   "Statement": [

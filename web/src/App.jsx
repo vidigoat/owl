@@ -8,7 +8,7 @@ import Household from './sections/Household.jsx';
 import { library, session as sessionApi, household as householdApi, num, money, odds } from './lib/api.js';
 
 /**
- * ── Second Set of Hands ─────────────────────────────────────────────────────
+ * ── Owl ─────────────────────────────────────────────────────
  *
  * An appliance repair copilot for Alexa+. Somebody is on a kitchen floor at nine at night with a
  * dishwasher that will not drain, and the manual is either lost or a PDF on a phone they cannot
@@ -288,9 +288,9 @@ export default function App() {
       </main>
 
       <footer className="wrap">
-        <span>Second Set of Hands</span>
+        <span>Owl</span>
         <span>Amazon Developer Hackathon · Alexa+ track</span>
-        <a href="https://github.com/vidigoat/second-set-of-hands">the source</a>
+        <a href="https://github.com/vidigoat/owl">the source</a>
       </footer>
     </>
   );

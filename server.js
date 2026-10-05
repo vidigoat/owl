@@ -1,4 +1,4 @@
-/* SECOND SET OF HANDS — zero-dependency dev server. node server.js -> http://localhost:8792 */
+/* OWL — zero-dependency dev server. node server.js -> http://localhost:8792 */
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
@@ -771,5 +771,5 @@ module.exports.handler = handler;
 
 // Only listen when run directly. Imported — by a host, or by a test — this is just a function.
 if (require.main === module) {
-  http.createServer(handler).listen(PORT, () => console.log(`second-set-of-hands  http://localhost:${PORT}`));
+  http.createServer(handler).listen(PORT, () => console.log(`owl  http://localhost:${PORT}`));
 }

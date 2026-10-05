@@ -74,7 +74,7 @@ export default function Ask({ machines }) {
 
   return (
     <section className="hero wrap" id="ask">
-      <p className="plate">Second Set of Hands · an appliance repair copilot for Alexa+</p>
+      <p className="plate">Owl · an appliance repair copilot for Alexa+</p>
 
       {/*
         No accent in the headline.

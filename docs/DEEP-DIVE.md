@@ -1,4 +1,4 @@
-# Second Set of Hands
+# Owl
 
 **An Alexa+ add-on that sees what's broken and fixes it with you — hands-free, down to the part on your doorstep.**
 
@@ -335,7 +335,7 @@ No dependencies, no build step, no credentials needed to see it work.
 
 ```bash
 git clone <repo>
-cd second-set-of-hands
+cd owl
 
 npm run demo            # ← start here: the whole loop in a terminal, 20 seconds
 npm test                # every suite, reported together
@@ -1122,7 +1122,7 @@ repair** and walk it through. Then press **Show it refuse a job** — that scree
 ## Repository map
 
 ```
-second-set-of-hands/
+owl/
 ├── mcp/
 │   ├── server.js        Streamable HTTP MCP server
 │   └── tools/           one file per tool, each independently testable

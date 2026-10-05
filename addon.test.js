@@ -51,7 +51,7 @@ it('the required fields are there, within the published limits', () => {
   assert.ok(en.fullDescription.length <= 4000);
   assert.ok(en.examplePhrases.length >= 3 && en.examplePhrases.length <= 4);
   en.examplePhrases.forEach((p) => assert.ok(p.length <= 200));
-  en.examplePhrases.forEach((p) => assert.match(p, /Second Set of Hands/, `"${p}" does not name the add-on`));
+  en.examplePhrases.forEach((p) => assert.match(p, /Night Owl/, `"${p}" does not name the add-on`));
 });
 
 it('the MCP endpoint is the deployed Streamable HTTP server', () => {

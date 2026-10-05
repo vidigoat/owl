@@ -1,4 +1,4 @@
-# Second Set of Hands — the 10× plan
+# Owl — the 10× plan
 
 Amazon Developer Hackathon, **Alexa+ track**. Submissions close **23 Oct 2026, 12:00 PT**
 (24 Oct, 00:30 IST).

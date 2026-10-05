@@ -201,7 +201,7 @@ at once are merged rather than overwritten. Where there is nowhere durable to ke
 demo until `scripts/hosted-setup.sh` is run — every answer says the repair is not kept. It used to say `saved: true` there, for a write that had failed; the agent then
 told people their repair was recorded (FRICTION-LOG, 24 September).
 
-**An MCP App for the screen**: eight tools name `ui://second-set-of-hands/card` in
+**An MCP App for the screen**: eight tools name `ui://owl/card` in
 `_meta.ui.resourceUri`, the way Alexa+ draws a tool's UI on an Echo Show — one self-contained page,
 `text/html;profile=mcp-app`, that draws what the tool returned and computes nothing. Plus Markdown
 **cards as MCP resources** for hosts that only read text. Both under one rule that is easy to break while making a screen nicer:

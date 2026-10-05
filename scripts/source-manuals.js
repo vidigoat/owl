@@ -55,7 +55,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { execFileSync } = require('node:child_process');
 
-const UA = 'second-set-of-hands/0.1 (appliance fault-table research; contact via repo)';
+const UA = 'owl/0.1 (appliance fault-table research; contact via repo)';
 const POLITE_MS = 1000;
 
 /*

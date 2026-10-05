@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Second Set of Hands</title>
+<title>Owl</title>
 <!--
   The MCP App: what an Echo Show draws while Alexa+ talks a repair through.
 
@@ -73,7 +73,7 @@
 </style>
 </head>
 <body>
-<main id="card" aria-live="polite"><div class="waiting"><div class="kicker">Second Set of Hands</div><h1>Listening.</h1></div></main>
+<main id="card" aria-live="polite"><div class="waiting"><div class="kicker">Owl</div><h1>Listening.</h1></div></main>
 <script>
 (() => {
   'use strict';
@@ -124,7 +124,7 @@
 
   request('ui/initialize', {
     appCapabilities: { availableDisplayModes: ['inline'] },
-    clientInfo: { name: 'second-set-of-hands-card', version: '1.0.0' },
+    clientInfo: { name: 'owl-card', version: '1.0.0' },
     protocolVersion: PROTOCOL,
   }).then((r) => {
     applyContext((r && r.hostContext) || {});

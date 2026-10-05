@@ -98,7 +98,7 @@ function checkoutCard({ part, price, tax, total, alternative }) {
  * runs it in a sandbox and hands it the tool's result over postMessage. The Markdown cards below
  * are for hosts that only read text; this is for the one the person is looking at.
  */
-const APP_URI = 'ui://second-set-of-hands/card';
+const APP_URI = 'ui://owl/card';
 const APP_MIME = 'text/html;profile=mcp-app';
 const APP_FILE = require('node:path').join(__dirname, 'apps', 'card.html');
 /** The tools whose results the card knows how to draw. */
@@ -117,7 +117,7 @@ const RESOURCES = [
     read: () => require('node:fs').readFileSync(APP_FILE, 'utf8'),
   },
   {
-    uri: 'card://second-set-of-hands/how-it-decides',
+    uri: 'card://owl/how-it-decides',
     name: 'How it decides what to ask',
     description: 'The one-screen explanation of why it asks the questions it asks, for a host that wants to show its working.',
     mimeType: 'text/markdown',
@@ -137,7 +137,7 @@ const RESOURCES = [
     ].join('\n'),
   },
   {
-    uri: 'card://second-set-of-hands/what-it-will-not-do',
+    uri: 'card://owl/what-it-will-not-do',
     name: 'What it will not do',
     description: 'The refusals, listed. The gate is the product, so it is worth being able to read it.',
     mimeType: 'text/markdown',

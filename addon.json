@@ -5,13 +5,13 @@
     "locales": {
       "en-US": {
         "default": "DEFAULT",
-        "name": { "value": "Second Set of Hands" },
+        "name": { "value": "Night Owl" },
         "shortDescription": "Talks you through an appliance repair from its own manual, and won't sell you a part until the diagnosis is verified.",
-        "fullDescription": "Your dishwasher shows a fault code, or leaves water in the bottom, and your hands are busy. Second Set of Hands reads that machine's own service manual — the manufacturer's words, cited to the page — and asks you the one quick check that rules out the most, such as listening for the drain pump. Then it talks you through the fix one step at a time, hands-free, at the pace you work.\n\nIt will not guess with your money. A part is offered only when one cause is left, every cheaper cause has been ruled out, and the repair is not behind mains wiring — and it reads you the full total before anything is ordered. When it does not know, it says so and names what the manual does cover.\n\nIt remembers your household's machines and past repairs, so the next conversation is shorter. No account, no tracking.",
+        "fullDescription": "Your dishwasher shows a fault code, or leaves water in the bottom, and your hands are busy. Night Owl reads that machine's own service manual — the manufacturer's words, cited to the page — and asks you the one quick check that rules out the most, such as listening for the drain pump. Then it talks you through the fix one step at a time, hands-free, at the pace you work.\n\nIt will not guess with your money. A part is offered only when one cause is left, every cheaper cause has been ruled out, and the repair is not behind mains wiring — and it reads you the full total before anything is ordered. When it does not know, it says so and names what the manual does cover.\n\nIt remembers your household's machines and past repairs, so the next conversation is shorter. No account, no tracking.",
         "examplePhrases": [
-          "Ask Second Set of Hands why my dishwasher is showing E24",
-          "Tell Second Set of Hands my dishwasher leaves water in the bottom",
-          "Ask Second Set of Hands what needs doing in my house"
+          "Ask Night Owl why my dishwasher is showing E24",
+          "Tell Night Owl my dishwasher leaves water in the bottom",
+          "Ask Night Owl what needs doing in my house"
         ],
         "privacyAndCompliance": {
           "privacyPolicyUrl": "https://second-set-of-hands.vercel.app/privacy.html",

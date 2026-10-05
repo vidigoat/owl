@@ -166,7 +166,7 @@ Not urgent for the build. It is a real exposure and it should not go into Decemb
 ### 10. Three new decisions, 23 Sep  ⏱ one reply each
 
 - **AWS credentials on Vercel for the hosted `/talk.html`?** Then a judge can talk to the agent on
-  the demo URL instead of watching the footage (`docs/media/talk.webm`). The global cap is now
+  the demo URL instead of watching the footage (`public/media/talk.webm`). The global cap is now
   built: `mcp/shared-budget.js` keeps the ledger as one DynamoDB item that every instance reserves
   against in a single conditional write — two instances racing for the last cent cannot both get
   it (tested), an unreachable ledger stops the call, and a deployment with keys but no ledger

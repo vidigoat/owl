@@ -591,7 +591,7 @@ async function handle(msg) {
     return result(id, {
       protocolVersion: SUPPORTED_VERSIONS.includes(asked) ? asked : PROTOCOL_VERSION,
       capabilities: { tools: { listChanged: false }, resources: { listChanged: false, subscribe: false } },
-      serverInfo: { name: 'second-set-of-hands', version: '0.1.0' },
+      serverInfo: { name: 'owl', version: '0.1.0' },
     });
   }
 
@@ -725,7 +725,7 @@ async function serveMcp(req, res) {
      */
     res.writeHead(405, { 'content-type': 'text/plain; charset=utf-8', allow: 'POST' });
     return res.end(
-      `second-set-of-hands MCP server, spec ${PROTOCOL_VERSION}.\n` +
+      `owl MCP server, spec ${PROTOCOL_VERSION}.\n` +
         'No server-initiated SSE stream is offered on GET. POST JSON-RPC to this URL.\n'
     );
   }

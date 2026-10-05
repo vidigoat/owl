@@ -40,7 +40,7 @@ OE   The machine cannot drain
 `,
 };
 
-console.log(`\n  ${b('SECOND SET OF HANDS')}  ${dim('— the whole loop, on a machine nobody coded for')}\n`);
+console.log(`\n  ${b('OWL')}  ${dim('— the whole loop, on a machine nobody coded for')}\n`);
 line();
 
 /* 0 — see it, if there is anything to see with.
