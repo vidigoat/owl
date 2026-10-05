@@ -10,7 +10,7 @@
 
 <br>
 
-[**Live demo**](https://second-set-of-hands.vercel.app) · [The review bench](https://second-set-of-hands.vercel.app/review.html) · [The deep dive](docs/DEEP-DIVE.md) · [For reviewers](docs/JUDGING.md)
+[**Live demo**](https://owl-repair.vercel.app) · [The review bench](https://owl-repair.vercel.app/review.html) · [The deep dive](docs/DEEP-DIVE.md) · [For reviewers](docs/JUDGING.md)
 
 <br>
 
@@ -32,7 +32,7 @@ through the repair without your hands, and orders a part only if the diagnosis w
 ## Try it
 
 ```bash
-git clone <repo> && cd owl
+git clone https://github.com/vidigoat/owl.git && cd owl
 
 npm run demo          # the whole loop in a terminal, ~20 seconds
 npm run mcp:session   # a real MCP session — the Alexa+ deliverable, proven in one command
@@ -64,8 +64,8 @@ are flashing"* is what a person says; `E:22` is not.
 
 ## An agent drives it, not a script
 
-**Use the real thing today at [`/connect.html`](https://second-set-of-hands.vercel.app/connect.html):**
-add `https://second-set-of-hands.vercel.app/mcp` to Claude as a custom connector (no sign-in), and
+**Use the real thing today at [`/connect.html`](https://owl-repair.vercel.app/connect.html):**
+add `https://owl-repair.vercel.app/mcp` to Claude as a custom connector (no sign-in), and
 talk a repair through with the same twenty-two tools Alexa+ would call. The page asks the server for
 its tools live, so what it lists is what is there.
 

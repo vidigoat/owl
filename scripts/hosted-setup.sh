@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Turn on the hosted live agent at second-set-of-hands.vercel.app/talk.html, with a hard ceiling.
+# Turn on the hosted live agent at owl-repair.vercel.app/talk.html, with a hard ceiling.
 #
 #   AWS_PROFILE=<an admin profile> bash scripts/hosted-setup.sh          # asks before changing anything
 #   AWS_PROFILE=<an admin profile> bash scripts/hosted-setup.sh --undo   # takes it all away again
@@ -94,6 +94,6 @@ put AWS_REGION "$REGION"
 # A new IAM key takes a few seconds to be accepted everywhere.
 sleep 10
 vercel --prod --yes >/dev/null
-echo "Hosted agent on, ceiling \$$CEILING for every instance together: https://second-set-of-hands.vercel.app/talk.html"
+echo "Hosted agent on, ceiling \$$CEILING for every instance together: https://owl-repair.vercel.app/talk.html"
 echo "What it has spent:  aws dynamodb get-item --table-name $TABLE --key '{\"id\":{\"S\":\"ledger\"}}' --region $REGION"
 echo "Turn it off:        AWS_PROFILE=$AWS_PROFILE bash scripts/hosted-setup.sh --undo"

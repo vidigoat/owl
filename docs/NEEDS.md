@@ -134,7 +134,7 @@ Both are live:
   `/index.json`: 7,933 packages, about 620 kB over the wire. A stranger can point `cli.js lock --index` at
   it and get their own tree answered without building anything, which is the part of the argument
   that used to be unverifiable.
-- **<https://second-set-of-hands.vercel.app>** — and `/review.html` now **reads a manual you drop
+- **<https://owl-repair.vercel.app>** — and `/review.html` now **reads a manual you drop
   on it**. That used to need `pdftotext`, which the host does not have; the reader is written here
   now with no dependencies, so the one capability the project is for is finally reachable from the
   URL. Measured against poppler on 1,881 pages: identical page counts, 98.4–100% of its words,

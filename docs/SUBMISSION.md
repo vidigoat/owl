@@ -19,7 +19,7 @@ Checklist against the stated requirements:
 | **AWS Builder mini**: AWS services with documented integrations | Bedrock: Nova 2 Lite **Converse with tool use** drives the agent (`npm run alexa`); Nova Lite reads panels and manual pages — live, measured, `npm run preflight` |
 | **Open Source mini**: a *new additional* OSS project or public contribution | **[github.com/vidigoat/faultgraph](https://github.com/vidigoat/faultgraph)** — MIT, public, built in the window |
 | friction log — **up to 10% judging bonus** | `docs/FRICTION-LOG.md` |
-| a place to see it without installing anything | **<https://second-set-of-hands.vercel.app>** — ask a real manual a question and get the manufacturer's sentence and its page number, or a refusal naming what that manual does cover. And at `/review.html`, **drop in a manual of your own** and watch it be read. |
+| a place to see it without installing anything | **<https://owl-repair.vercel.app>** — ask a real manual a question and get the manufacturer's sentence and its page number, or a refusal naming what that manual does cover. And at `/review.html`, **drop in a manual of your own** and watch it be read. |
 
 Note: the repo does **not** have to be public for this hackathon. Sharing it privately with
 `testing@devpost.com` and the six Amazon DevRel GitHub accounts (chris-trag, knmeiss, giolaq, anishamalde, mosesroth, emersonsklar) satisfies the rule. Their invitations expire after 7 days, so send them in the last week.

@@ -29,7 +29,7 @@ const it = (name, fn) => {
 
 const addon = JSON.parse(fs.readFileSync(path.join(__dirname, 'addon.json'), 'utf8'));
 const en = addon.storeListing.locales['en-US'];
-const HOST = 'https://second-set-of-hands.vercel.app/';
+const HOST = 'https://owl-repair.vercel.app/';
 const local = (uri) => {
   assert.ok(uri.startsWith(HOST), `${uri} is not served by this project`);
   return path.join(__dirname, 'public', uri.slice(HOST.length));

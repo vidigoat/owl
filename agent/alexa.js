@@ -145,7 +145,7 @@ const spoken = (blocks = []) =>
 class Alexa {
   /**
    * @param {object} opts
-   * @param {string} opts.url            the MCP server — e.g. https://second-set-of-hands.vercel.app/mcp
+   * @param {string} opts.url            the MCP server — e.g. https://owl-repair.vercel.app/mcp
    * @param {string} [opts.model]        a Bedrock model id
    * @param {Function} [opts.converse]   injected in tests; defaults to agent/bedrock.js
    * @param {object} [opts.client]       an McpClient; built from `url` if absent

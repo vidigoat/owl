@@ -111,7 +111,7 @@ above will not be where you look for them.**
 
 | moment | record it on | exactly |
 |---|---|---|
-| the hook — a sentence, answered with a citation | **the page**, <https://second-set-of-hands.vercel.app> | type *"there is water left in the bottom at the end of the program"*. The answer carries the manufacturer's own sentence and **Bosch manual, page 46**. This is the strongest single frame on the page and it is now the opening. |
+| the hook — a sentence, answered with a citation | **the page**, <https://owl-repair.vercel.app> | type *"there is water left in the bottom at the end of the program"*. The answer carries the manufacturer's own sentence and **Bosch manual, page 46**. This is the strongest single frame on the page and it is now the opening. |
 | **THE PAUSE** and **THE COLLAPSE** | **the terminal**, `npm run demo` | the narrowing is there in full: three causes, `1.50 bits`, the chosen check with its cost, the answer, the strike-through, the second question, one cause left. Let the pause run. |
 | the same thing over the wire | **the terminal**, `npm run mcp:session` | proves the Alexa+ deliverable in one command: handshake, 22 tools, a citation, a refusal, a code narrowed, and a cart the gate refuses to open |
 | hands-free steps | **the page**, section 2 | one step at headline size, the tick row, *needs both hands*, and **read it out loud** — press it, and let the speech be heard. It is the only moment in the film that sounds like an Alexa product. |

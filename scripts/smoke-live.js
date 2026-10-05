@@ -2,7 +2,7 @@
 /**
  * Every route the deployed site serves, asked once, after a deploy.
  *
- *   npm run smoke:live                        # https://second-set-of-hands.vercel.app
+ *   npm run smoke:live                        # https://owl-repair.vercel.app
  *   npm run smoke:live -- https://preview-url
  *
  * The hosted functions are a compiled bundle, and a bundle can break what every local test passes —
@@ -11,7 +11,7 @@
  * visitor should not get. Spends nothing: the agent route is expected to say it has no credentials.
  */
 
-const BASE = (process.argv.slice(2).find((a) => !a.startsWith('--')) || 'https://second-set-of-hands.vercel.app').replace(/\/$/, '');
+const BASE = (process.argv.slice(2).find((a) => !a.startsWith('--')) || 'https://owl-repair.vercel.app').replace(/\/$/, '');
 const J = (t) => JSON.parse(t);
 
 const CHECKS = [

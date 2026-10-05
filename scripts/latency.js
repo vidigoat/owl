@@ -3,7 +3,7 @@
  * How fast is a tool call? Measured, and split into the part this server owns and the part it does not.
  *
  *   npm run latency                                   against a local server
- *   npm run latency -- --url https://second-set-of-hands.vercel.app/mcp --from "Pune, India"
+ *   npm run latency -- --url https://owl-repair.vercel.app/mcp --from "Pune, India"
  *
  * Alexa+ asks for a round trip under 500 ms. The orchestrator cannot be called by entrants, so
  * that exact figure cannot be taken (docs/FRICTION-LOG.md). Two can:

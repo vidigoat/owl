@@ -5,7 +5,7 @@
  *   npm run alexa                        a conversation, typed — the agent is live, you are the person
  *   npm run alexa -- --demo              a whole repair, with the person's lines scripted
  *   npm run alexa -- --url <mcp url>     against any MCP server — e.g. the deployed one:
- *                                        https://second-set-of-hands.vercel.app/mcp
+ *                                        https://owl-repair.vercel.app/mcp
  *
  * Every Alexa+ line and every tool call is live: an Amazon Nova model on Bedrock, choosing tools
  * from the MCP server over Streamable HTTP. In --demo only the PERSON is scripted — the lines a
