@@ -38,7 +38,7 @@ npm run demo          # the whole loop in a terminal, ~20 seconds
 npm run mcp:session   # a real MCP session — the Alexa+ deliverable, proven in one command
 npm start             # http://localhost:8792 — the device experience
 npm run alexa         # talk to it — Amazon Nova on Bedrock choosing the tools, over MCP
-npm test              # 46 suites · 542 checks
+npm test              # 47 suites · 544 checks
 npm run smoke:live    # every route of the deployed site and the MCP handshake, after a deploy
 ```
 

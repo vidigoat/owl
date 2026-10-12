@@ -13,6 +13,8 @@ import Alexa from './sections/Alexa.jsx';
 import UseIt from './sections/UseIt.jsx';
 import Footer from './sections/Footer.jsx';
 import Why from './sections/Why.jsx';
+import Evidence from './sections/Evidence.jsx';
+import Track from './sections/Track.jsx';
 import { library, session as sessionApi, household as householdApi, money, odds } from './lib/api.js';
 
 /**
@@ -72,6 +74,8 @@ export default function App() {
         <Alexa />
 
         <Why />
+
+        <Track />
 
         <Ask machines={lib?.machines} />
 
@@ -136,6 +140,8 @@ export default function App() {
         {lib?.totals && <Library lib={lib} />}
 
         {house && <Household data={house} />}
+
+        <Evidence />
 
         <UseIt />
 

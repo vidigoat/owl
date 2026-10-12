@@ -1,0 +1,46 @@
+{
+  "items": [
+    {
+      "figure": "23 / 23",
+      "label": "live agent scenarios passed",
+      "detail": "Amazon Nova 2 Lite choosing Owl's tools itself, 48 turns, no rule broken.",
+      "source": "docs/agent-eval.json",
+      "measured": "2026-10-04"
+    },
+    {
+      "figure": "0",
+      "label": "parts sold on a guess",
+      "detail": "Every cause of every machine swept — 14,237 causes on 453 machines — checked independently of the gate.",
+      "source": "docs/no-bad-buy.json",
+      "measured": "2026-10-05"
+    },
+    {
+      "figure": "1.8 ms",
+      "label": "slowest tool, p95, on the server",
+      "detail": "Each tool the agent uses, called 20 times against the deployed MCP server.",
+      "source": "docs/latency.json",
+      "measured": "2026-09-23"
+    },
+    {
+      "figure": "98.4%",
+      "label": "worst-case word recall of its own PDF reader",
+      "detail": "Against poppler, over 1,881 pages of 30 manuals, with no dependencies.",
+      "source": "docs/pdf-compare.json",
+      "measured": "2026-09-22"
+    },
+    {
+      "figure": "157 of 496",
+      "label": "Bosch and Siemens appliances answered",
+      "detail": "Every major-appliance page those makers list, visited; 172 manuals read behind them.",
+      "source": "docs/coverage.json",
+      "measured": "2026-10-04"
+    },
+    {
+      "figure": "83",
+      "label": "repair steps re-found word for word",
+      "detail": "Manufacturer procedures followed from 73 page references; anything not on the page is dropped.",
+      "source": "docs/procedures.json",
+      "measured": "2026-09-23"
+    }
+  ]
+}

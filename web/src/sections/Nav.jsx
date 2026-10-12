@@ -16,8 +16,8 @@ export const SECTIONS = [
   ['alexa', 'On Alexa+'],
   ['why', 'Why'],
   ['ask', 'Ask a manual'],
-  ['hands', 'Hands-free'],
   ['library', 'Library'],
+  ['evidence', 'Evidence'],
   ['use', 'Use it'],
   ['wont', 'Refusals'],
 ];
