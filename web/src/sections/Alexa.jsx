@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { House, Ear, ReceiptText } from 'lucide-react';
 
 /**
  * ── On Alexa+ ───────────────────────────────────────────────────────────────
@@ -13,9 +14,9 @@ import { useEffect, useRef } from 'react';
  */
 
 const BEATS = [
-  ['Remembers the house', 'It knows your machines and what was tried last time, before you say a word.'],
-  ['Asks one check, then waits', 'The check that rules out the most for the least effort. Your hands stay in the machine.'],
-  ['Reads the total first', 'A part is offered only when one cause is left, and nothing is ordered until you say yes.'],
+  [House, 'Remembers the house', 'It knows your machines and what was tried last time, before you say a word.'],
+  [Ear, 'Asks one check, then waits', 'The check that rules out the most for the least effort. Your hands stay in the machine.'],
+  [ReceiptText, 'Reads the total first', 'A part is offered only when one cause is left, and nothing is ordered until you say yes.'],
 ];
 
 export default function Alexa() {
@@ -45,8 +46,9 @@ export default function Alexa() {
         </div>
 
         <dl className="alexa__beats">
-          {BEATS.map(([t, d]) => (
+          {BEATS.map(([Icon, t, d]) => (
             <div key={t}>
+              <span className="tile" aria-hidden="true"><Icon size={18} strokeWidth={2} /></span>
               <dt>{t}</dt>
               <dd>{d}</dd>
             </div>

@@ -6,17 +6,28 @@
  * and its menu bar — without rewriting each page's own layout.
  */
 :root {
-  --paper: #f5f6fa;
-  --paper-2: #eceef5;
-  --card: #ffffff;
-  --ink: #0e1430;
-  --ink-2: #3f4766;
-  --graphite: #3f4766;
-  --rule: #d6d9e6;
-  --amber: #b86a00;
+  color-scheme: dark;
+  --paper: #0c0a14;
+  --paper-2: #110d1a;
+  --card: #17131f;
+  --ink: #f5f2fb;
+  --ink-2: #c4bdd4;
+  --graphite: #b6aec8;
+  --faint: #8d84a1;
+  --rule: rgba(255, 255, 255, 0.1);
+  --amber: #fbbf24;
+  --fault: #fb7185;
+  --proof: #34d399;
   --sans: Geist, ui-sans-serif, system-ui, sans-serif;
   --mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
   --display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+}
+body {
+  background:
+    radial-gradient(800px 420px at 10% -10%, rgba(139, 92, 246, 0.25), transparent 70%),
+    radial-gradient(600px 360px at 95% 0%, rgba(245, 158, 11, 0.12), transparent 70%),
+    var(--paper) !important;
+  background-attachment: fixed !important;
 }
 body { font-family: var(--sans); -webkit-font-smoothing: antialiased; }
 h1, h2 { font-family: var(--display); font-weight: 650; letter-spacing: -0.02em; }
@@ -25,7 +36,7 @@ h1, h2 { font-family: var(--display); font-weight: 650; letter-spacing: -0.02em;
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(10, 15, 36, 0.92);
+  background: rgba(12, 10, 20, 0.82);
   backdrop-filter: saturate(160%) blur(16px);
   -webkit-backdrop-filter: saturate(160%) blur(16px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -52,8 +63,8 @@ h1, h2 { font-family: var(--display); font-weight: 650; letter-spacing: -0.02em;
   height: 36px;
   padding: 0 16px;
   border-radius: 999px;
-  background: #f5a623;
-  color: #0a0f24;
+  background: #fbbf24;
+  color: #1a1206;
   font-weight: 600;
   box-shadow: 0 8px 22px -10px rgba(245, 166, 35, 0.6);
 }

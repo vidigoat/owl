@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
+import { ShieldCheck, Ban } from 'lucide-react';
 import TitleBlock from '../components/TitleBlock.jsx';
 import { describe, odds } from '../lib/api.js';
 
@@ -200,7 +201,7 @@ function Found({ out }) {
   return (
     <div className="answer">
       <p className="answer__symptom">“{first.symptom}”</p>
-      <p className="answer__from">{out.provenance}</p>
+      <p className="answer__from"><ShieldCheck size={15} strokeWidth={2.2} aria-hidden="true" />{out.provenance}</p>
 
       {first.causes.map((c) => (
         <div className="cause" key={c.id}>
@@ -257,7 +258,7 @@ function Found({ out }) {
 function Refused({ out }) {
   return (
     <div className="refusal">
-      <h3>It will not guess</h3>
+      <h3><Ban size={18} strokeWidth={2.4} aria-hidden="true" />It will not guess</h3>
       <p>{out.reason}</p>
       {out.available?.length > 0 && (
         <>

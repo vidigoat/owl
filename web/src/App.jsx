@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
 import { motion, useReducedMotion } from 'motion/react';
+import { Ban, ChevronDown } from 'lucide-react';
 import Ask from './sections/Ask.jsx';
 import Plate from './sections/Plate.jsx';
 import Device from './sections/Device.jsx';
@@ -149,10 +150,9 @@ export default function App() {
               <Accordion.Item value={w.q} key={w.q}>
                 <Accordion.Header>
                   <Accordion.Trigger className="wont__trigger">
-                    {w.q}
-                    <span className="wont__sign" aria-hidden="true">
-                      +
-                    </span>
+                    <span className="wont__icon" aria-hidden="true"><Ban size={16} strokeWidth={2.2} /></span>
+                    <span className="wont__q">{w.q}</span>
+                    <ChevronDown className="wont__sign" size={18} strokeWidth={2} aria-hidden="true" />
                   </Accordion.Trigger>
                 </Accordion.Header>
                 <Accordion.Content className="panel">

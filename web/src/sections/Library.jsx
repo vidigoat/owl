@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { WashingMachine, MessageSquareText, FileSearch, ShieldX, Search } from 'lucide-react';
 import { num } from '../lib/api.js';
 
 /**
@@ -47,13 +48,13 @@ export default function Library({ lib }) {
 
       <dl className="stats">
         {[
-          ['Machines', t.machines],
-          ['Symptoms', t.symptoms],
-          ['Causes, each with its page', t.causes],
-          ['Readings rejected', t.rejected],
-        ].map(([label, n]) => (
+          [WashingMachine, 'Machines', t.machines],
+          [MessageSquareText, 'Symptoms', t.symptoms],
+          [FileSearch, 'Causes, each with its page', t.causes],
+          [ShieldX, 'Readings rejected', t.rejected],
+        ].map(([Icon, label, n]) => (
           <div key={label}>
-            <dt>{label}</dt>
+            <dt><Icon size={15} strokeWidth={2} aria-hidden="true" />{label}</dt>
             <dd>{num(n)}</dd>
           </div>
         ))}
@@ -69,7 +70,7 @@ export default function Library({ lib }) {
           ))}
         </div>
         <label className="search">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+          <Search size={16} strokeWidth={2} aria-hidden="true" />
           <input type="search" placeholder="Find a model number" value={find} onChange={(e) => setFind(e.target.value)} spellCheck={false} autoComplete="off" aria-label="Find a model number" />
         </label>
       </div>

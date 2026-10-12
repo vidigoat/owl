@@ -1,3 +1,4 @@
+import { Play, ArrowDown } from 'lucide-react';
 import { Logo } from '../lib/logos.jsx';
 
 /**
@@ -34,8 +35,8 @@ export default function Hero() {
         </p>
 
         <div className="hero__actions">
-          <a className="button button--eye" href="#alexa">Watch it on Alexa+</a>
-          <a className="button button--ghost" href="#ask">Ask a manual</a>
+          <a className="button button--eye" href="#alexa"><Play size={16} strokeWidth={2.5} fill="currentColor" />Watch it on Alexa+</a>
+          <a className="button button--ghost" href="#ask">Ask a manual<ArrowDown size={16} strokeWidth={2.2} /></a>
         </div>
 
         <div className="makers" aria-label="Manufacturers whose manuals Owl reads">

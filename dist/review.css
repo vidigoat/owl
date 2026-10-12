@@ -28,6 +28,8 @@
 
 :root {
   --paper: #efeae1;
+  /* Panels. site.css, loaded after this sheet, sets the site-wide value; this is the fallback. */
+  --card: #ffffff;
   --paper-2: #e4ddd1;
   --graphite: #3a4048;
   --ink: #1b1f24;
@@ -98,7 +100,7 @@
 .bench-empty p { color: var(--graphite); margin: 0 0 16px; }
 .bench-cmd {
   font: 400 13px/1.6 var(--mono);
-  background: #fff;
+  background: var(--card);
   border: 1px solid var(--rule);
   border-left: 3px solid var(--ink);
   padding: 11px 13px;
@@ -173,7 +175,7 @@
   height: 15px;
   margin-top: 3px;
   border: 1.5px solid var(--graphite);
-  background: #fff;
+  background: var(--card);
   display: grid;
   place-items: center;
   font-size: 11px;
@@ -217,7 +219,7 @@
 .done {
   margin-top: 22px;
   padding: 13px 15px;
-  background: #fff;
+  background: var(--card);
   border: 1px solid var(--rule);
   border-left: 3px solid var(--proof);
   font-size: 13px;
@@ -296,7 +298,7 @@
 .again {
   margin: -8px 0 22px;
   padding: 10px 13px;
-  background: #fff;
+  background: var(--card);
   border: 1px solid var(--rule);
   border-left: 3px solid var(--amber);
   font-size: 13px;
