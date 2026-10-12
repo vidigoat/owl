@@ -418,20 +418,45 @@ async function loadLibrary() {
     `<b>${t.withCauses}</b> carry causes; the rest the library can name and cannot yet explain.` +
     (t.rejected ? ` <b>${t.rejected}</b> reading${t.rejected === 1 ? ' was' : 's were'} rejected at this bench and recorded.` : '');
 
+  /*
+   * The first dozen, then the rest on request. Four hundred and fifty rows made this page twenty-five
+   * thousand pixels of table under a bench that is about reading ONE manual. And a rejection is
+   * counted, not listed: the ids are slugs ("there-are-colored-coatings-blue-yellow-b-0"), which
+   * are a reviewer's handles, not something to read down a column.
+   */
+  const SHOWN = 12;
   const rows = $('libRows');
-  rows.textContent = '';
-  for (const m of data.machines) {
-    const [label, cls] = HOW[m.tier] || [m.tier, 'how'];
-    const tr = document.createElement('tr');
-    tr.innerHTML =
-      `<td>${esc(m.model)}</td>` +
-      `<td>${esc(m.brand)}${m.kind ? ' ' + esc(m.kind.toLowerCase()) : '<span class="lib-none"> — kind not recorded</span>'}</td>` +
-      `<td class="lib-n">${m.codes + m.symptoms}</td>` +
-      `<td class="lib-n">${m.withCauses || '<span class="lib-none">none</span>'}</td>` +
-      `<td class="${cls}">${esc(label)}` +
-        (m.rejected.length ? `, ${esc(m.rejected.join(', '))} rejected` : '') +
-      `</td>`;
-    rows.appendChild(tr);
+  const draw = (all) => {
+    rows.textContent = '';
+    for (const m of all ? data.machines : data.machines.slice(0, SHOWN)) {
+      const [label, cls] = HOW[m.tier] || [m.tier, 'how'];
+      const tr = document.createElement('tr');
+      tr.innerHTML =
+        `<td>${esc(m.model)}</td>` +
+        `<td>${esc(m.brand)}${m.kind ? ' ' + esc(m.kind.toLowerCase()) : '<span class="lib-none"> — kind not recorded</span>'}</td>` +
+        `<td class="lib-n">${m.codes + m.symptoms}</td>` +
+        `<td class="lib-n">${m.withCauses || '<span class="lib-none">none</span>'}</td>` +
+        `<td class="${cls}">${esc(label)}` +
+          (m.rejected.length ? `, ${m.rejected.length} rejected` : '') +
+        `</td>`;
+      rows.appendChild(tr);
+    }
+  };
+  draw(false);
+
+  if (data.machines.length > SHOWN) {
+    const more = document.createElement('button');
+    more.type = 'button';
+    more.className = 'lib-more';
+    more.setAttribute('aria-expanded', 'false');
+    more.textContent = `Show all ${data.machines.length} machines`;
+    more.addEventListener('click', () => {
+      const open = more.getAttribute('aria-expanded') !== 'true';
+      draw(open);
+      more.setAttribute('aria-expanded', String(open));
+      more.textContent = open ? 'Show fewer' : `Show all ${data.machines.length} machines`;
+    });
+    $('library').appendChild(more);
   }
 }
 

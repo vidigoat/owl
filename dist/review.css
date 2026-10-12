@@ -266,6 +266,18 @@
 .lib tbody td { padding: 9px 10px; border-bottom: 1px solid var(--rule); font-size: 13px; }
 .lib tbody td:first-child { padding-left: 0; font-weight: 500; }
 .lib tbody td.lib-n { text-align: right; }
+.lib-more {
+  margin-top: 14px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: 400 13px/1.4 inherit;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.lib-more:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 
 /*
  * How a fact got here. Not a badge — a sentence, because the distinction is the product and a
