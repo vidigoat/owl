@@ -6,6 +6,121 @@ a log useful is gone within a day.
 Only entries from work actually done are recorded here. Bedrock, Wallet and AgentCore entries will
 appear when those are wired; there is nothing to say about them yet.
 
+## Amazon's tools, in the format the rules ask for
+
+Every entry below is about an Amazon tool or service, in the six fields the hackathon rules list:
+task attempted, steps taken, expected against actual, severity, workaround, and an actionable
+suggestion. Entries about our own bugs are kept further down, under the full log, and labelled as ours.
+
+| # | Tool | Severity | One line |
+|---|---|---|---|
+| A1 | Alexa+ | Medium | An add-on cannot be run against Alexa+ before submission |
+| A2 | Alexa+ MCP Apps | Medium | The docs do not say whether a tool can receive a camera image |
+| A3 | Alexa+ | Medium | The sub-500 ms round-trip requirement cannot be measured by entrants |
+| A4 | Bedrock (CLI) | Low | Image input over the CLI needs a flag no vision doc mentions |
+| A5 | Bedrock (Nova Lite) | High | The first real calls exposed five defects no offline test could |
+| A6 | Bedrock | High | There is no spend ceiling to set; budgets only alert |
+| A7 | Bedrock | High | A local spend guard stops being a ceiling once the demo is hosted |
+| A8 | Bedrock (Nova 2 Lite, Converse) | High | Nova's reasoning arrives as ordinary text beside the tool call |
+| A9 | Bedrock (Nova Lite) | Medium | Asked to read a table that is not there, it produced one |
+| A10 | Bedrock (usage) | Low | Usage is reported — but image and text tokens are not separated |
+
+**A1 · Alexa+ add-ons cannot be tested against Alexa+**
+- **Task:** demo an MCP add-on end to end, on Alexa+.
+- **Steps:** read the Alexa+ for Builders pages and the hackathon rules; asked on the forum.
+- **Expected → actual:** a sandbox or simulator → Alexa+ for Builders is limited to selected partners; entrants cannot call it at all.
+- **Severity:** Medium — it decides the architecture on day one.
+- **Workaround:** a real MCP server, driven by Amazon Nova on Bedrock from a simulated device, so every tool call is genuine.
+- **Suggestion:** a read-only Alexa+ sandbox, even one device and rate-limited, before certification.
+
+**A2 · MCP Apps documents output, not image input**
+- **Task:** let a tool receive the Echo Show camera's photo of a control panel.
+- **Steps:** read the MCP toolkit overview and MCP Apps docs; searched for image arguments.
+- **Expected → actual:** a clear yes or no → output to the device is documented in depth; image input is not mentioned.
+- **Severity:** Medium — it is the difference between a real camera step and a simulated one.
+- **Workaround:** the vision step runs server-side, in our own surface.
+- **Suggestion:** one line in the toolkit overview: whether tool inputs can carry an image, and in what encoding.
+
+**A3 · The latency requirement cannot be measured**
+- **Task:** check the add-on against the sub-500 ms round trip the functional requirements set.
+- **Steps:** looked for a measurement point or echo endpoint; measured our own server with `Server-Timing` and `npm run latency`.
+- **Expected → actual:** a way to measure as the orchestrator sees it → only our own server can be measured (slowest tool p95 1.8 ms server-side, `docs/latency.json`).
+- **Severity:** Medium — a stated requirement with no way to verify compliance.
+- **Workaround:** measure and publish the part we own, and say where it was measured from.
+- **Suggestion:** publish the measurement point, or an echo endpoint that reports round-trip time as Alexa+ sees it.
+
+**A4 · Bedrock image input from the CLI**
+- **Task:** call a vision model from a project with no npm dependencies.
+- **Steps:** read the Bedrock vision docs (SDK only); tried hand-signed SigV4; settled on `aws bedrock-runtime invoke-model`.
+- **Expected → actual:** a documented plain-HTTPS or CLI path → SDK snippets only; the CLI works once `--cli-binary-format raw-in-base64-out` is found.
+- **Severity:** Low, once found — it cost an hour.
+- **Workaround:** the CLI, with that flag, inheriting the operator's profile.
+- **Suggestion:** a copy-pasteable CLI example for image input in the Bedrock vision docs.
+
+**A5 · Pointing it at real Bedrock for the first time**
+- **Task:** get the vision path working with a Bedrock-only IAM user.
+- **Steps:** ran the eval against real Bedrock; read every response by hand.
+- **Expected → actual:** the path the unit tests covered to work → five defects in twenty minutes, none findable offline (stdout shared by the CLI and the response body; model and fault fields confused; `"null"` read as a code; label text read as a fault; a repair confirmed on a 0.1-confidence read).
+- **Severity:** High — the whole feature.
+- **Workaround:** response through a temp file; the prompt says where each field physically lives; absences survive as absences; low-confidence reads cannot confirm a repair.
+- **Suggestion:** a "first real call" checklist in the Bedrock getting-started docs, covering the CLI stdout behaviour above.
+
+**A6 · Bedrock has no spend ceiling you can set**
+- **Task:** make the project safe to leave running.
+- **Steps:** looked in Bedrock, Budgets and Cost Explorer for a hard cap.
+- **Expected → actual:** a cap that stops calls → budgets alert after the money is spent; the only hard stop is an SCP or IAM deny someone has to write and remember to remove.
+- **Severity:** High — a stuck retry bills the owner's whole account.
+- **Workaround:** `mcp/budget.js`, a ledger with a pre-flight check that refuses a call that could exceed the ceiling and fails closed.
+- **Suggestion:** a per-principal or per-inference-profile monthly cap that returns a distinct throttling error.
+
+**A7 · A local spend guard does not survive being hosted**
+- **Task:** let judges talk to the live agent on the public URL.
+- **Steps:** deployed with the file ledger; reasoned about serverless instances; built and tested a shared ledger.
+- **Expected → actual:** the ceiling to carry over → every serverless instance has its own disk, so ten instances would each believe they held the whole budget.
+- **Severity:** High — the only thing between a public URL and the owner's bill.
+- **Workaround:** `mcp/shared-budget.js`: one DynamoDB item, reserved with a conditional `UpdateItem` so two instances cannot both take the last cent.
+- **Suggestion:** the same hard per-principal cap as A6 would make this file unnecessary.
+
+**A8 · Nova's reasoning arrives as ordinary text beside the tool call**
+- **Task:** drive the MCP server from Nova 2 Lite over Converse, as a voice assistant.
+- **Steps:** ran the first live turn; read the raw Converse response.
+- **Expected → actual:** reasoning in `reasoningContent`, separate from speech → the chain of thought came back as a plain `text` block next to `toolUse`, and the voice client read it aloud.
+- **Severity:** High for anything that speaks.
+- **Workaround:** speech became a tool: `toolChoice: { any: {} }`, with `speak` the only way to reach the person.
+- **Suggestion:** return Nova's reasoning in `reasoningContent`, or say in the Nova tool-use docs that text beside a tool call may be reasoning.
+
+**A9 · Asked to read a table that is not there, Nova produced one**
+- **Task:** read a fault-code table off a manual page.
+- **Steps:** sent a Wi-Fi setup page (no table) by mistake; compared the output with the facing page.
+- **Expected → actual:** "there is no table here" → seven codes with one identical meaning, four of them other makers' conventions; reproducible.
+- **Severity:** Medium — it reached the library looking like seven facts.
+- **Workaround:** a structural guard in code: distinct codes must mean distinct things, or the reading is refused whole.
+- **Suggestion:** a per-field confidence, or a flag for "the requested structure was not present".
+
+**A10 · Image tokens are not separated in usage**
+- **Task:** record what each vision call actually cost.
+- **Steps:** read `usage` from `invoke-model` responses; compared with the pre-flight estimate.
+- **Expected → actual:** image and text tokens reported apart → one combined input count, so images are over-estimated at a flat 3,000 tokens.
+- **Severity:** Low — the ceiling is blunter than it needs to be. (Reporting usage at all is genuinely good, and noted as such below.)
+- **Workaround:** a conservative flat estimate for images.
+- **Suggestion:** break out image tokens in `usage`, and put the per-call price in the Converse response or model catalog.
+
+## Feature requests
+
+| Request | Why it matters | Priority |
+|---|---|---|
+| A hard spend cap per IAM principal or inference profile on Bedrock (A6, A7) | Anyone hosting a Bedrock demo has to build their own global ledger to be safe | Critical |
+| A read-only Alexa+ sandbox for add-on developers (A1) | The first time an add-on meets Alexa+ is after submission | Critical |
+| Reasoning in `reasoningContent` for Nova tool use (A8) | A voice client cannot tell thinking from speech | Important |
+| An echo endpoint reporting round-trip latency as Alexa+ sees it (A3) | A stated requirement entrants cannot verify | Important |
+| Image input for MCP tools on Echo Show, documented (A2) | "Point the camera at it" is the most natural repair interaction | Important |
+| "Structure not present" signal from Nova vision (A9) | Lets a caller refuse an invented table without heuristics | Nice-to-have |
+| CLI image-input example in the Bedrock vision docs (A4) | Saves an hour for anyone avoiding the SDK | Nice-to-have |
+
+---
+
+## The full log
+
 ---
 
 ### 2026-09-15 · Alexa+ add-ons cannot be tested against Alexa+
