@@ -43,12 +43,17 @@ const WONT = [
 ];
 
 /** "1 fault codes" is the sort of thing that makes a careful page look careless. */
-const plural = (n, word) => `${num(n)} ${word}${n === 1 ? '' : 's'}`;
+const plural = (n, word) => `${num(n)} ${word}${n === 1 ? '' : word.endsWith('ch') ? 'es' : 's'}`;
+
+/** Rows shown per manufacturer before "show all". */
+const SHOWN = 6;
 
 export default function App() {
   const [lib, setLib] = useState(null);
   const [ses, setSes] = useState(null);
   const [house, setHouse] = useState(null);
+  const [find, setFind] = useState('');
+  const [open, setOpen] = useState({});
   const still = useReducedMotion();
 
   useEffect(() => {
@@ -196,6 +201,25 @@ export default function App() {
               took the most work. Grouped and columnar, the same data reads as what it is: an index
               of documents, with the numbers aligned so they can be compared down the column.
             */}
+            {/*
+              A few rows per manufacturer, and a box to find yours.
+
+              Every machine printed in full was twenty thousand pixels of table — the page's other
+              sections sat on either side of a list nobody scrolls. What a visitor wants from it is
+              "is mine in there?", so that is what the box answers; the rest opens on request.
+            */}
+            <label className="shelf__find">
+              <span>Is yours in here?</span>
+              <input
+                type="search"
+                placeholder="Model number, e.g. GDT226SSLSS"
+                value={find}
+                onChange={(e) => setFind(e.target.value)}
+                spellCheck={false}
+                autoComplete="off"
+              />
+            </label>
+
             <div className="shelf">
               {Object.entries(
                 lib.machines.reduce((by, m) => {
@@ -204,11 +228,16 @@ export default function App() {
                 }, {})
               )
                 .sort((a, b) => b[1].length - a[1].length)
-                .map(([brand, list]) => (
+                .map(([brand, all]) => {
+                  const q = find.trim().toUpperCase().replace(/[\s-]/g, '');
+                  const matches = q ? all.filter((m) => m.model.toUpperCase().includes(q)) : all;
+                  if (q && !matches.length) return null;
+                  const list = q || open[brand] ? matches : matches.slice(0, SHOWN);
+                  return (
                   <div className="shelf__brand" key={brand}>
                     <h3>
                       {brand}
-                      <span>{plural(list.length, 'machine')}</span>
+                      <span>{q ? `${plural(matches.length, 'match')} of ${num(all.length)}` : plural(all.length, 'machine')}</span>
                     </h3>
 
                     {/*
@@ -250,8 +279,26 @@ export default function App() {
                         </span>
                       </div>
                     ))}
+
+                    {!q && all.length > SHOWN && (
+                      <button
+                        type="button"
+                        className="shelf__more"
+                        aria-expanded={Boolean(open[brand])}
+                        onClick={() => setOpen((o) => ({ ...o, [brand]: !o[brand] }))}
+                      >
+                        {open[brand] ? `Show fewer` : `Show all ${num(all.length)} ${brand} machines`}
+                      </button>
+                    )}
                   </div>
-                ))}
+                  );
+                })}
+              {find.trim() && !lib.machines.some((m) => m.model.toUpperCase().includes(find.trim().toUpperCase().replace(/[\s-]/g, ''))) && (
+                <p className="shelf__none">
+                  No machine here has a model number containing “{find.trim()}”. You can still{' '}
+                  <a href="/review.html#try">read its manual yourself</a>.
+                </p>
+              )}
             </div>
           </section>
         )}

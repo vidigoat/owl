@@ -608,6 +608,37 @@ section { padding-block: clamp(64px, 9vh, 112px); }
 }
 .machine[data-tier='checked'] .machine__tier { color: var(--done); }
 
+.shelf__find {
+  display: grid;
+  gap: 8px;
+  margin-top: 34px;
+  max-width: 420px;
+}
+.shelf__find span { font: 400 var(--t-mono)/1 var(--mono); color: var(--faint); }
+.shelf__find input {
+  font: 500 var(--t-small)/1.4 var(--mono);
+  padding: 11px 14px;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ink);
+}
+.shelf__find input:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+.shelf__more {
+  margin-top: 12px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: 400 var(--t-small)/1.4 var(--sans, inherit);
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.shelf__more:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.shelf__none { color: var(--ink-2); font-size: var(--t-small); }
+
 @media (max-width: 760px) {
   .shelf__head { display: none; }
   .machine {
