@@ -1,0 +1,33 @@
+{
+  "why": "Every figure here is quoted from its source, linked, and kept in this file rather than typed into the page.",
+  "facts": [
+    {
+      "figure": "58%",
+      "claim": "of Americans whose large appliance broke in the last five years replaced it rather than repairing it.",
+      "quote": "60% of respondents had an appliance stop working in the last five years, and of those, 58% of them ended up replacing the broken product.",
+      "source": "Consumer Reports, Right to Repair Survey of 2,154 U.S. adults, summer 2024",
+      "url": "https://innovation.consumerreports.org/cost-considerations-drive-consumer-repair-decisions/"
+    },
+    {
+      "figure": "26%",
+      "claim": "of the people who replaced it had tried to repair it first, and could not.",
+      "quote": "Of those that ended up replacing their product, 26% tried to repair it but couldn't.",
+      "source": "Consumer Reports, Right to Repair Survey, 2024",
+      "url": "https://innovation.consumerreports.org/cost-considerations-drive-consumer-repair-decisions/"
+    },
+    {
+      "figure": "7 of 50",
+      "claim": "appliance makers examined made their service manuals available.",
+      "quote": "Of the 50 appliance manufacturers examined, just seven made service manuals available.",
+      "source": "U.S. PIRG, iFixit and Repair.org, investigation submitted to the FTC",
+      "url": "https://pirg.org/media-center/86-of-surveyed-appliance-manufacturers-keep-repair-manuals-under-wraps/"
+    },
+    {
+      "figure": "2.1M tons",
+      "claim": "of major appliances went to landfill in the United States in 2018.",
+      "quote": "leaving 2.1 million tons of appliances to be landfilled.",
+      "source": "U.S. EPA, Durable Goods: Product-Specific Data",
+      "url": "https://www.epa.gov/facts-and-figures-about-materials-waste-and-recycling/durable-goods-product-specific-data"
+    }
+  ]
+}

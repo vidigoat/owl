@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 
 export const SECTIONS = [
   ['alexa', 'On Alexa+'],
+  ['why', 'Why'],
   ['ask', 'Ask a manual'],
   ['hands', 'Hands-free'],
   ['library', 'Library'],

@@ -12,6 +12,7 @@ import Library from './sections/Library.jsx';
 import Alexa from './sections/Alexa.jsx';
 import UseIt from './sections/UseIt.jsx';
 import Footer from './sections/Footer.jsx';
+import Why from './sections/Why.jsx';
 import { library, session as sessionApi, household as householdApi, money, odds } from './lib/api.js';
 
 /**
@@ -69,6 +70,8 @@ export default function App() {
         <Hero />
 
         <Alexa />
+
+        <Why />
 
         <Ask machines={lib?.machines} />
 

@@ -608,7 +608,7 @@ section { padding-block: clamp(64px, 9vh, 112px); }
   font: 400 var(--t-mono)/1 var(--mono);
   color: var(--screen-dim);
 }
-.viewfinder__off p { position: absolute; bottom: 16px; margin: 0; }
+.viewfinder__off p { position: absolute; bottom: 14px; left: 16px; right: 16px; margin: 0; text-align: center; line-height: 1.4; }
 .sticker {
   display: grid;
   grid-template-columns: auto auto;
@@ -1239,4 +1239,20 @@ section[id] { scroll-margin-top: 72px; }
   .stats div:nth-child(n + 3) { border-top: 1px solid var(--rule-soft); }
   .alexa__device { padding: 7px; border-radius: 16px; }
   .alexa__device video { border-radius: 10px; }
+}
+
+/* ── why it matters ──────────────────────────────────────────────────────── */
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--rule); border-radius: 14px; overflow: hidden; background: #fff; }
+.fact { margin: 0; padding: 24px 22px 20px; display: flex; flex-direction: column; }
+.fact + .fact { border-left: 1px solid var(--rule-soft); }
+.fact__fig { margin: 0; font: 600 clamp(2rem, 3.4vw, 2.6rem)/1 var(--sans); letter-spacing: -0.05em; color: var(--ink); }
+.fact__claim { margin: 12px 0 18px; font-size: 0.9375rem; line-height: 1.5; color: var(--ink-2); }
+.fact figcaption { margin-top: auto; }
+.fact figcaption a { display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem; line-height: 1.4; color: var(--faint); text-decoration: none; }
+.fact figcaption a:hover { color: var(--ink); }
+.why__owl { margin: 24px 0 0; max-width: 70ch; font-size: 1.0625rem; color: var(--ink); }
+@media (max-width: 900px) {
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fact:nth-child(3) { border-left: 0; }
+  .fact:nth-child(n + 3) { border-top: 1px solid var(--rule-soft); }
 }
