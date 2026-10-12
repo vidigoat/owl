@@ -25,9 +25,9 @@ export const SECTIONS = [
 export function Mark({ size = 26 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 240 240" aria-hidden="true">
-      <rect width="240" height="240" rx="54" fill="#14161a" />
-      <circle cx="98" cy="120" r="50" fill="none" stroke="#f2f0ea" strokeWidth="16" />
-      <circle cx="142" cy="120" r="50" fill="none" stroke="#e0a34a" strokeWidth="16" />
+      <rect width="240" height="240" rx="54" fill="#0a0a0a" />
+      <circle cx="98" cy="120" r="50" fill="none" stroke="#ffffff" strokeWidth="16" />
+      <circle cx="142" cy="120" r="50" fill="none" stroke="#8f8f8f" strokeWidth="16" />
     </svg>
   );
 }
