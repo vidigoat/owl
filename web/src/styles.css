@@ -1089,7 +1089,7 @@ section[id] { scroll-margin-top: 72px; }
 .alexa__device video {
   display: block;
   width: 100%;
-  aspect-ratio: 1280 / 644;
+  aspect-ratio: 1280 / 578;
   border-radius: 15px;
   background: var(--paper-2);
 }
