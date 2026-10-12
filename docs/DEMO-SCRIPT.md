@@ -1,5 +1,32 @@
 # Demo video — shot by shot
 
+## FINAL — record from this (12 October)
+
+Everything below this section is how the film got here; this is the one to shoot. About 2:40.
+Each moment was run live on 12 October and does what the line says.
+
+**Setup, before pressing record:** `npm run home:demo`, then
+`HANDS_BUDGET_USD=5 AWS_PROFILE=bedrock npm start`. Chrome, window 1280×800, at
+`localhost:8792/talk.html`. Press **Read replies aloud**, allow the microphone. Screen Studio, your
+voice on.
+
+| # | time | on screen | you say (plainly — your own words are fine) |
+|---|---|---|---|
+| 1 | 0:00 | a real appliance with a problem, filmed on your phone — or black | "When an appliance breaks, the answer is usually in a manual nobody can find. A repair visit costs days and a lot of money." |
+| 2 | 0:10 | `/talk.html` — the house screen: *2 things need attention* | "This is Owl, on Alexa+. Before I say anything, it already knows this house: three machines, and an E24 on the dishwasher that keeps coming back." |
+| 3 | 0:25 | say *"My Bosch dishwasher is showing E24. The model is SHE3AR75UC."* — it recalls the last repair and asks the pump question. **Let the pause run.** | "It remembers what we tried last time. And it asks one check — the one that rules out the most. Then it waits. My hands are in the machine." |
+| 4 | 0:55 | say *"No, it's completely silent."* → the part card, $38.42 | "Only now, with one cause left, does it offer a part." |
+| 5 | 1:05 | say *"Yes, order it."* → it reads **$41.78 in total** → say *"Yes."* | "It reads me the full total before anything is ordered. Nothing is charged until I say yes." |
+| 6 | 1:20 | **New conversation**, say *"My SHE3AR75UC says E09. Can I fix it myself?"* → *needs a technician … mains wiring* | "And when the fault is behind mains wiring, it won't talk me through it, and it won't sell me anything. It tells me to call a technician." |
+| 7 | 1:40 | <https://owl-repair.vercel.app>, ask *"there is water left in the bottom at the end of the program"* → the manufacturer's sentence and **Bosch manual, page 46** | "Every answer is the manufacturer's own words, with the page they're printed on. Four hundred and fifty-three machines so far, every quotation checked against its page." |
+| 8 | 2:05 | `/review.html` — drop in a manual PDF it has never seen → the fault table in under a second, each cause with its page | "And it isn't limited to those. Give it any manual, and it reads the fault table right there." |
+| 9 | 2:25 | black: **Owl** | "It reads the manual, so you don't have to guess." |
+
+Three rules: **let the pause in shot 3 run** — that silence is the product. **Don't retake to make
+it smoother** — if it stumbles, keep the take that is true. **End on shot 9**, not on the purchase.
+
+---
+
 Under three minutes, public, English. Judges are not required to run anything, so this is the
 product as far as scoring is concerned.
 
