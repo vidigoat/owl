@@ -73,35 +73,18 @@ export default function Ask({ machines }) {
   }, new Map())].sort(([a], [b]) => a.localeCompare(b)).map(([label, list]) => [`${label} (${list.length})`, list.sort((x, y) => x.model.localeCompare(y.model))]);
 
   return (
-    <section className="hero wrap" id="ask">
-      <p className="plate">Owl · an appliance repair copilot for Alexa+</p>
-
-      {/*
-        No accent in the headline.
-        
-        "the manufacturer's own words" used to be set in the callout ochre, which put the brightest
-        thing on the page inside a sentence — competing with the one element that has actually
-        earned that colour, the citation under each cause. The headline is the claim; the citation
-        is the evidence, and the evidence should be what the eye lands on.
-      */}
-      <div className="hero__top">
+    <section className="wrap" id="ask">
+      <header className="head head--split head--top">
         <div>
-          <h1>
-            Tell it what the machine is doing. It answers with the manufacturer's own words, and
-            the page they are printed on.
-          </h1>
-
-          <p className="hero__sub">
-            Not a summary of a manual. The sentence out of the manual, the cause listed beside it,
-            and the remedy printed under that — or a straight answer that this one is not in there.
-          </p>
-          <p className="hero__sub">
-            <a className="hero__cta" href="/fix.html">Something broken right now? Fix it on your phone →</a>
+          <h2>Ask a manual</h2>
+          <p className="lede">
+            Describe the problem the way you would say it. The answer is the manufacturer's own
+            sentence, the cause beside it and the remedy under it, or a plain "this one is not in
+            there".
           </p>
         </div>
-
         <TitleBlock machine={readable.find((m) => m.model === model)} />
-      </div>
+      </header>
 
       <div className="ask">
         <form

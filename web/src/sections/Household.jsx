@@ -36,21 +36,16 @@ export default function Household({ data }) {
 
   return (
     <section className="wrap" id="household">
-      <p className="plate">5 · what it remembers</p>
-      <h2>The second conversation is the short one</h2>
-      <p className="lede">
-        {data.demo ? (
-          <>
-            This is <b>a household made up for the demo</b> — a real <code>data/home.json</code> is
-            somebody's home and is kept out of every deploy. The machines and the faults are real
-            ones out of the library; what is invented is that one house owns all three.
-          </>
-        ) : (
-          <>This is the household on this machine, as it actually is.</>
-        )}{' '}
-        Everything below is computed from the receipts, not stored: what is overdue is subtraction,
-        and a fault that came back is a count and its dates.
-      </p>
+      <header className="head">
+        <h2>The second conversation is the short one</h2>
+        <p className="lede">
+          Owl remembers your machines and every repair, so a fault that comes back starts where the
+          last one ended.{' '}
+          {data.demo
+            ? 'This household is made up for the demo; the machines and faults are real ones from the library.'
+            : 'This is the household on this machine.'}
+        </p>
+      </header>
 
       <div className="house">
         {data.appliances.map((a, i) => {

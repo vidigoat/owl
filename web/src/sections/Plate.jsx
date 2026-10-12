@@ -84,13 +84,13 @@ export default function Plate() {
 
   return (
     <section className="wrap" id="plate">
-      <p className="plate">1 · which machine is it</p>
-      <h2>Nobody knows their model number</h2>
-      <p className="lede">
-        It is a sticker inside the door, in eight-point type, behind the seal. Point the camera at
-        it. What comes back carries how sure it is, and an unsure read is reported as unsure rather
-        than rounded up to the nearest model that exists.
-      </p>
+      <header className="head">
+        <h2>Nobody knows their model number</h2>
+        <p className="lede">
+          It is a tiny sticker inside the door. Point the camera at it, and an unsure read is
+          reported as unsure rather than rounded to the nearest model that exists.
+        </p>
+      </header>
 
       <div className="viewfinder">
         <div className="viewfinder__frame" data-state={state}>
@@ -98,7 +98,17 @@ export default function Plate() {
 
           {state !== 'live' && (
             <div className="viewfinder__off">
-              {state === 'reading' ? 'reading the plate…' : 'the camera is off'}
+              {/*
+                What it is looking for, drawn rather than photographed: the shape of a rating plate,
+                with no maker's name on it. An empty black box read as a camera that had failed.
+              */}
+              <div className="sticker" aria-hidden="true">
+                <span>MODEL</span><b>SHE3AR75UC</b>
+                <span>SERIAL</span><b>••••••••••</b>
+                <span>RATING</span><b>120V ~ 60Hz</b>
+              </div>
+              <span className="viewfinder__bracket" aria-hidden="true" />
+              <p>{state === 'reading' ? 'reading the plate…' : 'the camera is off · this is what it looks for'}</p>
             </div>
           )}
 

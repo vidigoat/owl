@@ -134,7 +134,7 @@ const it = async (name, fn) => {
 
   await it('a section with no data is not rendered rather than filled in', () => {
     const app = read('App.jsx');
-    for (const guard of ['{ses &&', '{ses?.part &&', '{t &&']) {
+    for (const guard of ['{ses &&', '{ses?.part &&', '{lib?.totals &&']) {
       assert.ok(app.includes(guard), `a section renders without its data (missing ${guard})`);
     }
   });

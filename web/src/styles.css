@@ -23,56 +23,64 @@
  */
 
 :root {
-  /* Paper. Warmer than grey, greener than cream. */
-  --paper: #e8e5dc;
-  --paper-2: #e1ddd2;
-  --card: #f1efe8;
-  --ink: #191714;
-  --ink-2: #4a453d;
-  --faint: #6a6358;
-  --rule: #c9c4b6;
-  --rule-soft: #d6d2c5;
+  /*
+   * ── Night owl ─────────────────────────────────────────────────────────────
+   *
+   * The owl lives at night: the hero, the menu, the device stage and the footer are midnight, lit
+   * by the two lights in its mark — amber for the eye that acts, indigo for the cool one. The pages
+   * between are mist, a cool white, so the night reads as a place you come back to rather than a
+   * theme painted over everything.
+   */
+  --night: #0a0f24;
+  --night-2: #121a3d;
+  --night-3: #1c2656;
+  --moon: #f7f6f2;
+  --moon-2: #b9bfd6;
 
-  /* What the manual itself says, and where it says it. The callout ochre. */
-  --amber: #b8761f;
-  /* A refusal, and nothing else. It appears when the copilot will not guess. */
-  --stop: #a8321f;
+  --paper: #f5f6fa;
+  --paper-2: #eceef5;
+  --card: #ffffff;
+  --ink: #0e1430;
+  --ink-2: #3f4766;
+  --faint: #6b7290;
+  --rule: #d6d9e6;
+  --rule-soft: #e4e6ef;
+
+  /* The owl's eye. Bright on night; deepened to stay legible as text on mist. */
+  --eye: #f5a623;
+  --amber: #b86a00;
+  --indigo: #5b6cff;
+  /* A refusal, and nothing else. */
+  --stop: #d6453b;
   /* A verified, ordered, finished thing. */
-  --done: #3f6b4e;
+  --done: #12875a;
 
-  /* The device. The single dark surface on the page. */
-  --screen: #14161a;
-  --screen-2: #1c1f25;
-  --screen-ink: #f2f0ea;
-  --screen-dim: #98a0aa;
+  /* The device. */
+  --screen: #0d1226;
+  --screen-2: #161d3a;
+  --screen-ink: #f7f6f2;
+  --screen-dim: #9aa3c2;
 
-  --sans: Archivo, ui-sans-serif, system-ui, sans-serif;
-  --mono: 'DM Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  --sans: Geist, ui-sans-serif, system-ui, sans-serif;
+  --mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
-  --t-hero: clamp(2.05rem, 3.4vw, 2.9rem);
-  --t-head: clamp(1.55rem, 2.8vw, 2.2rem);
+  --t-hero: clamp(2.6rem, 5.2vw, 4.4rem);
+  --t-head: clamp(1.9rem, 3.4vw, 2.75rem);
   --t-body: 1.0625rem;
   --t-small: 0.875rem;
   --t-mono: 0.8125rem;
 
   --gut: clamp(20px, 5vw, 56px);
 
-  /*
-   * ── Paper, ink, and the light on it ───────────────────────────────────────
-   *
-   * The first version was flat: one warm grey, hairline rules, nothing sitting above anything
-   * else. Print has more than that — a card laid on a page casts a little shadow, a panel catches
-   * light along its top edge, a heavy rule reads as a different object from a hairline. These
-   * describe that, and nothing else: each token is a physical relationship, not an effect.
-   */
-  --lift: linear-gradient(180deg, #fbfaf6, var(--card));
-  --edge: 1px solid rgba(25, 23, 20, 0.14);
-  --edge-soft: 1px solid rgba(25, 23, 20, 0.08);
-  --cast: 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 12px 26px -18px rgba(25, 23, 20, 0.45);
-  --cast-lg: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 26px 54px -28px rgba(25, 23, 20, 0.5);
+  --lift: linear-gradient(180deg, #ffffff, #f8f9fc);
+  --edge: 1px solid rgba(14, 20, 48, 0.12);
+  --edge-soft: 1px solid rgba(14, 20, 48, 0.07);
+  --cast: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 12px 28px -18px rgba(14, 20, 48, 0.35);
+  --cast-lg: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 30px 60px -30px rgba(14, 20, 48, 0.45);
 
-  --r: 10px;
-  --r-sm: 6px;
+  --r: 12px;
+  --r-sm: 8px;
 }
 
 * { box-sizing: border-box; }
@@ -83,56 +91,29 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0;
   /* Paper is not one colour under a light. */
-  background:
-    radial-gradient(1100px 560px at 84% -6%, rgba(255, 255, 255, 0.75), transparent 60%),
-    radial-gradient(820px 460px at 6% 40%, rgba(184, 118, 31, 0.05), transparent 62%),
-    var(--paper);
-  background-attachment: fixed;
+  background: var(--paper);
   color: var(--ink);
   font: 400 var(--t-body)/1.6 var(--sans);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
-::selection { background: color-mix(in oklab, var(--amber) 30%, transparent); }
+::selection { background: color-mix(in oklab, var(--eye) 40%, transparent); }
 
-h1, h2, h3 { font-family: var(--sans); font-weight: 600; letter-spacing: -0.018em; margin: 0; line-height: 1.1; }
+h1, h2 { font-family: var(--display); font-weight: 650; letter-spacing: -0.02em; margin: 0; line-height: 1.04; font-variation-settings: 'opsz' 96; }
+h3 { font-family: var(--sans); font-weight: 600; letter-spacing: -0.015em; margin: 0; line-height: 1.2; }
+/* Every section heading at one size, the size the scale above was written for. */
+h2 { font-size: var(--t-head); text-wrap: balance; }
 
 a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--rule); }
 a:hover { text-decoration-color: var(--amber); }
 
-:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--indigo); outline-offset: 3px; }
 
 code, .mono { font-family: var(--mono); font-size: 0.9em; }
 
 .wrap { width: min(1080px, 100% - var(--gut) * 2); margin-inline: auto; }
 section { padding-block: clamp(64px, 9vh, 112px); }
-
-/*
- * The plate: a small mono label in the margin, the way a manual numbers its figures. It is the
- * page's one piece of repeated furniture and it earns its place by saying WHERE you are in a
- * document, not by decorating a heading.
- */
-.plate {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  font: 500 var(--t-mono)/1 var(--mono);
-  color: var(--ink-2);
-  letter-spacing: 0.04em;
-  margin: 0 0 16px;
-  padding: 6px 12px 6px 10px;
-  border: var(--edge-soft);
-  border-radius: 999px;
-  background: var(--lift);
-}
-.plate::before {
-  content: '';
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--amber);
-}
 
 .lede {
   max-width: 62ch;
@@ -142,53 +123,12 @@ section { padding-block: clamp(64px, 9vh, 112px); }
 }
 .lede b { color: var(--ink); font-weight: 600; }
 
-/*
- * The one place on this page that asks the reader to do something.
- *
- * Set apart with a rule rather than a button: the page is a description of a device, and a call to
- * action styled like a product button would read as marketing in the middle of an index. A rule and
- * a link is the same invitation at the volume the rest of the page is speaking at.
- */
-.invite {
-  max-width: 62ch;
-  margin: 18px 0 0;
-  padding-left: 14px;
-  border-left: 2px solid var(--amber);
-  color: var(--ink-2);
-  font-size: var(--t-body);
-}
-.invite a {
-  color: var(--ink);
-  font-weight: 600;
-  text-decoration: underline;
-  text-decoration-color: var(--amber);
-  text-underline-offset: 3px;
-}
-.invite a:hover { text-decoration-thickness: 2px; }
-
-/* ── hero ────────────────────────────────────────────────────────────────── */
-
-.hero { padding-block: clamp(56px, 9vh, 104px) clamp(40px, 6vh, 72px); }
-
-.hero h1 {
-  font-size: var(--t-hero);
-  /* Three lines, not five. At 3.6rem the headline pushed the input — which IS the product — most
-     of the way off a laptop screen, and the first thing anybody saw was a claim with no evidence
-     under it. */
-  max-width: 27ch;
-  font-weight: 700;
-  letter-spacing: -0.028em;
-}
-.hero h1 em { font-style: normal; color: var(--amber); }
-
-.hero__sub { max-width: 54ch; color: var(--ink-2); margin-top: 20px; }
-
 /* ── the ask: type what the machine is doing ─────────────────────────────── */
 
 .ask {
   margin-top: clamp(28px, 4vh, 44px);
   border: var(--edge);
-  border-top: 2px solid var(--ink);
+  border-top: 2px solid var(--eye);
   border-radius: var(--r);
   background: var(--lift);
   box-shadow: var(--cast-lg);
@@ -217,7 +157,6 @@ section { padding-block: clamp(64px, 9vh, 112px); }
 }
 .ask input::placeholder { color: var(--faint); }
 .ask input:focus { outline: none; }
-.ask__row:focus-within { box-shadow: inset 0 -2px 0 var(--amber); }
 
 .ask__which {
   display: flex;
@@ -330,10 +269,6 @@ section { padding-block: clamp(64px, 9vh, 112px); }
   font: 400 var(--t-mono)/1.6 var(--mono);
   color: var(--faint);
 }
-
-/* ── the device ──────────────────────────────────────────────────────────── */
-
-.device-band { background: var(--paper-2); border-block: 1px solid var(--rule); }
 
 .device {
   background: var(--screen);
@@ -533,125 +468,6 @@ section { padding-block: clamp(64px, 9vh, 112px); }
 }
 .btn--quiet:hover { background: none; color: var(--screen-ink); border-color: var(--screen-dim); }
 
-/* ── the library ─────────────────────────────────────────────────────────── */
-
-.totals {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 1px;
-  background: rgba(25, 23, 20, 0.12);
-  border: var(--edge);
-  border-radius: var(--r);
-  box-shadow: var(--cast);
-  overflow: hidden;
-  margin-top: 30px;
-}
-.totals > div { background: var(--lift); padding: 18px 20px; }
-.totals dt { font-size: var(--t-small); color: var(--faint); margin-bottom: 4px; }
-.totals dd { margin: 0; font: 500 1.5rem/1 var(--mono); font-variant-numeric: tabular-nums; }
-
-/* ── the index ────────────────────────────────────────────────────────────
- *
- * Grouped by manufacturer, and columnar. It was nineteen flat rows with "Bosch Dishwasher" printed
- * down the page twelve times — low density, and a poor way to present the part of this project
- * that took the most work. Numbers are tabular and right-aligned so a column can be read down
- * rather than one row at a time.
- */
-.shelf { margin-top: 34px; display: grid; gap: 34px; }
-
-.shelf__brand h3 {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  font-size: 1rem;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--ink);
-}
-.shelf__brand h3 span {
-  font: 400 var(--t-mono)/1 var(--mono);
-  color: var(--faint);
-  font-weight: 400;
-}
-
-.shelf__head,
-.machine {
-  display: grid;
-  grid-template-columns: 124px minmax(0, 1fr) 56px 72px 64px 72px 84px;
-  gap: 14px;
-  align-items: baseline;
-  padding: 9px 0;
-  border-bottom: 1px solid var(--rule-soft);
-}
-
-.shelf__head {
-  padding: 8px 0 6px;
-  font: 400 var(--t-mono)/1 var(--mono);
-  color: var(--faint);
-  border-bottom-color: var(--rule);
-}
-.shelf__head > span:nth-child(n + 3) { text-align: right; }
-
-.machine__model { font: 500 var(--t-small)/1.4 var(--mono); }
-.machine__kind { color: var(--ink-2); font-size: var(--t-small); }
-.machine__n {
-  text-align: right;
-  font: 400 var(--t-small)/1.4 var(--mono);
-  font-variant-numeric: tabular-nums;
-}
-/* What was thrown out. Present in the same column position as everything else, so a machine with
-   rejections cannot be scanned past. */
-.machine__n--out { color: var(--stop); }
-.machine__tier {
-  text-align: right;
-  font: 400 var(--t-mono)/1.4 var(--mono);
-  color: var(--faint);
-}
-.machine[data-tier='checked'] .machine__tier { color: var(--done); }
-
-.shelf__find {
-  display: grid;
-  gap: 8px;
-  margin-top: 34px;
-  max-width: 420px;
-}
-.shelf__find span { font: 400 var(--t-mono)/1 var(--mono); color: var(--faint); }
-.shelf__find input {
-  font: 500 var(--t-small)/1.4 var(--mono);
-  padding: 11px 14px;
-  border: 1px solid var(--rule);
-  border-radius: 10px;
-  background: transparent;
-  color: var(--ink);
-}
-.shelf__find input:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-
-.shelf__more {
-  margin-top: 12px;
-  padding: 0;
-  border: 0;
-  background: none;
-  font: 400 var(--t-small)/1.4 var(--sans, inherit);
-  color: var(--ink);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  cursor: pointer;
-}
-.shelf__more:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
-.shelf__none { color: var(--ink-2); font-size: var(--t-small); }
-
-@media (max-width: 760px) {
-  .shelf__head { display: none; }
-  .machine {
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 2px 12px;
-  }
-  .machine__model { grid-column: 1; }
-  .machine__tier { grid-column: 2; grid-row: 1; }
-  .machine__kind { grid-column: 1 / -1; }
-  .machine__n { text-align: left; grid-column: 1 / -1; color: var(--faint); }
-  .machine__n:empty { display: none; }
-}
-
 /* ── the part ────────────────────────────────────────────────────────────── */
 
 .part {
@@ -711,18 +527,6 @@ section { padding-block: clamp(64px, 9vh, 112px); }
   .panel[data-state='open'], .panel[data-state='closed'] { animation: none; }
 }
 
-/* ── footer ──────────────────────────────────────────────────────────────── */
-
-footer {
-  border-top: 1px solid var(--rule);
-  padding-block: 30px 52px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 26px;
-  font: 400 var(--t-mono)/1.5 var(--mono);
-  color: var(--faint);
-}
-
 /* ── the viewfinder ───────────────────────────────────────────────────────
  *
  * Off until somebody asks. There is no preview quietly running in the background of a page nobody
@@ -752,9 +556,28 @@ footer {
 .viewfinder__frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 .viewfinder__off {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
   font: 400 var(--t-mono)/1 var(--mono);
   color: var(--screen-dim);
 }
+.viewfinder__off p { position: absolute; bottom: 16px; margin: 0; }
+.sticker {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 10px 26px;
+  padding: 22px 28px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #e9e6de, #d9d5ca);
+  color: #2a2722;
+  opacity: 0.32;
+  transform: rotate(-1.2deg);
+  box-shadow: 0 18px 40px -20px rgba(0, 0, 0, 0.8);
+}
+.sticker span { font: 500 0.6875rem/1 var(--mono); letter-spacing: 0.08em; color: #6a6358; }
+.sticker b { font: 500 0.9375rem/1 var(--mono); letter-spacing: 0.04em; }
 
 /* The bracket you line the sticker up inside. The only instruction the frame needs. */
 .viewfinder__bracket {
@@ -847,21 +670,6 @@ footer {
 
 .house__quiet { margin: 0; font-size: var(--t-small); color: var(--faint); }
 
-/* ── the title block ──────────────────────────────────────────────────────
- *
- * The corner of an engineering drawing: which document this is, what it covers, who checked it.
- * The most boring part of a service manual and the first thing a technician reads, because it is
- * the part that says whether the rest can be trusted.
- */
-.hero__top {
-  display: grid;
-  gap: clamp(24px, 4vw, 56px);
-  align-items: start;
-}
-@media (min-width: 940px) {
-  .hero__top { grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.85fr); }
-}
-
 .titleblock {
   border: var(--edge);
   border-top: 2px solid var(--ink);
@@ -929,6 +737,448 @@ footer {
   color: var(--faint);
 }
 
-/* The one link that takes a person from "reading about it" to actually fixing their machine. */
-.hero__cta { color: var(--amber); font-weight: 500; text-decoration: none; border-bottom: 1px solid currentColor; }
-.hero__cta:hover { color: var(--ink); }
+/* ── the menu ────────────────────────────────────────────────────────────────
+ *
+ * Sticky, and paper rather than glass: it blurs what passes under it, but it is the same warm
+ * surface as the page, so it reads as the top edge of the document and not as an app's toolbar.
+ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  color: var(--moon);
+  background: rgba(10, 15, 36, 0.86);
+  backdrop-filter: saturate(160%) blur(16px);
+  -webkit-backdrop-filter: saturate(160%) blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.nav__bar {
+  width: min(1180px, 100% - var(--gut) * 2);
+  margin-inline: auto;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font: 600 1.125rem/1 var(--sans);
+  letter-spacing: -0.02em;
+}
+.nav__brand svg { border-radius: 7px; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14); }
+.nav__links { display: flex; gap: 4px; margin-right: auto; }
+.nav__links a {
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.9375rem;
+  color: var(--moon-2);
+  text-decoration: none;
+  transition: color 0.15s, background-color 0.15s;
+}
+.nav__links a:hover { color: var(--moon); background: rgba(255, 255, 255, 0.06); }
+.nav__links a[aria-current='true'] { color: var(--moon); background: rgba(255, 255, 255, 0.1); }
+.nav__end { display: flex; align-items: center; gap: 18px; }
+.nav__quiet { font-size: 0.9375rem; color: var(--moon-2); text-decoration: none; }
+.nav__quiet:hover { color: var(--moon); }
+.nav__cta {
+  display: inline-flex;
+  align-items: center;
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: var(--eye);
+  color: var(--night);
+  font: 600 0.9375rem/1 var(--sans);
+  text-decoration: none;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2) inset, 0 8px 22px -10px rgba(245, 166, 35, 0.6);
+}
+.nav__cta:hover { background: #ffb53d; }
+.nav__toggle {
+  display: none;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  font: 500 0.9375rem/1 var(--sans);
+  color: var(--moon);
+  cursor: pointer;
+}
+.nav__sheet {
+  display: grid;
+  width: min(1180px, 100% - var(--gut) * 2);
+  margin: 0 auto 12px;
+  padding: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--r);
+  background: var(--night-2);
+  box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.6);
+}
+.nav__sheet[hidden] { display: none; }
+@media (min-width: 961px) { .nav__sheet { display: none; } }
+.nav__sheet a { padding: 12px 12px; text-decoration: none; border-radius: var(--r-sm); }
+.nav__sheet a:hover { background: rgba(255, 255, 255, 0.06); }
+
+@media (max-width: 960px) {
+  .nav__links, .nav__quiet { display: none; }
+  .nav__bar { justify-content: space-between; }
+  .nav__toggle { display: inline-flex; align-items: center; }
+}
+@media (max-width: 420px) {
+  .nav__cta { display: none; }
+}
+
+/* A heading under a sticky bar should land below it, not behind it. */
+section[id] { scroll-margin-top: 72px; }
+
+@media (max-width: 760px) {
+  .alexa__beats { grid-template-columns: 1fr; gap: 18px; }
+  .alexa__device { padding: 8px; border-radius: 18px; }
+  .alexa__device video { border-radius: 11px; }
+  .alexa__more { flex-direction: column; gap: 8px; }
+  .alexa__more span { display: none; }
+}
+
+/* ── use it yourself ─────────────────────────────────────────────────────── */
+.ways {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 34px;
+}
+.way {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  border: var(--edge);
+  border-radius: 14px;
+  background: var(--lift);
+  box-shadow: var(--cast);
+}
+.way h3 { font-size: 1.125rem; letter-spacing: -0.015em; }
+.way p { margin: 10px 0 20px; color: var(--ink-2); font-size: var(--t-small); line-height: 1.6; }
+.way__field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: -4px 0 16px;
+  padding: 6px 6px 6px 12px;
+  border: var(--edge-soft);
+  border-radius: 10px;
+  background: var(--paper);
+}
+.way__field code { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.8125rem; }
+.way__field button {
+  height: 30px;
+  padding: 0 12px;
+  border: var(--edge);
+  border-radius: 8px;
+  background: var(--card);
+  font: 500 0.8125rem/1 var(--sans);
+  color: var(--ink);
+  cursor: pointer;
+}
+.way__go {
+  margin-top: auto;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--screen-ink);
+  font: 500 0.9375rem/1 var(--sans);
+  text-decoration: none;
+}
+.way__go:hover { background: #2a2622; }
+.way__go--quiet { background: transparent; color: var(--ink); border: var(--edge); }
+.way__go--quiet:hover { background: color-mix(in oklab, var(--ink) 6%, transparent); }
+@media (max-width: 900px) {
+  .ways { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ── footer ──────────────────────────────────────────────────────────────── */
+.foot {
+  margin-top: clamp(40px, 6vh, 72px);
+  padding-block: 64px 72px;
+  color: var(--moon);
+  background:
+    radial-gradient(600px 300px at 90% 0%, rgba(91, 108, 255, 0.18), transparent 70%),
+    var(--night);
+}
+.foot__grid {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, minmax(0, 1fr));
+  gap: 36px;
+}
+.foot__brand p { margin: 14px 0 0; max-width: 34ch; color: var(--moon-2); font-size: var(--t-small); line-height: 1.6; }
+.foot h3 { font: 600 0.8125rem/1 var(--sans); color: var(--moon-2); letter-spacing: 0.02em; }
+.foot ul { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 10px; }
+.foot li a { font-size: var(--t-small); color: var(--moon); text-decoration: none; opacity: 0.86; }
+.foot li a:hover { opacity: 1; text-decoration: underline; text-decoration-color: var(--eye); }
+@media (max-width: 860px) {
+  .foot__grid { grid-template-columns: 1fr 1fr; }
+  .foot__brand { grid-column: 1 / -1; }
+}
+
+
+/* ══ the page, after the references ══════════════════════════════════════════
+ *
+ * Measured against Linear, Stripe, Vercel, Raycast and Titan: one idea per screen, one sentence
+ * under each heading, real marks where a name would do less, and a table that looks like a table.
+ */
+
+/* ── buttons ─────────────────────────────────────────────────────────────── */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font: 600 0.9375rem/1 var(--sans);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 0.15s, background-color 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+.button:hover { transform: translateY(-1px); }
+.button--eye {
+  background: var(--eye);
+  color: var(--night);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.22) inset, 0 12px 32px -10px rgba(245, 166, 35, 0.6);
+}
+.button--eye:hover { background: #ffb53d; }
+.button--ghost { color: var(--moon); border-color: rgba(255, 255, 255, 0.2); background: rgba(255, 255, 255, 0.04); }
+.button--ghost:hover { border-color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.08); }
+.button--line { color: var(--ink); border-color: var(--rule); background: var(--card); box-shadow: var(--cast); }
+.button--line:hover { border-color: var(--ink-2); }
+
+/* ── hero ────────────────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  isolation: isolate;
+  padding-block: clamp(88px, 14vh, 150px) clamp(150px, 22vh, 230px);
+  color: var(--moon);
+  text-align: center;
+  background:
+    radial-gradient(620px 380px at 78% 18%, rgba(245, 166, 35, 0.16), transparent 70%),
+    radial-gradient(760px 480px at 18% 0%, rgba(91, 108, 255, 0.34), transparent 70%),
+    linear-gradient(180deg, var(--night) 0%, var(--night-2) 100%);
+}
+/* A fine dot field — the night sky reduced to a texture — masked away from the edges. */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.26) 1px, transparent 1px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(60% 60% at 50% 35%, #000, transparent);
+  mask-image: radial-gradient(60% 60% at 50% 35%, #000, transparent);
+  opacity: 0.4;
+  pointer-events: none;
+}
+.hero__inner { display: flex; flex-direction: column; align-items: center; }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 14px 7px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--moon);
+  font: 500 0.875rem/1 var(--sans);
+  text-decoration: none;
+}
+.badge svg { color: #31c4f3; }
+.badge:hover { border-color: rgba(255, 255, 255, 0.3); }
+.hero h1 {
+  margin-top: 26px;
+  max-width: 14ch;
+  font-size: clamp(2.9rem, 7vw, 5.6rem);
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+  color: #fff;
+}
+.hero__lead {
+  margin: 24px 0 0;
+  max-width: 54ch;
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--moon-2);
+  text-wrap: pretty;
+}
+.hero__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 34px; }
+
+.makers { margin-top: clamp(56px, 9vh, 88px); }
+.makers p { margin: 0 0 22px; font: 500 0.8125rem/1 var(--sans); color: var(--moon-2); opacity: 0.8; }
+.makers ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 18px clamp(30px, 5vw, 64px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.makers li { display: inline-flex; color: var(--moon); opacity: 0.62; transition: opacity 0.2s; }
+.makers li:hover { opacity: 0.95; }
+
+/* ── on Alexa+: the product, rising out of the night ─────────────────────── */
+.alexa { padding-block: 0 clamp(64px, 9vh, 112px); }
+.alexa__stage { margin-top: calc(clamp(150px, 22vh, 230px) * -1 + 40px); position: relative; z-index: 1; }
+.alexa__device {
+  padding: 12px;
+  border-radius: 26px;
+  background: linear-gradient(180deg, #2b3366, #121835);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12) inset, 0 60px 120px -50px rgba(10, 15, 36, 0.9), 0 0 140px -40px rgba(91, 108, 255, 0.5);
+}
+.alexa__device video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1280 / 644;
+  border-radius: 15px;
+  background: var(--paper-2);
+}
+.alexa__beats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  margin: 48px 0 0;
+}
+.alexa__beats div { padding-top: 16px; border-top: 1px solid var(--rule); }
+.alexa__beats dt { font: 600 1.0625rem/1.3 var(--sans); letter-spacing: -0.01em; }
+.alexa__beats dd { margin: 8px 0 0; color: var(--ink-2); font-size: 0.9375rem; line-height: 1.6; }
+.alexa__caption { margin: 34px 0 0; max-width: 70ch; color: var(--faint); font-size: var(--t-small); line-height: 1.6; }
+.alexa__caption a { color: var(--ink); font-weight: 600; text-decoration: underline; text-decoration-color: var(--eye); text-underline-offset: 4px; }
+
+/* ── section headers ─────────────────────────────────────────────────────── */
+.head { margin-bottom: 36px; }
+.head .lede { margin-top: 14px; max-width: 60ch; font-size: 1.0625rem; }
+.head--split { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px 48px; }
+.head--split > div { flex: 1 1 420px; }
+.head--top { align-items: flex-start; }
+.head--split > .titleblock { flex: 0 1 340px; }
+.band { background: var(--paper-2); border-block: 1px solid var(--rule-soft); }
+
+/* ── the library ─────────────────────────────────────────────────────────── */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0 0 28px;
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  background: var(--card);
+  overflow: hidden;
+}
+.stats div { padding: 20px 22px; }
+.stats div + div { border-left: 1px solid var(--rule-soft); }
+.stats dt { font-size: 0.8125rem; color: var(--faint); }
+.stats dd { margin: 8px 0 0; font: 650 clamp(1.5rem, 2.4vw, 1.9rem)/1 var(--display); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+
+.table-tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 14px; }
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.tabs button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink-2);
+  font: 500 0.875rem/1 var(--sans);
+  cursor: pointer;
+}
+.tabs button em { font-style: normal; font: 500 0.75rem/1 var(--mono); color: var(--faint); }
+.tabs button:hover { border-color: var(--ink-2); color: var(--ink); }
+.tabs button[aria-selected='true'] { background: var(--ink); border-color: var(--ink); color: var(--moon); }
+.tabs button[aria-selected='true'] em { color: var(--moon-2); }
+.search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  width: min(300px, 100%);
+  padding: 0 12px;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--faint);
+}
+.search:focus-within { border-color: var(--indigo); box-shadow: 0 0 0 3px rgba(91, 108, 255, 0.15); }
+.search input { flex: 1; min-width: 0; border: 0; outline: 0; background: none; font: 400 0.9375rem/1 var(--sans); color: var(--ink); }
+
+.table-wrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 14px; background: var(--card); }
+.table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.table th {
+  padding: 12px 16px;
+  text-align: left;
+  font: 500 0.78rem/1 var(--sans);
+  color: var(--faint);
+  background: #f8f9fc;
+  border-bottom: 1px solid var(--rule);
+  white-space: nowrap;
+}
+.table td { padding: 13px 16px; border-bottom: 1px solid var(--rule-soft); white-space: nowrap; color: var(--ink-2); }
+.table tbody tr:last-child td { border-bottom: 0; }
+.table tbody tr:hover td { background: #f7f8fc; }
+.table .n { text-align: right; font-variant-numeric: tabular-nums; }
+.table td.model { font: 500 0.875rem/1 var(--mono); color: var(--ink); }
+.table td.out { color: var(--stop); font-weight: 600; }
+.table td.empty { padding: 28px 16px; text-align: center; white-space: normal; }
+.status { display: inline-flex; align-items: center; gap: 7px; font-size: 0.8125rem; font-weight: 500; }
+.status::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.status--ok { color: var(--done); }
+.status--hand { color: var(--indigo); }
+.status--wait { color: var(--faint); }
+.table-more { margin-top: 16px; }
+
+/* ── use it ──────────────────────────────────────────────────────────────── */
+.way__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  background: var(--night);
+  color: var(--eye);
+}
+
+/* ── footer base ─────────────────────────────────────────────────────────── */
+.foot__base {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 28px;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.8125rem;
+  color: var(--moon-2);
+}
+.foot__base ul { display: flex; flex-wrap: wrap; gap: 14px 26px; margin: 0; padding: 0; list-style: none; }
+.foot__base li { display: inline-flex; align-items: center; gap: 8px; color: var(--moon); }
+
+@media (max-width: 860px) {
+  .alexa__beats { grid-template-columns: 1fr; gap: 20px; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stats div:nth-child(3) { border-left: 0; }
+  .stats div:nth-child(n + 3) { border-top: 1px solid var(--rule-soft); }
+  .alexa__device { padding: 7px; border-radius: 16px; }
+  .alexa__device video { border-radius: 10px; }
+}
