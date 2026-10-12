@@ -39,6 +39,11 @@ export default function Hero() {
           <a className="button button--ghost" href="#ask">Ask a manual<ArrowDown size={16} strokeWidth={2.2} /></a>
         </div>
 
+        <a className="hero__alt" href="/connect.html">
+          <Logo name="claude" height={14} title={false} />
+          Talk to it live today: the same MCP server works in Claude as a connector, no sign-in
+        </a>
+
         <div className="makers" aria-label="Manufacturers whose manuals Owl reads">
           <p>Reads manuals from</p>
           <ul>

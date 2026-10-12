@@ -1256,3 +1256,6 @@ section[id] { scroll-margin-top: 72px; }
   .fact:nth-child(3) { border-left: 0; }
   .fact:nth-child(n + 3) { border-top: 1px solid var(--rule-soft); }
 }
+
+.hero__alt { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-size: 0.8125rem; color: var(--ink-2); text-decoration: none; }
+.hero__alt:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
