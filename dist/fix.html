@@ -6,13 +6,18 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <title>Fix it — Owl</title>
 <meta name="description" content="Talk your broken appliance through a repair, on your phone. It reads the manufacturer's own manual, refuses to sell you a part it hasn't ruled the cheaper cause out for, and remembers nothing about you." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400;500&display=swap" />
 <style>
   :root{
-    --paper:#e8e5dc; --card:#f1efe8; --ink:#191714; --ink-2:#4a453d; --faint:#6a6358;
-    --rule:#c9c4b6; --amber:#b8761f; --stop:#a8321f; --done:#3f6b4e;
-    --screen:#14161a; --screen-2:#1c1f25; --screen-ink:#f2f0ea; --screen-dim:#98a0aa;
-    --sans:'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;
-    --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+    /* The phone app is the site's one dark surface: black, white, one grey. The "amber" token is
+       the primary action, now white, so every button that said "do this" still stands out. */
+    --paper:#ffffff; --card:#161616; --ink:#ededed; --ink-2:#a1a1a1; --faint:#8f8f8f;
+    --rule:#2e2e2e; --amber:#ffffff; --stop:#ff6369; --done:#3dd68c;
+    --screen:#0a0a0a; --screen-2:#161616; --screen-ink:#ededed; --screen-dim:#a1a1a1;
+    --sans:Geist,ui-sans-serif,system-ui,sans-serif;
+    --mono:'Geist Mono',ui-monospace,Menlo,monospace;
   }
   *{box-sizing:border-box}
   html,body{margin:0}
@@ -36,7 +41,7 @@
     border-radius:12px;padding:16px;cursor:pointer;margin:0 0 10px}
   .btn:active{transform:translateY(1px)}
   .btn:disabled{opacity:.4}
-  .btn--amber{background:var(--amber);border-color:var(--amber);color:#12140f}
+  .btn--amber{background:var(--amber);border-color:var(--amber);color:#0a0a0a}
   .btn--quiet{background:none;color:var(--screen-dim);border-color:#2b2f37}
   .btn--stop{background:none;color:#e88;border-color:#5a2b24}
   .list{list-style:none;padding:0;margin:0 0 1em}

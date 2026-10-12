@@ -46,6 +46,8 @@
   /* The voice. Used for one thing only: the sentence being said out loud. */
   --spoken: "Newsreader", Georgia, serif;
   --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  /* Prose. site.css, loaded after this sheet, sets the site-wide face; this is the fallback. */
+  --sans: ui-sans-serif, system-ui, sans-serif;
 }
 
 [hidden] { display: none !important; }
@@ -71,7 +73,7 @@
   background: var(--paper);
   color: var(--ink);
   margin: 0;
-  font: 400 14px/1.55 var(--mono);
+  font: 400 14px/1.55 var(--sans);
 }
 
 /* ── bar ──────────────────────────────────────────────────────────────────── */
@@ -99,7 +101,7 @@
 .bench-empty h1 { font: 700 21px/1.3 var(--display); margin: 0 0 12px; }
 .bench-empty p { color: var(--graphite); margin: 0 0 16px; }
 .bench-cmd {
-  font: 400 13px/1.6 var(--mono);
+  font: 400 13px/1.6 var(--sans);
   background: var(--card);
   border: 1px solid var(--rule);
   border-left: 3px solid var(--ink);
@@ -394,7 +396,7 @@
 .drop-or { color: var(--graphite); font-weight: 400; }
 .drop-sub { display: block; margin-top: 7px; font: 400 12px/1.5 var(--mono); color: var(--graphite); }
 
-.try-state { margin: 16px 0 0; font: 400 13px/1.6 var(--mono); color: var(--graphite); }
+.try-state { margin: 16px 0 0; font: 400 13px/1.6 var(--sans); color: var(--graphite); }
 .try-state[data-kind='refused'] { color: var(--fault); }
 
 .try-out { margin-top: 26px; }
