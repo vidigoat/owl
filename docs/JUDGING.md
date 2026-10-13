@@ -38,7 +38,8 @@ The larger finding is on that screen too. Ten current Bosch US dishwasher manual
 Bosch's own site by `scripts/source-manuals.js`, contain **zero fault codes between them** — the
 troubleshooting tables are keyed on described symptoms now. The entry point this product was built
 on matches what Bosch published in 2019 and not what it publishes today, which is written up
-honestly in `PLAN.md` rather than papered over.
+honestly in [the deep dive](DEEP-DIVE.md) ("A manual that prints no fault codes at all") rather than
+papered over.
 
 ## Tech implementation
 *How effectively does it use the required technology for the Alexa+ track?*

@@ -36,3 +36,7 @@ local/
 
 # Stranger repair outcomes recorded locally (PII-free). Not this repository, like data/home.json.
 data/outcomes.jsonl
+
+# Internal working notes — kept on the laptop, never published.
+PLAN.md
+docs/NEEDS.md
