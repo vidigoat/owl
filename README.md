@@ -12,6 +12,11 @@
 
 [**Live demo**](https://owl-repair.vercel.app) · [The review bench](https://owl-repair.vercel.app/review.html) · [The deep dive](docs/DEEP-DIVE.md) · [For reviewers](docs/JUDGING.md)
 
+[![tests](https://github.com/vidigoat/owl/actions/workflows/test.yml/badge.svg)](https://github.com/vidigoat/owl/actions/workflows/test.yml)
+[![licence: MIT](https://img.shields.io/badge/licence-MIT-0a0a0a)](LICENSE)
+[![MCP server: zero dependencies](https://img.shields.io/badge/MCP_server-zero_dependencies-0a0a0a)](mcp/server.js)
+[![Amazon Nova on Bedrock](https://img.shields.io/badge/Amazon_Nova-Bedrock-0a0a0a)](agent/alexa.js)
+
 <br>
 
 <img src="docs/media/describe.jpg" alt="A sentence answered with the manufacturer's own words and the page they are printed on" width="860">
@@ -43,6 +48,33 @@ npm run smoke:live    # every route of the deployed site and the MCP handshake, 
 ```
 
 Nothing to install. The MCP server has zero dependencies and no build step.
+
+## How it works
+
+```mermaid
+flowchart LR
+  P["Someone says what the<br/>machine is doing"] --> A["Alexa+<br/>(Amazon Nova on Bedrock)"]
+  A -- "MCP tools" --> O["Owl MCP server"]
+  O --> L["The library<br/>manufacturer manuals, every quote<br/>re-read off the page it cites"]
+  O --> N["next_test<br/>one check that rules out the most,<br/>for the least effort"]
+  O --> H["Household memory<br/>machines and repairs, across sessions"]
+  N --> G{"verify_diagnosis<br/>the only gate to spending"}
+  G -- "one cause left, cheaper causes<br/>ruled out, not mains wiring" --> B["order_part<br/>full total read aloud first"]
+  G -- "anything else" --> R["Refuse<br/>a technician, or a plain 'not in the manual'"]
+```
+
+## Where things are
+
+| Folder | What is in it |
+|---|---|
+| [`mcp/`](mcp) | The MCP server (Streamable HTTP) and its tools, one file each — `verify_diagnosis.js` is the gate |
+| [`agent/`](agent) | The Alexa+ stand-in: Amazon Nova 2 Lite on Bedrock, choosing Owl's tools over MCP |
+| [`manual/`](manual) | The manual reader: PDF text layer, fault tables, symptom tables, procedures — no dependencies |
+| [`data/admitted/`](data/admitted) | The library: each machine's causes and remedies, every one citing its page |
+| [`web/`](web), [`public/`](public) | The site — the main page in React, the device, review bench and phone app as plain pages |
+| [`scripts/`](scripts) | Sourcing manuals, admitting what the pages back, the evals and the measurements |
+| [`docs/`](docs) | [Judging map](docs/JUDGING.md), [architecture](docs/ARCHITECTURE.md), [decision records](docs/decisions), [friction log](docs/FRICTION-LOG.md) |
+| `*.test.js` | Beside the code they check; `npm test` runs every one |
 
 ## The thing we got wrong, and what it taught us
 

@@ -55,11 +55,15 @@ for (const suite of suites) {
   let ok = true;
 
   try {
-    output = execFileSync('node', [suite], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], env: SUITE_ENV });
+    // A suite gets three minutes. One that waits forever on something a fresh machine does not have
+    // must fail by name, not hang the whole run until CI kills it with nothing printed.
+    output = execFileSync('node', [suite], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], env: SUITE_ENV, timeout: 180000, killSignal: 'SIGKILL' });
   } catch (e) {
     ok = false;
-    output = `${e.stdout || ''}${e.stderr || ''}`;
+    output = `${e.stdout || ''}${e.stderr || ''}${e.signal === 'SIGKILL' ? '\n  FAIL timed out after three minutes\n' : ''}`;
   }
+  // In CI, say each suite as it finishes, so a slow one is visible while it is slow.
+  if (process.env.CI) console.log(`  ${ok ? 'done' : 'FAILED'} ${rel}`);
 
   const checks = (output.match(/^ {2}ok {3}/gm) || []).length;
   const failures = (output.match(/^ {2}FAIL/gm) || []).length;

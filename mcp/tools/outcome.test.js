@@ -48,7 +48,11 @@ it('the outcome must be one of the known kinds', () => {
 
 it('where there is nowhere durable it says so, and does not pretend it saved', () => {
   const logged = [];
-  const r = record({ model: 'X1', outcome: 'fixed', consent: true }, { store: '/proc/nonexistent/cannot/write.jsonl', log: { log: (m) => logged.push(m) } });
+  // A path that runs through a regular file cannot be created on any system, and fails at once.
+  // (It was under /proc, which fails instantly on macOS and makes a recursive mkdir loop on Linux.)
+  const file = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'oc-')), 'a-file');
+  fs.writeFileSync(file, '');
+  const r = record({ model: 'X1', outcome: 'fixed', consent: true }, { store: path.join(file, 'cannot', 'write.jsonl'), log: { log: (m) => logged.push(m) } });
   assert.equal(r.recorded, true);
   assert.equal(r.kept, false);
   assert.match(r.note, /nowhere durable/);
