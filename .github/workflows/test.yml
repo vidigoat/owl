@@ -1,0 +1,22 @@
+# Every check in the repository, on every push and pull request. No secrets, no network calls to
+# AWS: the suites that need Bedrock or a real manual skip themselves and say so.
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - run: npm test
