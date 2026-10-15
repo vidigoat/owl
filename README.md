@@ -52,15 +52,20 @@ Nothing to install. The MCP server has zero dependencies and no build step.
 ## How it works
 
 ```mermaid
-flowchart LR
-  P["Someone says what the<br/>machine is doing"] --> A["Alexa+<br/>(Amazon Nova on Bedrock)"]
-  A -- "MCP tools" --> O["Owl MCP server"]
-  O --> L["The library<br/>manufacturer manuals, every quote<br/>re-read off the page it cites"]
-  O --> N["next_test<br/>one check that rules out the most,<br/>for the least effort"]
-  O --> H["Household memory<br/>machines and repairs, across sessions"]
-  N --> G{"verify_diagnosis<br/>the only gate to spending"}
-  G -- "one cause left, cheaper causes<br/>ruled out, not mains wiring" --> B["order_part<br/>full total read aloud first"]
-  G -- "anything else" --> R["Refuse<br/>a technician, or a plain 'not in the manual'"]
+flowchart TD
+  P["“My dishwasher shows E24”"] --> A["Alexa+ · Amazon Nova on Bedrock"]
+  A -->|MCP tools| O["Owl MCP server"]
+  O --> L["Manufacturer manual<br/>every quote checked against its page"]
+  O --> H["Household memory<br/>machines and past repairs"]
+  L --> N["One check at a time<br/>the one that rules out the most"]
+  H --> N
+  N --> G{"verify_diagnosis<br/>the only way to spend money"}
+  G -->|"one cause left · cheaper causes ruled out<br/>not behind mains wiring"| B["Order the part<br/>total read aloud first"]
+  G -->|"anything else"| R["Refuse<br/>call a technician, or 'not in the manual'"]
+  classDef node fill:#ffffff,stroke:#0a0a0a,color:#0a0a0a
+  classDef gate fill:#0a0a0a,stroke:#0a0a0a,color:#ffffff
+  class P,A,O,L,H,N,B,R node
+  class G gate
 ```
 
 ## Where things are
