@@ -166,6 +166,17 @@ function handler(req, res) {
      * page elsewhere cannot make a visitor's browser run up the bill) and every call is metered
      * against the budget ceiling before it is made — see agent/live.js.
      */
+    /*
+     * The reply's speech travels with the reply, so the device starts talking the moment the words
+     * appear — no second round trip after the agent has finished. A voice that cannot be made just
+     * leaves the reply silent here; the page then reads it in the browser's own voice.
+     */
+    const withVoice = (r, aloud) => {
+      if (!aloud || r.status !== 200 || !r.body || !r.body.say) return r;
+      return require('./agent/voice').speak(r.body.say)
+        .then((audio) => ({ ...r, body: { ...r.body, voice: audio.toString('base64') } }))
+        .catch(() => r);
+    };
     if (url.pathname === '/api/alexa') {
       const live = require('./agent/live');
       if (req.method === 'GET') return send(res, 200, JSON.stringify(live.available()), 'application/json');
@@ -179,12 +190,38 @@ function handler(req, res) {
         .then((raw) => {
           let body;
           try { body = JSON.parse(raw || '{}'); } catch { return { status: 400, body: { error: 'Malformed JSON.' } }; }
-          return live.turn(body && typeof body === 'object' ? body : {});
+          return live.turn(body && typeof body === 'object' ? body : {}).then((r) => withVoice(r, body && body.aloud));
         })
         .then((r) => send(res, r.status, JSON.stringify(r.body), 'application/json'))
         .catch((e) => {
           if (e.status === 413) res.setHeader('connection', 'close');
           send(res, e.status || 500, JSON.stringify({ error: e.status === 413 ? 'Too long — one line at a time.' : 'Internal error.' }), 'application/json');
+        });
+    }
+
+    /*
+     * Owl's voice: one spoken line, as audio from Amazon Polly (agent/voice.js). Like the agent, it
+     * spends money, so only this site's own pages may ask, and a line is capped at a few sentences.
+     * Any failure is an error the page answers by falling back to the browser's own voice.
+     */
+    if (url.pathname === '/api/voice') {
+      if (req.method !== 'POST') return send(res, 405, JSON.stringify({ error: 'POST' }), 'application/json');
+      if (!req.headers.origin || !originAllowed(req)) {
+        return send(res, 403, JSON.stringify({ error: 'Only this site\'s own pages may use the voice.' }), 'application/json');
+      }
+      return readBody(req, 4 * 1024)
+        .then((raw) => {
+          let body;
+          try { body = JSON.parse(raw || '{}'); } catch { throw Object.assign(new Error('Malformed JSON.'), { status: 400 }); }
+          return require('./agent/voice').speak(body && body.text);
+        })
+        .then((audio) => {
+          res.writeHead(200, { 'content-type': 'audio/mpeg', 'content-length': audio.length, 'cache-control': 'no-store' });
+          res.end(audio);
+        })
+        .catch((e) => {
+          const status = [400, 403, 413, 503].includes(e.status) ? e.status : 502;
+          send(res, status, JSON.stringify({ error: 'The voice is unavailable.' }), 'application/json');
         });
     }
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { ShieldCheck, Ban } from 'lucide-react';
 import TitleBlock from '../components/TitleBlock.jsx';
@@ -40,7 +40,7 @@ const TRIES = [
 ];
 
 export default function Ask({ machines }) {
-  const [said, setSaid] = useState(TRIES[0]);
+  const [said, setSaid] = useState('');
   const [model, setModel] = useState('SGE53C55UC');
   const [out, setOut] = useState(null);
   const [asking, setAsking] = useState(false);
@@ -58,12 +58,7 @@ export default function Ask({ machines }) {
     }
   }
 
-  // One answer on arrival, so the first screen is the product working rather than an empty box
-  // waiting to be trusted.
-  useEffect(() => {
-    ask(TRIES[0], 'SGE53C55UC');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // Nothing is answered until someone asks: an answer already on screen reads as a canned one.
 
   const readable = machines?.filter((m) => m.symptoms > 0) ?? [];
   const groups = [...readable.reduce((map, m) => {
@@ -112,7 +107,7 @@ export default function Ask({ machines }) {
             value={model}
             onChange={(e) => {
               setModel(e.target.value);
-              ask(said, e.target.value);
+              if (out) ask(said, e.target.value);
             }}
             aria-label="which machine"
           >
@@ -137,8 +132,9 @@ export default function Ask({ machines }) {
             className="try"
             key={t}
             onClick={() => {
+              // Fills the box; "Ask the manual" asks. The answer arrives when you ask for it.
               setSaid(t);
-              ask(t);
+              setOut(null);
             }}
           >
             {t}

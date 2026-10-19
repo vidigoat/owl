@@ -72,7 +72,7 @@
   .voice p { margin: 0; font-size: clamp(20px, 2.1vw, 26px); line-height: 1.28; letter-spacing: -0.012em; }
 
   /* ── the rail: what was said, and every tool the agent chose ── */
-  .talk { display: grid; gap: 14px; }
+  .talk { display: grid; gap: 14px; align-content: start; padding-top: 6px; }
   .talk h2 { margin: 0; font: 500 12px var(--mono); color: var(--faint); }
   .log { display: grid; gap: 14px; max-height: 52vh; overflow: auto; padding-right: 4px; }
   .log:empty::before { content: 'Each reply lists the MCP tools the agent called to produce it.'; color: var(--faint); font-size: 14px; }
@@ -92,8 +92,22 @@
   button[aria-pressed="true"] { border-color: var(--amber); color: var(--amber); }
   button:disabled { opacity: .45; cursor: default; }
   :is(button, input):focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
-  .starts { display: flex; flex-wrap: wrap; gap: 8px; }
-  .starts button { min-height: 40px; padding: 8px 12px; font-size: 14px; }
+  .starts { display: grid; gap: 10px; }
+  .starts button { min-height: 58px; padding: 0 20px; font: 600 18px/1.2 var(--sans); text-align: left; border-radius: 14px; border: 1px solid var(--rule); background: #fff; color: var(--ink); cursor: pointer; transition: transform .08s ease, background .15s ease; }
+  .starts button:hover { background: #fafafa; }
+  .starts button:active { transform: scale(.98); }
+  .starts button.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .starts button.primary:hover { background: #262626; }
+  #repliesLabel { font: 600 15px var(--sans); color: var(--ink); }
+  .trace { padding-top: 4px; }
+  .row.quiet button { min-height: 38px; padding: 0 14px; font-size: 14px; border-radius: 999px; }
+  .row.quiet .link { border: 0; background: none; color: var(--faint); text-decoration: underline; text-underline-offset: 3px; padding: 0 6px; }
+  .tools { margin: 4px 0 0; font: 12px/1.5 var(--mono); color: var(--faint); }
+  .tools span { color: var(--ink-2); }
+  .trace summary { cursor: pointer; font: 500 12px var(--mono); color: var(--faint); list-style: none; }
+  .trace summary::-webkit-details-marker { display: none; }
+  .trace .meta { display: block; margin-top: 4px; }
+  #aloud[aria-pressed='true'] { background: var(--ink); color: #fff; border-color: var(--ink); }
   .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
   .meta { font: 12px var(--mono); color: var(--faint); }
   .closed { padding: 16px; border: 1px solid var(--rule); border-radius: 12px; }
@@ -109,7 +123,7 @@
 <div class="wrap">
   <header>
     <h1><a href="/">Owl</a> · a simulated Alexa+</h1>
-    <p id="lede">Amazon Nova on Bedrock, choosing this project's MCP tools itself. The screen opens on what the house already knows. What it says, every tool it calls, and the card are this turn's — nothing here is scripted.</p>
+    <p id="lede">Amazon Nova on Bedrock chooses Owl's tools live, and speaks with an Amazon Polly voice. Nothing here is scripted.</p>
   </header>
 
   <div class="stage" role="main">
@@ -129,24 +143,24 @@
 
     <div class="talk">
       <div id="closed" class="closed" hidden></div>
-      <h2>say it, or start from one of these</h2>
-      <div class="starts" id="starts" aria-label="Ways to start">
-        <button data-say="My Bosch dishwasher is showing E24. The model is SHE3AR75UC.">E24 on a SHE3AR75UC</button>
-        <button data-say="My Bosch SGE53C55UC leaves water in the bottom at the end of the program.">Water left in an SGE53C55UC</button>
-        <button data-say="My SHE3AR75UC dishwasher says E09.">E09</button>
-      </div>
-      <form class="form" id="form" autocomplete="off">
+      <h2 id="repliesLabel">Tap to start</h2>
+      <div class="starts" id="starts" aria-label="What to say next"></div>
+      <form class="form" id="form" autocomplete="off" hidden>
         <input id="input" name="said" placeholder="Say what it is doing…" aria-label="What you say" maxlength="500">
         <button type="button" id="mic" aria-pressed="false" hidden>Hold to talk</button>
         <button class="primary" id="send">Say it</button>
       </form>
-      <div class="row">
-        <button type="button" id="aloud" aria-pressed="false">Read replies aloud</button>
+      <div class="row quiet">
+        <button type="button" id="aloud" aria-pressed="true">Voice on</button>
         <button type="button" id="restart">New conversation</button>
-        <span class="meta" id="meta"></span>
+        <button type="button" id="typeit" class="link">type instead</button>
       </div>
-      <h2>what it said, and the tools it chose</h2>
-      <div class="log" id="log" role="log" aria-label="Conversation"></div>
+      <p class="tools" id="tools" hidden></p>
+      <details class="trace">
+        <summary>Full conversation</summary>
+        <p class="meta" id="meta"></p>
+        <div class="log" id="log" role="log" aria-label="Conversation"></div>
+      </details>
     </div>
   </div>
 </div>
@@ -156,7 +170,7 @@
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   let conversation = null;
-  let aloud = false;
+  let aloud = true;
   let busy = false;
 
   // ── the MCP App card, hosted the way a screen-bearing Alexa+ device would ─
@@ -242,13 +256,70 @@
   $('house').addEventListener('click', (e) => { const b = e.target.closest('button[data-say]'); if (b) say(b.dataset.say); });
 
   // ── talking ────────────────────────────────────────────────────────────
-  function speak(line) {
-    if (!aloud || typeof speechSynthesis === 'undefined' || !line) return;
-    speechSynthesis.cancel();
+  /*
+   * Owl's voice is Amazon Polly (/api/voice), not the browser's robotic system voice. If the voice
+   * cannot be reached — no credentials here, a network blip — the line is read by the browser
+   * instead, so the device never goes silent when it was asked to speak.
+   */
+  let playing = null;
+  function stopSpeaking() {
+    if (playing) { playing.pause(); playing = null; }
+    if (typeof speechSynthesis !== 'undefined') speechSynthesis.cancel();
+  }
+  function browserVoice(line) {
+    if (typeof speechSynthesis === 'undefined') return;
     const u = new SpeechSynthesisUtterance(line);
     u.rate = 0.97;
     speechSynthesis.speak(u);
   }
+  async function speak(line, mp3) {
+    if (!aloud || !line) return;
+    stopSpeaking();
+    try {
+      if (mp3) {
+        // The speech came with the reply: play it now, with no second request.
+        playing = new Audio(`data:audio/mpeg;base64,${mp3}`);
+        return await playing.play();
+      }
+      const res = await fetch('/api/voice', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ text: line }) });
+      if (!res.ok) throw new Error(String(res.status));
+      const audio = new Audio(URL.createObjectURL(await res.blob()));
+      playing = audio;
+      await audio.play();
+    } catch {
+      browserVoice(line);
+    }
+  }
+
+  /*
+   * What to say next, as big buttons, worked out from what Owl just said. They only fill in the
+   * words a person would say — the agent still decides everything, live, on every tap.
+   */
+  const START = [
+    ['E24 on the dishwasher', 'My Bosch dishwasher is showing E24. The model is SHE3AR75UC.'],
+    ['Water left in the bottom', 'My Bosch SGE53C55UC leaves water in the bottom at the end of the program.'],
+    ['E09 on the dishwasher', 'My Bosch dishwasher is showing E09. The model is SHE3AR75UC.'],
+  ];
+  function nextReplies(r) {
+    const line = String((r && r.say) || '');
+    const low = line.toLowerCase();
+    if (/in total/.test(low) && /\?\s*$/.test(line)) return [['Yes', 'Yes.'], ['No, cancel', 'No, cancel it.']];
+    if (/order it|want me to order|shall i order/.test(low)) return [['Yes, order it', 'Yes, order it.'], ['Not yet', 'Not yet.']];
+    if (/hum|hear the pump|listen/.test(low)) return [["It's silent", "No, it's completely silent."], ['It hums', 'Yes, I can hear it humming.']];
+    if (/did it work|is it fixed|fitted|arrived/.test(low)) return [['It works now', 'It arrived and I fitted it. It drains now.'], ['Still broken', 'It is still showing the fault.']];
+    // Read a code off the panel: answer with the code it named.
+    const code = line.match(/\b([A-Z]{1,2}\d{1,3})\b/);
+    if (/read .*code|what (does|do) (it|the panel|the display) say|tell me what it says/.test(low) && code) return [[`It says ${code[1]}`, `The panel says ${code[1]}.`]];
+    // Yes and No only for a question that can be answered yes or no.
+    if (r && r.waitingFor === 'their answer' && /^(is|are|can|could|do|does|did|was|were|has|have|will|would|should)\b/i.test(line.split(/(?<=[.!])\s+/).pop().trim()) && /\?\s*$/.test(line)) return [['Yes', 'Yes.'], ['No', 'No.']];
+    return null;
+  }
+  function showReplies(list, label) {
+    $('repliesLabel').textContent = label;
+    $('starts').innerHTML = list.map(([t, s], i) => `<button type="button" class="${i === 0 ? 'primary' : ''}" data-say="${esc(s)}">${esc(t)}</button>`).join('');
+    $('starts').hidden = false;
+  }
+  showReplies(START, 'Tap to start');
 
   function addTurn(said, r) {
     const el = document.createElement('div');
@@ -269,16 +340,23 @@
     $('send').disabled = true;
     $('starts').hidden = true;
     $('voice').classList.add('thinking');
-    $('state').textContent = 'Alexa+ · choosing tools…';
+    $('state').textContent = 'Alexa+ · thinking…';
     try {
-      const res = await fetch('/api/alexa', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conversation, said }) });
+      const res = await fetch('/api/alexa', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conversation, said, aloud }) });
       const r = await res.json();
       if (r.conversation) conversation = r.conversation;
       addTurn(said, r);
+      // One quiet line: the MCP tools Owl chose this turn — the proof it is a live agent.
+      const used = [...new Set((r.steps || []).map((x) => x.tool))];
+      $('tools').innerHTML = used.length ? `Tools this turn <span>${used.map(esc).join(' · ')}</span>` : '';
+      $('tools').hidden = !used.length;
       $('said').textContent = r.say || r.error || '—';
       if (r.card) draw(r.card);
       if (typeof r.total === 'number') $('meta').textContent = `${r.model} · turn ${r.turn} · this turn $${r.cost.toFixed(4)} · conversation $${r.total.toFixed(4)}`;
-      speak(r.say);
+      speak(r.say, r.voice);
+      const next = nextReplies(r);
+      if (next) showReplies(next, 'Tap to answer');
+      else showReplies(START, 'Start another');
     } catch (e) {
       $('said').textContent = 'That did not reach the agent. Nothing was spent.';
     } finally {
@@ -287,7 +365,6 @@
       $('voice').classList.remove('thinking');
       $('state').textContent = 'Alexa+ · ready';
       $('input').value = '';
-      $('input').focus();
     }
   }
 
@@ -296,12 +373,19 @@
   $('aloud').addEventListener('click', () => {
     aloud = !aloud;
     $('aloud').setAttribute('aria-pressed', String(aloud));
-    if (!aloud && typeof speechSynthesis !== 'undefined') speechSynthesis.cancel();
+    $('aloud').textContent = aloud ? 'Voice on' : 'Voice off';
+    if (!aloud) stopSpeaking();
+  });
+  $('typeit').addEventListener('click', () => {
+    $('form').hidden = !$('form').hidden;
+    $('typeit').textContent = $('form').hidden ? 'type instead' : 'hide typing';
+    if (!$('form').hidden) $('input').focus();
   });
   $('restart').addEventListener('click', () => {
+    $('tools').hidden = true;
     conversation = null;
     $('log').innerHTML = '';
-    $('starts').hidden = false;
+    showReplies(START, 'Tap to start');
     $('said').textContent = 'Tell me what the machine is doing.';
     $('meta').textContent = '';
     showHouse();
